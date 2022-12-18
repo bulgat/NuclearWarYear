@@ -1,0 +1,113 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public class SwitchActionHelper
+{
+    
+    public CommandLider SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
+        List<CityModel> TownList, int _flagIdPlayer, string actionCommand, int FlagId)
+    {
+        
+
+        ResetAction();
+        CommandLider commandLider = new CommandLider();
+        CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
+        bool AIfiend = FlagId != _flagIdPlayer;
+
+        CityModel targetCity = null;
+
+        commandLider.SetNameCommand(actionCommand);
+
+        //print (Command.Propaganda+"Command"+(Command.Propaganda).ToString());
+
+        switch (actionCommand)
+        {
+
+            case "Propaganda":
+                commandLider.VisibleProp = true;
+                targetCity = new ModGameEngine().GetCityFlagId(TownList, CountryLiderList[4], FlagId, AIfiend);
+
+
+                break;
+            case "Building":
+                commandLider.VisibleBuild = true;
+                // Add missle
+                commandLider.AddMissle(new List<Missle>() { new DictionaryMissle().GetMissle(1) });
+                commandLider.AddBomber(new List<Bomber>() { new DictionaryMissle().GetBomber(1) });
+                commandLider.AddWarhead(new List<Warhead>() { new DictionaryMissle().GetWarhead(1) });
+                break;
+            case "Defence":
+                commandLider.VisibleDefence = true;
+                break;
+            case "Missle":
+
+
+                commandLider.VisibleMissle = true;
+                break;
+            case "Bomber":
+
+                commandLider.VisibleBomber = true;
+                break;
+            case "AttackBomber":
+                targetCity = new TargetHelper().GetTarget(CountryLiderList, _flagIdPlayer, AIfiend, false, TownList, _flagIdPlayer);
+                if (targetCity == null)
+                {
+
+                    commandLider.VisibleProp = true;
+
+                }
+                else
+                {
+                    commandLider.VisibleAttackBomber = true;
+                    //City cityTown = targetCity.GetComponent<City>();
+                    commandLider.SetTargetCity(targetCity);
+                    commandLider.SetAttackBomber(countryLider.GetBomber());
+
+                }
+
+
+
+                break;
+            case "AttackMissle":
+                targetCity = new TargetHelper().GetTarget(CountryLiderList, _flagIdPlayer, AIfiend, true, TownList, _flagIdPlayer);
+                if (targetCity == null)
+                {
+
+                    commandLider.VisibleProp = true;
+                }
+                else
+                {
+                    commandLider.VisibleAttackMissle = true;
+                    //City cityTown = targetCity.GetComponent<City>();
+                    commandLider.SetTargetCity(targetCity);
+                    commandLider.SetAttackMissle(countryLider.GetMissle());
+
+                }
+
+
+                break;
+            default:
+                //print ("Incorrect intelligence level.");
+                break;
+        }
+        if (targetCity != null)
+        {
+            //City townCity = targetCity.GetComponent<City>();
+
+            commandLider.SetTargetCity(targetCity);
+
+
+        }
+
+        if (countryLider.GetTargetCitySelectPlayer() != null)
+        {
+            commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
+        }
+
+
+        return commandLider;
+    }
+  
+}

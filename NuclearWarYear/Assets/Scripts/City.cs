@@ -1,0 +1,133 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+using System;
+
+public class City : MonoBehaviour
+{
+	public GameObject NuclearTown;
+	public GameObject NuclearExplode;
+	public GameObject Shield;
+	public GameObject AttackTarget;
+	
+	public int FlagId=0;
+	private int _IdCity;
+	private List<City> _TownList;
+	private bool _visibleLabel;
+	//private int _population;
+	//private int _futurePopulation;
+	private Action<int> _SelectCityTargetIdPlayer;
+	private List<Sprite> _TownSpriteList;
+	public CityModel CityTownModel;
+
+    private void Await() {
+
+		
+	}
+	
+    void Start()
+    {
+		//_population = 40;
+		//_futurePopulation = _population;
+        NuclearExplode.SetActive(false);
+		AttackTarget.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+		ChangeViewTown();
+		
+    }
+	 void OnMouseDown()
+    {
+
+		_SelectCityTargetIdPlayer(_IdCity);
+
+    }
+	public void SetCityModelView(CityModel cityModel)
+    {
+		this.CityTownModel = cityModel;
+
+	}
+	public void ChangeViewTown(){
+		var spriteTown = NuclearTown.GetComponent<SpriteRenderer>();
+		
+		if(CityTownModel.GetPopulation() >= 40) {
+			spriteTown.sprite = _TownSpriteList[0];
+			return;
+		}
+		if(CityTownModel.GetPopulation() > 30) {
+			spriteTown.sprite = _TownSpriteList[1];
+			return;
+		}
+		if(CityTownModel.GetPopulation() > 20) {
+			spriteTown.sprite = _TownSpriteList[2];
+			return;
+		}
+		if(CityTownModel.GetPopulation() > 10) {
+			spriteTown.sprite = _TownSpriteList[3];
+			return;
+		}
+		if(CityTownModel.GetPopulation() > 0) {
+			spriteTown.sprite = _TownSpriteList[4];
+			return;
+		}
+			spriteTown.sprite = _TownSpriteList[5];
+
+		//print("FFFFFFFF = ");
+	}
+	public void ClearTargetAim(){
+		AttackTarget.SetActive(false);
+	}
+	public void SetTargetAim(bool Visible) {
+		AttackTarget.SetActive(Visible);
+	}
+	public int GetId(){
+		return _IdCity;
+		
+	}
+	public void SetId(int Id,Action<int> SelectCityTargetIdPlayer,List<Sprite> TownSpriteList){
+		_IdCity = Id;
+		_SelectCityTargetIdPlayer = SelectCityTargetIdPlayer;
+		
+		_TownSpriteList = TownSpriteList;
+
+	}
+	/*
+	public int GetPopulation(){
+		return _population;
+	}
+	
+	public void SetFuturePopulation(int FuturePopulation){
+		_futurePopulation = FuturePopulation;
+		
+	}
+	
+	public void SetPresentlyPopulation(){
+		_population = _futurePopulation;
+		
+	}
+	*/
+	public void SetVisibleLabel(bool Visible){
+		_visibleLabel = Visible;
+	}
+	public void SetVisible(bool Visible){
+		NuclearExplode.SetActive(Visible);
+	}
+	public void SetVisibleShild(bool Visible){
+		Shield.SetActive(Visible);
+	}
+	void OnGUI()
+    {
+		
+		if(_visibleLabel){
+			GUI.color = Color.red;
+			Vector3 getPixelPos = Camera.main.WorldToScreenPoint( transform.position );
+			 getPixelPos.y = Screen.height - getPixelPos.y;
+			
+			GUI.Label(new Rect(getPixelPos.x-10, getPixelPos.y+10, 100, 20), CityTownModel.GetPopulation() + "");
+		}
+    }
+}
