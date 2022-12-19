@@ -31,8 +31,8 @@ public class MenuScript : MonoBehaviour
     public Button DefenceButton;
     public Button MissleButton;
     public Button BomberButton;
-    public Button AttackBomberButton;
-    public Button AttackMissleButton;
+    //public Button AttackBomberButton;
+    //public Button AttackMissleButton;
     public Button WarheadButton;
 
     public Button LiderButton_1;
@@ -120,8 +120,8 @@ public class MenuScript : MonoBehaviour
         DefenceButton.onClick.AddListener(() => DefenceMethod(DefenceButton));
         MissleButton.onClick.AddListener(() => MissleMethod(MissleButton));
         BomberButton.onClick.AddListener(() => BomberMethod(BomberButton));
-        AttackBomberButton.onClick.AddListener(() => AttackBomberButtonMethod(AttackBomberButton));
-        AttackMissleButton.onClick.AddListener(() => AttackMissleButtonMethod(AttackMissleButton));
+        //AttackBomberButton.onClick.AddListener(() => AttackBomberButtonMethod(AttackBomberButton));
+        //AttackMissleButton.onClick.AddListener(() => AttackMissleButtonMethod(AttackMissleButton));
         WarheadButton.onClick.AddListener(() => WarheadMethod(WarheadButton));
 
         LiderButton_1.onClick.AddListener(() => LiderButton_1_Method(LiderButton_1));
@@ -178,13 +178,16 @@ public class MenuScript : MonoBehaviour
 
     private void SelectCityTargetIdPlayer(int CityId)
     {
-
+        
+        City selectCityTarget = ClearCityTargetMark(CityId,true);
         CityEvent cityEvent = new CityEvent(Controller.Command.SelectCityEnemyTargetPlayer, CityId);
         _controller.SendCommand(cityEvent);
 
-        print("$$$$$$$$$$$$$$    id=" + CityId + " city  re=" + CityId);
+        
 
-        City selectCityTarget = ClearCityTargetMark(CityId);
+
+        
+        Debug.Log("0011  City =" + selectCityTarget);
         // TargetSity
         if (_mainModel._flagIdPlayer != selectCityTarget.FlagId)
         {
@@ -199,7 +202,7 @@ public class MenuScript : MonoBehaviour
         }
 
     }
-    private City ClearCityTargetMark(int CityId)
+    private City ClearCityTargetMark(int CityId,bool Player)
     {
         City selectCityTarget = null;
         foreach (GameObject city in TownList)
@@ -214,10 +217,12 @@ public class MenuScript : MonoBehaviour
             }
 
         }
-        
-        CityEvent cityEvent = new CityEvent(Controller.Command.ResetSelectCityEnemyTargetPlayer, 0);
-        _controller.SendCommand(cityEvent);
-
+        if (Player)
+        {
+            //reset?
+            CityEvent cityEvent = new CityEvent(Controller.Command.ResetSelectCityEnemyTargetPlayer, 0);
+            _controller.SendCommand(cityEvent);
+        }
         return selectCityTarget;
     }
     private void SetAllCityVisibleComponent()
@@ -286,10 +291,10 @@ public class MenuScript : MonoBehaviour
     }
     private IEnumerator TurnText(string Name,int indexLider) {
        
-       // Debug.Log("0000   a  [ ]  rt = " + Name);
+       
         yield return new WaitForSeconds(waitTime+(waitTurnTime * indexLider));
         Debug.Log("0001 CORUTINE   mandLider = "+ Name);
-        Debug.Log("0001  "+ indexLider + "   List = "+ Name);
+        
     }
 
     private IEnumerator TurnOneLider(CountryLider lider, int indexLider)
@@ -331,7 +336,7 @@ public class MenuScript : MonoBehaviour
 
         new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList, _mainModel.GetTownList(), _mainModel._flagIdPlayer, _mainModel._flagIdPlayer);
         
-        StartCoroutine(PrintTypeWriter("propaganda"));
+        StartCoroutine(PrintTypeWriter("\n propaganda"));
     }
     void BuildMethod(Button buttonPressed)
     {
@@ -378,7 +383,7 @@ public class MenuScript : MonoBehaviour
      
         SelectCountryOne();
 
-        ClearCityTargetMark(0);
+        ClearCityTargetMark(0,false);
     }
     void LiderButton_2_Method(Button buttonPressed)
     {
@@ -387,7 +392,7 @@ public class MenuScript : MonoBehaviour
         _controller.SendCommand(eventController);
         _targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapTopY, 0);
 
-        ClearCityTargetMark(0);
+        ClearCityTargetMark(0,false);
     }
     void LiderButton_3_Method(Button buttonPressed)
     {
@@ -396,7 +401,7 @@ public class MenuScript : MonoBehaviour
         _controller.SendCommand(eventController);
         _targetNuclearMap = new Vector3(NuclearMapLeftX, NuclearMapDowmY, 0);
 
-        ClearCityTargetMark(0);
+        ClearCityTargetMark(0,false);
     }
     void LiderButton_4_Method(Button buttonPressed)
     {
@@ -405,7 +410,7 @@ public class MenuScript : MonoBehaviour
         _controller.SendCommand(eventController);
         _targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapDowmY, 0);
 
-        ClearCityTargetMark(0);
+        ClearCityTargetMark(0,false);
     }
     void LiderButton_5_Method(Button buttonPressed)
     {
@@ -413,13 +418,14 @@ public class MenuScript : MonoBehaviour
         _targetNuclearMap = new Vector3(NuclearMapRightX/3, NuclearMapDowmY/2, 0);
     }
         // Bomber
-    void AttackBomberButtonMethod(Button buttonPressed)
-    {
-        EventController eventController = new EventController(Controller.Command.AttackBomber, _mainModel._flagIdPlayer);
-        _controller.SendCommand(eventController);
+    //void AttackBomberButtonMethod(Button buttonPressed)
+    //{
+       // EventController eventController = new EventController(Controller.Command.AttackBomber, _mainModel._flagIdPlayer);
+       // _controller.SendCommand(eventController);
 
-    }
+    //}
     // Missle
+    /*
     void AttackMissleButtonMethod(Button buttonPressed)
     {
         EventController eventController = new EventController(Controller.Command.AttackMissle, _mainModel._flagIdPlayer);
@@ -427,6 +433,7 @@ public class MenuScript : MonoBehaviour
 
 
     }
+    */
     //WarheadMethod
     void WarheadMethod(Button buttonPressed)
     {
@@ -476,28 +483,55 @@ public class MenuScript : MonoBehaviour
     {
         bool enableButton = false;
 
-        if (_mainModel.CountryLiderList[4].GetCommandLider().VisibleMissle)
+        if (_mainModel.CountryLiderList[4].GetCommandLider().GetVisibleMissle())
         {
-            AttackMissleButton.GetComponent<Button>().interactable = true;
+            //AttackMissleButton.GetComponent<Button>().interactable = true;
             MissleButton.GetComponent<Button>().interactable = false;
 
             enableButton = true;
+           // StartCoroutine(PrintTypeWriter("\n missle ready!"));
+            EventController eventController = new EventController(Controller.Command.AttackMissle, _mainModel._flagIdPlayer);
+            _controller.SendCommand(eventController);
+            Debug.Log("00 i  = " );
+            var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
+            if (cityTarget == null)
+            {
+                StartCoroutine(PrintTypeWriter("\n Ready. Not target for missle. Select Target!"));
+            }
+            else
+            {
+                StartCoroutine(PrintTypeWriter("\n Ready. Select target for missle"));
+            }
         }
         else
         {
-            AttackMissleButton.GetComponent<Button>().interactable = false;
+            //AttackMissleButton.GetComponent<Button>().interactable = false;
             MissleButton.GetComponent<Button>().interactable = true;
         }
 
-        if (_mainModel.CountryLiderList[4].GetCommandLider().VisibleBomber)
+        if (_mainModel.CountryLiderList[4].GetCommandLider().GetVisibleBomber())
         {
-            AttackBomberButton.GetComponent<Button>().interactable = true;
+            //AttackBomberButton.GetComponent<Button>().interactable = true;
+
             BomberButton.GetComponent<Button>().interactable = false;
             enableButton = true;
+            
+            var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
+            if (cityTarget == null)
+            {
+                StartCoroutine(PrintTypeWriter("\n not target. Select Target!"));
+            }
+            else { 
+                StartCoroutine(PrintTypeWriter("\n select target bomber"));
+            }
+            
+            Debug.Log("0000_______  [ "+ cityTarget + "]    = "  );
+            EventController eventController = new EventController(Controller.Command.AttackBomber, _mainModel._flagIdPlayer);
+            _controller.SendCommand(eventController);
         }
         else
         {
-            AttackBomberButton.GetComponent<Button>().interactable = false;
+            //AttackBomberButton.GetComponent<Button>().interactable = false;
             BomberButton.GetComponent<Button>().interactable = true;
         }
         if (enableButton)

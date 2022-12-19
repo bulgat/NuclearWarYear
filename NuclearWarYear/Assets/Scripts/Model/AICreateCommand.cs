@@ -17,12 +17,12 @@ public class AICreateCommand
 			// only fiend
 			if(lider.FlagId!=FlagIdPlayer){
 				if(lider.GetCommandLider ()!=null){
-					if(lider.GetCommandLider ().VisibleMissle ){
+					if(lider.GetCommandLider ().GetVisibleMissle() ){
 						
 						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, "AttackMissle",lider.FlagId));
 						continue;
 					}
-					if(lider.GetCommandLider ().VisibleBomber ){
+					if(lider.GetCommandLider ().GetVisibleBomber() ){
 						
 						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, "AttackBomber",lider.FlagId));
 						continue;

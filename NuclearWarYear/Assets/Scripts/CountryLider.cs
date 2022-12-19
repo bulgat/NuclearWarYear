@@ -9,7 +9,7 @@ public class CountryLider
 	public bool Player;
 	
 	public GameObject PropagandaBuilding;
-	public CommandLider _CommandLider;
+	private CommandLider _CommandLider;
 	private bool _dead;
 	private List<Missle> _MissleList;
 	private List<Bomber> _BomberList;
@@ -22,35 +22,7 @@ public class CountryLider
 	private CityModel _targetCitySelectPlayer;
 	private string Name;
 
-	public string GetName()
-	{
-		return this.Name;
-
-	}
-	public void ChangeTurn() {
-		float percent=GetAllOwnPopulation()/_maxPopulation;
-		if(percent>0.9){
-			Mood =2;
-		}
-		if(percent<0.5){
-			Mood =5;
-		}
-		if(percent<0.2){
-			Mood =7;
-		}
-	}
-	public void SetDead() {
-		_dead =true;
-	}
-	public bool  GetDead() {
-		return _dead;
-	}
-	public CommandLider GetCommandLider () {
-		return _CommandLider;
-	}
-	public void SetCommandLider (CommandLider commandLider) {
-		_CommandLider =commandLider;
-	}
+	
 	public CountryLider(int flagId,bool player,Missle missle,Bomber bomber,Warhead warhead,
 		GameObject PropagandaBuild,List<CityModel> TownList,string Name) {
 		FlagId = flagId;
@@ -73,6 +45,43 @@ public class CountryLider
 			}
 		}
 		_maxPopulation=GetAllOwnPopulation();
+	}
+	public string GetName()
+	{
+		return this.Name;
+
+	}
+	public void ChangeTurn()
+	{
+		float percent = GetAllOwnPopulation() / _maxPopulation;
+		if (percent > 0.9)
+		{
+			Mood = 2;
+		}
+		if (percent < 0.5)
+		{
+			Mood = 5;
+		}
+		if (percent < 0.2)
+		{
+			Mood = 7;
+		}
+	}
+	public void SetDead()
+	{
+		_dead = true;
+	}
+	public bool GetDead()
+	{
+		return _dead;
+	}
+	public CommandLider GetCommandLider()
+	{
+		return this._CommandLider;
+	}
+	public void SetCommandLider(CommandLider commandLider)
+	{
+		this._CommandLider = commandLider;
 	}
 	public int GetAllOwnPopulation() {
 		int maxPopulation=0;
@@ -138,6 +147,7 @@ public class CountryLider
 		return PropagandaBuilding;
 	}
 	public void SetTargetCitySelectPlayer(CityModel targetCitySelectPlayer){
+		Debug.Log("0005  ["+ targetCitySelectPlayer + "] BomberObje  ");
 		_targetCitySelectPlayer =targetCitySelectPlayer;
 	}
 	public CityModel GetTargetCitySelectPlayer(){

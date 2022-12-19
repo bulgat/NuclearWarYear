@@ -28,8 +28,7 @@ public class City : MonoBehaviour
 	
     void Start()
     {
-		//_population = 40;
-		//_futurePopulation = _population;
+
         NuclearExplode.SetActive(false);
 		AttackTarget.SetActive(false);
     }
@@ -43,7 +42,7 @@ public class City : MonoBehaviour
 	 void OnMouseDown()
     {
 
-		_SelectCityTargetIdPlayer(_IdCity);
+		_SelectCityTargetIdPlayer(CityTownModel.GetId());
 
     }
 	public void SetCityModelView(CityModel cityModel)
@@ -95,21 +94,7 @@ public class City : MonoBehaviour
 		_TownSpriteList = TownSpriteList;
 
 	}
-	/*
-	public int GetPopulation(){
-		return _population;
-	}
 	
-	public void SetFuturePopulation(int FuturePopulation){
-		_futurePopulation = FuturePopulation;
-		
-	}
-	
-	public void SetPresentlyPopulation(){
-		_population = _futurePopulation;
-		
-	}
-	*/
 	public void SetVisibleLabel(bool Visible){
 		_visibleLabel = Visible;
 	}

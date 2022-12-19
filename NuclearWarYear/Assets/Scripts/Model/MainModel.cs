@@ -71,7 +71,7 @@ public class MainModel
 	}
 	public void SetPropagandPlayer(int FlagId){
 
-		Debug.Log(" SetPropagandPlayer = "+ FlagId);
+		
 
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,FlagId);
 		
@@ -179,7 +179,7 @@ public class MainModel
 					}
 				}
 				// attack bomber
-				if(lider.GetCommandLider ().VisibleAttackBomber){
+				if(lider.GetCommandLider ().GetVisibleAttackBomber()){
 					if(enemylider.GetCommandLider ().GetDefence()){
 				
 						/////lider.GetCommandLider().GetTargetCity().SetVisibleShild(true);
@@ -227,26 +227,25 @@ public class MainModel
 	public void SelectCityEnemyTargetPlayer(int CityId) {
 		CityModel selectCityTarget=null;
 		
-		foreach(CityModel townCity in TownList){
-			 //City townCity = city.GetComponent<City>();
-			 
+		foreach (CityModel townCity in this.TownList){
+			
 			 if(townCity.GetId() == CityId) {
 				 selectCityTarget = townCity;
 				 CountryLiderList[4].GetCommandLider().SetTargetCity(townCity);
 				
 				 CountryLiderList[4].SetTargetCitySelectPlayer(townCity);
-			 }
+				Debug.Log(" SetPropag Play  = "+ CountryLiderList[4].GetTargetCitySelectPlayer());
+			}
 			  
 		 }
 		
-		 if(_flagIdPlayer != selectCityTarget.FlagId){
+		if(_flagIdPlayer != selectCityTarget.FlagId){
 
 		} else {
 			// auto Set attack
 			CityModel targetCityPlayer = new TargetHelper().GetTarget(CountryLiderList,_flagIdPlayer,false,true,TownList,_flagIdPlayer);
-			//City targetCityPlayerTown = targetCityPlayer.GetComponent<City>();
-			
-			CountryLiderList[4].SetTargetCitySelectPlayer(null);
+			Debug.Log("0010  SetTargetCitySelectPlayer="+ targetCityPlayer);
+			CountryLiderList[4].SetTargetCitySelectPlayer(targetCityPlayer);
 			
 		}
 		 

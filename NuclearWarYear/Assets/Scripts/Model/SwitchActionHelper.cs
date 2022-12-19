@@ -5,11 +5,11 @@ using System;
 
 public class SwitchActionHelper
 {
-    
+
     public CommandLider SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
         List<CityModel> TownList, int _flagIdPlayer, string actionCommand, int FlagId)
     {
-        
+
 
         ResetAction();
         CommandLider commandLider = new CommandLider();
@@ -19,8 +19,11 @@ public class SwitchActionHelper
         CityModel targetCity = null;
 
         commandLider.SetNameCommand(actionCommand);
-
-        //print (Command.Propaganda+"Command"+(Command.Propaganda).ToString());
+        Debug.Log("0009 $$$$$$$$$$$$$$    i   FlagId  =" + FlagId);
+        if (countryLider.GetCommandLider()?.GetVisibleBomber() == true) { 
+            Debug.Log ("0011  Command  FlagId =" + FlagId);
+        }
+        Debug.Log("0008  City  AIfiend =" + AIfiend);
 
         switch (actionCommand)
         {
@@ -44,13 +47,14 @@ public class SwitchActionHelper
             case "Missle":
 
 
-                commandLider.VisibleMissle = true;
+                commandLider.SetVisibleMissle(true);
                 break;
             case "Bomber":
 
-                commandLider.VisibleBomber = true;
+                commandLider.SetVisibleBomber(true);
                 break;
             case "AttackBomber":
+
                 targetCity = new TargetHelper().GetTarget(CountryLiderList, _flagIdPlayer, AIfiend, false, TownList, _flagIdPlayer);
                 if (targetCity == null)
                 {
@@ -60,8 +64,8 @@ public class SwitchActionHelper
                 }
                 else
                 {
-                    commandLider.VisibleAttackBomber = true;
-                    //City cityTown = targetCity.GetComponent<City>();
+                    commandLider.SetVisibleAttackBomber(true);
+                   
                     commandLider.SetTargetCity(targetCity);
                     commandLider.SetAttackBomber(countryLider.GetBomber());
 

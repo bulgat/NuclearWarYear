@@ -8,11 +8,15 @@ public class BuildingCentral : MonoBehaviour
 	public GameObject Building;
 	public GameObject DefenceObject;
 	public GameObject MissleObject;
+	public GameObject MissleOpenObject;
+
 	public GameObject BomberObjectPrefabs;
 	public GameObject BomberObject;
 	public GameObject WingMisslePrefabs;
 	public GameObject WingMissle;
-	
+	public GameObject Airport;
+	public GameObject AirportAttack;
+
 	private bool _visibleBomber;
 	private bool _attackBomber;
 	private bool _attackMissle;
@@ -47,15 +51,18 @@ public class BuildingCentral : MonoBehaviour
 		Propaganda.SetActive(commandLider.VisibleProp);
 		Building.SetActive(commandLider.VisibleBuild);
 		DefenceObject.SetActive(commandLider.VisibleDefence);
-		MissleObject.SetActive(commandLider.VisibleMissle);
+		MissleObject.SetActive(commandLider.GetVisibleMissle());
+		Airport.SetActive(commandLider.VisibleAirport);
+		AirportAttack.SetActive(commandLider.VisibleAttackAirport);
 		if (WingMissle!=null) {
 			WingMissle.SetActive(commandLider.VisibleAttackMissle);
+			MissleOpenObject.SetActive(commandLider.VisibleAttackMissle);
 		}
 		
 		//bomber
 		if(BomberObject!=null)
 		{
-			if(commandLider.VisibleBomber||commandLider.VisibleAttackBomber) {
+			if(commandLider.GetVisibleBomber()||commandLider.GetVisibleAttackBomber()) {
 				BomberObject.SetActive(true);
 				_visibleBomber = true;
 			} else {
@@ -63,7 +70,7 @@ public class BuildingCentral : MonoBehaviour
 				_visibleBomber = false;
 			}
 		}
-		_attackBomber = commandLider.VisibleAttackBomber;
+		_attackBomber = commandLider.GetVisibleAttackBomber();
 		_attackMissle = commandLider.VisibleAttackMissle;
 		
 	}
@@ -88,7 +95,7 @@ public class BuildingCentral : MonoBehaviour
 		
 					Vector3 pivot = new Vector3(transform.position.x,transform.position.y,0);
 					float speed =100.0f;
-					 Debug.Log("0000 [ ] w  Mod BomberObject= " + BomberObject);
+					
 					// To rotate around the world's up axis
 					BomberObject.transform.RotateAround(pivot, Vector3.forward, speed*Time.deltaTime);
 					

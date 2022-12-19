@@ -38,7 +38,7 @@ public class Controller
 		if (eventController.NameCommand == Command.Defence){
 
 			_mainModel.SetDefencePlayer(eventController.FlagId);
-			//_mainModel
+			
 		}
 		if (eventController.NameCommand == Command.Missle){
 			_mainModel.SetMisslePlayer(eventController.FlagId);
@@ -56,7 +56,7 @@ public class Controller
 		if (eventController.NameCommand == Command.AttackBomber){
 			
 			_mainModel.SetAttackBomberPlayer(eventController.FlagId);
-			//_mainModel
+			
 		}
 		if (eventController.NameCommand == Command.LiderTargetPlayer){
 	
@@ -82,7 +82,7 @@ public class Controller
 		if (eventController.NameCommand == Command.ResetSelectCityEnemyTargetPlayer){
 
 			_mainModel.ResetSelectCityEnemyTargetPlayer(eventController.CityId);
-			//_mainModel
+			
 		}
 	}
 

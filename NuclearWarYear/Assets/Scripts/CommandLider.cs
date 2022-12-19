@@ -7,9 +7,11 @@ public class CommandLider
 	public bool VisibleProp;
 	public bool  VisibleBuild;
 	public bool  VisibleDefence;
-	public bool VisibleMissle;
-	public bool VisibleBomber;
-	public bool VisibleAttackBomber;
+	private bool VisibleMissle;
+	public bool VisibleAirport;
+	private bool VisibleBomber;
+	private bool VisibleAttackBomber;
+	public bool VisibleAttackAirport;
 	public bool VisibleAttackMissle;
 	private List<Missle> _MissleList;
 	private List<Bomber> _BomberList;
@@ -26,7 +28,33 @@ public class CommandLider
 		_BomberList = new List<Bomber>();
 		_WarheadList = new List<Warhead>();
 	}
+	public bool SetVisibleMissle(bool visibleMissle)
+	{
+		return this.VisibleMissle= visibleMissle;
+	}
+	public bool GetVisibleMissle()
+    {
+		return this.VisibleMissle;
+    }
+	public void SetVisibleBomber(bool visibleBomber)
+    {
+		this.VisibleBomber = visibleBomber;
+		this.VisibleAirport = visibleBomber;
 
+	}
+	
+
+	public bool GetVisibleBomber() {
+		return this.VisibleBomber;
+	}
+	public void SetVisibleAttackBomber(bool visibleAttackBomber) {
+		this.VisibleAttackBomber = visibleAttackBomber;
+		this.VisibleAttackAirport = visibleAttackBomber;
+	}
+	public bool GetVisibleAttackBomber()
+	{
+		return this.VisibleAttackBomber;
+	}
 	public void SetNameCommand(string nameCommand)
 	{
 		this.NameCommand = nameCommand;
@@ -39,13 +67,15 @@ public class CommandLider
 
 
 	public void ResetCommand(){
-		VisibleProp=false;
-		VisibleBuild=false;
-		VisibleDefence=false;
-		VisibleMissle=false;
-		VisibleBomber=false;
-		VisibleAttackBomber=false;
-		VisibleAttackMissle=false;
+		this.VisibleProp=false;
+		this.VisibleBuild =false;
+		this.VisibleDefence =false;
+		this.VisibleMissle =false;
+		this.VisibleAirport = false;
+		this.VisibleBomber =false;
+		this.VisibleAttackBomber =false;
+		this.VisibleAttackAirport = false;
+		this.VisibleAttackMissle =false;
 	}
 public bool GetDefence() {
 	//return true;
@@ -88,13 +118,13 @@ public List<Warhead> GetWarhead(){
 	}
 	public CityModel GetTargetCity(){
 
-			return _TargetCity;
+			return this._TargetCity;
 	
 	}
 
 	public void SetTargetCity(CityModel TargetCity){
 		
-			_TargetCity=TargetCity;
+			this._TargetCity=TargetCity;
 		
 	}
 	public Missle GetAttackMissle(){
