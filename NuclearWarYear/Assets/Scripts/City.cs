@@ -15,8 +15,7 @@ public class City : MonoBehaviour
 	private int _IdCity;
 	private List<City> _TownList;
 	private bool _visibleLabel;
-	//private int _population;
-	//private int _futurePopulation;
+
 	private Action<int> _SelectCityTargetIdPlayer;
 	private List<Sprite> _TownSpriteList;
 	public CityModel CityTownModel;

@@ -19,7 +19,7 @@ public class MenuScript : MonoBehaviour
 
     public GameObject Canvas;
     public GameObject CardGamePrefabs;
-
+    public Image CircleReady;
 
 
     public Button ButtonResource;
@@ -41,11 +41,13 @@ public class MenuScript : MonoBehaviour
     public Button LiderButton_4;
     public Button LiderButton_5;
 
-    public Image LiderImage_1;
-    public Image LiderImage_2;
-    public Image LiderImage_3;
-    public Image LiderImage_4;
+    //public Image LiderImage_1;
+    //public Image LiderImage_2;
+    //public Image LiderImage_3;
+    //public Image LiderImage_4;
     public List<Sprite> LiderImageList;
+    public List<Sprite> FlagImageList;
+    public List<Sprite> IconCircleReadyList;
 
     public List<GameObject> CountryLiderPropagandaBuildingList;
     public Image HpBar;
@@ -124,13 +126,24 @@ public class MenuScript : MonoBehaviour
         //AttackMissleButton.onClick.AddListener(() => AttackMissleButtonMethod(AttackMissleButton));
         WarheadButton.onClick.AddListener(() => WarheadMethod(WarheadButton));
 
+        var viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
+        viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList,0);
+
+        var viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
+        viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList,1);
+
+        var viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
+        viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, 2);
+
+        var viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
+        viewLiderButton_4.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, 3);
+
         LiderButton_1.onClick.AddListener(() => LiderButton_1_Method(LiderButton_1));
         LiderButton_2.onClick.AddListener(() => LiderButton_2_Method(LiderButton_2));
         LiderButton_3.onClick.AddListener(() => LiderButton_3_Method(LiderButton_3));
         LiderButton_4.onClick.AddListener(() => LiderButton_4_Method(LiderButton_4));
         LiderButton_5.onClick.AddListener(() => LiderButton_5_Method(LiderButton_5));
-        // LiderButton_1.Find("Button Name").GetComponentInChildren<Text>().text = "Button Text";
-
+   
 
         SetPropagand(5);
         
@@ -150,8 +163,9 @@ public class MenuScript : MonoBehaviour
         //ReplaceCardGame();
         StartCoroutine(PrintTypeWriter("privet user"));
         //PrintTypeWriter();
-        //SetAllCityVisibleLabelView(true);
+        
         CanvasResourcePlayer.SetActive(false);
+        CircleImageReadyParam(0, false);
     }
     private void ReplaceCardGame()
     {
@@ -164,17 +178,47 @@ public class MenuScript : MonoBehaviour
 
     private void ChangeImageLider()
     {
+        // var kol = LiderButton_1.GetComponents<Image>();
+        
+        // LiderImage_1
+        //ButtonLiderFrame();
+        ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
+        viewLiderButton.ButtonLiderFrame();
 
-        LiderImage_1.sprite = LiderImageList[0 + _mainModel.CountryLiderList[0].Mood];
-        LiderImage_2.sprite = LiderImageList[8 + _mainModel.CountryLiderList[1].Mood];
-        LiderImage_3.sprite = LiderImageList[16 + _mainModel.CountryLiderList[2].Mood];
-        LiderImage_4.sprite = LiderImageList[24 + _mainModel.CountryLiderList[3].Mood];
+        ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
+        viewLiderButton_2.ButtonLiderFrame();
 
-        LiderButton_1.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[0].GetName()+" ("+ _mainModel.CountryLiderList[0].GetAllOwnPopulation()+")";
-        LiderButton_2.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[1].GetName() + " (" + _mainModel.CountryLiderList[1].GetAllOwnPopulation() + ")";
-        LiderButton_3.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[2].GetName() + " (" + _mainModel.CountryLiderList[2].GetAllOwnPopulation() + ")";
+        ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
+        viewLiderButton_3.ButtonLiderFrame();
+
+        ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
+        viewLiderButton_4.ButtonLiderFrame();
+
+        //LiderImage_2.sprite = LiderImageList[8 + _mainModel.CountryLiderList[1].Mood];
+        //LiderImage_3.sprite = LiderImageList[16 + _mainModel.CountryLiderList[2].Mood];
+        //LiderImage_4.sprite = LiderImageList[24 + _mainModel.CountryLiderList[3].Mood];
+
+        
+        //LiderButton_2.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[1].GetName() + " (" + _mainModel.CountryLiderList[1].GetAllOwnPopulation() + ")";
+        //LiderButton_3.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[2].GetName() + " (" + _mainModel.CountryLiderList[2].GetAllOwnPopulation() + ")";
         LiderButton_4.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[3].GetName() + " (" + _mainModel.CountryLiderList[3].GetAllOwnPopulation() + ")";
     }
+    /*
+    private void ButtonLiderFrame()
+    {
+        var allImage_ar = LiderButton_1.GetComponentsInChildren<Image>();
+        Debug.Log("0009 $$$$$$$$$$$$$$     agId  ="  );
+        Debug.Log("0011  C  =" + allImage_ar.Length);
+        var LiderImage_1 = allImage_ar[1].GetComponent<Image>();
+        var flagImage = allImage_ar[2].GetComponent<Image>();
+        var circleReady = allImage_ar[4].GetComponent<Image>();
+        LiderImage_1.sprite = LiderImageList[0 + _mainModel.CountryLiderList[0].Mood];
+        flagImage.sprite = FlagImageList[0];
+        circleReady.enabled = false;
+
+        LiderButton_1.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[0].GetName() + " (" + _mainModel.CountryLiderList[0].GetAllOwnPopulation() + ")";
+    }
+    */
 
     private void SelectCityTargetIdPlayer(int CityId)
     {
@@ -187,7 +231,7 @@ public class MenuScript : MonoBehaviour
 
 
         
-        Debug.Log("0011  City =" + selectCityTarget);
+        
         // TargetSity
         if (_mainModel._flagIdPlayer != selectCityTarget.FlagId)
         {
@@ -273,7 +317,7 @@ public class MenuScript : MonoBehaviour
         {
             StartCoroutine(TurnOneLider(lider, indexLider));
 
-            //StartCoroutine(TurnText(lider.GetName(), indexLider));
+            
             indexLider++;
         }
         float openWaitTime = waitTime + waitTurnTime * _mainModel.CountryLiderList.Count();
@@ -288,6 +332,7 @@ public class MenuScript : MonoBehaviour
             townCity.SetVisible(false);
             townCity.SetVisibleShild(false);
         }
+        CircleImageReadyParam(0, false);
     }
     private IEnumerator TurnText(string Name,int indexLider) {
        
@@ -417,23 +462,7 @@ public class MenuScript : MonoBehaviour
         
         _targetNuclearMap = new Vector3(NuclearMapRightX/3, NuclearMapDowmY/2, 0);
     }
-        // Bomber
-    //void AttackBomberButtonMethod(Button buttonPressed)
-    //{
-       // EventController eventController = new EventController(Controller.Command.AttackBomber, _mainModel._flagIdPlayer);
-       // _controller.SendCommand(eventController);
-
-    //}
-    // Missle
-    /*
-    void AttackMissleButtonMethod(Button buttonPressed)
-    {
-        EventController eventController = new EventController(Controller.Command.AttackMissle, _mainModel._flagIdPlayer);
-        _controller.SendCommand(eventController);
-
-
-    }
-    */
+      
     //WarheadMethod
     void WarheadMethod(Button buttonPressed)
     {
@@ -490,9 +519,8 @@ public class MenuScript : MonoBehaviour
 
             enableButton = true;
            // StartCoroutine(PrintTypeWriter("\n missle ready!"));
-            EventController eventController = new EventController(Controller.Command.AttackMissle, _mainModel._flagIdPlayer);
-            _controller.SendCommand(eventController);
-            Debug.Log("00 i  = " );
+            
+            
             var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
@@ -502,6 +530,9 @@ public class MenuScript : MonoBehaviour
             {
                 StartCoroutine(PrintTypeWriter("\n Ready. Select target for missle"));
             }
+            CircleImageReadyParam(1,true);
+            EventController eventController = new EventController(Controller.Command.AttackMissle, _mainModel._flagIdPlayer);
+            _controller.SendCommand(eventController);
         }
         else
         {
@@ -524,10 +555,12 @@ public class MenuScript : MonoBehaviour
             else { 
                 StartCoroutine(PrintTypeWriter("\n select target bomber"));
             }
-            
+
+            CircleImageReadyParam(0,true);
             Debug.Log("0000_______  [ "+ cityTarget + "]    = "  );
             EventController eventController = new EventController(Controller.Command.AttackBomber, _mainModel._flagIdPlayer);
             _controller.SendCommand(eventController);
+
         }
         else
         {
@@ -544,7 +577,12 @@ public class MenuScript : MonoBehaviour
         }
 
     }
+    private void CircleImageReadyParam(int IndexImage,bool Visible) {
+        CircleReady.enabled = Visible;
+        //var circleReadySprite = CircleReady.GetComponent<SpriteRenderer>();
+        CircleReady.sprite = IconCircleReadyList[IndexImage];
 
+    }
     void GetEnergeLevelPercent()
     {
         int EnergeLevelFull = 10;

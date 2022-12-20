@@ -14,10 +14,6 @@ public class EventController
 		this.NameCommand = nameCommand;
 		this.FlagId = FlagId;
 	}
-	/*
-	public virtual int GetFlagId() {
-		return FlagId;
-	}
-	*/
+
 }
 

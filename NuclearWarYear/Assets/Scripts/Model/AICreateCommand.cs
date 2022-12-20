@@ -12,8 +12,9 @@ public class AICreateCommand
 		List<string> nameCommandList = new List<string>() {
 			"Propaganda","Building","Defence","Missle","Bomber","AttackBomber","AttackMissle"
 		};
-
-		foreach(CountryLider lider in CountryLiderList) {
+		
+		// all country lider
+		foreach (CountryLider lider in CountryLiderList) {
 			// only fiend
 			if(lider.FlagId!=FlagIdPlayer){
 				if(lider.GetCommandLider ()!=null){
@@ -32,6 +33,8 @@ public class AICreateCommand
 				
 				int indexCommand = UnityEngine.Random.Range(0, nameCommandList.Count);
 		
+			Debug.Log(lider.GetName()+"  $$$$$$$$"+ nameCommandList[indexCommand] + "$$$$        =" + indexCommand);
+
 				lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, 
 					nameCommandList[indexCommand],lider.FlagId));
 			}

@@ -19,11 +19,11 @@ public class SwitchActionHelper
         CityModel targetCity = null;
 
         commandLider.SetNameCommand(actionCommand);
-        Debug.Log("0009 $$$$$$$$$$$$$$    i   FlagId  =" + FlagId);
+        
         if (countryLider.GetCommandLider()?.GetVisibleBomber() == true) { 
             Debug.Log ("0011  Command  FlagId =" + FlagId);
         }
-        Debug.Log("0008  City  AIfiend =" + AIfiend);
+        
 
         switch (actionCommand)
         {

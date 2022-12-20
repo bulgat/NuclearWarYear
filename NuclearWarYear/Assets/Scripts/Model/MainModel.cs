@@ -53,9 +53,9 @@ public class MainModel
 		this._flagIdPlayer = flagIdPlayer;
 		this.CountryLiderList = new List<CountryLider>();
 		this.CountryLiderList.Add(new CountryLider(1,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[0],TownList,"Путин"));
-		this.CountryLiderList.Add(new CountryLider(2,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[1],TownList,"Зеленский"));
+		this.CountryLiderList.Add(new CountryLider(2,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[1],TownList,"Зеленс"));
 		this.CountryLiderList.Add(new CountryLider(3,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[2],TownList, "Байден"));
-		this.CountryLiderList.Add(new CountryLider(4,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[3],TownList, "Си Цзипин"));
+		this.CountryLiderList.Add(new CountryLider(4,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[3],TownList, "Си Цзип"));
 		this.CountryLiderList.Add(new CountryLider(flagIdPlayer, true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[4],TownList, "Игрок"));
 		
 	}
@@ -133,9 +133,11 @@ public class MainModel
 		//GetEnergeLevelPercentWarhead();
 	}
 	public void ReconTotalTurn(int FlagId){
-			
-			// realize command.
-		foreach(CountryLider lider in CountryLiderList){
+
+		Debug.Log("0  ReconTotalTurn  = ");
+
+		// realize command.
+		foreach (CountryLider lider in CountryLiderList){
 			bool explode=false;
 			if(lider.GetCommandLider ()!=null) {
 				

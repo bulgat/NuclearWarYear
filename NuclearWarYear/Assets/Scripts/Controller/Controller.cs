@@ -51,7 +51,7 @@ public class Controller
 		if (eventController.NameCommand == Command.Bomber){
 	
 			_mainModel.SetBomberPlayer(eventController.FlagId);
-			//_mainModel
+			
 		}
 		if (eventController.NameCommand == Command.AttackBomber){
 			
@@ -71,7 +71,7 @@ public class Controller
 		if (eventController.NameCommand == Command.TotalTurn){
 
 			_mainModel.ReconTotalTurn(eventController.FlagId);
-			//_mainModel
+			
 		}
 		if (eventController.NameCommand == Command.SelectCityEnemyTargetPlayer){
 
