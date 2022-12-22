@@ -33,7 +33,7 @@ public class AICreateCommand
 				
 				int indexCommand = UnityEngine.Random.Range(0, nameCommandList.Count);
 		
-			Debug.Log(lider.GetName()+"  $$$$$$$$"+ nameCommandList[indexCommand] + "$$$$        =" + indexCommand);
+			
 
 				lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, 
 					nameCommandList[indexCommand],lider.FlagId));

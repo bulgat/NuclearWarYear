@@ -10,8 +10,12 @@ public class City : MonoBehaviour
 	public GameObject NuclearExplode;
 	public GameObject Shield;
 	public GameObject AttackTarget;
-	
+	public GameObject Flag;
+	public List<Sprite> FlagImageList;
+
 	public int FlagId=0;
+	[Header("View Id")]
+	public int ViewId;
 	private int _IdCity;
 	private List<City> _TownList;
 	private bool _visibleLabel;
@@ -30,7 +34,10 @@ public class City : MonoBehaviour
 
         NuclearExplode.SetActive(false);
 		AttackTarget.SetActive(false);
-    }
+
+		
+
+	}
 
     // Update is called once per frame
     void Update()
@@ -47,6 +54,12 @@ public class City : MonoBehaviour
 	public void SetCityModelView(CityModel cityModel)
     {
 		this.CityTownModel = cityModel;
+		this.FlagId = cityModel.FlagId-1;
+
+		
+		var spriteRenderer = Flag.GetComponent<SpriteRenderer>();
+
+		spriteRenderer.sprite = FlagImageList[this.FlagId];
 
 	}
 	public void ChangeViewTown(){
@@ -73,8 +86,7 @@ public class City : MonoBehaviour
 			return;
 		}
 			spriteTown.sprite = _TownSpriteList[5];
-
-		//print("FFFFFFFF = ");
+			Flag.SetActive(false);
 	}
 	public void ClearTargetAim(){
 		AttackTarget.SetActive(false);

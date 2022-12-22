@@ -13,6 +13,7 @@ public class CityModel
         _population = 40;
         _futurePopulation = _population;
         this.Id = id;
+        
     }
     public int GetId()
     {
