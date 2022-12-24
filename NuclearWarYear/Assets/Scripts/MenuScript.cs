@@ -46,9 +46,7 @@ public class MenuScript : MonoBehaviour
     public List<Sprite> IconCircleReadyList;
 
     public List<GameObject> CountryLiderPropagandaBuildingList;
-    //public Image HpBar;
-    //public Image HpBarBomber;
-    //public Image HpBarWarhead;
+
 
     public List<Sprite> TownSpriteList;
 
@@ -93,7 +91,7 @@ public class MenuScript : MonoBehaviour
         TownList = new GameObject[_mainModel.GetTownList().Count];
         GameObject[] TownListView = GameObject.FindGameObjectsWithTag("Town");
 
-        Debug.Log( " = it ="+ TownListView.Count());
+        
 
         for (int i=0;i< TownListView.Length;i++)
         {
@@ -126,7 +124,7 @@ public class MenuScript : MonoBehaviour
 
         ButtonResource.onClick.AddListener(() => ButtonResourceMethod(ButtonResource));
         ButtonCloseResource.onClick.AddListener(() => ButtonCloseResourceMethod(ButtonCloseResource));
-        TurnButton.onClick.AddListener(() => TurnAttackMethod(TurnButton));
+        TurnButton.onClick.AddListener(() => TurnButtonMethod(TurnButton));
         PropButton.onClick.AddListener(() => PropMethod(PropButton));
         BuildButton.onClick.AddListener(() => BuildMethod(BuildButton));
         DefenceButton.onClick.AddListener(() => DefenceMethod(DefenceButton));
@@ -158,10 +156,6 @@ public class MenuScript : MonoBehaviour
         
         new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList, 
             _mainModel.GetTownList(), _mainModel._flagIdPlayer, _mainModel._flagIdPlayer);
-
-        //GetEnergeLevelPercent();
-        //GetEnergeLevelPercentBomber();
-        //GetEnergeLevelPercentWarhead();
 
         SelectCountryOne();
         SetAllCityVisibleComponent();
@@ -255,10 +249,11 @@ public class MenuScript : MonoBehaviour
     }
     private void SetAllCityVisibleComponent()
     {
+        
         foreach (var city in TownList)
         {
             City townCity = city.GetComponent<City>();
-            townCity.SetVisible(false);
+            townCity.SetVisibleExplode(false);
             townCity.SetVisibleShild(false);
         }
     }
@@ -284,9 +279,9 @@ public class MenuScript : MonoBehaviour
     }
     void ButtonCloseResourceMethod(Button buttonCloseResource) {
         CanvasResourcePlayer.SetActive(false);
-        Debug.Log("===" );
+        
     }
-    void TurnAttackMethod(Button buttonPressed)
+    void TurnButtonMethod(Button buttonPressed)
     {
 
 
@@ -294,7 +289,7 @@ public class MenuScript : MonoBehaviour
         _visiblePanel = false;
         MoveMapNuclear();
 
-        CanvasTacticRealSetText("Начало хода");
+        CanvasTacticRealSetText("Начало хода",0);
         // accept animation Central Building Propagation
         int indexLider = 0;
         foreach (CountryLider lider in _mainModel.CountryLiderList)
@@ -313,10 +308,12 @@ public class MenuScript : MonoBehaviour
         foreach (GameObject city in TownList)
         {
             City townCity = city.GetComponent<City>();
-            townCity.SetVisible(false);
+            townCity.SetVisibleExplode(false);
             townCity.SetVisibleShild(false);
         }
         CircleImageReadyParam(0, false);
+        new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList,
+            _mainModel.GetTownList(), _mainModel._flagIdPlayer, _mainModel._flagIdPlayer);
     }
     private IEnumerator TurnText(string Name,int indexLider) {
        
@@ -330,7 +327,9 @@ public class MenuScript : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime + (waitTurnTime * indexLider));
 
-        CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand());
+        CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand(), lider.FlagId);
+       
+
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.StartStateObject(TownList, waitTime + (waitTurnTime * indexLider));
@@ -363,7 +362,7 @@ public class MenuScript : MonoBehaviour
         
         SetPropagand(flagIdPlayer);
 
-        new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList, _mainModel.GetTownList(), _mainModel._flagIdPlayer, _mainModel._flagIdPlayer);
+        //new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList, _mainModel.GetTownList(), _mainModel._flagIdPlayer, _mainModel._flagIdPlayer);
         
         StartCoroutine(PrintTypeWriter("\n propaganda"));
     }
@@ -446,22 +445,13 @@ public class MenuScript : MonoBehaviour
         
         _targetNuclearMap = new Vector3(NuclearMapRightX/3, NuclearMapDowmY/2, 0);
     }
-      /*
-    //WarheadMethod
-    void WarheadMethod(Button buttonPressed)
-    {
-        EventController eventController = new EventController(Controller.Command.Warhead, _mainModel._flagIdPlayer);
-        _controller.SendCommand(eventController);
-
-        GetEnergeLevelPercentWarhead();
-    }
-      */
+ 
 
 
     void ResetAction()
     {
 
-        SetCityVisible(false);
+        //SetCityVisible(false);
 
         _mainModel.ResetAction();
     }
@@ -484,12 +474,10 @@ public class MenuScript : MonoBehaviour
         //button player
         EnableButtonPlayer();
 
-        //GetEnergeLevelPercent();
-        //GetEnergeLevelPercentBomber();
-        //GetEnergeLevelPercentWarhead();
+   
         ResetAction();
 
-        SetCityVisible(true);
+        //SetCityVisible(true);
         ChangeImageLider();
     }
     void EnableButtonPlayer()
@@ -541,7 +529,7 @@ public class MenuScript : MonoBehaviour
             }
 
             CircleImageReadyParam(0,true);
-            Debug.Log("0000_______  [ "+ cityTarget + "]    = "  );
+            
             EventController eventController = new EventController(Controller.Command.AttackBomber, _mainModel._flagIdPlayer);
             _controller.SendCommand(eventController);
 
@@ -551,23 +539,16 @@ public class MenuScript : MonoBehaviour
             //AttackBomberButton.GetComponent<Button>().interactable = false;
             BomberButton.GetComponent<Button>().interactable = true;
         }
-        /*
-        if (enableButton)
-        {
-            WarheadButton.GetComponent<Button>().interactable = true;
-        }
-        else
-        {
-            WarheadButton.GetComponent<Button>().interactable = false;
-        }
-        */
+  
 
         BomberButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light bomber ("
             + _mainModel.CountryLiderList[4].GetBomberCount()+")";
         
         
         MissleButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light missle " + _mainModel.CountryLiderList[4].GetMissleCount();
-       // WarheadButton.GetComponentInChildren<UnityEngine.UI.Text>().text =
+    
+        //SetCityVisible(false);
+        SetAllCityVisibleComponent();
     }
     private void CircleImageReadyParam(int IndexImage,bool Visible) {
         CircleReady.enabled = Visible;
@@ -575,44 +556,7 @@ public class MenuScript : MonoBehaviour
         CircleReady.sprite = IconCircleReadyList[IndexImage];
 
     }
-    /*
-    void GetEnergeLevelPercent()
-    {
-        int EnergeLevelFull = 10;
-        int missleCount = _mainModel.CountryLiderList[4].GetMissleCount();
-        if (missleCount > EnergeLevelFull)
-        {
-            missleCount = EnergeLevelFull;
-        }
-        HpBar.fillAmount = (float)missleCount / EnergeLevelFull;
-    }
-    */
-    /*
-    void GetEnergeLevelPercentBomber()
-    {
-        int EnergeLevelFull = 10;
-        int missleCount = _mainModel.CountryLiderList[4].GetBomberCount();
-
-        if (missleCount > EnergeLevelFull)
-        {
-            missleCount = EnergeLevelFull;
-        }
-        HpBarBomber.fillAmount = (float)missleCount / EnergeLevelFull;
-    }
-    */
-    /*
-    void GetEnergeLevelPercentWarhead()
-    {
-        int EnergeLevelFull = 10;
-        int missleCount = _mainModel.CountryLiderList[4].GetWarheadCount();
-
-        if (missleCount > EnergeLevelFull)
-        {
-            missleCount = EnergeLevelFull;
-        }
-        HpBarWarhead.fillAmount = (float)missleCount / EnergeLevelFull;
-    }
-    */
+   /*
     void SetCityVisible(bool Visible)
     {
         
@@ -621,20 +565,26 @@ public class MenuScript : MonoBehaviour
             CityModel cityModel = _mainModel.CountryLiderList[4].GetCommandLider().GetTargetCity();
             GameObject viewTown = new ViewTown().GetTownViewWithId(TownList, cityModel);
             City city = viewTown.GetComponent<City>();
+            
             if (city != null)
             {
-                city.SetVisible(Visible);
+                city.SetVisibleExplode(Visible);
             }
+            
         }
     }
+   */
     private void UpdatePanelVisible() { 
         panelMain.GetComponent<Canvas>().enabled = _visiblePanel;
         CanvasTacticReal.GetComponent<Canvas>().enabled = (_visiblePanel==false);
         
     }
-    private void CanvasTacticRealSetText(string InfoText)
+    private void CanvasTacticRealSetText(string InfoText,int FlagIndex)
     {
         CanvasTacticReal.GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
+        var CanvasTacticRealImage = CanvasTacticReal.GetComponentsInChildren<Image>();
+        Debug.Log("  - -  t   [" + CanvasTacticRealImage.Count() + "]");
+        CanvasTacticRealImage[1].sprite = FlagImageList[FlagIndex];
     }
 
     void Update()
@@ -657,7 +607,7 @@ public class MenuScript : MonoBehaviour
 
         if (_mainModel._endGame)
         {
-            Debug.Log("  _endGame  ");
+            
             //Application.LoadLevel("Victory");
             SceneManager.LoadScene("Victory", LoadSceneMode.Single);
         }
@@ -665,9 +615,10 @@ public class MenuScript : MonoBehaviour
     private void SetAllCityVisibleLabelView(bool Visible)
     {
         //int k = 0;
-        foreach (var city in TownList)
+Debug.Log("  _endGa C =   "+ TownList.Count());
+        foreach (GameObject city in TownList)
         {
-            Debug.Log(TownList.Count()+"  - -  ty = [" + city+"]");
+            
             City townCity = city.GetComponent<City>();
             townCity.SetVisibleLabel(Visible);
            // k++;

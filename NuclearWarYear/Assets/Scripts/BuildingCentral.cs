@@ -125,8 +125,14 @@ public class BuildingCentral : MonoBehaviour
 	}
 	public void ResetStateObject(){
 		_animationProcess = false;
-		Destroy(WingMissle);
-		Destroy(BomberObject);
+		if (WingMissle != null)
+        {
+			Destroy(WingMissle);
+        }
+		if (BomberObject != null)
+		{
+			Destroy(BomberObject);
+		}
 	}
 	void SendBomberAndWing(GameObject bomberObject,int Speed) {
 
@@ -135,14 +141,26 @@ public class BuildingCentral : MonoBehaviour
 					
 
 					var offset = 260f;
-			Vector3 targetBomber = GetTownViewWithId(this.buildingCentralModel.GetTargetBomber()).transform.position;
-bomberObject.transform.position = Vector3.MoveTowards(bomberObject.transform.position, targetBomber, step);
+					GameObject cityTown = GetTownViewWithId(this.buildingCentralModel.GetTargetBomber());
+					Vector3 targetBomber = cityTown.transform.position;
+					bomberObject.transform.position = Vector3.MoveTowards(bomberObject.transform.position, targetBomber, step);
 
 					 Vector2 direction = (Vector2)targetBomber - (Vector2)transform.position;
 					 direction.Normalize();
 					 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
 					 bomberObject.transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
-				}
+					//ExplodeTown
+					var kol = targetBomber - bomberObject.transform.position;
+					float dist = Vector3.Distance(targetBomber, bomberObject.transform.position);
+					if (dist<1.5f) {
+						//draw explode
+						City city = cityTown.GetComponent<City>();
+						city.SetVisibleExplode(true);
+						Debug.Log("explode===");
+
+					}
+			Debug.Log(dist+" dist   " +targetBomber+" = t ="+ bomberObject.transform.position+" ___kol = "+ kol);
+		}
 	}
 	public GameObject GetTownViewWithId(CityModel cityModel)
     {

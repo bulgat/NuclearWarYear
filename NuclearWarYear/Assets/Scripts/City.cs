@@ -109,7 +109,8 @@ public class City : MonoBehaviour
 	public void SetVisibleLabel(bool Visible){
 		_visibleLabel = Visible;
 	}
-	public void SetVisible(bool Visible){
+	public void SetVisibleExplode(bool Visible){
+		Debug.Log("0000__ AllCityVisibleComponent [ "+_IdCity+" ]    = " + Visible);
 		NuclearExplode.SetActive(Visible);
 	}
 	public void SetVisibleShild(bool Visible){
