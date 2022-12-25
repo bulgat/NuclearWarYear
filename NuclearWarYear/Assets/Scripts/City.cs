@@ -43,12 +43,13 @@ public class City : MonoBehaviour
     void Update()
     {
 		ChangeViewTown();
-		
-    }
+		Shield.SetActive(false);
+	}
 	 void OnMouseDown()
     {
-
-		_SelectCityTargetIdPlayer(CityTownModel.GetId());
+		//print("0000_["+ _SelectCityTargetIdPlayer + "] City ibleComponent [  "+ CityTownModel 
+		//	+ " ]    = "+ _IdCity+"  "+ CityTownModel.GetId());
+		//_SelectCityTargetIdPlayer(CityTownModel.GetId());
 
     }
 	public void SetCityModelView(CityModel cityModel)
@@ -64,29 +65,36 @@ public class City : MonoBehaviour
 	}
 	public void ChangeViewTown(){
 		var spriteTown = NuclearTown.GetComponent<SpriteRenderer>();
-		
-		if(CityTownModel.GetPopulation() >= 40) {
-			spriteTown.sprite = _TownSpriteList[0];
-			return;
-		}
-		if(CityTownModel.GetPopulation() > 30) {
-			spriteTown.sprite = _TownSpriteList[1];
-			return;
-		}
-		if(CityTownModel.GetPopulation() > 20) {
-			spriteTown.sprite = _TownSpriteList[2];
-			return;
-		}
-		if(CityTownModel.GetPopulation() > 10) {
-			spriteTown.sprite = _TownSpriteList[3];
-			return;
-		}
-		if(CityTownModel.GetPopulation() > 0) {
-			spriteTown.sprite = _TownSpriteList[4];
-			return;
-		}
+		if (CityTownModel!=null)
+		{
+			if (CityTownModel.GetPopulation() >= 40)
+			{
+				spriteTown.sprite = _TownSpriteList[0];
+				return;
+			}
+			if (CityTownModel.GetPopulation() > 30)
+			{
+				spriteTown.sprite = _TownSpriteList[1];
+				return;
+			}
+			if (CityTownModel.GetPopulation() > 20)
+			{
+				spriteTown.sprite = _TownSpriteList[2];
+				return;
+			}
+			if (CityTownModel.GetPopulation() > 10)
+			{
+				spriteTown.sprite = _TownSpriteList[3];
+				return;
+			}
+			if (CityTownModel.GetPopulation() > 0)
+			{
+				spriteTown.sprite = _TownSpriteList[4];
+				return;
+			}
 			spriteTown.sprite = _TownSpriteList[5];
 			Flag.SetActive(false);
+		}
 	}
 	public void ClearTargetAim(){
 		AttackTarget.SetActive(false);
@@ -110,8 +118,12 @@ public class City : MonoBehaviour
 		_visibleLabel = Visible;
 	}
 	public void SetVisibleExplode(bool Visible){
-		Debug.Log("0000__ AllCityVisibleComponent [ "+_IdCity+" ]    = " + Visible);
-		NuclearExplode.SetActive(Visible);
+		
+		if (NuclearExplode)
+		{
+			
+			NuclearExplode.SetActive(Visible);
+		}
 	}
 	public void SetVisibleShild(bool Visible){
 		Shield.SetActive(Visible);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ViewTown
 {
-    public GameObject GetTownViewWithId(GameObject[] TownList, CityModel cityModel)
+    public GameObject GetTownViewWithId(List<GameObject> TownList, CityModel cityModel)
     {
         foreach (GameObject cityTown in TownList)
         {

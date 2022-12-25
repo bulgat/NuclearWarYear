@@ -26,6 +26,7 @@ public class MenuScript : MonoBehaviour
     public Button ButtonCloseResource;
     public Button TurnButton;
 
+    
     public Button PropButton;
     public Button BuildButton;
     public Button DefenceButton;
@@ -55,7 +56,7 @@ public class MenuScript : MonoBehaviour
     float _animationTime = 2.0f;
     bool _visiblePanel = true;
 
-    private GameObject[] TownList;
+    private List<GameObject> TownViewList;
 
     [SerializeField]
     List<CountryLider> CountryLiderList;
@@ -74,47 +75,29 @@ public class MenuScript : MonoBehaviour
         
         
     }
-    IEnumerator PrintTypeWriter(string Message)
+    void OnEnable()
     {
-        foreach (var item in Message)
-        {
-            TextTypeWriter.text += item;
-            yield return new WaitForSeconds(0.1f);
-        }
-
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // all objects are loaded, call other methods
+        
+       // StartCoroutine(PrintTypeWriter("LOAD SCENE"));
+    }
+    
     void Start()
     {
 
 
 
-        TownList = new GameObject[_mainModel.GetTownList().Count];
-        GameObject[] TownListView = GameObject.FindGameObjectsWithTag("Town");
-
         
-
-        for (int i=0;i< TownListView.Length;i++)
-        {
-            
-            
-            CityModel cityModel = _mainModel.GetTownList()[i];
-
-            for(int z=0; z < TownListView.Length; z++)
-            {
-                City townCity = TownListView[i].GetComponent<City>();
-                if (townCity.ViewId == cityModel.GetId()) 
-                {
-                    townCity.SetCityModelView(cityModel);
-                    townCity.SetId(cityModel.GetId(), SelectCityTargetIdPlayer, TownSpriteList);
- 
-                    TownList[i] = TownListView[i];
-                
-                }
-            }
-            
-            
-
-        }
         
         _controller = new Controller(_mainModel);
 
@@ -130,8 +113,8 @@ public class MenuScript : MonoBehaviour
         DefenceButton.onClick.AddListener(() => DefenceMethod(DefenceButton));
         MissleButton.onClick.AddListener(() => MissleMethod(MissleButton));
         BomberButton.onClick.AddListener(() => BomberMethod(BomberButton));
-   
-        //WarheadButton.onClick.AddListener(() => WarheadMethod(WarheadButton));
+
+        //PromGameObject.onClick.AddListener(() => PropMethod(WarheadButton));
 
         var viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
         viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList,0);
@@ -169,7 +152,55 @@ public class MenuScript : MonoBehaviour
         
         CanvasResourcePlayer.SetActive(false);
         CircleImageReadyParam(0, false);
+
+        GlueTownView();
+       // StartCoroutine(GlueTownView());
     }
+
+    private void GlueTownView()
+    {
+
+        //IEnumerator
+        // yield return new WaitForSeconds(2);
+
+
+        //TownViewList = new GameObject[_mainModel.GetTownList().Count];
+        TownViewList = new List<GameObject>();
+        GameObject[] TownListView = GameObject.FindGameObjectsWithTag("Town");
+
+        List<CityModel> cityModelList = _mainModel.GetTownList();
+
+        for (int i = 0; i < TownListView.Length; i++)
+        {
+
+
+            //CityModel cityModel = _mainModel.GetTownList()[i];
+
+            //for (int z = 0; z < TownListView.Length; z++)
+            //{
+            foreach (CityModel cityModel in cityModelList)
+            {
+
+
+
+                City townCity = TownListView[i].GetComponent<City>();
+                if (townCity.ViewId == cityModel.GetId())
+                {
+                    townCity.SetCityModelView(cityModel);
+                    townCity.SetId(cityModel.GetId(), SelectCityTargetIdPlayer, TownSpriteList);
+
+                    //TownViewList[i] = TownListView[i];
+                    TownViewList.Add(TownListView[i]);
+                }
+            }
+            //}
+
+
+
+        }
+        Debug.Log("  -----    t   [ "+ TownViewList + " ] = "+ TownViewList.Count());
+    }
+
     private void ReplaceCardGame()
     {
         for (int i = 0; i < 5; i++)
@@ -205,11 +236,6 @@ public class MenuScript : MonoBehaviour
         CityEvent cityEvent = new CityEvent(Controller.Command.SelectCityEnemyTargetPlayer, CityId);
         _controller.SendCommand(cityEvent);
 
-        
-
-
-        
-        
         // TargetSity
         if (_mainModel._flagIdPlayer != selectCityTarget.FlagId)
         {
@@ -226,16 +252,21 @@ public class MenuScript : MonoBehaviour
     }
     private City ClearCityTargetMark(int CityId,bool Player)
     {
+        Debug.LogWarning("TTT " + TownViewList);
         City selectCityTarget = null;
-        foreach (GameObject city in TownList)
+        foreach (GameObject city in TownViewList)
         {
-            City townCity = city.GetComponent<City>();
-            townCity.ClearTargetAim();
-
-            if (townCity.GetId() == CityId)
+            if (city != null)
             {
-                selectCityTarget = townCity;
+                
+                City townCity = city.GetComponent<City>();
+                townCity.ClearTargetAim();
 
+                if (townCity.GetId() == CityId)
+                {
+                    selectCityTarget = townCity;
+
+                }
             }
 
         }
@@ -249,12 +280,17 @@ public class MenuScript : MonoBehaviour
     }
     private void SetAllCityVisibleComponent()
     {
-        
-        foreach (var city in TownList)
+        if (TownViewList != null)
         {
-            City townCity = city.GetComponent<City>();
-            townCity.SetVisibleExplode(false);
-            townCity.SetVisibleShild(false);
+            foreach (var city in TownViewList)
+            {
+                if (city)
+                {
+                    City townCity = city.GetComponent<City>();
+                    townCity.SetVisibleExplode(false);
+                    townCity.SetVisibleShild(false);
+                }
+            }
         }
     }
     void MoveMapNuclear()
@@ -305,7 +341,7 @@ public class MenuScript : MonoBehaviour
         StartCoroutine(AnimationPlayer(openWaitTime+_animationTime));
 
         // reset view
-        foreach (GameObject city in TownList)
+        foreach (GameObject city in TownViewList)
         {
             City townCity = city.GetComponent<City>();
             townCity.SetVisibleExplode(false);
@@ -319,7 +355,7 @@ public class MenuScript : MonoBehaviour
        
        
         yield return new WaitForSeconds(waitTime+(waitTurnTime * indexLider));
-        Debug.Log("0001 CORUTINE   mandLider = "+ Name);
+        
         
     }
 
@@ -332,16 +368,16 @@ public class MenuScript : MonoBehaviour
 
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
-        buildingCentral.StartStateObject(TownList, waitTime + (waitTurnTime * indexLider));
+        buildingCentral.StartStateObject(TownViewList, waitTime + (waitTurnTime * indexLider));
 
         CityModel cityTown = lider.GetCommandLider().GetTargetCity();
         if (cityTown != null)
         {
-            GameObject viewTown = new ViewTown().GetTownViewWithId(TownList, cityTown);
+            GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);
             City city = viewTown.GetComponent<City>();
             
 
-            GameObject targetCityObj = new CityGameObjHelper().GetCityCameObjectWithId(TownList, cityTown.GetId());
+            GameObject targetCityObj = new CityGameObjHelper().GetCityCameObjectWithId(TownViewList, cityTown.GetId());
             if (targetCityObj != null)
             {
                 buildingCentral.SetTargetBomber(cityTown);
@@ -482,14 +518,14 @@ public class MenuScript : MonoBehaviour
     }
     void EnableButtonPlayer()
     {
-        bool enableButton = false;
+        //bool enableButton = false;
 
         if (_mainModel.CountryLiderList[4].GetCommandLider().GetVisibleMissle())
         {
             //AttackMissleButton.GetComponent<Button>().interactable = true;
             MissleButton.GetComponent<Button>().interactable = false;
 
-            enableButton = true;
+            //enableButton = true;
            // StartCoroutine(PrintTypeWriter("\n missle ready!"));
             
             
@@ -517,7 +553,7 @@ public class MenuScript : MonoBehaviour
             //AttackBomberButton.GetComponent<Button>().interactable = true;
 
             BomberButton.GetComponent<Button>().interactable = false;
-            enableButton = true;
+            //enableButton = true;
             
             var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
             if (cityTarget == null)
@@ -583,7 +619,7 @@ public class MenuScript : MonoBehaviour
     {
         CanvasTacticReal.GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
         var CanvasTacticRealImage = CanvasTacticReal.GetComponentsInChildren<Image>();
-        Debug.Log("  - -  t   [" + CanvasTacticRealImage.Count() + "]");
+        
         CanvasTacticRealImage[1].sprite = FlagImageList[FlagIndex];
     }
 
@@ -611,17 +647,40 @@ public class MenuScript : MonoBehaviour
             //Application.LoadLevel("Victory");
             SceneManager.LoadScene("Victory", LoadSceneMode.Single);
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+           
+
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+            RaycastHit2D hit2D = Physics2D.Raycast(mousePos2D, Vector2.zero);
+            if (hit2D)
+            {
+                Debug.Log(" AD SCEN nd  =   " + hit2D.transform.gameObject.name);
+                City city = hit2D.transform.gameObject.GetComponent<City>();
+                SelectCityTargetIdPlayer(city.GetId());
+            }
+            
+        }
     }
     private void SetAllCityVisibleLabelView(bool Visible)
     {
         //int k = 0;
-Debug.Log("  _endGa C =   "+ TownList.Count());
-        foreach (GameObject city in TownList)
+        
+        if (TownViewList != null)
         {
-            
-            City townCity = city.GetComponent<City>();
-            townCity.SetVisibleLabel(Visible);
-           // k++;
+            foreach (GameObject city in TownViewList)
+            {
+                //Debug.Log("0001 CORUTINE   mandLi  = " ) ;
+
+                if (city)
+                {
+
+                    City townCity = city.GetComponent<City>();
+                    townCity.SetVisibleLabel(Visible);
+                }
+                // k++;
+            }
         }
     }
 
@@ -639,5 +698,13 @@ Debug.Log("  _endGa C =   "+ TownList.Count());
             }
         }
     }
+    IEnumerator PrintTypeWriter(string Message)
+    {
+        foreach (var item in Message)
+        {
+            TextTypeWriter.text += item;
+            yield return new WaitForSeconds(0.1f);
+        }
 
+    }
 }

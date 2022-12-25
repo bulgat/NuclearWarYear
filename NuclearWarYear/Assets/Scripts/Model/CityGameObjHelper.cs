@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CityGameObjHelper 
 {
-	public GameObject GetCityCameObjectWithId(GameObject[] TownList, int CityId) {
+	public GameObject GetCityCameObjectWithId(List<GameObject> TownList, int CityId) {
 		foreach(GameObject city in TownList){
 			City townCity = city.GetComponent<City>();
 			if(townCity.GetId() ==CityId){

@@ -16,8 +16,8 @@ public class MenuStart : MonoBehaviour
 	void StartAttackMethod(Button buttonPressed)
 	{
 		//Application.LoadLevel("SampleScene");
-       // SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+       // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
     // Update is called once per frame
     void Update()

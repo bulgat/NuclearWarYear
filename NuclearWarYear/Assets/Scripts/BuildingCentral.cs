@@ -26,7 +26,7 @@ public class BuildingCentral : MonoBehaviour
 	
 	bool _animationProcess;
 	BuildingCentralModel buildingCentralModel;
-	GameObject[] TownList;
+	List<GameObject> TownList;
 
 	public BuildingCentral()
     {
@@ -113,7 +113,7 @@ public class BuildingCentral : MonoBehaviour
 			}
 		}
     }
-	public void StartStateObject(GameObject[] townList,float TimeDelete)
+	public void StartStateObject(List<GameObject> townList,float TimeDelete)
 	{
 		_animationProcess = true;
 		SetAnglePosition = false;
