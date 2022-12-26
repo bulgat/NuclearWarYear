@@ -77,7 +77,7 @@ public class MainModel
 		
 		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, _flagIdPlayer,"Propaganda",_flagIdPlayer));
 
-		//new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, _flagIdPlayer, _flagIdPlayer);
+		
 	}
 	public void SetBuildingPlayer(int FlagId){
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,FlagId);
@@ -135,6 +135,7 @@ public class MainModel
 	public void ReconTotalTurn(int FlagId){
 
 		Debug.Log("0  ReconTotalTurn  = ");
+		
 
 		// realize command.
 		foreach (CountryLider lider in CountryLiderList){
@@ -159,7 +160,6 @@ public class MainModel
 					int indexTown = UnityEngine.Random.Range(0, liderCityList.Count);
 					
 					
-					//City liderCityMy = liderCityList[indexTown];
 					CityModel liderCityMy = liderCityList[indexTown];
 
 
@@ -176,15 +176,14 @@ public class MainModel
 					liderCityMy.SetPresentlyPopulation();
 					// remove population Fiend.
 					explode = new DamagePopulationHelper().SetDamagePopulation(lider,UnDamage,false);
-					if (lider.GetCommandLider ().GetTargetCity()!=null){
-						////lider.GetCommandLider ().GetTargetCity().SetVisible(explode);
-					}
+
+					lider.SetEventTotalTurn("Население увеличилось");
 				}
 				// attack bomber
 				if(lider.GetCommandLider ().GetVisibleAttackBomber()){
 					if(enemylider.GetCommandLider ().GetDefence()){
 				
-						/////lider.GetCommandLider().GetTargetCity().SetVisibleShild(true);
+						
 						lider.RemoveBomber();
 					} else{
 						//bool explode0;
@@ -193,31 +192,44 @@ public class MainModel
 								explode = new DamagePopulationHelper().SetDamagePopulation(lider,lider.GetCommandLider ().GetAttackBomber().Damage,true);
 							}
 						}
-						/////lider.GetCommandLider ().GetTargetCity().SetVisible(explode);
+						
 						
 					}
+					lider.SetEventTotalTurn("От ядерного взрыва с бомбардировщика население уменьшилось");
 				}
 				// attack Missle
 				if(lider.GetCommandLider ().VisibleAttackMissle){
 					
 					if(enemylider.GetCommandLider ().GetDefence()){
 						
-						////lider.GetCommandLider().GetTargetCity().SetVisibleShild(true);
+						
 					} else {
 						if (lider.GetCommandLider ().GetTargetCity()!=null){
 							if (lider.GetCommandLider ().GetAttackMissle()!=null){
 								explode = new DamagePopulationHelper().SetDamagePopulation(lider,lider.GetCommandLider ().GetAttackMissle().Damage,true);
 							}
 						}
-						////lider.GetCommandLider ().GetTargetCity().SetVisible(explode);
+						
 					}
 					lider.RemoveMissle();
-					
-					
+
+					lider.SetEventTotalTurn("От ядерного взрыва ракеты население уменьшилось");
 				}
-			} else {
-		
-			}
+				if (lider.GetCommandLider().VisibleBuild)
+				{
+					lider.SetEventTotalTurn("Производство вооружения");
+				}
+				if (lider.GetCommandLider().VisibleDefence)
+                {
+					lider.SetEventTotalTurn("Защитные системы приведены в готовность");
+				}
+				if (lider.GetCommandLider().VisibleAirport)
+                {
+					lider.SetEventTotalTurn("Бомбардировщики приведены в готовность");
+				}
+				
+
+			} 
 			
 			lider.ChangeTurn();
 			

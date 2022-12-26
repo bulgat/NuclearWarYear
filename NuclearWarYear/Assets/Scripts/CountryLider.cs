@@ -21,7 +21,7 @@ public class CountryLider
 	private int _maxPopulation;
 	private CityModel _targetCitySelectPlayer;
 	private string Name;
-
+	private string EventTotalTurn;
 	
 	public CountryLider(int flagId,bool player,Missle missle,Bomber bomber,Warhead warhead,
 		GameObject PropagandaBuild,List<CityModel> TownList,string Name) {
@@ -45,6 +45,14 @@ public class CountryLider
 			}
 		}
 		_maxPopulation=GetAllOwnPopulation();
+	}
+	public void SetEventTotalTurn(string eventTotalTurn)
+    {
+		this.EventTotalTurn = eventTotalTurn;
+
+	}
+	public string GetEventTotalTurn() {
+		return this.EventTotalTurn;
 	}
 	public string GetName()
 	{

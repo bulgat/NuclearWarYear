@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\Model\CityHelperList.cs" />
     <Compile Include="Assets\Scripts\Model\DamagePopulationHelper.cs" />
     <Compile Include="Assets\Scripts\Controller\Controller.cs" />
+    <Compile Include="Assets\Scripts\Model\ActionCommand.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

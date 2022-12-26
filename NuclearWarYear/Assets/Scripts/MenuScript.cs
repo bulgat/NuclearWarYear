@@ -198,7 +198,7 @@ public class MenuScript : MonoBehaviour
 
 
         }
-        Debug.Log("  -----    t   [ "+ TownViewList + " ] = "+ TownViewList.Count());
+        
     }
 
     private void ReplaceCardGame()
@@ -363,9 +363,12 @@ public class MenuScript : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime + (waitTurnTime * indexLider));
 
-        CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand(), lider.FlagId);
-       
+        CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+
+            lider.GetEventTotalTurn(),
+            lider.FlagId);
 
+        Debug.Log("  SCEN"+ ActionCommand.Command.Defence.ToString() + "d  =   " + lider.GetCommandLider().GetNameCommand());
+        Debug.Log("  explo ===");
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.StartStateObject(TownViewList, waitTime + (waitTurnTime * indexLider));
@@ -525,10 +528,7 @@ public class MenuScript : MonoBehaviour
             //AttackMissleButton.GetComponent<Button>().interactable = true;
             MissleButton.GetComponent<Button>().interactable = false;
 
-            //enableButton = true;
-           // StartCoroutine(PrintTypeWriter("\n missle ready!"));
-            
-            
+         
             var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
@@ -592,24 +592,7 @@ public class MenuScript : MonoBehaviour
         CircleReady.sprite = IconCircleReadyList[IndexImage];
 
     }
-   /*
-    void SetCityVisible(bool Visible)
-    {
-        
-        if (_mainModel.CountryLiderList[4].GetCommandLider() != null)
-        {
-            CityModel cityModel = _mainModel.CountryLiderList[4].GetCommandLider().GetTargetCity();
-            GameObject viewTown = new ViewTown().GetTownViewWithId(TownList, cityModel);
-            City city = viewTown.GetComponent<City>();
-            
-            if (city != null)
-            {
-                city.SetVisibleExplode(Visible);
-            }
-            
-        }
-    }
-   */
+
     private void UpdatePanelVisible() { 
         panelMain.GetComponent<Canvas>().enabled = _visiblePanel;
         CanvasTacticReal.GetComponent<Canvas>().enabled = (_visiblePanel==false);
@@ -656,7 +639,7 @@ public class MenuScript : MonoBehaviour
             RaycastHit2D hit2D = Physics2D.Raycast(mousePos2D, Vector2.zero);
             if (hit2D)
             {
-                Debug.Log(" AD SCEN nd  =   " + hit2D.transform.gameObject.name);
+                
                 City city = hit2D.transform.gameObject.GetComponent<City>();
                 SelectCityTargetIdPlayer(city.GetId());
             }
@@ -665,7 +648,7 @@ public class MenuScript : MonoBehaviour
     }
     private void SetAllCityVisibleLabelView(bool Visible)
     {
-        //int k = 0;
+       
         
         if (TownViewList != null)
         {

@@ -10,11 +10,14 @@ public class SwitchActionHelper
         List<CityModel> TownList, int _flagIdPlayer, string actionCommand, int FlagId)
     {
 
+        
 
         ResetAction();
         CommandLider commandLider = new CommandLider();
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         bool AIfiend = FlagId != _flagIdPlayer;
+
+Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis t  __k  = "+ countryLider.GetName());
 
         CityModel targetCity = null;
 
@@ -23,7 +26,11 @@ public class SwitchActionHelper
         if (countryLider.GetCommandLider()?.GetVisibleBomber() == true) { 
             Debug.Log ("0011  Command  FlagId =" + FlagId);
         }
-        
+        //Change Ai Command
+        //if (AIfiend)
+        //{
+            
+        //}
 
         switch (actionCommand)
         {
@@ -96,6 +103,7 @@ public class SwitchActionHelper
                 //print ("Incorrect intelligence level.");
                 break;
         }
+
         if (targetCity != null)
         {
             //City townCity = targetCity.GetComponent<City>();

@@ -9,15 +9,16 @@ public class AICreateCommand
 	public void EstimationSetCommandAi(Action ResetAction,List<CountryLider> CountryLiderList,
 		List<CityModel> TownList,int _flagIdPlayer,int FlagIdPlayer){
 
-		List<string> nameCommandList = new List<string>() {
-			"Propaganda","Building","Defence","Missle","Bomber","AttackBomber","AttackMissle"
-		};
+	
 		
 		// all country lider
 		foreach (CountryLider lider in CountryLiderList) {
 			// only fiend
 			if(lider.FlagId!=FlagIdPlayer){
-				if(lider.GetCommandLider ()!=null){
+
+				Debug.Log("   ----    [ " + lider.GetCommandLider()?.GetVisibleMissle() + "  ] = " + lider.GetCommandLider()?.GetVisibleBomber());
+				
+				if (lider.GetCommandLider ()!=null){
 					if(lider.GetCommandLider ().GetVisibleMissle() ){
 						
 						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, "AttackMissle",lider.FlagId));
@@ -29,16 +30,31 @@ public class AICreateCommand
 						continue;
 					}
 				}
-			
-				
-				int indexCommand = UnityEngine.Random.Range(0, nameCommandList.Count);
-		
-			
 
-				lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, 
-					nameCommandList[indexCommand],lider.FlagId));
+
+				string actionNameCommand = GetRandomActionCommand();
+
+
+
+
+				lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer,
+					actionNameCommand, lider.FlagId));
 			}
 		}
+	}
+	private string GetRandomActionCommand()
+    {
+		List<string> nameCommandList = new List<string>() {
+			"Propaganda",
+			"Building",
+			"Defence",
+			"Missle",
+			"Bomber"//,
+			//"AttackBomber",
+			//"AttackMissle"
+		};
+		int indexCommand = UnityEngine.Random.Range(0, nameCommandList.Count);
+		return nameCommandList[indexCommand];
 	}
 	
 }
