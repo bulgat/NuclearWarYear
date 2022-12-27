@@ -83,21 +83,21 @@ public class BuildingCentral : MonoBehaviour
 				
 				if(_attackBomber==false){
 
-					
-					if(SetAnglePosition==false){
-						BomberObject.transform.position = new Vector3(Propaganda.transform.position.x,Propaganda.transform.position.y+1,0);
-
-						BomberObject.transform.Rotate(new Vector3(0,0,90));
-						SetAnglePosition=true;
-					}
-					
-					timeBomber +=Time.deltaTime;
-		
-					Vector3 pivot = new Vector3(transform.position.x,transform.position.y,0);
-					float speed =100.0f;
-
 					if (BomberObject != null)
 					{
+						if(SetAnglePosition==false){
+							BomberObject.transform.position = new Vector3(Propaganda.transform.position.x,Propaganda.transform.position.y+1,0);
+
+							BomberObject.transform.Rotate(new Vector3(0,0,90));
+							SetAnglePosition=true;
+						}
+					
+						timeBomber +=Time.deltaTime;
+		
+						Vector3 pivot = new Vector3(transform.position.x,transform.position.y,0);
+						float speed =100.0f;
+
+					
 						// To rotate around the world's up axis
 						BomberObject.transform.RotateAround(pivot, Vector3.forward, speed * Time.deltaTime);
 					}

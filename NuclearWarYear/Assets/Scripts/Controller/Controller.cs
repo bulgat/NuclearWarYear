@@ -17,6 +17,7 @@ public class Controller
 		LiderTargetPlayer,
 		Warhead,
 		TotalTurn,
+		TurnSatisfyOneLider,
 		SelectCityEnemyTargetPlayer,
 		ResetSelectCityEnemyTargetPlayer
 	}
@@ -61,18 +62,26 @@ public class Controller
 		if (eventController.NameCommand == Command.LiderTargetPlayer){
 	
 			_mainModel.SetLiderTargetPlayer(eventController.FlagId);
-			//_mainModel
+
 		}
 		if (eventController.NameCommand == Command.Warhead){
 	
 			_mainModel.SetWarheadMethodPlayer(eventController.FlagId);
-			//_mainModel
+
 		}
 		if (eventController.NameCommand == Command.TotalTurn){
 
 			_mainModel.ReconTotalTurn(eventController.FlagId);
 			
 		}
+		//TurnSatisfyOneLider
+		if (eventController.NameCommand == Command.TurnSatisfyOneLider)
+		{
+
+			_mainModel.SatisfyOneLiderTurn(eventController.FlagId);
+
+		}
+
 		if (eventController.NameCommand == Command.SelectCityEnemyTargetPlayer){
 
 			_mainModel.SelectCityEnemyTargetPlayer(eventController.CityId);

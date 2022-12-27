@@ -16,7 +16,7 @@ public class AICreateCommand
 			// only fiend
 			if(lider.FlagId!=FlagIdPlayer){
 
-				Debug.Log("   ----    [ " + lider.GetCommandLider()?.GetVisibleMissle() + "  ] = " + lider.GetCommandLider()?.GetVisibleBomber());
+				
 				
 				if (lider.GetCommandLider ()!=null){
 					if(lider.GetCommandLider ().GetVisibleMissle() ){

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class SwitchActionHelper
 {
@@ -10,16 +11,14 @@ public class SwitchActionHelper
         List<CityModel> TownList, int _flagIdPlayer, string actionCommand, int FlagId)
     {
 
-        
-
         ResetAction();
         CommandLider commandLider = new CommandLider();
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         bool AIfiend = FlagId != _flagIdPlayer;
 
-Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis t  __k  = "+ countryLider.GetName());
+        Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis t  __k  = "+ countryLider.GetName());
 
-        CityModel targetCity = null;
+        //CityModel targetCity = null;
 
         commandLider.SetNameCommand(actionCommand);
         
@@ -27,10 +26,34 @@ Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis t  __k  = "+ country
             Debug.Log ("0011  Command  FlagId =" + FlagId);
         }
         //Change Ai Command
-        //if (AIfiend)
-        //{
-            
-        //}
+        if (AIfiend)
+        {
+            //int countWeapon;
+            if (actionCommand== "Missle")
+            {
+                if (countryLider.GetMissleCount() <= 0)
+                {
+                    actionCommand = "Propaganda";
+                }
+            }
+            if(actionCommand == "Bomber")
+            {
+                //bomber
+                if (countryLider.GetBomberCount()<=0)
+                {
+                    actionCommand = "Propaganda";
+                }
+            }
+
+         }
+        CityModel targetCity = new TargetHelper().GetTarget(CountryLiderList, _flagIdPlayer, AIfiend, true, TownList, _flagIdPlayer);
+
+        commandLider.SetTargetNameLider( CountryLiderList.Where(a => a.FlagId == targetCity.FlagId).FirstOrDefault().GetName());
+
+
+        if (AIfiend) {
+            commandLider.SetTargetCity(targetCity);
+        }
 
         switch (actionCommand)
         {
@@ -62,7 +85,7 @@ Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis t  __k  = "+ country
                 break;
             case "AttackBomber":
 
-                targetCity = new TargetHelper().GetTarget(CountryLiderList, _flagIdPlayer, AIfiend, false, TownList, _flagIdPlayer);
+                //targetCity = new TargetHelper().GetTarget(CountryLiderList, _flagIdPlayer, AIfiend, false, TownList, _flagIdPlayer);
                 if (targetCity == null)
                 {
 
@@ -82,7 +105,9 @@ Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis t  __k  = "+ country
 
                 break;
             case "AttackMissle":
-                targetCity = new TargetHelper().GetTarget(CountryLiderList, _flagIdPlayer, AIfiend, true, TownList, _flagIdPlayer);
+
+               
+                //targetCity = new TargetHelper().GetTarget(CountryLiderList, _flagIdPlayer, AIfiend, true, TownList, _flagIdPlayer);
                 if (targetCity == null)
                 {
 
@@ -104,14 +129,14 @@ Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis t  __k  = "+ country
                 break;
         }
 
-        if (targetCity != null)
-        {
+        //if (targetCity != null)
+        //{
             //City townCity = targetCity.GetComponent<City>();
 
-            commandLider.SetTargetCity(targetCity);
+           
 
 
-        }
+        //}
 
         if (countryLider.GetTargetCitySelectPlayer() != null)
         {
@@ -121,5 +146,5 @@ Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis t  __k  = "+ country
 
         return commandLider;
     }
-  
+ 
 }

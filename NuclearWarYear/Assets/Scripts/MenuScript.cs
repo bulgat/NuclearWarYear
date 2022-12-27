@@ -12,7 +12,7 @@ public class MenuScript : MonoBehaviour
     public GameObject panelMain;
     public GameObject CanvasTacticReal;
     public GameObject CanvasResourcePlayer;
-
+    public Text CanvasResourcePlayerPopulation;
 
     public GameObject NuclearMap;
     private Vector3 _targetNuclearMap;
@@ -26,14 +26,11 @@ public class MenuScript : MonoBehaviour
     public Button ButtonCloseResource;
     public Button TurnButton;
 
-    
     public Button PropButton;
     public Button BuildButton;
     public Button DefenceButton;
     public Button MissleButton;
     public Button BomberButton;
-
-    //public Button WarheadButton;
 
     public Button LiderButton_1;
     public Button LiderButton_2;
@@ -47,7 +44,6 @@ public class MenuScript : MonoBehaviour
     public List<Sprite> IconCircleReadyList;
 
     public List<GameObject> CountryLiderPropagandaBuildingList;
-
 
     public List<Sprite> TownSpriteList;
 
@@ -154,7 +150,8 @@ public class MenuScript : MonoBehaviour
         CircleImageReadyParam(0, false);
 
         GlueTownView();
-       // StartCoroutine(GlueTownView());
+        // StartCoroutine(GlueTownView());
+        
     }
 
     private void GlueTownView()
@@ -311,7 +308,11 @@ public class MenuScript : MonoBehaviour
     {
         
         CanvasResourcePlayer.SetActive(true);
-       
+        CanvasResourcePlayerPopulation.text = 
+            " population " + _mainModel.GetCountryLiderList()[4].GetAllOwnPopulation()
+            +"\n missle " + _mainModel.GetCountryLiderList()[4].GetMissleCount()
+            + "\n bomber " + _mainModel.GetCountryLiderList()[4].GetBomberCount()
+            ;
     }
     void ButtonCloseResourceMethod(Button buttonCloseResource) {
         CanvasResourcePlayer.SetActive(false);
@@ -363,6 +364,9 @@ public class MenuScript : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime + (waitTurnTime * indexLider));
 
+        EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, lider.FlagId);
+        _controller.SendCommand(eventController);
+
         CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+
             lider.GetEventTotalTurn(),
             lider.FlagId);
@@ -373,6 +377,8 @@ public class MenuScript : MonoBehaviour
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.StartStateObject(TownViewList, waitTime + (waitTurnTime * indexLider));
 
+        buildingCentral.SetTargetBomber(TargetManager(lider));
+        /*
         CityModel cityTown = lider.GetCommandLider().GetTargetCity();
         if (cityTown != null)
         {
@@ -386,6 +392,25 @@ public class MenuScript : MonoBehaviour
                 buildingCentral.SetTargetBomber(cityTown);
             }
         }
+        */
+    }
+    private CityModel TargetManager(CountryLider lider)
+    {
+        CityModel cityTown = lider.GetCommandLider().GetTargetCity();
+        if (cityTown != null)
+        {
+            GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);
+            City city = viewTown.GetComponent<City>();
+
+
+            GameObject targetCityObj = new CityGameObjHelper().GetCityCameObjectWithId(TownViewList, cityTown.GetId());
+            if (targetCityObj != null)
+            {
+                
+                //buildingCentral.SetTargetBomber(cityTown);
+            }
+        }
+        return cityTown;
     }
     //Propagand
     void SetPropagand(int FlagId)
@@ -507,8 +532,8 @@ public class MenuScript : MonoBehaviour
 
         yield return new WaitForSeconds(AnimationTime);
 
-        EventController eventController = new EventController(Controller.Command.TotalTurn, _mainModel._flagIdPlayer);
-        _controller.SendCommand(eventController);
+        //EventController eventController = new EventController(Controller.Command.TotalTurn, _mainModel._flagIdPlayer);
+        //_controller.SendCommand(eventController);
 
         //button player
         EnableButtonPlayer();
