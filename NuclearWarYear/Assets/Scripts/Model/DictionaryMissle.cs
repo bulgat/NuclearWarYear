@@ -25,4 +25,8 @@ public class DictionaryMissle
 	public Warhead GetWarhead (int Id){
 		return new Warhead("Warhead", 1, 25);
 	}
+	public Defence GetDefenceWeapon()
+	{
+		return new Defence("Defence", 1, 1);
+	}
 }

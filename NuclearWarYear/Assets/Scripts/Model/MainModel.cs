@@ -155,7 +155,7 @@ public class MainModel
 			lider.AddMissle(lider.GetCommandLider().GetMissle());
 			lider.AddBomber(lider.GetCommandLider().GetBomber());
 			lider.AddWarhead(lider.GetCommandLider().GetWarhead());
-			//lider.AddDefence(lider.GetCommandLider().GetDefence());
+			lider.AddDefenceWeapon(lider.GetCommandLider().GetDefenceWeapon());
 			CityModel cityModelTarget = lider.GetCommandLider().GetTargetCity();
 			//Enemy lider.
 			CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider);
@@ -245,6 +245,7 @@ public class MainModel
 			if (lider.GetCommandLider().VisibleDefence)
 			{
 				lider.SetEventTotalTurn("Защитные системы приведены в готовность");
+				lider.RemoveDefenceWeapon();
 			}
 			if (lider.GetCommandLider().VisibleAirport)
 			{

@@ -16,7 +16,7 @@ public class SwitchActionHelper
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         bool AIfiend = FlagId != _flagIdPlayer;
 
-        Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis t  __k  = "+ countryLider.GetName());
+        Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis  __k  = " );
 
         //CityModel targetCity = null;
 
@@ -40,6 +40,13 @@ public class SwitchActionHelper
             {
                 //bomber
                 if (countryLider.GetBomberCount()<=0)
+                {
+                    actionCommand = "Propaganda";
+                }
+            }
+            if(actionCommand == ActionCommand.Command.Defence.ToString())
+            {
+                if (countryLider.GetDefenceWeapon().Count() <= 0)
                 {
                     actionCommand = "Propaganda";
                 }
@@ -70,6 +77,7 @@ public class SwitchActionHelper
                 commandLider.AddMissle(new List<Missle>() { new DictionaryMissle().GetMissle(1) });
                 commandLider.AddBomber(new List<Bomber>() { new DictionaryMissle().GetBomber(1) });
                 commandLider.AddWarhead(new List<Warhead>() { new DictionaryMissle().GetWarhead(1) });
+                commandLider.AddDefenceWeapon(new List<Defence>() { new DictionaryMissle().GetDefenceWeapon() });
                 break;
             case "Defence":
                 commandLider.VisibleDefence = true;

@@ -91,9 +91,6 @@ public class MenuScript : MonoBehaviour
     void Start()
     {
 
-
-
-        
         
         _controller = new Controller(_mainModel);
 
@@ -157,11 +154,7 @@ public class MenuScript : MonoBehaviour
     private void GlueTownView()
     {
 
-        //IEnumerator
-        // yield return new WaitForSeconds(2);
 
-
-        //TownViewList = new GameObject[_mainModel.GetTownList().Count];
         TownViewList = new List<GameObject>();
         GameObject[] TownListView = GameObject.FindGameObjectsWithTag("Town");
 
@@ -170,11 +163,6 @@ public class MenuScript : MonoBehaviour
         for (int i = 0; i < TownListView.Length; i++)
         {
 
-
-            //CityModel cityModel = _mainModel.GetTownList()[i];
-
-            //for (int z = 0; z < TownListView.Length; z++)
-            //{
             foreach (CityModel cityModel in cityModelList)
             {
 
@@ -190,8 +178,6 @@ public class MenuScript : MonoBehaviour
                     TownViewList.Add(TownListView[i]);
                 }
             }
-            //}
-
 
 
         }
@@ -367,32 +353,17 @@ public class MenuScript : MonoBehaviour
         EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, lider.FlagId);
         _controller.SendCommand(eventController);
 
-        CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+
-            lider.GetEventTotalTurn(),
-            lider.FlagId);
+Debug.Log("  SCE = "+ lider.FlagId + " d  =   " + lider.GetCommandLider().GetNameCommand()+"  = "+ lider.GetName());
+        
+        CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+lider.GetEventTotalTurn(),
+            lider.FlagId-1);
 
-        Debug.Log("  SCEN"+ ActionCommand.Command.Defence.ToString() + "d  =   " + lider.GetCommandLider().GetNameCommand());
-        Debug.Log("  explo ===");
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.StartStateObject(TownViewList, waitTime + (waitTurnTime * indexLider));
 
         buildingCentral.SetTargetBomber(TargetManager(lider));
-        /*
-        CityModel cityTown = lider.GetCommandLider().GetTargetCity();
-        if (cityTown != null)
-        {
-            GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);
-            City city = viewTown.GetComponent<City>();
-            
-
-            GameObject targetCityObj = new CityGameObjHelper().GetCityCameObjectWithId(TownViewList, cityTown.GetId());
-            if (targetCityObj != null)
-            {
-                buildingCentral.SetTargetBomber(cityTown);
-            }
-        }
-        */
+        
     }
     private CityModel TargetManager(CountryLider lider)
     {
@@ -404,11 +375,7 @@ public class MenuScript : MonoBehaviour
 
 
             GameObject targetCityObj = new CityGameObjHelper().GetCityCameObjectWithId(TownViewList, cityTown.GetId());
-            if (targetCityObj != null)
-            {
-                
-                //buildingCentral.SetTargetBomber(cityTown);
-            }
+
         }
         return cityTown;
     }
@@ -532,21 +499,16 @@ public class MenuScript : MonoBehaviour
 
         yield return new WaitForSeconds(AnimationTime);
 
-        //EventController eventController = new EventController(Controller.Command.TotalTurn, _mainModel._flagIdPlayer);
-        //_controller.SendCommand(eventController);
-
         //button player
         EnableButtonPlayer();
 
-   
         ResetAction();
 
-        //SetCityVisible(true);
         ChangeImageLider();
     }
     void EnableButtonPlayer()
     {
-        //bool enableButton = false;
+    
 
         if (_mainModel.CountryLiderList[4].GetCommandLider().GetVisibleMissle())
         {
@@ -569,7 +531,7 @@ public class MenuScript : MonoBehaviour
         }
         else
         {
-            //AttackMissleButton.GetComponent<Button>().interactable = false;
+            
             MissleButton.GetComponent<Button>().interactable = true;
         }
 
@@ -602,15 +564,25 @@ public class MenuScript : MonoBehaviour
         }
   
 
-        BomberButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light bomber ("
-            + _mainModel.CountryLiderList[4].GetBomberCount()+")";
         
+
+        ManagerButton();
+
         
-        MissleButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light missle " + _mainModel.CountryLiderList[4].GetMissleCount();
-    
-        //SetCityVisible(false);
+
         SetAllCityVisibleComponent();
     }
+    private void ManagerButton() {
+        BomberButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light bomber ("
+            + _mainModel.CountryLiderList[4].GetBomberCount() + ")";
+
+        MissleButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light missle (" + _mainModel.CountryLiderList[4].GetMissleCount() + ")";
+
+        Debug.Log("  exp ==="+ _mainModel.CountryLiderList[4].GetDefenceWeapon().Count());
+        DefenceButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Defence (" + _mainModel.CountryLiderList[4].GetDefenceWeapon().Count() + ")";
+    }
+
+
     private void CircleImageReadyParam(int IndexImage,bool Visible) {
         CircleReady.enabled = Visible;
         
@@ -687,7 +659,7 @@ public class MenuScript : MonoBehaviour
                     City townCity = city.GetComponent<City>();
                     townCity.SetVisibleLabel(Visible);
                 }
-                // k++;
+                
             }
         }
     }

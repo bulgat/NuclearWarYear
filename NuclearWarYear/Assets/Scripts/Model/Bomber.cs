@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomber
+public class Bomber: Weapon
 {
-	public string Name;
-	public int Size;
-	public int Damage;
+
 	
 	public Bomber(string name, int size, int damage) {
 		Name=name;

@@ -14,6 +14,7 @@ public class CountryLider
 	private List<Missle> _MissleList;
 	private List<Bomber> _BomberList;
 	private List<Warhead> _WarheadList;
+	private List<Defence> _DefenceList;
 	public int FlagIdAttack=1;
 	
 	private List<CityModel> _TownList;
@@ -34,6 +35,9 @@ public class CountryLider
 		_MissleList.Add(missle);
 		_WarheadList = new List<Warhead>();
 		_WarheadList.Add(warhead);
+		_DefenceList = new List<Defence>();
+		_DefenceList.Add(new DictionaryMissle().GetDefenceWeapon());
+
 		PropagandaBuilding = PropagandaBuild;
 		this.Name = Name;
 
@@ -114,11 +118,23 @@ public class CountryLider
 	public void AddWarhead(List<Warhead> warheadList) {
 		_WarheadList.AddRange(warheadList);
 	}
+	//Defence
 	
-
 	public int GetBomberCount() {
 		return _BomberList.Count;
 	}
+
+
+
+	public void AddDefenceWeapon(List<Defence> DefenceList)
+	{
+		_DefenceList.AddRange(DefenceList);
+	}
+	public List<Defence> GetDefenceWeapon()
+	{
+		return this._DefenceList;
+	}
+
 	public Bomber GetBomber() {
 		if (_BomberList.Count>0){
 			return _BomberList[0];
@@ -134,7 +150,16 @@ public class CountryLider
 	public void AddBomber(List<Bomber> bomberList) {
 		_BomberList.AddRange(bomberList);
 	}
-	
+
+	public void RemoveDefenceWeapon()
+	{
+		if (_DefenceList.Count > 0)
+		{
+			_DefenceList.RemoveAt(0);
+		}
+	}
+
+
 	public int GetMissleCount() {
 		return _MissleList.Count;
 	}

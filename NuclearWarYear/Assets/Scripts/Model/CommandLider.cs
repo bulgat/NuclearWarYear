@@ -16,6 +16,7 @@ public class CommandLider
 	private List<Missle> _MissleList;
 	private List<Bomber> _BomberList;
 	private List<Warhead> _WarheadList;
+	private List<Defence> _DefenceList;
 	private CityModel _TargetCity;
 	
 	private Missle _AttackMissle;
@@ -28,6 +29,7 @@ public class CommandLider
 		_MissleList = new List<Missle>();
 		_BomberList = new List<Bomber>();
 		_WarheadList = new List<Warhead>();
+		_DefenceList = new List<Defence>();
 	}
 	public bool SetVisibleMissle(bool visibleMissle)
 	{
@@ -86,6 +88,7 @@ public class CommandLider
 	public List<Warhead> GetWarhead(){
 		return _WarheadList;
 	}
+
 	public void AddWarhead(List<Warhead> WarheadList){
 		_WarheadList = WarheadList;
 	}
@@ -96,7 +99,14 @@ public class CommandLider
 		_AttackWarhead = AttackWarhead;
 	}
 
-
+	public List<Defence> GetDefenceWeapon()
+	{
+		return this._DefenceList;
+	}
+	public void AddDefenceWeapon(List<Defence> DefenceWeapon)
+	{
+		this._DefenceList = DefenceWeapon;
+	}
 	public List<Bomber> GetBomber(){
 		return _BomberList;
 	}

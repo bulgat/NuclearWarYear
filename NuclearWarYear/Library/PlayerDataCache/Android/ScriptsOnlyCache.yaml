@@ -75,17 +75,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12920}
     - Class: 114
-      Script: {instanceID: 14028}
+      Script: {instanceID: 14030}
     - Class: 114
-      Script: {instanceID: 14048}
+      Script: {instanceID: 14050}
     - Class: 114
-      Script: {instanceID: 14252}
+      Script: {instanceID: 14254}
     - Class: 114
-      Script: {instanceID: 14480}
+      Script: {instanceID: 14482}
     - Class: 114
-      Script: {instanceID: 14772}
+      Script: {instanceID: 14774}
     - Class: 114
-      Script: {instanceID: 15118}
+      Script: {instanceID: 15120}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -152,9 +152,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13324}
     - Class: 114
-      Script: {instanceID: 14480}
+      Script: {instanceID: 14482}
     - Class: 114
-      Script: {instanceID: 15118}
+      Script: {instanceID: 15120}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -203,11 +203,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12862}
     - Class: 114
-      Script: {instanceID: 14396}
+      Script: {instanceID: 14398}
     - Class: 114
-      Script: {instanceID: 14480}
+      Script: {instanceID: 14482}
     - Class: 114
-      Script: {instanceID: 15118}
+      Script: {instanceID: 15120}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -499,7 +499,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: e421397af8788a9a83ab9051d64acb60
+      Hash: fa31450f8831d11ed8c4da2d05698dd4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuScript
@@ -760,4 +760,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MenuStart.unity
   - Assets/Scenes/SampleScene.unity
   - Assets/Scenes/Victory.unity
-  playerPath: C:/Project/NuclearWarYear/Android/nuclear_war_3.apk
+  playerPath: C:/Project/NuclearWarYear/111111
