@@ -353,7 +353,7 @@ public class MenuScript : MonoBehaviour
         EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, lider.FlagId);
         _controller.SendCommand(eventController);
 
-Debug.Log("  SCE = "+ lider.FlagId + " d  =   " + lider.GetCommandLider().GetNameCommand()+"  = "+ lider.GetName());
+
         
         CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+lider.GetEventTotalTurn(),
             lider.FlagId-1);

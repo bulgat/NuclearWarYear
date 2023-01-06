@@ -1,0 +1,375 @@
+Using pre-set license
+Built from '2020.3/release' branch; Version is '2020.3.12f1 (b3b2c6512326) revision 11776710'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 19044.2364; Version 2009; 64bit' Language: 'ru' Physical Memory: 12287 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.12f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker1
+-projectPath
+C:/Project/NuclearWarYear/NuclearWarYear
+-logFile
+Logs/AssetImportWorker1.log
+-srvPort
+53822
+Successfully changed project path to: C:/Project/NuclearWarYear/NuclearWarYear
+C:/Project/NuclearWarYear/NuclearWarYear
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 91.92 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.12f1 (b3b2c6512326)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.12f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Project/NuclearWarYear/NuclearWarYear/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 650 (ID=0xfc6)
+    Vendor:   
+    VRAM:     984 MB
+    Driver:   27.21.14.5671
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.12f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.12f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.12f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56252
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.12f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.003632 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 91.08 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.432 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.007982 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 86.64 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.033 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.15 seconds
+Refreshing native plugins compatible for Editor in 0.93 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2128 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 95.5 MB.
+System memory in use after: 95.6 MB.
+
+Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 2567.
+Total: 5.143470 ms (FindLiveObjects: 0.630253 ms CreateObjectMapping: 0.156338 ms MarkObjects: 4.212793 ms  DeleteObjects: 0.136244 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  path: Assets/Texture/nuclearMissleOpen.png
+  artifactKey: Guid(4b7dc3af184ea4340bb9284247955962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearMissleOpen.png using Guid(4b7dc3af184ea4340bb9284247955962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ccc678718da9584b7e278e78ce02e600') in 0.248355 seconds 
+  Import took 0.254061 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000335 seconds.
+  path: Assets/Texture/card.png
+  artifactKey: Guid(cde75b2a2d8f4f14da6763f7bd0d6094) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/card.png using Guid(cde75b2a2d8f4f14da6763f7bd0d6094) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58ec2b09f83627195eb82986cdc7c530') in 0.045231 seconds 
+  Import took 0.050206 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000345 seconds.
+  path: Assets/Texture/shield.jpg
+  artifactKey: Guid(97c3dc98d330b7242af572069ac31223) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/shield.jpg using Guid(97c3dc98d330b7242af572069ac31223) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0493a8eac17a713c1dce8c3f745dfc56') in 0.045969 seconds 
+  Import took 0.052576 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000495 seconds.
+  path: Assets/Texture/nuclearDefence.png
+  artifactKey: Guid(8ef61640b8be6b6458b305f1171ac33a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearDefence.png using Guid(8ef61640b8be6b6458b305f1171ac33a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69a2bdb1c5be9df024778abf55bd065d') in 0.040857 seconds 
+  Import took 0.049826 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000352 seconds.
+  path: Assets/Texture/nuclearMissle.png
+  artifactKey: Guid(83f65c36e45255f478ffa097bd206a07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearMissle.png using Guid(83f65c36e45255f478ffa097bd206a07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5cea2439a655a7391e23125f1a07faf6') in 0.029167 seconds 
+  Import took 0.034752 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000298 seconds.
+  path: Assets/Texture/nuclearPanelDown.png
+  artifactKey: Guid(96c02c38b27c8bc43860454bfaf497ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearPanelDown.png using Guid(96c02c38b27c8bc43860454bfaf497ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66f6fa7c6ca2aa983f39f482bdc91c7b') in 0.032413 seconds 
+  Import took 0.037453 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000525 seconds.
+  path: Assets/Texture/lider.png
+  artifactKey: Guid(59535315081762047a88be4f0225adab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/lider.png using Guid(59535315081762047a88be4f0225adab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '751ff4ba106962295c988a7c788b68b4') in 0.072554 seconds 
+  Import took 0.077911 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000600 seconds.
+  path: Assets/Texture/IconCircleAirplanMissle.png
+  artifactKey: Guid(e619f5b529d94c146bd07bf528ee894c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/IconCircleAirplanMissle.png using Guid(e619f5b529d94c146bd07bf528ee894c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf4d008dbdc40ce4f9c3c64af4e692d2') in 0.039796 seconds 
+  Import took 0.044869 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000335 seconds.
+  path: Assets/Texture/explodeLine.png
+  artifactKey: Guid(586a257af95f2cf4b8d68d648bb2c895) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/explodeLine.png using Guid(586a257af95f2cf4b8d68d648bb2c895) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b81b0754d4838520fe33da43c26a91ab') in 0.059563 seconds 
+  Import took 0.065795 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000075 seconds.
+  path: Assets/Texture/nuclearTown 1.png
+  artifactKey: Guid(f494930e16b636f4fad512089805af7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearTown 1.png using Guid(f494930e16b636f4fad512089805af7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18955076ab612f3c5491bd87ebb31a19') in 0.059143 seconds 
+  Import took 0.065687 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000335 seconds.
+  path: Assets/Texture/IconBuilding.png
+  artifactKey: Guid(5c81677557efac34f9d253a744339f23) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/IconBuilding.png using Guid(5c81677557efac34f9d253a744339f23) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a7f3da1702a23aa04dacb1199544fe8') in 0.037341 seconds 
+  Import took 0.042855 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000344 seconds.
+  path: Assets/Texture/IconPropaganda.png
+  artifactKey: Guid(ac2c540295d8b184c8c8a8a3f7ea494d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/IconPropaganda.png using Guid(ac2c540295d8b184c8c8a8a3f7ea494d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0cc158371c419c441d9d53dcf3562495') in 0.059719 seconds 
+  Import took 0.065894 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000360 seconds.
+  path: Assets/Texture/wingMissle.png
+  artifactKey: Guid(faea31ee3cd9d314faf0e115a111b8b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/wingMissle.png using Guid(faea31ee3cd9d314faf0e115a111b8b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56c494278fe6834d6b872d88dc2786b7') in 0.037719 seconds 
+  Import took 0.044885 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000352 seconds.
+  path: Assets/Texture/nuclearTown.png
+  artifactKey: Guid(33136d79b105a6d44ac95d3b78118b18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearTown.png using Guid(33136d79b105a6d44ac95d3b78118b18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '340dd88a672d7372e7081f31fcc77cdf') in 0.031611 seconds 
+  Import took 0.036995 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000376 seconds.
+  path: Assets/Texture/prop.png
+  artifactKey: Guid(9fd2b3167fcbb65478a2995f596e4eb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/prop.png using Guid(9fd2b3167fcbb65478a2995f596e4eb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b90dca5efe3497a8effd954bca548c1a') in 0.039595 seconds 
+  Import took 0.046950 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000349 seconds.
+  path: Assets/Texture/IconRacket.png
+  artifactKey: Guid(786f14d4f722dc64594f733b80a10b76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/IconRacket.png using Guid(786f14d4f722dc64594f733b80a10b76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5f15420400c38e188d17aadca93f492') in 0.036726 seconds 
+  Import took 0.042397 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000321 seconds.
+  path: Assets/Texture/nuclearExplode.png
+  artifactKey: Guid(62ec74d79f5cf434493802258e2566a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearExplode.png using Guid(62ec74d79f5cf434493802258e2566a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ab0989ade1381305ce9c5db32b9d7f6') in 0.035028 seconds 
+  Import took 0.040317 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000352 seconds.
+  path: Assets/Texture/nuclearPanel — копия.png
+  artifactKey: Guid(6f8ff74ce1934804084cf3e6c19b39b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearPanel — копия.png using Guid(6f8ff74ce1934804084cf3e6c19b39b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c5b488bbf5773ff6ab57a362ec97bf30') in 0.067502 seconds 
+  Import took 0.073627 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000306 seconds.
+  path: Assets/Texture/hpBar.png
+  artifactKey: Guid(bcfea242d09459e49a950f62cb999b5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/hpBar.png using Guid(bcfea242d09459e49a950f62cb999b5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1c3db88c3322849a524c28b1e0887a6') in 0.045212 seconds 
+  Import took 0.050376 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000305 seconds.
+  path: Assets/Texture/nuclearPanel.png
+  artifactKey: Guid(0e3839a582c9fb44fa5832a4f8227c52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearPanel.png using Guid(0e3839a582c9fb44fa5832a4f8227c52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b858b4f18eef81f5a4429265c321bf94') in 0.060040 seconds 
+  Import took 0.065143 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000300 seconds.
+  path: Assets/Texture/nuclearPanelUp.png
+  artifactKey: Guid(8d7a64563983e7240a4704301e6e525e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearPanelUp.png using Guid(8d7a64563983e7240a4704301e6e525e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '332476d2a8531c7e98f0023f0ca684f8') in 0.032288 seconds 
+  Import took 0.037657 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000349 seconds.
+  path: Assets/Texture/flag.png
+  artifactKey: Guid(92546f106f361884d9692f1eaa641e98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/flag.png using Guid(92546f106f361884d9692f1eaa641e98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d227eae6357bce681afa7542879ff33') in 0.048357 seconds 
+  Import took 0.054665 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000365 seconds.
+  path: Assets/Texture/ядерныйвзрыв.jpg
+  artifactKey: Guid(6153ea7c0b9cec44fa7e21fb34e96bf6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/ядерныйвзрыв.jpg using Guid(6153ea7c0b9cec44fa7e21fb34e96bf6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f53bfd5f0d837c7f4e50723c3dfd9133') in 0.077792 seconds 
+  Import took 0.082944 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000903 seconds.
+  path: Assets/Texture/attack.png
+  artifactKey: Guid(ad322f8647ad5cd43bd2770b3b5e69a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/attack.png using Guid(ad322f8647ad5cd43bd2770b3b5e69a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd13956fdd32317ab7b1222306060f160') in 0.031568 seconds 
+  Import took 0.036800 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000353 seconds.
+  path: Assets/Texture/FrameTelevision.png
+  artifactKey: Guid(04ee2ae04ca32a1418513339da844938) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/FrameTelevision.png using Guid(04ee2ae04ca32a1418513339da844938) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '390f44359680cbdd15d3e0b4d8406a4a') in 0.031820 seconds 
+  Import took 0.036923 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000328 seconds.
+  path: Assets/Texture/выборы.jpg
+  artifactKey: Guid(e771f0c93b5566b438ad21fb2bc5e7ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/выборы.jpg using Guid(e771f0c93b5566b438ad21fb2bc5e7ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8bddaf4c32953c16030d49f07677f447') in 0.045117 seconds 
+  Import took 0.050133 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000332 seconds.
+  path: Assets/Texture/airport.png
+  artifactKey: Guid(56ff1d84654e1e24db0b05d73c85a641) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/airport.png using Guid(56ff1d84654e1e24db0b05d73c85a641) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f073b3440a16e5506ff5f3b5f092dfe0') in 0.041130 seconds 
+  Import took 0.050283 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000218 seconds.
+  path: Assets/Texture/nuclear.png
+  artifactKey: Guid(cebd262bbcfe72f419f6fc43d2ad121b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclear.png using Guid(cebd262bbcfe72f419f6fc43d2ad121b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a38fba7f41702ed390147298d94e4524') in 0.047064 seconds 
+  Import took 0.054072 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000334 seconds.
+  path: Assets/Texture/IconRadar.png
+  artifactKey: Guid(9e30eab46e969364aaa7f3ba17793474) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/IconRadar.png using Guid(9e30eab46e969364aaa7f3ba17793474) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6350fd2be555728818fd97b19e3ccbc5') in 0.032615 seconds 
+  Import took 0.037831 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000343 seconds.
+  path: Assets/Texture/nuclearBomber.png
+  artifactKey: Guid(df4f0078eda9bab4091fc7ebc0fc5ff0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearBomber.png using Guid(df4f0078eda9bab4091fc7ebc0fc5ff0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff149eb9c43c4b52b2ed33f38bff921f') in 0.031566 seconds 
+  Import took 0.037789 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000350 seconds.
+  path: Assets/Texture/IconAirplane.png
+  artifactKey: Guid(b9a94d7623c336b43ba0216b9e5e3adb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/IconAirplane.png using Guid(b9a94d7623c336b43ba0216b9e5e3adb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec5060111edf832271893f11dc4e8961') in 0.046934 seconds 
+  Import took 0.052863 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000392 seconds.
+  path: Assets/Texture/airportAttack.png
+  artifactKey: Guid(151ae75f010d6734a8efe1ff0fcefb61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/airportAttack.png using Guid(151ae75f010d6734a8efe1ff0fcefb61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f1f9653e1593bbe893202d012eb02eb') in 0.029116 seconds 
+  Import took 0.034660 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000344 seconds.
+  path: Assets/Texture/face.png
+  artifactKey: Guid(27ec6db20f7c1d44ab48123acd5ea429) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/face.png using Guid(27ec6db20f7c1d44ab48123acd5ea429) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c60df8747c0f55cb391945f07e9cba78') in 0.179703 seconds 
+  Import took 0.187192 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000334 seconds.
+  path: Assets/Texture/spr_shield.png
+  artifactKey: Guid(226eb7eb5dae7ab4a825bff708b01400) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/spr_shield.png using Guid(226eb7eb5dae7ab4a825bff708b01400) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ca10bfa17207bde581dfc0111fbaed8') in 0.046894 seconds 
+  Import took 0.052039 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000326 seconds.
+  path: Assets/Texture/IconBomb.png
+  artifactKey: Guid(26deaa29b511f0648bb652645eef40a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/IconBomb.png using Guid(26deaa29b511f0648bb652645eef40a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4fd40e0b3f8fbef40572f91189320fe') in 0.035966 seconds 
+  Import took 0.041798 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000390 seconds.
+  path: Assets/Texture/nuclearBuilding.png
+  artifactKey: Guid(0b090419c9998984c93e394d6eb95c43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/nuclearBuilding.png using Guid(0b090419c9998984c93e394d6eb95c43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'acf71bb8d86aff3856b51240605f1933') in 0.056545 seconds 
+  Import took 0.062159 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 24.718389 seconds.
+  path: Assets/Texture/defectors.png
+  artifactKey: Guid(fd52a67824fe0d14f92d94f90ce906a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Texture/defectors.png using Guid(fd52a67824fe0d14f92d94f90ce906a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61f08105cb80ae010652acfe90c533e6') in 0.032166 seconds 
+  Import took 0.042736 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

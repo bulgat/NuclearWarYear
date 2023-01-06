@@ -16,7 +16,7 @@ public class SwitchActionHelper
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         bool AIfiend = FlagId != _flagIdPlayer;
 
-        Debug.Log("0200   AIfiend =" + AIfiend + " SwitchAction dis  __k  = " );
+        
 
         //CityModel targetCity = null;
 

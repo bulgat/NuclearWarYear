@@ -149,10 +149,14 @@ public class MainModel
 		bool explode = false;
 		if (lider.GetCommandLider() != null)
 		{
+            // Счастливая карта!
+            if((int)Random.Range(-10.0f, 10.0f)==5)
+			{
+				Debug.Log("   ----    [  RICH!  ] = "  );
+			}
 
-
-			// building ammunition
-			lider.AddMissle(lider.GetCommandLider().GetMissle());
+            // building ammunition
+            lider.AddMissle(lider.GetCommandLider().GetMissle());
 			lider.AddBomber(lider.GetCommandLider().GetBomber());
 			lider.AddWarhead(lider.GetCommandLider().GetWarhead());
 			lider.AddDefenceWeapon(lider.GetCommandLider().GetDefenceWeapon());
@@ -171,7 +175,7 @@ public class MainModel
 
 				CityModel liderCityMy = liderCityList[indexTown];
 
-				Debug.Log("   ----    [    ] = "  );
+				
 
 				int UnDamage = UnityEngine.Random.Range(0, 9);
 				if (cityModelTarget != null)
@@ -259,7 +263,7 @@ public class MainModel
 
 
 		BuildingCentral buildingCentralLider = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
-		buildingCentralLider.ResetStateObject();
+		//buildingCentralLider.ResetStateObject();
 	}
 	public void SelectCityEnemyTargetPlayer(int CityId) {
 		CityModel selectCityTarget=null;
