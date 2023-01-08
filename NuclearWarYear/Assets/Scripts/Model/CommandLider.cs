@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class CommandLider 
 {
-	/*
-	public bool VisibleProp;
-	public bool  VisibleBuild;
-	public bool  VisibleDefence;
-	private bool VisibleMissle;
-	public bool VisibleAirport;
-	private bool VisibleBomber;
-	private bool VisibleAttackBomber;
-	public bool VisibleAttackAirport;
-	public bool VisibleAttackMissle;
-	*/
+
 	public Dictionary<string, bool> VisibleEventList;
 
 	private List<Missle> _MissleList;
@@ -47,6 +37,8 @@ public class CommandLider
         VisibleEventList.Add("AttackMissle", false);
         VisibleEventList.Add("Defectors", false);
         VisibleEventList.Add("Ufo", false);
+        VisibleEventList.Add("Baby", false);
+        VisibleEventList.Add("RocketRich", false);
     }
 	public void SetVisibleEventList(string Key,bool Value)
 	{
@@ -55,32 +47,27 @@ public class CommandLider
     }
     public bool SetVisibleMissle(bool visibleMissle)
 	{
-		//return this.VisibleMissle= visibleMissle;
+
 		return VisibleEventList["Missle"];
 
     }
 	public bool GetVisibleMissle()
     {
-		//return this.VisibleMissle;
+
 		return VisibleEventList["Missle"];
     }
 	public void SetVisibleBomber(bool visibleBomber)
     {
-		//this.VisibleBomber = visibleBomber;
-		//this.VisibleAirport = visibleBomber;
         VisibleEventList["Bomber"]= visibleBomber;
         VisibleEventList["Airport"]= visibleBomber;
     }
 	
 
 	public bool GetVisibleBomber() {
-		//return this.VisibleBomber;
         return VisibleEventList["Bomber"];
 
     }
 	public void SetVisibleAttackBomber(bool visibleAttackBomber) {
-		//this.VisibleAttackBomber = visibleAttackBomber;
-		//this.VisibleAttackAirport = visibleAttackBomber;
 		VisibleEventList["AttackBomber"] = visibleAttackBomber;
 		VisibleEventList["AttackAirport"] = visibleAttackBomber;
 
@@ -108,17 +95,7 @@ public class CommandLider
 			VisibleEventList[item.Key] = false;
 
         }
-		/*
-		this.VisibleProp=false;
-		this.VisibleBuild =false;
-		this.VisibleDefence =false;
-		this.VisibleMissle =false;
-		this.VisibleAirport = false;
-		this.VisibleBomber =false;
-		this.VisibleAttackBomber =false;
-		this.VisibleAttackAirport = false;
-		this.VisibleAttackMissle =false;
-		*/
+
 	}
 	public bool GetDefence() {
 

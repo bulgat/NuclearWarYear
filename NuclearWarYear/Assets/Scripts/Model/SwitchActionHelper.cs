@@ -76,9 +76,16 @@ Debug.Log("  ex =="  );
             Debug.Log("  ex ==");
             actionCommand = "Ufo";
         }
-
+        if ((int)UnityEngine.Random.Range(-5.0f, 5.0f) == 0)
+        {
+            actionCommand = "Baby";
+        }
         switch (actionCommand)
         {
+            case "Baby":
+                commandLider.SetVisibleEventList("Baby", true);
+                commandLider.SetTargetCity(targetCity);
+                break;
             case "Ufo":
                 commandLider.SetVisibleEventList("Ufo", true);
                 commandLider.SetTargetCity(targetCity);

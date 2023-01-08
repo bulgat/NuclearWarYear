@@ -153,10 +153,15 @@ public class MainModel
 				//Enemy lider.
 			CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider);
 
+			if (lider.GetCommandLider().VisibleEventList["Baby"])
+			{
+                int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false);
+                lider.SetEventTotalTurn("Бабибум " + UnDamage);
+            }
             if (lider.GetCommandLider().VisibleEventList["Ufo"])
 			{
                 int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false);
-                lider.SetEventTotalTurn("Ufo " );
+                lider.SetEventTotalTurn("Ufo инопланитяне прибыли в город "+ UnDamage);
             }
             if (lider.GetCommandLider().VisibleEventList["Defectors"])
 			{

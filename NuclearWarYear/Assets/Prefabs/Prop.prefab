@@ -307,11 +307,14 @@ MonoBehaviour:
     type: 3}
   DefectorsObject: {fileID: 0}
   UfoObject: {fileID: 0}
+  BabyObject: {fileID: 0}
   WingMisslePrefabs: {fileID: 6151397117038778283, guid: 86199c5c78c21534fa7408032245cd17,
     type: 3}
   DefectorsPrefabs: {fileID: 1049071386360259073, guid: b1362e20330fcc14bb9cbd545aac0ab7,
     type: 3}
   UfoPrefabs: {fileID: 4482940566122175048, guid: 6df9a5b895c717f4aacaa54049a7a280,
+    type: 3}
+  BabyPrefabs: {fileID: 7446852944133125269, guid: 7bf7ddf88dfcbce4aa488933a9388947,
     type: 3}
   WingMissle: {fileID: 6151397117038778283, guid: 86199c5c78c21534fa7408032245cd17,
     type: 3}
