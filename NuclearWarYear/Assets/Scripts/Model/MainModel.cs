@@ -149,48 +149,38 @@ public class MainModel
 		bool explode = false;
 		if (lider.GetCommandLider() != null)
 		{
-            // Счастливая карта!
-            if((int)Random.Range(-10.0f, 10.0f)==5)
-			{
-				Debug.Log("   ----    [  RICH!  ] = "  );
-			}
-
-            // building ammunition
-            lider.AddMissle(lider.GetCommandLider().GetMissle());
-			lider.AddBomber(lider.GetCommandLider().GetBomber());
-			lider.AddWarhead(lider.GetCommandLider().GetWarhead());
-			lider.AddDefenceWeapon(lider.GetCommandLider().GetDefenceWeapon());
-			CityModel cityModelTarget = lider.GetCommandLider().GetTargetCity();
-			//Enemy lider.
+            CityModel cityModelTarget = lider.GetCommandLider().GetTargetCity();
+				//Enemy lider.
 			CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider);
+
+            if (lider.GetCommandLider().VisibleEventList["Ufo"])
+			{
+                int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false);
+                lider.SetEventTotalTurn("Ufo " );
+            }
+            if (lider.GetCommandLider().VisibleEventList["Defectors"])
+			{
+                int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false);
+                lider.SetEventTotalTurn("Перебежчики сбежали "+ UnDamage);
+            }
+                //if (lider.GetCommandLider().VisibleBuild)
+            if (lider.GetCommandLider().VisibleEventList["Build"])
+            {
+				// building ammunition
+				lider.AddMissle(lider.GetCommandLider().GetMissle());
+				lider.AddBomber(lider.GetCommandLider().GetBomber());
+				lider.AddWarhead(lider.GetCommandLider().GetWarhead());
+				lider.AddDefenceWeapon(lider.GetCommandLider().GetDefenceWeapon());
+                lider.SetEventTotalTurn("Производство вооружения");
+            }
+
 			
 
-			//propogation
-			if (lider.GetCommandLider().VisibleProp)
+            //propogation
+            //if (lider.GetCommandLider().VisibleProp)
+            if (lider.GetCommandLider().VisibleEventList["Prop"])
 			{
-
-				List<CityModel> liderCityList = new CityHelperList().GetListCityFlagId(TownList, lider.FlagId);
-				int indexTown = UnityEngine.Random.Range(0, liderCityList.Count);
-
-
-				CityModel liderCityMy = liderCityList[indexTown];
-
-				
-
-				int UnDamage = UnityEngine.Random.Range(0, 9);
-				if (cityModelTarget != null)
-				{
-					if (UnDamage > cityModelTarget.GetPopulation())
-					{
-						UnDamage = cityModelTarget.GetPopulation();
-					}
-				}
-				// add population
-				int population = liderCityMy.GetPopulation() + UnDamage;
-				liderCityMy.SetFuturePopulation(population);
-				liderCityMy.SetPresentlyPopulation();
-				// remove population Fiend.
-				explode = new DamagePopulationHelper().SetDamagePopulation(lider, UnDamage, false);
+				int UnDamage = AddAndRemovePopulation(cityModelTarget, lider,true);
 
 				lider.SetEventTotalTurn("Население увеличилось на "+ UnDamage+" сбежав от "+ lider.GetCommandLider().GetTargetNameLider());
 			}
@@ -210,7 +200,7 @@ public class MainModel
 					{
 						if (lider.GetCommandLider().GetAttackBomber() != null)
 						{
-							explode = new DamagePopulationHelper().SetDamagePopulation(lider, lider.GetCommandLider().GetAttackBomber().Damage, true);
+							explode = new DamagePopulationHelper().SetDamagePopulation( new DamagePopulationHelper().GetCityLider(lider), lider.GetCommandLider().GetAttackBomber().Damage, true);
 						}
 					}
 
@@ -218,8 +208,9 @@ public class MainModel
 				}
 				lider.SetEventTotalTurn("От ядерного взрыва с бомбардировщика население уменьшилось на "+ lider.GetCommandLider().GetAttackBomber().Damage+" у "+ lider.GetCommandLider().GetTargetNameLider());
 			}
-			// attack Missle
-			if (lider.GetCommandLider().VisibleAttackMissle)
+            // attack Missle
+            //if (lider.GetCommandLider().VisibleAttackMissle)
+            if (lider.GetCommandLider().VisibleEventList["AttackMissle"])
 			{
 
 				if (enemylider.GetCommandLider().GetDefence())
@@ -233,7 +224,8 @@ public class MainModel
 					{
 						if (lider.GetCommandLider().GetAttackMissle() != null)
 						{
-							explode = new DamagePopulationHelper().SetDamagePopulation(lider, lider.GetCommandLider().GetAttackMissle().Damage, true);
+                            
+                            explode = new DamagePopulationHelper().SetDamagePopulation( new DamagePopulationHelper().GetCityLider(lider), lider.GetCommandLider().GetAttackMissle().Damage, true);
 						}
 					}
 
@@ -242,16 +234,15 @@ public class MainModel
 
 				lider.SetEventTotalTurn("От ядерного взрыва ракеты население уменьшилось на "+ lider.GetCommandLider().GetAttackMissle().Damage+" у "+ lider.GetCommandLider().GetTargetNameLider());
 			}
-			if (lider.GetCommandLider().VisibleBuild)
-			{
-				lider.SetEventTotalTurn("Производство вооружения");
-			}
-			if (lider.GetCommandLider().VisibleDefence)
-			{
+
+			//if (lider.GetCommandLider().VisibleDefence)
+            if (lider.GetCommandLider().VisibleEventList["Defence"])
+            {
 				lider.SetEventTotalTurn("Защитные системы приведены в готовность");
 				lider.RemoveDefenceWeapon();
 			}
-			if (lider.GetCommandLider().VisibleAirport)
+            //if (lider.GetCommandLider().VisibleAirport)
+            if (lider.GetCommandLider().VisibleEventList["Airport"])
 			{
 				lider.SetEventTotalTurn("Бомбардировщики приведены в готовность");
 			}
@@ -264,6 +255,51 @@ public class MainModel
 
 		BuildingCentral buildingCentralLider = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
 		//buildingCentralLider.ResetStateObject();
+	}
+	private int AddAndRemovePopulation(CityModel cityModelTarget, CountryLider lider,bool RandomAndUnRevert)
+	{
+        List<CityModel> liderCityList = new CityHelperList().GetListCityFlagId(TownList, lider.FlagId);
+        int indexTown = UnityEngine.Random.Range(0, liderCityList.Count);
+
+
+        CityModel liderCityMy = liderCityList[indexTown];
+
+
+
+        int UnDamage = UnityEngine.Random.Range(0, 9);
+        UnDamage = RandomAndUnRevert ? UnDamage:9;
+
+        if (cityModelTarget != null)
+        {
+            if (UnDamage > cityModelTarget.GetPopulation())
+            {
+                UnDamage = cityModelTarget.GetPopulation();
+            }
+        }
+
+		CityModel cityFiend = new DamagePopulationHelper().GetCityLider(lider);
+		// add population
+		if (RandomAndUnRevert) { 
+			AddPopulationCity(liderCityMy, UnDamage, cityFiend);
+		} else
+		{
+            AddPopulationCity(cityFiend, UnDamage, liderCityMy);
+        }
+        
+
+        
+        
+
+		return UnDamage;
+    }
+	private void AddPopulationCity(CityModel liderCityMy,int UnDamage, CityModel cityFiend)
+	{
+		int population = liderCityMy.GetPopulation() + UnDamage;
+        liderCityMy.SetFuturePopulation(population);
+        liderCityMy.SetPresentlyPopulation();
+
+		// remove population Fiend.
+        new DamagePopulationHelper().SetDamagePopulation(cityFiend, UnDamage, false);
 	}
 	public void SelectCityEnemyTargetPlayer(int CityId) {
 		CityModel selectCityTarget=null;

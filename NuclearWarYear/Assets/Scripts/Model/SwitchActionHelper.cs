@@ -62,17 +62,42 @@ public class SwitchActionHelper
             commandLider.SetTargetCity(targetCity);
         }
 
+        // Счастливая карта!
+        if ((int)UnityEngine.Random.Range(-5.0f, 5.0f) == 0)
+        {
+            Debug.Log("   ----    [  RICH!  ] = ");
+            
+            actionCommand = "Defectors";
+        }
+        if ((int)UnityEngine.Random.Range(-5.0f, 5.0f) == 0)
+        {
+Debug.Log("  ex =="  );
+            Debug.Log("   ---- UFO   [  RICH!  ] = ");
+            Debug.Log("  ex ==");
+            actionCommand = "Ufo";
+        }
+
         switch (actionCommand)
         {
-
+            case "Ufo":
+                commandLider.SetVisibleEventList("Ufo", true);
+                commandLider.SetTargetCity(targetCity);
+                break;
+            case "Defectors":
+                commandLider.SetVisibleEventList("Defectors", true);
+                commandLider.SetTargetCity(targetCity);
+                break;
             case "Propaganda":
-                commandLider.VisibleProp = true;
+                //commandLider.VisibleProp = true;
+                //commandLider.VisibleEventList["Prop"] = true;
+                commandLider.SetVisibleEventList("Prop",true);
                 targetCity = new ModGameEngine().GetCityFlagId(TownList, CountryLiderList[4], FlagId, AIfiend);
 
 
                 break;
             case "Building":
-                commandLider.VisibleBuild = true;
+                //commandLider.VisibleBuild = true;
+                commandLider.SetVisibleEventList("Build", true);
                 // Add missle
                 commandLider.AddMissle(new List<Missle>() { new DictionaryMissle().GetMissle(1) });
                 commandLider.AddBomber(new List<Bomber>() { new DictionaryMissle().GetBomber(1) });
@@ -80,7 +105,8 @@ public class SwitchActionHelper
                 commandLider.AddDefenceWeapon(new List<Defence>() { new DictionaryMissle().GetDefenceWeapon() });
                 break;
             case "Defence":
-                commandLider.VisibleDefence = true;
+                //commandLider.VisibleDefence = true;
+                commandLider.SetVisibleEventList("Defence", true);
                 break;
             case "Missle":
 
@@ -97,8 +123,8 @@ public class SwitchActionHelper
                 if (targetCity == null)
                 {
 
-                    commandLider.VisibleProp = true;
-
+                    //commandLider.VisibleProp = true;
+                    commandLider.SetVisibleEventList("Prop", true);
                 }
                 else
                 {
@@ -119,11 +145,13 @@ public class SwitchActionHelper
                 if (targetCity == null)
                 {
 
-                    commandLider.VisibleProp = true;
+                    //commandLider.VisibleProp = true;
+                    commandLider.SetVisibleEventList("Prop", true);
                 }
                 else
                 {
-                    commandLider.VisibleAttackMissle = true;
+                    //commandLider.VisibleAttackMissle = true;
+                    commandLider.SetVisibleEventList("AttackMissle", true);
                     //City cityTown = targetCity.GetComponent<City>();
                     commandLider.SetTargetCity(targetCity);
                     commandLider.SetAttackMissle(countryLider.GetMissle());
@@ -137,14 +165,7 @@ public class SwitchActionHelper
                 break;
         }
 
-        //if (targetCity != null)
-        //{
-            //City townCity = targetCity.GetComponent<City>();
-
-           
-
-
-        //}
+  
 
         if (countryLider.GetTargetCitySelectPlayer() != null)
         {

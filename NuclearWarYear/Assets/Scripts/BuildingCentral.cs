@@ -12,7 +12,12 @@ public class BuildingCentral : MonoBehaviour
 
     public GameObject BomberObjectPrefabs;
     public GameObject BomberObject;
+    public GameObject DefectorsObject;
+    public GameObject UfoObject;
+
     public GameObject WingMisslePrefabs;
+    public GameObject DefectorsPrefabs;
+    public GameObject UfoPrefabs;
     public GameObject WingMissle;
     public GameObject Airport;
     public GameObject AirportAttack;
@@ -20,7 +25,8 @@ public class BuildingCentral : MonoBehaviour
     private bool _visibleBomber;
     private bool _attackBomber;
     private bool _attackMissle;
-    //private float timeBomber = 0f;
+    private bool _visibleDefectors;
+    private bool _visibleUfo;
 
     bool SetAnglePosition;
 
@@ -48,19 +54,34 @@ public class BuildingCentral : MonoBehaviour
     }
     public void VisibleBuilding(CommandLider commandLider)
     {
+        //foreach(var item in commandLider.VisibleEventList)
+        //{
 
+        // }
 
-
+        /*
         Propaganda.SetActive(commandLider.VisibleProp);
         Building.SetActive(commandLider.VisibleBuild);
         DefenceObject.SetActive(commandLider.VisibleDefence);
         MissleObject.SetActive(commandLider.GetVisibleMissle());
         Airport.SetActive(commandLider.VisibleAirport);
         AirportAttack.SetActive(commandLider.VisibleAttackAirport);
+        */
+        Propaganda.SetActive(commandLider.VisibleEventList["Prop"]);
+        Building.SetActive(commandLider.VisibleEventList["Build"]);
+        DefenceObject.SetActive(commandLider.VisibleEventList["Defence"]);
+        MissleObject.SetActive(commandLider.VisibleEventList["Missle"]);
+        Airport.SetActive(commandLider.VisibleEventList["Airport"]);
+        AirportAttack.SetActive(commandLider.VisibleEventList["AttackAirport"]);
+        
+
         if (WingMissle != null)
         {
-            WingMissle.SetActive(commandLider.VisibleAttackMissle);
-            MissleOpenObject.SetActive(commandLider.VisibleAttackMissle);
+            //WingMissle.SetActive(commandLider.VisibleAttackMissle);
+            //MissleOpenObject.SetActive(commandLider.VisibleAttackMissle);
+
+            WingMissle.SetActive(commandLider.VisibleEventList["AttackMissle"]);
+            MissleOpenObject.SetActive(commandLider.VisibleEventList["AttackMissle"]);
         }
 
         //bomber
@@ -68,18 +89,30 @@ public class BuildingCentral : MonoBehaviour
         {
             if (commandLider.GetVisibleBomber() || commandLider.GetVisibleAttackBomber())
             {
-                BomberObject.SetActive(true);
-                _visibleBomber = true;
+                bool vis = true;
+                BomberObject.SetActive(vis);
+                _visibleBomber = vis;
             }
+            /*
             else
             {
                 BomberObject.SetActive(false);
                 _visibleBomber = false;
             }
+            */
+        }
+        if (DefectorsObject!=null) { 
+            DefectorsObject.SetActive(commandLider.VisibleEventList["Defectors"]);
+        }
+        if (UfoObject != null)
+        {
+            UfoObject.SetActive(commandLider.VisibleEventList["Ufo"]);
         }
         _attackBomber = commandLider.GetVisibleAttackBomber();
-        _attackMissle = commandLider.VisibleAttackMissle;
-
+        //_attackMissle = commandLider.VisibleAttackMissle;
+        _attackMissle = commandLider.VisibleEventList["AttackMissle"];
+        _visibleDefectors = commandLider.VisibleEventList["Defectors"];
+        _visibleUfo = commandLider.VisibleEventList["Ufo"];
     }
 
     void Update()
@@ -118,7 +151,7 @@ public class BuildingCentral : MonoBehaviour
                 }
                 else
                 {
-                    SendBomberAndWing(BomberObject, 5,true);
+                    SendBomberAndWing(BomberObject, 5,true,true);
 
 
                 }
@@ -126,26 +159,38 @@ public class BuildingCentral : MonoBehaviour
             if (_attackMissle)
             {
 
-                SendBomberAndWing(WingMissle, 5,false);
+                SendBomberAndWing(WingMissle, 5,false,true);
+            }
+            if (_visibleDefectors)
+            {
+                SendBomberAndWing(DefectorsObject, 5, false,false);
+            }
+            if (_visibleUfo)
+            {
+                SendBomberAndWing(UfoObject, 5, false, false);
             }
         }
     }
-    public void StartStateObject(List<GameObject> townList, float TimeDelete)
+    public void ViewStartStateObject(List<GameObject> townList, float TimeDelete, CountryLider lider)
     {
         this._animationProcess = true;
         this._animationTimeProcess = Time.time;
         SetAnglePosition = false;
         WingMissle = Instantiate(WingMisslePrefabs, Propaganda.transform.position, Quaternion.identity);
         BomberObject = Instantiate(BomberObjectPrefabs, Propaganda.transform.position, Quaternion.identity);
+        DefectorsObject = Instantiate(DefectorsPrefabs, Propaganda.transform.position, Quaternion.identity);
+        UfoObject = Instantiate(UfoPrefabs, Propaganda.transform.position, Quaternion.identity);
         this.TownList = townList;
         DestroyObject(TimeDelete);
         
-        Debug.Log(Time.fixedTime+"   ---0200   AIf d  tchAction di   = "+ Time.deltaTime);
+        Debug.Log("   ---0200   AIf d  tchAction  = ");
     }
     public void DestroyObject(float TimeDelete)
     {
         Destroy(WingMissle, TimeDelete);
         Destroy(BomberObject, TimeDelete);
+        Destroy(DefectorsObject, TimeDelete);
+        Destroy(UfoObject, TimeDelete);
     }
     /*
     public void ResetStateObject()
@@ -161,7 +206,7 @@ public class BuildingCentral : MonoBehaviour
         }
     }
     */
-    void SendBomberAndWing(GameObject bomberObject, int Speed,bool AirPlane)
+    void SendBomberAndWing(GameObject bomberObject, int Speed,bool AirPlane,bool RotationAndExplode)
     {
 
         float step = Speed * Time.deltaTime; // calculate distance to move
@@ -181,7 +226,7 @@ public class BuildingCentral : MonoBehaviour
 
             var offset = 260f;
             GameObject cityTown = GetTownViewWithId(this.buildingCentralModel.GetTargetBomber());
-City city = cityTown.GetComponent<City>();
+            City city = cityTown.GetComponent<City>();
             Vector3 targetBomber = cityTown.transform.position;
             if (returnBomber){
                 targetBomber = transform.position;
@@ -192,18 +237,21 @@ City city = cityTown.GetComponent<City>();
             //Vector2 direction = (Vector2)targetBomber - (Vector2)transform.position;
             Vector2 direction = (Vector2)targetBomber - (Vector2)bomberObject.transform.position;
             direction.Normalize();
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            bomberObject.transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
-            //ExplodeTown
-            //var kol = targetBomber - bomberObject.transform.position;
-            float dist = Vector3.Distance(targetBomber, bomberObject.transform.position);
-            if (dist < 1.5f)
+            if (RotationAndExplode)
             {
-                //draw explode
-                
-                city.SetVisibleExplode(true);
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                bomberObject.transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
+           
+                //ExplodeTown
+                //var kol = targetBomber - bomberObject.transform.position;
+                float dist = Vector3.Distance(targetBomber, bomberObject.transform.position);
+                if (dist < 1.5f)
+                {
+                    //draw explode
+                    city.SetVisibleExplode(true);
 
-                // return bomber
+                    // return bomber
+                }
             }
 
         }

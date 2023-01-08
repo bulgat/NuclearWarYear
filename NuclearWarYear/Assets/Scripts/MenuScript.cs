@@ -360,7 +360,7 @@ public class MenuScript : MonoBehaviour
 
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
-        buildingCentral.StartStateObject(TownViewList, waitTime + (waitTurnTime * indexLider));
+        buildingCentral.ViewStartStateObject(TownViewList, waitTime + (waitTurnTime * indexLider), lider);
 
         buildingCentral.SetTargetBomber(TargetManager(lider));
         
@@ -578,7 +578,7 @@ public class MenuScript : MonoBehaviour
 
         MissleButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light missle (" + _mainModel.CountryLiderList[4].GetMissleCount() + ")";
 
-        Debug.Log("  exp ==="+ _mainModel.CountryLiderList[4].GetDefenceWeapon().Count());
+        
         DefenceButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Defence (" + _mainModel.CountryLiderList[4].GetDefenceWeapon().Count() + ")";
     }
 

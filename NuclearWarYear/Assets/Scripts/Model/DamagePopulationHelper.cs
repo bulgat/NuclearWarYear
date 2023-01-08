@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class DamagePopulationHelper
 {
-	public bool SetDamagePopulation(CountryLider lider,int Damage,bool Explode){
-		
-		if(lider.GetCommandLider ().GetTargetCity()!=null){
-			int population = lider.GetCommandLider ().GetTargetCity().GetPopulation() - Damage;
+	public CityModel GetCityLider(CountryLider lider)
+	{
+		return lider.GetCommandLider().GetTargetCity();
+
+    }
+    public bool SetDamagePopulation( CityModel cityModel,int Damage,bool Explode){
+
+		//CityModel cityModel = GetCityLider(lider);
+
+
+        if (cityModel != null){
+			int population = cityModel.GetPopulation() - Damage;
 			if(population<0)
 			{
 				population =0;
 			}
-			lider.GetCommandLider ().GetTargetCity().SetFuturePopulation(population);
-			lider.GetCommandLider ().GetTargetCity().SetPresentlyPopulation();
+            cityModel.SetFuturePopulation(population);
+            cityModel.SetPresentlyPopulation();
 			if (Explode){
-				//lider.GetCommandLider ().GetTargetCity().SetVisible(true);
+				
 				return true;
 			}
 		}

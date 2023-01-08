@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CommandLider 
 {
+	/*
 	public bool VisibleProp;
 	public bool  VisibleBuild;
 	public bool  VisibleDefence;
@@ -13,6 +14,9 @@ public class CommandLider
 	private bool VisibleAttackBomber;
 	public bool VisibleAttackAirport;
 	public bool VisibleAttackMissle;
+	*/
+	public Dictionary<string, bool> VisibleEventList;
+
 	private List<Missle> _MissleList;
 	private List<Bomber> _BomberList;
 	private List<Warhead> _WarheadList;
@@ -30,34 +34,63 @@ public class CommandLider
 		_BomberList = new List<Bomber>();
 		_WarheadList = new List<Warhead>();
 		_DefenceList = new List<Defence>();
-	}
-	public bool SetVisibleMissle(bool visibleMissle)
+
+		VisibleEventList = new Dictionary<string, bool>();
+		VisibleEventList.Add("Prop",false);
+        VisibleEventList.Add("Build", false);
+        VisibleEventList.Add("Defence", false);
+        VisibleEventList.Add("Missle", false);
+        VisibleEventList.Add("Airport", false);
+        VisibleEventList.Add("Bomber", false);
+        VisibleEventList.Add("AttackBomber", false);
+        VisibleEventList.Add("AttackAirport", false);
+        VisibleEventList.Add("AttackMissle", false);
+        VisibleEventList.Add("Defectors", false);
+        VisibleEventList.Add("Ufo", false);
+    }
+	public void SetVisibleEventList(string Key,bool Value)
 	{
-		return this.VisibleMissle= visibleMissle;
-	}
+		VisibleEventList[Key] = Value;
+
+    }
+    public bool SetVisibleMissle(bool visibleMissle)
+	{
+		//return this.VisibleMissle= visibleMissle;
+		return VisibleEventList["Missle"];
+
+    }
 	public bool GetVisibleMissle()
     {
-		return this.VisibleMissle;
+		//return this.VisibleMissle;
+		return VisibleEventList["Missle"];
     }
 	public void SetVisibleBomber(bool visibleBomber)
     {
-		this.VisibleBomber = visibleBomber;
-		this.VisibleAirport = visibleBomber;
-
-	}
+		//this.VisibleBomber = visibleBomber;
+		//this.VisibleAirport = visibleBomber;
+        VisibleEventList["Bomber"]= visibleBomber;
+        VisibleEventList["Airport"]= visibleBomber;
+    }
 	
 
 	public bool GetVisibleBomber() {
-		return this.VisibleBomber;
-	}
+		//return this.VisibleBomber;
+        return VisibleEventList["Bomber"];
+
+    }
 	public void SetVisibleAttackBomber(bool visibleAttackBomber) {
-		this.VisibleAttackBomber = visibleAttackBomber;
-		this.VisibleAttackAirport = visibleAttackBomber;
-	}
+		//this.VisibleAttackBomber = visibleAttackBomber;
+		//this.VisibleAttackAirport = visibleAttackBomber;
+		VisibleEventList["AttackBomber"] = visibleAttackBomber;
+		VisibleEventList["AttackAirport"] = visibleAttackBomber;
+
+    }
 	public bool GetVisibleAttackBomber()
 	{
-		return this.VisibleAttackBomber;
-	}
+		//return this.VisibleAttackBomber;
+		return VisibleEventList["AttackBomber"];
+
+    }
 	public void SetNameCommand(string nameCommand)
 	{
 		this.NameCommand = nameCommand;
@@ -70,6 +103,12 @@ public class CommandLider
 
 
 	public void ResetCommand(){
+		foreach(var item in VisibleEventList)
+		{
+			VisibleEventList[item.Key] = false;
+
+        }
+		/*
 		this.VisibleProp=false;
 		this.VisibleBuild =false;
 		this.VisibleDefence =false;
@@ -79,11 +118,13 @@ public class CommandLider
 		this.VisibleAttackBomber =false;
 		this.VisibleAttackAirport = false;
 		this.VisibleAttackMissle =false;
+		*/
 	}
 	public bool GetDefence() {
 
-		return VisibleDefence;
-	}
+		//return VisibleDefence;
+        return VisibleEventList["Defence"];
+    }
 	//AddWarhead
 	public List<Warhead> GetWarhead(){
 		return _WarheadList;
