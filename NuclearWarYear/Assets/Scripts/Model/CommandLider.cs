@@ -39,7 +39,8 @@ public class CommandLider
         VisibleEventList.Add("Ufo", false);
         VisibleEventList.Add("Baby", false);
         VisibleEventList.Add("RocketRich", false);
-    }
+		VisibleEventList.Add("CrazyCow", false);
+	}
 	public void SetVisibleEventList(string Key,bool Value)
 	{
 		VisibleEventList[Key] = Value;

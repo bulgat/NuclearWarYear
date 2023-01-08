@@ -153,6 +153,11 @@ public class MainModel
 				//Enemy lider.
 			CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider);
 
+			if (lider.GetCommandLider().VisibleEventList["RocketRich"])
+            {
+				int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false);
+				lider.SetEventTotalTurn("Богатые и Маск постороили ракету на Луну " + UnDamage);
+			}
 			if (lider.GetCommandLider().VisibleEventList["Baby"])
 			{
                 int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false);
