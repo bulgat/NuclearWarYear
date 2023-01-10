@@ -58,13 +58,17 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Model\CheckVictory.cs" />
     <Compile Include="Assets\Scripts\Model\MainModel.cs" />
+    <Compile Include="Assets\Scripts\View\StateCentral\ViewCrazyCow.cs" />
     <Compile Include="Assets\Scripts\Model\Missle.cs" />
     <Compile Include="Assets\Scripts\BuildingCentral.cs" />
+    <Compile Include="Assets\Scripts\View\StateCentral\ViewRocketRich.cs" />
+    <Compile Include="Assets\Scripts\View\ViewSendAnimObj.cs" />
     <Compile Include="Assets\Scripts\Model\Warhead.cs" />
     <Compile Include="Assets\Scripts\Model\Defence.cs" />
     <Compile Include="Assets\Scripts\Model\ActionCommand.cs" />
     <Compile Include="Assets\Scripts\Model\CityGameObjHelper.cs" />
     <Compile Include="Assets\Scripts\Model\CommandLider.cs" />
+    <Compile Include="Assets\Scripts\View\StateCentral\ViewMoveDeflectors.cs" />
     <Compile Include="Assets\Scripts\Model\ModGameEngine.cs" />
     <Compile Include="Assets\Scripts\Model\LiderHelperOne.cs" />
     <Compile Include="Assets\Scripts\Model\DamagePopulationHelper.cs" />
@@ -73,6 +77,7 @@
     <Compile Include="Assets\Scripts\Controller\Controller.cs" />
     <Compile Include="Assets\Scripts\Controller\CityEvent.cs" />
     <Compile Include="Assets\Scripts\Model\DictionaryMissle.cs" />
+    <Compile Include="Assets\Scripts\View\StateCentral\ViewCircleBomber.cs" />
     <Compile Include="Assets\Scripts\Model\LiderHelper.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon.cs" />
     <Compile Include="Assets\Scripts\ViewCardGame.cs" />
@@ -80,6 +85,7 @@
     <Compile Include="Assets\Scripts\View\ViewLiderButton.cs" />
     <Compile Include="Assets\Scripts\Model\SwitchActionHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildingCentralHelper.cs" />
+    <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackBomber.cs" />
     <Compile Include="Assets\Scripts\Model\CountryLider.cs" />
     <Compile Include="Assets\Scripts\MenuStart.cs" />
     <Compile Include="Assets\Scripts\Model\CityModel.cs" />
@@ -90,15 +96,10 @@
     <Compile Include="Assets\Scripts\Model\BuildingCentralModel.cs" />
     <Compile Include="Assets\Scripts\Model\Bomber.cs" />
     <Compile Include="Assets\Scripts\City.cs" />
+    <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackMissle.cs" />
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\View\ViewSendAnimObj.cs" />
-    <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackBomber.cs" />
-    <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackMissle.cs" />
-    <Compile Include="Assets\Scripts\View\StateCentral\ViewMoveDeflectors.cs" />
-    <Compile Include="Assets\Scripts\View\StateCentral\ViewRocketRich.cs" />
-    <Compile Include="Assets\Scripts\View\StateCentral\ViewCrazyCow.cs" />
-    <Compile Include="Assets\Scripts\View\StateCentral\ViewCircleBomber.cs" />
+    <Compile Include="Assets\Scripts\Model\BuildWeapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

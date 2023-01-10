@@ -29,7 +29,7 @@ public class ViewCrazyCow : ViewSendAnimObj
             bomberObject.transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
 
                
-            Debug.Log("   E   " + city.GetId() + " =   turnBomber   ___tim > ");
+            
             Vector3 newRotation = new Vector3(0, Time.time, 0);
             bomberObject.transform.rotation = Quaternion.Euler(Vector3.forward * (offset * Time.time));
               

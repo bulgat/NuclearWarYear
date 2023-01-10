@@ -10,13 +10,13 @@ public class DictionaryMissle
 			return new Missle("Medium", 2, 10);
 		}
 		if(Id==3) {
-			return new Missle("Big", 3, 15);
+			return new Missle("Heavy", 3, 15);
 		}
 		if(Id==4) {
-			return new Missle("SuperBig", 4, 20);
+			return new Missle("SuperHeavy", 4, 20);
 		}
 		// id = 1
-		return new Missle("Small", 1, 40);
+		return new Missle("Light", 1, 40);
 	}
 	public Bomber GetBomber (int Id){
 		return new Bomber("Bomber", 1, 5);

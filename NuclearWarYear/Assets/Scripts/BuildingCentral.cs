@@ -31,14 +31,6 @@ public class BuildingCentral : MonoBehaviour
     public GameObject Airport;
     public GameObject AirportAttack;
 
-    //private bool _visibleBomber;
-    //private bool _attackBomber;
-    //private bool _attackMissle;
-    //private bool _visibleDefectors;
-    //private bool _visibleUfo;
-    //private bool _visibleBaby;
-    //private bool _visibleRocketRich;
-    //private bool _visibleCrazyCow;
 
     private Dictionary<string, bool> VisibleObjList;
 
@@ -233,7 +225,7 @@ public class BuildingCentral : MonoBehaviour
         CreateObject();
         DestroyObject(TimeDelete);
         
-        Debug.Log("   ---0200   AIf d  tchAction  = ");
+        
     }
     private void CreateObject()
     {
@@ -255,85 +247,16 @@ public class BuildingCentral : MonoBehaviour
         Destroy(BabyObject, TimeDelete);
         Destroy(RocketRichObject, TimeDelete);
         Destroy(CrazyCowObject, TimeDelete);
+
+        WingMissle.SetActive(false);
+        BomberObject.SetActive(false);
+        DefectorsObject.SetActive(false);
+        UfoObject.SetActive(false);
+        BabyObject.SetActive(false);
+        RocketRichObject.SetActive(false);
+        CrazyCowObject.SetActive(false);
+
+
     }
-  /*
-    void SendBomberAndWing(GameObject bomberObject,bool AirPlane,
-        bool RotationAndExplode,bool RocketRich,bool CrazyCow)
-    {
-
-        float step = Speed * Time.deltaTime; // calculate distance to move
-        if (bomberObject != null)
-        {
-
-            bool returnBomber = false;
-            float offset = 260f;
-            GameObject cityTown = GetTownViewWithId(this.buildingCentralModel.GetTargetBomber());
-            City city = cityTown.GetComponent<City>();
-            Vector3 targetBomber = cityTown.transform.position;
-            if (AirPlane)
-            {
-                if (this._animationTimeProcess + 3 < Time.time)
-                {
-                    returnBomber = true;
-
-                }
-            }
-            if (RocketRich)
-            {
-                targetBomber = new Vector2(0,6);
-            }
-            
-
-
-            if (returnBomber){
-                targetBomber = transform.position;
-            }
-            
-            bomberObject.transform.position = Vector3.MoveTowards(bomberObject.transform.position, targetBomber, step);
-
-            //Vector2 direction = (Vector2)targetBomber - (Vector2)transform.position;
-            Vector2 direction = (Vector2)targetBomber - (Vector2)bomberObject.transform.position;
-            direction.Normalize();
-            if (RotationAndExplode)
-            {
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                bomberObject.transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
-
-                if (CrazyCow)
-                {
-                    Debug.Log("   E   " + city.GetId() + " =   turnBomber   ___tim > ");
-                    Vector3 newRotation = new Vector3(0, Time.time, 0);
-                    bomberObject.transform.rotation = Quaternion.Euler(Vector3.forward * (offset*Time.time));
-                    //bomberObject.transform.rotation += 1;
-                }
-
-                //ExplodeTown
-                float dist = Vector3.Distance(targetBomber, bomberObject.transform.position);
-                if (dist < 1.5f)
-                {
-                    //draw explode
-                    city.SetVisibleExplode(true);
-
-                    // return bomber
-                }
-            }
-
-        }
-    }
-  */
-    /*
-    public GameObject GetTownViewWithId(CityModel cityModel)
-    {
-        foreach (GameObject cityTown in this.TownList)
-        {
-            City city = cityTown.GetComponent<City>();
-            if (city.GetId() == cityModel.GetId())
-            {
-                return cityTown;
-
-            }
-        }
-        return null;
-    }
-    */
+  
 }

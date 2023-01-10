@@ -562,10 +562,10 @@ public class MenuScript : MonoBehaviour
             //AttackBomberButton.GetComponent<Button>().interactable = false;
             BomberButton.GetComponent<Button>().interactable = true;
         }
-  
 
-        
+        StartCoroutine(PrintTypeWriter("\n  * "+ _mainModel.CountryLiderList[4].GetEventTotalTurn()));
 
+        Debug.Log("      turnBom im > "+ _mainModel.CountryLiderList[4].GetEventTotalTurn());
         ManagerButton();
 
         

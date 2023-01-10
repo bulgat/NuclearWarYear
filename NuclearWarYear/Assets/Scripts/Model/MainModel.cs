@@ -181,7 +181,14 @@ public class MainModel
 				lider.AddBomber(lider.GetCommandLider().GetBomber());
 				lider.AddWarhead(lider.GetCommandLider().GetWarhead());
 				lider.AddDefenceWeapon(lider.GetCommandLider().GetDefenceWeapon());
-                lider.SetEventTotalTurn("Производство вооружения");
+
+				List<string> reportProducedWeaponList = new BuildWeapon().AddLiderBuildWeapon(lider);
+				string resultProducedWeapon = string.Join(", ", reportProducedWeaponList.ToArray());
+
+				Debug.Log("   ---0200   AIf  hAction  = "+ resultProducedWeapon);
+				
+
+				lider.SetEventTotalTurn("Производство вооружения "+ resultProducedWeapon);
             }
 
 			
