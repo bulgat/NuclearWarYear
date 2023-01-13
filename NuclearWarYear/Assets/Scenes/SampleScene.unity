@@ -4026,6 +4026,9 @@ MonoBehaviour:
   BuildButton: {fileID: 1774809343}
   DefenceButton: {fileID: 351392266}
   MissleButton: {fileID: 969503190}
+  MissleButton_1: {fileID: 1224247462}
+  MissleButton_2: {fileID: 537024944}
+  MissleButton_3: {fileID: 409891643}
   BomberButton: {fileID: 1155062066}
   LiderButton_1: {fileID: 1646373513}
   LiderButton_2: {fileID: 1435277597}
@@ -4311,7 +4314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1358557753
 MonoBehaviour:
   m_ObjectHideFlags: 0

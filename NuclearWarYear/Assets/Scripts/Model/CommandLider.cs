@@ -7,23 +7,24 @@ public class CommandLider
 
 	public Dictionary<string, bool> VisibleEventList;
 
-	private List<Missle> _MissleList;
-	private List<Bomber> _BomberList;
-	private List<Warhead> _WarheadList;
-	private List<Defence> _DefenceList;
+	private List<Weapon> _MissleList;
+	//private List<Bomber> _BomberList;
+	//private List<Warhead> _WarheadList;
+	//private List<Defence> _DefenceList;
 	private CityModel _TargetCity;
 	
-	private Missle _AttackMissle;
-	private Bomber _AttackBomber;
+	private Weapon _AttackMissle;
+	private Weapon _AttackBomber;
 	private Warhead _AttackWarhead;
 	private string NameCommand;
 	private string NameLiderFiend;
+	List<string> _reportProducedWeaponList;
 
 	public CommandLider() {
-		_MissleList = new List<Missle>();
-		_BomberList = new List<Bomber>();
-		_WarheadList = new List<Warhead>();
-		_DefenceList = new List<Defence>();
+		_MissleList = new List<Weapon>();
+		//_BomberList = new List<Bomber>();
+		//_WarheadList = new List<Warhead>();
+		//_DefenceList = new List<Defence>();
 
 		VisibleEventList = new Dictionary<string, bool>();
 		VisibleEventList.Add("Prop",false);
@@ -104,13 +105,13 @@ public class CommandLider
         return VisibleEventList["Defence"];
     }
 	//AddWarhead
-	public List<Warhead> GetWarhead(){
-		return _WarheadList;
-	}
+	//public List<Warhead> GetWarhead(){
+		//return _WarheadList;
+	//}
 
-	public void AddWarhead(List<Warhead> WarheadList){
-		_WarheadList = WarheadList;
-	}
+	//public void AddWarhead(List<Warhead> WarheadList){
+		//_WarheadList = WarheadList;
+	//}
 	public Warhead GetAttackWarhead(){
 		return _AttackWarhead;
 	}
@@ -118,33 +119,43 @@ public class CommandLider
 		_AttackWarhead = AttackWarhead;
 	}
 
-	public List<Defence> GetDefenceWeapon()
-	{
-		return this._DefenceList;
-	}
-	public void AddDefenceWeapon(List<Defence> DefenceWeapon)
-	{
-		this._DefenceList = DefenceWeapon;
-	}
-	public List<Bomber> GetBomber(){
-		return _BomberList;
-	}
-	public void AddBomber(List<Bomber> BomberList){
-		_BomberList = BomberList;
-	}
-	public Bomber GetAttackBomber(){
+	//public List<Defence> GetDefenceWeapon()
+	//{
+		//return this._DefenceList;
+	//}
+	//public void AddDefenceWeapon(List<Defence> DefenceWeapon)
+	//{
+		//this._DefenceList = DefenceWeapon;
+	//}
+	//public List<Bomber> GetBomber(){
+		//return _BomberList;
+	//}
+	//public void AddBomber(List<Bomber> BomberList){
+	//	_BomberList = BomberList;
+	//}
+	public Weapon GetAttackBomber(){
 		return _AttackBomber;
 	}
-	public void SetAttackBomber(Bomber AttackBomber){
+	public void SetAttackBomber(Weapon AttackBomber){
 		_AttackBomber = AttackBomber;
 	}
 	
 	
-	public List<Missle> GetMissle(){
+	public List<Weapon> GetMissle(){
 		return _MissleList;
 	}
-	public void AddMissle(List<Missle> MissleList){
+	public void AddMissle(List<Weapon> MissleList){
 		_MissleList = MissleList;
+	}
+	public void AddReportProducedWeaponList(List<string> ReportProducedWeaponList)
+    {
+		_reportProducedWeaponList = ReportProducedWeaponList;
+
+	}
+	public List<string> GetReportProducedWeaponList()
+    {
+		return _reportProducedWeaponList;
+
 	}
 	public void SetTargetCity(CityModel TargetCity)
 	{
@@ -164,10 +175,10 @@ public class CommandLider
 		return this.NameLiderFiend;
 		
 	}
-	public Missle GetAttackMissle(){
+	public Weapon GetAttackMissle(){
 		return _AttackMissle;
 	}
-	public void SetAttackMissle(Missle AttackMissle){
+	public void SetAttackMissle(Weapon AttackMissle){
 		_AttackMissle = AttackMissle;
 	}
 }

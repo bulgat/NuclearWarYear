@@ -65,7 +65,7 @@ public class SwitchActionHelper
         // Счастливая карта!
         if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
         {
-            Debug.Log("   ----    [  RICH!  ] = ");
+            
             
             actionCommand = "Defectors";
         }
@@ -117,13 +117,14 @@ public class SwitchActionHelper
             case "Building":
                 commandLider.SetVisibleEventList("Build", true);
                 // Add missle
-               // List<string> reportProducedWeaponList = new BuildWeapon().AddLiderBuildWeapon();
+                // List<string> reportProducedWeaponList = new BuildWeapon().AddLiderBuildWeapon();
+                BuildWeapon buildWeapon = new BuildWeapon();
 
-
-                commandLider.AddMissle(new List<Missle>() { new DictionaryMissle().GetMissle(1) });
-                commandLider.AddBomber(new List<Bomber>() { new DictionaryMissle().GetBomber(1) });
-                commandLider.AddWarhead(new List<Warhead>() { new DictionaryMissle().GetWarhead(1) });
-                commandLider.AddDefenceWeapon(new List<Defence>() { new DictionaryMissle().GetDefenceWeapon() });
+                commandLider.AddMissle(buildWeapon.AddLiderBuildWeaponSwithAction());
+                commandLider.AddReportProducedWeaponList(buildWeapon.GetReportProducedWeaponList());
+                //commandLider.AddBomber(new List<Bomber>() { new DictionaryMissle().GetBomber(1) });
+                //commandLider.AddWarhead(new List<Warhead>() { new DictionaryMissle().GetWarhead(1) });
+                //commandLider.AddDefenceWeapon(new List<Defence>() { new DictionaryMissle().GetDefenceWeapon() });
                 break;
             case "Defence":
                 commandLider.SetVisibleEventList("Defence", true);

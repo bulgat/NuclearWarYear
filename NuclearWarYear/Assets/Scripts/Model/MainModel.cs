@@ -52,11 +52,11 @@ public class MainModel
 		//5
 		this._flagIdPlayer = flagIdPlayer;
 		this.CountryLiderList = new List<CountryLider>();
-		this.CountryLiderList.Add(new CountryLider(1,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[0],TownList,"Путин"));
-		this.CountryLiderList.Add(new CountryLider(2,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[1],TownList,"Зеленс"));
-		this.CountryLiderList.Add(new CountryLider(3,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[2],TownList, "Байден"));
-		this.CountryLiderList.Add(new CountryLider(4,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[3],TownList, "Си Цзип"));
-		this.CountryLiderList.Add(new CountryLider(flagIdPlayer, true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetWarhead (1),CountryLiderPropagandaBuildingList[4],TownList, "Игрок"));
+		this.CountryLiderList.Add(new CountryLider(1,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[0],TownList,"Путин"));
+		this.CountryLiderList.Add(new CountryLider(2,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[1],TownList,"Зеленс"));
+		this.CountryLiderList.Add(new CountryLider(3,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[2],TownList, "Байден"));
+		this.CountryLiderList.Add(new CountryLider(4,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, "Си Цзип"));
+		this.CountryLiderList.Add(new CountryLider(flagIdPlayer, true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[4],TownList, "Игрок"));
 		
 	}
 	private int GetIncrementCityId()
@@ -127,9 +127,9 @@ public class MainModel
 	//WarheadMethod
 	public void SetWarheadMethodPlayer(int FlagId){
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,_flagIdPlayer);
-		countryLider.GetBomber().Damage =countryLider.GetWarhead().Damage;
-		countryLider.GetMissle().Damage =countryLider.GetWarhead().Damage;
-		countryLider.RemoveWarhead();
+		countryLider.GetBomber().Damage =countryLider.GetBomber().Damage;
+		countryLider.GetMissle().Damage =countryLider.GetMissle().Damage;
+		//countryLider.RemoveWarhead();
 		//GetEnergeLevelPercentWarhead();
 	}
 	public void ReconTotalTurn(int FlagId){
@@ -178,14 +178,15 @@ public class MainModel
             {
 				// building ammunition
 				lider.AddMissle(lider.GetCommandLider().GetMissle());
-				lider.AddBomber(lider.GetCommandLider().GetBomber());
-				lider.AddWarhead(lider.GetCommandLider().GetWarhead());
-				lider.AddDefenceWeapon(lider.GetCommandLider().GetDefenceWeapon());
+				//lider.AddBomber(lider.GetCommandLider().GetBomber());
+				//lider.AddWarhead(lider.GetCommandLider().GetWarhead());
+				//lider.AddDefenceWeapon(lider.GetCommandLider().GetDefenceWeapon());
 
-				List<string> reportProducedWeaponList = new BuildWeapon().AddLiderBuildWeapon(lider);
+				//List<string> reportProducedWeaponList = new BuildWeapon().AddLiderBuildWeapon(lider);
+				List<string> reportProducedWeaponList = lider.GetCommandLider().GetReportProducedWeaponList();
 				string resultProducedWeapon = string.Join(", ", reportProducedWeaponList.ToArray());
 
-				Debug.Log("   ---0200   AIf  hAction  = "+ resultProducedWeapon);
+				Debug.Log("   --- L = "+ lider.GetMissleCount()+"   AIf  hAction  = "+ resultProducedWeapon);
 				
 
 				lider.SetEventTotalTurn("Производство вооружения "+ resultProducedWeapon);

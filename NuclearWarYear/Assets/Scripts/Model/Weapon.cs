@@ -7,5 +7,6 @@ public class Weapon
 	public string Name;
 	public int Size;
 	public int Damage;
+	public DictionaryMissle.TypeWeapon Type;
 
 }

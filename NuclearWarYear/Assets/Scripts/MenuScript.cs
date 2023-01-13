@@ -30,6 +30,11 @@ public class MenuScript : MonoBehaviour
     public Button BuildButton;
     public Button DefenceButton;
     public Button MissleButton;
+
+    public Button MissleButton_1;
+    public Button MissleButton_2;
+    public Button MissleButton_3;
+
     public Button BomberButton;
 
     public Button LiderButton_1;
@@ -104,7 +109,12 @@ public class MenuScript : MonoBehaviour
         PropButton.onClick.AddListener(() => PropMethod(PropButton));
         BuildButton.onClick.AddListener(() => BuildMethod(BuildButton));
         DefenceButton.onClick.AddListener(() => DefenceMethod(DefenceButton));
-        MissleButton.onClick.AddListener(() => MissleMethod(MissleButton));
+
+        MissleButton.onClick.AddListener(() => MissleMethod(0));
+        MissleButton_1.onClick.AddListener(() => MissleMethod(1));
+        MissleButton_2.onClick.AddListener(() => MissleMethod(2));
+        MissleButton_3.onClick.AddListener(() => MissleMethod(3));
+
         BomberButton.onClick.AddListener(() => BomberMethod(BomberButton));
 
         //PromGameObject.onClick.AddListener(() => PropMethod(WarheadButton));
@@ -235,7 +245,7 @@ public class MenuScript : MonoBehaviour
     }
     private City ClearCityTargetMark(int CityId,bool Player)
     {
-        Debug.LogWarning("TTT " + TownViewList);
+        Debug.LogWarning(" TTT " + TownViewList);
         City selectCityTarget = null;
         foreach (GameObject city in TownViewList)
         {
@@ -403,22 +413,24 @@ public class MenuScript : MonoBehaviour
         EventController eventController = new EventController(Controller.Command.Building, _mainModel._flagIdPlayer);
         _controller.SendCommand(eventController);
 
-        StartCoroutine(PrintTypeWriter("build weapon"));
+        StartCoroutine(PrintTypeWriter(" build weapon"));
 
     }
     void DefenceMethod(Button buttonPressed)
     {
         EventController eventController = new EventController(Controller.Command.Defence, _mainModel._flagIdPlayer);
         _controller.SendCommand(eventController);
-        StartCoroutine(PrintTypeWriter("defence"));
+        StartCoroutine(PrintTypeWriter(" defence"));
 
     }
     //Missle
-    void MissleMethod(Button buttonPressed)
+    void MissleMethod(int IdMissle)
     {
         EventController eventController = new EventController(Controller.Command.Missle, _mainModel._flagIdPlayer);
         _controller.SendCommand(eventController);
         StartCoroutine(PrintTypeWriter("missle"));
+
+        Debug.Log("@@@@The cursor entered the selectable  IdMissle " + IdMissle);
     }
     void BomberMethod(Button buttonPressed)
     {
@@ -576,9 +588,11 @@ public class MenuScript : MonoBehaviour
         BomberButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light bomber ("
             + _mainModel.CountryLiderList[4].GetBomberCount() + ")";
 
-        MissleButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light missle (" + _mainModel.CountryLiderList[4].GetMissleCount() + ")";
+        MissleButton.GetComponentInChildren<UnityEngine.UI.Text>().text =   "Light missle (" + _mainModel.CountryLiderList[4].GetMissleCount() + ")";
+        MissleButton_1.GetComponentInChildren<UnityEngine.UI.Text>().text = "Medium missl (" + _mainModel.CountryLiderList[4].GetMissleSpecCount(2) + ")";
+        MissleButton_2.GetComponentInChildren<UnityEngine.UI.Text>().text = "Heavy missle (" + _mainModel.CountryLiderList[4].GetMissleSpecCount(3) + ")";
+        MissleButton_3.GetComponentInChildren<UnityEngine.UI.Text>().text = "S Heavy miss (" + _mainModel.CountryLiderList[4].GetMissleSpecCount(4) + ")";
 
-        
         DefenceButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Defence (" + _mainModel.CountryLiderList[4].GetDefenceWeapon().Count() + ")";
     }
 

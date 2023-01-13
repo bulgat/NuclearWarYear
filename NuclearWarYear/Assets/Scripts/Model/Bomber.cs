@@ -6,9 +6,10 @@ public class Bomber: Weapon
 {
 
 	
-	public Bomber(string name, int size, int damage) {
+	public Bomber(string name, int size, int damage, DictionaryMissle.TypeWeapon Type) {
 		Name=name;
 		Size=size;
 		Damage=damage;
+		this.Type = Type;
 	}
 }

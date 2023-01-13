@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
  [System.Serializable]
 public class CountryLider 
 {
@@ -11,10 +13,10 @@ public class CountryLider
 	public GameObject PropagandaBuilding;
 	private CommandLider _CommandLider;
 	private bool _dead;
-	private List<Missle> _MissleList;
-	private List<Bomber> _BomberList;
-	private List<Warhead> _WarheadList;
-	private List<Defence> _DefenceList;
+	private List<Weapon> _MissleList;
+	//private List<Bomber> _BomberList;
+	//private List<Warhead> _WarheadList;
+	//private List<Defence> _DefenceList;
 	public int FlagIdAttack=1;
 	
 	private List<CityModel> _TownList;
@@ -25,18 +27,18 @@ public class CountryLider
 	private string Name;
 	private string EventTotalTurn;
 	
-	public CountryLider(int flagId,bool player,Missle missle,Bomber bomber,Warhead warhead,
+	public CountryLider(int flagId,bool player,Missle missle,Bomber bomber,//Warhead warhead,
 		GameObject PropagandaBuild,List<CityModel> TownList,string Name) {
 		FlagId = flagId;
 		Player = player;
-		_BomberList = new List<Bomber>();
-		_BomberList.Add(bomber);
-		_MissleList = new List<Missle>();
+		//_BomberList = new List<Bomber>();
+		//_BomberList.Add(bomber);
+		_MissleList = new List<Weapon>();
 		_MissleList.Add(missle);
-		_WarheadList = new List<Warhead>();
-		_WarheadList.Add(warhead);
-		_DefenceList = new List<Defence>();
-		_DefenceList.Add(new DictionaryMissle().GetDefenceWeapon());
+		//_WarheadList = new List<Warhead>();
+		//_WarheadList.Add(warhead);
+		//_DefenceList = new List<Defence>();
+		//_DefenceList.Add(new DictionaryMissle().GetDefenceWeapon());
 
 		PropagandaBuilding = PropagandaBuild;
 		this.Name = Name;
@@ -103,79 +105,102 @@ public class CountryLider
 		}
 		return maxPopulation;
 	}
-	public int GetWarheadCount() {
-		return _WarheadList.Count;
-	}
+	//public int GetWarheadCount() {
+		//return _WarheadList.Count;
+	//}
+	/*
 	public Warhead GetWarhead() {
 		if (_WarheadList.Count>0){
 			return _WarheadList[0];
+		
 		}
 		return null;
 	}
+	*/
+	/*
 	public void RemoveWarhead() {
 		_WarheadList.RemoveAt(0);
-	}
+	}*/
+	/*
 	public void AddWarhead(List<Warhead> warheadList) {
 		_WarheadList.AddRange(warheadList);
-	}
+	}*/
 	//Defence
 	
 	public int GetBomberCount() {
-		return _BomberList.Count;
+		//return _BomberList.Count;
+		return _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Bomber).Count();
 	}
 
 
 
-	public void AddDefenceWeapon(List<Defence> DefenceList)
+	public void AddDefenceWeapon(List<Weapon> DefenceList)
 	{
-		_DefenceList.AddRange(DefenceList);
+		//_DefenceList.AddRange(DefenceList);
+		_MissleList.AddRange(DefenceList);
 	}
-	public List<Defence> GetDefenceWeapon()
+	public List<Weapon> GetDefenceWeapon()
 	{
-		return this._DefenceList;
+		//return this._DefenceList;
+		return _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Defence).ToList();
 	}
 
-	public Bomber GetBomber() {
-		if (_BomberList.Count>0){
-			return _BomberList[0];
-		}
-		return null;
+	public Weapon GetBomber() {
+		//if (_BomberList.Count>0){
+		//	return _BomberList[0];
+		//}
+		//return null;
+		return _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Bomber).FirstOrDefault();
 	}
 	public void RemoveBomber() {
-		if(_BomberList.Count>0)
-		{
-		_BomberList.RemoveAt(0);
-		}
+		//if(_BomberList.Count>0)
+		//{
+		//_BomberList.RemoveAt(0);
+		//}
+		Weapon bomberWeapon = _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Bomber).FirstOrDefault();
+		_MissleList.Remove(bomberWeapon);
 	}
-	public void AddBomber(List<Bomber> bomberList) {
-		_BomberList.AddRange(bomberList);
+	public void AddBomber(List<Weapon> bomberList) {
+		//_BomberList.AddRange(bomberList);
+		_MissleList.AddRange(bomberList);
 	}
 
 	public void RemoveDefenceWeapon()
 	{
-		if (_DefenceList.Count > 0)
-		{
-			_DefenceList.RemoveAt(0);
-		}
+		//if (_DefenceList.Count > 0)
+		//{
+		//	_DefenceList.RemoveAt(0);
+		//}
+		Weapon defenceWeapon = _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Defence).FirstOrDefault();
+		_MissleList.Remove(defenceWeapon);
 	}
 
 
 	public int GetMissleCount() {
 		return _MissleList.Count;
 	}
-	public Missle GetMissle() {
-		if (_MissleList.Count>0){
-			return _MissleList[0];
-		}
-		return null;
+	public int GetMissleSpecCount(int Id)
+	{
+		Debug.Log(Id+"   ----    "+ _MissleList.Count()+"  = " + _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Missle && a.Size == Id).Count());
+		return _MissleList.Where(a=>a.Type== DictionaryMissle.TypeWeapon.Missle && a.Size == Id).Count();
+	}
+
+	public Weapon GetMissle() {
+		//if (_MissleList.Count>0){
+		//	return _MissleList[0];
+		//}
+		return _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Missle).FirstOrDefault();
 	}
 	public void RemoveMissle() {
 		if (_MissleList.Count>0){
 			_MissleList.RemoveAt(0);
 		}
 	}
-	public void AddMissle(List<Missle> missleList) {
-		_MissleList.AddRange(missleList);
+	public void AddMissle(List<Weapon> missleList) {
+		if (missleList != null)
+		{
+			_MissleList.AddRange(missleList);
+		}
 	}
 	public GameObject GetCentralBuildingPropogation() {
 		return PropagandaBuilding;
