@@ -14,31 +14,27 @@ public class CountryLider
 	private CommandLider _CommandLider;
 	private bool _dead;
 	private List<Weapon> _MissleList;
-	//private List<Bomber> _BomberList;
-	//private List<Warhead> _WarheadList;
-	//private List<Defence> _DefenceList;
+
 	public int FlagIdAttack=1;
 	
 	private List<CityModel> _TownList;
 	public int Mood =2;
 	private int _maxPopulation;
 	private CityModel _targetCitySelectPlayer;
-	//private CityModel TargetCitySelectAi;
+
 	private string Name;
 	private string EventTotalTurn;
-	
-	public CountryLider(int flagId,bool player,Missle missle,Bomber bomber,//Warhead warhead,
+
+	public int MissleId;
+
+	public CountryLider(int flagId,bool player,Missle missle,Bomber bomber,
 		GameObject PropagandaBuild,List<CityModel> TownList,string Name) {
 		FlagId = flagId;
 		Player = player;
-		//_BomberList = new List<Bomber>();
-		//_BomberList.Add(bomber);
+
 		_MissleList = new List<Weapon>();
 		_MissleList.Add(missle);
-		//_WarheadList = new List<Warhead>();
-		//_WarheadList.Add(warhead);
-		//_DefenceList = new List<Defence>();
-		//_DefenceList.Add(new DictionaryMissle().GetDefenceWeapon());
+
 
 		PropagandaBuilding = PropagandaBuild;
 		this.Name = Name;
@@ -105,33 +101,17 @@ public class CountryLider
 		}
 		return maxPopulation;
 	}
-	//public int GetWarheadCount() {
-		//return _WarheadList.Count;
-	//}
-	/*
-	public Warhead GetWarhead() {
-		if (_WarheadList.Count>0){
-			return _WarheadList[0];
-		
-		}
-		return null;
-	}
-	*/
-	/*
-	public void RemoveWarhead() {
-		_WarheadList.RemoveAt(0);
-	}*/
-	/*
-	public void AddWarhead(List<Warhead> warheadList) {
-		_WarheadList.AddRange(warheadList);
-	}*/
+	
 	//Defence
 	
 	public int GetBomberCount() {
-		//return _BomberList.Count;
 		return _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Bomber).Count();
 	}
-
+	public int GetBomberSpecCount(int Id)
+	{
+		Debug.Log(Id + "   ----  Count =  " + _MissleList.Count() + "  = " + _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Missle && a.Size == Id).Count());
+		return _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Bomber && a.Size == Id).Count();
+	}
 
 
 	public void AddDefenceWeapon(List<Weapon> DefenceList)
@@ -179,9 +159,20 @@ public class CountryLider
 	public int GetMissleCount() {
 		return _MissleList.Count;
 	}
+	public int GetRandomMissleSizeId(DictionaryMissle.TypeWeapon TypeWeaponFly)
+    {
+		List<Weapon> missleList = _MissleList.Where(a => a.Type == TypeWeaponFly).ToList();
+        if (missleList.Count() == 0)
+        {
+			return 0;
+        }
+		
+		int indexWeapon = UnityEngine.Random.Range(0, missleList.Count);
+		return missleList[indexWeapon].Size;
+	}
 	public int GetMissleSpecCount(int Id)
 	{
-		Debug.Log(Id+"   ----    "+ _MissleList.Count()+"  = " + _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Missle && a.Size == Id).Count());
+		Debug.Log(Id+ "   ----  Count =  " + _MissleList.Count()+"  = " + _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Missle && a.Size == Id).Count());
 		return _MissleList.Where(a=>a.Type== DictionaryMissle.TypeWeapon.Missle && a.Size == Id).Count();
 	}
 
@@ -206,11 +197,17 @@ public class CountryLider
 		return PropagandaBuilding;
 	}
 	public void SetTargetCitySelectPlayer(CityModel targetCitySelectPlayer){
-		Debug.Log("0005  ["+ targetCitySelectPlayer + "] BomberObje  ");
+		
 		_targetCitySelectPlayer =targetCitySelectPlayer;
 	}
 	public CityModel GetTargetCitySelectPlayer(){
 		return _targetCitySelectPlayer;
 	}
-	
+	public void SetMissleSideId(int MissleId) {
+		this.MissleId = MissleId;
+	}
+	public int GetMissleSideId()
+	{
+		return this.MissleId ;
+	}
 }

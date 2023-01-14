@@ -28,69 +28,69 @@ public class Controller
 		
 		if (eventController.NameCommand == Command.Propaganda){
 
-			_mainModel.SetPropagandPlayer(eventController.FlagId);
+			_mainModel.SetPropagandPlayer(eventController.EventSend.FlagId);
 			//_mainModel
 		}
 		if (eventController.NameCommand == Command.Building){
 
-			_mainModel.SetBuildingPlayer(eventController.FlagId);
+			_mainModel.SetBuildingPlayer(eventController.EventSend.FlagId);
 			//_mainModel
 		}
 		if (eventController.NameCommand == Command.Defence){
 
-			_mainModel.SetDefencePlayer(eventController.FlagId);
+			_mainModel.SetDefencePlayer(eventController.EventSend.FlagId);
 			
 		}
 		if (eventController.NameCommand == Command.Missle){
-			_mainModel.SetMisslePlayer(eventController.FlagId);
-			//_mainModel
+			_mainModel.SetMisslePlayer(eventController.EventSend.FlagId, eventController.EventSend.Id);
+			
 		}
 		if (eventController.NameCommand == Command.AttackMissle){
-			_mainModel.SetAttackMisslePlayer(eventController.FlagId);
-			//_mainModel
+			_mainModel.SetAttackMisslePlayer(eventController.EventSend.FlagId);
+			
 		}
 		if (eventController.NameCommand == Command.Bomber){
 	
-			_mainModel.SetBomberPlayer(eventController.FlagId);
+			_mainModel.SetBomberPlayer(eventController.EventSend.FlagId, eventController.EventSend.Id);
 			
 		}
 		if (eventController.NameCommand == Command.AttackBomber){
 			
-			_mainModel.SetAttackBomberPlayer(eventController.FlagId);
+			_mainModel.SetAttackBomberPlayer(eventController.EventSend.FlagId);
 			
 		}
 		if (eventController.NameCommand == Command.LiderTargetPlayer){
 	
-			_mainModel.SetLiderTargetPlayer(eventController.FlagId);
+			_mainModel.SetLiderTargetPlayer(eventController.EventSend.FlagId);
 
 		}
 		if (eventController.NameCommand == Command.Warhead){
 	
-			_mainModel.SetWarheadMethodPlayer(eventController.FlagId);
+			_mainModel.SetWarheadMethodPlayer(eventController.EventSend.FlagId);
 
 		}
 		if (eventController.NameCommand == Command.TotalTurn){
 
-			_mainModel.ReconTotalTurn(eventController.FlagId);
+			_mainModel.ReconTotalTurn(eventController.EventSend.FlagId);
 			
 		}
 		//TurnSatisfyOneLider
 		if (eventController.NameCommand == Command.TurnSatisfyOneLider)
 		{
 
-			_mainModel.SatisfyOneLiderTurn(eventController.FlagId);
+			_mainModel.SatisfyOneLiderTurn(eventController.EventSend.FlagId);
 
 		}
 
 		if (eventController.NameCommand == Command.SelectCityEnemyTargetPlayer){
 
-			_mainModel.SelectCityEnemyTargetPlayer(eventController.CityId);
+			_mainModel.SelectCityEnemyTargetPlayer(eventController.EventSend.CityId);
 			//_mainModel
 		}
 		//ResetSelectCityEnemyTargetPlayer
 		if (eventController.NameCommand == Command.ResetSelectCityEnemyTargetPlayer){
 
-			_mainModel.ResetSelectCityEnemyTargetPlayer(eventController.CityId);
+			_mainModel.ResetSelectCityEnemyTargetPlayer(eventController.EventSend.CityId);
 			
 		}
 	}

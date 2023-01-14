@@ -36,6 +36,7 @@ public class MenuScript : MonoBehaviour
     public Button MissleButton_3;
 
     public Button BomberButton;
+    public Button BomberButton_1;
 
     public Button LiderButton_1;
     public Button LiderButton_2;
@@ -110,12 +111,13 @@ public class MenuScript : MonoBehaviour
         BuildButton.onClick.AddListener(() => BuildMethod(BuildButton));
         DefenceButton.onClick.AddListener(() => DefenceMethod(DefenceButton));
 
-        MissleButton.onClick.AddListener(() => MissleMethod(0));
-        MissleButton_1.onClick.AddListener(() => MissleMethod(1));
-        MissleButton_2.onClick.AddListener(() => MissleMethod(2));
-        MissleButton_3.onClick.AddListener(() => MissleMethod(3));
+        MissleButton.onClick.AddListener(() => MissleMethod(1));
+        MissleButton_1.onClick.AddListener(() => MissleMethod(2));
+        MissleButton_2.onClick.AddListener(() => MissleMethod(3));
+        MissleButton_3.onClick.AddListener(() => MissleMethod(4));
 
-        BomberButton.onClick.AddListener(() => BomberMethod(BomberButton));
+        BomberButton.onClick.AddListener(() => BomberMethod(1));
+        BomberButton_1.onClick.AddListener(() => BomberMethod(2));
 
         //PromGameObject.onClick.AddListener(() => PropMethod(WarheadButton));
 
@@ -226,7 +228,7 @@ public class MenuScript : MonoBehaviour
     {
         
         City selectCityTarget = ClearCityTargetMark(CityId,true);
-        CityEvent cityEvent = new CityEvent(Controller.Command.SelectCityEnemyTargetPlayer, CityId);
+        EventController cityEvent = new EventController(Controller.Command.SelectCityEnemyTargetPlayer, new CityEvent( CityId));
         _controller.SendCommand(cityEvent);
 
         // TargetSity
@@ -266,7 +268,7 @@ public class MenuScript : MonoBehaviour
         if (Player)
         {
             //reset?
-            CityEvent cityEvent = new CityEvent(Controller.Command.ResetSelectCityEnemyTargetPlayer, 0);
+            EventController cityEvent = new EventController(Controller.Command.ResetSelectCityEnemyTargetPlayer, new CityEvent(0));
             _controller.SendCommand(cityEvent);
         }
         return selectCityTarget;
@@ -360,7 +362,7 @@ public class MenuScript : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime + (waitTurnTime * indexLider));
 
-        EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, lider.FlagId);
+        EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, new EventSendLider(lider.FlagId));
         _controller.SendCommand(eventController);
 
 
@@ -393,7 +395,7 @@ public class MenuScript : MonoBehaviour
     void SetPropagand(int FlagId)
     {
         
-        EventController eventController = new EventController(Controller.Command.Propaganda, _mainModel._flagIdPlayer);
+        EventController eventController = new EventController(Controller.Command.Propaganda, new EventSendLider(_mainModel._flagIdPlayer));
         _controller.SendCommand(eventController);
 
     }
@@ -410,7 +412,7 @@ public class MenuScript : MonoBehaviour
     void BuildMethod(Button buttonPressed)
     {
      
-        EventController eventController = new EventController(Controller.Command.Building, _mainModel._flagIdPlayer);
+        EventController eventController = new EventController(Controller.Command.Building, new EventSendLider(_mainModel._flagIdPlayer));
         _controller.SendCommand(eventController);
 
         StartCoroutine(PrintTypeWriter(" build weapon"));
@@ -418,7 +420,7 @@ public class MenuScript : MonoBehaviour
     }
     void DefenceMethod(Button buttonPressed)
     {
-        EventController eventController = new EventController(Controller.Command.Defence, _mainModel._flagIdPlayer);
+        EventController eventController = new EventController(Controller.Command.Defence, new EventSendLider(_mainModel._flagIdPlayer));
         _controller.SendCommand(eventController);
         StartCoroutine(PrintTypeWriter(" defence"));
 
@@ -426,17 +428,27 @@ public class MenuScript : MonoBehaviour
     //Missle
     void MissleMethod(int IdMissle)
     {
-        EventController eventController = new EventController(Controller.Command.Missle, _mainModel._flagIdPlayer);
-        _controller.SendCommand(eventController);
-        StartCoroutine(PrintTypeWriter("missle"));
+        Debug.Log("=="+_mainModel.CountryLiderList[4].GetMissleSpecCount(IdMissle)+"  entered the selectable  IdMissle " + IdMissle);
+        if (_mainModel.CountryLiderList[4].GetMissleSpecCount(IdMissle) > 0)
+        {
+            EventController eventController = new EventController(Controller.Command.Missle, new EventMissle(_mainModel._flagIdPlayer, IdMissle));
+            _controller.SendCommand(eventController);
+            StartCoroutine(PrintTypeWriter(" missle"));
+        } else
+        {
+            StartCoroutine(PrintTypeWriter("not missle"));
+        }
 
-        Debug.Log("@@@@The cursor entered the selectable  IdMissle " + IdMissle);
+
+       
+
+        
     }
-    void BomberMethod(Button buttonPressed)
+    void BomberMethod(int SizeIdBomber)
     {
-        EventController eventController = new EventController(Controller.Command.Bomber, _mainModel._flagIdPlayer);
+        EventController eventController = new EventController(Controller.Command.Bomber, new EventBomber(_mainModel._flagIdPlayer, SizeIdBomber));
         _controller.SendCommand(eventController);
-        StartCoroutine(PrintTypeWriter("bomber"));
+        StartCoroutine(PrintTypeWriter(" bomber"));
 
     }
     float NuclearMapLeftX = 2.5f;
@@ -449,7 +461,7 @@ public class MenuScript : MonoBehaviour
     }
     void LiderButton_1_Method(Button buttonPressed)
     {
-        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, 1);
+        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider( 1));
         _controller.SendCommand(eventController);
      
         SelectCountryOne();
@@ -459,7 +471,7 @@ public class MenuScript : MonoBehaviour
     void LiderButton_2_Method(Button buttonPressed)
     {
        
-        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, 2);
+        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(2));
         _controller.SendCommand(eventController);
         _targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapTopY, 0);
 
@@ -468,7 +480,7 @@ public class MenuScript : MonoBehaviour
     void LiderButton_3_Method(Button buttonPressed)
     {
        
-        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, 3);
+        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(3));
         _controller.SendCommand(eventController);
         _targetNuclearMap = new Vector3(NuclearMapLeftX, NuclearMapDowmY, 0);
 
@@ -477,7 +489,7 @@ public class MenuScript : MonoBehaviour
     void LiderButton_4_Method(Button buttonPressed)
     {
 
-        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, 4);
+        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(4));
         _controller.SendCommand(eventController);
         _targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapDowmY, 0);
 
@@ -538,7 +550,7 @@ public class MenuScript : MonoBehaviour
                 StartCoroutine(PrintTypeWriter("\n Ready. Select target for missle"));
             }
             CircleImageReadyParam(1,true);
-            EventController eventController = new EventController(Controller.Command.AttackMissle, _mainModel._flagIdPlayer);
+            EventController eventController = new EventController(Controller.Command.AttackMissle, new EventSendLider(_mainModel._flagIdPlayer));
             _controller.SendCommand(eventController);
         }
         else
@@ -565,7 +577,7 @@ public class MenuScript : MonoBehaviour
 
             CircleImageReadyParam(0,true);
             
-            EventController eventController = new EventController(Controller.Command.AttackBomber, _mainModel._flagIdPlayer);
+            EventController eventController = new EventController(Controller.Command.AttackBomber, new EventSendLider(_mainModel._flagIdPlayer));
             _controller.SendCommand(eventController);
 
         }
@@ -587,6 +599,8 @@ public class MenuScript : MonoBehaviour
     private void ManagerButton() {
         BomberButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light bomber ("
             + _mainModel.CountryLiderList[4].GetBomberCount() + ")";
+        BomberButton_1.GetComponentInChildren<UnityEngine.UI.Text>().text = "Heavy bomber ("
+            + _mainModel.CountryLiderList[4].GetBomberSpecCount(2) + ")";
 
         MissleButton.GetComponentInChildren<UnityEngine.UI.Text>().text =   "Light missle (" + _mainModel.CountryLiderList[4].GetMissleCount() + ")";
         MissleButton_1.GetComponentInChildren<UnityEngine.UI.Text>().text = "Medium missl (" + _mainModel.CountryLiderList[4].GetMissleSpecCount(2) + ")";

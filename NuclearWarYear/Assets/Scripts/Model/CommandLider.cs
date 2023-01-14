@@ -8,11 +8,11 @@ public class CommandLider
 	public Dictionary<string, bool> VisibleEventList;
 
 	private List<Weapon> _MissleList;
-	//private List<Bomber> _BomberList;
-	//private List<Warhead> _WarheadList;
-	//private List<Defence> _DefenceList;
+
 	private CityModel _TargetCity;
-	
+
+	private int MissleId;
+
 	private Weapon _AttackMissle;
 	private Weapon _AttackBomber;
 	private Warhead _AttackWarhead;
@@ -22,9 +22,7 @@ public class CommandLider
 
 	public CommandLider() {
 		_MissleList = new List<Weapon>();
-		//_BomberList = new List<Bomber>();
-		//_WarheadList = new List<Warhead>();
-		//_DefenceList = new List<Defence>();
+	
 
 		VisibleEventList = new Dictionary<string, bool>();
 		VisibleEventList.Add("Prop",false);
@@ -47,22 +45,29 @@ public class CommandLider
 		VisibleEventList[Key] = Value;
 
     }
-    public bool SetVisibleMissle(bool visibleMissle)
+	public int GetSizeIdMissle()
+    {
+		return this.MissleId;
+
+	}
+
+	public void SetVisibleMissle(bool visibleMissle, int MissleId)
 	{
+		VisibleEventList["Missle"] = visibleMissle;
+		this.MissleId = MissleId;
 
-		return VisibleEventList["Missle"];
-
-    }
+	}
 	public bool GetVisibleMissle()
     {
 
 		return VisibleEventList["Missle"];
     }
-	public void SetVisibleBomber(bool visibleBomber)
+	public void SetVisibleBomber(bool visibleBomber, int MissleId)
     {
         VisibleEventList["Bomber"]= visibleBomber;
         VisibleEventList["Airport"]= visibleBomber;
-    }
+		this.MissleId = MissleId;
+	}
 	
 
 	public bool GetVisibleBomber() {
@@ -97,21 +102,14 @@ public class CommandLider
 			VisibleEventList[item.Key] = false;
 
         }
-
+		this.MissleId = 0;
 	}
 	public bool GetDefence() {
 
-		//return VisibleDefence;
         return VisibleEventList["Defence"];
     }
 	//AddWarhead
-	//public List<Warhead> GetWarhead(){
-		//return _WarheadList;
-	//}
-
-	//public void AddWarhead(List<Warhead> WarheadList){
-		//_WarheadList = WarheadList;
-	//}
+	
 	public Warhead GetAttackWarhead(){
 		return _AttackWarhead;
 	}
@@ -119,20 +117,7 @@ public class CommandLider
 		_AttackWarhead = AttackWarhead;
 	}
 
-	//public List<Defence> GetDefenceWeapon()
-	//{
-		//return this._DefenceList;
-	//}
-	//public void AddDefenceWeapon(List<Defence> DefenceWeapon)
-	//{
-		//this._DefenceList = DefenceWeapon;
-	//}
-	//public List<Bomber> GetBomber(){
-		//return _BomberList;
-	//}
-	//public void AddBomber(List<Bomber> BomberList){
-	//	_BomberList = BomberList;
-	//}
+
 	public Weapon GetAttackBomber(){
 		return _AttackBomber;
 	}

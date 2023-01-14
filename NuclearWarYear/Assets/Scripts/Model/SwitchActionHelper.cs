@@ -8,7 +8,7 @@ public class SwitchActionHelper
 {
 
     public CommandLider SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
-        List<CityModel> TownList, int _flagIdPlayer, string actionCommand, int FlagId)
+        List<CityModel> TownList, int _flagIdPlayer, string actionCommand, int FlagId,int MissleId)
     {
 
         ResetAction();
@@ -31,15 +31,18 @@ public class SwitchActionHelper
             //int countWeapon;
             if (actionCommand== "Missle")
             {
-                if (countryLider.GetMissleCount() <= 0)
+                MissleId = countryLider.GetRandomMissleSizeId(DictionaryMissle.TypeWeapon.Missle);
+                if (MissleId== 0)
                 {
                     actionCommand = "Propaganda";
                 }
+             
             }
             if(actionCommand == "Bomber")
             {
+                MissleId = countryLider.GetRandomMissleSizeId(DictionaryMissle.TypeWeapon.Bomber);
                 //bomber
-                if (countryLider.GetBomberCount()<=0)
+                if (MissleId == 0)
                 {
                     actionCommand = "Propaganda";
                 }
@@ -60,6 +63,7 @@ public class SwitchActionHelper
 
         if (AIfiend) {
             commandLider.SetTargetCity(targetCity);
+            
         }
 
         // Счастливая карта!
@@ -130,10 +134,13 @@ public class SwitchActionHelper
                 commandLider.SetVisibleEventList("Defence", true);
                 break;
             case "Missle":
-                commandLider.SetVisibleMissle(true);
+                //MissleId
+              
+
+                    commandLider.SetVisibleMissle(true, MissleId);
                 break;
             case "Bomber":
-                commandLider.SetVisibleBomber(true);
+                commandLider.SetVisibleBomber(true, MissleId);
                 break;
             case "AttackBomber":
 

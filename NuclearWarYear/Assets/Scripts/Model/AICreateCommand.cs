@@ -21,12 +21,12 @@ public class AICreateCommand
 				if (lider.GetCommandLider ()!=null){
 					if(lider.GetCommandLider ().GetVisibleMissle() ){
 						
-						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, "AttackMissle",lider.FlagId));
+						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, "AttackMissle",lider.FlagId,0));
 						continue;
 					}
 					if(lider.GetCommandLider ().GetVisibleBomber() ){
 						
-						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, "AttackBomber",lider.FlagId));
+						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, "AttackBomber",lider.FlagId,0));
 						continue;
 					}
 				}
@@ -38,7 +38,7 @@ public class AICreateCommand
 
 
 				lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer,
-					actionNameCommand, lider.FlagId));
+					actionNameCommand, lider.FlagId,0));
 			}
 		}
 	}

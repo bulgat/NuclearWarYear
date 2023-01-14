@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CityEvent :EventController
+public class CityEvent :IEventSend
 {
-	
-	public CityEvent(Controller.Command nameCommand,int cityId) {
-		this.NameCommand = nameCommand;
+	public int Id { set; get; }
+	public int FlagId { set; get; }
+	public int CityId { set; get; }
+
+	public CityEvent(int cityId) {
 		this.CityId = cityId;
 	}
 }
