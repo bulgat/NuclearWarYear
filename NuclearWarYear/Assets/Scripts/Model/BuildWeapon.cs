@@ -48,7 +48,7 @@ using System.Threading.Tasks;
         for (int i = 0; i < 6; i++)
         {
             randomAddWeaponList.Add(false);
-            if ((int)UnityEngine.Random.Range(0.0f, 3.0f) == 1)
+            if ((int)UnityEngine.Random.Range(0.0f, 2.0f) == 1)
             {
                 randomAddWeaponList[i] = true;
             }

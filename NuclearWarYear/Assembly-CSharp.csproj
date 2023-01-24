@@ -66,12 +66,15 @@
     <Compile Include="Assets\Scripts\Model\Warhead.cs" />
     <Compile Include="Assets\Scripts\Model\Defence.cs" />
     <Compile Include="Assets\Scripts\Model\ActionCommand.cs" />
+    <Compile Include="Assets\Scripts\Controller\EventBomber.cs" />
     <Compile Include="Assets\Scripts\Model\CityGameObjHelper.cs" />
     <Compile Include="Assets\Scripts\Model\CommandLider.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewMoveDeflectors.cs" />
     <Compile Include="Assets\Scripts\Model\ModGameEngine.cs" />
+    <Compile Include="Assets\Scripts\Controller\IEventSend.cs" />
     <Compile Include="Assets\Scripts\Model\LiderHelperOne.cs" />
     <Compile Include="Assets\Scripts\Model\DamagePopulationHelper.cs" />
+    <Compile Include="Assets\Scripts\Controller\EventMissle.cs" />
     <Compile Include="Assets\Scripts\MenuScript.cs" />
     <Compile Include="Assets\Scripts\View\ViewTown.cs" />
     <Compile Include="Assets\Scripts\Controller\Controller.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Assets\Scripts\Model\CountryLider.cs" />
     <Compile Include="Assets\Scripts\MenuStart.cs" />
     <Compile Include="Assets\Scripts\Model\CityModel.cs" />
+    <Compile Include="Assets\Scripts\Controller\EventSendLider.cs" />
     <Compile Include="Assets\Scripts\Model\CityHelperList.cs" />
     <Compile Include="Assets\Scripts\MenuVictory.cs" />
     <Compile Include="Assets\Scripts\Controller\EventController.cs" />
@@ -100,10 +104,6 @@
     <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackMissle.cs" />
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\Controller\IEventSend.cs" />
-    <Compile Include="Assets\Scripts\Controller\EventSendLider.cs" />
-    <Compile Include="Assets\Scripts\Controller\EventMissle.cs" />
-    <Compile Include="Assets\Scripts\Controller\EventBomber.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

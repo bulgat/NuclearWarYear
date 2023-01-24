@@ -172,7 +172,7 @@ public class CountryLider
 	}
 	public int GetMissleSpecCount(int Id)
 	{
-		Debug.Log(Id+ "   ----  Count =  " + _MissleList.Count()+"  = " + _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Missle && a.Size == Id).Count());
+		
 		return _MissleList.Where(a=>a.Type== DictionaryMissle.TypeWeapon.Missle && a.Size == Id).Count();
 	}
 

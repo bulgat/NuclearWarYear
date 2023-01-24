@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEngine.SceneManagement;
+using System.Text;
 
 public class MenuScript : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class MenuScript : MonoBehaviour
     public GameObject panelMain;
     public GameObject CanvasTacticReal;
     public GameObject CanvasResourcePlayer;
+    public GameObject CanvasReport;
+
     public Text CanvasResourcePlayerPopulation;
 
     public GameObject NuclearMap;
@@ -24,6 +27,7 @@ public class MenuScript : MonoBehaviour
 
     public Button ButtonResource;
     public Button ButtonCloseResource;
+    public Button CanvasReportButtonClose;
     public Button TurnButton;
 
     public Button PropButton;
@@ -67,7 +71,7 @@ public class MenuScript : MonoBehaviour
     MainModel _mainModel;
     private int flagIdPlayer = 5;
     public Text TextTypeWriter;
-
+    public Text CanvasReportTextMessage;
     void Awake()
     {
         CountryLiderList = null;
@@ -119,6 +123,7 @@ public class MenuScript : MonoBehaviour
         BomberButton.onClick.AddListener(() => BomberMethod(1));
         BomberButton_1.onClick.AddListener(() => BomberMethod(2));
 
+        CanvasReportButtonClose.onClick.AddListener(() => CanvasReportButtonCloseMethod());
         //PromGameObject.onClick.AddListener(() => PropMethod(WarheadButton));
 
         var viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
@@ -140,6 +145,7 @@ public class MenuScript : MonoBehaviour
         LiderButton_5.onClick.AddListener(() => LiderButton_5_Method(LiderButton_5));
    
 
+
         SetPropagand(5);
         
         new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList, 
@@ -160,7 +166,7 @@ public class MenuScript : MonoBehaviour
 
         GlueTownView();
         // StartCoroutine(GlueTownView());
-        
+        CanvasReport.SetActive(false);
     }
 
     private void GlueTownView()
@@ -301,6 +307,10 @@ public class MenuScript : MonoBehaviour
         {
             NuclearMap.transform.position = new Vector3(0, 0, 0);
         }
+    }
+    void CanvasReportButtonCloseMethod()
+    {
+        CanvasReport.SetActive(false);
     }
     void ButtonResourceMethod(Button buttonResource)
     {
@@ -532,7 +542,8 @@ public class MenuScript : MonoBehaviour
     }
     void EnableButtonPlayer()
     {
-    
+        StringBuilder printMessage = new StringBuilder("");
+        
 
         if (_mainModel.CountryLiderList[4].GetCommandLider().GetVisibleMissle())
         {
@@ -543,11 +554,13 @@ public class MenuScript : MonoBehaviour
             var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
-                StartCoroutine(PrintTypeWriter("\n Ready. Not target for missle. Select Target!"));
+                //StartCoroutine(PrintTypeWriter("\n Ready. Not target for missle. Select Target!"));
+                printMessage.Append("\n Ready. Not target for missle. Select Target!");
             }
             else
             {
-                StartCoroutine(PrintTypeWriter("\n Ready. Select target for missle"));
+                //StartCoroutine(PrintTypeWriter("\n Ready. Select target for missle"));
+                printMessage.Append("\n Ready. Select target for missle");
             }
             CircleImageReadyParam(1,true);
             EventController eventController = new EventController(Controller.Command.AttackMissle, new EventSendLider(_mainModel._flagIdPlayer));
@@ -569,10 +582,12 @@ public class MenuScript : MonoBehaviour
             var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
-                StartCoroutine(PrintTypeWriter("\n not target. Select Target!"));
+                //StartCoroutine(PrintTypeWriter("\n not target. Select Target!"));
+                printMessage.Append("\n not target. Select Target!");
             }
             else { 
-                StartCoroutine(PrintTypeWriter("\n select target bomber"));
+                //StartCoroutine(PrintTypeWriter("\n select target bomber"));
+                printMessage.Append("\n select target bomber");
             }
 
             CircleImageReadyParam(0,true);
@@ -587,7 +602,8 @@ public class MenuScript : MonoBehaviour
             BomberButton.GetComponent<Button>().interactable = true;
         }
 
-        StartCoroutine(PrintTypeWriter("\n  * "+ _mainModel.CountryLiderList[4].GetEventTotalTurn()));
+        //StartCoroutine(PrintTypeWriter("\n  * "+ _mainModel.CountryLiderList[4].GetEventTotalTurn()));
+        printMessage.Append("\n  * " + _mainModel.CountryLiderList[4].GetEventTotalTurn());
 
         Debug.Log("      turnBom im > "+ _mainModel.CountryLiderList[4].GetEventTotalTurn());
         ManagerButton();
@@ -595,6 +611,11 @@ public class MenuScript : MonoBehaviour
         
 
         SetAllCityVisibleComponent();
+
+        CanvasReport.SetActive(true);
+        CanvasReportTextMessage.text = printMessage.ToString();
+        Debug.Log(printMessage+"   --- ou  =  " + printMessage.ToString());
+        StartCoroutine(PrintTypeWriter(printMessage.ToString()));
     }
     private void ManagerButton() {
         BomberButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light bomber ("

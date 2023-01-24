@@ -121,14 +121,11 @@ public class SwitchActionHelper
             case "Building":
                 commandLider.SetVisibleEventList("Build", true);
                 // Add missle
-                // List<string> reportProducedWeaponList = new BuildWeapon().AddLiderBuildWeapon();
                 BuildWeapon buildWeapon = new BuildWeapon();
 
                 commandLider.AddMissle(buildWeapon.AddLiderBuildWeaponSwithAction());
                 commandLider.AddReportProducedWeaponList(buildWeapon.GetReportProducedWeaponList());
-                //commandLider.AddBomber(new List<Bomber>() { new DictionaryMissle().GetBomber(1) });
-                //commandLider.AddWarhead(new List<Warhead>() { new DictionaryMissle().GetWarhead(1) });
-                //commandLider.AddDefenceWeapon(new List<Defence>() { new DictionaryMissle().GetDefenceWeapon() });
+           
                 break;
             case "Defence":
                 commandLider.SetVisibleEventList("Defence", true);
