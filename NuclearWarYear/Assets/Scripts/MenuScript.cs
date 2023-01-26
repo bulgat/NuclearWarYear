@@ -158,7 +158,7 @@ public class MenuScript : MonoBehaviour
         EnableButtonPlayer();
 
         //ReplaceCardGame();
-        StartCoroutine(PrintTypeWriter("privet user"));
+        PrintTypeWriter("privet user");
         //PrintTypeWriter();
         
         CanvasResourcePlayer.SetActive(false);
@@ -417,7 +417,7 @@ public class MenuScript : MonoBehaviour
 
         //new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList, _mainModel.GetTownList(), _mainModel._flagIdPlayer, _mainModel._flagIdPlayer);
         
-        StartCoroutine(PrintTypeWriter("\n propaganda"));
+        PrintTypeWriter("\n propaganda");
     }
     void BuildMethod(Button buttonPressed)
     {
@@ -425,14 +425,14 @@ public class MenuScript : MonoBehaviour
         EventController eventController = new EventController(Controller.Command.Building, new EventSendLider(_mainModel._flagIdPlayer));
         _controller.SendCommand(eventController);
 
-        StartCoroutine(PrintTypeWriter(" build weapon"));
+        PrintTypeWriter(" build weapon");
 
     }
     void DefenceMethod(Button buttonPressed)
     {
         EventController eventController = new EventController(Controller.Command.Defence, new EventSendLider(_mainModel._flagIdPlayer));
         _controller.SendCommand(eventController);
-        StartCoroutine(PrintTypeWriter(" defence"));
+        PrintTypeWriter(" defence");
 
     }
     //Missle
@@ -443,10 +443,10 @@ public class MenuScript : MonoBehaviour
         {
             EventController eventController = new EventController(Controller.Command.Missle, new EventMissle(_mainModel._flagIdPlayer, IdMissle));
             _controller.SendCommand(eventController);
-            StartCoroutine(PrintTypeWriter(" missle"));
+            PrintTypeWriter(" missle");
         } else
         {
-            StartCoroutine(PrintTypeWriter("not missle"));
+            PrintTypeWriter("not missle");
         }
 
 
@@ -458,7 +458,7 @@ public class MenuScript : MonoBehaviour
     {
         EventController eventController = new EventController(Controller.Command.Bomber, new EventBomber(_mainModel._flagIdPlayer, SizeIdBomber));
         _controller.SendCommand(eventController);
-        StartCoroutine(PrintTypeWriter(" bomber"));
+        PrintTypeWriter(" bomber");
 
     }
     float NuclearMapLeftX = 2.5f;
@@ -611,12 +611,18 @@ public class MenuScript : MonoBehaviour
         
 
         SetAllCityVisibleComponent();
+        CanvasReportWindow(printMessage.ToString());
 
-        CanvasReport.SetActive(true);
-        CanvasReportTextMessage.text = printMessage.ToString();
-        Debug.Log(printMessage+"   --- ou  =  " + printMessage.ToString());
-        StartCoroutine(PrintTypeWriter(printMessage.ToString()));
+
     }
+    private void CanvasReportWindow(string PrintMessage)
+    {
+        CanvasReport.SetActive(true);
+        CanvasReportTextMessage.text = PrintMessage;
+        Debug.Log( "   --- o  =  "  );
+        //PrintTypeWriter(PrintMessage);
+    }
+
     private void ManagerButton() {
         BomberButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light bomber ("
             + _mainModel.CountryLiderList[4].GetBomberCount() + ")";
@@ -727,13 +733,15 @@ public class MenuScript : MonoBehaviour
             }
         }
     }
-    IEnumerator PrintTypeWriter(string Message)
+    void PrintTypeWriter(string Message)
     {
+        CanvasReportWindow(Message);
+        /*
         foreach (var item in Message)
         {
             TextTypeWriter.text += item;
             yield return new WaitForSeconds(0.1f);
         }
-
+        */
     }
 }
