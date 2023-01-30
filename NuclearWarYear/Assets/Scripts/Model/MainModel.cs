@@ -58,6 +58,11 @@ public class MainModel
 		this.CountryLiderList.Add(new CountryLider(4,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, "Си Цзип"));
 		this.CountryLiderList.Add(new CountryLider(flagIdPlayer, true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[4],TownList, "Игрок"));
 		
+		foreach(var Lider in this.CountryLiderList)
+        {
+			Lider._RelationShip.InitRelationContry(this.CountryLiderList);
+
+		}
 	}
 	private int GetIncrementCityId()
     {
@@ -194,7 +199,8 @@ public class MainModel
 			{
 				int UnDamage = AddAndRemovePopulation(cityModelTarget, lider,true);
 
-				lider.SetEventTotalTurn("Население увеличилось на "+ UnDamage+" сбежав от "+ lider.GetCommandLider().GetTargetNameLider());
+				lider.SetEventTotalTurn("Население увеличилось на "+ UnDamage+" сбежав от "+ lider.GetCommandLider().GetTargetLider().GetName());
+				//lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(10);
 			}
 			// attack bomber
 			if (lider.GetCommandLider().GetVisibleAttackBomber())
@@ -218,7 +224,7 @@ public class MainModel
 
 
 				}
-				lider.SetEventTotalTurn("От ядерного взрыва с бомбардировщика население уменьшилось на "+ lider.GetCommandLider().GetAttackBomber().Damage+" у "+ lider.GetCommandLider().GetTargetNameLider());
+				lider.SetEventTotalTurn("От ядерного взрыва с бомбардировщика население уменьшилось на "+ lider.GetCommandLider().GetAttackBomber().Damage+" у "+ lider.GetCommandLider().GetTargetLider().GetName());
 			}
 			if (lider.GetCommandLider().VisibleEventList["Missle"]) {
 				lider.MissleId = lider.GetCommandLider().GetSizeIdMissle();
@@ -247,7 +253,7 @@ public class MainModel
 				}
 				lider.RemoveMissle();
 
-				lider.SetEventTotalTurn("От ядерного взрыва ракеты население уменьшилось на "+ lider.GetCommandLider().GetAttackMissle().Damage+" у "+ lider.GetCommandLider().GetTargetNameLider());
+				lider.SetEventTotalTurn("От ядерного взрыва ракеты население уменьшилось на "+ lider.GetCommandLider().GetAttackMissle().Damage+" у "+ lider.GetCommandLider().GetTargetLider().GetName());
 			}
 
             if (lider.GetCommandLider().VisibleEventList["Defence"])

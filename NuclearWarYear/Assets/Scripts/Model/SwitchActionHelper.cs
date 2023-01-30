@@ -58,7 +58,7 @@ public class SwitchActionHelper
          }
         CityModel targetCity = new TargetHelper().GetTarget(CountryLiderList, _flagIdPlayer, AIfiend, true, TownList, _flagIdPlayer);
 
-        commandLider.SetTargetNameLider( CountryLiderList.Where(a => a.FlagId == targetCity.FlagId).FirstOrDefault().GetName());
+        commandLider.SetTargetLider( CountryLiderList.Where(a => a.FlagId == targetCity.FlagId).FirstOrDefault());
 
 
         if (AIfiend) {
@@ -76,8 +76,8 @@ public class SwitchActionHelper
         if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
         {
 
-            Debug.Log("   ---- UFO   [  RICH!  ] = ");
-            Debug.Log("  ex ==");
+            
+            
             actionCommand = "Ufo";
         }
         if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)

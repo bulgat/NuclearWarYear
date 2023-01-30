@@ -18,7 +18,7 @@ public class CountryLider
 	public int FlagIdAttack=1;
 	
 	private List<CityModel> _TownList;
-	public int Mood =2;
+	//public int Mood =2;
 	private int _maxPopulation;
 	private CityModel _targetCitySelectPlayer;
 
@@ -26,6 +26,7 @@ public class CountryLider
 	private string EventTotalTurn;
 
 	public int MissleId;
+	public RelationShip _RelationShip;
 
 	public CountryLider(int flagId,bool player,Missle missle,Bomber bomber,
 		GameObject PropagandaBuild,List<CityModel> TownList,string Name) {
@@ -48,6 +49,7 @@ public class CountryLider
 			}
 		}
 		_maxPopulation=GetAllOwnPopulation();
+		_RelationShip = new RelationShip();
 	}
 	public void SetEventTotalTurn(string eventTotalTurn)
     {
@@ -64,6 +66,7 @@ public class CountryLider
 	}
 	public void ChangeTurn()
 	{
+		/*
 		float percent = GetAllOwnPopulation() / _maxPopulation;
 		if (percent > 0.9)
 		{
@@ -77,7 +80,13 @@ public class CountryLider
 		{
 			Mood = 7;
 		}
+		*/
+		//_RelationShip.Mood()
 	}
+	public int GetMood(int FlagId)
+    {
+		return _RelationShip.GetMood(FlagId);
+    }
 	public void SetDead()
 	{
 		this._dead = true;
@@ -116,41 +125,29 @@ public class CountryLider
 
 	public void AddDefenceWeapon(List<Weapon> DefenceList)
 	{
-		//_DefenceList.AddRange(DefenceList);
 		_MissleList.AddRange(DefenceList);
 	}
 	public List<Weapon> GetDefenceWeapon()
 	{
-		//return this._DefenceList;
 		return _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Defence).ToList();
 	}
 
 	public Weapon GetBomber() {
-		//if (_BomberList.Count>0){
-		//	return _BomberList[0];
-		//}
-		//return null;
+
 		return _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Bomber).FirstOrDefault();
 	}
 	public void RemoveBomber() {
-		//if(_BomberList.Count>0)
-		//{
-		//_BomberList.RemoveAt(0);
-		//}
+
 		Weapon bomberWeapon = _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Bomber).FirstOrDefault();
 		_MissleList.Remove(bomberWeapon);
 	}
 	public void AddBomber(List<Weapon> bomberList) {
-		//_BomberList.AddRange(bomberList);
 		_MissleList.AddRange(bomberList);
 	}
 
 	public void RemoveDefenceWeapon()
 	{
-		//if (_DefenceList.Count > 0)
-		//{
-		//	_DefenceList.RemoveAt(0);
-		//}
+
 		Weapon defenceWeapon = _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Defence).FirstOrDefault();
 		_MissleList.Remove(defenceWeapon);
 	}
@@ -177,9 +174,6 @@ public class CountryLider
 	}
 
 	public Weapon GetMissle() {
-		//if (_MissleList.Count>0){
-		//	return _MissleList[0];
-		//}
 		return _MissleList.Where(a => a.Type == DictionaryMissle.TypeWeapon.Missle).FirstOrDefault();
 	}
 	public void RemoveMissle() {

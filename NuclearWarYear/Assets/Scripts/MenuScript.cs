@@ -215,16 +215,16 @@ public class MenuScript : MonoBehaviour
     {
 
         ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
-        viewLiderButton.ButtonLiderFrame();
+        viewLiderButton.ButtonLiderFrame(flagIdPlayer-1);
 
         ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
-        viewLiderButton_2.ButtonLiderFrame();
+        viewLiderButton_2.ButtonLiderFrame(flagIdPlayer-1);
 
         ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
-        viewLiderButton_3.ButtonLiderFrame();
+        viewLiderButton_3.ButtonLiderFrame(flagIdPlayer-1);
 
         ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
-        viewLiderButton_4.ButtonLiderFrame();
+        viewLiderButton_4.ButtonLiderFrame(flagIdPlayer-1);
 
         LiderButton_4.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[3].GetName() + " (" + _mainModel.CountryLiderList[3].GetAllOwnPopulation() + ")";
     }

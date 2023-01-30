@@ -17,7 +17,7 @@ public class CommandLider
 	private Weapon _AttackBomber;
 	private Warhead _AttackWarhead;
 	private string NameCommand;
-	private string NameLiderFiend;
+	private CountryLider LiderFiend;
 	List<string> _reportProducedWeaponList;
 
 	public CommandLider() {
@@ -151,13 +151,13 @@ public class CommandLider
 		return this._TargetCity;
 	
 	}
-	public void SetTargetNameLider(string nameLiderFiend)
+	public void SetTargetLider(CountryLider nameLiderFiend)
 	{
-		this.NameLiderFiend = nameLiderFiend;
+		this.LiderFiend = nameLiderFiend;
 	}
-	public string GetTargetNameLider(){
+	public CountryLider GetTargetLider(){
 		
-		return this.NameLiderFiend;
+		return this.LiderFiend;
 		
 	}
 	public Weapon GetAttackMissle(){
