@@ -31,6 +31,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         Debug.Log("IndexLidet = " + this.IndexLidet + "  PlayerFlagId =" + PlayerFlagId+"   L = "+ this._mainModel.CountryLiderList.Count);
 
         var moodLider = _mainModel.CountryLiderList[PlayerFlagId].GetMood(this.IndexLidet + 1);
+        Debug.Log("   --- L = " + moodLider + "   AIf  hAct   = " + moodLider);
         var imageMood = 0;
         if (moodLider > 90)
         {

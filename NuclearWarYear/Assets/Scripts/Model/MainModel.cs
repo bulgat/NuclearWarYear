@@ -16,6 +16,9 @@ public class MainModel
 	}
 	
 	private void InitModel(List<GameObject> countryLiderPropagandaBuildingList,int flagIdPlayer) {
+
+		
+
 		this.CountryLiderPropagandaBuildingList = countryLiderPropagandaBuildingList;
 		this.TownList =  new List<CityModel>();
 		this.TownList.Add(new CityModel(1, GetIncrementCityId()));
@@ -57,8 +60,10 @@ public class MainModel
 		this.CountryLiderList.Add(new CountryLider(3,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[2],TownList, "Байден"));
 		this.CountryLiderList.Add(new CountryLider(4,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, "Си Цзип"));
 		this.CountryLiderList.Add(new CountryLider(flagIdPlayer, true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[4],TownList, "Игрок"));
-		
-		foreach(var Lider in this.CountryLiderList)
+
+		LiderCountryHelper.Init(this.CountryLiderList);
+
+		foreach (var Lider in this.CountryLiderList)
         {
 			Lider._RelationShip.InitRelationContry(this.CountryLiderList);
 
@@ -186,7 +191,7 @@ public class MainModel
 				List<string> reportProducedWeaponList = lider.GetCommandLider().GetReportProducedWeaponList();
 				string resultProducedWeapon = string.Join(", ", reportProducedWeaponList.ToArray());
 
-				Debug.Log("   --- L = "+ lider.GetMissleCount()+"   AIf  hAction  = "+ resultProducedWeapon);
+				
 				
 
 				lider.SetEventTotalTurn("Производство вооружения "+ resultProducedWeapon);
@@ -200,7 +205,7 @@ public class MainModel
 				int UnDamage = AddAndRemovePopulation(cityModelTarget, lider,true);
 
 				lider.SetEventTotalTurn("Население увеличилось на "+ UnDamage+" сбежав от "+ lider.GetCommandLider().GetTargetLider().GetName());
-				//lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(10);
+				lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId,50);
 			}
 			// attack bomber
 			if (lider.GetCommandLider().GetVisibleAttackBomber())
