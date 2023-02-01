@@ -14,7 +14,7 @@ public class LiderCountryHelper
     {
         return CountryLiderList.Where(a => a.FlagId == flagId).FirstOrDefault();
     }
-    public int GetLiderIndegWithFlag(int flagId)
+    public int GetLiderIndexWithFlag(int flagId)
     {
         CountryLider countryLider = CountryLiderList.Where(a => a.FlagId == flagId).FirstOrDefault();
         return CountryLiderList.IndexOf(countryLider);

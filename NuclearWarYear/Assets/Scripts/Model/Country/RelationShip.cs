@@ -6,7 +6,7 @@ using System.Linq;
 public class RelationShip {
    // public int Mood { set; get; }
     private List<CountryLider> _CountryLiderList;
-    List<RelationMood> _RelationMood;
+    List<RelationMood> RelationMoodList;
 
     public RelationShip()
     {
@@ -15,23 +15,28 @@ public class RelationShip {
     public void InitRelationContry(List<CountryLider> CountryLiderList)
     {
         this._CountryLiderList = CountryLiderList;
-        this._RelationMood = new List<RelationMood>();
+        this.RelationMoodList = new List<RelationMood>();
         foreach (var lider in CountryLiderList)
         {
-            this._RelationMood.Add(new RelationMood(lider.FlagId));
+            this.RelationMoodList.Add(new RelationMood(lider));
         }
     }
     public int GetMood(int FlafId)
     {
         
-        RelationMood relationLider = this._RelationMood.Where(a => a.FlagId == FlafId).FirstOrDefault();
-        Debug.Log(relationLider+"   ---- UFO   [  "+ this._RelationMood .Count+ "   ]  FlafId = " + FlafId);
+        RelationMood relationLider = this.RelationMoodList.Where(a => a.Lider.FlagId == FlafId).FirstOrDefault();
+        
         return relationLider.Mood;
     }
     public void SetNegativeMood(int FlagId,int NegativeMood)
     {
-        RelationMood relationLider = this._RelationMood.Where(a => a.FlagId == FlagId).FirstOrDefault();
+        RelationMood relationLider = this.RelationMoodList.Where(a => a.Lider.FlagId == FlagId).FirstOrDefault();
         relationLider.SetNegativeMood(NegativeMood);
        
+    }
+    public void GetHighlyHatredLider()
+    {
+        List<RelationMood> relationMoodListSort = this.RelationMoodList.OrderBy(a => a.Mood).ToList();
+        Debug.Log( "   ---- U    [  " + relationMoodListSort[0].Mood + "   ]  FlafId = " + relationMoodListSort[1].Mood+" = " + relationMoodListSort[2].Mood+" = "+ relationMoodListSort[3].Mood);
     }
 }

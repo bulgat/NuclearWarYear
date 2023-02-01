@@ -56,7 +56,7 @@ public class SwitchActionHelper
             }
 
          }
-        CityModel targetCity = new TargetHelper().GetTarget(CountryLiderList, _flagIdPlayer, AIfiend, true, TownList, _flagIdPlayer);
+        CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, _flagIdPlayer, AIfiend, true, TownList, _flagIdPlayer);
 
         commandLider.SetTargetLider( CountryLiderList.Where(a => a.FlagId == targetCity.FlagId).FirstOrDefault());
 
@@ -116,7 +116,7 @@ public class SwitchActionHelper
                 break;
             case "Propaganda":
                 commandLider.SetVisibleEventList("Prop",true);
-                targetCity = new ModGameEngine().GetCityFlagId(TownList, CountryLiderList[4], FlagId, AIfiend);
+                targetCity = new ModGameEngine().GetCityRandomFlagId(TownList, CountryLiderList[4], FlagId, AIfiend);
                 break;
             case "Building":
                 commandLider.SetVisibleEventList("Build", true);

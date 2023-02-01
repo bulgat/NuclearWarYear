@@ -181,7 +181,8 @@ public class MainModel
 			{
                 int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false);
                 lider.SetEventTotalTurn("Перебежчики сбежали "+ UnDamage);
-            }
+				lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 5);
+			}
  
             if (lider.GetCommandLider().VisibleEventList["Build"])
             {
@@ -195,7 +196,8 @@ public class MainModel
 				
 
 				lider.SetEventTotalTurn("Производство вооружения "+ resultProducedWeapon);
-            }
+				lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 5);
+			}
 
 			
 
@@ -230,6 +232,7 @@ public class MainModel
 
 				}
 				lider.SetEventTotalTurn("От ядерного взрыва с бомбардировщика население уменьшилось на "+ lider.GetCommandLider().GetAttackBomber().Damage+" у "+ lider.GetCommandLider().GetTargetLider().GetName());
+				lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 25);
 			}
 			if (lider.GetCommandLider().VisibleEventList["Missle"]) {
 				lider.MissleId = lider.GetCommandLider().GetSizeIdMissle();
@@ -259,6 +262,7 @@ public class MainModel
 				lider.RemoveMissle();
 
 				lider.SetEventTotalTurn("От ядерного взрыва ракеты население уменьшилось на "+ lider.GetCommandLider().GetAttackMissle().Damage+" у "+ lider.GetCommandLider().GetTargetLider().GetName());
+				lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 25);
 			}
 
             if (lider.GetCommandLider().VisibleEventList["Defence"])
@@ -281,6 +285,7 @@ public class MainModel
 		BuildingCentral buildingCentralLider = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
 
 	}
+	
 	private int AddAndRemovePopulation(CityModel cityModelTarget, CountryLider lider,bool RandomAndUnRevert)
 	{
         List<CityModel> liderCityList = new CityHelperList().GetListCityFlagId(TownList, lider.FlagId);
@@ -345,7 +350,7 @@ public class MainModel
 
 		} else {
 			// auto Set attack
-			CityModel targetCityPlayer = new TargetHelper().GetTarget(CountryLiderList,_flagIdPlayer,false,true,TownList,_flagIdPlayer);
+			CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList,_flagIdPlayer,false,true,TownList,_flagIdPlayer);
 			Debug.Log("0010  SetTargetCitySelectPlayer="+ targetCityPlayer);
 			CountryLiderList[4].SetTargetCitySelectPlayer(targetCityPlayer);
 			

@@ -127,16 +127,16 @@ public class MenuScript : MonoBehaviour
         //PromGameObject.onClick.AddListener(() => PropMethod(WarheadButton));
 
         var viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
-        viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList,0);
+        viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, _mainModel.CountryLiderList[0]);
 
         var viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
-        viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList,1);
+        viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, _mainModel.CountryLiderList[1]);
 
         var viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
-        viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, 2);
+        viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, _mainModel.CountryLiderList[2]);
 
         var viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
-        viewLiderButton_4.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, 3);
+        viewLiderButton_4.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, _mainModel.CountryLiderList[3]);
 
         LiderButton_1.onClick.AddListener(() => LiderButton_1_Method(LiderButton_1));
         LiderButton_2.onClick.AddListener(() => LiderButton_2_Method(LiderButton_2));
@@ -619,7 +619,7 @@ public class MenuScript : MonoBehaviour
     {
         CanvasReport.SetActive(true);
         CanvasReportTextMessage.text = PrintMessage;
-        Debug.Log( "   --- o  =  "  );
+        
         //PrintTypeWriter(PrintMessage);
     }
 

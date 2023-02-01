@@ -2,34 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModGameEngine 
+public class ModGameEngine
 {
-	public CityModel GetCityFlagId(List<CityModel> TownList,CountryLider Lider,
-		int FlagIdOwnerAI,
-		bool AI) {
+    public CityModel GetCityRandomFlagId(List<CityModel> TownList, CountryLider Lider,
+        int FlagIdOwnerAI,
+        bool AI)
+    {
+        Debug.Log("   -- Lider =  " + Lider.FlagId);
+        Lider._RelationShip.GetHighlyHatredLider();
 
-		List<CityModel> TargetCityList = new List<CityModel>();
-		foreach(CityModel townCity in TownList){
-			//City townCity = city.GetComponent<City>();
-			if(AI==false){
-				if(townCity.FlagId ==Lider.FlagIdAttack){
-					if(townCity.GetPopulation()>0){
-						TargetCityList.Add(townCity);
-						
-					}
-					
-				}
-			} else {
-				if(townCity.FlagId !=FlagIdOwnerAI){
-					if(townCity.GetPopulation()>0){
-						TargetCityList.Add(townCity);
-					}
-				}
-			}
-		}
-		int indexTownBomber = Random.Range(0, TargetCityList.Count);
-		CityModel target = TargetCityList[indexTownBomber];
+        List<CityModel> TargetCityList = new List<CityModel>();
+        foreach (CityModel townCity in TownList)
+        {
 
-		return target;
-	}
+            if (AI)
+            {
+                if (townCity.FlagId != FlagIdOwnerAI)
+                {
+                    if (townCity.GetPopulation() > 0)
+                    {
+                        TargetCityList.Add(townCity);
+                    }
+                }
+            }
+            else
+            {
+                //select lider attack
+
+
+                if (townCity.FlagId == Lider.FlagIdAttack)
+                {
+                    if (townCity.GetPopulation() > 0)
+                    {
+                        TargetCityList.Add(townCity);
+
+                    }
+
+                }
+            }
+        }
+        int indexTownBomber = Random.Range(0, TargetCityList.Count);
+        CityModel target = TargetCityList[indexTownBomber];
+
+        return target;
+    }
 }
