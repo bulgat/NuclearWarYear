@@ -333,15 +333,15 @@ public class MainModel
 	}
 	public void SelectCityEnemyTargetPlayer(int CityId) {
 		CityModel selectCityTarget=null;
-		
+		CountryLider playerLider = CountryLiderList[4];
 		foreach (CityModel townCity in this.TownList){
 			
 			 if(townCity.GetId() == CityId) {
 				 selectCityTarget = townCity;
-				 CountryLiderList[4].GetCommandLider().SetTargetCity(townCity);
-				
-				 CountryLiderList[4].SetTargetCitySelectPlayer(townCity);
-				Debug.Log(" SetPropag Play  = "+ CountryLiderList[4].GetTargetCitySelectPlayer());
+				playerLider.GetCommandLider().SetTargetCity(townCity);
+
+				playerLider.SetTargetCitySelectPlayer(townCity);
+				//Debug.Log(" SetPropag Play  = "+ CountryLiderList[4].GetTargetCitySelectPlayer());
 			}
 			  
 		 }
@@ -350,9 +350,9 @@ public class MainModel
 
 		} else {
 			// auto Set attack
-			CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList,_flagIdPlayer,false,true,TownList,_flagIdPlayer);
-			Debug.Log("0010  SetTargetCitySelectPlayer="+ targetCityPlayer);
-			CountryLiderList[4].SetTargetCitySelectPlayer(targetCityPlayer);
+			CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList,_flagIdPlayer,false,TownList, playerLider);
+			//Debug.Log("0010  SetTargetCitySelectPlayer="+ targetCityPlayer);
+			playerLider.SetTargetCitySelectPlayer(targetCityPlayer);
 			
 		}
 		 

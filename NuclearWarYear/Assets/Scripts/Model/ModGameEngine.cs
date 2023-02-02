@@ -8,7 +8,8 @@ public class ModGameEngine
         int FlagIdOwnerAI,
         bool AI)
     {
-        Debug.Log("   -- Lider =  " + Lider.FlagId);
+        Debug.Log("____ mo  = ");
+        Debug.Log(" @@@@  -- Lider =  " + Lider.FlagId);
         Lider._RelationShip.GetHighlyHatredLider();
 
         List<CityModel> TargetCityList = new List<CityModel>();

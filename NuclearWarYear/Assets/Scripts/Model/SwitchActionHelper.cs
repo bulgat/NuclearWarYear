@@ -8,13 +8,13 @@ public class SwitchActionHelper
 {
 
     public CommandLider SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
-        List<CityModel> TownList, int _flagIdPlayer, string actionCommand, int FlagId,int MissleId)
+        List<CityModel> TownList, int FlagIdPlayer, string actionCommand, int FlagId,int MissleId)
     {
 
         ResetAction();
         CommandLider commandLider = new CommandLider();
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
-        bool AIfiend = FlagId != _flagIdPlayer;
+        bool AIfiend = FlagId != FlagIdPlayer;
 
         
 
@@ -23,7 +23,7 @@ public class SwitchActionHelper
         commandLider.SetNameCommand(actionCommand);
         
         if (countryLider.GetCommandLider()?.GetVisibleBomber() == true) { 
-            Debug.Log ("0011  Command  FlagId =" + FlagId);
+            Debug.Log ("0011 ####  Command  FlagId =" + FlagId);
         }
         //Change Ai Command
         if (AIfiend)
@@ -56,7 +56,7 @@ public class SwitchActionHelper
             }
 
          }
-        CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, _flagIdPlayer, AIfiend, true, TownList, _flagIdPlayer);
+        CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider);
 
         commandLider.SetTargetLider( CountryLiderList.Where(a => a.FlagId == targetCity.FlagId).FirstOrDefault());
 

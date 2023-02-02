@@ -51,7 +51,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         }
         
 
-        Debug.Log("____ mood = " );
+        
         //LiderImage_1.sprite = LiderImageList[(IndexLidet*8) + _mainModel.CountryLiderList[IndexLidet].GetMood()];
         LiderImage_1.sprite = LiderImageList[(indexLider * 8) + imageMood];
         flagImage.sprite = FlagImageList[indexLider];
