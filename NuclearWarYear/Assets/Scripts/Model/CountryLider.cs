@@ -17,7 +17,7 @@ public class CountryLider
 
 	public int FlagIdAttack=1;
 	
-	private List<CityModel> _TownList;
+	private List<CityModel> _TownListOwn;
 	//public int Mood =2;
 	private int _maxPopulation;
 	private CityModel _targetCitySelectPlayer;
@@ -40,11 +40,11 @@ public class CountryLider
 		PropagandaBuilding = PropagandaBuild;
 		this.Name = Name;
 
-		_TownList = new List<CityModel>();
+		_TownListOwn = new List<CityModel>();
 		foreach(CityModel TownCity in TownList){
 			
 			if(flagId== TownCity.FlagId){
-				_TownList.Add(TownCity);
+				_TownListOwn.Add(TownCity);
 				
 			}
 		}
@@ -64,25 +64,7 @@ public class CountryLider
 		return this.Name;
 
 	}
-	public void ChangeTurn()
-	{
-		/*
-		float percent = GetAllOwnPopulation() / _maxPopulation;
-		if (percent > 0.9)
-		{
-			Mood = 2;
-		}
-		if (percent < 0.5)
-		{
-			Mood = 5;
-		}
-		if (percent < 0.2)
-		{
-			Mood = 7;
-		}
-		*/
-		//_RelationShip.Mood()
-	}
+	
 	public int GetMood(int FlagId)
     {
 		return _RelationShip.GetMood(FlagId);
@@ -105,12 +87,16 @@ public class CountryLider
 	}
 	public int GetAllOwnPopulation() {
 		int maxPopulation=0;
-		foreach(CityModel TownCity in _TownList){
+		foreach(CityModel TownCity in _TownListOwn){
 			maxPopulation+=TownCity.GetPopulation();
 		}
 		return maxPopulation;
 	}
-	
+	public List<CityModel> GetOwnTownListLiderFilterPopulation()
+    {
+		return _TownListOwn.Where(a=>a.GetPopulation()>0).ToList();
+
+	}
 	//Defence
 	
 	public int GetBomberCount() {

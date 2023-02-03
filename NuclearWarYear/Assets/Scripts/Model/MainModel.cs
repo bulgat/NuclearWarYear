@@ -279,7 +279,7 @@ public class MainModel
 
 		}
 
-		lider.ChangeTurn();
+		//lider.ChangeTurn();
 
 
 		BuildingCentral buildingCentralLider = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
