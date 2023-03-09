@@ -69,6 +69,7 @@ public class MainModel
 
 		}
 	}
+	
 	private int GetIncrementCityId()
     {
 		return this.CityIncrementId++;
@@ -132,7 +133,8 @@ public class MainModel
 		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,_flagIdPlayer, _flagIdPlayer);
 	}
 	public void SetLiderTargetPlayer(int FlagId){
-		CountryLiderList[4].FlagIdAttack =FlagId;
+		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, this._flagIdPlayer);
+		liderPlayer.FlagIdAttack =FlagId;
 	}
 	//WarheadMethod
 	public void SetWarheadMethodPlayer(int FlagId){
@@ -154,8 +156,9 @@ public class MainModel
 	}
 	public void SatisfyOneLiderTurn(int FlagId)
     {
-		CountryLider lider = this.CountryLiderList[FlagId - 1];
-		//bool explode = false;
+		CountryLider lider = new LiderHelperOne().GetLiderOne(this.CountryLiderList, FlagId);
+		//CountryLider lider = this.CountryLiderList[FlagId - 1];
+	
 		if (lider.GetCommandLider() != null)
 		{
             CityModel cityModelTarget = lider.GetCommandLider().GetTargetCity();
@@ -250,7 +253,7 @@ public class MainModel
 				{
 					if (lider.GetCommandLider().GetTargetCity() != null)
 					{
-						Debug.Log("0005   mberObje  "+ lider.GetMissleSideId());
+						
 						if (lider.GetCommandLider().GetAttackMissle() != null)
 						{
                             
@@ -278,9 +281,6 @@ public class MainModel
 
 
 		}
-
-		//lider.ChangeTurn();
-
 
 		BuildingCentral buildingCentralLider = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
 
@@ -333,15 +333,16 @@ public class MainModel
 	}
 	public void SelectCityEnemyTargetPlayer(int CityId) {
 		CityModel selectCityTarget=null;
-		CountryLider playerLider = CountryLiderList[4];
+		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, this._flagIdPlayer);
+		//CountryLider playerLider = CountryLiderList[4];
 		foreach (CityModel townCity in this.TownList){
 			
 			 if(townCity.GetId() == CityId) {
 				 selectCityTarget = townCity;
-				playerLider.GetCommandLider().SetTargetCity(townCity);
+				liderPlayer.GetCommandLider().SetTargetCity(townCity);
 
-				playerLider.SetTargetCitySelectPlayer(townCity);
-				//Debug.Log(" SetPropag Play  = "+ CountryLiderList[4].GetTargetCitySelectPlayer());
+				liderPlayer.SetTargetCitySelectPlayer(townCity);
+				
 			}
 			  
 		 }
@@ -350,17 +351,17 @@ public class MainModel
 
 		} else {
 			// auto Set attack
-			CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList,_flagIdPlayer,false,TownList, playerLider);
-			//Debug.Log("0010  SetTargetCitySelectPlayer="+ targetCityPlayer);
-			playerLider.SetTargetCitySelectPlayer(targetCityPlayer);
+			CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList,_flagIdPlayer,false,TownList, liderPlayer);
+
+			liderPlayer.SetTargetCitySelectPlayer(targetCityPlayer);
 			
 		}
 		 
 	
 	}
 	public void ResetSelectCityEnemyTargetPlayer(int CityId) {
-		
-		CountryLiderList[4].SetTargetCitySelectPlayer(null);
+		CountryLider liderPlayer =new LiderHelperOne().GetLiderOne(this.CountryLiderList,this._flagIdPlayer);
+		liderPlayer.SetTargetCitySelectPlayer(null);
 	}
 	public void ResetAction(){
 

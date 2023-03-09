@@ -30,12 +30,10 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         var LiderImage_1 = allImage_ar[1].GetComponent<Image>();
         var flagImage = allImage_ar[2].GetComponent<Image>();
         var circleReady = allImage_ar[4].GetComponent<Image>();
-        Debug.Log("IndexLidet =   PlayerFlagId =" + PlayerFlagId+"   L = "+ this._mainModel.CountryLiderList.Count);
-
-        //var moodLider = _mainModel.CountryLiderList[PlayerFlagId].GetMood(this.IndexLidet + 1);
+   
         int indexLider = new LiderCountryHelper().GetLiderIndexWithFlag(this.Lider.FlagId);
-        var moodLider = _mainModel.CountryLiderList[indexLider].GetMood(PlayerFlagId);
-        Debug.Log("   --- L = " + moodLider + "   AIf  hAct   = " + moodLider);
+        int moodLider = _mainModel.CountryLiderList[indexLider].GetMood(PlayerFlagId);
+        
         var imageMood = 0;
         if (moodLider > 90)
         {
@@ -51,8 +49,6 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         }
         
 
-        
-        //LiderImage_1.sprite = LiderImageList[(IndexLidet*8) + _mainModel.CountryLiderList[IndexLidet].GetMood()];
         LiderImage_1.sprite = LiderImageList[(indexLider * 8) + imageMood];
         flagImage.sprite = FlagImageList[indexLider];
         circleReady.enabled = false;
@@ -72,8 +68,8 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         }
 
 
-        GetComponentInChildren<UnityEngine.UI.Text>().text = this._mainModel.CountryLiderList[indexLider].GetName() +
-            " (" + this._mainModel.CountryLiderList[indexLider].GetAllOwnPopulation() + ")";
+        GetComponentInChildren<UnityEngine.UI.Text>().text = this.Lider.GetName() +
+            " (" + this.Lider.GetAllOwnPopulation() + ")";
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

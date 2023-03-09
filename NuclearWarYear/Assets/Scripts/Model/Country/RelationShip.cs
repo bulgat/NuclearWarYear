@@ -39,8 +39,6 @@ public class RelationShip {
         List<RelationMood> relationMoodListSort = this.RelationMoodList.OrderBy(a => a.Mood).ToList();
         int curveRandom = CurveRandom();
 
-        Debug.Log( "   ---- U    [  " + relationMoodListSort[0].Mood + "   ]  Fl = " + relationMoodListSort[1].Mood+" = " + relationMoodListSort[2].Mood+" = "+ relationMoodListSort[3].Mood);
-        
         return relationMoodListSort[curveRandom].Lider;  
     }
     int CurveRandom()

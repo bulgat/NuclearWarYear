@@ -124,7 +124,8 @@ public class MenuScript : MonoBehaviour
         BomberButton_1.onClick.AddListener(() => BomberMethod(2));
 
         CanvasReportButtonClose.onClick.AddListener(() => CanvasReportButtonCloseMethod());
-        //PromGameObject.onClick.AddListener(() => PropMethod(WarheadButton));
+
+        //CountryLider Lider = new LiderHelperOne().GetLiderOne(_mainModel.CountryLiderList);
 
         var viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
         viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, _mainModel.CountryLiderList[0]);
@@ -192,7 +193,6 @@ public class MenuScript : MonoBehaviour
                     townCity.SetCityModelView(cityModel);
                     townCity.SetId(cityModel.GetId(), SelectCityTargetIdPlayer, TownSpriteList);
 
-                    //TownViewList[i] = TownListView[i];
                     TownViewList.Add(TownListView[i]);
                 }
             }
@@ -213,18 +213,19 @@ public class MenuScript : MonoBehaviour
 
     private void ChangeImageLider()
     {
+        CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(_mainModel.CountryLiderList, this.flagIdPlayer);
 
         ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
-        viewLiderButton.ButtonLiderFrame(flagIdPlayer-1);
+        viewLiderButton.ButtonLiderFrame(liderPlayer.FlagId);
 
         ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
-        viewLiderButton_2.ButtonLiderFrame(flagIdPlayer-1);
+        viewLiderButton_2.ButtonLiderFrame(liderPlayer.FlagId);
 
         ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
-        viewLiderButton_3.ButtonLiderFrame(flagIdPlayer-1);
+        viewLiderButton_3.ButtonLiderFrame(liderPlayer.FlagId);
 
         ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
-        viewLiderButton_4.ButtonLiderFrame(flagIdPlayer-1);
+        viewLiderButton_4.ButtonLiderFrame(liderPlayer.FlagId);
 
         LiderButton_4.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[3].GetName() + " (" + _mainModel.CountryLiderList[3].GetAllOwnPopulation() + ")";
     }
@@ -415,8 +416,6 @@ public class MenuScript : MonoBehaviour
         
         SetPropagand(flagIdPlayer);
 
-        //new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList, _mainModel.GetTownList(), _mainModel._flagIdPlayer, _mainModel._flagIdPlayer);
-        
         PrintTypeWriter("\n propaganda");
     }
     void BuildMethod(Button buttonPressed)
@@ -438,7 +437,7 @@ public class MenuScript : MonoBehaviour
     //Missle
     void MissleMethod(int IdMissle)
     {
-        Debug.Log("=="+_mainModel.CountryLiderList[4].GetMissleSpecCount(IdMissle)+"  entered the selectable  IdMissle " + IdMissle);
+ 
         if (_mainModel.CountryLiderList[4].GetMissleSpecCount(IdMissle) > 0)
         {
             EventController eventController = new EventController(Controller.Command.Missle, new EventMissle(_mainModel._flagIdPlayer, IdMissle));
@@ -516,8 +515,6 @@ public class MenuScript : MonoBehaviour
     void ResetAction()
     {
 
-        //SetCityVisible(false);
-
         _mainModel.ResetAction();
     }
     // Main time
@@ -550,8 +547,8 @@ public class MenuScript : MonoBehaviour
             //AttackMissleButton.GetComponent<Button>().interactable = true;
             MissleButton.GetComponent<Button>().interactable = false;
 
-         
-            var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
+            CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel._flagIdPlayer);
+            var cityTarget = liderPlayer0.GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
                 //StartCoroutine(PrintTypeWriter("\n Ready. Not target for missle. Select Target!"));
@@ -571,14 +568,12 @@ public class MenuScript : MonoBehaviour
             
             MissleButton.GetComponent<Button>().interactable = true;
         }
-
-        if (_mainModel.CountryLiderList[4].GetCommandLider().GetVisibleBomber())
+        CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel._flagIdPlayer);
+        if (liderPlayer.GetCommandLider().GetVisibleBomber())
         {
-            //AttackBomberButton.GetComponent<Button>().interactable = true;
-
+ 
             BomberButton.GetComponent<Button>().interactable = false;
-            //enableButton = true;
-            
+ 
             var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
@@ -598,7 +593,6 @@ public class MenuScript : MonoBehaviour
         }
         else
         {
-            //AttackBomberButton.GetComponent<Button>().interactable = false;
             BomberButton.GetComponent<Button>().interactable = true;
         }
 
@@ -678,8 +672,7 @@ public class MenuScript : MonoBehaviour
 
         if (_mainModel._endGame)
         {
-            
-            //Application.LoadLevel("Victory");
+
             SceneManager.LoadScene("Victory", LoadSceneMode.Single);
         }
         if (Input.GetMouseButtonDown(0))
@@ -706,7 +699,6 @@ public class MenuScript : MonoBehaviour
         {
             foreach (GameObject city in TownViewList)
             {
-                //Debug.Log("0001 CORUTINE   mandLi  = " ) ;
 
                 if (city)
                 {

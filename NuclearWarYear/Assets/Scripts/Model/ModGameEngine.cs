@@ -8,27 +8,13 @@ public class ModGameEngine
         int FlagIdOwnerAI,
         bool AI)
     {
-        Debug.Log("____ mo  = ");
-        Debug.Log(" @@@@  -- Lider =  " + Lider.FlagId);
+
         CountryLider countryLiderVictim = Lider._RelationShip.GetHighlyHatredLiderRandom();
         List<CityModel> TargetCityListVictim= countryLiderVictim.GetOwnTownListLiderFilterPopulation();
 
         List<CityModel> TargetCityList = new List<CityModel>();
         if (AI)
-            {
-       
-
-            
-                //if (townCity.FlagId != FlagIdOwnerAI)
-                //{
-                    //if (townCity.GetPopulation() > 0)
-                    //{
-                        //TargetCityList.Add(townCity);
-
-            //}
-            //}
-
-            //select lider attack
+        {
 
             TargetCityList = TargetCityListVictim;
 
