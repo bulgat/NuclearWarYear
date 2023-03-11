@@ -9,17 +9,18 @@ public class MainModel
 	public List<CountryLider> CountryLiderList;
 	public List<GameObject> CountryLiderPropagandaBuildingList;
 	public List<CityModel> TownList;
-	public int _flagIdPlayer;
+	private List<int> FlagIdPlayer { get; set; } 
 	public bool _endGame;
 	private int CityIncrementId;
-	
-	public MainModel(List<GameObject> countryLiderPropagandaBuildingList,int flagIdPlayer) {
-		InitModel(countryLiderPropagandaBuildingList,flagIdPlayer);
+	private int CurrenPlayerFlag { set; get; }
+	public MainModel(List<GameObject> countryLiderPropagandaBuildingList) {
+		InitModel(countryLiderPropagandaBuildingList);
 	}
 	
-	private void InitModel(List<GameObject> countryLiderPropagandaBuildingList,int flagIdPlayer) {
+	private void InitModel(List<GameObject> countryLiderPropagandaBuildingList) {
 
-		
+		//FlagIdPlayer = new List<int>() { 5 };
+		//this.FlagIdPlayer.Add(5);
 
 		this.CountryLiderPropagandaBuildingList = countryLiderPropagandaBuildingList;
 		this.TownList =  new List<CityModel>();
@@ -55,16 +56,30 @@ public class MainModel
 
 		this.CountryLiderList = new List<CountryLider>();
 
-		ParamLider paramLider = new ParamLider(flagIdPlayer);
-        List<ScenarioLider> scenarioLider_ar = paramLider.ScenarioLider_ar;
-        //5
-        this._flagIdPlayer = flagIdPlayer;
+		ParamLider paramLider = new ParamLider();
+		
+
+		List<ScenarioLider> scenarioLider_ar = paramLider.ScenarioLider_ar;
+
 		this.CountryLiderList = new List<CountryLider>();
 		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[0],TownList, scenarioLider_ar[0],1));
 		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[1],TownList, scenarioLider_ar[1],2));
-		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[2],TownList, scenarioLider_ar[5],3));
-		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, scenarioLider_ar[3],4));
-		this.CountryLiderList.Add(new CountryLider( true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[4],TownList, scenarioLider_ar[4],5));
+		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[2],TownList, scenarioLider_ar[2],3));
+		this.CountryLiderList.Add(new CountryLider(true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, scenarioLider_ar[3],4));
+		this.CountryLiderList.Add(new CountryLider(true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[4],TownList, scenarioLider_ar[4],5));
+
+		this.FlagIdPlayer = new List<int>();
+		foreach (var item in this.CountryLiderList)
+        {
+			if (item.Player)
+            {
+				this.FlagIdPlayer.Add(item.FlagId);
+
+			}
+        }
+		this.CurrenPlayerFlag = this.FlagIdPlayer[0];
+		//FlagIdPlayer = new List<int>() { 5, 3 };
+
 
 		LiderCountryHelper.Init(this.CountryLiderList);
 
@@ -74,11 +89,69 @@ public class MainModel
 
 		}
 	}
-	
+	public bool EveryonePlayerWent()
+    {
+		foreach(CountryLider lider in this.CountryLiderList)
+        {
+			
+			if (this.FlagIdPlayer.Contains(lider.FlagId))
+            {
+				Debug.Log("====="+lider.MoveMade+"   ["+ this.FlagIdPlayer[0] +","+ this.FlagIdPlayer[1]+ "] ==" + lider.FlagId);
+				if (lider.MoveMade==false)
+                {
+					return false;
+                }
+
+			}
+        }
+		Debug.Log( "   ----  Coun  = "); 
+		return true;
+    }
+	public int GetCurrenFlagPlayer()
+    {
+		return this.CurrenPlayerFlag;
+
+	}
+	public CountryLider GetLiderOne(int FlagId)
+    {
+		return new LiderHelperOne().GetLiderOne(this.CountryLiderList, FlagId);
+
+	}
+	public void ChangeCurrentPlayer()
+    {
+		if (this.FlagIdPlayer.Count > 1)
+        {
+			var index = this.FlagIdPlayer.FindIndex(a=>a==this.CurrenPlayerFlag);
+			index++;
+			if(index>= this.FlagIdPlayer.Count)
+            {
+				this.CurrenPlayerFlag = this.FlagIdPlayer[0];
+				return;
+			}
+			this.CurrenPlayerFlag = this.FlagIdPlayer[index];
+
+
+		}
+		
+
+	}
+	public int GetCurrentPlayerFlag()
+    {
+		return this.CurrenPlayerFlag;
+
+	}
 	private int GetIncrementCityId()
     {
 		return this.CityIncrementId++;
     }
+	public void DoneMoveMadeCurrentPlayer()
+    {
+		CountryLider countryLider =  this.GetLiderOne(this.CurrenPlayerFlag);
+		countryLider.DoneMoveMade();
+
+	}
+
+
 	public List<CityModel> GetTownList() {
 		return this.TownList;
 	}
@@ -87,7 +160,7 @@ public class MainModel
 	}
     public List<CountryLider> GetFiendCountryLiderList()
     {
-        return this.CountryLiderList.Where(a=>a.FlagId!= _flagIdPlayer).ToList();
+        return this.CountryLiderList.Where(a=>a.FlagId!= this.GetCurrentPlayerFlag()).ToList();
     }
     public void SetPropagandPlayer(int FlagId){
 
@@ -95,59 +168,59 @@ public class MainModel
 
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,FlagId);
 		
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, _flagIdPlayer,"Propaganda",_flagIdPlayer,0));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, this.FlagIdPlayer[0],"Propaganda",this.FlagIdPlayer[0],0));
 
 		
 	}
 	public void SetBuildingPlayer(int FlagId){
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,FlagId);
 		
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, _flagIdPlayer,"Building",_flagIdPlayer,0));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, this.FlagIdPlayer[0],"Building",this.FlagIdPlayer[0],0));
 		
-		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,_flagIdPlayer, _flagIdPlayer);
+		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,this.FlagIdPlayer[0], this.FlagIdPlayer[0]);
 	}
 	public void SetDefencePlayer(int FlagId){
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,FlagId);
 		
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, _flagIdPlayer,"Defence",_flagIdPlayer,0));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, this.FlagIdPlayer[0],"Defence",this.FlagIdPlayer[0],0));
 		
-		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,_flagIdPlayer, _flagIdPlayer);
+		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,this.FlagIdPlayer[0], this.FlagIdPlayer[0]);
 	}
 	public void SetMisslePlayer(int FlagId,int MissleId){
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,FlagId);
 		
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, _flagIdPlayer,"Missle",_flagIdPlayer, MissleId));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, this.FlagIdPlayer[0],"Missle",this.FlagIdPlayer[0], MissleId));
 		
-		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,_flagIdPlayer, _flagIdPlayer);
+		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,this.FlagIdPlayer[0], this.FlagIdPlayer[0]);
 	}
 	public void SetAttackMisslePlayer(int FlagId){
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,FlagId);
 		
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, _flagIdPlayer,"AttackMissle",_flagIdPlayer,0));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, this.FlagIdPlayer[0],"AttackMissle",this.FlagIdPlayer[0],0));
 		
-		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,_flagIdPlayer, _flagIdPlayer);
+		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,this.FlagIdPlayer[0], this.FlagIdPlayer[0]);
 	}
 	public void SetBomberPlayer(int FlagId,int BomberId){
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,FlagId);
 		
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, _flagIdPlayer,"Bomber",_flagIdPlayer, BomberId));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, this.FlagIdPlayer[0],"Bomber",this.FlagIdPlayer[0], BomberId));
 		
-		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,_flagIdPlayer, _flagIdPlayer);
+		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,this.FlagIdPlayer[0], this.FlagIdPlayer[0]);
 	}
 	public void SetAttackBomberPlayer(int FlagId){
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,FlagId);
 		
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, _flagIdPlayer,"AttackBomber",_flagIdPlayer,0));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList, this.FlagIdPlayer[0],"AttackBomber",this.FlagIdPlayer[0],0));
 		
-		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,_flagIdPlayer, _flagIdPlayer);
+		new AICreateCommand().EstimationSetCommandAi(ResetAction,CountryLiderList,TownList,this.FlagIdPlayer[0], this.FlagIdPlayer[0]);
 	}
 	public void SetLiderTargetPlayer(int FlagId){
-		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, this._flagIdPlayer);
+		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, this.FlagIdPlayer[0]);
 		liderPlayer.FlagIdAttack =FlagId;
 	}
 	//WarheadMethod
 	public void SetWarheadMethodPlayer(int FlagId){
-		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,_flagIdPlayer);
+		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList,this.FlagIdPlayer[0]);
 		countryLider.GetBomber().Damage =countryLider.GetBomber().Damage;
 		countryLider.GetMissle().Damage =countryLider.GetMissle().Damage;
 
@@ -342,7 +415,7 @@ public class MainModel
 	}
 	public void SelectCityEnemyTargetPlayer(int CityId) {
 		CityModel selectCityTarget=null;
-		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, this._flagIdPlayer);
+		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, this.FlagIdPlayer[0]);
 		//CountryLider playerLider = CountryLiderList[4];
 		foreach (CityModel townCity in this.TownList){
 			
@@ -356,11 +429,11 @@ public class MainModel
 			  
 		 }
 		
-		if(_flagIdPlayer != selectCityTarget.FlagId){
+		if(this.FlagIdPlayer[0] != selectCityTarget.FlagId){
 
 		} else {
 			// auto Set attack
-			CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList,_flagIdPlayer,false,TownList, liderPlayer);
+			CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList,this.FlagIdPlayer[0],false,TownList, liderPlayer);
 
 			liderPlayer.SetTargetCitySelectPlayer(targetCityPlayer);
 			
@@ -369,7 +442,7 @@ public class MainModel
 	
 	}
 	public void ResetSelectCityEnemyTargetPlayer(int CityId) {
-		CountryLider liderPlayer =new LiderHelperOne().GetLiderOne(this.CountryLiderList,this._flagIdPlayer);
+		CountryLider liderPlayer =new LiderHelperOne().GetLiderOne(this.CountryLiderList,this.FlagIdPlayer[0]);
 		liderPlayer.SetTargetCitySelectPlayer(null);
 	}
 	public void ResetAction(){

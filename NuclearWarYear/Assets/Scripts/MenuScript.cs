@@ -72,14 +72,15 @@ public class MenuScript : MonoBehaviour
   
     Controller _controller;
     MainModel _mainModel;
-    private int flagIdPlayer = 5;
+    private int flagIdPlayer;
     public Text TextTypeWriter;
     public Text CanvasReportTextMessage;
     void Awake()
     {
         this.CountryLiderList = null;
         
-         _mainModel = new MainModel( CountryLiderPropagandaBuildingList, flagIdPlayer);
+         _mainModel = new MainModel( CountryLiderPropagandaBuildingList);
+        this.flagIdPlayer = _mainModel.GetCurrentPlayerFlag();
         this.CountryLiderList = _mainModel.GetCountryLiderList();
         
         
@@ -128,32 +129,8 @@ public class MenuScript : MonoBehaviour
 
         CanvasReportButtonClose.onClick.AddListener(() => CanvasReportButtonCloseMethod());
 
-        //CountryLider Lider = new LiderHelperOne().GetLiderOne(_mainModel.CountryLiderList);
-        List<CountryLider> fiendLider_ar = _mainModel.GetFiendCountryLiderList();
-
-        ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
-        viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel,
-            this.IconCircleReadyList, fiendLider_ar[0]);
-
-        ChangeFlag(0, fiendLider_ar[0]);
-
-        ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
-        viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel,
-            this.IconCircleReadyList, fiendLider_ar[1]);
-
-        ChangeFlag(1, fiendLider_ar[1]);
-
-        ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
-        viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel,
-            this.IconCircleReadyList, fiendLider_ar[2]);
-
-        ChangeFlag(2, fiendLider_ar[2]);
- Debug.LogWarning(" TT = "+ fiendLider_ar.Count);
-        ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
-        viewLiderButton_4.Init(LiderImageList, FlagImageList, _mainModel,
-            this.IconCircleReadyList, fiendLider_ar[3]);
-        Debug.Log("  00  ==" );
-        ChangeFlag(3, fiendLider_ar[3]);
+        SetImageLiderButton();
+        
 
         LiderButton_1.onClick.AddListener(() => LiderButton_1_Method(LiderButton_1));
         LiderButton_2.onClick.AddListener(() => LiderButton_2_Method(LiderButton_2));
@@ -166,7 +143,7 @@ public class MenuScript : MonoBehaviour
         SetPropagand(5);
         
         new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList, 
-            _mainModel.GetTownList(), _mainModel._flagIdPlayer, _mainModel._flagIdPlayer);
+            _mainModel.GetTownList(), _mainModel.GetCurrentPlayerFlag(), _mainModel.GetCurrentPlayerFlag());
 
         SelectCountryOne();
         SetAllCityVisibleComponent();
@@ -185,6 +162,62 @@ public class MenuScript : MonoBehaviour
        
         CanvasReport.SetActive(false);
         
+    }
+    void SetImageLiderButton()
+    {
+        List<CountryLider> fiendLider_ar = _mainModel.GetFiendCountryLiderList();
+
+        Debug.LogWarning(" T  = "+ fiendLider_ar.Count);
+
+        ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
+        viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel,
+            this.IconCircleReadyList, fiendLider_ar[0]);
+
+        ChangeFlag(0, fiendLider_ar[0]);
+
+        ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
+        viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel,
+            this.IconCircleReadyList, fiendLider_ar[1]);
+
+        ChangeFlag(1, fiendLider_ar[1]);
+if (fiendLider_ar.Count > 3)
+        {
+        ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
+        viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel,
+            this.IconCircleReadyList, fiendLider_ar[2]);
+
+        ChangeFlag(2, fiendLider_ar[2]);
+
+        
+            ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
+            viewLiderButton_4.Init(LiderImageList, FlagImageList, _mainModel,
+                this.IconCircleReadyList, fiendLider_ar[3]);
+
+
+            ChangeFlag(3, fiendLider_ar[3]);
+        }
+    }
+    private void ChangeImageLider()
+    {
+        //List<CountryLider> fiendLider_ar = _mainModel.GetFiendCountryLiderList();
+        //CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(_mainModel.CountryLiderList, this.flagIdPlayer);
+
+
+
+        ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
+        viewLiderButton.ButtonLiderFrame(_mainModel.GetCurrentPlayerFlag());
+
+        ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
+        viewLiderButton_2.ButtonLiderFrame(_mainModel.GetCurrentPlayerFlag());
+
+        
+            ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
+            viewLiderButton_3.ButtonLiderFrame(_mainModel.GetCurrentPlayerFlag());
+
+            ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
+            viewLiderButton_4.ButtonLiderFrame(_mainModel.GetCurrentPlayerFlag());
+      
+        //LiderButton_4.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[3].GetName() + " (" + _mainModel.CountryLiderList[3].GetAllOwnPopulation() + ")";
     }
     private void ChangeFlag(int Index,CountryLider countryLider)
     {
@@ -232,24 +265,7 @@ public class MenuScript : MonoBehaviour
         }
     }
 
-    private void ChangeImageLider()
-    {
-        CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(_mainModel.CountryLiderList, this.flagIdPlayer);
-
-        ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
-        viewLiderButton.ButtonLiderFrame(liderPlayer.FlagId);
-
-        ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
-        viewLiderButton_2.ButtonLiderFrame(liderPlayer.FlagId);
-
-        ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
-        viewLiderButton_3.ButtonLiderFrame(liderPlayer.FlagId);
-
-        ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
-        viewLiderButton_4.ButtonLiderFrame(liderPlayer.FlagId);
-
-        LiderButton_4.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[3].GetName() + " (" + _mainModel.CountryLiderList[3].GetAllOwnPopulation() + ")";
-    }
+   
   
 
     private void SelectCityTargetIdPlayer(int CityId)
@@ -260,7 +276,7 @@ public class MenuScript : MonoBehaviour
         _controller.SendCommand(cityEvent);
 
         // TargetSity
-        if (_mainModel._flagIdPlayer != selectCityTarget.FlagId)
+        if (_mainModel.GetCurrentPlayerFlag() != selectCityTarget.FlagId)
         {
             selectCityTarget.SetTargetAim(true);
         }
@@ -348,10 +364,32 @@ public class MenuScript : MonoBehaviour
         CanvasResourcePlayer.SetActive(false);
         
     }
+    void RefreshPlayerView()
+    {
+        this.flagIdPlayer = this._mainModel.GetCurrentPlayerFlag();
+        //this.SetImageLiderButton();
+        SetImageLiderButton();
+        ChangeImageLider();
+        
+    }
     void TurnButtonMethod(Button buttonPressed)
     {
+        EventController eventController = new EventController(Controller.Command.DoneMoveMadeCurrentPlayer, null);
+        _controller.SendCommand(eventController);
+
+        //Ходы игроков.
+        //Все игроки сходили?
 
 
+        if (this._mainModel.EveryonePlayerWent()==false)
+        {
+            //Переключится на другого игрока.
+            
+            EventController eventController0 = new EventController(Controller.Command.ChangeCurrentPlayer, null);
+            _controller.SendCommand(eventController0);
+            RefreshPlayerView();
+            return;
+        }
 
         _visiblePanel = false;
         MoveMapNuclear();
@@ -380,7 +418,7 @@ public class MenuScript : MonoBehaviour
         }
         CircleImageReadyParam(0, false);
         new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList,
-            _mainModel.GetTownList(), _mainModel._flagIdPlayer, _mainModel._flagIdPlayer);
+            _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
     }
     private IEnumerator TurnText(string Name,int indexLider) {
        
@@ -427,7 +465,7 @@ public class MenuScript : MonoBehaviour
     void SetPropagand(int FlagId)
     {
         
-        EventController eventController = new EventController(Controller.Command.Propaganda, new EventSendLider(_mainModel._flagIdPlayer));
+        EventController eventController = new EventController(Controller.Command.Propaganda, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
         _controller.SendCommand(eventController);
 
     }
@@ -442,7 +480,7 @@ public class MenuScript : MonoBehaviour
     void BuildMethod(Button buttonPressed)
     {
      
-        EventController eventController = new EventController(Controller.Command.Building, new EventSendLider(_mainModel._flagIdPlayer));
+        EventController eventController = new EventController(Controller.Command.Building, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
         _controller.SendCommand(eventController);
 
         PrintTypeWriter(" build weapon");
@@ -450,7 +488,7 @@ public class MenuScript : MonoBehaviour
     }
     void DefenceMethod(Button buttonPressed)
     {
-        EventController eventController = new EventController(Controller.Command.Defence, new EventSendLider(_mainModel._flagIdPlayer));
+        EventController eventController = new EventController(Controller.Command.Defence, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
         _controller.SendCommand(eventController);
         PrintTypeWriter(" defence");
 
@@ -461,7 +499,7 @@ public class MenuScript : MonoBehaviour
  
         if (_mainModel.CountryLiderList[4].GetMissleSpecCount(IdMissle) > 0)
         {
-            EventController eventController = new EventController(Controller.Command.Missle, new EventMissle(_mainModel._flagIdPlayer, IdMissle));
+            EventController eventController = new EventController(Controller.Command.Missle, new EventMissle(_mainModel.GetCurrenFlagPlayer(), IdMissle));
             _controller.SendCommand(eventController);
             PrintTypeWriter(" missle");
         } else
@@ -476,7 +514,7 @@ public class MenuScript : MonoBehaviour
     }
     void BomberMethod(int SizeIdBomber)
     {
-        EventController eventController = new EventController(Controller.Command.Bomber, new EventBomber(_mainModel._flagIdPlayer, SizeIdBomber));
+        EventController eventController = new EventController(Controller.Command.Bomber, new EventBomber(_mainModel.GetCurrenFlagPlayer(), SizeIdBomber));
         _controller.SendCommand(eventController);
         PrintTypeWriter(" bomber");
 
@@ -568,7 +606,7 @@ public class MenuScript : MonoBehaviour
             //AttackMissleButton.GetComponent<Button>().interactable = true;
             MissleButton.GetComponent<Button>().interactable = false;
 
-            CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel._flagIdPlayer);
+            CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
             var cityTarget = liderPlayer0.GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
@@ -581,7 +619,7 @@ public class MenuScript : MonoBehaviour
                 printMessage.Append("\n Ready. Select target for missle");
             }
             CircleImageReadyParam(1,true);
-            EventController eventController = new EventController(Controller.Command.AttackMissle, new EventSendLider(_mainModel._flagIdPlayer));
+            EventController eventController = new EventController(Controller.Command.AttackMissle, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
             _controller.SendCommand(eventController);
         }
         else
@@ -589,7 +627,7 @@ public class MenuScript : MonoBehaviour
             
             MissleButton.GetComponent<Button>().interactable = true;
         }
-        CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel._flagIdPlayer);
+        CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
         if (liderPlayer.GetCommandLider().GetVisibleBomber())
         {
  
@@ -608,7 +646,7 @@ public class MenuScript : MonoBehaviour
 
             CircleImageReadyParam(0,true);
             
-            EventController eventController = new EventController(Controller.Command.AttackBomber, new EventSendLider(_mainModel._flagIdPlayer));
+            EventController eventController = new EventController(Controller.Command.AttackBomber, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
             _controller.SendCommand(eventController);
 
         }
@@ -677,10 +715,10 @@ public class MenuScript : MonoBehaviour
 
 
 
-        BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(_mainModel.CountryLiderList, _mainModel._flagIdPlayer);
+        BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(_mainModel.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
 
         //player
-        
+        Debug.Log("$$$$$ @@@ cou select  =  " + _mainModel.CountryLiderList.Count+"  == "+ _mainModel.CountryLiderList[4].GetCommandLider());
         buildingCentral.VisibleBuilding(_mainModel.CountryLiderList[4].GetCommandLider());
 
         MoveAi();
@@ -735,7 +773,7 @@ public class MenuScript : MonoBehaviour
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
 
-            if (lider.FlagId != _mainModel._flagIdPlayer)
+            if (lider.FlagId != _mainModel.GetCurrenFlagPlayer())
             {
                 BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(_mainModel.CountryLiderList, lider.FlagId);
 

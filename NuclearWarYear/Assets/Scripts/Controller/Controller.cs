@@ -19,13 +19,23 @@ public class Controller
 		TotalTurn,
 		TurnSatisfyOneLider,
 		SelectCityEnemyTargetPlayer,
-		ResetSelectCityEnemyTargetPlayer
+		ResetSelectCityEnemyTargetPlayer,
+		DoneMoveMadeCurrentPlayer,
+		ChangeCurrentPlayer
 	}
 	public Controller(MainModel MainModel) {
 		_mainModel = MainModel;
 	}
 	public void SendCommand(EventController eventController) {
-		
+
+		if (eventController.NameCommand == Command.ChangeCurrentPlayer)
+		{
+			_mainModel.ChangeCurrentPlayer();
+		}
+		if (eventController.NameCommand == Command.DoneMoveMadeCurrentPlayer)
+		{
+			_mainModel.DoneMoveMadeCurrentPlayer();
+		}
 		if (eventController.NameCommand == Command.Propaganda){
 
 			_mainModel.SetPropagandPlayer(eventController.EventSend.FlagId);
