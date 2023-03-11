@@ -39,7 +39,7 @@ public class ViewCircleReady : MonoBehaviour//, IPointerEnterHandler,IPointerExi
     {
         VisibleHint(false);
         //GetComponentInChildren<UnityEngine.UI.Text>().text = "ZZZZZ";
-        Debug.Log("$$$$$ @@@@The cursor entered the selectable UI element.");
+       
     }
     */
 }

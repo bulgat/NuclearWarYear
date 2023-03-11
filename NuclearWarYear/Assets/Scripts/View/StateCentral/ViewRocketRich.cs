@@ -13,7 +13,6 @@ public class ViewRocketRich : ViewSendAnimObj
         if (bomberObject != null)
         {
 
-            //bool returnBomber = false;
             float offset = 260f;
             GameObject cityTown = GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
             City city = cityTown.GetComponent<City>();
@@ -25,7 +24,6 @@ public class ViewRocketRich : ViewSendAnimObj
 
             bomberObject.transform.position = Vector3.MoveTowards(bomberObject.transform.position, targetBomber, step);
 
-            //Vector2 direction = (Vector2)targetBomber - (Vector2)transform.position;
             Vector2 direction = (Vector2)targetBomber - (Vector2)bomberObject.transform.position;
             direction.Normalize();
             

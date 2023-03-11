@@ -16,7 +16,7 @@ namespace Assets.Scripts.Model.scenario
             ScenarioLider_ar.Add(new ScenarioLider(3, "Байден",2));
             ScenarioLider_ar.Add(new ScenarioLider(4, "Си Цзип",3));
             ScenarioLider_ar.Add(new ScenarioLider(flagIdPlayer, "Zed",4));
-            ScenarioLider_ar.Add(new ScenarioLider(5, "Zedee", 4));
+            ScenarioLider_ar.Add(new ScenarioLider(2, "Сталин", 4));
         }
         
     }

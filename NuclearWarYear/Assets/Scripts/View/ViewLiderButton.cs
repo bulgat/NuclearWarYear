@@ -22,6 +22,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
     }
     public void ButtonLiderFrame(int PlayerFlagId)
     {
+        Debug.Log("$$$$$ @@@@The cursor entered the selectable UI  ");
         var allImage_ar = GetComponentsInChildren<Image>();
         
        

@@ -112,8 +112,6 @@ public class BuildingCentral : MonoBehaviour
         VisibleObjList["RocketRich"] = commandLider.VisibleEventList["RocketRich"];
         VisibleObjList["CrazyCow"] = commandLider.VisibleEventList["CrazyCow"];
 
-        //var allImage_ar = UFOObject.transform.GetComponentsInChildren<GameObject>();
-        //Debug.Log("  000 x =="+ allImage_ar.Length);
         //UFOObject
     }
 
@@ -128,9 +126,6 @@ public class BuildingCentral : MonoBehaviour
                 if (VisibleObjList["AttackBomber"] == false)
                 {
 
-                   // new ViewCircleBomber().SendBomberAndWingState(BomberObject, SetAnglePosition,
-                    //    Speed, gameObject.transform, _animationTimeProcess, TownList, buildingCentralModel);
-                   
                     if (BomberObject != null)
                     {
                         if (SetAnglePosition == false)
@@ -154,9 +149,7 @@ public class BuildingCentral : MonoBehaviour
                 }
                 else
                 {
-                    //new ViewSendAnimObj().SendBomberAndWing(BomberObject,true,true,false, false,
-                      //  Speed, transform, _animationTimeProcess,  TownList,  buildingCentralModel);
-
+ 
                     new ViewAttackBomber ().SendBomberAndWingState(BomberObject, 
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
                 }
@@ -164,48 +157,42 @@ public class BuildingCentral : MonoBehaviour
             if (VisibleObjList["AttackMissle"])
             {
 
-                //new ViewSendAnimObj().SendBomberAndWing(WingMissle,false,true, false, false,
-                    //Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
+
 
                 new ViewAttackMissle().SendBomberAndWingState(WingMissle,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
             if (VisibleObjList["Defectors"])
             {
-               // new ViewSendAnimObj().SendBomberAndWing(DefectorsObject, false,false, false, false,
-                  //  Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
+   
 
                 new ViewMoveDeflectors().SendBomberAndWingState(DefectorsObject,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
             if (VisibleObjList["Ufo"])
             {
-               // new ViewSendAnimObj().SendBomberAndWing(UfoObject, false, false, false, false,
-                 //   Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
+  
 
                 new ViewMoveDeflectors().SendBomberAndWingState(UfoObject,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
             if (VisibleObjList["Baby"])
             {
-                //new ViewSendAnimObj().SendBomberAndWing(BabyObject, false, false, false, false,
-                   // Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
+
 
                 new ViewMoveDeflectors().SendBomberAndWingState(BabyObject,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
             if (VisibleObjList["RocketRich"])
             {
-                //new ViewSendAnimObj().SendBomberAndWing(RocketRichObject, false, false,true, false,
-                 //   Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
+       
 
                 new ViewRocketRich().SendBomberAndWingState(RocketRichObject, 
                     Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
             if (VisibleObjList["CrazyCow"])
             {
-                //new ViewSendAnimObj().SendBomberAndWing(CrazyCowObject, false, true, false,true,
-                //    Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
+
 
                 new ViewCrazyCow().SendBomberAndWingState(CrazyCowObject, 
                     Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);

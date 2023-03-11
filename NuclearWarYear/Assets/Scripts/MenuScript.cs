@@ -148,11 +148,11 @@ public class MenuScript : MonoBehaviour
             this.IconCircleReadyList, fiendLider_ar[2]);
 
         ChangeFlag(2, fiendLider_ar[2]);
-
+ Debug.LogWarning(" TT = "+ fiendLider_ar.Count);
         ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
         viewLiderButton_4.Init(LiderImageList, FlagImageList, _mainModel,
             this.IconCircleReadyList, fiendLider_ar[3]);
-
+        Debug.Log("  00  ==" );
         ChangeFlag(3, fiendLider_ar[3]);
 
         LiderButton_1.onClick.AddListener(() => LiderButton_1_Method(LiderButton_1));
@@ -161,7 +161,7 @@ public class MenuScript : MonoBehaviour
         LiderButton_4.onClick.AddListener(() => LiderButton_4_Method(LiderButton_4));
         LiderButton_5.onClick.AddListener(() => LiderButton_5_Method(LiderButton_5));
    
-
+        
 
         SetPropagand(5);
         
@@ -176,14 +176,15 @@ public class MenuScript : MonoBehaviour
 
         //ReplaceCardGame();
         PrintTypeWriter("privet user");
-        //PrintTypeWriter();
+ 
         
         CanvasResourcePlayer.SetActive(false);
         CircleImageReadyParam(0, false);
 
         GlueTownView();
-        // StartCoroutine(GlueTownView());
+       
         CanvasReport.SetActive(false);
+        
     }
     private void ChangeFlag(int Index,CountryLider countryLider)
     {
@@ -274,7 +275,7 @@ public class MenuScript : MonoBehaviour
     }
     private City ClearCityTargetMark(int CityId,bool Player)
     {
-        Debug.LogWarning(" TTT " + TownViewList);
+        
         City selectCityTarget = null;
         foreach (GameObject city in TownViewList)
         {
@@ -597,11 +598,11 @@ public class MenuScript : MonoBehaviour
             var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
-                //StartCoroutine(PrintTypeWriter("\n not target. Select Target!"));
+
                 printMessage.Append("\n not target. Select Target!");
             }
             else { 
-                //StartCoroutine(PrintTypeWriter("\n select target bomber"));
+         
                 printMessage.Append("\n select target bomber");
             }
 
@@ -616,7 +617,6 @@ public class MenuScript : MonoBehaviour
             BomberButton.GetComponent<Button>().interactable = true;
         }
 
-        //StartCoroutine(PrintTypeWriter("\n  * "+ _mainModel.CountryLiderList[4].GetEventTotalTurn()));
         printMessage.Append("\n  * " + _mainModel.CountryLiderList[4].GetEventTotalTurn());
 
         Debug.Log("      turnBom im > "+ _mainModel.CountryLiderList[4].GetEventTotalTurn());
@@ -633,8 +633,7 @@ public class MenuScript : MonoBehaviour
     {
         CanvasReport.SetActive(true);
         CanvasReportTextMessage.text = PrintMessage;
-        
-        //PrintTypeWriter(PrintMessage);
+
     }
 
     private void ManagerButton() {
