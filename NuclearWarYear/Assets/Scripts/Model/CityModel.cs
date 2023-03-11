@@ -8,13 +8,16 @@ public class CityModel
     private int _population;
     private int _futurePopulation;
     private int Id;
-    public CityModel(int flagId,int id) {
-        this.FlagId = flagId;
+    public int CountryId { get; }
+    public CityModel(int countryId, int id) {
+        //this.FlagId 
+        this.CountryId = countryId;
         _population = 40;
         _futurePopulation = _population;
         this.Id = id;
         
     }
+ 
     public int GetId()
     {
         return this.Id;

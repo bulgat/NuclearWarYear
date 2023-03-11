@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Model.scenario;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MainModel 
@@ -52,14 +54,17 @@ public class MainModel
 		this.TownList.Add(new CityModel(5, GetIncrementCityId()));
 
 		this.CountryLiderList = new List<CountryLider>();
-		//5
-		this._flagIdPlayer = flagIdPlayer;
+
+		ParamLider paramLider = new ParamLider(flagIdPlayer);
+        List<ScenarioLider> scenarioLider_ar = paramLider.ScenarioLider_ar;
+        //5
+        this._flagIdPlayer = flagIdPlayer;
 		this.CountryLiderList = new List<CountryLider>();
-		this.CountryLiderList.Add(new CountryLider(1,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[0],TownList,"Путин"));
-		this.CountryLiderList.Add(new CountryLider(2,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[1],TownList,"Зеленс"));
-		this.CountryLiderList.Add(new CountryLider(3,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[2],TownList, "Байден"));
-		this.CountryLiderList.Add(new CountryLider(4,false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, "Си Цзип"));
-		this.CountryLiderList.Add(new CountryLider(flagIdPlayer, true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[4],TownList, "Игрок"));
+		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[0],TownList, scenarioLider_ar[0],1));
+		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[1],TownList, scenarioLider_ar[1],2));
+		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[2],TownList, scenarioLider_ar[2],3));
+		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, scenarioLider_ar[3],4));
+		this.CountryLiderList.Add(new CountryLider( true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[4],TownList, scenarioLider_ar[4],5));
 
 		LiderCountryHelper.Init(this.CountryLiderList);
 
@@ -80,7 +85,11 @@ public class MainModel
 	public List<CountryLider> GetCountryLiderList() {
 		return this.CountryLiderList;
 	}
-	public void SetPropagandPlayer(int FlagId){
+    public List<CountryLider> GetFiendCountryLiderList()
+    {
+        return this.CountryLiderList.Where(a=>a.FlagId!= _flagIdPlayer).ToList();
+    }
+    public void SetPropagandPlayer(int FlagId){
 
 		
 

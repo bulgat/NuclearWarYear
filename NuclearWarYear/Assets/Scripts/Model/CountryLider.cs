@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Assets.Scripts.Model.scenario;
 
  [System.Serializable]
 public class CountryLider 
@@ -27,10 +28,10 @@ public class CountryLider
 
 	public int MissleId;
 	public RelationShip _RelationShip;
-
-	public CountryLider(int flagId,bool player,Missle missle,Bomber bomber,
-		GameObject PropagandaBuild,List<CityModel> TownList,string Name) {
-		FlagId = flagId;
+	public int GraphicId { get; }
+	public CountryLider(bool player,Missle missle,Bomber bomber,
+		GameObject PropagandaBuild,List<CityModel> TownList, ScenarioLider scenarioLider,int CountryId) {
+		this.FlagId = scenarioLider.FlagId;
 		Player = player;
 
 		_MissleList = new List<Weapon>();
@@ -38,13 +39,15 @@ public class CountryLider
 
 
 		PropagandaBuilding = PropagandaBuild;
-		this.Name = Name;
+		this.Name = scenarioLider.Name;
+		this.GraphicId = scenarioLider.GraphicId;
 
-		_TownListOwn = new List<CityModel>();
+        _TownListOwn = new List<CityModel>();
 		foreach(CityModel TownCity in TownList){
 			
-			if(flagId== TownCity.FlagId){
-				_TownListOwn.Add(TownCity);
+			if(CountryId == TownCity.CountryId){
+				TownCity.FlagId = scenarioLider.FlagId;
+                _TownListOwn.Add(TownCity);
 				
 			}
 		}

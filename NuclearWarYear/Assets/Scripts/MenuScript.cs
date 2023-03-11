@@ -6,6 +6,7 @@ using System.Linq;
 using System;
 using UnityEngine.SceneManagement;
 using System.Text;
+using System.Reflection;
 
 public class MenuScript : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class MenuScript : MonoBehaviour
     public GameObject CanvasTacticReal;
     public GameObject CanvasResourcePlayer;
     public GameObject CanvasReport;
+
+    public List<GameObject> MapNationFlagList; 
 
     public Text CanvasResourcePlayerPopulation;
 
@@ -74,10 +77,10 @@ public class MenuScript : MonoBehaviour
     public Text CanvasReportTextMessage;
     void Awake()
     {
-        CountryLiderList = null;
+        this.CountryLiderList = null;
         
          _mainModel = new MainModel( CountryLiderPropagandaBuildingList, flagIdPlayer);
-        CountryLiderList = _mainModel.GetCountryLiderList();
+        this.CountryLiderList = _mainModel.GetCountryLiderList();
         
         
     }
@@ -126,18 +129,31 @@ public class MenuScript : MonoBehaviour
         CanvasReportButtonClose.onClick.AddListener(() => CanvasReportButtonCloseMethod());
 
         //CountryLider Lider = new LiderHelperOne().GetLiderOne(_mainModel.CountryLiderList);
+        List<CountryLider> fiendLider_ar = _mainModel.GetFiendCountryLiderList();
 
-        var viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
-        viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, _mainModel.CountryLiderList[0]);
+        ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
+        viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel,
+            this.IconCircleReadyList, fiendLider_ar[0]);
 
-        var viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
-        viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, _mainModel.CountryLiderList[1]);
+        ChangeFlag(0, fiendLider_ar[0]);
 
-        var viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
-        viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, _mainModel.CountryLiderList[2]);
+        ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
+        viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel,
+            this.IconCircleReadyList, fiendLider_ar[1]);
 
-        var viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
-        viewLiderButton_4.Init(LiderImageList, FlagImageList, _mainModel, IconCircleReadyList, _mainModel.CountryLiderList[3]);
+        ChangeFlag(1, fiendLider_ar[1]);
+
+        ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
+        viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel,
+            this.IconCircleReadyList, fiendLider_ar[2]);
+
+        ChangeFlag(2, fiendLider_ar[2]);
+
+        ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
+        viewLiderButton_4.Init(LiderImageList, FlagImageList, _mainModel,
+            this.IconCircleReadyList, fiendLider_ar[3]);
+
+        ChangeFlag(3, fiendLider_ar[3]);
 
         LiderButton_1.onClick.AddListener(() => LiderButton_1_Method(LiderButton_1));
         LiderButton_2.onClick.AddListener(() => LiderButton_2_Method(LiderButton_2));
@@ -169,7 +185,11 @@ public class MenuScript : MonoBehaviour
         // StartCoroutine(GlueTownView());
         CanvasReport.SetActive(false);
     }
-
+    private void ChangeFlag(int Index,CountryLider countryLider)
+    {
+        MapNationFlagList[Index].GetComponent<SpriteRenderer>().sprite = FlagImageList[countryLider.GraphicId];
+      
+    }
     private void GlueTownView()
     {
 
