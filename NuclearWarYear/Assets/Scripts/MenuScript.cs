@@ -7,6 +7,7 @@ using System;
 using UnityEngine.SceneManagement;
 using System.Text;
 using System.Reflection;
+using Assets.Scripts.View;
 
 public class MenuScript : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class MenuScript : MonoBehaviour
     public GameObject panelMain;
     public GameObject CanvasTacticReal;
     public GameObject CanvasResourcePlayer;
+    public Image CanvasResourcePlayerImageLider;
+    public Text CanvasResourcePlayerTextLider;
     public GameObject CanvasReport;
 
     public List<GameObject> MapNationFlagList; 
@@ -70,7 +73,7 @@ public class MenuScript : MonoBehaviour
     [SerializeField]
     List<CountryLider> CountryLiderList;
   
-    Controller _controller;
+    public Controller _controller;
     MainModel _mainModel;
     private int flagIdPlayer;
     public Text TextTypeWriter;
@@ -140,7 +143,7 @@ public class MenuScript : MonoBehaviour
    
         
 
-        SetPropagand(5);
+        new ViewPlayerButton().SetPropagand(this,this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
         
         new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList, 
             _mainModel.GetTownList(), _mainModel.GetCurrentPlayerFlag(), _mainModel.GetCurrentPlayerFlag());
@@ -167,7 +170,7 @@ public class MenuScript : MonoBehaviour
     {
         List<CountryLider> fiendLider_ar = _mainModel.GetFiendCountryLiderList();
 
-        Debug.LogWarning(" T  = "+ fiendLider_ar.Count);
+        Debug.LogWarning(_mainModel.GetCountryLiderList().Count+" T  = " + fiendLider_ar.Count);
 
         ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
         viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel,
@@ -199,10 +202,7 @@ if (fiendLider_ar.Count > 3)
     }
     private void ChangeImageLider()
     {
-        //List<CountryLider> fiendLider_ar = _mainModel.GetFiendCountryLiderList();
-        //CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(_mainModel.CountryLiderList, this.flagIdPlayer);
-
-
+  
 
         ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
         viewLiderButton.ButtonLiderFrame(_mainModel.GetCurrentPlayerFlag());
@@ -211,13 +211,13 @@ if (fiendLider_ar.Count > 3)
         viewLiderButton_2.ButtonLiderFrame(_mainModel.GetCurrentPlayerFlag());
 
         
-            ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
-            viewLiderButton_3.ButtonLiderFrame(_mainModel.GetCurrentPlayerFlag());
+        ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
+        viewLiderButton_3.ButtonLiderFrame(_mainModel.GetCurrentPlayerFlag());
 
-            ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
-            viewLiderButton_4.ButtonLiderFrame(_mainModel.GetCurrentPlayerFlag());
+        ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
+        viewLiderButton_4.ButtonLiderFrame(_mainModel.GetCurrentPlayerFlag());
       
-        //LiderButton_4.GetComponentInChildren<UnityEngine.UI.Text>().text = _mainModel.CountryLiderList[3].GetName() + " (" + _mainModel.CountryLiderList[3].GetAllOwnPopulation() + ")";
+        
     }
     private void ChangeFlag(int Index,CountryLider countryLider)
     {
@@ -352,13 +352,26 @@ if (fiendLider_ar.Count > 3)
     }
     void ButtonResourceMethod(Button buttonResource)
     {
-        
-        CanvasResourcePlayer.SetActive(true);
+        new ViewResourceMethod().ViewResourceMethodTable(this, this.LiderImageList,this._mainModel);
+
+        /*
+        this.CanvasResourcePlayer.SetActive(true);
+        int flagId = _mainModel.GetCurrenFlagPlayer();
+        CountryLider liderPlayer = _mainModel.GetLiderOne(flagId);
+        int indexLider = liderPlayer.GraphicId;
+
+        //this.CanvasResourcePlayerImageLider.sprite = this.LiderImageList[(indexLider * 8)];
+        this.CanvasResourcePlayerImageLider.sprite = this.LiderImageList[
+            new ViewLiderHelper().GetNumberSpriteLider(indexLider, 0)];
+
+        this.CanvasResourcePlayerTextLider.text = liderPlayer.GetName();
+
         CanvasResourcePlayerPopulation.text = 
             " population " + _mainModel.GetCountryLiderList()[4].GetAllOwnPopulation()
             +"\n missle " + _mainModel.GetCountryLiderList()[4].GetMissleCount()
             + "\n bomber " + _mainModel.GetCountryLiderList()[4].GetBomberCount()
             ;
+        */
     }
     void ButtonCloseResourceMethod(Button buttonCloseResource) {
         CanvasResourcePlayer.SetActive(false);
@@ -462,6 +475,7 @@ if (fiendLider_ar.Count > 3)
         return cityTown;
     }
     //Propagand
+    /*
     void SetPropagand(int FlagId)
     {
         
@@ -469,11 +483,13 @@ if (fiendLider_ar.Count > 3)
         _controller.SendCommand(eventController);
 
     }
+    */
     //Button
     void PropMethod(Button buttonPressed)
     {
         
-        SetPropagand(flagIdPlayer);
+        //SetPropagand(flagIdPlayer);
+        new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
 
         PrintTypeWriter("\n propaganda");
     }
@@ -675,6 +691,9 @@ if (fiendLider_ar.Count > 3)
     }
 
     private void ManagerButton() {
+
+        new ViewManageWeapon().ManagerButton(this,this._mainModel);
+        /*
         BomberButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light bomber ("
             + _mainModel.CountryLiderList[4].GetBomberCount() + ")";
         BomberButton_1.GetComponentInChildren<UnityEngine.UI.Text>().text = "Heavy bomber ("
@@ -686,6 +705,7 @@ if (fiendLider_ar.Count > 3)
         MissleButton_3.GetComponentInChildren<UnityEngine.UI.Text>().text = "S Heavy miss (" + _mainModel.CountryLiderList[4].GetMissleSpecCount(4) + ")";
 
         DefenceButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Defence (" + _mainModel.CountryLiderList[4].GetDefenceWeapon().Count() + ")";
+    */
     }
 
 
@@ -718,8 +738,11 @@ if (fiendLider_ar.Count > 3)
         BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(_mainModel.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
 
         //player
-        Debug.Log("$$$$$ @@@ cou select  =  " + _mainModel.CountryLiderList.Count+"  == "+ _mainModel.CountryLiderList[4].GetCommandLider());
-        buildingCentral.VisibleBuilding(_mainModel.CountryLiderList[4].GetCommandLider());
+        Debug.Log("$$$$$ @@@ cou select  =  " + _mainModel.CountryLiderList.Count+"  == " );
+        CountryLider liderPLayer = _mainModel.GetCurrenPlayer();
+
+
+        buildingCentral.VisibleBuilding(liderPLayer.GetCommandLider());
 
         MoveAi();
         // visible label sity;

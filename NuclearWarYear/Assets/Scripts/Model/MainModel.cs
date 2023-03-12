@@ -112,6 +112,11 @@ public class MainModel
 		return this.CurrenPlayerFlag;
 
 	}
+	public CountryLider GetCurrenPlayer()
+	{
+		return this.GetLiderOne(this.CurrenPlayerFlag);
+
+	}
 	public CountryLider GetLiderOne(int FlagId)
     {
 		return new LiderHelperOne().GetLiderOne(this.CountryLiderList, FlagId);

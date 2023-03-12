@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Assets.Scripts.View;
 
 public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
 {
@@ -24,8 +25,8 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
     {
         
         var allImage_ar = GetComponentsInChildren<Image>();
-        
-       
+
+
         var LiderImage_1 = allImage_ar[1].GetComponent<Image>();
         var flagImage = allImage_ar[2].GetComponent<Image>();
         var circleReady = allImage_ar[4].GetComponent<Image>();
@@ -46,9 +47,11 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         {
             imageMood = 7;
         }
-        
 
-        LiderImage_1.sprite = LiderImageList[(indexLider * 8) + imageMood];
+        ViewLiderHelper kol;
+
+       // LiderImage_1.sprite = LiderImageList[(indexLider * 8) + imageMood];
+        LiderImage_1.sprite = LiderImageList[new ViewLiderHelper().GetNumberSpriteLider(indexLider, imageMood)];
         flagImage.sprite = FlagImageList[indexLider];
         circleReady.enabled = false;
 
