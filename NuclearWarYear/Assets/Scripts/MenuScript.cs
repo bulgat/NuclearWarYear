@@ -16,6 +16,7 @@ public class MenuScript : MonoBehaviour
     public GameObject CanvasTacticReal;
     public GameObject CanvasResourcePlayer;
     public Image CanvasResourcePlayerImageLider;
+    public Image CanvasResourceFlagImageLider;
     public Text CanvasResourcePlayerTextLider;
     public GameObject CanvasReport;
 
@@ -352,26 +353,9 @@ if (fiendLider_ar.Count > 3)
     }
     void ButtonResourceMethod(Button buttonResource)
     {
-        new ViewResourceMethod().ViewResourceMethodTable(this, this.LiderImageList,this._mainModel);
+        new ViewResourceMethod().ViewResourceMethodTable(this, this.LiderImageList, this.FlagImageList,this._mainModel);
 
-        /*
-        this.CanvasResourcePlayer.SetActive(true);
-        int flagId = _mainModel.GetCurrenFlagPlayer();
-        CountryLider liderPlayer = _mainModel.GetLiderOne(flagId);
-        int indexLider = liderPlayer.GraphicId;
-
-        //this.CanvasResourcePlayerImageLider.sprite = this.LiderImageList[(indexLider * 8)];
-        this.CanvasResourcePlayerImageLider.sprite = this.LiderImageList[
-            new ViewLiderHelper().GetNumberSpriteLider(indexLider, 0)];
-
-        this.CanvasResourcePlayerTextLider.text = liderPlayer.GetName();
-
-        CanvasResourcePlayerPopulation.text = 
-            " population " + _mainModel.GetCountryLiderList()[4].GetAllOwnPopulation()
-            +"\n missle " + _mainModel.GetCountryLiderList()[4].GetMissleCount()
-            + "\n bomber " + _mainModel.GetCountryLiderList()[4].GetBomberCount()
-            ;
-        */
+        
     }
     void ButtonCloseResourceMethod(Button buttonCloseResource) {
         CanvasResourcePlayer.SetActive(false);
@@ -380,7 +364,7 @@ if (fiendLider_ar.Count > 3)
     void RefreshPlayerView()
     {
         this.flagIdPlayer = this._mainModel.GetCurrentPlayerFlag();
-        //this.SetImageLiderButton();
+ 
         SetImageLiderButton();
         ChangeImageLider();
         
@@ -474,21 +458,11 @@ if (fiendLider_ar.Count > 3)
         }
         return cityTown;
     }
-    //Propagand
-    /*
-    void SetPropagand(int FlagId)
-    {
-        
-        EventController eventController = new EventController(Controller.Command.Propaganda, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-        _controller.SendCommand(eventController);
 
-    }
-    */
     //Button
     void PropMethod(Button buttonPressed)
     {
-        
-        //SetPropagand(flagIdPlayer);
+   
         new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
 
         PrintTypeWriter("\n propaganda");
@@ -512,8 +486,8 @@ if (fiendLider_ar.Count > 3)
     //Missle
     void MissleMethod(int IdMissle)
     {
- 
-        if (_mainModel.CountryLiderList[4].GetMissleSpecCount(IdMissle) > 0)
+        CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
+        if (liderPlayer.GetMissleSpecCount(IdMissle) > 0)
         {
             EventController eventController = new EventController(Controller.Command.Missle, new EventMissle(_mainModel.GetCurrenFlagPlayer(), IdMissle));
             _controller.SendCommand(eventController);
@@ -605,6 +579,10 @@ if (fiendLider_ar.Count > 3)
 
         yield return new WaitForSeconds(AnimationTime);
 
+        EventController eventController0 = new EventController(Controller.Command.ChangeCurrentPlayer, null);
+        _controller.SendCommand(eventController0);
+        _mainModel.ResetDoneMoveAll();
+
         //button player
         EnableButtonPlayer();
 
@@ -615,14 +593,15 @@ if (fiendLider_ar.Count > 3)
     void EnableButtonPlayer()
     {
         StringBuilder printMessage = new StringBuilder("");
-        
 
-        if (_mainModel.CountryLiderList[4].GetCommandLider().GetVisibleMissle())
+        CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
+
+        if (liderPlayer0.GetCommandLider().GetVisibleMissle())
         {
-            //AttackMissleButton.GetComponent<Button>().interactable = true;
+            
             MissleButton.GetComponent<Button>().interactable = false;
 
-            CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
+           // CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
             var cityTarget = liderPlayer0.GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
@@ -649,7 +628,7 @@ if (fiendLider_ar.Count > 3)
  
             BomberButton.GetComponent<Button>().interactable = false;
  
-            var cityTarget = _mainModel.CountryLiderList[4].GetTargetCitySelectPlayer();
+            var cityTarget = liderPlayer.GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
 
@@ -671,9 +650,9 @@ if (fiendLider_ar.Count > 3)
             BomberButton.GetComponent<Button>().interactable = true;
         }
 
-        printMessage.Append("\n  * " + _mainModel.CountryLiderList[4].GetEventTotalTurn());
+        printMessage.Append("\n  * " + liderPlayer0.GetEventTotalTurn());
 
-        Debug.Log("      turnBom im > "+ _mainModel.CountryLiderList[4].GetEventTotalTurn());
+        Debug.Log("      turnBom im > "+ liderPlayer0.GetEventTotalTurn());
         ManagerButton();
 
         
@@ -693,19 +672,7 @@ if (fiendLider_ar.Count > 3)
     private void ManagerButton() {
 
         new ViewManageWeapon().ManagerButton(this,this._mainModel);
-        /*
-        BomberButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light bomber ("
-            + _mainModel.CountryLiderList[4].GetBomberCount() + ")";
-        BomberButton_1.GetComponentInChildren<UnityEngine.UI.Text>().text = "Heavy bomber ("
-            + _mainModel.CountryLiderList[4].GetBomberSpecCount(2) + ")";
 
-        MissleButton.GetComponentInChildren<UnityEngine.UI.Text>().text =   "Light missle (" + _mainModel.CountryLiderList[4].GetMissleCount() + ")";
-        MissleButton_1.GetComponentInChildren<UnityEngine.UI.Text>().text = "Medium missl (" + _mainModel.CountryLiderList[4].GetMissleSpecCount(2) + ")";
-        MissleButton_2.GetComponentInChildren<UnityEngine.UI.Text>().text = "Heavy missle (" + _mainModel.CountryLiderList[4].GetMissleSpecCount(3) + ")";
-        MissleButton_3.GetComponentInChildren<UnityEngine.UI.Text>().text = "S Heavy miss (" + _mainModel.CountryLiderList[4].GetMissleSpecCount(4) + ")";
-
-        DefenceButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Defence (" + _mainModel.CountryLiderList[4].GetDefenceWeapon().Count() + ")";
-    */
     }
 
 
@@ -738,7 +705,7 @@ if (fiendLider_ar.Count > 3)
         BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(_mainModel.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
 
         //player
-        Debug.Log("$$$$$ @@@ cou select  =  " + _mainModel.CountryLiderList.Count+"  == " );
+        
         CountryLider liderPLayer = _mainModel.GetCurrenPlayer();
 
 

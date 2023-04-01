@@ -14,7 +14,6 @@ public class BuildingCentral : MonoBehaviour
     public GameObject BomberObject;
     public GameObject DefectorsObject;
     public GameObject UfoObject;
-   // private GameObject UFOObject;
     public GameObject BabyObject;
     public GameObject RocketRichObject;
     public GameObject CrazyCowObject;
@@ -22,7 +21,6 @@ public class BuildingCentral : MonoBehaviour
     public GameObject WingMisslePrefabs;
     public GameObject DefectorsPrefabs;
     public GameObject UfoPrefabs;
-   // public GameObject UFOPrefabs;
     public GameObject BabyPrefabs;
     public GameObject RocketRichPrefabs;
     public GameObject CrazyCowPrefabs;

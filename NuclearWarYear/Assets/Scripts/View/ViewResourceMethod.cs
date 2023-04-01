@@ -10,16 +10,18 @@ namespace Assets.Scripts.View
 {
     public class ViewResourceMethod
     {
-        public void ViewResourceMethodTable(MenuScript menuScript, List<Sprite> LiderImageList, MainModel _mainModel)
+        public void ViewResourceMethodTable(MenuScript menuScript, List<Sprite> LiderImageList, List<Sprite> FlagImageList, MainModel _mainModel)
         {
             menuScript.CanvasResourcePlayer.SetActive(true);
             int flagId = _mainModel.GetCurrenFlagPlayer();
             CountryLider liderPlayer = _mainModel.GetLiderOne(flagId);
             int indexLider = liderPlayer.GraphicId;
 
-            //this.CanvasResourcePlayerImageLider.sprite = this.LiderImageList[(indexLider * 8)];
             menuScript.CanvasResourcePlayerImageLider.sprite = LiderImageList[
                 new ViewLiderHelper().GetNumberSpriteLider(indexLider, 0)];
+
+            menuScript.CanvasResourceFlagImageLider.sprite = FlagImageList[
+                flagId-1];
 
             menuScript.CanvasResourcePlayerTextLider.text = liderPlayer.GetName();
 

@@ -29,7 +29,7 @@ public class CountryLider
 	public int MissleId;
 	public RelationShip _RelationShip;
 	public int GraphicId { get; }
-	public bool MoveMade { set; get; }
+	public bool MoveMade { private set; get; }
 	public CountryLider(bool player,Missle missle,Bomber bomber,
 		GameObject PropagandaBuild,List<CityModel> TownList, ScenarioLider scenarioLider,int CountryId) {
 		this.FlagId = scenarioLider.FlagId;
@@ -55,9 +55,9 @@ public class CountryLider
 		_maxPopulation=GetAllOwnPopulation();
 		_RelationShip = new RelationShip();
 	}
-	public void DoneMoveMade()
+	public void DoneMoveMade(bool Value)
     {
-		MoveMade = true;
+		MoveMade = Value;
 
 	}
 	public void SetEventTotalTurn(string eventTotalTurn)
