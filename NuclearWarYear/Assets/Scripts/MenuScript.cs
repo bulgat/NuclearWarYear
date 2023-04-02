@@ -79,6 +79,12 @@ public class MenuScript : MonoBehaviour
     private int flagIdPlayer;
     public Text TextTypeWriter;
     public Text CanvasReportTextMessage;
+
+    float NuclearMapLeftX = 2.5f;
+    float NuclearMapRightX = -2.4f;
+    float NuclearMapTopY = -1.2f;
+    float NuclearMapDowmY = 1.2f;
+
     void Awake()
     {
         this.CountryLiderList = null;
@@ -133,7 +139,7 @@ public class MenuScript : MonoBehaviour
 
         CanvasReportButtonClose.onClick.AddListener(() => CanvasReportButtonCloseMethod());
 
-        SetImageLiderButton();
+        
         
 
         LiderButton_1.onClick.AddListener(() => LiderButton_1_Method(LiderButton_1));
@@ -151,6 +157,8 @@ public class MenuScript : MonoBehaviour
 
         SelectCountryOne();
         SetAllCityVisibleComponent();
+
+SetImageLiderButton();
         ChangeImageLider();
 
         EnableButtonPlayer();
@@ -165,11 +173,13 @@ public class MenuScript : MonoBehaviour
         GlueTownView();
        
         CanvasReport.SetActive(false);
+
         
     }
     void SetImageLiderButton()
     {
         List<CountryLider> fiendLider_ar = _mainModel.GetFiendCountryLiderList();
+        
 
         Debug.LogWarning(_mainModel.GetCountryLiderList().Count+" T  = " + fiendLider_ar.Count);
 
@@ -177,20 +187,21 @@ public class MenuScript : MonoBehaviour
         viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel,
             this.IconCircleReadyList, fiendLider_ar[0]);
 
-        ChangeFlag(0, fiendLider_ar[0]);
+        //ChangeFlag(0, fiendLider_ar[0]);
 
         ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
         viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel,
             this.IconCircleReadyList, fiendLider_ar[1]);
 
-        ChangeFlag(1, fiendLider_ar[1]);
-if (fiendLider_ar.Count > 3)
-        {
-        ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
-        viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel,
+        print(fiendLider_ar[2].GetName()+" = sently = pulation =" + fiendLider_ar[3].GetName());
+        //ChangeFlag(1, fiendLider_ar[1]);
+        //if (fiendLider_ar.Count > 3)
+        //{
+            ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
+            viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel,
             this.IconCircleReadyList, fiendLider_ar[2]);
 
-        ChangeFlag(2, fiendLider_ar[2]);
+            //ChangeFlag(2, fiendLider_ar[2]);
 
         
             ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
@@ -198,8 +209,19 @@ if (fiendLider_ar.Count > 3)
                 this.IconCircleReadyList, fiendLider_ar[3]);
 
 
-            ChangeFlag(3, fiendLider_ar[3]);
-        }
+            //ChangeFlag(3, fiendLider_ar[3]);
+            ////ChangeFlag(4, fiendLider_ar[4]);
+        //}
+        SetFlagNation();
+    }
+    void SetFlagNation()
+    {
+        List<CountryLider> fiendLider_ar = _mainModel.GetCountryLiderList();
+        ChangeFlag(0, fiendLider_ar[0]);
+        ChangeFlag(1, fiendLider_ar[1]);
+        ChangeFlag(2, fiendLider_ar[2]);
+        ChangeFlag(3, fiendLider_ar[3]);
+        ChangeFlag(4, fiendLider_ar[4]);
     }
     private void ChangeImageLider()
     {
@@ -509,10 +531,7 @@ if (fiendLider_ar.Count > 3)
         PrintTypeWriter(" bomber");
 
     }
-    float NuclearMapLeftX = 2.5f;
-    float NuclearMapRightX = -2.4f;
-    float NuclearMapTopY = -1.2f;
-    float NuclearMapDowmY = 1.2f;
+   
     void SelectCountryOne()
     {
         _targetNuclearMap = new Vector3(NuclearMapLeftX, NuclearMapTopY, 0);

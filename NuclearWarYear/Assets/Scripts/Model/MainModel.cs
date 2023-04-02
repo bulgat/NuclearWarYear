@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Model;
+﻿using Assets.Scripts;
+using Assets.Scripts.Model;
 using Assets.Scripts.Model.scenario;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,8 +21,7 @@ public class MainModel
 	
 	private void InitModel(List<GameObject> countryLiderPropagandaBuildingList) {
 
-		//FlagIdPlayer = new List<int>() { 5 };
-		//this.FlagIdPlayer.Add(5);
+
 
 		this.CountryLiderPropagandaBuildingList = countryLiderPropagandaBuildingList;
 		this.TownList =  new List<CityModel>();
@@ -66,7 +66,16 @@ public class MainModel
 		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[0],TownList, scenarioLider_ar[0],1));
 		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[1],TownList, scenarioLider_ar[1],2));
 		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[2],TownList, scenarioLider_ar[2],3));
-		this.CountryLiderList.Add(new CountryLider(true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, scenarioLider_ar[3],4));
+
+		SettingPlayer.TwoPlayerGame = true;
+		if (SettingPlayer.TwoPlayerGame)
+        {
+			this.CountryLiderList.Add(new CountryLider(true, new DictionaryMissle().GetMissle(1), new DictionaryMissle().GetBomber(1), CountryLiderPropagandaBuildingList[3], TownList, scenarioLider_ar[3], 4));
+		} else
+        {
+			this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, scenarioLider_ar[3],4));
+        }
+		
 		this.CountryLiderList.Add(new CountryLider(true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[4],TownList, scenarioLider_ar[4],5));
 
 		this.FlagIdPlayerList = new List<int>();
@@ -95,7 +104,7 @@ public class MainModel
 			
 			if (this.FlagIdPlayerList.Contains(lider.FlagId))
             {
-				Debug.Log("====="+lider.MoveMade+"   ["+ this.FlagIdPlayerList[0] +","+ this.FlagIdPlayerList[1]+ "] ==" + lider.FlagId);
+				Debug.Log("====    [ , ] =="  );
 				if (lider.MoveMade==false)
                 {
 					return false;

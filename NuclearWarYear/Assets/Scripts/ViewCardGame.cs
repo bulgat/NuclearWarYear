@@ -13,7 +13,7 @@ public class ViewCardGame : MonoBehaviour, IPointerDownHandler, IPointerClickHan
     }
 	void OnMouseDown()
     {
-		print(" Presently = pulationcity y=");
+		
 		Destroy(gameObject);
 	}
 
