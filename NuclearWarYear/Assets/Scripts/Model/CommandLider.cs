@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Model;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,21 +8,21 @@ public class CommandLider
 
 	public Dictionary<string, bool> VisibleEventList;
 
-	private List<Weapon> _MissleList;
+	private List<IWeapon> _MissleList;
 
 	private CityModel _TargetCity;
 
 	private int MissleId;
 
-	private Weapon _AttackMissle;
-	private Weapon _AttackBomber;
+	private IWeapon _AttackMissle;
+	private IWeapon _AttackBomber;
 	private Warhead _AttackWarhead;
 	private string NameCommand;
 	private CountryLider LiderFiend;
 	List<string> _reportProducedWeaponList;
 
 	public CommandLider() {
-		_MissleList = new List<Weapon>();
+		this._MissleList = new List<IWeapon>();
 	
 
 		VisibleEventList = new Dictionary<string, bool>();
@@ -118,19 +119,19 @@ public class CommandLider
 	}
 
 
-	public Weapon GetAttackBomber(){
+	public IWeapon GetAttackBomber(){
 		return _AttackBomber;
 	}
-	public void SetAttackBomber(Weapon AttackBomber){
+	public void SetAttackBomber(IWeapon AttackBomber){
 		_AttackBomber = AttackBomber;
 	}
 	
 	
-	public List<Weapon> GetMissle(){
-		return _MissleList;
+	public List<IWeapon> GetMissle(){
+		return this._MissleList;
 	}
-	public void AddMissle(List<Weapon> MissleList){
-		_MissleList = MissleList;
+	public void AddMissle(List<IWeapon> MissleList){
+		this._MissleList = MissleList;
 	}
 	public void AddReportProducedWeaponList(List<string> ReportProducedWeaponList)
     {
@@ -160,10 +161,10 @@ public class CommandLider
 		return this.LiderFiend;
 		
 	}
-	public Weapon GetAttackMissle(){
-		return _AttackMissle;
+	public IWeapon GetAttackMissle(){
+		return this._AttackMissle;
 	}
-	public void SetAttackMissle(Weapon AttackMissle){
-		_AttackMissle = AttackMissle;
+	public void SetAttackMissle(IWeapon AttackMissle){
+		this._AttackMissle = AttackMissle;
 	}
 }

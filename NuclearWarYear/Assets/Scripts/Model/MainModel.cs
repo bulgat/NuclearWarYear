@@ -63,20 +63,20 @@ public class MainModel
 		List<ScenarioLider> scenarioLider_ar = paramLider.ScenarioLider_ar;
 
 		this.CountryLiderList = new List<CountryLider>();
-		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[0],TownList, scenarioLider_ar[0],1));
-		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[1],TownList, scenarioLider_ar[1],2));
-		this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[2],TownList, scenarioLider_ar[2],3));
+		this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryMissle().GetMissle(1) },new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[0],TownList, scenarioLider_ar[0],1));
+		this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryMissle().GetMissle(1) },new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[1],TownList, scenarioLider_ar[1],2));
+		this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryMissle().GetMissle(1) },new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[2],TownList, scenarioLider_ar[2],3));
 
-		SettingPlayer.TwoPlayerGame = true;
+		//SettingPlayer.TwoPlayerGame = true;
 		if (SettingPlayer.TwoPlayerGame)
         {
-			this.CountryLiderList.Add(new CountryLider(true, new DictionaryMissle().GetMissle(1), new DictionaryMissle().GetBomber(1), CountryLiderPropagandaBuildingList[3], TownList, scenarioLider_ar[3], 4));
+			this.CountryLiderList.Add(new CountryLider(true, new List<IWeapon>() { new DictionaryMissle().GetMissle(1) }, new DictionaryMissle().GetBomber(1), CountryLiderPropagandaBuildingList[3], TownList, scenarioLider_ar[3], 4));
 		} else
         {
-			this.CountryLiderList.Add(new CountryLider(false,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, scenarioLider_ar[3],4));
+			this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryMissle().GetMissle(1) },new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[3],TownList, scenarioLider_ar[3],4));
         }
 		
-		this.CountryLiderList.Add(new CountryLider(true,new DictionaryMissle().GetMissle (1),new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[4],TownList, scenarioLider_ar[4],5));
+		this.CountryLiderList.Add(new CountryLider(true, new List<IWeapon>() { new DictionaryMissle().GetMissle(1), new DictionaryMissle().GetMissle(1) },new DictionaryMissle().GetBomber (1),CountryLiderPropagandaBuildingList[4],TownList, scenarioLider_ar[4],5));
 
 		this.FlagIdPlayerList = new List<int>();
 		foreach (var item in this.CountryLiderList)
@@ -240,8 +240,8 @@ public class MainModel
 	//WarheadMethod
 	public void SetWarheadMethodPlayer(int FlagId){
 		CountryLider countryLider =new LiderHelperOne().GetLiderOne(CountryLiderList, this.GetCurrenPlayer().FlagId);
-		countryLider.GetBomber().Damage =countryLider.GetBomber().Damage;
-		countryLider.GetMissle().Damage =countryLider.GetMissle().Damage;
+		countryLider.GetBomber().SetDamage( countryLider.GetBomber().GetDamage());
+		countryLider.GetMissle().SetDamage(countryLider.GetMissle().GetDamage());
 
 	}
 	public void ReconTotalTurn(int FlagId){

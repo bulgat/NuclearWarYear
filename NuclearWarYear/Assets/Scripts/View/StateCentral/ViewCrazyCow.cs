@@ -12,7 +12,6 @@ public class ViewCrazyCow : ViewSendAnimObj
         if (bomberObject != null)
         {
 
-           // bool returnBomber = false;
             float offset = 260f;
             GameObject cityTown = GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
             City city = cityTown.GetComponent<City>();

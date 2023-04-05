@@ -13,7 +13,7 @@ public class ViewMoveDeflectors : ViewSendAnimObj
         {
 
             bool returnBomber = false;
-            float offset = 260f;
+
             GameObject cityTown = GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
             City city = cityTown.GetComponent<City>();
             Vector3 targetBomber = cityTown.transform.position;

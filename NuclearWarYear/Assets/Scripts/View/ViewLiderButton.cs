@@ -48,7 +48,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
             imageMood = 7;
         }
 
-        ViewLiderHelper kol;
+        //ViewLiderHelper kol;
 
        // LiderImage_1.sprite = LiderImageList[(indexLider * 8) + imageMood];
         LiderImage_1.sprite = LiderImageList[new ViewLiderHelper().GetNumberSpriteLider(indexLider, imageMood)];

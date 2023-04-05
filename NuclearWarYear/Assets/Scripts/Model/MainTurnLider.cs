@@ -82,13 +82,13 @@ namespace Assets.Scripts.Model
 						{
 							if (lider.GetCommandLider().GetAttackBomber() != null)
 							{
-								new DamagePopulationHelper().SetDamagePopulation(new DamagePopulationHelper().GetCityLider(lider), lider.GetCommandLider().GetAttackBomber().Damage, true);
+								new DamagePopulationHelper().SetDamagePopulation(new DamagePopulationHelper().GetCityLider(lider), lider.GetCommandLider().GetAttackBomber().GetDamage(), true);
 							}
 						}
 
 
 					}
-					lider.SetEventTotalTurn("От ядерного взрыва с бомбардировщика население уменьшилось на " + lider.GetCommandLider().GetAttackBomber().Damage + " у " + lider.GetCommandLider().GetTargetLider().GetName());
+					lider.SetEventTotalTurn("От ядерного взрыва с бомбардировщика население уменьшилось на " + lider.GetCommandLider().GetAttackBomber().GetDamage() + " у " + lider.GetCommandLider().GetTargetLider().GetName());
 					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 25);
 				}
 				if (lider.GetCommandLider().VisibleEventList["Missle"])
@@ -112,14 +112,14 @@ namespace Assets.Scripts.Model
 							if (lider.GetCommandLider().GetAttackMissle() != null)
 							{
 
-								new DamagePopulationHelper().SetDamagePopulation(new DamagePopulationHelper().GetCityLider(lider), lider.GetCommandLider().GetAttackMissle().Damage, true);
+								new DamagePopulationHelper().SetDamagePopulation(new DamagePopulationHelper().GetCityLider(lider), lider.GetCommandLider().GetAttackMissle().GetDamage(), true);
 							}
 						}
 
 					}
 					lider.RemoveMissle();
 
-					lider.SetEventTotalTurn("От ядерного взрыва ракеты население уменьшилось на " + lider.GetCommandLider().GetAttackMissle().Damage + " у " + lider.GetCommandLider().GetTargetLider().GetName());
+					lider.SetEventTotalTurn("От ядерного взрыва ракеты население уменьшилось на " + lider.GetCommandLider().GetAttackMissle().GetDamage() + " у " + lider.GetCommandLider().GetTargetLider().GetName());
 					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 25);
 				}
 

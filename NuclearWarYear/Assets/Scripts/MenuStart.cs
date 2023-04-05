@@ -10,7 +10,6 @@ public class MenuStart : MonoBehaviour
 	public Button StartButton;
     public Button Start2PlayerButton;
 
-    // Start is called before the first frame update
     void Start()
     {
         StartButton.onClick.AddListener(() => StartMethod(StartButton));
@@ -18,7 +17,8 @@ public class MenuStart : MonoBehaviour
     }
 	void StartMethod(Button buttonPressed)
 	{
-		//Application.LoadLevel("SampleScene");
+        SettingPlayer.TwoPlayerGame = false;
+        //Application.LoadLevel("SampleScene");
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }

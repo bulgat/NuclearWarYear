@@ -4603,6 +4603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ace8e61c68dd14193f0c11addcd5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardWeapon: {fileID: 4836606449191074803, guid: 601c98c6a8b580448aee58eb1dab2ec1,
+    type: 3}
   panelMain: {fileID: 1285494132}
   CanvasTacticReal: {fileID: 1358557752}
   CanvasResourcePlayer: {fileID: 1653898555}

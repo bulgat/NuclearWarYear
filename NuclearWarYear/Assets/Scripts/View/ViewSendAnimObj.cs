@@ -40,7 +40,7 @@ public class ViewSendAnimObj
 
             bomberObject.transform.position = Vector3.MoveTowards(bomberObject.transform.position, targetBomber, step);
 
-            //Vector2 direction = (Vector2)targetBomber - (Vector2)transform.position;
+ 
             Vector2 direction = (Vector2)targetBomber - (Vector2)bomberObject.transform.position;
             direction.Normalize();
             if (RotationAndExplode)
@@ -53,7 +53,7 @@ public class ViewSendAnimObj
                     Debug.Log("   E   " + city.GetId() + " =   turnBomber   ___tim > ");
                     Vector3 newRotation = new Vector3(0, Time.time, 0);
                     bomberObject.transform.rotation = Quaternion.Euler(Vector3.forward * (offset * Time.time));
-                    //bomberObject.transform.rotation += 1;
+   
                 }
 
                 //ExplodeTown

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
     {
         private List<string> _reportProducedWeaponList;
     
-    public List<Weapon> AddLiderBuildWeaponSwithAction()
+    public List<IWeapon> AddLiderBuildWeaponSwithAction()
     {
-        List<Weapon> resultList = new List<Weapon>();
+        List<IWeapon> resultList = new List<IWeapon>();
         List<bool> randomAddWeaponList = new List<bool>();
         this._reportProducedWeaponList = new List<string>();
         for (int i = 0; i < 6; i++)

@@ -11,6 +11,7 @@ using Assets.Scripts.View;
 
 public class MenuScript : MonoBehaviour
 {
+    public GameObject CardWeapon;
 
     public GameObject panelMain;
     public GameObject CanvasTacticReal;
@@ -158,7 +159,7 @@ public class MenuScript : MonoBehaviour
         SelectCountryOne();
         SetAllCityVisibleComponent();
 
-SetImageLiderButton();
+        SetImageLiderButton();
         ChangeImageLider();
 
         EnableButtonPlayer();
@@ -174,7 +175,25 @@ SetImageLiderButton();
        
         CanvasReport.SetActive(false);
 
+        SetViewCard();
         
+    }
+    void SetViewCard()
+    {
+        //CardWeapon
+        //panelMain
+        int count = 0;
+        foreach (var item in _mainModel.GetCurrenPlayer().GetMissleList())
+        {
+         var CardWing = Instantiate(CardWeapon, new Vector2(100+(count*50),100), Quaternion.identity);
+                CardWing.transform.parent = panelMain.transform;
+                ViewCardWeapon viewCardWeapon = CardWing.GetComponent<ViewCardWeapon>();
+                viewCardWeapon.SetText("Light missle (" + _mainModel.GetCurrenPlayer().GetMissleCount() + ")");
+                viewCardWeapon.SetCallback(MissleMethod);
+            count++;
+        }
+
+      
     }
     void SetImageLiderButton()
     {
@@ -193,25 +212,17 @@ SetImageLiderButton();
         viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel,
             this.IconCircleReadyList, fiendLider_ar[1]);
 
-        print(fiendLider_ar[2].GetName()+" = sently = pulation =" + fiendLider_ar[3].GetName());
-        //ChangeFlag(1, fiendLider_ar[1]);
-        //if (fiendLider_ar.Count > 3)
-        //{
+        
+ 
             ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
             viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel,
             this.IconCircleReadyList, fiendLider_ar[2]);
-
-            //ChangeFlag(2, fiendLider_ar[2]);
 
         
             ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
             viewLiderButton_4.Init(LiderImageList, FlagImageList, _mainModel,
                 this.IconCircleReadyList, fiendLider_ar[3]);
 
-
-            //ChangeFlag(3, fiendLider_ar[3]);
-            ////ChangeFlag(4, fiendLider_ar[4]);
-        //}
         SetFlagNation();
     }
     void SetFlagNation()
@@ -671,7 +682,7 @@ SetImageLiderButton();
 
         printMessage.Append("\n  * " + liderPlayer0.GetEventTotalTurn());
 
-        Debug.Log("      turnBom im > "+ liderPlayer0.GetEventTotalTurn());
+        
         ManagerButton();
 
         
@@ -753,6 +764,10 @@ SetImageLiderButton();
                 
                 City city = hit2D.transform.gameObject.GetComponent<City>();
                 SelectCityTargetIdPlayer(city.GetId());
+
+                
+                ViewCardWeapon viewCardWeapon = hit2D.transform.gameObject.GetComponent<ViewCardWeapon>();
+                print(" = sently = pul="+ viewCardWeapon);
             }
             
         }
