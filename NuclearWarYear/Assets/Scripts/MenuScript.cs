@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using System.Text;
 using System.Reflection;
 using Assets.Scripts.View;
+using Assets.Scripts.Model;
 
 public class MenuScript : MonoBehaviour
 {
@@ -195,7 +196,9 @@ public class MenuScript : MonoBehaviour
         this.CardButtonList.Clear();
         //CardWeapon
         //panelMain
-        var missleList = _mainModel.GetCurrenPlayer().GetMissleList();
+        List<IWeapon> missleList = new List<IWeapon>();
+
+        missleList.AddRange( _mainModel.GetCurrenPlayer().GetMissleList());
 
         int count = 0;
         foreach (var item in missleList)

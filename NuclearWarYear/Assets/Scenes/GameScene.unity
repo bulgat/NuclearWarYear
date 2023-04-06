@@ -3143,12 +3143,12 @@ RectTransform:
   - {fileID: 815175774}
   - {fileID: 1774809342}
   - {fileID: 351392265}
+  - {fileID: 2027187623}
+  - {fileID: 2142616950}
   - {fileID: 1646373514}
   - {fileID: 1435277594}
   - {fileID: 1956044001}
   - {fileID: 1370098441}
-  - {fileID: 2027187623}
-  - {fileID: 2142616950}
   - {fileID: 1172747272}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -3173,12 +3173,15 @@ MonoBehaviour:
   CardWeapon: {fileID: 4836606449191074803, guid: 601c98c6a8b580448aee58eb1dab2ec1,
     type: 3}
   IconCardList:
-  - {fileID: -4897408875779584784, guid: b3c95af6bc58a704a920f2ac02aee0bd, type: 3}
-  - {fileID: 5997088396319905728, guid: b3c95af6bc58a704a920f2ac02aee0bd, type: 3}
-  - {fileID: -2167789549580083803, guid: b3c95af6bc58a704a920f2ac02aee0bd, type: 3}
-  - {fileID: -5573279440937375608, guid: b3c95af6bc58a704a920f2ac02aee0bd, type: 3}
-  - {fileID: 4736917141645170625, guid: b3c95af6bc58a704a920f2ac02aee0bd, type: 3}
-  - {fileID: -872706434045770284, guid: b3c95af6bc58a704a920f2ac02aee0bd, type: 3}
+  - {fileID: 4784744330624703386, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: 2752151522955441623, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: 6685342859469625371, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: -3677860423627731794, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: -2619361612633498010, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: -5808162105275420530, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: -1587665703275846062, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: -7745780256162858751, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: 3959596469592909050, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
   panelMain: {fileID: 1285494132}
   CanvasTacticReal: {fileID: 1358557752}
   CanvasResourcePlayer: {fileID: 1653898555}
@@ -6920,7 +6923,7 @@ RectTransform:
   m_Children:
   - {fileID: 105487357}
   m_Father: {fileID: 1285494136}
-  m_RootOrder: 10
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -7774,7 +7777,7 @@ RectTransform:
   m_Children:
   - {fileID: 816172390}
   m_Father: {fileID: 1285494136}
-  m_RootOrder: 11
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
