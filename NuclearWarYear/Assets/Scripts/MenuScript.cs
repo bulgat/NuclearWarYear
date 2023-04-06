@@ -12,6 +12,7 @@ using Assets.Scripts.View;
 public class MenuScript : MonoBehaviour
 {
     public GameObject CardWeapon;
+    public List<Sprite> IconCardList;
 
     public GameObject panelMain;
     public GameObject CanvasTacticReal;
@@ -41,11 +42,12 @@ public class MenuScript : MonoBehaviour
     public Button PropButton;
     public Button BuildButton;
     public Button DefenceButton;
-    public Button MissleButton;
 
-    public Button MissleButton_1;
-    public Button MissleButton_2;
-    public Button MissleButton_3;
+    //public Button MissleButton;
+
+    //public Button MissleButton_1;
+    //public Button MissleButton_2;
+    //public Button MissleButton_3;
 
     public Button BomberButton;
     public Button BomberButton_1;
@@ -85,6 +87,8 @@ public class MenuScript : MonoBehaviour
     float NuclearMapRightX = -2.4f;
     float NuclearMapTopY = -1.2f;
     float NuclearMapDowmY = 1.2f;
+
+    private List<GameObject> CardButtonList;
 
     void Awake()
     {
@@ -130,13 +134,13 @@ public class MenuScript : MonoBehaviour
         BuildButton.onClick.AddListener(() => BuildMethod(BuildButton));
         DefenceButton.onClick.AddListener(() => DefenceMethod(DefenceButton));
 
-        MissleButton.onClick.AddListener(() => MissleMethod(1));
-        MissleButton_1.onClick.AddListener(() => MissleMethod(2));
-        MissleButton_2.onClick.AddListener(() => MissleMethod(3));
-        MissleButton_3.onClick.AddListener(() => MissleMethod(4));
+        //MissleButton.onClick.AddListener(() => MissleMethod(1));
+       // MissleButton_1.onClick.AddListener(() => MissleMethod(2));
+        //MissleButton_2.onClick.AddListener(() => MissleMethod(3));
+        //MissleButton_3.onClick.AddListener(() => MissleMethod(4));
 
-        BomberButton.onClick.AddListener(() => BomberMethod(1));
-        BomberButton_1.onClick.AddListener(() => BomberMethod(2));
+        //BomberButton.onClick.AddListener(() => BomberMethod(1));
+        //BomberButton_1.onClick.AddListener(() => BomberMethod(2));
 
         CanvasReportButtonClose.onClick.AddListener(() => CanvasReportButtonCloseMethod());
 
@@ -175,21 +179,35 @@ public class MenuScript : MonoBehaviour
        
         CanvasReport.SetActive(false);
 
-        SetViewCard();
+        RefreshViewCard();
         
     }
-    void SetViewCard()
+    void RefreshViewCard()
     {
+        if (this.CardButtonList == null)
+        {
+            this.CardButtonList = new List<GameObject>();
+        }
+        foreach(var item in this.CardButtonList)
+        {
+            Destroy(item);
+        }
+        this.CardButtonList.Clear();
         //CardWeapon
         //panelMain
+        var missleList = _mainModel.GetCurrenPlayer().GetMissleList();
+
         int count = 0;
-        foreach (var item in _mainModel.GetCurrenPlayer().GetMissleList())
+        foreach (var item in missleList)
         {
-         var CardWing = Instantiate(CardWeapon, new Vector2(100+(count*50),100), Quaternion.identity);
+            Debug.LogWarning(item.GetSize()+" T  = " + item.GetTypeWeapon());
+
+            GameObject CardWing = Instantiate(CardWeapon, new Vector2(100+(count*100),100), Quaternion.identity);
                 CardWing.transform.parent = panelMain.transform;
                 ViewCardWeapon viewCardWeapon = CardWing.GetComponent<ViewCardWeapon>();
-                viewCardWeapon.SetText("Light missle (" + _mainModel.GetCurrenPlayer().GetMissleCount() + ")");
+                viewCardWeapon.SetParam(item.GetName(), IconCardList,item.GetId());
                 viewCardWeapon.SetCallback(MissleMethod);
+            this.CardButtonList.Add(CardWing);
             count++;
         }
 
@@ -200,8 +218,7 @@ public class MenuScript : MonoBehaviour
         List<CountryLider> fiendLider_ar = _mainModel.GetFiendCountryLiderList();
         
 
-        Debug.LogWarning(_mainModel.GetCountryLiderList().Count+" T  = " + fiendLider_ar.Count);
-
+    
         ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
         viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel,
             this.IconCircleReadyList, fiendLider_ar[0]);
@@ -520,21 +537,21 @@ public class MenuScript : MonoBehaviour
     void MissleMethod(int IdMissle)
     {
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
-        if (liderPlayer.GetMissleSpecCount(IdMissle) > 0)
-        {
+        if (new int[4] { 0,1,2, 3 }.Contains(IdMissle))
+            {
             EventController eventController = new EventController(Controller.Command.Missle, new EventMissle(_mainModel.GetCurrenFlagPlayer(), IdMissle));
             _controller.SendCommand(eventController);
-            PrintTypeWriter(" missle");
-        } else
+            PrintTypeWriter("Prepare a missle "+ IdMissle);
+        } 
+        if (new int[2] { 4, 5 }.Contains(IdMissle))
         {
-            PrintTypeWriter("not missle");
+            EventController eventController = new EventController(Controller.Command.Bomber, new EventBomber(_mainModel.GetCurrenFlagPlayer(), IdMissle));
+            _controller.SendCommand(eventController);
+            PrintTypeWriter("Prepare bomber");
+
         }
-
-
-       
-
-        
     }
+    /*
     void BomberMethod(int SizeIdBomber)
     {
         EventController eventController = new EventController(Controller.Command.Bomber, new EventBomber(_mainModel.GetCurrenFlagPlayer(), SizeIdBomber));
@@ -542,7 +559,7 @@ public class MenuScript : MonoBehaviour
         PrintTypeWriter(" bomber");
 
     }
-   
+   */
     void SelectCountryOne()
     {
         _targetNuclearMap = new Vector3(NuclearMapLeftX, NuclearMapTopY, 0);
@@ -629,7 +646,7 @@ public class MenuScript : MonoBehaviour
         if (liderPlayer0.GetCommandLider().GetVisibleMissle())
         {
             
-            MissleButton.GetComponent<Button>().interactable = false;
+            //MissleButton.GetComponent<Button>().interactable = false;
 
            // CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
             var cityTarget = liderPlayer0.GetTargetCitySelectPlayer();
@@ -650,7 +667,7 @@ public class MenuScript : MonoBehaviour
         else
         {
             
-            MissleButton.GetComponent<Button>().interactable = true;
+            //MissleButton.GetComponent<Button>().interactable = true;
         }
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
         if (liderPlayer.GetCommandLider().GetVisibleBomber())
@@ -677,7 +694,7 @@ public class MenuScript : MonoBehaviour
         }
         else
         {
-            BomberButton.GetComponent<Button>().interactable = true;
+            //BomberButton.GetComponent<Button>().interactable = true;
         }
 
         printMessage.Append("\n  * " + liderPlayer0.GetEventTotalTurn());
@@ -690,7 +707,7 @@ public class MenuScript : MonoBehaviour
         SetAllCityVisibleComponent();
         CanvasReportWindow(printMessage.ToString());
 
-
+        RefreshViewCard();
     }
     private void CanvasReportWindow(string PrintMessage)
     {
@@ -767,7 +784,7 @@ public class MenuScript : MonoBehaviour
 
                 
                 ViewCardWeapon viewCardWeapon = hit2D.transform.gameObject.GetComponent<ViewCardWeapon>();
-                print(" = sently = pul="+ viewCardWeapon);
+                
             }
             
         }

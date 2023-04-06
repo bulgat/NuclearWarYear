@@ -13,17 +13,17 @@ namespace Assets.Scripts.View
         {
             int flagId = _mainModel.GetCurrenFlagPlayer();
             CountryLider lider = _mainModel.GetLiderOne(flagId);
-
+            /*
             menuScript.BomberButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light bomber ("
                 + lider.GetBomberCount() + ")";
             menuScript.BomberButton_1.GetComponentInChildren<UnityEngine.UI.Text>().text = "Heavy bomber ("
                 + lider.GetBomberSpecCount(2) + ")";
-
+            */
             /*
             var WingMissle = Instantiate(menuScript.CardWeapon, Vector3.zero, Quaternion.identity);
             WingMissle.transform.parent = menuScript.panelMain.transform;
             */
-
+            /*
             if (lider.GetMissleCount()>0) {
                 menuScript.MissleButton.gameObject.SetActive(true);
                 menuScript.MissleButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Light missle (" + lider.GetMissleCount() + ")";
@@ -54,6 +54,7 @@ namespace Assets.Scripts.View
             {
                 menuScript.MissleButton_3.gameObject.SetActive(false);
             }
+            */
             menuScript.DefenceButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Defence (" + lider.GetDefenceWeapon().Count() + ")";
         }
     }
