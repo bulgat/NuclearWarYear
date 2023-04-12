@@ -35,5 +35,12 @@ public class DictionaryMissle
 		}
 		return new Defence("Defence", 1, 1, DictionaryMissle.TypeWeapon.Defence,6);
 	}
-	
+	public Defence GetPropaganda()
+	{
+		return new Defence("Propaganda", 1, 1, DictionaryMissle.TypeWeapon.Defence, 9);
+	}
+	public Defence GetIndustry()
+	{
+		return new Defence("Industry", 1, 1, DictionaryMissle.TypeWeapon.Defence, 8);
+	}
 }

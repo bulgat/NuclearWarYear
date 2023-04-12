@@ -21,7 +21,11 @@ public class MenuScript : MonoBehaviour
     public Image CanvasResourcePlayerImageLider;
     public Image CanvasResourceFlagImageLider;
     public Text CanvasResourcePlayerTextLider;
+
     public GameObject CanvasReport;
+    public Button CanvasReportButtonClose;
+    public Text CanvasReportTextMessage;
+    public Image CanvasReportIcon;
 
     public List<GameObject> MapNationFlagList; 
 
@@ -37,7 +41,7 @@ public class MenuScript : MonoBehaviour
 
     public Button ButtonResource;
     public Button ButtonCloseResource;
-    public Button CanvasReportButtonClose;
+    
     public Button TurnButton;
 
     public Button PropButton;
@@ -82,7 +86,7 @@ public class MenuScript : MonoBehaviour
     MainModel _mainModel;
     private int flagIdPlayer;
     public Text TextTypeWriter;
-    public Text CanvasReportTextMessage;
+    
 
     float NuclearMapLeftX = 2.5f;
     float NuclearMapRightX = -2.4f;
@@ -131,9 +135,9 @@ public class MenuScript : MonoBehaviour
         ButtonResource.onClick.AddListener(() => ButtonResourceMethod(ButtonResource));
         ButtonCloseResource.onClick.AddListener(() => ButtonCloseResourceMethod(ButtonCloseResource));
         TurnButton.onClick.AddListener(() => TurnButtonMethod(TurnButton));
-        PropButton.onClick.AddListener(() => PropMethod(PropButton));
-        BuildButton.onClick.AddListener(() => BuildMethod(BuildButton));
-        DefenceButton.onClick.AddListener(() => DefenceMethod(DefenceButton));
+        //PropButton.onClick.AddListener(() => PropMethod(PropButton));
+        //BuildButton.onClick.AddListener(() => BuildMethod(BuildButton));
+        //DefenceButton.onClick.AddListener(() => DefenceMethod(DefenceButton));
 
         //MissleButton.onClick.AddListener(() => MissleMethod(1));
        // MissleButton_1.onClick.AddListener(() => MissleMethod(2));
@@ -197,7 +201,9 @@ public class MenuScript : MonoBehaviour
         //CardWeapon
         //panelMain
         List<IWeapon> missleList = new List<IWeapon>();
-
+        missleList.Add(new DictionaryMissle().GetIndustry());
+        missleList.Add(new DictionaryMissle().GetPropaganda());
+        missleList.AddRange(_mainModel.GetCurrenPlayer().GetDefenceWeapon());
         missleList.AddRange( _mainModel.GetCurrenPlayer().GetMissleList());
 
         int count = 0;
@@ -513,13 +519,15 @@ public class MenuScript : MonoBehaviour
     }
 
     //Button
+    /*
     void PropMethod(Button buttonPressed)
     {
    
         new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
 
         PrintTypeWriter("\n propaganda");
-    }
+    }*/
+    /*
     void BuildMethod(Button buttonPressed)
     {
      
@@ -528,14 +536,15 @@ public class MenuScript : MonoBehaviour
 
         PrintTypeWriter(" build weapon");
 
-    }
+    }*/
+    /*
     void DefenceMethod(Button buttonPressed)
     {
         EventController eventController = new EventController(Controller.Command.Defence, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
         _controller.SendCommand(eventController);
         PrintTypeWriter(" defence");
 
-    }
+    }*/
     //Missle
     void MissleMethod(int IdMissle)
     {
@@ -553,6 +562,25 @@ public class MenuScript : MonoBehaviour
             PrintTypeWriter("Prepare bomber");
 
         }
+        if (new int[2] { 6, 7 }.Contains(IdMissle)) {
+            EventController eventController = new EventController(Controller.Command.Defence, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
+            _controller.SendCommand(eventController);
+            PrintTypeWriter(" defence");
+        }
+        if (new int[1] { 9 }.Contains(IdMissle))
+        {
+            new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
+
+            PrintTypeWriter("\n propaganda");
+        }
+        if (new int[1] { 8 }.Contains(IdMissle))
+        {
+            EventController eventController = new EventController(Controller.Command.Building, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
+            _controller.SendCommand(eventController);
+
+            PrintTypeWriter(" build weapon");
+        }
+        CanvasReportIcon.sprite = this.IconCardList[IdMissle];
     }
     /*
     void BomberMethod(int SizeIdBomber)

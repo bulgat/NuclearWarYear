@@ -77,7 +77,8 @@ public class MainModel
         }
 		
 		this.CountryLiderList.Add(new CountryLider(true, new List<IWeapon>() { new DictionaryMissle().GetMissle(1),
-			new DictionaryMissle().GetMissle(2),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetBomber (2) },
+			new DictionaryMissle().GetMissle(2),new DictionaryMissle().GetBomber (1),new DictionaryMissle().GetBomber (2),
+			new DictionaryMissle().GetDefenceWeapon(1),new DictionaryMissle().GetDefenceWeapon(2)},
 			CountryLiderPropagandaBuildingList[4],TownList, scenarioLider_ar[4],5));
 
 		this.FlagIdPlayerList = new List<int>();

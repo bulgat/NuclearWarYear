@@ -55,7 +55,7 @@ namespace Assets.Scripts.View
                 menuScript.MissleButton_3.gameObject.SetActive(false);
             }
             */
-            menuScript.DefenceButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Defence (" + lider.GetDefenceWeapon().Count() + ")";
+           // menuScript.DefenceButton.GetComponentInChildren<UnityEngine.UI.Text>().text = "Defence (" + lider.GetDefenceWeapon().Count() + ")";
         }
     }
 }
