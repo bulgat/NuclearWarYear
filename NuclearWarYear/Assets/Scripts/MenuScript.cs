@@ -94,6 +94,8 @@ public class MenuScript : MonoBehaviour
     float NuclearMapDowmY = 1.2f;
 
     private List<GameObject> CardButtonList;
+    public GameObject[] CountryList;
+    public GameObject[] CountryLineList;
 
     void Awake()
     {
@@ -185,7 +187,9 @@ public class MenuScript : MonoBehaviour
         CanvasReport.SetActive(false);
 
         RefreshViewCard();
-        
+
+        //CountryLineList[0].SetActive(false);
+        ResetCountryOutline();
     }
     void RefreshViewCard()
     {
@@ -597,46 +601,60 @@ public class MenuScript : MonoBehaviour
     }
     void LiderButton_1_Method(Button buttonPressed)
     {
+        ResetCountryOutline();
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider( 1));
         _controller.SendCommand(eventController);
      
         SelectCountryOne();
 
         ClearCityTargetMark(0,false);
+        CountryLineList[4].SetActive(true);
     }
     void LiderButton_2_Method(Button buttonPressed)
     {
-       
+        ResetCountryOutline();
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(2));
         _controller.SendCommand(eventController);
         _targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapTopY, 0);
 
         ClearCityTargetMark(0,false);
+        CountryLineList[2].SetActive(true);
     }
     void LiderButton_3_Method(Button buttonPressed)
     {
-       
+        ResetCountryOutline();
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(3));
         _controller.SendCommand(eventController);
         _targetNuclearMap = new Vector3(NuclearMapLeftX, NuclearMapDowmY, 0);
 
         ClearCityTargetMark(0,false);
+        CountryLineList[3].SetActive(true);
     }
     void LiderButton_4_Method(Button buttonPressed)
     {
-
+        ResetCountryOutline();
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(4));
         _controller.SendCommand(eventController);
         _targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapDowmY, 0);
 
         ClearCityTargetMark(0,false);
+        CountryLineList[1].SetActive(true);
     }
     void LiderButton_5_Method(Button buttonPressed)
     {
-        
+        ResetCountryOutline();
         _targetNuclearMap = new Vector3(NuclearMapRightX/3, NuclearMapDowmY/2, 0);
+        CountryLineList[0].SetActive(true);
     }
- 
+    void ResetCountryOutline()
+    {
+        CountryLineList[0].SetActive(false);
+        CountryLineList[1].SetActive(false);
+        CountryLineList[2].SetActive(false);
+        CountryLineList[3].SetActive(false);
+        CountryLineList[4].SetActive(false);
+    }
+
 
 
     void ResetAction()
