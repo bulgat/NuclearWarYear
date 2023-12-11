@@ -48,11 +48,6 @@ public class MenuScript : MonoBehaviour
     public Button BuildButton;
     public Button DefenceButton;
 
-    //public Button MissleButton;
-
-    //public Button MissleButton_1;
-    //public Button MissleButton_2;
-    //public Button MissleButton_3;
 
     public Button BomberButton;
     public Button BomberButton_1;
@@ -137,17 +132,7 @@ public class MenuScript : MonoBehaviour
         ButtonResource.onClick.AddListener(() => ButtonResourceMethod(ButtonResource));
         ButtonCloseResource.onClick.AddListener(() => ButtonCloseResourceMethod(ButtonCloseResource));
         TurnButton.onClick.AddListener(() => TurnButtonMethod(TurnButton));
-        //PropButton.onClick.AddListener(() => PropMethod(PropButton));
-        //BuildButton.onClick.AddListener(() => BuildMethod(BuildButton));
-        //DefenceButton.onClick.AddListener(() => DefenceMethod(DefenceButton));
 
-        //MissleButton.onClick.AddListener(() => MissleMethod(1));
-       // MissleButton_1.onClick.AddListener(() => MissleMethod(2));
-        //MissleButton_2.onClick.AddListener(() => MissleMethod(3));
-        //MissleButton_3.onClick.AddListener(() => MissleMethod(4));
-
-        //BomberButton.onClick.AddListener(() => BomberMethod(1));
-        //BomberButton_1.onClick.AddListener(() => BomberMethod(2));
 
         CanvasReportButtonClose.onClick.AddListener(() => CanvasReportButtonCloseMethod());
 
@@ -219,7 +204,7 @@ public class MenuScript : MonoBehaviour
                 CardWing.transform.parent = panelMain.transform;
                 ViewCardWeapon viewCardWeapon = CardWing.GetComponent<ViewCardWeapon>();
                 viewCardWeapon.SetParam(item.GetName(), IconCardList,item.GetId());
-                viewCardWeapon.SetCallback(MissleMethod);
+                viewCardWeapon.SetCallback(MissleMethodClick);
             this.CardButtonList.Add(CardWing);
             count++;
         }
@@ -522,37 +507,17 @@ public class MenuScript : MonoBehaviour
         return cityTown;
     }
 
-    //Button
-    /*
-    void PropMethod(Button buttonPressed)
-    {
-   
-        new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
-
-        PrintTypeWriter("\n propaganda");
-    }*/
-    /*
-    void BuildMethod(Button buttonPressed)
-    {
-     
-        EventController eventController = new EventController(Controller.Command.Building, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-        _controller.SendCommand(eventController);
-
-        PrintTypeWriter(" build weapon");
-
-    }*/
-    /*
-    void DefenceMethod(Button buttonPressed)
-    {
-        EventController eventController = new EventController(Controller.Command.Defence, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-        _controller.SendCommand(eventController);
-        PrintTypeWriter(" defence");
-
-    }*/
+    
     //Missle
-    void MissleMethod(int IdMissle)
+    void MissleMethodClick(int IdMissle)
     {
-        CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
+        foreach (var item in this.CardButtonList)
+        {
+            item.transform.localScale = new Vector2(1, 1);
+        }
+
+
+            CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
         if (new int[4] { 0,1,2, 3 }.Contains(IdMissle))
             {
             EventController eventController = new EventController(Controller.Command.Missle, new EventMissle(_mainModel.GetCurrenFlagPlayer(), IdMissle));
@@ -586,15 +551,7 @@ public class MenuScript : MonoBehaviour
         }
         CanvasReportIcon.sprite = this.IconCardList[IdMissle];
     }
-    /*
-    void BomberMethod(int SizeIdBomber)
-    {
-        EventController eventController = new EventController(Controller.Command.Bomber, new EventBomber(_mainModel.GetCurrenFlagPlayer(), SizeIdBomber));
-        _controller.SendCommand(eventController);
-        PrintTypeWriter(" bomber");
 
-    }
-   */
     void SelectCountryOne()
     {
         _targetNuclearMap = new Vector3(NuclearMapLeftX, NuclearMapTopY, 0);

@@ -49,9 +49,7 @@ public class AICreateCommand
 			"Building",
 			"Defence",
 			"Missle",
-			"Bomber"//,
-			//"AttackBomber",
-			//"AttackMissle"
+			"Bomber"
 		};
 		int indexCommand = UnityEngine.Random.Range(0, nameCommandList.Count);
 		return nameCommandList[indexCommand];

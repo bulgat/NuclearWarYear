@@ -19,9 +19,9 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         // OnClick code goes here ...
-Debug.Log("      turnBo > "  );
+Debug.Log("      turnB > "  );
         this.callback(this.Id);
-
+        gameObject.transform.localScale = new Vector2(2, 2);
     }
     void Update()
     {
@@ -36,6 +36,8 @@ Debug.Log("      turnBo > "  );
     }
     public void SetCallback(System.Action<int> Callback)
     {
+        
+
         this.callback = Callback;
     }
 }
