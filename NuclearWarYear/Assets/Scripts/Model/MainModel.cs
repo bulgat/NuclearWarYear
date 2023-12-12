@@ -115,7 +115,7 @@ public class MainModel
 
 			}
         }
-		Debug.Log( "   ----  Coun  = "); 
+		
 		return true;
     }
 	public int GetCurrenFlagPlayer()

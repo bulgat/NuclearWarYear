@@ -30,8 +30,13 @@ Debug.Log("      turnB > "  );
     public void SetParam(string text, List<Sprite> iconCardList,int id)
     {
         Text.text = text;
-        this.IconCardList = iconCardList;
-        SpriteIcon.sprite = iconCardList[id];
+
+        var iconCard = gameObject.transform.GetChild(1);
+        ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
+        viewIconCard.SetParam(iconCardList,id);
+
+        //this.IconCardList = iconCardList;
+        //SpriteIcon.sprite = iconCardList[id];
         this.Id = id;
     }
     public void SetCallback(System.Action<int> Callback)

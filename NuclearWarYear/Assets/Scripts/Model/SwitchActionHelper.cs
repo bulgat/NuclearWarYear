@@ -23,7 +23,7 @@ public class SwitchActionHelper
         commandLider.SetNameCommand(actionCommand);
         
         if (countryLider.GetCommandLider()?.GetVisibleBomber() == true) { 
-            Debug.Log ("0011 ####  Command  FlagId =" + FlagId);
+           
         }
         //Change Ai Command
         if (AIfiend)

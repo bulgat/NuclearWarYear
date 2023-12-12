@@ -9,6 +9,7 @@ using System.Text;
 using System.Reflection;
 using Assets.Scripts.View;
 using Assets.Scripts.Model;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class MenuScript : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class MenuScript : MonoBehaviour
     public GameObject CanvasReport;
     public Button CanvasReportButtonClose;
     public Text CanvasReportTextMessage;
-    public Image CanvasReportIcon;
+    //public Image CanvasReportIcon;
 
     public List<GameObject> MapNationFlagList; 
 
@@ -91,7 +92,7 @@ public class MenuScript : MonoBehaviour
     private List<GameObject> CardButtonList;
     public GameObject[] CountryList;
     public GameObject[] CountryLineList;
-
+    public ViewTacticReal _viewTacticReal;
     void Awake()
     {
         this.CountryLiderList = null;
@@ -99,8 +100,11 @@ public class MenuScript : MonoBehaviour
          _mainModel = new MainModel( CountryLiderPropagandaBuildingList);
         this.flagIdPlayer = _mainModel.GetCurrentPlayerFlag();
         this.CountryLiderList = _mainModel.GetCountryLiderList();
+
         
-        
+        this._viewTacticReal = CanvasTacticReal.transform.GetChild(0).GetComponent<ViewTacticReal>();
+        this._viewTacticReal.Init(this.FlagImageList,this.IconCardList);
+Debug.Log(this._viewTacticReal+"   ----  Co   = " + CanvasTacticReal.transform.GetChild(0));
     }
     void OnEnable()
     {
@@ -438,8 +442,8 @@ public class MenuScript : MonoBehaviour
 
         _visiblePanel = false;
         MoveMapNuclear();
-
-        CanvasTacticRealSetText("Начало хода",0);
+        Debug.Log(_viewTacticReal+"  this.FlagImageList = " + this.FlagImageList);
+        _viewTacticReal.CanvasTacticRealSetText("Начало хода",0);
         // accept animation Central Building Propagation
         int indexLider = 0;
         foreach (CountryLider lider in _mainModel.CountryLiderList)
@@ -481,8 +485,8 @@ public class MenuScript : MonoBehaviour
         _controller.SendCommand(eventController);
 
 
-        
-        CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+lider.GetEventTotalTurn(),
+
+        _viewTacticReal.CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+lider.GetEventTotalTurn(),
             lider.FlagId-1);
 
 
@@ -507,10 +511,11 @@ public class MenuScript : MonoBehaviour
         return cityTown;
     }
 
-    
+
     //Missle
     void MissleMethodClick(int IdMissle)
     {
+        Debug.Log("0011 ### and  FlagId    IdMissle =" + IdMissle);
         foreach (var item in this.CardButtonList)
         {
             item.transform.localScale = new Vector2(1, 1);
@@ -549,7 +554,11 @@ public class MenuScript : MonoBehaviour
 
             PrintTypeWriter(" build weapon");
         }
-        CanvasReportIcon.sprite = this.IconCardList[IdMissle];
+        Debug.Log(" IdMissle = "+ IdMissle);
+        var iconCard = CanvasReport.transform.GetChild(0).GetChild(1);
+        ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
+        viewIconCard.SetParam(this.IconCardList,IdMissle);
+        //CanvasReportIcon.sprite = this.IconCardList[IdMissle];
     }
 
     void SelectCountryOne()
@@ -741,6 +750,7 @@ public class MenuScript : MonoBehaviour
         CanvasTacticReal.GetComponent<Canvas>().enabled = (_visiblePanel==false);
         
     }
+    /*
     private void CanvasTacticRealSetText(string InfoText,int FlagIndex)
     {
         CanvasTacticReal.GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
@@ -748,7 +758,7 @@ public class MenuScript : MonoBehaviour
         
         CanvasTacticRealImage[1].sprite = FlagImageList[FlagIndex];
     }
-
+    */
     void Update()
     {
         UpdatePanelVisible();
