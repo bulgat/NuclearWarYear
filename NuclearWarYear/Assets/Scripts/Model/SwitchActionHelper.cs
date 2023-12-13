@@ -6,6 +6,7 @@ using System.Linq;
 
 public class SwitchActionHelper
 {
+    public enum ActionCommand { Propaganda, Defence, Defectors, Ufo, Baby, RocketRich, CrazyCow,Build, AttackMissle }
 
     public CommandLider SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
         List<CityModel> TownList, int FlagIdPlayer, string actionCommand, int FlagId,int MissleId)
@@ -16,10 +17,6 @@ public class SwitchActionHelper
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         bool AIfiend = FlagId != FlagIdPlayer;
 
-        
-
-        //CityModel targetCity = null;
-
         commandLider.SetNameCommand(actionCommand);
         
         if (countryLider.GetCommandLider()?.GetVisibleBomber() == true) { 
@@ -29,29 +26,29 @@ public class SwitchActionHelper
         if (AIfiend)
         {
             //int countWeapon;
-            if (actionCommand== "Missle")
+            if (actionCommand== DictionaryEssence.TypeWeapon.Missle.ToString())
             {
-                MissleId = countryLider.GetRandomMissleSizeId(DictionaryMissle.TypeWeapon.Missle);
+                MissleId = countryLider.GetRandomMissleSizeId(DictionaryEssence.TypeWeapon.Missle);
                 if (MissleId== 0)
                 {
-                    actionCommand = "Propaganda";
+                    actionCommand = ActionCommand.Propaganda.ToString();
                 }
              
             }
-            if(actionCommand == "Bomber")
+            if(actionCommand == DictionaryEssence.TypeWeapon.Bomber.ToString())
             {
-                MissleId = countryLider.GetRandomMissleSizeId(DictionaryMissle.TypeWeapon.Bomber);
+                MissleId = countryLider.GetRandomMissleSizeId(DictionaryEssence.TypeWeapon.Bomber);
                 //bomber
                 if (MissleId == 0)
                 {
-                    actionCommand = "Propaganda";
+                    actionCommand = ActionCommand.Propaganda.ToString();
                 }
             }
-            if(actionCommand == ActionCommand.Command.Defence.ToString())
+            if(actionCommand == ActionCommand.Defence.ToString())
             {
                 if (countryLider.GetDefenceWeapon().Count() <= 0)
                 {
-                    actionCommand = "Propaganda";
+                    actionCommand = ActionCommand.Propaganda.ToString();
                 }
             }
 
@@ -71,117 +68,100 @@ public class SwitchActionHelper
         {
             
             
-            actionCommand = "Defectors";
+            actionCommand = ActionCommand.Defectors.ToString();
         }
         if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
         {
 
             
             
-            actionCommand = "Ufo";
+            actionCommand = ActionCommand.Ufo.ToString();
         }
         if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
         {
-            actionCommand = "Baby";
+            actionCommand = ActionCommand.Baby.ToString();
         }
         if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
         {
-            actionCommand = "RocketRich";
+            actionCommand = ActionCommand.RocketRich.ToString();
         }
         if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
         {
-            actionCommand = "CrazyCow";
+            actionCommand = ActionCommand.CrazyCow.ToString();
         }
         switch (actionCommand)
         {
             case "CrazyCow":
-                commandLider.SetVisibleEventList("CrazyCow", true);
+                commandLider.SetVisibleEventList(ActionCommand.CrazyCow.ToString(), true);
                 commandLider.SetTargetCity(targetCity);
                 break;
             case "RocketRich":
-                commandLider.SetVisibleEventList("RocketRich", true);
+                commandLider.SetVisibleEventList(ActionCommand.RocketRich.ToString(), true);
                 commandLider.SetTargetCity(targetCity);
                 break;
             case "Baby":
-                commandLider.SetVisibleEventList("Baby", true);
+                commandLider.SetVisibleEventList(ActionCommand.Baby.ToString(), true);
                 commandLider.SetTargetCity(targetCity);
                 break;
             case "Ufo":
-                commandLider.SetVisibleEventList("Ufo", true);
+                commandLider.SetVisibleEventList(ActionCommand.Ufo.ToString(), true);
                 commandLider.SetTargetCity(targetCity);
                 break;
             case "Defectors":
-                commandLider.SetVisibleEventList("Defectors", true);
+                commandLider.SetVisibleEventList(ActionCommand.Defectors.ToString(), true);
                 commandLider.SetTargetCity(targetCity);
                 break;
             case "Propaganda":
-                commandLider.SetVisibleEventList("Prop",true);
+                commandLider.SetVisibleEventList(ActionCommand.Propaganda.ToString(), true);
                 targetCity = new ModGameEngine().GetCityRandomFlagId(TownList, CountryLiderList[4], FlagId, AIfiend);
                 break;
             case "Building":
-                commandLider.SetVisibleEventList("Build", true);
-                // Add missle
+                commandLider.SetVisibleEventList(ActionCommand.Build.ToString(), true);
                 BuildWeapon buildWeapon = new BuildWeapon();
-
                 commandLider.AddMissle(buildWeapon.AddLiderBuildWeaponSwithAction());
                 commandLider.AddReportProducedWeaponList(buildWeapon.GetReportProducedWeaponList());
-           
                 break;
             case "Defence":
-                commandLider.SetVisibleEventList("Defence", true);
+                commandLider.SetVisibleEventList(ActionCommand.Defence.ToString(), true);
                 break;
             case "Missle":
-                //MissleId
-              
-
                     commandLider.SetVisibleMissle(true, MissleId);
                 break;
             case "Bomber":
                 commandLider.SetVisibleBomber(true, MissleId);
                 break;
             case "AttackBomber":
-
                 if (targetCity == null)
                 {
-                    commandLider.SetVisibleEventList("Prop", true);
+                    commandLider.SetVisibleEventList(ActionCommand.Propaganda.ToString(), true);
                 }
                 else
                 {
                     commandLider.SetVisibleAttackBomber(true);
-                   
                     commandLider.SetTargetCity(targetCity);
                     commandLider.SetAttackBomber(countryLider.GetBomber());
-
                 }
                 break;
             case "AttackMissle":
-
                 if (targetCity == null)
                 {
-                    commandLider.SetVisibleEventList("Prop", true);
+                    commandLider.SetVisibleEventList(ActionCommand.Propaganda.ToString(), true);
                 }
                 else
                 {
-                    commandLider.SetVisibleEventList("AttackMissle", true);
+                    commandLider.SetVisibleEventList(ActionCommand.AttackMissle.ToString(), true);
                     commandLider.SetTargetCity(targetCity);
                     commandLider.SetAttackMissle(countryLider.GetMissle());
-
                 }
-
                 break;
             default:
                 //print ("Incorrect intelligence level.");
                 break;
         }
-
-  
-
         if (countryLider.GetTargetCitySelectPlayer() != null)
         {
             commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
         }
-
-
         return commandLider;
     }
  

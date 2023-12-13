@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Defence : Weapon,IWeapon
 {
-   public Defence(string name, int size, int damage, DictionaryMissle.TypeWeapon Type,int id)
+   public Defence(string name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id)
 	{
 		this.Id = id;
 		this.Name = name;
@@ -21,7 +21,7 @@ public class Defence : Weapon,IWeapon
 	{
 		return this.Name;
 	}
-	public DictionaryMissle.TypeWeapon GetTypeWeapon()
+	public DictionaryEssence.TypeWeapon GetTypeWeapon()
 	{
 		return this.Type;
 

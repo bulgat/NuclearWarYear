@@ -7,7 +7,7 @@ public class Bomber: Weapon,IWeapon
 {
 
 	
-	public Bomber(string name, int size, int damage, DictionaryMissle.TypeWeapon Type,int id) {
+	public Bomber(string name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id) {
 		this.Id = id;
 		Name=name;
 		Size=size;
@@ -22,7 +22,7 @@ public class Bomber: Weapon,IWeapon
 	{
 		return this.Name;
 	}
-	public DictionaryMissle.TypeWeapon GetTypeWeapon()
+	public DictionaryEssence.TypeWeapon GetTypeWeapon()
 	{
 		return this.Type;
 

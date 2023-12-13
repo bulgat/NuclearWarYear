@@ -68,7 +68,7 @@ public class BuildingCentral : MonoBehaviour
     }
     public void VisibleBuilding(CommandLider commandLider)
     {
-        Propaganda.SetActive(commandLider.VisibleEventList["Prop"]);
+        Propaganda.SetActive(commandLider.VisibleEventList["Propaganda"]);
         Building.SetActive(commandLider.VisibleEventList["Build"]);
         DefenceObject.SetActive(commandLider.VisibleEventList["Defence"]);
         MissleObject.SetActive(commandLider.VisibleEventList["Missle"]);

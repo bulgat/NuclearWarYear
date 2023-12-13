@@ -45,13 +45,13 @@ public class MenuScript : MonoBehaviour
     
     public Button TurnButton;
 
-    public Button PropButton;
-    public Button BuildButton;
-    public Button DefenceButton;
+    //public Button PropButton;
+    //public Button BuildButton;
+    //public Button DefenceButton;
 
 
-    public Button BomberButton;
-    public Button BomberButton_1;
+    //public Button BomberButton;
+    //public Button BomberButton_1;
 
     public Button LiderButton_1;
     public Button LiderButton_2;
@@ -104,7 +104,7 @@ public class MenuScript : MonoBehaviour
         
         this._viewTacticReal = CanvasTacticReal.transform.GetChild(0).GetComponent<ViewTacticReal>();
         this._viewTacticReal.Init(this.FlagImageList,this.IconCardList);
-Debug.Log(this._viewTacticReal+"   ----  Co   = " + CanvasTacticReal.transform.GetChild(0));
+
     }
     void OnEnable()
     {
@@ -194,8 +194,8 @@ Debug.Log(this._viewTacticReal+"   ----  Co   = " + CanvasTacticReal.transform.G
         //CardWeapon
         //panelMain
         List<IWeapon> missleList = new List<IWeapon>();
-        missleList.Add(new DictionaryMissle().GetIndustry());
-        missleList.Add(new DictionaryMissle().GetPropaganda());
+        missleList.Add(new DictionaryEssence().GetIndustry());
+        missleList.Add(new DictionaryEssence().GetPropaganda());
         missleList.AddRange(_mainModel.GetCurrenPlayer().GetDefenceWeapon());
         missleList.AddRange( _mainModel.GetCurrenPlayer().GetMissleList());
 
@@ -484,10 +484,14 @@ Debug.Log(this._viewTacticReal+"   ----  Co   = " + CanvasTacticReal.transform.G
         EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, new EventSendLider(lider.FlagId));
         _controller.SendCommand(eventController);
 
+        var idEvent = new DictionaryEssence().GetIdEvent(lider.GetCommandLider().GetNameCommand());
+        
+        Debug.Log(idEvent+"  = Controller = " + eventController.NameCommand+"   "+ lider.GetCommandLider().GetNameCommand());
 
 
         _viewTacticReal.CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+lider.GetEventTotalTurn(),
             lider.FlagId-1);
+
 
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
@@ -515,7 +519,7 @@ Debug.Log(this._viewTacticReal+"   ----  Co   = " + CanvasTacticReal.transform.G
     //Missle
     void MissleMethodClick(int IdMissle)
     {
-        Debug.Log("0011 ### and  FlagId    IdMissle =" + IdMissle);
+        
         foreach (var item in this.CardButtonList)
         {
             item.transform.localScale = new Vector2(1, 1);
@@ -687,8 +691,8 @@ Debug.Log(this._viewTacticReal+"   ----  Co   = " + CanvasTacticReal.transform.G
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
         if (liderPlayer.GetCommandLider().GetVisibleBomber())
         {
- 
-            BomberButton.GetComponent<Button>().interactable = false;
+            Debug.Log("0011 ### and  FlagId    Id ="  );
+            //BomberButton.GetComponent<Button>().interactable = false;
  
             var cityTarget = liderPlayer.GetTargetCitySelectPlayer();
             if (cityTarget == null)

@@ -16,7 +16,7 @@ public class CommandLider
 
 	private IWeapon _AttackMissle;
 	private IWeapon _AttackBomber;
-	private Warhead _AttackWarhead;
+	//private Warhead _AttackWarhead;
 	private string NameCommand;
 	private CountryLider LiderFiend;
 	List<string> _reportProducedWeaponList;
@@ -25,8 +25,8 @@ public class CommandLider
 		this._MissleList = new List<IWeapon>();
 	
 
-		VisibleEventList = new Dictionary<string, bool>();
-		VisibleEventList.Add("Prop",false);
+		this.VisibleEventList = new Dictionary<string, bool>();
+		VisibleEventList.Add("Propaganda",false);
         VisibleEventList.Add("Build", false);
         VisibleEventList.Add("Defence", false);
         VisibleEventList.Add("Missle", false);
@@ -82,9 +82,7 @@ public class CommandLider
     }
 	public bool GetVisibleAttackBomber()
 	{
-		//return this.VisibleAttackBomber;
 		return VisibleEventList["AttackBomber"];
-
     }
 	public void SetNameCommand(string nameCommand)
 	{
@@ -109,15 +107,6 @@ public class CommandLider
 
         return VisibleEventList["Defence"];
     }
-	//AddWarhead
-	
-	public Warhead GetAttackWarhead(){
-		return _AttackWarhead;
-	}
-	public void SetAttackWarhead(Warhead AttackWarhead){
-		_AttackWarhead = AttackWarhead;
-	}
-
 
 	public IWeapon GetAttackBomber(){
 		return _AttackBomber;

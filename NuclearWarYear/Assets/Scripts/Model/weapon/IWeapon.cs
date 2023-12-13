@@ -10,7 +10,7 @@ namespace Assets.Scripts.Model
     {
         public int GetId();
         public string GetName();
-        public DictionaryMissle.TypeWeapon GetTypeWeapon();
+        public DictionaryEssence.TypeWeapon GetTypeWeapon();
         public int GetSize();
         public int GetDamage();
         public void SetDamage(int damage);

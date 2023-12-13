@@ -94,7 +94,7 @@ public class Controller
 		//TurnSatisfyOneLider
 		if (eventController.NameCommand == Command.TurnSatisfyOneLider)
 		{
-			Debug.Log( "&&&&&&&&&& $$ @@@ cou sel  == ");
+			
 			_mainModel.SatisfyOneLiderTurn(eventController.EventSend.FlagId);
 			return;
 		}

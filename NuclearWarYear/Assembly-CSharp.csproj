@@ -64,7 +64,7 @@
     <Compile Include="Assets\Scripts\BuildingCentral.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewRocketRich.cs" />
     <Compile Include="Assets\Scripts\View\ViewSendAnimObj.cs" />
-    <Compile Include="Assets\Scripts\Model\weapon\Warhead.cs" />
+    <Compile Include="Assets\Scripts\Model\weapon\Incident.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\Defence.cs" />
     <Compile Include="Assets\Scripts\View\ViewLiderHelper.cs" />
     <Compile Include="Assets\Scripts\Model\ActionCommand.cs" />
@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Model\CommandLider.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewMoveDeflectors.cs" />
     <Compile Include="Assets\Scripts\Model\ModGameEngine.cs" />
+    <Compile Include="Assets\Scripts\ViewIconCard.cs" />
     <Compile Include="Assets\Scripts\Controller\IEventSend.cs" />
     <Compile Include="Assets\Scripts\Model\Nation\LiderHelperOne.cs" />
     <Compile Include="Assets\Scripts\Model\DamagePopulationHelper.cs" />
@@ -83,7 +84,7 @@
     <Compile Include="Assets\Scripts\View\ViewTown.cs" />
     <Compile Include="Assets\Scripts\Controller\Controller.cs" />
     <Compile Include="Assets\Scripts\Controller\CityEvent.cs" />
-    <Compile Include="Assets\Scripts\Model\weapon\DictionaryMissle.cs" />
+    <Compile Include="Assets\Scripts\Model\weapon\DictionaryEssence.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewCircleBomber.cs" />
     <Compile Include="Assets\Scripts\Model\LiderHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildWeapon.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\Scripts\View\ViewPlayerButton.cs" />
     <Compile Include="Assets\Scripts\Model\Country\RelationShip.cs" />
     <Compile Include="Assets\Scripts\ViewCardGame.cs" />
+    <Compile Include="Assets\Scripts\ViewTacticReal.cs" />
     <Compile Include="Assets\Scripts\View\ViewResourceMethod.cs" />
     <Compile Include="Assets\Scripts\View\ViewCircleReady.cs" />
     <Compile Include="Assets\Scripts\View\ViewCardWeapon.cs" />
@@ -117,8 +119,6 @@
     <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackMissle.cs" />
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\ViewIconCard.cs" />
-    <Compile Include="Assets\Scripts\ViewTacticReal.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

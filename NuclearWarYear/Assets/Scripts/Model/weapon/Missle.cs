@@ -6,7 +6,7 @@ using UnityEngine;
 public class Missle : Weapon, IWeapon
 {
 
-	public Missle(string name, int size, int damage, DictionaryMissle.TypeWeapon Type,int id) {
+	public Missle(string name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id) {
 		this.Id = id;
 		this.Name =name;
 		this.Size =size;
@@ -21,7 +21,7 @@ public class Missle : Weapon, IWeapon
 	{
 		return this.Name;
 	}
-	public DictionaryMissle.TypeWeapon GetTypeWeapon()
+	public DictionaryEssence.TypeWeapon GetTypeWeapon()
     {
 		return this.Type;
 
