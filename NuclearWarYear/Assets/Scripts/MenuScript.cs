@@ -10,6 +10,7 @@ using System.Reflection;
 using Assets.Scripts.View;
 using Assets.Scripts.Model;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
+using static UnityEngine.ParticleSystem;
 
 public class MenuScript : MonoBehaviour
 {
@@ -38,20 +39,12 @@ public class MenuScript : MonoBehaviour
     public GameObject Canvas;
     public GameObject CardGamePrefabs;
     public Image CircleReady;
-
+    public Image ImageTestCard;
 
     public Button ButtonResource;
     public Button ButtonCloseResource;
     
     public Button TurnButton;
-
-    //public Button PropButton;
-    //public Button BuildButton;
-    //public Button DefenceButton;
-
-
-    //public Button BomberButton;
-    //public Button BomberButton_1;
 
     public Button LiderButton_1;
     public Button LiderButton_2;
@@ -69,7 +62,7 @@ public class MenuScript : MonoBehaviour
     public List<Sprite> TownSpriteList;
 
     float waitTime = 4.0f;
-    float waitTurnTime = 2.0f;
+    float waitTurnTime = 3.0f;
     float _animationTime = 2.0f;
     bool _visiblePanel = true;
 
@@ -281,7 +274,7 @@ public class MenuScript : MonoBehaviour
     {
 
 
-        TownViewList = new List<GameObject>();
+        this.TownViewList = new List<GameObject>();
         GameObject[] TownListView = GameObject.FindGameObjectsWithTag("Town");
 
         List<CityModel> cityModelList = _mainModel.GetTownList();
@@ -300,7 +293,7 @@ public class MenuScript : MonoBehaviour
                     townCity.SetCityModelView(cityModel);
                     townCity.SetId(cityModel.GetId(), SelectCityTargetIdPlayer, TownSpriteList);
 
-                    TownViewList.Add(TownListView[i]);
+                    this.TownViewList.Add(TownListView[i]);
                 }
             }
 
@@ -442,8 +435,8 @@ public class MenuScript : MonoBehaviour
 
         _visiblePanel = false;
         MoveMapNuclear();
-        Debug.Log(_viewTacticReal+"  this.FlagImageList = " + this.FlagImageList);
-        _viewTacticReal.CanvasTacticRealSetText("Начало хода",0);
+        
+        _viewTacticReal.CanvasTacticRealSetText("Начало хода",0,0, this.LiderImageList, this._mainModel,0);
         // accept animation Central Building Propagation
         int indexLider = 0;
         foreach (CountryLider lider in _mainModel.CountryLiderList)
@@ -453,7 +446,7 @@ public class MenuScript : MonoBehaviour
             
             indexLider++;
         }
-        float openWaitTime = waitTime + waitTurnTime * _mainModel.CountryLiderList.Count();
+        float openWaitTime = waitTime + this.waitTurnTime * _mainModel.CountryLiderList.Count();
 
         StartCoroutine(OpenMenu(openWaitTime));
         StartCoroutine(AnimationPlayer(openWaitTime+_animationTime));
@@ -490,7 +483,7 @@ public class MenuScript : MonoBehaviour
 
 
         _viewTacticReal.CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+lider.GetEventTotalTurn(),
-            lider.FlagId-1);
+            lider.FlagId-1, idEvent, this.LiderImageList, this._mainModel, indexLider);
 
 
 
@@ -515,8 +508,6 @@ public class MenuScript : MonoBehaviour
         return cityTown;
     }
 
-
-    //Missle
     void MissleMethodClick(int IdMissle)
     {
         
@@ -754,15 +745,25 @@ public class MenuScript : MonoBehaviour
         CanvasTacticReal.GetComponent<Canvas>().enabled = (_visiblePanel==false);
         
     }
-    /*
-    private void CanvasTacticRealSetText(string InfoText,int FlagIndex)
+    private void SetAllCityVisibleLabelView(bool Visible)
     {
-        CanvasTacticReal.GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
-        var CanvasTacticRealImage = CanvasTacticReal.GetComponentsInChildren<Image>();
-        
-        CanvasTacticRealImage[1].sprite = FlagImageList[FlagIndex];
+
+
+        if (TownViewList != null)
+        {
+            foreach (GameObject city in TownViewList)
+            {
+
+                if (city)
+                {
+
+                    City townCity = city.GetComponent<City>();
+                    townCity.SetVisibleLabel(Visible);
+                }
+
+            }
+        }
     }
-    */
     void Update()
     {
         UpdatePanelVisible();
@@ -804,30 +805,15 @@ public class MenuScript : MonoBehaviour
 
                 
                 ViewCardWeapon viewCardWeapon = hit2D.transform.gameObject.GetComponent<ViewCardWeapon>();
+
                 
             }
             
         }
+ImageTestCard.transform.position = new Vector2(this.TownViewList.Last().transform.position.x*100, this.TownViewList.Last().transform.position.y*100);
+               // Debug.Log( "  this.FlagImage  = "  );
     }
-    private void SetAllCityVisibleLabelView(bool Visible)
-    {
-       
-        
-        if (TownViewList != null)
-        {
-            foreach (GameObject city in TownViewList)
-            {
 
-                if (city)
-                {
-
-                    City townCity = city.GetComponent<City>();
-                    townCity.SetVisibleLabel(Visible);
-                }
-                
-            }
-        }
-    }
 
     private void MoveAi()
     {

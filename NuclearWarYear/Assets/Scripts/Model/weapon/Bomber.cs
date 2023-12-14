@@ -7,12 +7,13 @@ public class Bomber: Weapon,IWeapon
 {
 
 	
-	public Bomber(string name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id) {
+	public Bomber(string name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id, int IdImage = 0) {
 		this.Id = id;
 		Name=name;
 		Size=size;
 		Damage=damage;
 		this.Type = Type;
+		this.IdImage=IdImage;
 	}
 	public int GetId()
 	{

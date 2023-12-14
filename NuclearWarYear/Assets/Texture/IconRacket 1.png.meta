@@ -32,6 +32,24 @@ TextureImporter:
   - first:
       213: -3464624375443493656
     second: IconRacket 1_9
+  - first:
+      213: 8413886053961802000
+    second: IconRacket 1_10
+  - first:
+      213: 6399702760359641969
+    second: IconRacket 1_11
+  - first:
+      213: 8903108971571854393
+    second: IconRacket 1_12
+  - first:
+      213: 6917669543070743611
+    second: IconRacket 1_13
+  - first:
+      213: -9030636506407637647
+    second: IconRacket 1_14
+  - first:
+      213: 4776699773809052520
+    second: IconRacket 1_15
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -118,6 +136,30 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -126,7 +168,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 284
+        y: 426
         width: 142
         height: 142
       alignment: 0
@@ -147,7 +189,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 142
-        y: 284
+        y: 426
         width: 142
         height: 142
       alignment: 0
@@ -168,7 +210,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 284
-        y: 284
+        y: 426
         width: 142
         height: 142
       alignment: 0
@@ -189,7 +231,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 426
-        y: 284
+        y: 426
         width: 142
         height: 142
       alignment: 0
@@ -210,7 +252,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 142
+        y: 284
         width: 142
         height: 142
       alignment: 0
@@ -231,7 +273,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 142
-        y: 142
+        y: 284
         width: 142
         height: 142
       alignment: 0
@@ -252,7 +294,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 284
-        y: 142
+        y: 284
         width: 142
         height: 142
       alignment: 0
@@ -273,7 +315,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 426
-        y: 142
+        y: 284
         width: 142
         height: 142
       alignment: 0
@@ -294,7 +336,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 142
         width: 142
         height: 142
       alignment: 0
@@ -315,7 +357,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 142
-        y: 0
+        y: 142
         width: 142
         height: 142
       alignment: 0
@@ -327,6 +369,132 @@ TextureImporter:
       bones: []
       spriteID: 8ece785ac7e2befc0800000000000000
       internalID: -3464624375443493656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconRacket 1_10
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 142
+        width: 142
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 011a10399c024c470800000000000000
+      internalID: 8413886053961802000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconRacket 1_11
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 142
+        width: 142
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 173c253e0cf40d850800000000000000
+      internalID: 6399702760359641969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconRacket 1_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 142
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93c322f50723e8b70800000000000000
+      internalID: 8903108971571854393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconRacket 1_13
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 0
+        width: 142
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3c354c4ccf700060800000000000000
+      internalID: 6917669543070743611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconRacket 1_14
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 0
+        width: 142
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17de5eb91fbbca280800000000000000
+      internalID: -9030636506407637647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconRacket 1_15
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 0
+        width: 142
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86bc390e22f3a4240800000000000000
+      internalID: 4776699773809052520
       vertices: []
       indices: 
       edges: []

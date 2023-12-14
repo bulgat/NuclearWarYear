@@ -9,5 +9,5 @@ public class Weapon
 	public int Size;
 	public int Damage;
 	public DictionaryEssence.TypeWeapon Type;
-
+    public int IdImage;
 }

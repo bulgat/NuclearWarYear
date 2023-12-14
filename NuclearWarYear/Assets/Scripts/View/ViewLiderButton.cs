@@ -58,15 +58,20 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         
 
         if (_mainModel.CountryLiderList[indexLider].GetCommandLider().GetVisibleBomber())
-            
         {
-            circleReady.enabled = true;
-            circleReady.sprite = IconCircleReadyList[0];
+            if (this.IconCircleReadyList!=null)
+            {
+                circleReady.enabled = true;
+                circleReady.sprite = this.IconCircleReadyList[0];
+            }
         }
         if (_mainModel.CountryLiderList[indexLider].GetCommandLider().GetVisibleMissle())
         {
-            circleReady.enabled = true;
-            circleReady.sprite = IconCircleReadyList[1];
+            if (this.IconCircleReadyList != null)
+            {
+                circleReady.enabled = true;
+                circleReady.sprite = IconCircleReadyList[1];
+            }
         }
 
 

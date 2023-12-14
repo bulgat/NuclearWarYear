@@ -15,10 +15,10 @@ namespace Assets.Scripts.View
             menuScript.CanvasResourcePlayer.SetActive(true);
             int flagId = _mainModel.GetCurrenFlagPlayer();
             CountryLider liderPlayer = _mainModel.GetLiderOne(flagId);
-            int indexLider = liderPlayer.GraphicId;
+            //int indexLider = liderPlayer.GraphicId;
 
             menuScript.CanvasResourcePlayerImageLider.sprite = LiderImageList[
-                new ViewLiderHelper().GetNumberSpriteLider(indexLider, 0)];
+                new ViewLiderHelper().GetNumberSpriteLider(liderPlayer.GraphicId, 0)];
 
             menuScript.CanvasResourceFlagImageLider.sprite = FlagImageList[
                 flagId-1];

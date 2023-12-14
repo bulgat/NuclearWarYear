@@ -9,6 +9,7 @@ using Assets.Scripts.Model;
 public class CountryLider 
 {
     public int FlagId;
+	public int ViewIdImageFlag;
 	[SerializeField]
 	public bool Player;
 	
@@ -41,6 +42,8 @@ public class CountryLider
 		this.GraphicId = scenarioLider.GraphicId;
 
         this._TownListOwn = new List<CityModel>();
+		
+
 		foreach(CityModel TownCity in TownList){
 			
 			if(CountryId == TownCity.CountryId){
@@ -150,7 +153,7 @@ public class CountryLider
 	}
 	public int GetRandomMissleSizeId(DictionaryEssence.TypeWeapon TypeWeaponFly)
     {
-        Debug.Log(_MissleList+" &&&&&&&&&&  @@ c id   TypeWeaponFly == " + TypeWeaponFly);
+        
         List<IWeapon> missleList = _MissleList.Where(a => a.GetTypeWeapon() == TypeWeaponFly).ToList();
         if (missleList.Count() == 0)
         {
@@ -174,7 +177,7 @@ public class CountryLider
 		if (this._MissleList.Count>0){
 			this._MissleList.RemoveAt(0);
 		}
-		Debug.Log("====FLAG "+this.FlagId+"    ==" + this._MissleList.Count);
+		
 	}
 	public void AddMissle(List<IWeapon> missleList) {
 		if (missleList != null)

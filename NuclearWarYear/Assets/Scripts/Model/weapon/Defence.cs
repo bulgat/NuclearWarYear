@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class Defence : Weapon,IWeapon
 {
-   public Defence(string name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id)
+   public Defence(string name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id, int IdImage = 0)
 	{
 		this.Id = id;
 		this.Name = name;
 		this.Size = size;
 		this.Damage = damage;
 		this.Type = Type;
+		this.IdImage = IdImage;
 	}
 	public int GetId()
 	{
