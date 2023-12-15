@@ -14,8 +14,10 @@ using static UnityEngine.ParticleSystem;
 
 public class MenuScript : MonoBehaviour
 {
+    //public Canvas CanvasMainPanel;
     public GameObject CardWeapon;
     public List<Sprite> IconCardList;
+    public List<GameObject> UICardTownList;
 
     public GameObject panelMain;
     public GameObject CanvasTacticReal;
@@ -27,7 +29,6 @@ public class MenuScript : MonoBehaviour
     public GameObject CanvasReport;
     public Button CanvasReportButtonClose;
     public Text CanvasReportTextMessage;
-    //public Image CanvasReportIcon;
 
     public List<GameObject> MapNationFlagList; 
 
@@ -39,7 +40,8 @@ public class MenuScript : MonoBehaviour
     public GameObject Canvas;
     public GameObject CardGamePrefabs;
     public Image CircleReady;
-    public Image ImageTestCard;
+
+    public GameObject TownCard;
 
     public Button ButtonResource;
     public Button ButtonCloseResource;
@@ -172,7 +174,26 @@ public class MenuScript : MonoBehaviour
 
         //CountryLineList[0].SetActive(false);
         ResetCountryOutline();
+
+        CreateTownInfoList();
+
+        
     }
+    void CreateTownInfoList()
+    {
+        this.UICardTownList = new List<GameObject>();
+        foreach(var town in this.TownViewList)
+        {
+            GameObject CardTown = Instantiate(TownCard, new Vector2(100, 100), Quaternion.identity);
+            TownCardInfo townCardInfo = CardTown.GetComponent<TownCardInfo>();
+            City townCity = town.GetComponent<City>();
+            townCardInfo.SetParam(this.FlagImageList, townCity);
+            //CardWing.transform.parent = CanvasMap.transform;
+            this.UICardTownList.Add(CardTown);
+            
+        }
+    }
+
     void RefreshViewCard()
     {
         if (this.CardButtonList == null)
@@ -810,10 +831,25 @@ public class MenuScript : MonoBehaviour
             }
             
         }
-ImageTestCard.transform.position = new Vector2(this.TownViewList.Last().transform.position.x*100, this.TownViewList.Last().transform.position.y*100);
-               // Debug.Log( "  this.FlagImage  = "  );
+        DrawTownInfoList();
+      
     }
+    void DrawTownInfoList()
+    {
+        float h = gameObject.GetComponent<RectTransform>().rect.height;
+        int count = 0;
+        foreach (var town in this.TownViewList)
+        {
+            Vector3 coordinates = Camera.main.WorldToScreenPoint(town.transform.position);
+            UICardTownList[count].transform.parent = gameObject.transform.GetChild(0);
+            UICardTownList[count].transform.position = new Vector3(coordinates.x, coordinates.y - h / 10, coordinates.z);
 
+            //Population
+            count++;
+        }
+
+        
+    }
 
     private void MoveAi()
     {
@@ -832,12 +868,6 @@ ImageTestCard.transform.position = new Vector2(this.TownViewList.Last().transfor
     void PrintTypeWriter(string Message)
     {
         CanvasReportWindow(Message);
-        /*
-        foreach (var item in Message)
-        {
-            TextTypeWriter.text += item;
-            yield return new WaitForSeconds(0.1f);
-        }
-        */
+
     }
 }

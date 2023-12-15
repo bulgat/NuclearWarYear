@@ -7,7 +7,7 @@ using System;
 public class City : MonoBehaviour
 {
 	public GameObject NuclearTown;
-	public GameObject NuclearExplode;
+    GameObject NuclearExplode;
 	public GameObject Shield;
 	public GameObject AttackTarget;
 	public GameObject Flag;
@@ -24,20 +24,35 @@ public class City : MonoBehaviour
 	private List<Sprite> _TownSpriteList;
 	public CityModel CityTownModel;
 
+    public Animator animator;
     private void Await() {
 
-		
-	}
+        
+        //animator.Play(0);
+    }
 	
     void Start()
     {
 
-        NuclearExplode.SetActive(false);
+        
 		AttackTarget.SetActive(false);
 
-		
+		NuclearExplode = gameObject.transform.GetChild(3).gameObject;
 
-	}
+animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
+        
+        if (animator)
+        {
+
+             animator.enabled = false;
+            //animator.StopPlayback();
+        }
+        //NuclearExplode.GetComponent().S
+
+        NuclearExplode.SetActive(false);
+        //animator.enabled = true;
+        //animator.Play(0);
+    }
 
     // Update is called once per frame
     void Update()
@@ -56,11 +71,9 @@ public class City : MonoBehaviour
     {
 		this.CityTownModel = cityModel;
 		this.FlagId = cityModel.FlagId-1;
+		//var spriteRenderer = Flag.GetComponent<SpriteRenderer>();
 
-		
-		var spriteRenderer = Flag.GetComponent<SpriteRenderer>();
-
-		spriteRenderer.sprite = FlagImageList[this.FlagId];
+		//spriteRenderer.sprite = FlagImageList[this.FlagId];
 
 	}
 	public void ChangeViewTown(){
@@ -118,16 +131,21 @@ public class City : MonoBehaviour
 		_visibleLabel = Visible;
 	}
 	public void SetVisibleExplode(bool Visible){
-		
-		if (NuclearExplode)
+
+       
+
+        NuclearExplode.SetActive(Visible);
+			animator.enabled = Visible;
+		if (Visible)
 		{
-			
-			NuclearExplode.SetActive(Visible);
-		}
+             Debug.Log("   l  = " + Visible);
+            animator.Play(0);
+        }
 	}
 	public void SetVisibleShild(bool Visible){
 		Shield.SetActive(Visible);
 	}
+	/*
 	void OnGUI()
     {
 		
@@ -139,4 +157,5 @@ public class City : MonoBehaviour
 			GUI.Label(new Rect(getPixelPos.x-10, getPixelPos.y+10, 100, 20), CityTownModel.GetPopulation() + "");
 		}
     }
+	*/
 }
