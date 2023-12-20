@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Assets.Scripts.View.ViewResourceMethod
     - BuildingCentral
     - City
     - MenuScript
@@ -36,10 +37,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -105,6 +104,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 4100}
     - Class: 114
       Script: {instanceID: 4102}
+    - Class: 114
+      Script: {instanceID: 4124}
     - Class: 114
       Script: {instanceID: 4186}
     - Class: 114
@@ -530,7 +531,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 1dde6cda3848cf26585c0bc6d9d06a5b
+      Hash: 9d47d683bcc91903da3b1754e6b9a605
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuScript
@@ -630,6 +631,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ViewTacticReal
+  - hash:
+      serializedVersion: 2
+      Hash: 366def9dc2813b2de023f2040d26fa56
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Assets.Scripts.View
+    className: ViewResourceMethod
   - hash:
       serializedVersion: 2
       Hash: 87cef3c82381dc586f6772c3e27561b6
@@ -839,4 +846,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MenuStart.unity
   - Assets/Scenes/GameScene.unity
   - Assets/Scenes/Victory.unity
-  playerPath: D:/Project/NuclearWar/NuclearWar0.apk
+  playerPath: D:/Project/NuclearWar/NuclearWar1.apk

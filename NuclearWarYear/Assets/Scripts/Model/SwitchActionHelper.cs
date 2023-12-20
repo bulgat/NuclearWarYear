@@ -164,6 +164,11 @@ public class SwitchActionHelper
         {
             actionCommand = ActionCommand.CrazyCow.ToString();
         }
+        if (actionCommand != null)
+        {
+            commandLider = new CommandLider();
+        }
+
         switch (actionCommand)
         {
             case "CrazyCow":

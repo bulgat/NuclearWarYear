@@ -8,28 +8,48 @@ using UnityEngine;
 
 namespace Assets.Scripts.View
 {
-    public class ViewResourceMethod
+    public class ViewResourceMethod : MonoBehaviour
     {
-        public void ViewResourceMethodTable(MenuScript menuScript, List<Sprite> LiderImageList, List<Sprite> FlagImageList, MainModel _mainModel)
+        public Button ButtonCloseResource;
+        private void Start()
         {
-            menuScript.CanvasResourcePlayer.SetActive(true);
+            ButtonCloseResource.onClick.AddListener(() => ButtonCloseResourceMethod(ButtonCloseResource));
+        }
+        public void SetResourceMethodTable(MenuScript menuScript, List<Sprite> LiderImageList, List<Sprite> FlagImageList, MainModel _mainModel)
+        {
+            //menuScript.CanvasResourcePlayer.SetActive(true);
             int flagId = _mainModel.GetCurrenFlagPlayer();
             CountryLider liderPlayer = _mainModel.GetLiderOne(flagId);
             //int indexLider = liderPlayer.GraphicId;
 
-            menuScript.CanvasResourcePlayerImageLider.sprite = LiderImageList[
+            var imageLider = gameObject.transform.GetChild(1);
+
+            imageLider.GetComponent<Image>().sprite = LiderImageList[
                 new ViewLiderHelper().GetNumberSpriteLider(liderPlayer.GraphicId, 0)];
 
-            menuScript.CanvasResourceFlagImageLider.sprite = FlagImageList[
+            var flagLider = gameObject.transform.GetChild(5);
+
+            flagLider.GetComponent<Image>().sprite = FlagImageList[
                 flagId-1];
 
-            menuScript.CanvasResourcePlayerTextLider.text = liderPlayer.GetName();
+            var textLider = gameObject.transform.GetChild(3);
 
-            menuScript.CanvasResourcePlayerPopulation.text =
+            textLider.GetComponent<Text>().text = liderPlayer.GetName();
+
+            var textPopulation = gameObject.transform.GetChild(4);
+
+            textPopulation.GetComponent<Text>().text =
                 " population " + _mainModel.GetCountryLiderList()[4].GetAllOwnPopulation()
                 + "\n missle " + _mainModel.GetCountryLiderList()[4].GetMissleCount()
                 + "\n bomber " + _mainModel.GetCountryLiderList()[4].GetBomberCount()
                 ;
+        }
+        void ButtonCloseResourceMethod(Button buttonCloseResource)
+        {
+            //CanvasResourcePlayer.SetActive(false);
+            //GameObject CanResPlayer = Instantiate(CanResPlayerPrefabs, new Vector2(100, 100), Quaternion.identity);
+            //CanResPlayer.transform.parent = panelMain.transform;
+            Destroy(gameObject);
         }
     }
 }

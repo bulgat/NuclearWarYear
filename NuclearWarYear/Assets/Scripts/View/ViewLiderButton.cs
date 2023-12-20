@@ -80,7 +80,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
 
         GetComponentInChildren<UnityEngine.UI.Text>().text = this.Lider.GetName() +
             " (" + this.Lider.GetAllOwnPopulation() + ")";
-        Debug.Log("   = "  );
+        
         Debug.Log( "  L  =" + countryLider.GetEventTotalTurn().IdEvent);
 
         if (this.IconCardList != null)

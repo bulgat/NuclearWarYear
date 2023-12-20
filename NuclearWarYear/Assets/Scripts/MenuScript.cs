@@ -21,7 +21,7 @@ public class MenuScript : MonoBehaviour
 
     public GameObject panelMain;
     public GameObject CanvasTacticReal;
-    public GameObject CanvasResourcePlayer;
+    public GameObject CanResPlayerPrefabs;
     public Image CanvasResourcePlayerImageLider;
     public Image CanvasResourceFlagImageLider;
     public Text CanvasResourcePlayerTextLider;
@@ -44,7 +44,7 @@ public class MenuScript : MonoBehaviour
     public GameObject TownCard;
 
     public Button ButtonResource;
-    public Button ButtonCloseResource;
+    //public Button ButtonCloseResource;
     
     public Button TurnButton;
 
@@ -129,7 +129,7 @@ public class MenuScript : MonoBehaviour
 
 
         ButtonResource.onClick.AddListener(() => ButtonResourceMethod(ButtonResource));
-        ButtonCloseResource.onClick.AddListener(() => ButtonCloseResourceMethod(ButtonCloseResource));
+        //ButtonCloseResource.onClick.AddListener(() => ButtonCloseResourceMethod(ButtonCloseResource));
         TurnButton.onClick.AddListener(() => TurnButtonMethod(TurnButton));
 
 
@@ -163,7 +163,7 @@ public class MenuScript : MonoBehaviour
         PrintTypeWriter("privet user");
  
         
-        CanvasResourcePlayer.SetActive(false);
+        //CanvasResourcePlayer.SetActive(false);
         CircleImageReadyParam(0, false);
 
         GlueTownView();
@@ -419,14 +419,21 @@ public class MenuScript : MonoBehaviour
     }
     void ButtonResourceMethod(Button buttonResource)
     {
-        new ViewResourceMethod().ViewResourceMethodTable(this, this.LiderImageList, this.FlagImageList,this._mainModel);
+        Debug.Log("   = ");
+        GameObject CanResPlayer = Instantiate(CanResPlayerPrefabs, new Vector2(100, 100), Quaternion.identity);
+        CanResPlayer.transform.parent = panelMain.transform;
+        ViewResourceMethod viewResourceMethod = CanResPlayer.GetComponent<ViewResourceMethod>();
+
+        viewResourceMethod.SetResourceMethodTable(this, this.LiderImageList, this.FlagImageList,this._mainModel);
 
         
     }
+    /*
     void ButtonCloseResourceMethod(Button buttonCloseResource) {
-        CanvasResourcePlayer.SetActive(false);
+        //CanvasResourcePlayer.SetActive(false);
         
     }
+    */
     void RefreshPlayerView()
     {
         this.flagIdPlayer = this._mainModel.GetCurrentPlayerFlag();
