@@ -254,14 +254,14 @@ public class MainModel
 
 		// realize command.
 		foreach (CountryLider lider in CountryLiderList){
-			new MainTurnLider().SatisfyOneLiderTurn(lider.FlagId, CountryLiderList, TownList);
+			new MainTurnLider().SatisfyEventOneLiderTurn(lider.FlagId, CountryLiderList, TownList);
 			
 		}
 	}
 	public void SatisfyOneLiderTurn(int FlagId)
 	{
 		//var lider = GetLiderOne(FlagId);
-		new MainTurnLider().SatisfyOneLiderTurn(FlagId, CountryLiderList, TownList);
+		new MainTurnLider().SatisfyEventOneLiderTurn(FlagId, CountryLiderList, TownList);
 	}
 	
 

@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\View\ViewLiderHelper.cs" />
     <Compile Include="Assets\Scripts\Model\ActionCommand.cs" />
     <Compile Include="Assets\Scripts\Controller\EventBomber.cs" />
+    <Compile Include="Assets\Scripts\TownCardInfo.cs" />
     <Compile Include="Assets\Scripts\Model\CityGameObjHelper.cs" />
     <Compile Include="Assets\Scripts\Model\CommandLider.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewMoveDeflectors.cs" />
@@ -119,7 +120,7 @@
     <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackMissle.cs" />
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\TownCardInfo.cs" />
+    <Compile Include="Assets\Scripts\Model\Nation\IncidentEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

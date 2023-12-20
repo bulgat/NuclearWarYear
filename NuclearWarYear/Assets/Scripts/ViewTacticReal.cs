@@ -34,12 +34,12 @@ public class ViewTacticReal : MonoBehaviour
         
         
         ViewLiderButton viewLiderButton = gameObject.transform.GetChild(4).GetComponent<ViewLiderButton>();
-        Debug.Log(FlagIndex+"====FL  =" + viewLiderButton);
+        
         Debug.Log("indexLider = " + indexLider+ " &&&&&&&&&&   WeaponFly == " + mainModel.GetFiendCountryLiderList().Count);
         //liderPlayer.GraphicId
         viewLiderButton.Init(LiderImageList, this._FlagImageList, mainModel,
             null, 
-            //mainModel.GetFiendCountryLiderList()[indexLider]
+            null,
             mainModel.GetCountryLiderList()[indexLider]);
 
         viewLiderButton.ButtonLiderFrame(mainModel.GetCurrentPlayerFlag());

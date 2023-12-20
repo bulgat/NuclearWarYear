@@ -10,16 +10,18 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
     List<Sprite> LiderImageList;
     List<Sprite> FlagImageList;
     List<Sprite> IconCircleReadyList;
+    List<Sprite> IconCardList;
     MainModel _mainModel;
     CountryLider Lider;
     public void Init(List<Sprite> liderImageList,List<Sprite> flagImageList, MainModel mainModel,
-        List<Sprite> iconCircleReadyList,CountryLider Lider)
+        List<Sprite> iconCircleReadyList, List<Sprite> iconCardList,CountryLider Lider)
     {
         this.LiderImageList = liderImageList;
         this.FlagImageList = flagImageList;
         this._mainModel = mainModel;
         this.Lider = Lider;
         this.IconCircleReadyList = iconCircleReadyList;
+        this.IconCardList = iconCardList;
     }
     public void ButtonLiderFrame(int PlayerFlagId)
     {
@@ -32,7 +34,8 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         var circleReady = allImage_ar[4].GetComponent<Image>();
    
         int indexLider = this.Lider.GraphicId;
-        int moodLider = _mainModel.CountryLiderList[indexLider].GetMood(PlayerFlagId);
+        CountryLider countryLider = _mainModel.CountryLiderList[indexLider];
+        int moodLider = countryLider.GetMood(PlayerFlagId);
         
         var imageMood = 0;
         if (moodLider > 90)
@@ -57,7 +60,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
 
         
 
-        if (_mainModel.CountryLiderList[indexLider].GetCommandLider().GetVisibleBomber())
+        if (countryLider.GetCommandLider().GetVisibleBomber())
         {
             if (this.IconCircleReadyList!=null)
             {
@@ -65,7 +68,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
                 circleReady.sprite = this.IconCircleReadyList[0];
             }
         }
-        if (_mainModel.CountryLiderList[indexLider].GetCommandLider().GetVisibleMissle())
+        if (countryLider.GetCommandLider().GetVisibleMissle())
         {
             if (this.IconCircleReadyList != null)
             {
@@ -77,6 +80,14 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
 
         GetComponentInChildren<UnityEngine.UI.Text>().text = this.Lider.GetName() +
             " (" + this.Lider.GetAllOwnPopulation() + ")";
+        Debug.Log("   = "  );
+        Debug.Log( "  L  =" + countryLider.GetEventTotalTurn().IdEvent);
+
+        if (this.IconCardList != null)
+        {
+            var imageEvent = gameObject.transform.GetChild(6).GetComponent<Image>();
+            imageEvent.sprite = this.IconCardList[countryLider.GetEventTotalTurn().IdEvent];
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

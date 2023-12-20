@@ -138,7 +138,7 @@ animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
 			animator.enabled = Visible;
 		if (Visible)
 		{
-             Debug.Log("   l  = " + Visible);
+             
             animator.Play(0);
         }
 	}

@@ -10,7 +10,7 @@ namespace Assets.Scripts.Model
     {
 		Dictionary<string,string> MessageDictionary;
 
-		public void SatisfyOneLiderTurn(int FlagId, List<CountryLider> CountryLiderList, List<CityModel> TownList)
+		public void SatisfyEventOneLiderTurn(int FlagId, List<CountryLider> CountryLiderList, List<CityModel> TownList)
 		{
             MessageDictionary = new Dictionary<string, string>();
 			MessageDictionary.Add("RocketRich", "Богатые и Маск постороили ракету на Луну ");
@@ -27,7 +27,6 @@ namespace Assets.Scripts.Model
             
 
             CountryLider lider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
-			//CountryLider lider = this.CountryLiderList[FlagId - 1];
 
 			if (lider.GetCommandLider() != null)
 			{
@@ -38,22 +37,22 @@ namespace Assets.Scripts.Model
 				if (lider.GetCommandLider().VisibleEventList["RocketRich"])
 				{
 					int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false, TownList);
-					lider.SetEventTotalMessageTurn(MessageDictionary["RocketRich"] + UnDamage);
+					lider.SetEventTotalMessageTurn(MessageDictionary["RocketRich"] + UnDamage, "RocketRich");
 				}
 				if (lider.GetCommandLider().VisibleEventList["Baby"])
 				{
 					int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false, TownList);
-					lider.SetEventTotalMessageTurn(MessageDictionary["Baby"] + UnDamage);
+					lider.SetEventTotalMessageTurn(MessageDictionary["Baby"] + UnDamage, "Baby");
 				}
 				if (lider.GetCommandLider().VisibleEventList["Ufo"])
 				{
 					int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false, TownList);
-					lider.SetEventTotalMessageTurn(MessageDictionary["Ufo"] + UnDamage);
+					lider.SetEventTotalMessageTurn(MessageDictionary["Ufo"] + UnDamage, "Ufo");
 				}
 				if (lider.GetCommandLider().VisibleEventList["Defectors"])
 				{
 					int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false, TownList);
-					lider.SetEventTotalMessageTurn(MessageDictionary["Defectors"] + UnDamage);
+					lider.SetEventTotalMessageTurn(MessageDictionary["Defectors"] + UnDamage, "Defectors");
 					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 5);
 				}
 
@@ -65,7 +64,7 @@ namespace Assets.Scripts.Model
 					List<string> reportProducedWeaponList = lider.GetCommandLider().GetReportProducedWeaponList();
 					string resultProducedWeapon = string.Join(", ", reportProducedWeaponList.ToArray());
 
-					lider.SetEventTotalMessageTurn(MessageDictionary["Build"] + resultProducedWeapon);
+					lider.SetEventTotalMessageTurn(MessageDictionary["Build"] + resultProducedWeapon, "Build");
 					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 5);
 				}
 
@@ -76,7 +75,7 @@ namespace Assets.Scripts.Model
 				{
 					int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, true, TownList);
 
-					lider.SetEventTotalMessageTurn(MessageDictionary["Propaganda"] + UnDamage + " сбежав от " + lider.GetCommandLider().GetTargetLider().GetName());
+					lider.SetEventTotalMessageTurn(MessageDictionary["Propaganda"] + UnDamage + " сбежав от " + lider.GetCommandLider().GetTargetLider().GetName(), "Propaganda");
 					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 50);
 				}
 				// attack bomber
@@ -103,7 +102,7 @@ namespace Assets.Scripts.Model
 					}
                     
 
-                    lider.SetEventTotalMessageTurn(MessageDictionary["AttackBomber"] + lider.GetCommandLider().GetAttackBomber().GetDamage() + " у " + lider.GetCommandLider().GetTargetLider().GetName());
+                    lider.SetEventTotalMessageTurn(MessageDictionary["AttackBomber"] + lider.GetCommandLider().GetAttackBomber().GetDamage() + " у " + lider.GetCommandLider().GetTargetLider().GetName(), "AttackBomber");
 					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 25);
 				}
 				if (lider.GetCommandLider().VisibleEventList["Missle"])
@@ -134,19 +133,19 @@ namespace Assets.Scripts.Model
 					}
 					lider.RemoveMissle();
 
-					lider.SetEventTotalMessageTurn(MessageDictionary["AttackMissle"] + lider.GetCommandLider().GetAttackMissle().GetDamage() + " у " + lider.GetCommandLider().GetTargetLider().GetName());
+					lider.SetEventTotalMessageTurn(MessageDictionary["AttackMissle"] + lider.GetCommandLider().GetAttackMissle().GetDamage() + " у " + lider.GetCommandLider().GetTargetLider().GetName(), "AttackMissle");
 					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 25);
 				}
 
 				if (lider.GetCommandLider().VisibleEventList["Defence"])
 				{
-					lider.SetEventTotalMessageTurn(MessageDictionary["Defence"]);
+					lider.SetEventTotalMessageTurn(MessageDictionary["Defence"], "Defence");
 					lider.RemoveDefenceWeapon();
 				}
 
 				if (lider.GetCommandLider().VisibleEventList["Airport"])
 				{
-					lider.SetEventTotalMessageTurn(MessageDictionary["Airport"]);
+					lider.SetEventTotalMessageTurn(MessageDictionary["Airport"], "Airport");
 				}
 
 

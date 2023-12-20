@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Assets.Scripts.Model.scenario;
 using Assets.Scripts.Model;
+using Assets.Scripts.Model.Nation;
 
 [System.Serializable]
 public class CountryLider 
@@ -26,9 +27,10 @@ public class CountryLider
 	private CityModel _targetCitySelectPlayer;
 
 	private string Name;
-	private string EventTotalTurn;
+	//private string EventTotalTurn;
+	IncidentEvent EventTotalTurn;
 
-	public int MissleId;
+    public int MissleId;
 	public RelationShip _RelationShip;
 	public int GraphicId { get; }
 	public bool MoveMade { private set; get; }
@@ -54,18 +56,19 @@ public class CountryLider
 		}
 		_maxPopulation=GetAllOwnPopulation();
 		_RelationShip = new RelationShip();
+		this.EventTotalTurn = new IncidentEvent("Propaganda");
 	}
 	public void DoneMoveMade(bool Value)
     {
 		MoveMade = Value;
 
 	}
-	public void SetEventTotalMessageTurn(string eventTotalTurn)
+	public void SetEventTotalMessageTurn(string eventTotalTurn, string eventName)
     {
-		this.EventTotalTurn = eventTotalTurn;
-
+		this.EventTotalTurn = new IncidentEvent(eventName) { EventMessage = eventTotalTurn};
+		
 	}
-	public string GetEventTotalTurn() {
+	public IncidentEvent GetEventTotalTurn() {
 		return this.EventTotalTurn;
 	}
 	public string GetName()

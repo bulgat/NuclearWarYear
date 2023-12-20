@@ -237,24 +237,24 @@ public class MenuScript : MonoBehaviour
     
         ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
         viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel,
-            this.IconCircleReadyList, fiendLider_ar[0]);
+            this.IconCircleReadyList, this.IconCardList, fiendLider_ar[0]);
 
         //ChangeFlag(0, fiendLider_ar[0]);
 
         ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
         viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel,
-            this.IconCircleReadyList, fiendLider_ar[1]);
+            this.IconCircleReadyList, this.IconCardList, fiendLider_ar[1]);
 
         
  
             ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
             viewLiderButton_3.Init(LiderImageList, FlagImageList, _mainModel,
-            this.IconCircleReadyList, fiendLider_ar[2]);
+            this.IconCircleReadyList, this.IconCardList, fiendLider_ar[2]);
 
         
             ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
             viewLiderButton_4.Init(LiderImageList, FlagImageList, _mainModel,
-                this.IconCircleReadyList, fiendLider_ar[3]);
+                this.IconCircleReadyList, this.IconCardList, fiendLider_ar[3]);
 
         SetFlagNation();
     }
@@ -503,7 +503,7 @@ public class MenuScript : MonoBehaviour
         Debug.Log(idEvent+"  = Controller = " + eventController.NameCommand+"   "+ lider.GetCommandLider().GetNameCommand());
 
 
-        _viewTacticReal.CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+lider.GetEventTotalTurn(),
+        _viewTacticReal.CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+lider.GetEventTotalTurn().EventMessage,
             lider.FlagId-1, idEvent, this.LiderImageList, this._mainModel, indexLider);
 
 
@@ -728,7 +728,7 @@ public class MenuScript : MonoBehaviour
             //BomberButton.GetComponent<Button>().interactable = true;
         }
 
-        printMessage.Append("\n  * " + liderPlayer0.GetEventTotalTurn());
+        printMessage.Append("\n  * " + liderPlayer0.GetEventTotalTurn().EventMessage);
 
         
         ManagerButton();
