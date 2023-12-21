@@ -15,11 +15,11 @@ public class SwitchActionHelper
     {
 
         ResetAction();
-        CommandLider commandLider = new CommandLider();
+        //CommandLider commandLider = new CommandLider();
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         bool AIfiend = FlagId != FlagIdPlayer;
 
-        commandLider.SetNameCommand(actionCommand);
+        CommandLider commandLider = new CommandLider(actionCommand);
         
         if (countryLider.GetCommandLider()?.GetVisibleBomber() == true) { 
            
@@ -55,10 +55,8 @@ public class SwitchActionHelper
             }
 
          }
-        CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider);
-
-        commandLider.SetTargetLider( CountryLiderList.Where(a => a.FlagId == targetCity.FlagId).FirstOrDefault());
-
+     
+CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider);
 
         if (AIfiend) {
             commandLider.SetTargetCity(targetCity);
@@ -79,6 +77,10 @@ public class SwitchActionHelper
         {
             commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
         }
+        
+
+        commandLider.SetTargetLider(CountryLiderList.Where(a => a.FlagId == targetCity.FlagId).FirstOrDefault());
+
         return commandLider;
     }
  private void TreatmentCommand(string actionCommand, CommandLider commandLider, CityModel targetCity, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
@@ -166,7 +168,7 @@ public class SwitchActionHelper
         }
         if (actionCommand != null)
         {
-            commandLider = new CommandLider();
+            commandLider = new CommandLider(actionCommand);
         }
 
         switch (actionCommand)
@@ -196,7 +198,7 @@ public class SwitchActionHelper
                 break;
 
             default:
-                //print ("Incorrect intelligence level.");
+                Debug.LogWarning("Incorrect intelligence level.");
                 break;
         }
 

@@ -50,14 +50,14 @@ public class BuildingCentral : MonoBehaviour
     {
         this.buildingCentralModel = new BuildingCentralModel();
         VisibleObjList = new Dictionary<string, bool>();
-        VisibleObjList.Add("Bomber", false);
-        VisibleObjList.Add("AttackBomber", false);
-        VisibleObjList.Add("AttackMissle", false);
-        VisibleObjList.Add("Defectors", false);
-        VisibleObjList.Add("Ufo", false);
-        VisibleObjList.Add("Baby", false);
-        VisibleObjList.Add("RocketRich", false);
-        VisibleObjList.Add("CrazyCow", false);
+        VisibleObjList.Add(DictionaryEssence.TypeEvent.Bomber.ToString(), false);
+        VisibleObjList.Add(DictionaryEssence.TypeEvent.AttackBomber.ToString(), false);
+        VisibleObjList.Add(DictionaryEssence.TypeEvent.AttackMissle.ToString(), false);
+        VisibleObjList.Add(DictionaryEssence.TypeEvent.Defectors.ToString(), false);
+        VisibleObjList.Add(DictionaryEssence.TypeEvent.Ufo.ToString(), false);
+        VisibleObjList.Add(DictionaryEssence.TypeEvent.Baby.ToString(), false);
+        VisibleObjList.Add(DictionaryEssence.TypeEvent.RocketRich.ToString(), false);
+        VisibleObjList.Add(DictionaryEssence.TypeEvent.CrazyCow.ToString(), false);
     }
     public void SetTargetBomber(CityModel target)
     {
@@ -68,20 +68,20 @@ public class BuildingCentral : MonoBehaviour
     }
     public void VisibleBuilding(CommandLider commandLider)
     {
-        Propaganda.SetActive(commandLider.VisibleEventList["Propaganda"]);
-        Building.SetActive(commandLider.VisibleEventList["Build"]);
-        DefenceObject.SetActive(commandLider.VisibleEventList["Defence"]);
-        MissleObject.SetActive(commandLider.VisibleEventList["Missle"]);
-        Airport.SetActive(commandLider.VisibleEventList["Airport"]);
-        AirportAttack.SetActive(commandLider.VisibleEventList["AttackAirport"]);
+        Propaganda.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Propaganda.ToString()]);
+        Building.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Building.ToString()]);
+        DefenceObject.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Defence.ToString()]);
+        MissleObject.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Missle.ToString()]);
+        Airport.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Airport.ToString()]);
+        AirportAttack.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.AttackAirport.ToString()]);
         
 
         if (WingMissle != null)
         {
 
 
-            WingMissle.SetActive(commandLider.VisibleEventList["AttackMissle"]);
-            MissleOpenObject.SetActive(commandLider.VisibleEventList["AttackMissle"]);
+            WingMissle.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.AttackMissle.ToString()]);
+            MissleOpenObject.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.AttackMissle.ToString()]);
         }
 
         //bomber
@@ -91,24 +91,24 @@ public class BuildingCentral : MonoBehaviour
             {
                 bool vis = true;
                 BomberObject.SetActive(vis);
-                VisibleObjList["Bomber"] = vis;
+                VisibleObjList[DictionaryEssence.TypeEvent.Bomber.ToString()] = vis;
             }
 
         }
         if (DefectorsObject!=null) { 
-            DefectorsObject.SetActive(commandLider.VisibleEventList["Defectors"]);
+            DefectorsObject.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Defectors.ToString()]);
         }
         if (UfoObject != null)
         {
-            UfoObject.SetActive(commandLider.VisibleEventList["Ufo"]);
+            UfoObject.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Ufo.ToString()]);
         }
-        VisibleObjList["AttackBomber"] = commandLider.GetVisibleAttackBomber();
-        VisibleObjList["AttackMissle"] = commandLider.VisibleEventList["AttackMissle"];
-        VisibleObjList["Defectors"] = commandLider.VisibleEventList["Defectors"];
-        VisibleObjList["Ufo"] = commandLider.VisibleEventList["Ufo"];
-        VisibleObjList["Baby"] = commandLider.VisibleEventList["Baby"];
-        VisibleObjList["RocketRich"] = commandLider.VisibleEventList["RocketRich"];
-        VisibleObjList["CrazyCow"] = commandLider.VisibleEventList["CrazyCow"];
+        VisibleObjList[DictionaryEssence.TypeEvent.AttackBomber.ToString()] = commandLider.GetVisibleAttackBomber();
+        VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()] = commandLider.VisibleEventList[DictionaryEssence.TypeEvent.AttackMissle.ToString()];
+        VisibleObjList[DictionaryEssence.TypeEvent.Defectors.ToString()] = commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Defectors.ToString()];
+        VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()] = commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Ufo.ToString()];
+        VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()] = commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Baby.ToString()];
+        VisibleObjList[DictionaryEssence.TypeEvent.RocketRich.ToString()] = commandLider.VisibleEventList[DictionaryEssence.TypeEvent.RocketRich.ToString()];
+        VisibleObjList[DictionaryEssence.TypeEvent.CrazyCow.ToString()] = commandLider.VisibleEventList[DictionaryEssence.TypeEvent.CrazyCow.ToString()];
 
         //UFOObject
     }
@@ -117,11 +117,11 @@ public class BuildingCentral : MonoBehaviour
     {
         if (_animationProcess)
         {
-            if (VisibleObjList["Bomber"])
+            if (VisibleObjList[DictionaryEssence.TypeEvent.Bomber.ToString()])
             {
 
 
-                if (VisibleObjList["AttackBomber"] == false)
+                if (VisibleObjList[DictionaryEssence.TypeEvent.AttackBomber.ToString()] == false)
                 {
 
                     if (BomberObject != null)
@@ -152,7 +152,7 @@ public class BuildingCentral : MonoBehaviour
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
                 }
             }
-            if (VisibleObjList["AttackMissle"])
+            if (VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()])
             {
 
 
@@ -160,35 +160,35 @@ public class BuildingCentral : MonoBehaviour
                 new ViewAttackMissle().SendBomberAndWingState(WingMissle,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
-            if (VisibleObjList["Defectors"])
+            if (VisibleObjList[DictionaryEssence.TypeEvent.Defectors.ToString()])
             {
    
 
                 new ViewMoveDeflectors().SendBomberAndWingState(DefectorsObject,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
-            if (VisibleObjList["Ufo"])
+            if (VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()])
             {
   
 
                 new ViewMoveDeflectors().SendBomberAndWingState(UfoObject,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
-            if (VisibleObjList["Baby"])
+            if (VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()])
             {
 
 
                 new ViewMoveDeflectors().SendBomberAndWingState(BabyObject,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
-            if (VisibleObjList["RocketRich"])
+            if (VisibleObjList[DictionaryEssence.TypeEvent.RocketRich.ToString()])
             {
        
 
                 new ViewRocketRich().SendBomberAndWingState(RocketRichObject, 
                     Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
-            if (VisibleObjList["CrazyCow"])
+            if (VisibleObjList[DictionaryEssence.TypeEvent.CrazyCow.ToString()])
             {
 
 
@@ -218,7 +218,7 @@ public class BuildingCentral : MonoBehaviour
         BabyObject = Instantiate(BabyPrefabs, Propaganda.transform.position + new Vector3(0, 5, 24), Quaternion.identity);
         RocketRichObject = Instantiate(RocketRichPrefabs, Propaganda.transform.position, Quaternion.identity);
         CrazyCowObject = Instantiate(CrazyCowPrefabs, Propaganda.transform.position, Quaternion.identity);
-       // UFOObject = Instantiate(UFOPrefabs, Propaganda.transform.position + new Vector3(0, 5, 24), Quaternion.identity);
+
     }
     private void DestroyObject(float TimeDelete)
     {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 namespace Assets.Scripts.Model
 {
@@ -13,12 +15,12 @@ namespace Assets.Scripts.Model
 		public void SatisfyEventOneLiderTurn(int FlagId, List<CountryLider> CountryLiderList, List<CityModel> TownList)
 		{
             MessageDictionary = new Dictionary<string, string>();
-			MessageDictionary.Add("RocketRich", "Богатые и Маск постороили ракету на Луну ");
-            MessageDictionary.Add("Baby", "Бэбибум ");
-            MessageDictionary.Add("Ufo", "Ufo инопланитяне прибыли в город ");
-            MessageDictionary.Add("Defectors", "Перебежчики сбежали ");
-            MessageDictionary.Add("Build", "Производство вооружения ");
-            MessageDictionary.Add("Propaganda", "Под воздействием пропаганды, население мигрировало ");
+			MessageDictionary.Add(DictionaryEssence.TypeEvent.RocketRich.ToString(), "Богатые и Маск постороили ракету на Луну ");
+            MessageDictionary.Add(DictionaryEssence.TypeEvent.Baby.ToString(), "Бэбибум ");
+            MessageDictionary.Add(DictionaryEssence.TypeEvent.Ufo.ToString(), "Ufo инопланитяне прибыли в город ");
+            MessageDictionary.Add(DictionaryEssence.TypeEvent.Defectors.ToString(), "Перебежчики сбежали ");
+            MessageDictionary.Add(DictionaryEssence.TypeEvent.Building.ToString(), "Производство вооружения ");
+            MessageDictionary.Add(DictionaryEssence.TypeEvent.Propaganda.ToString(), "Под воздействием пропаганды, население мигрировало ");
             MessageDictionary.Add("AttackBomber", "От ядерного взрыва с бомбардировщика население уменьшилось на ");
             MessageDictionary.Add("AttackMissle", "От ядерного взрыва ракеты население уменьшилось на ");
             MessageDictionary.Add("Defence", "Защитные системы приведены в готовность");
@@ -34,29 +36,30 @@ namespace Assets.Scripts.Model
 				//Enemy lider.
 				CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider);
 
-				if (lider.GetCommandLider().VisibleEventList["RocketRich"])
+				if (lider.GetCommandLider().VisibleEventList[DictionaryEssence.TypeEvent.RocketRich.ToString()])
 				{
 					int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false, TownList);
-					lider.SetEventTotalMessageTurn(MessageDictionary["RocketRich"] + UnDamage, "RocketRich");
+					lider.SetEventTotalMessageTurn(MessageDictionary[DictionaryEssence.TypeEvent.RocketRich.ToString()] + UnDamage, DictionaryEssence.TypeEvent.RocketRich.ToString());
 				}
-				if (lider.GetCommandLider().VisibleEventList["Baby"])
+				if (lider.GetCommandLider().VisibleEventList[DictionaryEssence.TypeEvent.Baby.ToString()])
 				{
 					int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false, TownList);
-					lider.SetEventTotalMessageTurn(MessageDictionary["Baby"] + UnDamage, "Baby");
+					lider.SetEventTotalMessageTurn(MessageDictionary[DictionaryEssence.TypeEvent.Baby.ToString()] + UnDamage, DictionaryEssence.TypeEvent.Baby.ToString());
 				}
-				if (lider.GetCommandLider().VisibleEventList["Ufo"])
+				if (lider.GetCommandLider().VisibleEventList[DictionaryEssence.TypeEvent.Ufo.ToString()])
 				{
 					int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false, TownList);
-					lider.SetEventTotalMessageTurn(MessageDictionary["Ufo"] + UnDamage, "Ufo");
+					lider.SetEventTotalMessageTurn(MessageDictionary[DictionaryEssence.TypeEvent.Ufo.ToString()] + UnDamage, DictionaryEssence.TypeEvent.Ufo.ToString());
 				}
-				if (lider.GetCommandLider().VisibleEventList["Defectors"])
+				if (lider.GetCommandLider().VisibleEventList[DictionaryEssence.TypeEvent.Defectors.ToString()])
 				{
 					int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, false, TownList);
-					lider.SetEventTotalMessageTurn(MessageDictionary["Defectors"] + UnDamage, "Defectors");
-					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 5);
+					lider.SetEventTotalMessageTurn(MessageDictionary[DictionaryEssence.TypeEvent.Defectors.ToString()] + UnDamage, DictionaryEssence.TypeEvent.Defectors.ToString());
+                    Debug.Log("     Lider = " + lider.GetCommandLider().LiderFiend);
+                    lider.GetCommandLider().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, 5);
 				}
 
-				if (lider.GetCommandLider().VisibleEventList["Build"])
+				if (lider.GetCommandLider().VisibleEventList[DictionaryEssence.TypeEvent.Building.ToString()])
 				{
 					// building ammunition
 					lider.AddMissle(lider.GetCommandLider().GetMissle());
@@ -64,19 +67,22 @@ namespace Assets.Scripts.Model
 					List<string> reportProducedWeaponList = lider.GetCommandLider().GetReportProducedWeaponList();
 					string resultProducedWeapon = string.Join(", ", reportProducedWeaponList.ToArray());
 
-					lider.SetEventTotalMessageTurn(MessageDictionary["Build"] + resultProducedWeapon, "Build");
-					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 5);
+					lider.SetEventTotalMessageTurn(MessageDictionary[DictionaryEssence.TypeEvent.Building.ToString()] + resultProducedWeapon, DictionaryEssence.TypeEvent.Building.ToString());
+					lider.GetCommandLider().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, 5);
 				}
 
 
 
 				//propogation
-				if (lider.GetCommandLider().VisibleEventList["Propaganda"])
+				if (lider.GetCommandLider().VisibleEventList[DictionaryEssence.TypeEvent.Propaganda.ToString()])
 				{
 					int UnDamage = AddAndRemovePopulation(cityModelTarget, lider, true, TownList);
 
-					lider.SetEventTotalMessageTurn(MessageDictionary["Propaganda"] + UnDamage + " сбежав от " + lider.GetCommandLider().GetTargetLider().GetName(), "Propaganda");
-					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 50);
+                    Debug.Log(MessageDictionary["Propaganda"]+" Lider = " + lider + " &&&&&&&&&&   Weapon== "+ lider.GetCommandLider());
+                    Debug.Log( "  = Contro = " + lider.GetCommandLider().LiderFiend + "   "  );
+                    
+                    lider.SetEventTotalMessageTurn(MessageDictionary[DictionaryEssence.TypeEvent.Propaganda.ToString()] + UnDamage + " сбежав от " + lider.GetCommandLider().LiderFiend.GetName(), DictionaryEssence.TypeEvent.Propaganda.ToString());
+					lider.GetCommandLider().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, 50);
 				}
 				// attack bomber
 				if (lider.GetCommandLider().GetVisibleAttackBomber())
@@ -102,15 +108,15 @@ namespace Assets.Scripts.Model
 					}
                     
 
-                    lider.SetEventTotalMessageTurn(MessageDictionary["AttackBomber"] + lider.GetCommandLider().GetAttackBomber().GetDamage() + " у " + lider.GetCommandLider().GetTargetLider().GetName(), "AttackBomber");
-					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 25);
+                    lider.SetEventTotalMessageTurn(MessageDictionary[DictionaryEssence.TypeEvent.AttackBomber.ToString()] + lider.GetCommandLider().GetAttackBomber().GetDamage() + " у " + lider.GetCommandLider().LiderFiend.GetName(), DictionaryEssence.TypeEvent.AttackBomber.ToString());
+					lider.GetCommandLider().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, 25);
 				}
-				if (lider.GetCommandLider().VisibleEventList["Missle"])
+				if (lider.GetCommandLider().VisibleEventList[DictionaryEssence.TypeEvent.Missle.ToString()])
 				{
 					lider.MissleId = lider.GetCommandLider().GetSizeIdMissle();
 				}
 				// attack Missle
-				if (lider.GetCommandLider().VisibleEventList["AttackMissle"])
+				if (lider.GetCommandLider().VisibleEventList[DictionaryEssence.TypeEvent.AttackMissle.ToString()])
 				{
 
 					if (enemylider.GetCommandLider().GetDefence())
@@ -133,19 +139,19 @@ namespace Assets.Scripts.Model
 					}
 					lider.RemoveMissle();
 
-					lider.SetEventTotalMessageTurn(MessageDictionary["AttackMissle"] + lider.GetCommandLider().GetAttackMissle().GetDamage() + " у " + lider.GetCommandLider().GetTargetLider().GetName(), "AttackMissle");
-					lider.GetCommandLider().GetTargetLider()._RelationShip.SetNegativeMood(lider.FlagId, 25);
+					lider.SetEventTotalMessageTurn(MessageDictionary[DictionaryEssence.TypeEvent.AttackMissle.ToString()] + lider.GetCommandLider().GetAttackMissle().GetDamage() + " у " + lider.GetCommandLider().LiderFiend.GetName(), DictionaryEssence.TypeEvent.AttackMissle.ToString());
+					lider.GetCommandLider().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, 25);
 				}
 
-				if (lider.GetCommandLider().VisibleEventList["Defence"])
+				if (lider.GetCommandLider().VisibleEventList[DictionaryEssence.TypeEvent.Defence.ToString()])
 				{
-					lider.SetEventTotalMessageTurn(MessageDictionary["Defence"], "Defence");
+					lider.SetEventTotalMessageTurn(MessageDictionary[DictionaryEssence.TypeEvent.Defence.ToString()], DictionaryEssence.TypeEvent.Defence.ToString());
 					lider.RemoveDefenceWeapon();
 				}
 
-				if (lider.GetCommandLider().VisibleEventList["Airport"])
+				if (lider.GetCommandLider().VisibleEventList[DictionaryEssence.TypeEvent.Airport.ToString()])
 				{
-					lider.SetEventTotalMessageTurn(MessageDictionary["Airport"], "Airport");
+					lider.SetEventTotalMessageTurn(MessageDictionary[DictionaryEssence.TypeEvent.Airport.ToString()], DictionaryEssence.TypeEvent.Airport.ToString());
 				}
 
 

@@ -249,7 +249,7 @@ public class MainModel
 	}
 	public void ReconTotalTurn(int FlagId){
 
-		Debug.Log("0  ReconTotalTurn  = ");
+		
 		
 
 		// realize command.

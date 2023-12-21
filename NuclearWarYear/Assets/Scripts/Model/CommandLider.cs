@@ -16,30 +16,29 @@ public class CommandLider
 
 	private IWeapon _AttackMissle;
 	private IWeapon _AttackBomber;
-	//private Warhead _AttackWarhead;
 	private string NameCommand;
-	private CountryLider LiderFiend;
+	public CountryLider LiderFiend { get; private set; }
 	List<string> _reportProducedWeaponList;
 
-	public CommandLider() {
+	public CommandLider(string nameCommand) {
 		this._MissleList = new List<IWeapon>();
-	
+        this.NameCommand = nameCommand;
 
-		this.VisibleEventList = new Dictionary<string, bool>();
-		VisibleEventList.Add("Propaganda",false);
-        VisibleEventList.Add("Build", false);
-        VisibleEventList.Add("Defence", false);
-        VisibleEventList.Add("Missle", false);
-        VisibleEventList.Add("Airport", false);
-        VisibleEventList.Add("Bomber", false);
-        VisibleEventList.Add("AttackBomber", false);
-        VisibleEventList.Add("AttackAirport", false);
-        VisibleEventList.Add("AttackMissle", false);
-        VisibleEventList.Add("Defectors", false);
-        VisibleEventList.Add("Ufo", false);
-        VisibleEventList.Add("Baby", false);
-        VisibleEventList.Add("RocketRich", false);
-		VisibleEventList.Add("CrazyCow", false);
+        this.VisibleEventList = new Dictionary<string, bool>();
+		VisibleEventList.Add(DictionaryEssence.TypeEvent.Propaganda.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.Building.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.Defence.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.Missle.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.Airport.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.Bomber.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.AttackBomber.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.AttackAirport.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.AttackMissle.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.Defectors.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.Ufo.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.Baby.ToString(), false);
+        VisibleEventList.Add(DictionaryEssence.TypeEvent.RocketRich.ToString(), false);
+		VisibleEventList.Add(DictionaryEssence.TypeEvent.CrazyCow.ToString(), false);
 	}
 	public void SetVisibleEventList(string Key,bool Value)
 	{
@@ -54,40 +53,40 @@ public class CommandLider
 
 	public void SetVisibleMissle(bool visibleMissle, int MissleId)
 	{
-		VisibleEventList["Missle"] = visibleMissle;
+		VisibleEventList[DictionaryEssence.TypeEvent.Missle.ToString()] = visibleMissle;
 		this.MissleId = MissleId;
 
 	}
 	public bool GetVisibleMissle()
     {
 
-		return VisibleEventList["Missle"];
+		return VisibleEventList[DictionaryEssence.TypeEvent.Missle.ToString()];
     }
 	public void SetVisibleBomber(bool visibleBomber, int MissleId)
     {
-        VisibleEventList["Bomber"]= visibleBomber;
-        VisibleEventList["Airport"]= visibleBomber;
+        VisibleEventList[DictionaryEssence.TypeEvent.Bomber.ToString()]= visibleBomber;
+        VisibleEventList[DictionaryEssence.TypeEvent.Airport.ToString()]= visibleBomber;
 		this.MissleId = MissleId;
 	}
 	
 
 	public bool GetVisibleBomber() {
-        return VisibleEventList["Bomber"];
+        return VisibleEventList[DictionaryEssence.TypeEvent.Bomber.ToString()];
 
     }
 	public void SetVisibleAttackBomber(bool visibleAttackBomber) {
-		VisibleEventList["AttackBomber"] = visibleAttackBomber;
-		VisibleEventList["AttackAirport"] = visibleAttackBomber;
+		VisibleEventList[DictionaryEssence.TypeEvent.AttackBomber.ToString()] = visibleAttackBomber;
+		VisibleEventList[DictionaryEssence.TypeEvent.AttackAirport.ToString()] = visibleAttackBomber;
 
     }
 	public bool GetVisibleAttackBomber()
 	{
-		return VisibleEventList["AttackBomber"];
+		return VisibleEventList[DictionaryEssence.TypeEvent.AttackBomber.ToString()];
     }
-	public void SetNameCommand(string nameCommand)
-	{
-		this.NameCommand = nameCommand;
-	}
+	//public void SetNameCommand(string nameCommand)
+	//{
+	//	this.NameCommand = nameCommand;
+	//}
 	public string GetNameCommand()
     {
 		return this.NameCommand;
@@ -105,7 +104,7 @@ public class CommandLider
 	}
 	public bool GetDefence() {
 
-        return VisibleEventList["Defence"];
+        return VisibleEventList[DictionaryEssence.TypeEvent.Defence.ToString()];
     }
 
 	public IWeapon GetAttackBomber(){
@@ -143,13 +142,16 @@ public class CommandLider
 	}
 	public void SetTargetLider(CountryLider nameLiderFiend)
 	{
+
 		this.LiderFiend = nameLiderFiend;
 	}
+	/*
 	public CountryLider GetTargetLider(){
-		
-		return this.LiderFiend;
+        Debug.Log("0  ReconTotal   LiderFiend  = " + this.LiderFiend);
+        return this.LiderFiend;
 		
 	}
+	*/
 	public IWeapon GetAttackMissle(){
 		return this._AttackMissle;
 	}
