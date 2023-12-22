@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - MenuStart
     - MenuVictory
     - TownCardInfo
+    - ViewCanvasReport
     - ViewCardGame
     - ViewCardWeapon
     - ViewCircleReady
@@ -18,11 +19,8 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
-    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
@@ -81,7 +79,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1488}
     - Class: 114
-      Script: {instanceID: 2204}
+      Script: {instanceID: 1490}
     - Class: 114
       Script: {instanceID: 2240}
     - Class: 114
@@ -114,6 +112,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 4204}
     - Class: 114
       Script: {instanceID: 5456}
+    - Class: 114
+      Script: {instanceID: 5578}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -156,11 +156,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1488}
     - Class: 114
-      Script: {instanceID: 1832}
+      Script: {instanceID: 1490}
     - Class: 114
-      Script: {instanceID: 2198}
+      Script: {instanceID: 1834}
     - Class: 114
-      Script: {instanceID: 2204}
+      Script: {instanceID: 2200}
     - Class: 114
       Script: {instanceID: 2616}
     - Class: 114
@@ -215,7 +215,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1488}
     - Class: 114
-      Script: {instanceID: 2204}
+      Script: {instanceID: 1490}
     - Class: 114
       Script: {instanceID: 2616}
     - Class: 114
@@ -253,6 +253,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Image
+  - hash:
+      serializedVersion: 2
+      Hash: 699619b86d9359741a4f58540298c80b
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Text
   - hash:
       serializedVersion: 2
       Hash: 5ab533713adae59372fb3e10a585c186
@@ -343,12 +349,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_StyleSheet
-  - hash:
-      serializedVersion: 2
-      Hash: 699619b86d9359741a4f58540298c80b
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Text
   - hash:
       serializedVersion: 2
       Hash: 8450d714020832a47ff6cc47ffa7714b
@@ -531,7 +531,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 9d47d683bcc91903da3b1754e6b9a605
+      Hash: 39ae60c859156817421ff8e86de199cc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuScript
@@ -841,9 +841,15 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: 471ba42eb389de164613506c14093a9a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ViewCanvasReport
   platform: 13
   scenePathNames:
   - Assets/Scenes/MenuStart.unity
   - Assets/Scenes/GameScene.unity
   - Assets/Scenes/Victory.unity
-  playerPath: D:/Project/NuclearWar/NuclearWar1.apk
+  playerPath: D:/Project/NuclearWar/NuclearWar2.apk

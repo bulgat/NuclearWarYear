@@ -98,10 +98,6 @@ public class MenuScript : MonoBehaviour
         this.flagIdPlayer = _mainModel.GetCurrentPlayerFlag();
         this.CountryLiderList = _mainModel.GetCountryLiderList();
 
-        
-        //this._viewTacticReal = CanvasTacticReal.transform.GetChild(0).GetComponent<ViewTacticReal>();
-        //this._viewTacticReal.Init(this.FlagImageList,this.IconCardList);
-
     }
     void OnEnable()
     {
@@ -123,7 +119,6 @@ public class MenuScript : MonoBehaviour
     void Start()
     {
 
-        
         _controller = new Controller(_mainModel);
 
 
@@ -131,14 +126,8 @@ public class MenuScript : MonoBehaviour
 
 
         ButtonResource.onClick.AddListener(() => ButtonResourceMethod(ButtonResource));
-        //ButtonCloseResource.onClick.AddListener(() => ButtonCloseResourceMethod(ButtonCloseResource));
+  
         TurnButton.onClick.AddListener(() => TurnButtonMethod(TurnButton));
-
-
-        //CanvasReportButtonClose.onClick.AddListener(() => CanvasReportButtonCloseMethod());
-
-        
-        
 
         LiderButton_1.onClick.AddListener(() => LiderButton_1_Method(LiderButton_1));
         LiderButton_2.onClick.AddListener(() => LiderButton_2_Method(LiderButton_2));
@@ -161,20 +150,12 @@ public class MenuScript : MonoBehaviour
 
         EnableButtonPlayer();
 
-        //ReplaceCardGame();
-        //PrintTypeWriter("privet user");
- 
-        
-        //CanvasResourcePlayer.SetActive(false);
         CircleImageReadyParam(0, false);
 
         GlueTownView();
-       
-        //CanvasReport.SetActive(false);
 
         RefreshViewCard();
 
-        //CountryLineList[0].SetActive(false);
         ResetCountryOutline();
 
         CreateTownInfoList();
@@ -218,10 +199,10 @@ public class MenuScript : MonoBehaviour
         int count = 0;
         foreach (var item in missleList)
         {
-            Debug.LogWarning(item.GetSize()+" T  = " + item.GetTypeWeapon());
+            
 
             GameObject CardWing = Instantiate(CardWeapon, new Vector2(100+(count*100),100), Quaternion.identity);
-                CardWing.transform.parent = panelMain.transform;
+                CardWing.transform.SetParent( panelMain.transform);
                 ViewCardWeapon viewCardWeapon = CardWing.GetComponent<ViewCardWeapon>();
                 viewCardWeapon.SetParam(item.GetName(), IconCardList,item.GetId());
                 viewCardWeapon.SetCallback(MissleMethodClick);
@@ -240,8 +221,6 @@ public class MenuScript : MonoBehaviour
         ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
         viewLiderButton.Init(LiderImageList, FlagImageList, _mainModel,
             this.IconCircleReadyList, this.IconCardList, fiendLider_ar[0]);
-
-        //ChangeFlag(0, fiendLider_ar[0]);
 
         ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
         viewLiderButton_2.Init(LiderImageList, FlagImageList, _mainModel,
@@ -415,13 +394,7 @@ public class MenuScript : MonoBehaviour
             NuclearMap.transform.position = new Vector3(0, 0, 0);
         }
     }
-  /*
-    void CanvasReportButtonCloseMethod()
-    {
-        //CanvasReport.SetActive(false);
 
-    }
-  */
     void ButtonResourceMethod(Button buttonResource)
     {
         
@@ -433,12 +406,7 @@ public class MenuScript : MonoBehaviour
 
         
     }
-    /*
-    void ButtonCloseResourceMethod(Button buttonCloseResource) {
-        //CanvasResourcePlayer.SetActive(false);
-        
-    }
-    */
+
     void RefreshPlayerView()
     {
         this.flagIdPlayer = this._mainModel.GetCurrentPlayerFlag();
@@ -490,7 +458,6 @@ public class MenuScript : MonoBehaviour
         _visiblePanel = false;
         MoveMapNuclear();
 
-        //viewTacticReal.CanvasTacticRealSetText("Начало хода", 0, 0, this.LiderImageList, this._mainModel, 0);
         TacticReal("Начало хода", 0, 0,0);
         
         // accept animation Central Building Propagation
@@ -533,15 +500,10 @@ public class MenuScript : MonoBehaviour
         EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, new EventSendLider(lider.FlagId));
         _controller.SendCommand(eventController);
 
-        var idEvent = new DictionaryEssence().GetIdEvent(lider.GetCommandLider().GetNameCommand());
+        var idEvent = new DictionaryEssence().GetIdEvent(lider.GetCommandLider().First().GetNameCommandList().First());
 
 
-        this.TacticReal(lider.GetName() + "  = " + lider.GetCommandLider().GetNameCommand() + lider.GetEventTotalTurn().EventMessage, lider.FlagId - 1, idEvent, indexLider);
-
-        //_viewTacticReal.CanvasTacticRealSetText(lider.GetName()+"  = "+ lider.GetCommandLider().GetNameCommand()+lider.GetEventTotalTurn().EventMessage,
-        //    lider.FlagId-1, idEvent, this.LiderImageList, this._mainModel, indexLider);
-
-
+        this.TacticReal(lider.GetName() + "  : " + lider.GetCommandLider().First().GetNameCommandList() + lider.GetEventTotalTurn().EventMessage, lider.FlagId - 1, idEvent, indexLider);
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.ViewStartStateObject(TownViewList, waitTime + (waitTurnTime * indexLider), lider);
@@ -551,7 +513,7 @@ public class MenuScript : MonoBehaviour
     }
     private CityModel TargetManager(CountryLider lider)
     {
-        CityModel cityTown = lider.GetCommandLider().GetTargetCity();
+        CityModel cityTown = lider.GetCommandLider().First().GetTargetCity();
         if (cityTown != null)
         {
             GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);
@@ -605,12 +567,8 @@ public class MenuScript : MonoBehaviour
 
             CanvasReportWindow(" build weapon", IdMissle);
         }
-        Debug.Log(" IdMissle = "+ IdMissle);
-        /*
-        var iconCard = CanvasReport.transform.GetChild(0).GetChild(1);
-        ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
-        viewIconCard.SetParam(this.IconCardList,IdMissle);
-        */
+        
+
     }
 
     void SelectCountryOne()
@@ -710,38 +668,27 @@ public class MenuScript : MonoBehaviour
 
         CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
 
-        if (liderPlayer0.GetCommandLider().GetVisibleMissle())
+        if (liderPlayer0.GetCommandLider().First().GetVisibleMissle())
         {
-            
-            //MissleButton.GetComponent<Button>().interactable = false;
 
-           // CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
             var cityTarget = liderPlayer0.GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
-                //StartCoroutine(PrintTypeWriter("\n Ready. Not target for missle. Select Target!"));
                 printMessage.Append("\n Ready. Not target for missle. Select Target!");
             }
             else
             {
-                //StartCoroutine(PrintTypeWriter("\n Ready. Select target for missle"));
                 printMessage.Append("\n Ready. Select target for missle");
             }
             CircleImageReadyParam(1,true);
             EventController eventController = new EventController(Controller.Command.AttackMissle, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
             _controller.SendCommand(eventController);
         }
-        else
-        {
-            
-            //MissleButton.GetComponent<Button>().interactable = true;
-        }
+     
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
-        if (liderPlayer.GetCommandLider().GetVisibleBomber())
+        if (liderPlayer.GetCommandLiderFirst().GetVisibleBomber())
         {
-            Debug.Log("0011 ### and  FlagId    Id ="  );
-            //BomberButton.GetComponent<Button>().interactable = false;
- 
+
             var cityTarget = liderPlayer.GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {
@@ -759,14 +706,8 @@ public class MenuScript : MonoBehaviour
             _controller.SendCommand(eventController);
 
         }
-        else
-        {
-            //BomberButton.GetComponent<Button>().interactable = true;
-        }
-
-        //printMessage.Append("\n  * " + liderPlayer0.GetEventTotalTurn().EventMessage);
-
         
+
         ManagerButton();
 
         
@@ -783,12 +724,10 @@ public class MenuScript : MonoBehaviour
         {
             return;
         }
-        // CanvasReport.SetActive(true);
         GameObject canvasReport = Instantiate(CanvasReportPrefabs, new Vector2(100, 100), Quaternion.identity);
         ViewCanvasReport viewCanvasReport = canvasReport.GetComponent<ViewCanvasReport>();
         viewCanvasReport.SetMessage(PrintMessage);
         viewCanvasReport.SetParam(this.IconCardList, IdEvent);
-        //CanvasReportTextMessage.text = PrintMessage;
 
     }
 
@@ -847,7 +786,7 @@ public class MenuScript : MonoBehaviour
         CountryLider liderPLayer = _mainModel.GetCurrenPlayer();
 
 
-        buildingCentral.VisibleBuilding(liderPLayer.GetCommandLider());
+        buildingCentral.VisibleBuilding(liderPLayer.GetCommandLider().First());
 
         MoveAi();
         // visible label sity;
@@ -890,7 +829,7 @@ public class MenuScript : MonoBehaviour
         foreach (var town in this.TownViewList)
         {
             Vector3 coordinates = Camera.main.WorldToScreenPoint(town.transform.position);
-            UICardTownList[count].transform.parent = gameObject.transform.GetChild(0);
+            UICardTownList[count].transform.SetParent(gameObject.transform.GetChild(0));
             UICardTownList[count].transform.position = new Vector3(coordinates.x, coordinates.y - h / 10, coordinates.z);
 
             //Population
@@ -909,16 +848,10 @@ public class MenuScript : MonoBehaviour
             {
                 BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(_mainModel.CountryLiderList, lider.FlagId);
 
-                buildingCentral.VisibleBuilding(lider.GetCommandLider());
+                buildingCentral.VisibleBuilding(lider.GetCommandLider().First());
 
             }
         }
     }
-    /*
-    void PrintTypeWriter(string Message)
-    {
-        CanvasReportWindow(Message);
 
-    }
-    */
 }

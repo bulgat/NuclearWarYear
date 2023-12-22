@@ -5,23 +5,28 @@ using System;
 using System.Linq;
 using static SwitchActionHelper;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
+using static UnityEditor.Progress;
 
 public class SwitchActionHelper
 {
     public enum ActionCommand { Propaganda, Defence, Defectors, Ufo, Baby, RocketRich, CrazyCow,Build, AttackMissle }
 
-    public CommandLider SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
+    public List<CommandLider> SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
         List<CityModel> TownList, int FlagIdPlayer, string actionCommand, int FlagId,int MissleId)
     {
+        List<CommandLider> commandLiderList = new List<CommandLider>();
 
         ResetAction();
-        //CommandLider commandLider = new CommandLider();
+    
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         bool AIfiend = FlagId != FlagIdPlayer;
 
         CommandLider commandLider = new CommandLider(actionCommand);
-        
-        if (countryLider.GetCommandLider()?.GetVisibleBomber() == true) { 
+        Debug.Log("0011 ### and  Flag  ="+ countryLider);
+        Debug.LogWarning(" T  = " + countryLider.GetCommandLiderFirst());
+        Debug.Log(" Missle = " + countryLider.GetCommandLiderFirst()?.GetVisibleBomber());
+
+        if (countryLider.GetCommandLiderFirst()?.GetVisibleBomber() == true) { 
            
         }
         //Change Ai Command
@@ -81,7 +86,9 @@ CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, Flag
 
         commandLider.SetTargetLider(CountryLiderList.Where(a => a.FlagId == targetCity.FlagId).FirstOrDefault());
 
-        return commandLider;
+        commandLiderList.Add(commandLider);
+
+        return commandLiderList;
     }
  private void TreatmentCommand(string actionCommand, CommandLider commandLider, CityModel targetCity, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
         List<CountryLider> CountryLiderList, CountryLider countryLider)

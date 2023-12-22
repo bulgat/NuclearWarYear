@@ -6,7 +6,7 @@ public class DamagePopulationHelper
 {
 	public CityModel GetCityLider(CountryLider lider)
 	{
-		return lider.GetCommandLider().GetTargetCity();
+		return lider.GetCommandLiderFirst().GetTargetCity();
 
     }
     public bool SetDamagePopulation( CityModel cityModel,int Damage,bool Explode){

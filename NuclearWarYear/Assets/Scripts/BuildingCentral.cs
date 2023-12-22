@@ -28,6 +28,7 @@ public class BuildingCentral : MonoBehaviour
     public GameObject WingMissle;
     public GameObject Airport;
     public GameObject AirportAttack;
+    //public GameObject MapMain;
 
 
     private Dictionary<string, bool> VisibleObjList;
@@ -212,12 +213,19 @@ public class BuildingCentral : MonoBehaviour
     private void CreateObject()
     {
         WingMissle = Instantiate(WingMisslePrefabs, Propaganda.transform.position, Quaternion.identity);
+        WingMissle.transform.parent = transform;
         BomberObject = Instantiate(BomberObjectPrefabs, Propaganda.transform.position, Quaternion.identity);
+        BomberObject.transform.parent = transform;
         DefectorsObject = Instantiate(DefectorsPrefabs, Propaganda.transform.position, Quaternion.identity);
+        DefectorsObject.transform.parent = transform;
         UfoObject = Instantiate(UfoPrefabs, Propaganda.transform.position+new Vector3(0,4,24), Quaternion.identity);
+        UfoObject.transform.parent = transform;
         BabyObject = Instantiate(BabyPrefabs, Propaganda.transform.position + new Vector3(0, 5, 24), Quaternion.identity);
+        BabyObject.transform.parent = transform;
         RocketRichObject = Instantiate(RocketRichPrefabs, Propaganda.transform.position, Quaternion.identity);
+        RocketRichObject.transform.parent = transform;
         CrazyCowObject = Instantiate(CrazyCowPrefabs, Propaganda.transform.position, Quaternion.identity);
+        CrazyCowObject.transform.parent = transform;
 
     }
     private void DestroyObject(float TimeDelete)

@@ -247,15 +247,10 @@ public class MainModel
 		countryLider.GetMissle().SetDamage(countryLider.GetMissle().GetDamage());
 
 	}
-	public void ReconTotalTurn(int FlagId){
+	public void TotalTurn(int FlagId){
 
-		
-		
-
-		// realize command.
-		foreach (CountryLider lider in CountryLiderList){
-			new MainTurnLider().SatisfyEventOneLiderTurn(lider.FlagId, CountryLiderList, TownList);
-			
+		foreach (CountryLider lider in this.CountryLiderList){
+			new MainTurnLider().SatisfyEventOneLiderTurn(lider.FlagId, this.CountryLiderList, this.TownList);	
 		}
 	}
 	public void SatisfyOneLiderTurn(int FlagId)
@@ -273,7 +268,7 @@ public class MainModel
 			
 			 if(townCity.GetId() == CityId) {
 				 selectCityTarget = townCity;
-				liderPlayer.GetCommandLider().SetTargetCity(townCity);
+				liderPlayer.GetCommandLiderFirst().SetTargetCity(townCity);
 
 				liderPlayer.SetTargetCitySelectPlayer(townCity);
 				

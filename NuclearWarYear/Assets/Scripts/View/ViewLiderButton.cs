@@ -60,7 +60,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
 
         
 
-        if (countryLider.GetCommandLider().GetVisibleBomber())
+        if (countryLider.GetCommandLiderFirst().GetVisibleBomber())
         {
             if (this.IconCircleReadyList!=null)
             {
@@ -68,7 +68,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
                 circleReady.sprite = this.IconCircleReadyList[0];
             }
         }
-        if (countryLider.GetCommandLider().GetVisibleMissle())
+        if (countryLider.GetCommandLiderFirst().GetVisibleMissle())
         {
             if (this.IconCircleReadyList != null)
             {

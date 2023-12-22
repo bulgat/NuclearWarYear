@@ -87,7 +87,7 @@ public class Controller
 		}
 		if (eventController.NameCommand == Command.TotalTurn){
 
-			_mainModel.ReconTotalTurn(eventController.EventSend.FlagId);
+			_mainModel.TotalTurn(eventController.EventSend.FlagId);
 			return;
 		}
 		

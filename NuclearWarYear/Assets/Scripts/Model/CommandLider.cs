@@ -16,13 +16,14 @@ public class CommandLider
 
 	private IWeapon _AttackMissle;
 	private IWeapon _AttackBomber;
-	private string NameCommand;
+	private List<string> NameCommand;
 	public CountryLider LiderFiend { get; private set; }
 	List<string> _reportProducedWeaponList;
 
 	public CommandLider(string nameCommand) {
 		this._MissleList = new List<IWeapon>();
-        this.NameCommand = nameCommand;
+        this.NameCommand = new List<string> { nameCommand };
+       // this.NameCommand = nameCommand;
 
         this.VisibleEventList = new Dictionary<string, bool>();
 		VisibleEventList.Add(DictionaryEssence.TypeEvent.Propaganda.ToString(), false);
@@ -83,11 +84,8 @@ public class CommandLider
 	{
 		return VisibleEventList[DictionaryEssence.TypeEvent.AttackBomber.ToString()];
     }
-	//public void SetNameCommand(string nameCommand)
-	//{
-	//	this.NameCommand = nameCommand;
-	//}
-	public string GetNameCommand()
+
+	public List<string> GetNameCommandList()
     {
 		return this.NameCommand;
     }

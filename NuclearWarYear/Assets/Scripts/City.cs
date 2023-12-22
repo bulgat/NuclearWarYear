@@ -10,7 +10,7 @@ public class City : MonoBehaviour
     GameObject NuclearExplode;
 	public GameObject Shield;
 	public GameObject AttackTarget;
-	public GameObject Flag;
+	//public GameObject Flag;
 	public List<Sprite> FlagImageList;
 
 	public int FlagId=0;
@@ -106,7 +106,7 @@ animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
 				return;
 			}
 			spriteTown.sprite = _TownSpriteList[5];
-			Flag.SetActive(false);
+			//Flag.SetActive(false);
 		}
 	}
 	public void ClearTargetAim(){

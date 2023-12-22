@@ -114,14 +114,15 @@
     <Compile Include="Assets\Scripts\Model\TargetHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildingCentralModel.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\IWeapon.cs" />
-    <Compile Include="Assets\Scripts\Model\MainTurnLider.cs" />
+    <Compile Include="Assets\Scripts\Model\turnEvent\MainTurnLider.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\Bomber.cs" />
     <Compile Include="Assets\Scripts\City.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackMissle.cs" />
     <Compile Include="Assets\Scripts\Model\Nation\IncidentEvent.cs" />
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
-    <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
     <Compile Include="Assets\Scripts\ViewCanvasReport.cs" />
+    <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
+    <Compile Include="Assets\Scripts\Model\turnEvent\TurnEventExecute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

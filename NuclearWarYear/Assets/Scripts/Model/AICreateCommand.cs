@@ -19,12 +19,12 @@ public class AICreateCommand
 				
 				
 				if (lider.GetCommandLider ()!=null){
-					if(lider.GetCommandLider ().GetVisibleMissle() ){
+					if(lider.GetCommandLiderFirst().GetVisibleMissle() ){
 						
 						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, "AttackMissle",lider.FlagId,0));
 						continue;
 					}
-					if(lider.GetCommandLider ().GetVisibleBomber() ){
+					if(lider.GetCommandLiderFirst().GetVisibleBomber() ){
 						
 						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, "AttackBomber",lider.FlagId,0));
 						continue;

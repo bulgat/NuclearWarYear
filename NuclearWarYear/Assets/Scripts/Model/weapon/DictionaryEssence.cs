@@ -45,7 +45,7 @@ public class DictionaryEssence
     }
 	public int GetIdEvent(string Name)
 	{
-        Debug.Log("     =" + Name);
+        
         return allEssenceList.Where(a=>a.Name== Name).FirstOrDefault().IdImage;
 
     }
