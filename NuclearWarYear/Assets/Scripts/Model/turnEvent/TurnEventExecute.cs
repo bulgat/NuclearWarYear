@@ -8,7 +8,7 @@ namespace Assets.Scripts.Model.turnEvent
 {
     internal class TurnEventExecute
     {
-        public string Message { get; private set; }
+        //public string Message { get; private set; }
         public string MessageSecond { get; private set; }
         public int NegativeMood { get; private set; }
         public bool Ammunition { get; private set; }
@@ -17,9 +17,9 @@ namespace Assets.Scripts.Model.turnEvent
         public bool Random { get; private set; }
         public bool RemoveDefenceWeapon { get; private set; }
         public bool Airport { get; private set; }
-        public TurnEventExecute(string message, string messageSecond, int negativeMood, bool ammunition,bool changePopulation,
+        public TurnEventExecute(string messageSecond, int negativeMood, bool ammunition,bool changePopulation,
             bool random, bool removeDefenceWeapon,bool airport) { 
-            this.Message = message;
+            //this.Message = message;
             this.MessageSecond = messageSecond;
             this.NegativeMood = negativeMood;
             this.Ammunition = ammunition;

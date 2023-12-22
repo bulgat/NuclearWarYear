@@ -17,13 +17,13 @@ public class ViewTacticReal : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
     public void CanvasTacticRealSetText(string InfoText, int FlagIndex,int IdEvent, List<Sprite> LiderImageList, MainModel mainModel, int indexLider)
     {
+        
         gameObject.transform.GetChild(0).GetChild(1).GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
         ViewIconCard viewIconCard = gameObject.transform.GetChild(0).GetChild(2).GetComponent<ViewIconCard>();
         viewIconCard.SetParam(this._IconCardList, IdEvent);
@@ -35,8 +35,7 @@ public class ViewTacticReal : MonoBehaviour
         
         ViewLiderButton viewLiderButton = gameObject.transform.GetChild(0).GetChild(4).GetComponent<ViewLiderButton>();
         
-        
-        //liderPlayer.GraphicId
+
         viewLiderButton.Init(LiderImageList, this._FlagImageList, mainModel,
             null, 
             null,

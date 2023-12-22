@@ -14,6 +14,7 @@ namespace Assets.Scripts.Model
         public int GetSize();
         public int GetDamage();
         public void SetDamage(int damage);
+        public string GetMessage();
     }
 
 }

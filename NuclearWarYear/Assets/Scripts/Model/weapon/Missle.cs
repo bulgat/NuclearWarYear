@@ -40,5 +40,9 @@ public class Missle : Weapon, IWeapon
 		this.Damage = damage;
 
 	}
-	
+
+    public string GetMessage()
+    {
+        throw new System.NotImplementedException();
+    }
 }

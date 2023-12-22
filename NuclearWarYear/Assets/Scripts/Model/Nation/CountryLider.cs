@@ -16,7 +16,7 @@ public class CountryLider
 	
 	public GameObject PropagandaBuilding;
 	private List<CommandLider> _CommandLiderList;
-    private List<CommandLider> _ReleaseCommandList;
+    public List<CommandLider> ReleaseCommandList { private set; get; }
     private bool _dead;
 	private List<IWeapon> _MissleList;
 
@@ -100,12 +100,12 @@ public class CountryLider
 		{
 			return null;
 		}
-        Debug.Log(" =" + this._CommandLiderList);
+        
         return this._CommandLiderList.FirstOrDefault();
     }
 	public void SetCommandRealise(CommandLider commandLider)
 	{
-		this._ReleaseCommandList = new List<CommandLider>() { commandLider  };
+		this.ReleaseCommandList = new List<CommandLider>() { commandLider  };
 
 	}
 
@@ -128,18 +128,20 @@ public class CountryLider
 	//Defence
 	
 	public int GetBomberCount() {
-		return _MissleList.Where(a => a.GetTypeWeapon() == DictionaryEssence.TypeWeapon.Bomber).Count();
+		return this._MissleList.Where(a => a.GetTypeWeapon() == DictionaryEssence.TypeWeapon.Bomber).Count();
 	}
 
 
 	public List<IWeapon> GetDefenceWeapon()
 	{
-		return _MissleList.Where(a => a.GetTypeWeapon() == DictionaryEssence.TypeWeapon.Defence).ToList();
+        Debug.Log(this._MissleList+"      tu > "  );
+        Debug.Log("   E   " + this._MissleList.Count + " = B __ti > " );
+        return this._MissleList.Where(a => a.GetTypeWeapon() == DictionaryEssence.TypeWeapon.Defence).ToList();
 	}
 
 	public IWeapon GetBomber() {
 
-		return _MissleList.Where(a => a.GetTypeWeapon() == DictionaryEssence.TypeWeapon.Bomber).FirstOrDefault();
+		return this._MissleList.Where(a => a.GetTypeWeapon() == DictionaryEssence.TypeWeapon.Bomber).FirstOrDefault();
 	}
 	public void RemoveBomber() {
 

@@ -71,7 +71,8 @@
     <Compile Include="Assets\Scripts\Controller\EventBomber.cs" />
     <Compile Include="Assets\Scripts\TownCardInfo.cs" />
     <Compile Include="Assets\Scripts\Model\CityGameObjHelper.cs" />
-    <Compile Include="Assets\Scripts\Model\CommandLider.cs" />
+    <Compile Include="Assets\Scripts\Model\turnEvent\TurnEventExecute.cs" />
+    <Compile Include="Assets\Scripts\Model\Country\CommandLider.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewMoveDeflectors.cs" />
     <Compile Include="Assets\Scripts\Model\ModGameEngine.cs" />
     <Compile Include="Assets\Scripts\ViewIconCard.cs" />
@@ -98,7 +99,7 @@
     <Compile Include="Assets\Scripts\View\ViewCircleReady.cs" />
     <Compile Include="Assets\Scripts\View\ViewCardWeapon.cs" />
     <Compile Include="Assets\Scripts\View\ViewLiderButton.cs" />
-    <Compile Include="Assets\Scripts\Model\SwitchActionHelper.cs" />
+    <Compile Include="Assets\Scripts\Model\createCommand\SwitchActionHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildingCentralHelper.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackBomber.cs" />
     <Compile Include="Assets\Scripts\Model\Nation\CountryLider.cs" />
@@ -122,7 +123,6 @@
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\ViewCanvasReport.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\Model\turnEvent\TurnEventExecute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

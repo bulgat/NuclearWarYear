@@ -12,6 +12,7 @@ using Assets.Scripts.Model;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 using static UnityEngine.ParticleSystem;
 using System.Xml.Linq;
+using UnityEditor.Experimental.GraphView;
 
 public class MenuScript : MonoBehaviour
 {
@@ -191,8 +192,8 @@ public class MenuScript : MonoBehaviour
         //CardWeapon
         //panelMain
         List<IWeapon> missleList = new List<IWeapon>();
-        missleList.Add(new DictionaryEssence().GetIndustry());
-        missleList.Add(new DictionaryEssence().GetPropaganda());
+        missleList.Add(new DictionaryEssence().GetIncident(8));
+        missleList.Add(new DictionaryEssence().GetIncident(9));
         missleList.AddRange(_mainModel.GetCurrenPlayer().GetDefenceWeapon());
         missleList.AddRange( _mainModel.GetCurrenPlayer().GetMissleList());
 
@@ -303,7 +304,7 @@ public class MenuScript : MonoBehaviour
         }
         
     }
-
+    /*
     private void ReplaceCardGame()
     {
         for (int i = 0; i < 5; i++)
@@ -312,7 +313,7 @@ public class MenuScript : MonoBehaviour
             CardBomberObject.transform.SetParent(Canvas.transform, false);
         }
     }
-
+    */
    
   
 
@@ -415,13 +416,10 @@ public class MenuScript : MonoBehaviour
         ChangeImageLider();
         
     }
-    void TacticReal(string EventMessage, int indexFlagId, int idEvent, int indexLider)
+    void TacticReal(string EventMessage, int indexFlagId, int idEvent, CountryLider lider)
     {
         
-        if (this.CanTacticReal == null)
-        {
 
-        }
         if (this.CanTacticReal == null)
         {
             this.CanTacticReal = Instantiate(CanvasTacticRealPrefabs, new Vector2(100, 100), Quaternion.identity);
@@ -429,11 +427,11 @@ public class MenuScript : MonoBehaviour
             
             ViewTacticReal viewTacticReal = this.CanTacticReal.AddComponent<ViewTacticReal>();
             viewTacticReal.Init(this.FlagImageList, this.IconCardList);
-            viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idEvent, this.LiderImageList, this._mainModel, indexLider);
+            viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idEvent, this.LiderImageList, this._mainModel, lider.FlagId-1);
 
-            //_viewTacticReal.CanvasTacticRealSetText(lider.GetName() + "  = " + lider.GetCommandLider().GetNameCommand() + lider.GetEventTotalTurn().EventMessage,
-            //   lider.FlagId - 1, idEvent, this.LiderImageList, this._mainModel, indexLider);
-        
+        //_viewTacticReal.CanvasTacticRealSetText(lider.GetName() + "  = " + lider.GetCommandLider().GetNameCommand() + lider.GetEventTotalTurn().EventMessage,
+        //   lider.FlagId - 1, idEvent, this.LiderImageList, this._mainModel, indexLider);
+       
     }
 
     void TurnButtonMethod(Button buttonPressed)
@@ -458,16 +456,20 @@ public class MenuScript : MonoBehaviour
         _visiblePanel = false;
         MoveMapNuclear();
 
-        TacticReal("Начало хода", 0, 0,0);
+        TacticReal("Начало хода", 0, 0, _mainModel.CountryLiderList.FirstOrDefault());
         
         // accept animation Central Building Propagation
-        int indexLider = 0;
+        int indexLiderTime = 0;
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
-            StartCoroutine(TurnOneLider(lider, indexLider));
+      
+            foreach(CommandLider commandLider in lider.GetCommandLider())
+            {
+                StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider));
+                indexLiderTime++;
+            }
 
-            
-            indexLider++;
+             //+= lider.GetCommandLider().Count;
         }
         float openWaitTime = waitTime + this.waitTurnTime * _mainModel.CountryLiderList.Count();
 
@@ -485,6 +487,7 @@ public class MenuScript : MonoBehaviour
         new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList,
             _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
     }
+    /*
     private IEnumerator TurnText(string Name,int indexLider) {
        
        
@@ -492,18 +495,26 @@ public class MenuScript : MonoBehaviour
         
         
     }
-
-    private IEnumerator TurnOneLider(CountryLider lider, int indexLider)
+    */
+    private IEnumerator TurnOneLider(CountryLider lider, int indexLider, CommandLider commandLider)
     {
         yield return new WaitForSeconds(waitTime + (waitTurnTime * indexLider));
 
         EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, new EventSendLider(lider.FlagId));
         _controller.SendCommand(eventController);
+Debug.Log(commandLider+"  ]=[ " + commandLider.GetIncident());
+        //var idEvent = new DictionaryEssence().GetIdEvent(commandLider.GetNameCommandFirst());
 
-        var idEvent = new DictionaryEssence().GetIdEvent(lider.GetCommandLider().First().GetNameCommandList().First());
-
-
-        this.TacticReal(lider.GetName() + "  : " + lider.GetCommandLider().First().GetNameCommandList() + lider.GetEventTotalTurn().EventMessage, lider.FlagId - 1, idEvent, indexLider);
+        Debug.Log("lid  Count=" + lider.GetCommandLider().Count);
+        var idEvent = commandLider.GetIncident().Id;
+        if (lider.GetCommandLider().Count > 1)
+        {
+Debug.LogWarning(commandLider.GetNameCommandFirst()+" T " + lider.GetName());
+        }
+        
+        Debug.Log(commandLider.GetIncident().Name+"  = Co   = " + lider.GetEventTotalTurn().EventMessage + "   "+ lider.GetEventTotalTurn().NameEvent);
+        Debug.Log(lider.GetName()+"    &&&&&&&&&&   Weapon== "+ commandLider.GetNameCommandFirst());
+        this.TacticReal(lider.GetName() + "  : " + commandLider.GetNameCommandFirst() + commandLider.GetIncident().GetMessage(), lider.FlagId - 1, idEvent, lider);
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.ViewStartStateObject(TownViewList, waitTime + (waitTurnTime * indexLider), lider);
