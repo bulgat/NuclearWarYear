@@ -21,12 +21,12 @@ public class ViewTacticReal : MonoBehaviour
     {
         
     }
-    public void CanvasTacticRealSetText(string InfoText, int FlagIndex,int IdEvent, List<Sprite> LiderImageList, MainModel mainModel, int indexLider)
+    public void CanvasTacticRealSetText(string InfoText, int FlagIndex,int IdImage, List<Sprite> LiderImageList, MainModel mainModel, int indexLider)
     {
-        
+        Debug.Log("lid  C   IdEvent =" + IdImage);
         gameObject.transform.GetChild(0).GetChild(1).GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
         ViewIconCard viewIconCard = gameObject.transform.GetChild(0).GetChild(2).GetComponent<ViewIconCard>();
-        viewIconCard.SetParam(this._IconCardList, IdEvent);
+        viewIconCard.SetParam(this._IconCardList, IdImage);
 
         ViewIconCard viewIconCard0 = gameObject.transform.GetChild(0).GetChild(3).GetComponent<ViewIconCard>();
         viewIconCard0.SetParam(this._FlagImageList, FlagIndex);

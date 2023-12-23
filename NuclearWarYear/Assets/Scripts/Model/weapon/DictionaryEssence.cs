@@ -23,7 +23,7 @@ public class DictionaryEssence
         allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 2, ""));
         allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 3, ""));
 
-		allEssenceList.Add(new Incident(TypeEvent.Bomber.ToString(), DictionaryEssence.TypeWeapon.Bomber, 4,"Бомбардировщики приведены в готовность"));
+		allEssenceList.Add(new Incident(TypeEvent.Bomber.ToString(), DictionaryEssence.TypeWeapon.Bomber, 4,"Бомбардировщики приведены в готовность",4));
         allEssenceList.Add(new Incident(TypeEvent.HeavyBomber.ToString(), DictionaryEssence.TypeWeapon.Bomber, 5, "Бомбардировщики приведены в готовность"));
 
         allEssenceList.Add(new Incident(TypeEvent.Defence.ToString(), DictionaryEssence.TypeWeapon.Defence, 6, "Защитные системы приведены в готовность",6));
@@ -84,7 +84,7 @@ public class DictionaryEssence
     */
     public Incident GetIncident(int Id)
     {
-        Debug.Log(Id+"  ### and     = Fortune =" + this.allEssenceList.Where(a => a.Id == Id).FirstOrDefault());
+        
         return this.allEssenceList.Where(a => a.Id == Id).FirstOrDefault() as Incident;
     }
     public Incident BuildIncident(string Name)

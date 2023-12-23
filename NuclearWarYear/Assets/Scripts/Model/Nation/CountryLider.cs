@@ -134,8 +134,8 @@ public class CountryLider
 
 	public List<IWeapon> GetDefenceWeapon()
 	{
-        Debug.Log(this._MissleList+"      tu > "  );
-        Debug.Log("   E   " + this._MissleList.Count + " = B __ti > " );
+        
+        
         return this._MissleList.Where(a => a.GetTypeWeapon() == DictionaryEssence.TypeWeapon.Defence).ToList();
 	}
 
@@ -179,7 +179,7 @@ public class CountryLider
 		return _MissleList.Where(a => a.GetTypeWeapon() == DictionaryEssence.TypeWeapon.Missle).FirstOrDefault();
 	}
 	public void RemoveMissle() {
-		Debug.Log("RemoveMissle = sently =  ="+ this._MissleList.Count);
+		
 		if (this._MissleList.Count>0){
 			this._MissleList.RemoveAt(0);
 		}

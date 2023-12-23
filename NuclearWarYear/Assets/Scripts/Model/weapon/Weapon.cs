@@ -11,4 +11,5 @@ public class Weapon
 	public DictionaryEssence.TypeWeapon Type;
     public int IdImage;
     public string Message;
+	public int Uid;
 }

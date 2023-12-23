@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Incident: Weapon,IWeapon
 {
-	
+    private static int UnicId = 0;
 	
 	public Incident(string name, DictionaryEssence.TypeWeapon type, int id, string message,int IdImage=0) {
 		this.Name=name;
@@ -14,7 +15,8 @@ public class Incident: Weapon,IWeapon
         this.Type = type;
         this.Damage = 0;
         this.Message = message;
-	}
+        this.Uid = UnicId++;
+     }
 
     public int GetDamage()
     {
@@ -48,5 +50,9 @@ public class Incident: Weapon,IWeapon
     public string GetMessage()
     {
         return this.Message;
+    }
+    public Incident Copy()
+    {
+        return this.MemberwiseClone() as Incident;
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using static SwitchActionHelper;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 using static UnityEditor.Progress;
+using Assets.Scripts.Model.createCommand;
 
 public class SwitchActionHelper
 {
@@ -77,7 +78,7 @@ CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, Flag
         }
 
         // Счастливая карта!
-        CommandLider commandLiderFortune = FortuneEvent(targetCity, MissleId, FlagId, AIfiend, TownList, CountryLiderList, countryLider);
+        CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(targetCity, MissleId, FlagId, AIfiend, TownList, CountryLiderList, countryLider);
        
 
         TreatmentCommand(actionCommand, commandLider, targetCity, MissleId, FlagId, AIfiend, TownList,
@@ -152,72 +153,5 @@ CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, Flag
                 break;
         }
     }
-    private CommandLider FortuneEvent(CityModel targetCity, int MissleId,int FlagId, bool AIfiend, List<CityModel> TownList,
-        List<CountryLider> CountryLiderList, CountryLider countryLider)
-    {
-        CommandLider commandLider = null;
-        string actionCommand=null;
-        if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
-        {
-
-
-            actionCommand = ActionCommand.Defectors.ToString();
-        }
-        if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
-        {
-
-
-
-            actionCommand = ActionCommand.Ufo.ToString();
-        }
-        if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
-        {
-            actionCommand = ActionCommand.Baby.ToString();
-        }
-        if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
-        {
-            actionCommand = ActionCommand.RocketRich.ToString();
-        }
-        if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
-        {
-            actionCommand = ActionCommand.CrazyCow.ToString();
-        }
-        if (actionCommand != null)
-        {
-            commandLider = new CommandLider(actionCommand);
-        }
-
-        switch (actionCommand)
-        {
-            case "CrazyCow":
-                commandLider.SetVisibleEventList(ActionCommand.CrazyCow.ToString(), true);
-                commandLider.SetTargetCity(targetCity);
-                break;
-            case "RocketRich":
-                commandLider.SetVisibleEventList(ActionCommand.RocketRich.ToString(), true);
-                commandLider.SetTargetCity(targetCity);
-                break;
-            case "Baby":
-                commandLider.SetVisibleEventList(ActionCommand.Baby.ToString(), true);
-                commandLider.SetTargetCity(targetCity);
-                break;
-            case "Ufo":
-                commandLider.SetVisibleEventList(ActionCommand.Ufo.ToString(), true);
-                commandLider.SetTargetCity(targetCity);
-                break;
-
-
-
-            case "Defectors":
-                commandLider.SetVisibleEventList(ActionCommand.Defectors.ToString(), true);
-                commandLider.SetTargetCity(targetCity);
-                break;
-
-            default:
-                //Debug.LogWarning("Incorrect intelligence level. actionCommand =" + actionCommand);
-                break;
-        }
-
-                return commandLider;
-    }
+    
 }

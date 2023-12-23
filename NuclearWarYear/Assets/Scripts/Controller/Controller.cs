@@ -112,5 +112,10 @@ public class Controller
 		}
 		throw new System.Exception("Not Command controller"); 
 	}
+	public void TurnCreateCommand()
+	{
+        new AICreateCommand().EstimationSetCommandAi(_mainModel.ResetAction, _mainModel.CountryLiderList,
+           _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
+    }
 
 }

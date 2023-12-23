@@ -416,7 +416,7 @@ public class MenuScript : MonoBehaviour
         ChangeImageLider();
         
     }
-    void TacticReal(string EventMessage, int indexFlagId, int idEvent, CountryLider lider)
+    void TacticReal(string EventMessage, int indexFlagId, int idImage, CountryLider lider)
     {
         
 
@@ -427,7 +427,7 @@ public class MenuScript : MonoBehaviour
             
             ViewTacticReal viewTacticReal = this.CanTacticReal.AddComponent<ViewTacticReal>();
             viewTacticReal.Init(this.FlagImageList, this.IconCardList);
-            viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idEvent, this.LiderImageList, this._mainModel, lider.FlagId-1);
+            viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idImage, this.LiderImageList, this._mainModel, lider.FlagId-1);
 
         //_viewTacticReal.CanvasTacticRealSetText(lider.GetName() + "  = " + lider.GetCommandLider().GetNameCommand() + lider.GetEventTotalTurn().EventMessage,
         //   lider.FlagId - 1, idEvent, this.LiderImageList, this._mainModel, indexLider);
@@ -436,6 +436,11 @@ public class MenuScript : MonoBehaviour
 
     void TurnButtonMethod(Button buttonPressed)
     {
+        _controller.TurnCreateCommand();
+        /*
+        new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList,
+           _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
+        */
         EventController eventController = new EventController(Controller.Command.DoneMoveMadeCurrentPlayer, null);
         _controller.SendCommand(eventController);
 
@@ -465,7 +470,8 @@ public class MenuScript : MonoBehaviour
       
             foreach(CommandLider commandLider in lider.GetCommandLider())
             {
-                StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider));
+                Debug.Log(lider.GetName()+"   " +lider.FlagId+"    UID =  " + commandLider.GetIncident().Uid +"   Count = "+ lider.GetCommandLider().Count + " ------------- index > "+ indexLiderTime);
+                StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.GetIncident()));
                 indexLiderTime++;
             }
 
@@ -484,8 +490,10 @@ public class MenuScript : MonoBehaviour
             townCity.SetVisibleShild(false);
         }
         CircleImageReadyParam(0, false);
+        /*
         new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList,
             _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
+        */
     }
     /*
     private IEnumerator TurnText(string Name,int indexLider) {
@@ -496,25 +504,25 @@ public class MenuScript : MonoBehaviour
         
     }
     */
-    private IEnumerator TurnOneLider(CountryLider lider, int indexLider, CommandLider commandLider)
+    private IEnumerator TurnOneLider(CountryLider lider, int indexLider, Incident CommandIncident)
     {
         yield return new WaitForSeconds(waitTime + (waitTurnTime * indexLider));
 
         EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, new EventSendLider(lider.FlagId));
         _controller.SendCommand(eventController);
-Debug.Log(commandLider+"  ]=[ " + commandLider.GetIncident());
-        //var idEvent = new DictionaryEssence().GetIdEvent(commandLider.GetNameCommandFirst());
-
-        Debug.Log("lid  Count=" + lider.GetCommandLider().Count);
-        var idEvent = commandLider.GetIncident().Id;
+        Debug.Log("  ### an tune     indexLider =" + indexLider);
+        Debug.Log(CommandIncident.Name + "  ]=[ " + CommandIncident.Id+"  idImage = "+ CommandIncident.IdImage+"  Uid = "+ CommandIncident.Uid);
+ 
         if (lider.GetCommandLider().Count > 1)
         {
-Debug.LogWarning(commandLider.GetNameCommandFirst()+" T " + lider.GetName());
+            Debug.Log("Rem Missle = sently =  =" + lider.GetName());
+            Debug.LogWarning("One "+lider.GetCommandLider()[0].GetNameCommandFirst() + "_____" + lider.GetCommandLider()[0].GetIncident().Uid + "  Count = "+ lider.GetCommandLider().Count);
+            Debug.Log("Two "+       lider.GetCommandLider()[1].GetNameCommandFirst() + "_____" + lider.GetCommandLider()[1].GetIncident().Uid + " u > " + CommandIncident.Name);
         }
         
-        Debug.Log(commandLider.GetIncident().Name+"  = Co   = " + lider.GetEventTotalTurn().EventMessage + "   "+ lider.GetEventTotalTurn().NameEvent);
-        Debug.Log(lider.GetName()+"    &&&&&&&&&&   Weapon== "+ commandLider.GetNameCommandFirst());
-        this.TacticReal(lider.GetName() + "  : " + commandLider.GetNameCommandFirst() + commandLider.GetIncident().GetMessage(), lider.FlagId - 1, idEvent, lider);
+        
+        Debug.Log(lider.GetName()+"    &&&&&    Weapon=    idEvent = " );
+        this.TacticReal(""+lider.GetName() + "  : " + CommandIncident.Name + CommandIncident.GetMessage(), lider.FlagId - 1, CommandIncident.IdImage, lider);
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.ViewStartStateObject(TownViewList, waitTime + (waitTurnTime * indexLider), lider);
