@@ -31,7 +31,6 @@ public class ViewCanvasReport : MonoBehaviour
 
     void CanvasReportButtonCloseMethod()
     {
-        //CanvasReport.SetActive(false);
         Destroy(gameObject);
     }
     void Update()

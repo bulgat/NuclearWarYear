@@ -17,7 +17,6 @@ public class Controller
 		LiderTargetPlayer,
 		Warhead,
 		TotalTurn,
-		TurnSatisfyOneLider,
 		SelectCityEnemyTargetPlayer,
 		ResetSelectCityEnemyTargetPlayer,
 		DoneMoveMadeCurrentPlayer,
@@ -90,7 +89,7 @@ public class Controller
 			_mainModel.TotalTurn(eventController.EventSend.FlagId);
 			return;
 		}
-		
+		/*
 		//TurnSatisfyOneLider
 		if (eventController.NameCommand == Command.TurnSatisfyOneLider)
 		{
@@ -98,7 +97,7 @@ public class Controller
 			_mainModel.SatisfyOneLiderTurn(eventController.EventSend.FlagId);
 			return;
 		}
-		
+		*/
 		if (eventController.NameCommand == Command.SelectCityEnemyTargetPlayer){
 
 			_mainModel.SelectCityEnemyTargetPlayer(eventController.EventSend.CityId);
@@ -117,5 +116,8 @@ public class Controller
         new AICreateCommand().EstimationSetCommandAi(_mainModel.ResetAction, _mainModel.CountryLiderList,
            _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
     }
-
+    public string TurnSatisfyOneLider(int flagId, Incident CommandIncident)
+	{
+			return _mainModel.SatisfyOneLiderTurn(flagId, CommandIncident);	
+	}
 }

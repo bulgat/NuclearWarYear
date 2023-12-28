@@ -17,7 +17,7 @@ namespace Assets.Scripts.View
         }
         public void SetResourceMethodTable(MenuScript menuScript, List<Sprite> LiderImageList, List<Sprite> FlagImageList, MainModel _mainModel)
         {
-            //menuScript.CanvasResourcePlayer.SetActive(true);
+
             int flagId = _mainModel.GetCurrenFlagPlayer();
             CountryLider liderPlayer = _mainModel.GetLiderOne(flagId);
             //int indexLider = liderPlayer.GraphicId;

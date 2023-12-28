@@ -67,10 +67,12 @@
     <Compile Include="Assets\Scripts\Model\weapon\Incident.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\Defence.cs" />
     <Compile Include="Assets\Scripts\View\ViewLiderHelper.cs" />
+    <Compile Include="Assets\Scripts\Fortune.cs" />
     <Compile Include="Assets\Scripts\Model\ActionCommand.cs" />
     <Compile Include="Assets\Scripts\Controller\EventBomber.cs" />
     <Compile Include="Assets\Scripts\TownCardInfo.cs" />
     <Compile Include="Assets\Scripts\Model\CityGameObjHelper.cs" />
+    <Compile Include="Assets\Scripts\Model\createCommand\CreateFortune.cs" />
     <Compile Include="Assets\Scripts\Model\turnEvent\TurnEventExecute.cs" />
     <Compile Include="Assets\Scripts\Model\Country\CommandLider.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewMoveDeflectors.cs" />

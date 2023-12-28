@@ -72,10 +72,8 @@ public class SwitchActionHelper
      
 CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider);
 
-        if (AIfiend) {
-            commandLider.SetTargetCity(targetCity);
-            
-        }
+
+        AiTargetCity(AIfiend, targetCity, commandLider);
 
         // Счастливая карта!
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(targetCity, MissleId, FlagId, AIfiend, TownList, CountryLiderList, countryLider);
@@ -99,6 +97,14 @@ CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, Flag
             commandLiderList.Add(commandLiderFortune);
         }
         return commandLiderList;
+    }
+    private void AiTargetCity(bool AIfiend, CityModel targetCity, CommandLider commandLider)
+    {
+        if (AIfiend)
+        {
+            commandLider.SetTargetCity(targetCity);
+
+        }
     }
  private void TreatmentCommand(string actionCommand, CommandLider commandLider, CityModel targetCity, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
         List<CountryLider> CountryLiderList, CountryLider countryLider)

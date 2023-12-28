@@ -64,11 +64,12 @@ public class CountryLider
 		MoveMade = Value;
 
 	}
-	public void SetEventTotalMessageTurn(string eventTotalTurn, string eventName)
+	public string SetEventTotalMessageTurn(string eventTotalTurn, string eventName)
     {
 		this.EventTotalTurn = new IncidentEvent(eventName) { EventMessage = eventTotalTurn};
-		
-	}
+		return this.EventTotalTurn.EventMessage;
+
+    }
 	public IncidentEvent GetEventTotalTurn() {
 		return this.EventTotalTurn;
 	}

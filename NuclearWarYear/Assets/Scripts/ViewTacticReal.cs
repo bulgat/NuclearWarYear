@@ -12,15 +12,7 @@ public class ViewTacticReal : MonoBehaviour
         this._FlagImageList = FlagImageList;
         this._IconCardList = IconCardList;
     }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+ 
     public void CanvasTacticRealSetText(string InfoText, int FlagIndex,int IdImage, List<Sprite> LiderImageList, MainModel mainModel, int indexLider)
     {
         Debug.Log("lid  C   IdEvent =" + IdImage);

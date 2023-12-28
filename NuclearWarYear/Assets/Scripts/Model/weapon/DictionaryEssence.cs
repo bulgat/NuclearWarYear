@@ -18,10 +18,10 @@ public class DictionaryEssence
 	public DictionaryEssence() {
         allEssenceList = new List<Weapon>();
 
-        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 0,""));
-		allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 1, ""));
-        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 2, ""));
-        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 3, ""));
+        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 0,"Ракеты приведены в готовность"));
+		allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 1, "Ракеты приведены в готовность"));
+        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 2, "Ракеты приведены в готовность"));
+        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 3, "Ракеты приведены в готовность"));
 
 		allEssenceList.Add(new Incident(TypeEvent.Bomber.ToString(), DictionaryEssence.TypeWeapon.Bomber, 4,"Бомбардировщики приведены в готовность",4));
         allEssenceList.Add(new Incident(TypeEvent.HeavyBomber.ToString(), DictionaryEssence.TypeWeapon.Bomber, 5, "Бомбардировщики приведены в готовность"));
@@ -33,8 +33,8 @@ public class DictionaryEssence
 
         allEssenceList.Add(new Incident(TypeEvent.Industry.ToString(), DictionaryEssence.TypeWeapon.Defence, 8, "Производство вооружения ",8));
 
-        allEssenceList.Add(new Incident(TypeEvent.Ufo.ToString(), DictionaryEssence.TypeWeapon.Incident, 10, "Ufo инопланитяне прибыли в город ",11));
-        allEssenceList.Add(new Incident(TypeEvent.Baby.ToString(), DictionaryEssence.TypeWeapon.Incident, 11, "Бэбибум ", 12));
+        allEssenceList.Add(new Incident(TypeEvent.Ufo.ToString(), DictionaryEssence.TypeWeapon.Incident, 10, "Ufo инопланитяне прибыли в город +",11));
+        allEssenceList.Add(new Incident(TypeEvent.Baby.ToString(), DictionaryEssence.TypeWeapon.Incident, 11, "Бэбибум прибавка населения +", 12));
         allEssenceList.Add(new Incident(TypeEvent.RocketRich.ToString(), DictionaryEssence.TypeWeapon.Incident, 12, "Богатые и Маск постороили ракету на Луну ",13));
         allEssenceList.Add(new Incident(TypeEvent.CrazyCow.ToString(), DictionaryEssence.TypeWeapon.Incident, 13,"Ковид-сумашедшествие от коров",14));
 

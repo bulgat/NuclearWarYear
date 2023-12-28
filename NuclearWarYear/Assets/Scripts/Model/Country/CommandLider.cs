@@ -46,7 +46,7 @@ public class CommandLider
          VisibleEventList.Add(DictionaryEssence.TypeEvent.CrazyCow.ToString(), false);
         */
     }
-	public bool GetVisible(string Name)
+	public bool GetNameExecute(string Name)
 	{
 		if (this.IncidentCommand?.Name == Name)
 		{

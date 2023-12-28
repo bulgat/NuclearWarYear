@@ -250,13 +250,12 @@ public class MainModel
 	public void TotalTurn(int FlagId){
 
 		foreach (CountryLider lider in this.CountryLiderList){
-			new MainTurnLider().SatisfyEventOneLiderTurn(lider.FlagId, this.CountryLiderList, this.TownList);	
+			new MainTurnLider().SatisfyEventOneLiderTurn(lider.FlagId, this.CountryLiderList, this.TownList, lider.GetCommandLiderFirst().GetIncident());	
 		}
 	}
-	public void SatisfyOneLiderTurn(int FlagId)
+	public string SatisfyOneLiderTurn(int FlagId, Incident CommandIncident)
 	{
-		//var lider = GetLiderOne(FlagId);
-		new MainTurnLider().SatisfyEventOneLiderTurn(FlagId, CountryLiderList, TownList);
+		return new MainTurnLider().SatisfyEventOneLiderTurn(FlagId, CountryLiderList, TownList, CommandIncident);
 	}
 	
 

@@ -70,12 +70,12 @@ public class BuildingCentral : MonoBehaviour
     public void VisibleBuilding(CommandLider commandLider)
     {
 
-        Propaganda.SetActive(commandLider.GetVisible(DictionaryEssence.TypeEvent.Propaganda.ToString()));
-        Building.SetActive(commandLider.GetVisible(DictionaryEssence.TypeEvent.Building.ToString()));
-        DefenceObject.SetActive(commandLider.GetVisible(DictionaryEssence.TypeEvent.Defence.ToString()));
-        MissleObject.SetActive(commandLider.GetVisible(DictionaryEssence.TypeEvent.Missle.ToString()));
-        Airport.SetActive(commandLider.GetVisible(DictionaryEssence.TypeEvent.Airport.ToString()));
-        AirportAttack.SetActive(commandLider.GetVisible(DictionaryEssence.TypeEvent.AttackAirport.ToString()));
+        Propaganda.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Propaganda.ToString()));
+        Building.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Building.ToString()));
+        DefenceObject.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Defence.ToString()));
+        MissleObject.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Missle.ToString()));
+        Airport.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Airport.ToString()));
+        AirportAttack.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.AttackAirport.ToString()));
 
         /*
         Propaganda.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Propaganda.ToString()]);
@@ -88,8 +88,8 @@ public class BuildingCentral : MonoBehaviour
 
         if (WingMissle != null)
         {
-            WingMissle.SetActive(commandLider.GetVisible(DictionaryEssence.TypeEvent.AttackMissle.ToString()));
-            MissleOpenObject.SetActive(commandLider.GetVisible(DictionaryEssence.TypeEvent.AttackMissle.ToString()));
+            WingMissle.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.AttackMissle.ToString()));
+            MissleOpenObject.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.AttackMissle.ToString()));
             /*
             WingMissle.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.AttackMissle.ToString()]);
             MissleOpenObject.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.AttackMissle.ToString()]);
@@ -108,23 +108,23 @@ public class BuildingCentral : MonoBehaviour
 
         }
         if (DefectorsObject!=null) {
-            DefectorsObject.SetActive(commandLider.GetVisible(DictionaryEssence.TypeEvent.Defectors.ToString()));
+            DefectorsObject.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Defectors.ToString()));
             //DefectorsObject.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Defectors.ToString()]);
         }
         if (UfoObject != null)
         {
-            UfoObject.SetActive(commandLider.GetVisible(DictionaryEssence.TypeEvent.Ufo.ToString()));
+            UfoObject.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Ufo.ToString()));
             //UfoObject.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Ufo.ToString()]);
         }
         VisibleObjList[DictionaryEssence.TypeEvent.AttackBomber.ToString()] = commandLider.GetVisibleAttackBomber();
 
 
-        VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()] = commandLider.GetVisible(DictionaryEssence.TypeEvent.AttackMissle.ToString());
-        VisibleObjList[DictionaryEssence.TypeEvent.Defectors.ToString()] = commandLider.GetVisible(DictionaryEssence.TypeEvent.Defectors.ToString());
-        VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()] = commandLider.GetVisible(DictionaryEssence.TypeEvent.Ufo.ToString());
-        VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()] = commandLider.GetVisible(DictionaryEssence.TypeEvent.Baby.ToString());
-        VisibleObjList[DictionaryEssence.TypeEvent.RocketRich.ToString()] = commandLider.GetVisible(DictionaryEssence.TypeEvent.RocketRich.ToString());
-        VisibleObjList[DictionaryEssence.TypeEvent.CrazyCow.ToString()] = commandLider.GetVisible(DictionaryEssence.TypeEvent.CrazyCow.ToString());
+        VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()] = commandLider.GetNameExecute(DictionaryEssence.TypeEvent.AttackMissle.ToString());
+        VisibleObjList[DictionaryEssence.TypeEvent.Defectors.ToString()] = commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Defectors.ToString());
+        VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()] = commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Ufo.ToString());
+        VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()] = commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Baby.ToString());
+        VisibleObjList[DictionaryEssence.TypeEvent.RocketRich.ToString()] = commandLider.GetNameExecute(DictionaryEssence.TypeEvent.RocketRich.ToString());
+        VisibleObjList[DictionaryEssence.TypeEvent.CrazyCow.ToString()] = commandLider.GetNameExecute(DictionaryEssence.TypeEvent.CrazyCow.ToString());
         /*
         VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()] = commandLider.VisibleEventList[DictionaryEssence.TypeEvent.AttackMissle.ToString()];
         VisibleObjList[DictionaryEssence.TypeEvent.Defectors.ToString()] = commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Defectors.ToString()];
