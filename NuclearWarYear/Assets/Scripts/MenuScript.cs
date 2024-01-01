@@ -13,6 +13,7 @@ using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 using static UnityEngine.ParticleSystem;
 using System.Xml.Linq;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.VersionControl;
 
 public class MenuScript : MonoBehaviour
 {
@@ -495,32 +496,33 @@ public class MenuScript : MonoBehaviour
             _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
         */
     }
-    /*
-    private IEnumerator TurnText(string Name,int indexLider) {
-       
-       
-        yield return new WaitForSeconds(waitTime+(waitTurnTime * indexLider));
-        
-        
-    }
-    */
+
     private IEnumerator TurnOneLider(CountryLider lider, int indexLider, Incident CommandIncident)
     {
-        yield return new WaitForSeconds(waitTime + (waitTurnTime * indexLider));
+        yield return new WaitForSeconds(this.waitTime + (this.waitTurnTime * indexLider));
         //EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, new EventSendLider(lider.FlagId));
         string messageModel = _controller.TurnSatisfyOneLider(lider.FlagId, CommandIncident);//.SendCommand(eventController);
-        Debug.Log("  I Coun--------- index > "+ CommandIncident.Id);
+        
         
         Debug.Log("  ###  = "+ messageModel + "  indexLider =" );
-        Debug.Log(CommandIncident.Name + "  ]=[ " + CommandIncident.Id+"  idImage = "+ CommandIncident.IdImage+"  Uid = "+ CommandIncident.Uid);
+        
  
         this.TacticReal(""+lider.GetName() + "  : " + CommandIncident.Name + messageModel, lider.FlagId - 1, CommandIncident.IdImage, lider);
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
-        buildingCentral.ViewStartStateObject(TownViewList, waitTime + (waitTurnTime * indexLider), lider);
+        buildingCentral.ViewStartStateObject(TownViewList, waitTime + (this.waitTurnTime * indexLider), lider);
 
         buildingCentral.SetTargetBomber(TargetManager(lider));
-        
+
+        StartCoroutine(AfterTurnOneLider(CommandIncident));
+    }
+    private IEnumerator AfterTurnOneLider(Incident CommandIncident)
+    {
+        yield return new WaitForSeconds( this.waitTurnTime);
+        Debug.Log("ou   message = " + CommandIncident.ReleasePopulation);
+        Debug.Log("  I  ------- index > "+ CommandIncident.PopulationEvent.City);
+        Debug.Log("  ]= Imag =  id = ------------------------------------------------------------------- "  );
+        _controller.ReleasePopulationEvent(CommandIncident);
     }
     private CityModel TargetManager(CountryLider lider)
     {

@@ -120,4 +120,8 @@ public class Controller
 	{
 			return _mainModel.SatisfyOneLiderTurn(flagId, CommandIncident);	
 	}
+    public void ReleasePopulationEvent(Incident CommandIncident)
+    {
+		_mainModel.ReleasePopulationEvent(CommandIncident);
+    }
 }

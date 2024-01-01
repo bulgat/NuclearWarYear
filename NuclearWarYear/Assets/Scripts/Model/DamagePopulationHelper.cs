@@ -11,9 +11,6 @@ public class DamagePopulationHelper
     }
     public bool SetDamagePopulation( CityModel cityModel,int Damage,bool Explode){
 
-		//CityModel cityModel = GetCityLider(lider);
-
-
         if (cityModel != null){
 			int population = cityModel.GetPopulation() - Damage;
 			if(population<0)

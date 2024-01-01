@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.Model;
 using Assets.Scripts.Model.scenario;
+using Assets.Scripts.Model.turnEvent;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -298,4 +299,9 @@ public class MainModel
 		_endGame= checkVictory.GetEndGame();
 		
 	}
+    public void ReleasePopulationEvent(Incident CommandIncident)
+    {
+        new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.City, CommandIncident.PopulationEvent.ChangePopulation, false);
+        //_mainModel;
+    }
 }
