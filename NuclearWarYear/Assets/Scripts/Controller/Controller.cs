@@ -116,7 +116,7 @@ public class Controller
         new AICreateCommand().EstimationSetCommandAi(_mainModel.ResetAction, _mainModel.CountryLiderList,
            _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
     }
-    public string TurnSatisfyOneLider(int flagId, Incident CommandIncident)
+    public Incident TurnSatisfyOneLider(int flagId, Incident CommandIncident)
 	{
 			return _mainModel.SatisfyOneLiderTurn(flagId, CommandIncident);	
 	}

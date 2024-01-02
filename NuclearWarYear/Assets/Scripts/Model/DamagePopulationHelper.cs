@@ -9,9 +9,11 @@ public class DamagePopulationHelper
 		return lider.GetCommandLiderFirst().GetTargetCity();
 
     }
-    public bool SetDamagePopulation( CityModel cityModel,int Damage,bool Explode){
-
+    public void SetDamagePopulation( CityModel cityModel,int Damage){
+        
+        
         if (cityModel != null){
+            
 			int population = cityModel.GetPopulation() - Damage;
 			if(population<0)
 			{
@@ -19,12 +21,14 @@ public class DamagePopulationHelper
 			}
             cityModel.SetFuturePopulation(population);
             cityModel.SetPresentlyPopulation();
-			if (Explode){
-				
-				return true;
-			}
-		}
-		return false;
+            //if (Explode){
+
+            //	return true;
+            //}
+            
+        }
+
+		//return false;
 	}
 	
 }

@@ -23,7 +23,7 @@ public class ViewCanvasReport : MonoBehaviour
     }
     public void SetMessage(string message)
     {
-    Debug.Log("   = "+ gameObject);    
+       
         var textMessage = gameObject.transform.GetChild(0).GetChild(2);
 
         textMessage.GetComponent<Text>().text = message;

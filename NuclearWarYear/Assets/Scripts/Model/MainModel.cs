@@ -254,7 +254,7 @@ public class MainModel
 			new MainTurnLider().SatisfyEventOneLiderTurn(lider.FlagId, this.CountryLiderList, this.TownList, lider.GetCommandLiderFirst().GetIncident());	
 		}
 	}
-	public string SatisfyOneLiderTurn(int FlagId, Incident CommandIncident)
+	public Incident SatisfyOneLiderTurn(int FlagId, Incident CommandIncident)
 	{
 		return new MainTurnLider().SatisfyEventOneLiderTurn(FlagId, CountryLiderList, TownList, CommandIncident);
 	}
@@ -301,6 +301,7 @@ public class MainModel
 	}
     public void ReleasePopulationEvent(Incident CommandIncident)
     {
+        
         new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.GetMyCity(), CommandIncident.PopulationEvent.GetMyPopulation());
         new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.GetFiendCity(), CommandIncident.PopulationEvent.GetFiendPopulation());
         //_mainModel;

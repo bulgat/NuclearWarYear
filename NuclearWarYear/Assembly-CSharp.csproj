@@ -56,6 +56,7 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Model\weapon\StateAttackPopulation.cs" />
     <Compile Include="Assets\Scripts\Model\CheckVictory.cs" />
     <Compile Include="Assets\Scripts\Model\MainModel.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewCrazyCow.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Scripts\Model\ModGameEngine.cs" />
     <Compile Include="Assets\Scripts\ViewIconCard.cs" />
     <Compile Include="Assets\Scripts\Controller\IEventSend.cs" />
+    <Compile Include="Assets\Scripts\Model\weapon\StateAddPopulation.cs" />
     <Compile Include="Assets\Scripts\Model\Nation\LiderHelperOne.cs" />
     <Compile Include="Assets\Scripts\Model\DamagePopulationHelper.cs" />
     <Compile Include="Assets\Scripts\Model\scenario\ParamLider.cs" />
@@ -101,15 +103,18 @@
     <Compile Include="Assets\Scripts\View\ViewCircleReady.cs" />
     <Compile Include="Assets\Scripts\View\ViewCardWeapon.cs" />
     <Compile Include="Assets\Scripts\View\ViewLiderButton.cs" />
+    <Compile Include="Assets\Scripts\Model\weapon\PopulationEvent.cs" />
     <Compile Include="Assets\Scripts\Model\createCommand\SwitchActionHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildingCentralHelper.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackBomber.cs" />
     <Compile Include="Assets\Scripts\Model\Nation\CountryLider.cs" />
+    <Compile Include="Assets\Scripts\Model\weapon\StateDragPopulation.cs" />
     <Compile Include="Assets\Scripts\Model\Country\LiderCountryHelper.cs" />
     <Compile Include="Assets\Scripts\MenuStart.cs" />
     <Compile Include="Assets\Scripts\Model\CityModel.cs" />
     <Compile Include="Assets\Scripts\Model\Country\RelationMood.cs" />
     <Compile Include="Assets\Scripts\Controller\EventSendLider.cs" />
+    <Compile Include="Assets\Scripts\Model\weapon\IStatePopulationEvent.cs" />
     <Compile Include="Assets\Scripts\Model\CityHelperList.cs" />
     <Compile Include="Assets\Scripts\Model\scenario\ScenarioLider.cs" />
     <Compile Include="Assets\Scripts\MenuVictory.cs" />
@@ -119,12 +124,14 @@
     <Compile Include="Assets\Scripts\Model\weapon\IWeapon.cs" />
     <Compile Include="Assets\Scripts\Model\turnEvent\MainTurnLider.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\Bomber.cs" />
+    <Compile Include="Assets\Scripts\Model\turnEvent\UtilModelCity.cs" />
     <Compile Include="Assets\Scripts\City.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackMissle.cs" />
     <Compile Include="Assets\Scripts\Model\Nation\IncidentEvent.cs" />
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\ViewCanvasReport.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
+    <Compile Include="Assets\Scripts\UFOmodel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

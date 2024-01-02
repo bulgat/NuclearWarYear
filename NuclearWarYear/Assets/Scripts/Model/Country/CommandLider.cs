@@ -28,23 +28,7 @@ public class CommandLider
         
         this.VisibleList = new List<string>();
         // this.NameCommand = nameCommand;
-        /*
-         this.VisibleEventList = new Dictionary<string, bool>();
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.Propaganda.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.Building.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.Defence.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.Missle.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.Airport.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.Bomber.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.AttackBomber.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.AttackAirport.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.AttackMissle.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.Defectors.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.Ufo.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.Baby.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.RocketRich.ToString(), false);
-         VisibleEventList.Add(DictionaryEssence.TypeEvent.CrazyCow.ToString(), false);
-        */
+       
     }
 	public bool GetNameExecute(string Name)
 	{

@@ -430,18 +430,14 @@ public class MenuScript : MonoBehaviour
             viewTacticReal.Init(this.FlagImageList, this.IconCardList);
             viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idImage, this.LiderImageList, this._mainModel, lider.FlagId-1);
 
-        //_viewTacticReal.CanvasTacticRealSetText(lider.GetName() + "  = " + lider.GetCommandLider().GetNameCommand() + lider.GetEventTotalTurn().EventMessage,
-        //   lider.FlagId - 1, idEvent, this.LiderImageList, this._mainModel, indexLider);
+
        
     }
 
     void TurnButtonMethod(Button buttonPressed)
     {
         _controller.TurnCreateCommand();
-        /*
-        new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList,
-           _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
-        */
+
         EventController eventController = new EventController(Controller.Command.DoneMoveMadeCurrentPlayer, null);
         _controller.SendCommand(eventController);
 
@@ -476,7 +472,6 @@ public class MenuScript : MonoBehaviour
                 indexLiderTime++;
             }
 
-             //+= lider.GetCommandLider().Count;
         }
         float openWaitTime = waitTime + this.waitTurnTime * _mainModel.CountryLiderList.Count();
 
@@ -491,38 +486,38 @@ public class MenuScript : MonoBehaviour
             townCity.SetVisibleShild(false);
         }
         CircleImageReadyParam(0, false);
-        /*
-        new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList,
-            _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
-        */
+
     }
 
     private IEnumerator TurnOneLider(CountryLider lider, int indexLider, Incident CommandIncident)
     {
         yield return new WaitForSeconds(this.waitTime + (this.waitTurnTime * indexLider));
-        //EventController eventController = new EventController(Controller.Command.TurnSatisfyOneLider, new EventSendLider(lider.FlagId));
-        string messageModel = _controller.TurnSatisfyOneLider(lider.FlagId, CommandIncident);//.SendCommand(eventController);
+
+        CommandIncident = _controller.TurnSatisfyOneLider(lider.FlagId, CommandIncident);//.SendCommand(eventController);
         
         
-        Debug.Log("  ###  = "+ messageModel + "  indexLider =" );
+        
         
  
-        this.TacticReal(""+lider.GetName() + "  : " + CommandIncident.Name + messageModel, lider.FlagId - 1, CommandIncident.IdImage, lider);
+        this.TacticReal(""+lider.GetName() + "  : " + CommandIncident.Name + CommandIncident.GetMessage(), lider.FlagId - 1, CommandIncident.IdImage, lider);
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
-        buildingCentral.ViewStartStateObject(TownViewList, waitTime + (this.waitTurnTime * indexLider), lider);
+        buildingCentral.ViewStartStateObject(TownViewList, waitTime + (this.waitTurnTime * indexLider), lider, CommandIncident);
 
         buildingCentral.SetTargetBomber(TargetManager(lider));
 
-        StartCoroutine(AfterTurnOneLider(CommandIncident));
+        StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
+        Debug.Log(" --------------- ##  Lider  mage =" + CommandIncident.GetName());
     }
-    private IEnumerator AfterTurnOneLider(Incident CommandIncident)
+    private IEnumerator AfterTurnOneLider(Incident CommandIncident, CountryLider lider)
     {
-        yield return new WaitForSeconds( this.waitTurnTime);
-        Debug.Log("ou   message = " + CommandIncident.ReleasePopulation);
-        Debug.Log("  I  ------- index > "+ CommandIncident.PopulationEvent);
-        Debug.Log("  ]= Imag =  id = ------------------------------------------------------------------- "  );
+        yield return new WaitForSeconds( this.waitTurnTime-1.0f);
+        
+        
+        Debug.Log("  Imag =  ------------------------------------------------------------------- " + CommandIncident.GetName());
         _controller.ReleasePopulationEvent(CommandIncident);
+        BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
+        buildingCentral.ViewEndState();
     }
     private CityModel TargetManager(CountryLider lider)
     {
@@ -764,8 +759,7 @@ public class MenuScript : MonoBehaviour
         {
             Destroy(this.CanTacticReal);
         }
-       // CanvasTacticReal.GetComponent<Canvas>().enabled = (_visiblePanel==false);
-        
+  
     }
     private void SetAllCityVisibleLabelView(bool Visible)
     {
@@ -798,8 +792,8 @@ public class MenuScript : MonoBehaviour
         
         CountryLider liderPLayer = _mainModel.GetCurrenPlayer();
 
-
-        buildingCentral.VisibleBuilding(liderPLayer.GetCommandLider().First());
+        //all?
+        //buildingCentral.UpdateVisibleBuilding(liderPLayer.GetCommandLider());
 
         MoveAi();
         // visible label sity;
@@ -861,7 +855,7 @@ public class MenuScript : MonoBehaviour
             {
                 BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(_mainModel.CountryLiderList, lider.FlagId);
 
-                buildingCentral.VisibleBuilding(lider.GetCommandLider().First());
+                //buildingCentral.UpdateVisibleBuilding(lider.GetCommandLider());
 
             }
         }

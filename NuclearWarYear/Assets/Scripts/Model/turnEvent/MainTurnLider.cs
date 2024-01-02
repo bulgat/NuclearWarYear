@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Model.turnEvent;
+using Assets.Scripts.Model.weapon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Assets.Scripts.Model
     {
 		Dictionary<string, TurnEventExecute> MessageDictionary;
 
-		public string SatisfyEventOneLiderTurn(int FlagId, List<CountryLider> CountryLiderList,
+		public Incident SatisfyEventOneLiderTurn(int FlagId, List<CountryLider> CountryLiderList,
 			List<CityModel> TownList, Incident CommandIncident)
 		{
             MessageDictionary = new Dictionary<string, TurnEventExecute>();
@@ -35,7 +36,7 @@ namespace Assets.Scripts.Model
 			string message="";
 
             CountryLider lider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
-            Debug.Log(CommandIncident.Name+"    = &&&&    We " + CommandIncident .Id+ " = ____________________________________"+ lider.GetCommandLider().Count);
+            
             if (lider.GetCommandLider() != null)
 			{
 				CityModel cityModelTarget = lider.GetCommandLiderFirst().GetTargetCity();
@@ -54,18 +55,18 @@ namespace Assets.Scripts.Model
                             lider.MissleId = lider.GetCommandLiderFirst().GetSizeIdMissle();
                             message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderFirst().GetIncident().GetMessage(), lider.GetCommandLiderFirst().GetIncident().GetName());
                             lider.RemoveMissle();
-							CommandIncident.SetReleaseMessage(message, 0, null,null,false);
-
-                            return message;
+							//CommandIncident.SetReleaseMessage(message, 0, null,null,false);
+                            CommandIncident.SetReleaseMessage(new StateAttackPopulation(message,0,null));
+                            return CommandIncident;
                         }
                         if (item.Key == "Bomber")
                         {
                             lider.MissleId = lider.GetCommandLiderFirst().GetSizeIdMissle();
                             message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderFirst().GetIncident().GetMessage(), lider.GetCommandLiderFirst().GetIncident().GetName());
                             lider.RemoveBomber();
-                            CommandIncident.SetReleaseMessage(message, 0, null, null, false);
-
-                            return message;
+                            //CommandIncident.SetReleaseMessage(message, 0, null, null, false);
+                            CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, 0, null));
+                            return CommandIncident;
                         }
 
                         if (MessageDictionary[item.Key].RemoveDefenceWeapon || MessageDictionary[item.Key].Airport)
@@ -79,24 +80,23 @@ namespace Assets.Scripts.Model
                                 message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderFirst().GetIncident().GetMessage(), lider.GetCommandLiderFirst().GetIncident().GetName());
 								lider.RemoveDefenceWeapon();
 							}
-                            CommandIncident.SetReleaseMessage(message,0,null, null, false);
-
-                            return message;
+                            //CommandIncident.SetReleaseMessage(message,0,null, null, false);
+                            CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, 0, null));
+                            return CommandIncident;
                         }
 						else
 						{
-                            Debug.Log("T _  > " + item.Key+ "   ChangePopulation = " + MessageDictionary[item.Key].ChangePopulation);
-
+                            
                             int UnDamage = 0;
 							// null;
 							CityModel cityFiend = new DamagePopulationHelper().GetCityLider(lider);
-							bool attackFiend=false;
-							CityModel liderCityMy = null;
-                           // CityModel liderCityMy = GetTargetCityEvent(bool RandomAndUnRevert, cityFiend, cityModelTarget);
+							//bool attackFiend=false;
+							CityModel liderCityMy = new UtilModelCity().GetCityModel(TownList, lider);
+                            // CityModel liderCityMy = GetTargetCityEvent(bool RandomAndUnRevert, cityFiend, cityModelTarget);
                             if (MessageDictionary[item.Key].ChangePopulation)
 							{
-								attackFiend = true;
-                                liderCityMy = new UtilModelCity().GetCityModel(TownList, lider);
+								//attackFiend = true;
+                                //liderCityMy = new UtilModelCity().GetCityModel(TownList, lider);
                                 UnDamage = AddAndRemovePopulation(cityModelTarget, liderCityMy, lider, MessageDictionary[item.Key].Random, TownList);
 							}
 							string report = CommandIncident.GetMessage() + UnDamage;
@@ -113,14 +113,18 @@ namespace Assets.Scripts.Model
 								List<string> reportProducedWeaponList = lider.GetCommandLiderFirst().GetReportProducedWeaponList();
 								report = string.Join(", ", reportProducedWeaponList.ToArray());
 							}
-
+							
                             message = lider.SetEventTotalMessageTurn(report, item.Key);
 							lider.SetCommandRealise(lider.GetCommandLiderFirst());
-
+							if (DictionaryEssence.TypeEvent.Propaganda.ToString() == item.Key || DictionaryEssence.TypeEvent.Defectors.ToString() ==item.Key) {
+                                CommandIncident.SetReleaseMessage(new StateDragPopulation(message, UnDamage, liderCityMy, cityFiend));
+                                return CommandIncident;
+                            }
 							bool doubleCity = item.Key == DictionaryEssence.TypeEvent.Propaganda.ToString() || item.Key == DictionaryEssence.TypeEvent.Defectors.ToString();
-                            CommandIncident.SetReleaseMessage(message, UnDamage, liderCityMy, cityFiend, doubleCity);
-
-                            return message;
+                            //CommandIncident.SetReleaseMessage(message, UnDamage, liderCityMy, cityFiend, doubleCity);
+                            
+                            CommandIncident.SetReleaseMessage(new StateAddPopulation(message, -UnDamage, liderCityMy));
+                            return CommandIncident;
 						}
                     }
                 }
@@ -143,8 +147,8 @@ namespace Assets.Scripts.Model
 							{
 								damageAttackCount = lider.GetCommandLiderFirst().GetAttackBomber().GetDamage();
 
-                                new DamagePopulationHelper().SetDamagePopulation(new DamagePopulationHelper().GetCityLider(lider), 
-									damageAttackCount, true);
+                                //new DamagePopulationHelper().SetDamagePopulation(new DamagePopulationHelper().GetCityLider(lider), 
+								//	damageAttackCount, true);
 							}
 						}
 
@@ -154,8 +158,9 @@ namespace Assets.Scripts.Model
                     message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderFirst().GetIncident().GetMessage() + damageAttackCount + " у " + lider.GetCommandLiderFirst().LiderFiend.GetName(), lider.GetCommandLiderFirst().GetIncident().GetName());
 					lider.GetCommandLiderFirst().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, 25);
 
-                    CommandIncident.SetReleaseMessage(message, damageAttackCount, null, cityModelTarget, false);
-                    return message;
+                    //CommandIncident.SetReleaseMessage(message, damageAttackCount, null, cityModelTarget, false);
+                    CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, damageAttackCount, cityModelTarget));
+                    return CommandIncident;
                 }
 
                 // attack Missle
@@ -171,8 +176,8 @@ namespace Assets.Scripts.Model
 							{
 								damageAttackCount = lider.GetCommandLiderFirst().GetAttackMissle().GetDamage();
 
-                                new DamagePopulationHelper().SetDamagePopulation(new DamagePopulationHelper().GetCityLider(lider),
-                                damageAttackCount, true);
+                                //new DamagePopulationHelper().SetDamagePopulation(new DamagePopulationHelper().GetCityLider(lider),
+                               // damageAttackCount, true);
 							
 							}
 						}
@@ -185,17 +190,18 @@ namespace Assets.Scripts.Model
                         lider.GetCommandLiderFirst().GetIncident().GetName());
 					lider.GetCommandLider().First().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, 25);
 
-                    CommandIncident.SetReleaseMessage(message, damageAttackCount, null, cityModelTarget, false);
-                    return message;
+                    //CommandIncident.SetReleaseMessage(message, damageAttackCount, null, cityModelTarget, false);
+                    CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, damageAttackCount, cityModelTarget));
+                    return CommandIncident;
                 }
 
 			}
 
             //BuildingCentral buildingCentralLider = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
             Debug.Log(" Mi  message  =" + message);
-            CommandIncident.SetReleaseMessage(message, 0, null, null, false);
-
-            return message;
+            //CommandIncident.SetReleaseMessage(message, 0, null, null, false);
+            CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, 0, null));
+            return CommandIncident;
 		}
 		/*
 		public CityModel GetCityModel(List<CityModel> TownList, CountryLider lider)
@@ -270,6 +276,7 @@ namespace Assets.Scripts.Model
             }
 			return cityModelLider;
         }
+		/*
 		public void AddPopulationCity(int UnDamage, CityModel cityFiend)
 		{
 			//int population = liderCityMy.GetPopulation() + UnDamage;
@@ -279,5 +286,6 @@ namespace Assets.Scripts.Model
 			// remove population Fiend.
 			new DamagePopulationHelper().SetDamagePopulation(cityFiend, UnDamage, false);
 		}
+		*/
 	}
 }
