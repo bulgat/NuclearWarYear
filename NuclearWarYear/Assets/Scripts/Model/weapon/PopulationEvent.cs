@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 namespace Assets.Scripts.Model.weapon
 {
     public class PopulationEvent
-    {
-        public CityModel City { get; private set; }
-        public CityModel FiendCity { get; private set; }
-        public bool DoubleCity { get; private set; }
-        public int ChangePopulation { get; private set; }
 
+    {
+        public string Message { get; protected set; }
+        public CityModel MyCity { get; protected set; }
+        public CityModel FiendCity { get; protected set; }
+        public bool DoubleCity { get; protected set; }
+        public int MyPopulation { get; protected set; }
+        public int FiendPopulation { get; protected set; }
+        /*
         public PopulationEvent(int ChangePopulation, CityModel City, CityModel fiendCity, bool doubleCity)
         {
             this.ChangePopulation = ChangePopulation;
@@ -20,5 +23,6 @@ namespace Assets.Scripts.Model.weapon
             this.FiendCity = fiendCity;
             this.DoubleCity = doubleCity;
         }
+        */
     }
 }

@@ -520,7 +520,7 @@ public class MenuScript : MonoBehaviour
     {
         yield return new WaitForSeconds( this.waitTurnTime);
         Debug.Log("ou   message = " + CommandIncident.ReleasePopulation);
-        Debug.Log("  I  ------- index > "+ CommandIncident.PopulationEvent.City);
+        Debug.Log("  I  ------- index > "+ CommandIncident.PopulationEvent);
         Debug.Log("  ]= Imag =  id = ------------------------------------------------------------------- "  );
         _controller.ReleasePopulationEvent(CommandIncident);
     }

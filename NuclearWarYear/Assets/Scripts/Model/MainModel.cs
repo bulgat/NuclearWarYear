@@ -301,7 +301,8 @@ public class MainModel
 	}
     public void ReleasePopulationEvent(Incident CommandIncident)
     {
-        new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.City, CommandIncident.PopulationEvent.ChangePopulation, false);
+        new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.GetMyCity(), CommandIncident.PopulationEvent.GetMyPopulation());
+        new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.GetFiendCity(), CommandIncident.PopulationEvent.GetFiendPopulation());
         //_mainModel;
     }
 }

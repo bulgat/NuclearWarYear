@@ -10,7 +10,7 @@ public class Incident: Weapon,IWeapon
     private static int UnicId = 0;
     public string ReleaseMessage { get; private set; }
     public int ReleasePopulation { get; private set; }
-    public PopulationEvent PopulationEvent { get; private set; }
+    public IStatePopulationEvent PopulationEvent { get; private set; }
 
     public Incident(string name, DictionaryEssence.TypeWeapon type, int id, string message,int IdImage=0) {
 		this.Name=name;
@@ -59,11 +59,13 @@ public class Incident: Weapon,IWeapon
     {
         return this.MemberwiseClone() as Incident;
     }
-    public void SetReleaseMessage(string Value, int PopulationDamage,CityModel cityLider, CityModel targetCity, bool doubleCity)
+    public void SetReleaseMessage(IStatePopulationEvent statePopulationEvent)
+        //string Value, int PopulationDamage,CityModel cityLider, CityModel targetCity, bool doubleCity)
     {
-        this.ReleaseMessage = Value;
-        this.ReleasePopulation = PopulationDamage;
-        this.PopulationEvent = new PopulationEvent(PopulationDamage, cityLider, targetCity, doubleCity);
+        //this.ReleaseMessage = Value;
+        //this.ReleasePopulation = PopulationDamage;
+        //this.PopulationEvent = new PopulationEvent(PopulationDamage, cityLider, targetCity, doubleCity);
+        this.PopulationEvent = statePopulationEvent;
     }
 
 }
