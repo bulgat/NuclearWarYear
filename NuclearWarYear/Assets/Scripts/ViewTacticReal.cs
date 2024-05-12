@@ -7,10 +7,14 @@ public class ViewTacticReal : MonoBehaviour
 {
     List<Sprite> _IconCardList;
     List<Sprite> _FlagImageList;
-    public void Init(List<Sprite> FlagImageList,List<Sprite> IconCardList)
+    List<GameObject> _TownViewList;
+    List<GameObject> _UICardTownList;
+    public void Init(List<Sprite> FlagImageList,List<Sprite> IconCardList, List<GameObject> TownViewList, List<GameObject> UICardTownList)
     {
         this._FlagImageList = FlagImageList;
         this._IconCardList = IconCardList;
+        this._TownViewList = TownViewList;
+        this._UICardTownList = UICardTownList;
     }
  
     public void CanvasTacticRealSetText(string InfoText, int FlagIndex,int IdImage, List<Sprite> LiderImageList, MainModel mainModel, int indexLider)
@@ -34,5 +38,28 @@ public class ViewTacticReal : MonoBehaviour
             mainModel.GetCountryLiderList()[indexLider]);
 
         viewLiderButton.ButtonLiderFrame(mainModel.GetCurrentPlayerFlag());
+    }
+    private void Update()
+    {
+        DrawTownInfoList();
+    }
+    void DrawTownInfoList()
+    {
+        float h = gameObject.GetComponent<RectTransform>().rect.height;
+        int count = 0;
+        Debug.Log(gameObject.transform+" = UfoPr      ve  =" + this._TownViewList);
+        if (this._TownViewList != null)
+        {
+            foreach (var town in this._TownViewList)
+            {
+                Vector3 coordinates = Camera.main.WorldToScreenPoint(town.transform.position);
+                this._UICardTownList[count].transform.SetParent(gameObject.transform.GetChild(0));
+                this._UICardTownList[count].transform.position = new Vector3(coordinates.x, coordinates.y - h / 10, coordinates.z);
+
+                //Population
+                count++;
+            }
+        }
+
     }
 }

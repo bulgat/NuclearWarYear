@@ -313,7 +313,7 @@ Debug.Log("  _animation  = " + CommandIncident.GetName());
         BomberObject.transform.parent = transform;
         DefectorsObject = Instantiate(DefectorsPrefabs, Propaganda.transform.position, Quaternion.identity);
         DefectorsObject.transform.parent = transform;
-        Debug.Log(" = UfoPrefabs   IdEve  =");
+        
         UfoObject = Instantiate(UfoPrefabs, Propaganda.transform.position+new Vector3(0,4,24), Quaternion.identity);
         UfoObject.transform.parent = transform;
         //BabyObject = Instantiate(BabyPrefabs, Propaganda.transform.position + new Vector3(0, 5, 24), Quaternion.identity);

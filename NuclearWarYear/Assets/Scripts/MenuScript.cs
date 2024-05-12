@@ -17,7 +17,6 @@ using UnityEditor.VersionControl;
 
 public class MenuScript : MonoBehaviour
 {
-    //public Canvas CanvasMainPanel;
     public GameObject CardWeapon;
     public List<Sprite> IconCardList;
     public List<GameObject> UICardTownList;
@@ -91,7 +90,7 @@ public class MenuScript : MonoBehaviour
     private List<GameObject> CardButtonList;
     public GameObject[] CountryList;
     public GameObject[] CountryLineList;
-    //public ViewTacticReal _viewTacticReal;
+    public FixedJoystick Joystick;
     void Awake()
     {
         this.CountryLiderList = null;
@@ -305,18 +304,6 @@ public class MenuScript : MonoBehaviour
         }
         
     }
-    /*
-    private void ReplaceCardGame()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            var CardBomberObject = Instantiate(CardGamePrefabs, new Vector3(-150 + (i * 80), -130, 0), Quaternion.identity);
-            CardBomberObject.transform.SetParent(Canvas.transform, false);
-        }
-    }
-    */
-   
-  
 
     private void SelectCityTargetIdPlayer(int CityId)
     {
@@ -384,12 +371,15 @@ public class MenuScript : MonoBehaviour
     }
     void MoveMapNuclear()
     {
+
         if (_visiblePanel)
         {
+            /*
             float speed = 1.0f;
 
             float step = speed * Time.deltaTime; // calculate distance to move
             NuclearMap.transform.position = Vector3.MoveTowards(NuclearMap.transform.position, _targetNuclearMap, step);
+            */
         }
         else
         {
@@ -427,7 +417,7 @@ public class MenuScript : MonoBehaviour
         }
             
             ViewTacticReal viewTacticReal = this.CanTacticReal.AddComponent<ViewTacticReal>();
-            viewTacticReal.Init(this.FlagImageList, this.IconCardList);
+            viewTacticReal.Init(this.FlagImageList, this.IconCardList,this.TownViewList,this.UICardTownList);
             viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idImage, this.LiderImageList, this._mainModel, lider.FlagId-1);
 
 
@@ -494,10 +484,7 @@ public class MenuScript : MonoBehaviour
         yield return new WaitForSeconds(this.waitTime + (this.waitTurnTime * indexLider));
 
         CommandIncident = _controller.TurnSatisfyOneLider(lider.FlagId, CommandIncident);//.SendCommand(eventController);
-        
-        
-        
-        
+
  
         this.TacticReal(""+lider.GetName() + "  : " + CommandIncident.Name + CommandIncident.GetMessage(), lider.FlagId - 1, CommandIncident.IdImage, lider);
 
@@ -599,7 +586,7 @@ public class MenuScript : MonoBehaviour
         ResetCountryOutline();
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(2));
         _controller.SendCommand(eventController);
-        _targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapTopY, 0);
+        //_targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapTopY, 0);
 
         ClearCityTargetMark(0,false);
         CountryLineList[2].SetActive(true);
@@ -609,7 +596,7 @@ public class MenuScript : MonoBehaviour
         ResetCountryOutline();
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(3));
         _controller.SendCommand(eventController);
-        _targetNuclearMap = new Vector3(NuclearMapLeftX, NuclearMapDowmY, 0);
+        //_targetNuclearMap = new Vector3(NuclearMapLeftX, NuclearMapDowmY, 0);
 
         ClearCityTargetMark(0,false);
         CountryLineList[3].SetActive(true);
@@ -619,7 +606,7 @@ public class MenuScript : MonoBehaviour
         ResetCountryOutline();
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(4));
         _controller.SendCommand(eventController);
-        _targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapDowmY, 0);
+        //_targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapDowmY, 0);
 
         ClearCityTargetMark(0,false);
         CountryLineList[1].SetActive(true);
@@ -627,7 +614,7 @@ public class MenuScript : MonoBehaviour
     void LiderButton_5_Method(Button buttonPressed)
     {
         ResetCountryOutline();
-        _targetNuclearMap = new Vector3(NuclearMapRightX/3, NuclearMapDowmY/2, 0);
+        //_targetNuclearMap = new Vector3(NuclearMapRightX/3, NuclearMapDowmY/2, 0);
         CountryLineList[0].SetActive(true);
     }
     void ResetCountryOutline()
@@ -827,7 +814,7 @@ public class MenuScript : MonoBehaviour
             
         }
         DrawTownInfoList();
-      
+        UpdateJoystick(); 
     }
     void DrawTownInfoList()
     {
@@ -845,7 +832,19 @@ public class MenuScript : MonoBehaviour
 
         
     }
-
+    void UpdateJoystick()
+    {
+        //_targetNuclearMap 
+        if (Joystick.Horizontal != 0 || Joystick.Vertical != 0)
+        {
+            _targetNuclearMap = new Vector3(
+            _targetNuclearMap.x - Joystick.Horizontal / 50,
+            _targetNuclearMap.y - Joystick.Vertical / 50,
+            _targetNuclearMap.z);
+        }
+        NuclearMap.transform.position =  _targetNuclearMap;
+       
+    }
     private void MoveAi()
     {
         foreach (CountryLider lider in _mainModel.CountryLiderList)
