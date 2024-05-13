@@ -14,6 +14,7 @@ using static UnityEngine.ParticleSystem;
 using System.Xml.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.VersionControl;
+using Assets.Scripts.Model.param;
 
 public class MenuScript : MonoBehaviour
 {
@@ -414,6 +415,7 @@ public class MenuScript : MonoBehaviour
         if (this.CanTacticReal == null)
         {
             this.CanTacticReal = Instantiate(CanvasTacticRealPrefabs, new Vector2(100, 100), Quaternion.identity);
+            //this.CanTacticReal.transform.SetParent(panelMain.transform);
         }
             
             ViewTacticReal viewTacticReal = this.CanTacticReal.AddComponent<ViewTacticReal>();
@@ -448,7 +450,7 @@ public class MenuScript : MonoBehaviour
         _visiblePanel = false;
         MoveMapNuclear();
 
-        TacticReal("Начало хода", 0, 0, _mainModel.CountryLiderList.FirstOrDefault());
+        TacticReal("Начало хода", GlobalParam.StartTurnIdFlag, GlobalParam.StartTurnIdImage, _mainModel.CountryLiderList.FirstOrDefault());
         
         // accept animation Central Building Propagation
         int indexLiderTime = 0;
@@ -586,7 +588,6 @@ public class MenuScript : MonoBehaviour
         ResetCountryOutline();
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(2));
         _controller.SendCommand(eventController);
-        //_targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapTopY, 0);
 
         ClearCityTargetMark(0,false);
         CountryLineList[2].SetActive(true);
@@ -596,7 +597,6 @@ public class MenuScript : MonoBehaviour
         ResetCountryOutline();
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(3));
         _controller.SendCommand(eventController);
-        //_targetNuclearMap = new Vector3(NuclearMapLeftX, NuclearMapDowmY, 0);
 
         ClearCityTargetMark(0,false);
         CountryLineList[3].SetActive(true);

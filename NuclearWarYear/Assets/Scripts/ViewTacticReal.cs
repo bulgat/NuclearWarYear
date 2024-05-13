@@ -1,3 +1,4 @@
+using Assets.Scripts.Model.param;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,28 +10,34 @@ public class ViewTacticReal : MonoBehaviour
     List<Sprite> _FlagImageList;
     List<GameObject> _TownViewList;
     List<GameObject> _UICardTownList;
+int canvasIndex = 1;
     public void Init(List<Sprite> FlagImageList,List<Sprite> IconCardList, List<GameObject> TownViewList, List<GameObject> UICardTownList)
     {
         this._FlagImageList = FlagImageList;
         this._IconCardList = IconCardList;
         this._TownViewList = TownViewList;
         this._UICardTownList = UICardTownList;
+
+        //ViewIconCard viewIconCard = gameObject.transform.GetChild(0).GetChild(2).GetComponent<ViewIconCard>();
+        //viewIconCard.SetParam(this._IconCardList, 4);
     }
  
     public void CanvasTacticRealSetText(string InfoText, int FlagIndex,int IdImage, List<Sprite> LiderImageList, MainModel mainModel, int indexLider)
     {
         
-        gameObject.transform.GetChild(0).GetChild(1).GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
-        ViewIconCard viewIconCard = gameObject.transform.GetChild(0).GetChild(2).GetComponent<ViewIconCard>();
+        
+Debug.Log("   IdIm "+ gameObject.transform.GetChild(canvasIndex));
+
+        gameObject.transform.GetChild(canvasIndex).GetChild(1).GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
+        ViewIconCard viewIconCard = gameObject.transform.GetChild(canvasIndex).GetChild(2).GetComponent<ViewIconCard>();
         viewIconCard.SetParam(this._IconCardList, IdImage);
 
-        ViewIconCard viewIconCard0 = gameObject.transform.GetChild(0).GetChild(3).GetComponent<ViewIconCard>();
+        ViewIconCard viewIconCard0 = gameObject.transform.GetChild(canvasIndex).GetChild(3).GetComponent<ViewIconCard>();
         viewIconCard0.SetParam(this._FlagImageList, FlagIndex);
+        
+        ViewLiderButton viewLiderButton = gameObject.transform.GetChild(canvasIndex).GetChild(4).GetComponent<ViewLiderButton>();
 
-        
-        
-        ViewLiderButton viewLiderButton = gameObject.transform.GetChild(0).GetChild(4).GetComponent<ViewLiderButton>();
-        
+        viewLiderButton.gameObject.SetActive(FlagIndex != GlobalParam.StartTurnIdFlag);
 
         viewLiderButton.Init(LiderImageList, this._FlagImageList, mainModel,
             null, 
@@ -47,13 +54,15 @@ public class ViewTacticReal : MonoBehaviour
     {
         float h = gameObject.GetComponent<RectTransform>().rect.height;
         int count = 0;
-        Debug.Log(gameObject.transform+" = UfoPr      ve  =" + this._TownViewList);
+        //Debug.Log(gameObject.name+"   I  -- -  in  " + gameObject.transform.GetChild(0).name);
+        //Debug.Log(gameObject.name + "   I     in  " + gameObject.transform.GetChild(1).name);
         if (this._TownViewList != null)
         {
             foreach (var town in this._TownViewList)
             {
                 Vector3 coordinates = Camera.main.WorldToScreenPoint(town.transform.position);
                 this._UICardTownList[count].transform.SetParent(gameObject.transform.GetChild(0));
+                //this._UICardTownList[count].transform.SetParent(gameObject.transform);
                 this._UICardTownList[count].transform.position = new Vector3(coordinates.x, coordinates.y - h / 10, coordinates.z);
 
                 //Population

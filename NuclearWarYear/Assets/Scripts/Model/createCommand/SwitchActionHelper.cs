@@ -24,22 +24,9 @@ public class SwitchActionHelper
 
         CommandLider commandLider = new CommandLider(actionCommand);
         
-        
-        
-        /*
-        if (countryLider.ReleaseCommandList?.First()?.GetVisibleBomber() == true) {
-            actionCommand = ActionCommand.AttackBomber.ToString();
-        }
-        if (countryLider.ReleaseCommandList?.First()?.GetVisibleMissle() == true)
-        {
-            actionCommand = ActionCommand.AttackMissle.ToString();
-        }
-        */
         //Change Ai Command
         if (AIfiend)
         {
-            //int countWeapon;
-            
             if (actionCommand== DictionaryEssence.TypeWeapon.Missle.ToString())
             {
                 MissleId = countryLider.GetRandomMissleSizeId(DictionaryEssence.TypeWeapon.Missle);

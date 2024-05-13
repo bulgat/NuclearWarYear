@@ -227,25 +227,8 @@ public class BuildingCentral : MonoBehaviour
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
                 }
             }
-/*
-            if (VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()])
-            {
 
 
-
-                new ViewAttackMissle().SendBomberAndWingState(WingMissle,
-                        Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
-            }
-            
-            if (VisibleObjList[DictionaryEssence.TypeEvent.Defectors.ToString()])
-            {
-   
-
-                new ViewMoveDeflectors().SendBomberAndWingState(DefectorsObject,
-                        Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
-            }
-            */
-Debug.Log(VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()]+" =  messa = "+ VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()]);
             if (VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()] 
                 || VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()]
                 || VisibleObjList[DictionaryEssence.TypeEvent.CrazyCow.ToString()]
@@ -259,32 +242,8 @@ Debug.Log(VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()]+" =  messa 
                 new ViewMoveDeflectors().SendBomberAndWingState(UfoObject,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
             }
-            /*
-            if (VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()])
-            {
-
-                //baby
-                new ViewMoveDeflectors().SendBomberAndWingState(UfoObject,
-                        Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
-            }
             
-            if (VisibleObjList[DictionaryEssence.TypeEvent.RocketRich.ToString()])
-            {
-       
-
-                new ViewRocketRich().SendBomberAndWingState(RocketRichObject, 
-                    Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
-            }
-*/
-            /*
-            if (VisibleObjList[DictionaryEssence.TypeEvent.CrazyCow.ToString()])
-            {
-
-
-                new ViewCrazyCow().SendBomberAndWingState(CrazyCowObject, 
-                    Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
-            }
-            */
+            
         }
     }
     public void ViewStartStateObject(List<GameObject> townList, float TimeDelete, CountryLider lider, Incident CommandIncident)

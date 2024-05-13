@@ -26,8 +26,13 @@ public class Controller
 		_mainModel = MainModel;
 	}
 	public void SendCommand(EventController eventController) {
+        
 
-		if (eventController.NameCommand == Command.ChangeCurrentPlayer)
+		//if(eventController.NameCommand.ToString() == "DoneMoveMadeCurrentPlayer")
+		//{
+         //   return;
+        //}
+        if (eventController.NameCommand == Command.ChangeCurrentPlayer)
 		{
 			_mainModel.ChangeCurrentPlayer();
 			return;

@@ -13,7 +13,7 @@ public class UFOmodel : MonoBehaviour
     private GameObject Missle;
     private void Awake()
     {
-        Debug.Log("T  I  ------- ind > " );
+        
         this.UFO = gameObject.transform.GetChild(0).gameObject;
         this.Stork = gameObject.transform.GetChild(1).gameObject;
         this.Cow = gameObject.transform.GetChild(2).gameObject;
@@ -56,7 +56,6 @@ public class UFOmodel : MonoBehaviour
                 break;
         }
     }
-    // Update is called once per frame
     void Update()
     {
         

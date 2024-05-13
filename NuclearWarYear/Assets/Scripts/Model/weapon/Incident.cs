@@ -60,11 +60,7 @@ public class Incident: Weapon,IWeapon
         return this.MemberwiseClone() as Incident;
     }
     public void SetReleaseMessage(IStatePopulationEvent statePopulationEvent)
-        //string Value, int PopulationDamage,CityModel cityLider, CityModel targetCity, bool doubleCity)
     {
-        //this.ReleaseMessage = Value;
-        //this.ReleasePopulation = PopulationDamage;
-        //this.PopulationEvent = new PopulationEvent(PopulationDamage, cityLider, targetCity, doubleCity);
         this.PopulationEvent = statePopulationEvent;
     }
 
