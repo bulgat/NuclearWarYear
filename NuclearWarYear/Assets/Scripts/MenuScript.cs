@@ -485,7 +485,7 @@ public class MenuScript : MonoBehaviour
     {
         yield return new WaitForSeconds(this.waitTime + (this.waitTurnTime * indexLider));
 
-        CommandIncident = _controller.TurnSatisfyOneLider(lider.FlagId, CommandIncident);//.SendCommand(eventController);
+        CommandIncident = _controller.TurnSatisfyOneLider(lider.FlagId, CommandIncident);
 
  
         this.TacticReal(""+lider.GetName() + "  : " + CommandIncident.Name + CommandIncident.GetMessage(), lider.FlagId - 1, CommandIncident.IdImage, lider);

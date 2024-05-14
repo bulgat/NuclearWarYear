@@ -237,7 +237,7 @@ public class BuildingCentral : MonoBehaviour
                 || VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()]
                 )
             {
-                Debug.Log(Speed + "  &    ______________ _____ ___"+ UfoObject);
+                Debug.Log(Speed + "  &    _________"+ new ViewMoveDeflectors() + "_____ _____ ___"+ UfoObject);
 
                 new ViewMoveDeflectors().SendBomberAndWingState(UfoObject,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);

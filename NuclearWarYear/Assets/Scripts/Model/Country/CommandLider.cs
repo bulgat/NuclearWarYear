@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Model;
+using Assets.Scripts.Model.param;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,7 @@ public class CommandLider
 	}
 	public bool GetVisibleMissle()
     {
-        return this.IncidentCommand?.Name == SwitchActionHelper.ActionCommand.Missle.ToString();
+        return this.IncidentCommand?.Name == GlobalParam.ActionCommand.Missle.ToString();
     }
 	public void SetVisibleBomber(bool visibleBomber, int MissleId)
     {
@@ -77,7 +78,7 @@ public class CommandLider
 
 	public bool GetVisibleBomber() {
         
-        return this.IncidentCommand?.Name == SwitchActionHelper.ActionCommand.Bomber.ToString();
+        return this.IncidentCommand?.Name == GlobalParam.ActionCommand.Bomber.ToString();
     }
 	public void SetVisibleAttackBomber(bool visibleAttackBomber) {
         this.VisibleList.Add("AttackBomber");
@@ -85,7 +86,7 @@ public class CommandLider
     }
 	public bool GetVisibleAttackBomber()
 	{
-        return this.IncidentCommand?.Name == SwitchActionHelper.ActionCommand.AttackBomber.ToString();
+        return this.IncidentCommand?.Name == GlobalParam.ActionCommand.AttackBomber.ToString();
     }
 
 	public string GetNameCommandFirst()
@@ -95,7 +96,7 @@ public class CommandLider
 
 	public bool GetDefence() {
 
-        return this.IncidentCommand.Name == SwitchActionHelper.ActionCommand.Defence.ToString();
+        return this.IncidentCommand.Name == GlobalParam.ActionCommand.Defence.ToString();
     }
 
 	public IWeapon GetAttackBomber(){

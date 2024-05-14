@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.Scripts.Model.param;
+using Assets.Scripts.Model.paramTable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,59 +15,75 @@ namespace Assets.Scripts.Model.createCommand
         {
             CommandLider commandLider = null;
             string actionCommand = null;
+
+            foreach(EventFortuneIncident eventFortuneIncident in GlobalParam.EventFortuneIncidentList)
+            {
+                if ((int)UnityEngine.Random.Range(0.0f, eventFortuneIncident.Random) == 1)
+                {
+                    actionCommand = eventFortuneIncident.Name.ToString();
+                    commandLider = new CommandLider(actionCommand);
+                    commandLider.SetVisibleEventList(eventFortuneIncident.Name.ToString(), true);
+                    commandLider.SetTargetCity(targetCity);
+                }
+            }
+
+            /*
             if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
             {
 
 
-                actionCommand = SwitchActionHelper.ActionCommand.Defectors.ToString();
+                actionCommand = GlobalParam.ActionCommand.Defectors.ToString();
             }
             if ((int)UnityEngine.Random.Range(0.0f, 2.0f) == 1)
             {
 
 
 
-                actionCommand = SwitchActionHelper.ActionCommand.Ufo.ToString();
+                actionCommand = GlobalParam.ActionCommand.Ufo.ToString();
             }
             if ((int)UnityEngine.Random.Range(0.0f, 2.0f) == 1)
             {
-                actionCommand = SwitchActionHelper.ActionCommand.Baby.ToString();
+                actionCommand = GlobalParam.ActionCommand.Baby.ToString();
             }
             if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
             {
-                actionCommand = SwitchActionHelper.ActionCommand.RocketRich.ToString();
+                actionCommand = GlobalParam.ActionCommand.RocketRich.ToString();
             }
             if ((int)UnityEngine.Random.Range(0.0f, 30.0f) == 1)
             {
-                actionCommand = SwitchActionHelper.ActionCommand.CrazyCow.ToString();
+                actionCommand = GlobalParam.ActionCommand.CrazyCow.ToString();
             }
+            */
+            /*
             if (actionCommand != null)
             {
                 commandLider = new CommandLider(actionCommand);
             }
-
+            */
+            /*
             switch (actionCommand)
             {
                 case "CrazyCow":
-                    commandLider.SetVisibleEventList(SwitchActionHelper.ActionCommand.CrazyCow.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.CrazyCow.ToString(), true);
                     commandLider.SetTargetCity(targetCity);
                     break;
                 case "RocketRich":
-                    commandLider.SetVisibleEventList(SwitchActionHelper.ActionCommand.RocketRich.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.RocketRich.ToString(), true);
                     commandLider.SetTargetCity(targetCity);
                     break;
                 case "Baby":
-                    commandLider.SetVisibleEventList(SwitchActionHelper.ActionCommand.Baby.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Baby.ToString(), true);
                     commandLider.SetTargetCity(targetCity);
                     break;
                 case "Ufo":
-                    commandLider.SetVisibleEventList(SwitchActionHelper.ActionCommand.Ufo.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Ufo.ToString(), true);
                     commandLider.SetTargetCity(targetCity);
                     break;
 
 
 
                 case "Defectors":
-                    commandLider.SetVisibleEventList(SwitchActionHelper.ActionCommand.Defectors.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Defectors.ToString(), true);
                     commandLider.SetTargetCity(targetCity);
                     break;
 
@@ -73,7 +91,7 @@ namespace Assets.Scripts.Model.createCommand
                     //Debug.LogWarning("Incorrect intelligence level. actionCommand =" + actionCommand);
                     break;
             }
-
+            */
             return commandLider;
         }
     }

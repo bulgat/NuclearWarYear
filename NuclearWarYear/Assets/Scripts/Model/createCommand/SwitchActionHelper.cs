@@ -7,10 +7,11 @@ using static SwitchActionHelper;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 using static UnityEditor.Progress;
 using Assets.Scripts.Model.createCommand;
+using Assets.Scripts.Model.param;
 
 public class SwitchActionHelper
 {
-    public enum ActionCommand { Propaganda, Defence, Defectors, Ufo, Baby, RocketRich, CrazyCow,Build, AttackMissle, AttackBomber,Bomber,Missle }
+    
 
     public List<CommandLider> SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
         List<CityModel> TownList, int FlagIdPlayer, string actionCommand, int FlagId,int MissleId)
@@ -32,7 +33,7 @@ public class SwitchActionHelper
                 MissleId = countryLider.GetRandomMissleSizeId(DictionaryEssence.TypeWeapon.Missle);
                 if (MissleId== 0)
                 {
-                    actionCommand = ActionCommand.Propaganda.ToString();
+                    actionCommand = GlobalParam.ActionCommand.Propaganda.ToString();
                 }
              
             }
@@ -43,15 +44,15 @@ public class SwitchActionHelper
                 //bomber
                 if (MissleId == 0)
                 {
-                    actionCommand = ActionCommand.Propaganda.ToString();
+                    actionCommand = GlobalParam.ActionCommand.Propaganda.ToString();
                 }
             }
             
-            if(actionCommand == ActionCommand.Defence.ToString())
+            if(actionCommand == GlobalParam.ActionCommand.Defence.ToString())
             {
                 if (countryLider.GetDefenceWeapon().Count() <= 0)
                 {
-                    actionCommand = ActionCommand.Propaganda.ToString();
+                    actionCommand = GlobalParam.ActionCommand.Propaganda.ToString();
                 }
             }
 
@@ -99,17 +100,17 @@ CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, Flag
         switch (actionCommand)
         {
             case "Propaganda":
-                commandLider.SetVisibleEventList(ActionCommand.Propaganda.ToString(), true);
+                commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Propaganda.ToString(), true);
                 targetCity = new ModGameEngine().GetCityRandomFlagId(TownList, CountryLiderList[4], FlagId, AIfiend);
                 break;
             case "Building":
-                commandLider.SetVisibleEventList(ActionCommand.Build.ToString(), true);
+                commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Build.ToString(), true);
                 BuildWeapon buildWeapon = new BuildWeapon();
                 commandLider.AddMissle(buildWeapon.AddLiderBuildWeaponSwithAction());
                 commandLider.AddReportProducedWeaponList(buildWeapon.GetReportProducedWeaponList());
                 break;
             case "Defence":
-                commandLider.SetVisibleEventList(ActionCommand.Defence.ToString(), true);
+                commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Defence.ToString(), true);
                 break;
             case "Missle":
                 commandLider.SetVisibleMissle(true, MissleId);
@@ -120,7 +121,7 @@ CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, Flag
             case "AttackBomber":
                 if (targetCity == null)
                 {
-                    commandLider.SetVisibleEventList(ActionCommand.Propaganda.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Propaganda.ToString(), true);
                 }
                 else
                 {
@@ -132,11 +133,11 @@ CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, Flag
             case "AttackMissle":
                 if (targetCity == null)
                 {
-                    commandLider.SetVisibleEventList(ActionCommand.Propaganda.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Propaganda.ToString(), true);
                 }
                 else
                 {
-                    commandLider.SetVisibleEventList(ActionCommand.AttackMissle.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.AttackMissle.ToString(), true);
                     commandLider.SetTargetCity(targetCity);
                     commandLider.SetAttackMissle(countryLider.GetMissle());
                 }

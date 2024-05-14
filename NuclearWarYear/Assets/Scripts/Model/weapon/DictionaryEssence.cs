@@ -55,41 +55,15 @@ public class DictionaryEssence
 
     }
 
-	//public Missle GetMissle (int Id){
 
-       // return this.allEssenceList.Where(a=>a.Id== Id).FirstOrDefault() as Missle;
-
-    //}
-    /*
-	public Bomber GetBomber (int Id){
-        return this.allEssenceList.Where(a => a.Id == Id).FirstOrDefault() as Bomber;
-
-	}
-    */
-    /*
-	public Defence GetDefenceWeapon(int Id)
-	{
-        return this.allEssenceList.Where(a => a.Id == Id).FirstOrDefault() as Defence;
-
-	}
-	public Defence GetPropaganda()
-	{
-        return this.allEssenceList.Where(a => a.Id == 9).FirstOrDefault() as Defence;
-
-	}
-	public Defence GetIndustry()
-	{
-        return this.allEssenceList.Where(a => a.Id == 8).FirstOrDefault() as Defence;
-	}
-    */
     public Incident GetIncident(int Id)
     {
         
-        return this.allEssenceList.Where(a => a.Id == Id).FirstOrDefault() as Incident;
+        return this.allEssenceList.FirstOrDefault(a => a.Id == Id) as Incident;
     }
     public Incident BuildIncident(string Name)
     {
         
-        return this.allEssenceList.Where(a => a.Name == Name).FirstOrDefault() as Incident;
+        return this.allEssenceList.FirstOrDefault(a => a.Name == Name) as Incident;
     }
 }
