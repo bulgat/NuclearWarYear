@@ -305,4 +305,18 @@ public class MainModel
         new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.GetMyCity(), CommandIncident.PopulationEvent.GetMyPopulation());
         new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.GetFiendCity(), CommandIncident.PopulationEvent.GetFiendPopulation());
     }
+	public List<IWeapon> GetStaticWeapon()
+	{
+        List<IWeapon> missleList = new List<IWeapon>();
+        missleList.Add(new DictionaryEssence().GetIncident(8));
+        missleList.Add(new DictionaryEssence().GetIncident(9));
+		return missleList;
+    }
+    public List<IWeapon> GetCurrentWeapon()
+	{
+        List<IWeapon> missleList = new List<IWeapon>();
+        missleList.AddRange(GetCurrenPlayer().GetDefenceWeapon());
+        missleList.AddRange(GetCurrenPlayer().GetMissleList());
+        return missleList;
+    }
 }

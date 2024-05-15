@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Model.turnEvent
 {
-    internal class TurnEventExecute
+    public class TurnEventExecute
     {
-        //public string Message { get; private set; }
         public string MessageSecond { get; private set; }
         public int NegativeMood { get; private set; }
         public bool Ammunition { get; private set; }

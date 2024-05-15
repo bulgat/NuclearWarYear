@@ -192,11 +192,13 @@ public class MenuScript : MonoBehaviour
         this.CardButtonList.Clear();
         //CardWeapon
         //panelMain
-        List<IWeapon> missleList = new List<IWeapon>();
-        missleList.Add(new DictionaryEssence().GetIncident(8));
-        missleList.Add(new DictionaryEssence().GetIncident(9));
-        missleList.AddRange(_mainModel.GetCurrenPlayer().GetDefenceWeapon());
-        missleList.AddRange( _mainModel.GetCurrenPlayer().GetMissleList());
+        //List<IWeapon> missleList = new List<IWeapon>();
+        //missleList.Add(new DictionaryEssence().GetIncident(8));
+        //missleList.Add(new DictionaryEssence().GetIncident(9));
+        List<IWeapon> missleList = _mainModel.GetStaticWeapon();
+        //missleList.AddRange(_mainModel.GetCurrenPlayer().GetDefenceWeapon());
+        //missleList.AddRange( _mainModel.GetCurrenPlayer().GetMissleList());
+        missleList.AddRange(_mainModel.GetCurrentWeapon());
 
         int count = 0;
         foreach (var item in missleList)
@@ -488,7 +490,7 @@ public class MenuScript : MonoBehaviour
         CommandIncident = _controller.TurnSatisfyOneLider(lider.FlagId, CommandIncident);
 
  
-        this.TacticReal(""+lider.GetName() + "  : " + CommandIncident.Name + CommandIncident.GetMessage(), lider.FlagId - 1, CommandIncident.IdImage, lider);
+        this.TacticReal(CommandIncident.FullMessage(lider), lider.FlagId - 1, CommandIncident.IdImage, lider);
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.ViewStartStateObject(TownViewList, waitTime + (this.waitTurnTime * indexLider), lider, CommandIncident);
@@ -497,6 +499,8 @@ public class MenuScript : MonoBehaviour
 
         StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
         Debug.Log(" --------------- ##  Lider  mage =" + CommandIncident.GetName());
+        Debug.Log( "  DoneMoveMadeCurrentP = Ufo     =" + CommandIncident.GetMessage());
+        Debug.Log( "  &    ______ _____ _____ ___" +CommandIncident.Name);
     }
     private IEnumerator AfterTurnOneLider(Incident CommandIncident, CountryLider lider)
     {
@@ -535,8 +539,11 @@ public class MenuScript : MonoBehaviour
             CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
         if (new int[4] { 0,1,2, 3 }.Contains(IdMissle))
             {
+            /*
             EventController eventController = new EventController(Controller.Command.Missle, new EventMissle(_mainModel.GetCurrenFlagPlayer(), IdMissle));
             _controller.SendCommand(eventController);
+            */
+            _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), IdMissle);
             CanvasReportWindow("Prepare a missle ", IdMissle);
         } 
         if (new int[2] { 4, 5 }.Contains(IdMissle))
@@ -606,15 +613,12 @@ public class MenuScript : MonoBehaviour
         ResetCountryOutline();
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(4));
         _controller.SendCommand(eventController);
-        //_targetNuclearMap = new Vector3(NuclearMapRightX, NuclearMapDowmY, 0);
-
         ClearCityTargetMark(0,false);
         CountryLineList[1].SetActive(true);
     }
     void LiderButton_5_Method(Button buttonPressed)
     {
         ResetCountryOutline();
-        //_targetNuclearMap = new Vector3(NuclearMapRightX/3, NuclearMapDowmY/2, 0);
         CountryLineList[0].SetActive(true);
     }
     void ResetCountryOutline()
@@ -779,11 +783,8 @@ public class MenuScript : MonoBehaviour
         
         CountryLider liderPLayer = _mainModel.GetCurrenPlayer();
 
-        //all?
-        //buildingCentral.UpdateVisibleBuilding(liderPLayer.GetCommandLider());
-
         MoveAi();
-        // visible label sity;
+
         SetAllCityVisibleLabelView(_visiblePanel == false);
 
         MoveMapNuclear();
@@ -808,8 +809,7 @@ public class MenuScript : MonoBehaviour
 
                 
                 ViewCardWeapon viewCardWeapon = hit2D.transform.gameObject.GetComponent<ViewCardWeapon>();
-
-                
+ 
             }
             
         }
@@ -853,8 +853,6 @@ public class MenuScript : MonoBehaviour
             if (lider.FlagId != _mainModel.GetCurrenFlagPlayer())
             {
                 BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(_mainModel.CountryLiderList, lider.FlagId);
-
-                //buildingCentral.UpdateVisibleBuilding(lider.GetCommandLider());
 
             }
         }

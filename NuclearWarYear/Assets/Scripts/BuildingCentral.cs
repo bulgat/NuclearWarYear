@@ -148,8 +148,6 @@ public class BuildingCentral : MonoBehaviour
                 )
             {
                 Debug.Log(VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()]+"T _   ange  = "+ VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()]);
-                //DefectorsObject.SetActive(commandLider.GetNameExecute(DictionaryEssence.TypeEvent.Defectors.ToString()));
-                //DefectorsObject.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.Defectors.ToString()]);
                 UfoObject.SetActive(true);
                 UFOmodel uFOmodel = UfoObject.GetComponent<UFOmodel>();
                 if (NameCommand== DictionaryEssence.TypeEvent.Ufo.ToString())
@@ -237,7 +235,7 @@ public class BuildingCentral : MonoBehaviour
                 || VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()]
                 )
             {
-                Debug.Log(Speed + "  &    _________"+ new ViewMoveDeflectors() + "_____ _____ ___"+ UfoObject);
+                
 
                 new ViewMoveDeflectors().SendBomberAndWingState(UfoObject,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);

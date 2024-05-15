@@ -12,4 +12,5 @@ public class Weapon
     public int IdImage;
     public string Message;
 	public int Uid;
+	
 }

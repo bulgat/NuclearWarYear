@@ -20,7 +20,7 @@ public class ViewIconCard : MonoBehaviour
     }
     public void SetParam(List<Sprite> iconCardList, int id)
     {
-        Debug.Log(iconCardList.Count+"  DoneMoveMadeCurrentPlayer = Ufo     =" + id);
+        
         this.IconCardList = iconCardList;
         SpriteIcon.sprite = iconCardList[id];
         this.Id = id;

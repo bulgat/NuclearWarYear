@@ -26,12 +26,7 @@ public class Controller
 		_mainModel = MainModel;
 	}
 	public void SendCommand(EventController eventController) {
-        
 
-		//if(eventController.NameCommand.ToString() == "DoneMoveMadeCurrentPlayer")
-		//{
-         //   return;
-        //}
         if (eventController.NameCommand == Command.ChangeCurrentPlayer)
 		{
 			_mainModel.ChangeCurrentPlayer();
@@ -61,10 +56,12 @@ public class Controller
 			return;
 
 		}
+		/*
 		if (eventController.NameCommand == Command.Missle){
 			_mainModel.SetMisslePlayer(eventController.EventSend.FlagId, eventController.EventSend.Id);
 			return;
 		}
+		*/
 		if (eventController.NameCommand == Command.AttackMissle){
 			_mainModel.SetAttackMisslePlayer(eventController.EventSend.FlagId);
 			return;
@@ -94,15 +91,6 @@ public class Controller
 			_mainModel.TotalTurn(eventController.EventSend.FlagId);
 			return;
 		}
-		/*
-		//TurnSatisfyOneLider
-		if (eventController.NameCommand == Command.TurnSatisfyOneLider)
-		{
-			
-			_mainModel.SatisfyOneLiderTurn(eventController.EventSend.FlagId);
-			return;
-		}
-		*/
 		if (eventController.NameCommand == Command.SelectCityEnemyTargetPlayer){
 
 			_mainModel.SelectCityEnemyTargetPlayer(eventController.EventSend.CityId);
@@ -116,6 +104,11 @@ public class Controller
 		}
 		throw new System.Exception("Not Command controller"); 
 	}
+	public void SetMissle(int FlagId,int Id)
+	{
+            _mainModel.SetMisslePlayer(FlagId, Id);
+            return;
+    }
 	public void TurnCreateCommand()
 	{
         new AICreateCommand().EstimationSetCommandAi(_mainModel.ResetAction, _mainModel.CountryLiderList,
