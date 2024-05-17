@@ -312,8 +312,9 @@ public class MenuScript : MonoBehaviour
     {
         
         City selectCityTarget = ClearCityTargetMark(CityId,true);
-        EventController cityEvent = new EventController(Controller.Command.SelectCityEnemyTargetPlayer, new CityEvent( CityId));
-        _controller.SendCommand(cityEvent);
+        //EventController cityEvent = new EventController(Controller.Command.SelectCityEnemyTargetPlayer, new CityEvent( CityId));
+        //_controller.SendCommand(cityEvent);
+        _controller.SelectCityEnemyTargetPlayer(CityId);
 
         // TargetSity
         if (_mainModel.GetCurrentPlayerFlag() != selectCityTarget.FlagId)
@@ -352,8 +353,9 @@ public class MenuScript : MonoBehaviour
         if (Player)
         {
             //reset?
-            EventController cityEvent = new EventController(Controller.Command.ResetSelectCityEnemyTargetPlayer, new CityEvent(0));
-            _controller.SendCommand(cityEvent);
+            //EventController cityEvent = new EventController(Controller.Command.ResetSelectCityEnemyTargetPlayer, new CityEvent(0));
+            //_controller.SendCommand(cityEvent);
+            _controller.ResetSelectCityEnemyTargetPlayer(0);
         }
         return selectCityTarget;
     }
@@ -432,8 +434,9 @@ public class MenuScript : MonoBehaviour
     {
         _controller.TurnCreateCommand();
 
-        EventController eventController = new EventController(Controller.Command.DoneMoveMadeCurrentPlayer, null);
-        _controller.SendCommand(eventController);
+        //EventController eventController = new EventController(Controller.Command.DoneMoveMadeCurrentPlayer, null);
+        //_controller.SendCommand(eventController);
+        _controller.DoneMoveMadeCurrentPlayer();
 
         //Ходы игроков.
         //Все игроки сходили?
@@ -443,8 +446,9 @@ public class MenuScript : MonoBehaviour
         {
             //Переключится на другого игрока.
             
-            EventController eventController0 = new EventController(Controller.Command.ChangeCurrentPlayer, null);
-            _controller.SendCommand(eventController0);
+            //EventController eventController0 = new EventController(Controller.Command.ChangeCurrentPlayer, null);
+            //_controller.SendCommand(eventController0);
+            _controller.ChangeCurrentPlayer();
             RefreshPlayerView();
             return;
         }
@@ -554,8 +558,9 @@ public class MenuScript : MonoBehaviour
 
         }
         if (new int[2] { 6, 7 }.Contains(IdMissle)) {
-            EventController eventController = new EventController(Controller.Command.Defence, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-            _controller.SendCommand(eventController);
+            //EventController eventController = new EventController(Controller.Command.Defence, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
+            //_controller.SendCommand(eventController);
+            _controller.Defence(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(" defence", IdMissle);
         }
         if (new int[1] { 9 }.Contains(IdMissle))
@@ -566,9 +571,9 @@ public class MenuScript : MonoBehaviour
         }
         if (new int[1] { 8 }.Contains(IdMissle))
         {
-            EventController eventController = new EventController(Controller.Command.Building, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-            _controller.SendCommand(eventController);
-
+            //EventController eventController = new EventController(Controller.Command.Building, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
+            //_controller.SendCommand(eventController);
+            _controller.Building(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(" build weapon", IdMissle);
         }
         
@@ -650,8 +655,11 @@ public class MenuScript : MonoBehaviour
 
         yield return new WaitForSeconds(AnimationTime);
 
-        EventController eventController0 = new EventController(Controller.Command.ChangeCurrentPlayer, null);
-        _controller.SendCommand(eventController0);
+        //EventController eventController0 = new EventController(Controller.Command.ChangeCurrentPlayer, null);
+        //_controller.SendCommand(eventController0);
+
+        _controller.ChangeCurrentPlayer();
+
         _mainModel.ResetDoneMoveAll();
 
         //button player
@@ -701,9 +709,9 @@ public class MenuScript : MonoBehaviour
 
             CircleImageReadyParam(0,true);
             
-            EventController eventController = new EventController(Controller.Command.AttackBomber, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-            _controller.SendCommand(eventController);
-
+            //EventController eventController = new EventController(Controller.Command.AttackBomber, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
+            //_controller.SendCommand(eventController);
+            _controller.AttackBomber(_mainModel.GetCurrenFlagPlayer());
         }
         
 

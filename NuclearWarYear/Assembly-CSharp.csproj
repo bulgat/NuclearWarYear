@@ -73,7 +73,6 @@
     <Compile Include="Assets\Scripts\Model\weapon\Defence.cs" />
     <Compile Include="Assets\Scripts\View\ViewLiderHelper.cs" />
     <Compile Include="Assets\Scripts\Fortune.cs" />
-    <Compile Include="Assets\Scripts\Model\ActionCommand.cs" />
     <Compile Include="Assets\Scripts\Controller\EventBomber.cs" />
     <Compile Include="Assets\Scripts\TownCardInfo.cs" />
     <Compile Include="Assets\Scripts\Model\CityGameObjHelper.cs" />
@@ -85,6 +84,7 @@
     <Compile Include="Assets\Scripts\ViewIconCard.cs" />
     <Compile Include="Assets\Scripts\Controller\IEventSend.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\StateAddPopulation.cs" />
+    <Compile Include="Assets\Scripts\Model\paramTable\GlobalParam.cs" />
     <Compile Include="Assets\Scripts\Model\Nation\LiderHelperOne.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
     <Compile Include="Assets\Scripts\Model\DamagePopulationHelper.cs" />
@@ -95,7 +95,7 @@
     <Compile Include="Assets\Scripts\View\ViewTown.cs" />
     <Compile Include="Assets\Scripts\Controller\Controller.cs" />
     <Compile Include="Assets\Scripts\Controller\CityEvent.cs" />
-    <Compile Include="Assets\Scripts\Model\weapon\DictionaryEssence.cs" />
+    <Compile Include="Assets\Scripts\Model\paramTable\DictionaryEssence.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewCircleBomber.cs" />
     <Compile Include="Assets\Scripts\Model\LiderHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildWeapon.cs" />
@@ -128,6 +128,7 @@
     <Compile Include="Assets\Scripts\Controller\EventController.cs" />
     <Compile Include="Assets\Scripts\Model\TargetHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildingCentralModel.cs" />
+    <Compile Include="Assets\Scripts\Model\paramTable\EventFortuneIncident.cs" />
     <Compile Include="Assets\Scripts\UFOmodel.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\IWeapon.cs" />
     <Compile Include="Assets\Scripts\Model\turnEvent\MainTurnLider.cs" />
@@ -139,7 +140,7 @@
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\ViewCanvasReport.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\Model\paramTable\GlobalParam.cs" />
+    <Compile Include="Assets\Scripts\Model\createCommand\RandomActionCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using Assets.Scripts.Model.createCommand;
 
 public class AICreateCommand 
 {
@@ -33,13 +34,14 @@ public class AICreateCommand
 				}
 				//not missle and bomber
 
-				string actionNameCommand = GetRandomActionCommand();
+				string actionNameCommand = new RandomActionCommand().GetRandomActionCommand();
 				lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer,
 					actionNameCommand, lider.FlagId,0));
 
 			}
 		}
 	}
+	/*
 	private string GetRandomActionCommand()
     {
 		List<string> nameCommandList = new List<string>() {
@@ -52,5 +54,5 @@ public class AICreateCommand
 		int indexCommand = UnityEngine.Random.Range(0, nameCommandList.Count);
 		return nameCommandList[indexCommand];
 	}
-	
+	*/
 }

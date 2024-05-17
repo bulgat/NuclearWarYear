@@ -58,7 +58,7 @@ public class SwitchActionHelper
 
          }
      
-CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider);
+        CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider);
 
 
         AiTargetCity(AIfiend, targetCity, commandLider);

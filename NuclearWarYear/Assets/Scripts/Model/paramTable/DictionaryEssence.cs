@@ -18,13 +18,13 @@ public class DictionaryEssence
 	public DictionaryEssence() {
         allEssenceList = new List<Weapon>();
 
-        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 0,"Ракеты приведены в готовность",1,0));
-		allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 1, "Ракеты приведены в готовность",2,0));
-        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 2, "Ракеты приведены в готовность",3,0));
-        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 3, "Ракеты приведены в готовность",4, 0));
+        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 0,"Ракеты приведены в готовность",10,0));
+		allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 1, "Ракеты приведены в готовность",20,0));
+        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 2, "Ракеты приведены в готовность",50,0));
+        allEssenceList.Add(new Incident(TypeEvent.Missle.ToString(), DictionaryEssence.TypeWeapon.Missle, 3, "Ракеты приведены в готовность",100, 0));
 
-		allEssenceList.Add(new Incident(TypeEvent.Bomber.ToString(), DictionaryEssence.TypeWeapon.Bomber, 4,"Бомбардировщики приведены в готовность",1,4));
-        allEssenceList.Add(new Incident(TypeEvent.HeavyBomber.ToString(), DictionaryEssence.TypeWeapon.Bomber, 5, "Бомбардировщики приведены в готовность",2,5));
+		allEssenceList.Add(new Incident(TypeEvent.Bomber.ToString(), DictionaryEssence.TypeWeapon.Bomber, 4,"Бомбардировщики приведены в готовность",10,4));
+        allEssenceList.Add(new Incident(TypeEvent.HeavyBomber.ToString(), DictionaryEssence.TypeWeapon.Bomber, 5, "Бомбардировщики приведены в готовность",50,5));
 
         allEssenceList.Add(new Incident(TypeEvent.Defence.ToString(), DictionaryEssence.TypeWeapon.Defence, 6, "Защитные системы приведены в готовность",0,6));
         allEssenceList.Add(new Incident(TypeEvent.Defence.ToString(), DictionaryEssence.TypeWeapon.Defence, 7, "Защитные системы приведены в готовность",0, 6));
@@ -63,7 +63,8 @@ public class DictionaryEssence
     }
     public Incident BuildIncident(string Name)
     {
-        
-        return this.allEssenceList.FirstOrDefault(a => a.Name == Name) as Incident;
+        Incident incident = this.allEssenceList.FirstOrDefault(a => a.Name == Name) as Incident;
+        incident.MutationDamage();
+        return incident;
     }
 }

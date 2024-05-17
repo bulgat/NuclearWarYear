@@ -22,7 +22,10 @@ public class Incident: Weapon,IWeapon
         this.Message = message;
         this.Uid = UnicId++;
      }
-
+    public int MutationDamage()
+    {
+        return UnityEngine.Random.Range(1, this.Damage);
+    }
     public int GetDamage()
     {
         return this.Damage;
