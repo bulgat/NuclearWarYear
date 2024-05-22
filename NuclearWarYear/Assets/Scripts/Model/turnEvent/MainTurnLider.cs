@@ -123,8 +123,7 @@ namespace Assets.Scripts.Model
                                 return CommandIncident;
                             }
 							bool doubleCity = item.Key == DictionaryEssence.TypeEvent.Propaganda.ToString() || item.Key == DictionaryEssence.TypeEvent.Defectors.ToString();
-                            //CommandIncident.SetReleaseMessage(message, UnDamage, liderCityMy, cityFiend, doubleCity);
-                            
+
                             CommandIncident.SetReleaseMessage(new StateAddPopulation(message, -UnDamage, liderCityMy));
                             return CommandIncident;
 						}

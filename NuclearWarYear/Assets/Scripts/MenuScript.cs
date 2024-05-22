@@ -15,6 +15,7 @@ using System.Xml.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.VersionControl;
 using Assets.Scripts.Model.param;
+using UnityEngine.Video;
 
 public class MenuScript : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class MenuScript : MonoBehaviour
     public GameObject CanvasTacticRealPrefabs;
     public GameObject CanTacticReal;
     public GameObject CanResPlayerPrefabs;
+    public GameObject NewPaperPrefabs;
     public Image CanvasResourcePlayerImageLider;
     public Image CanvasResourceFlagImageLider;
     public Text CanvasResourcePlayerTextLider;
@@ -48,7 +50,7 @@ public class MenuScript : MonoBehaviour
     public GameObject TownCard;
 
     public Button ButtonResource;
-    //public Button ButtonCloseResource;
+
     
     public Button TurnButton;
 
@@ -58,6 +60,7 @@ public class MenuScript : MonoBehaviour
     public Button LiderButton_4;
     public Button LiderButton_5;
 
+    public Button NewPaperButton;
 
     public List<Sprite> LiderImageList;
     public List<Sprite> FlagImageList;
@@ -127,7 +130,7 @@ public class MenuScript : MonoBehaviour
         _targetNuclearMap = new Vector3(0, 0, 0);
 
 
-        ButtonResource.onClick.AddListener(() => ButtonResourceMethod(ButtonResource));
+        ButtonResource.onClick.AddListener(() => ButtonResourceMethod());
   
         TurnButton.onClick.AddListener(() => TurnButtonMethod(TurnButton));
 
@@ -136,8 +139,8 @@ public class MenuScript : MonoBehaviour
         LiderButton_3.onClick.AddListener(() => LiderButton_3_Method(LiderButton_3));
         LiderButton_4.onClick.AddListener(() => LiderButton_4_Method(LiderButton_4));
         LiderButton_5.onClick.AddListener(() => LiderButton_5_Method(LiderButton_5));
-   
-        
+
+        NewPaperButton.onClick.AddListener(() => ButtonNewPaper());
 
         new ViewPlayerButton().SetPropagand(this,this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
         
@@ -192,12 +195,9 @@ public class MenuScript : MonoBehaviour
         this.CardButtonList.Clear();
         //CardWeapon
         //panelMain
-        //List<IWeapon> missleList = new List<IWeapon>();
-        //missleList.Add(new DictionaryEssence().GetIncident(8));
-        //missleList.Add(new DictionaryEssence().GetIncident(9));
+
         List<IWeapon> missleList = _mainModel.GetStaticWeapon();
-        //missleList.AddRange(_mainModel.GetCurrenPlayer().GetDefenceWeapon());
-        //missleList.AddRange( _mainModel.GetCurrenPlayer().GetMissleList());
+
         missleList.AddRange(_mainModel.GetCurrentWeapon());
 
         int count = 0;
@@ -312,8 +312,7 @@ public class MenuScript : MonoBehaviour
     {
         
         City selectCityTarget = ClearCityTargetMark(CityId,true);
-        //EventController cityEvent = new EventController(Controller.Command.SelectCityEnemyTargetPlayer, new CityEvent( CityId));
-        //_controller.SendCommand(cityEvent);
+
         _controller.SelectCityEnemyTargetPlayer(CityId);
 
         // TargetSity
@@ -392,16 +391,13 @@ public class MenuScript : MonoBehaviour
         }
     }
 
-    void ButtonResourceMethod(Button buttonResource)
+    void ButtonResourceMethod()
     {
-        
         GameObject CanResPlayer = Instantiate(CanResPlayerPrefabs, new Vector2(100, 100), Quaternion.identity);
         CanResPlayer.transform.parent = panelMain.transform;
-        ViewResourceMethod viewResourceMethod = CanResPlayer.GetComponent<ViewResourceMethod>();
+        ViewResourcуBase viewResourceMethod = CanResPlayer.GetComponent<ViewResourcуBase>();
 
         viewResourceMethod.SetResourceMethodTable(this, this.LiderImageList, this.FlagImageList,this._mainModel);
-
-        
     }
 
     void RefreshPlayerView()
@@ -434,8 +430,6 @@ public class MenuScript : MonoBehaviour
     {
         _controller.TurnCreateCommand();
 
-        //EventController eventController = new EventController(Controller.Command.DoneMoveMadeCurrentPlayer, null);
-        //_controller.SendCommand(eventController);
         _controller.DoneMoveMadeCurrentPlayer();
 
         //Ходы игроков.
@@ -445,9 +439,7 @@ public class MenuScript : MonoBehaviour
         if (this._mainModel.EveryonePlayerWent()==false)
         {
             //Переключится на другого игрока.
-            
-            //EventController eventController0 = new EventController(Controller.Command.ChangeCurrentPlayer, null);
-            //_controller.SendCommand(eventController0);
+
             _controller.ChangeCurrentPlayer();
             RefreshPlayerView();
             return;
@@ -543,10 +535,7 @@ public class MenuScript : MonoBehaviour
             CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
         if (new int[4] { 0,1,2, 3 }.Contains(IdMissle))
             {
-            /*
-            EventController eventController = new EventController(Controller.Command.Missle, new EventMissle(_mainModel.GetCurrenFlagPlayer(), IdMissle));
-            _controller.SendCommand(eventController);
-            */
+
             _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), IdMissle);
             CanvasReportWindow("Prepare a missle ", IdMissle);
         } 
@@ -558,8 +547,7 @@ public class MenuScript : MonoBehaviour
 
         }
         if (new int[2] { 6, 7 }.Contains(IdMissle)) {
-            //EventController eventController = new EventController(Controller.Command.Defence, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-            //_controller.SendCommand(eventController);
+
             _controller.Defence(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(" defence", IdMissle);
         }
@@ -571,8 +559,7 @@ public class MenuScript : MonoBehaviour
         }
         if (new int[1] { 8 }.Contains(IdMissle))
         {
-            //EventController eventController = new EventController(Controller.Command.Building, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-            //_controller.SendCommand(eventController);
+
             _controller.Building(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(" build weapon", IdMissle);
         }
@@ -626,6 +613,21 @@ public class MenuScript : MonoBehaviour
         ResetCountryOutline();
         CountryLineList[0].SetActive(true);
     }
+    void ButtonNewPaper()
+    {
+        
+        GameObject CanResPlayer = Instantiate(NewPaperPrefabs, new Vector2(100, 100), Quaternion.identity);
+        CanResPlayer.transform.parent = panelMain.transform;
+        ViewNewPaperMethod viewResourceMethod = CanResPlayer.GetComponent<ViewNewPaperMethod>();
+
+        viewResourceMethod.SetResourceMethodTable(this, this.LiderImageList, this.FlagImageList, this._mainModel);
+
+
+        
+        viewResourceMethod.SetMessage(_mainModel.GetAllMessageTurn());
+
+    }
+
     void ResetCountryOutline()
     {
         CountryLineList[0].SetActive(false);
@@ -654,9 +656,6 @@ public class MenuScript : MonoBehaviour
     {
 
         yield return new WaitForSeconds(AnimationTime);
-
-        //EventController eventController0 = new EventController(Controller.Command.ChangeCurrentPlayer, null);
-        //_controller.SendCommand(eventController0);
 
         _controller.ChangeCurrentPlayer();
 
@@ -708,9 +707,7 @@ public class MenuScript : MonoBehaviour
             }
 
             CircleImageReadyParam(0,true);
-            
-            //EventController eventController = new EventController(Controller.Command.AttackBomber, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-            //_controller.SendCommand(eventController);
+
             _controller.AttackBomber(_mainModel.GetCurrenFlagPlayer());
         }
         

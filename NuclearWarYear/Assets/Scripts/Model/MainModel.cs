@@ -320,7 +320,25 @@ public class MainModel
 		return missleList;
 	}
     public void TurnCreateAICommand()
-	{new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList,
-		   GetTownList(), GetCurrenFlagPlayer(), GetCurrenFlagPlayer()); }
+	{
+		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList,
+		   GetTownList(), GetCurrenFlagPlayer(), GetCurrenFlagPlayer());
+	}
+	public string GetAllMessageTurn()
+	{
+        var text = "";
+        foreach (CountryLider lider in this.CountryLiderList)
+        {
 
+            foreach (CommandLider commandLider in lider.GetCommandLider())
+            {
+
+                //StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.GetIncident()));
+                //indexLiderTime++;
+                text += "\n"+commandLider.GetIncident().FullMessage(lider);
+            }
+
+        }
+		return text;
+    }
 }

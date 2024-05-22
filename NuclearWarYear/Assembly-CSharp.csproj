@@ -128,6 +128,7 @@
     <Compile Include="Assets\Scripts\Controller\EventController.cs" />
     <Compile Include="Assets\Scripts\Model\TargetHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildingCentralModel.cs" />
+    <Compile Include="Assets\Scripts\Model\createCommand\RandomActionCommand.cs" />
     <Compile Include="Assets\Scripts\Model\paramTable\EventFortuneIncident.cs" />
     <Compile Include="Assets\Scripts\UFOmodel.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\IWeapon.cs" />
@@ -140,7 +141,8 @@
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\ViewCanvasReport.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\Model\createCommand\RandomActionCommand.cs" />
+    <Compile Include="Assets\Scripts\View\ViewNewPaperMethod.cs" />
+    <Compile Include="Assets\Scripts\View\ViewResourcуBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

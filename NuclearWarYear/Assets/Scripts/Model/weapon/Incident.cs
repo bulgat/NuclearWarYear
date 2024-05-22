@@ -20,7 +20,9 @@ public class Incident: Weapon,IWeapon
         this.Type = type;
         this.Damage = damage;
         this.Message = message;
+        this.PopulationEvent = new PopulationEvent() as IStatePopulationEvent;
         this.Uid = UnicId++;
+
      }
     public int MutationDamage()
     {
@@ -65,6 +67,11 @@ public class Incident: Weapon,IWeapon
     }
     string GetDamagePopulation()
     {
+        Debug.Log("ZZZZZZ Z Z = " + this.PopulationEvent);
+        if (this.PopulationEvent == null)
+        {
+            return "";
+        }
         int population  = Mathf.Max(this.PopulationEvent.GetMyPopulation(), this.PopulationEvent.GetMyPopulation());
         if (population > 0)
         {

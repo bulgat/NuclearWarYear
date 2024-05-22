@@ -15,14 +15,6 @@ namespace Assets.Scripts.Model.weapon
         public bool DoubleCity { get; protected set; }
         public int MyPopulation { get; protected set; }
         public int FiendPopulation { get; protected set; }
-        /*
-        public PopulationEvent(int ChangePopulation, CityModel City, CityModel fiendCity, bool doubleCity)
-        {
-            this.ChangePopulation = ChangePopulation;
-            this.City = City;
-            this.FiendCity = fiendCity;
-            this.DoubleCity = doubleCity;
-        }
-        */
+
     }
 }
