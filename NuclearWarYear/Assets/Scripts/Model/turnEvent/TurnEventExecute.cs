@@ -17,9 +17,9 @@ namespace Assets.Scripts.Model.turnEvent
         public bool RemoveDefenceWeapon { get; private set; }
         public bool Airport { get; private set; }
         public bool Revert { get; private set; }
+        public bool ShowFiend { get; private set; }
         public TurnEventExecute(string messageSecond, int negativeMood, bool ammunition,bool changePopulation,
-            bool random, bool removeDefenceWeapon,bool airport) { 
-            //this.Message = message;
+            bool random, bool removeDefenceWeapon,bool airport, bool showFiend) { 
             this.MessageSecond = messageSecond;
             this.NegativeMood = negativeMood;
             this.Ammunition = ammunition;
@@ -27,7 +27,7 @@ namespace Assets.Scripts.Model.turnEvent
             this.Random = random;
             this.RemoveDefenceWeapon = removeDefenceWeapon;
             this.Airport = airport;
-           // this.Revert = revert;
+            this.ShowFiend = showFiend;
         }
     }
 }

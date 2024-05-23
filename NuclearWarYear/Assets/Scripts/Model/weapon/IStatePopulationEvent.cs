@@ -10,6 +10,7 @@ namespace Assets.Scripts.Model.weapon
     {
         public CityModel GetMyCity();
         public CityModel GetFiendCity();
+        public CountryLider GetFiendLider();
         public int GetMyPopulation();
         public int GetFiendPopulation();
     }

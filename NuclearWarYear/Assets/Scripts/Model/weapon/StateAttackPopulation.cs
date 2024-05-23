@@ -9,10 +9,11 @@ namespace Assets.Scripts.Model.weapon
     public class StateAttackPopulation:PopulationEvent,IStatePopulationEvent
     {
         public string Name { get; set; } = "Attack";
-        public StateAttackPopulation(string message,int ChangePopulation,CityModel fiendCity) {
+        public StateAttackPopulation(string message,int ChangePopulation,CityModel fiendCity, CountryLider fiendCountryLider) {
             this.Message = message;
             this.FiendPopulation = ChangePopulation;
             this.FiendCity = fiendCity;
+            this.FiendCountryLider = fiendCountryLider;
         }
         public CityModel GetMyCity()
         {
@@ -21,6 +22,10 @@ namespace Assets.Scripts.Model.weapon
         public CityModel GetFiendCity()
         {
             return this.FiendCity;
+        }
+        public CountryLider GetFiendLider()
+        {
+            return this.FiendCountryLider;
         }
         public int GetMyPopulation()
         {

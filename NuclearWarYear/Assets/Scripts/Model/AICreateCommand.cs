@@ -41,18 +41,5 @@ public class AICreateCommand
 			}
 		}
 	}
-	/*
-	private string GetRandomActionCommand()
-    {
-		List<string> nameCommandList = new List<string>() {
-			"Propaganda",
-			"Building",
-			"Defence",
-			"Missle",
-			"Bomber"
-		};
-		int indexCommand = UnityEngine.Random.Range(0, nameCommandList.Count);
-		return nameCommandList[indexCommand];
-	}
-	*/
+
 }

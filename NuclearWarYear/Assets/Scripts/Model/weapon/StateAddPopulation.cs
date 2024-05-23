@@ -23,6 +23,10 @@ namespace Assets.Scripts.Model.weapon
         {
             return this.FiendCity;
         }
+        public CountryLider GetFiendLider()
+        {
+            return this.FiendCountryLider;
+        }
         public int GetMyPopulation()
         {
             return this.MyPopulation;

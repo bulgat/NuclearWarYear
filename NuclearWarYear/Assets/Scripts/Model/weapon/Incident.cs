@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Model;
+using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.weapon;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ public class Incident: Weapon,IWeapon
     public string ReleaseMessage { get; private set; }
     public int ReleasePopulation { get; private set; }
     public IStatePopulationEvent PopulationEvent { get; private set; }
+    private bool ShowLider { get; set; }
 
     public Incident(string name, DictionaryEssence.TypeWeapon type, int id, string message,int damage,int IdImage) {
 		this.Name=name;
@@ -63,11 +65,23 @@ public class Incident: Weapon,IWeapon
     }
     public string FullMessage(CountryLider lider)
     {
-        return "" + lider.GetName() + "  : " + Name + GetMessage() +": "+ GetDamagePopulation();
+        return "" + lider.GetName() + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
+    }
+    string GetNameFiendLider() { 
+        Debug.Log(this.ShowLider+" Z Z"+ GlobalParam.MessageDictionary[this.Name].ShowFiend + " Z"+ this.Name + " Z Z = "  + this.PopulationEvent.GetFiendLider());
+        if (this.PopulationEvent.GetFiendLider() == null)
+        {
+            return "";
+        }
+        if (GlobalParam.MessageDictionary[this.Name].ShowFiend == false)
+        {
+            return "";
+        }
+        return this.PopulationEvent.GetFiendLider().GetName(); 
     }
     string GetDamagePopulation()
     {
-        Debug.Log("ZZZZZZ Z Z = " + this.PopulationEvent);
+        
         if (this.PopulationEvent == null)
         {
             return "";
@@ -78,17 +92,17 @@ public class Incident: Weapon,IWeapon
             return population.ToString();
         }
         return "";
-        //new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.GetMyCity(), CommandIncident.PopulationEvent.GetMyPopulation());
-        //new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.GetFiendCity(), CommandIncident.PopulationEvent.GetFiendPopulation());
+
     }
 
     public Incident Copy()
     {
         return this.MemberwiseClone() as Incident;
     }
-    public void SetReleaseMessage(IStatePopulationEvent statePopulationEvent)
+    public void SetReleaseMessage(IStatePopulationEvent statePopulationEvent,bool showFiend)
     {
         this.PopulationEvent = statePopulationEvent;
+        this.ShowLider = showFiend;
     }
 
 }
