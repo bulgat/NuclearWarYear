@@ -279,8 +279,9 @@ public class MainModel
 		if (this.GetCurrenPlayer().FlagId != selectCityTarget.FlagId) {
 
 		} else {
-			// auto Set attack
-			CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList, this.GetCurrenPlayer().FlagId, false, TownList, liderPlayer);
+            // auto Set attack
+            CountryLider fiendLider1 = new BuildingCentralHelper().GetFiendLider(CountryLiderList, this.GetCurrenPlayer().FlagId);
+            CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList, this.GetCurrenPlayer().FlagId, false, TownList, liderPlayer, fiendLider1);
 
 			liderPlayer.SetTargetCitySelectPlayer(targetCityPlayer);
 

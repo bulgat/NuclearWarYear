@@ -7,7 +7,7 @@ public class LiderHelper
 	public CountryLider GetLiderEnemy(List<CountryLider> CountryLiderList,CountryLider lider){
 		
 		if(lider.GetCommandLiderFirst().GetTargetCity()==null){
-			return null;
+            return null;
 		}
 		CityModel city = lider.GetCommandLiderFirst().GetTargetCity();	
 		return new LiderHelperOne().GetLiderOne(CountryLiderList,city.FlagId);

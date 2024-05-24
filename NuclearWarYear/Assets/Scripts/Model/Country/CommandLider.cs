@@ -20,7 +20,7 @@ public class CommandLider
 	public CountryLider LiderFiend { get; private set; }
 	List<string> _reportProducedWeaponList;
     List<string> VisibleList;
-
+	
     public CommandLider(string nameCommand) {
 		this._MissleList = new List<IWeapon>();
         this.IncidentCommand = new DictionaryEssence ().BuildIncident( nameCommand);
@@ -125,9 +125,15 @@ public class CommandLider
 	}
 	public void SetTargetCity(CityModel TargetCity)
 	{
+		if (TargetCity == null)
+		{
+			throw new System.Exception("TargetCity");
+		}
 		this._TargetCity = TargetCity;
 	}
-	public CityModel GetTargetCity(){
+
+
+    public CityModel GetTargetCity(){
 
 		return this._TargetCity;
 	

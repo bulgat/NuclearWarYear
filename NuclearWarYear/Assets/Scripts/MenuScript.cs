@@ -503,7 +503,7 @@ public class MenuScript : MonoBehaviour
         yield return new WaitForSeconds( this.waitTurnTime-1.0f);
         
         
-        Debug.Log("  Imag =  ------------------------------------------------------------------- " + CommandIncident.GetName());
+        
         _controller.ReleasePopulationEvent(CommandIncident);
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.ViewEndState();
@@ -781,8 +781,8 @@ public class MenuScript : MonoBehaviour
         UpdatePanelVisible();
 
 
-
-        BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(_mainModel.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
+        CountryLider fiendLider = new BuildingCentralHelper().GetFiendLider(_mainModel.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
+        BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(fiendLider);
 
         //player
         
@@ -857,7 +857,8 @@ public class MenuScript : MonoBehaviour
 
             if (lider.FlagId != _mainModel.GetCurrenFlagPlayer())
             {
-                BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(_mainModel.CountryLiderList, lider.FlagId);
+                CountryLider fiendLider = new BuildingCentralHelper().GetFiendLider(_mainModel.CountryLiderList, lider.FlagId);
+                BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(fiendLider);
 
             }
         }

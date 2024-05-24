@@ -147,7 +147,7 @@ public class BuildingCentral : MonoBehaviour
                 || NameCommand == DictionaryEssence.TypeEvent.AttackMissle.ToString()
                 )
             {
-                Debug.Log(VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()]+"T _   ange  = "+ VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()]);
+                
                 UfoObject.SetActive(true);
                 UFOmodel uFOmodel = UfoObject.GetComponent<UFOmodel>();
                 if (NameCommand== DictionaryEssence.TypeEvent.Ufo.ToString())
@@ -235,7 +235,7 @@ public class BuildingCentral : MonoBehaviour
                 || VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()]
                 )
             {
-                
+                Debug.Log(  "    ange  = " + UfoObject);
 
                 new ViewMoveDeflectors().SendBomberAndWingState(UfoObject,
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
@@ -256,7 +256,7 @@ public class BuildingCentral : MonoBehaviour
 
         
         UpdateVisibleBuilding(CommandIncident.GetName());
-Debug.Log("  _animation  = " + CommandIncident.GetName());
+
     }
     public void ViewEndState()
     {
@@ -273,8 +273,7 @@ Debug.Log("  _animation  = " + CommandIncident.GetName());
         
         UfoObject = Instantiate(UfoPrefabs, Propaganda.transform.position+new Vector3(0,4,24), Quaternion.identity);
         UfoObject.transform.parent = transform;
-        //BabyObject = Instantiate(BabyPrefabs, Propaganda.transform.position + new Vector3(0, 5, 24), Quaternion.identity);
-        //BabyObject.transform.parent = transform;
+
         RocketRichObject = Instantiate(RocketRichPrefabs, Propaganda.transform.position, Quaternion.identity);
         RocketRichObject.transform.parent = transform;
         CrazyCowObject = Instantiate(CrazyCowPrefabs, Propaganda.transform.position, Quaternion.identity);
@@ -287,15 +286,12 @@ Debug.Log("  _animation  = " + CommandIncident.GetName());
         Destroy(BomberObject, TimeDelete);
         Destroy(DefectorsObject, TimeDelete);
         Destroy(UfoObject, TimeDelete);
-        //Destroy(BabyObject, TimeDelete);
         Destroy(RocketRichObject, TimeDelete);
         Destroy(CrazyCowObject, TimeDelete);
 
         WingMissle.SetActive(false);
         BomberObject.SetActive(false);
         DefectorsObject.SetActive(false);
-        //UfoObject.SetActive(false);
-        //BabyObject.SetActive(false);
         RocketRichObject.SetActive(false);
         CrazyCowObject.SetActive(false);
 

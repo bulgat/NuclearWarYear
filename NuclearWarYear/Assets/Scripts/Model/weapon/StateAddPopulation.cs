@@ -9,10 +9,15 @@ namespace Assets.Scripts.Model.weapon
     public class StateAddPopulation:PopulationEvent,IStatePopulationEvent
     {
         public string Name { get; set; } = "Add";
-        public StateAddPopulation(string message,int population,CityModel myCity) {
+        public StateAddPopulation(string message,int population,CityModel myCity, CountryLider fiendCountryLider) {
             this.Message = message;
             this.MyPopulation = population;
             this.MyCity= myCity;
+            //if (fiendCountryLider == null)
+            //{
+            //    throw new ArgumentNullException("not lider");
+            //}
+            this.FiendCountryLider = fiendCountryLider;
         }
 
         public CityModel GetMyCity()

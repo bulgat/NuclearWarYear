@@ -26,6 +26,7 @@ namespace Assets.Scripts.Model.param
             { DictionaryEssence.TypeEvent.RocketRich.ToString(), new TurnEventExecute(null,0,false,true,false,false, false,false)},
             { DictionaryEssence.TypeEvent.Baby.ToString(), new TurnEventExecute( null, 0,false, true, false,false, false,false) },
             {DictionaryEssence.TypeEvent.Ufo.ToString(), new TurnEventExecute( null, 0, false,true, false,false, false,false) },
+            {DictionaryEssence.TypeEvent.CrazyCow.ToString(), new TurnEventExecute( null, 0, false,true, false,false, false,false) },
             {DictionaryEssence.TypeEvent.Defectors.ToString(), new TurnEventExecute( null, 5,false, true, false,false, false,true) },
             {DictionaryEssence.TypeEvent.Building.ToString(), new TurnEventExecute(null, 5, true, false, false,false, false,false) },
             {DictionaryEssence.TypeEvent.Propaganda.ToString(), new TurnEventExecute(

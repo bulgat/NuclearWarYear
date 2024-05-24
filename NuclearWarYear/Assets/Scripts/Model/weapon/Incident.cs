@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Model;
 using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.weapon;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -67,8 +68,9 @@ public class Incident: Weapon,IWeapon
     {
         return "" + lider.GetName() + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
     }
-    string GetNameFiendLider() { 
-        Debug.Log(this.ShowLider+" Z Z"+ GlobalParam.MessageDictionary[this.Name].ShowFiend + " Z"+ this.Name + " Z Z = "  + this.PopulationEvent.GetFiendLider());
+    string GetNameFiendLider() {
+        Debug.Log("  Ima ------------------------------------------------------------------ " + this.Name);
+        Debug.Log(this.ShowLider+" Z Z"+ GlobalParam.MessageDictionary[this.Name].ShowFiend + " Z"+ this.Name + " Z lider = "  + this.PopulationEvent.GetFiendLider());
         if (this.PopulationEvent.GetFiendLider() == null)
         {
             return "";
@@ -102,6 +104,10 @@ public class Incident: Weapon,IWeapon
     public void SetReleaseMessage(IStatePopulationEvent statePopulationEvent,bool showFiend)
     {
         this.PopulationEvent = statePopulationEvent;
+        if (statePopulationEvent.GetFiendLider() == null)
+        {
+            throw new ArgumentNullException("not lider");
+        }
         this.ShowLider = showFiend;
     }
 

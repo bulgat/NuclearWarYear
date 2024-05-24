@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class BuildingCentralHelper 
 {
-   public BuildingCentral GetBuildingCentral(List<CountryLider> CountryLiderList,int FlagId){
-	
-		foreach(CountryLider CountryLider in CountryLiderList)
-		{
-			if(CountryLider.FlagId==FlagId)
-			{
-				
+   public BuildingCentral GetBuildingCentral(CountryLider CountryLider)
+    {
+
 				return CountryLider.PropagandaBuilding.GetComponent<BuildingCentral>();
-			}
-		}
-		return null;
 
 	}
+	public CountryLider GetFiendLider(List<CountryLider> CountryLiderList, int FlagId)
+	{
+        foreach (CountryLider CountryLider in CountryLiderList)
+        {
+            if (CountryLider.FlagId == FlagId)
+            {
+
+                return CountryLider;
+            }
+        }
+        return null;
+    }
 }

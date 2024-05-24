@@ -24,7 +24,9 @@ public class SwitchActionHelper
         bool AIfiend = FlagId != FlagIdPlayer;
 
         CommandLider commandLider = new CommandLider(actionCommand);
-        
+        CountryLider fiendLider1 = new BuildingCentralHelper().GetFiendLider(CountryLiderList, countryLider.FlagId);
+        CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider, fiendLider1);
+
         //Change Ai Command
         if (AIfiend)
         {
@@ -58,16 +60,16 @@ public class SwitchActionHelper
 
          }
      
-        CityModel targetCity = new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider);
+        
 
 
-        AiTargetCity(AIfiend, targetCity, commandLider);
+        AiTargetCity(AIfiend, targetCity, commandLider, fiendLider1);
 
         // Счастливая карта!
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(targetCity, MissleId, FlagId, AIfiend, TownList, CountryLiderList, countryLider);
        
 
-        TreatmentCommand(actionCommand, commandLider, targetCity, MissleId, FlagId, AIfiend, TownList,
+        this.TreatmentCommand(actionCommand, commandLider, targetCity, MissleId, FlagId, AIfiend, TownList,
         CountryLiderList, countryLider);
 
         if (countryLider.GetTargetCitySelectPlayer() != null)
@@ -86,12 +88,12 @@ public class SwitchActionHelper
         }
         return commandLiderList;
     }
-    private void AiTargetCity(bool AIfiend, CityModel targetCity, CommandLider commandLider)
+    private void AiTargetCity(bool AIfiend, CityModel targetCity, CommandLider commandLider,CountryLider enemyLider)
     {
         if (AIfiend)
         {
             commandLider.SetTargetCity(targetCity);
-
+            commandLider.SetTargetLider(enemyLider);
         }
     }
  private void TreatmentCommand(string actionCommand, CommandLider commandLider, CityModel targetCity, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
