@@ -18,8 +18,6 @@ public class AICreateCommand
 			// only fiend
 			if(lider.FlagId!=FlagIdPlayer){
 
-				
-
 				if (lider.ReleaseCommandList != null){
 					if(lider.ReleaseCommandList.First().GetVisibleMissle() ){
 						

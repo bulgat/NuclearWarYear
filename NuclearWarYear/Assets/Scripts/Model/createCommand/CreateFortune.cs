@@ -10,7 +10,7 @@ namespace Assets.Scripts.Model.createCommand
 {
     internal class CreateFortune
     {
-        public CommandLider FortuneEvent(CityModel targetCity, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
+        public CommandLider FortuneEvent(TargetCityModel targetCityModel, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
         List<CountryLider> CountryLiderList, CountryLider countryLider)
         {
             CommandLider commandLider = null;
@@ -23,7 +23,8 @@ namespace Assets.Scripts.Model.createCommand
                     actionCommand = eventFortuneIncident.Name.ToString();
                     commandLider = new CommandLider(actionCommand);
                     commandLider.SetVisibleEventList(eventFortuneIncident.Name.ToString(), true);
-                    commandLider.SetTargetCity(targetCity);
+                    commandLider.SetTargetCity(targetCityModel.TargetCity);
+                    commandLider.SetTargetLider(targetCityModel.EnemyLider);
                 }
             }
 

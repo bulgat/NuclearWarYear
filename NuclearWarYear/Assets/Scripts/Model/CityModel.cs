@@ -10,7 +10,6 @@ public class CityModel
     private int Id;
     public int CountryId { get; }
     public CityModel(int countryId, int id) {
-        //this.FlagId 
         this.CountryId = countryId;
         _population = 40;
         _futurePopulation = _population;
