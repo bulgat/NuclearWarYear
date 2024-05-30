@@ -26,7 +26,7 @@ namespace Assets.Scripts.Model
             
             if (lider.GetCommandLider() != null)
 			{
-				CityModel cityModelTarget = lider.GetCommandLiderFirst().GetTargetCity();
+				CityModel cityModelTarget = lider.GetCommandLiderFirst().GetTargetCity().TargetCity;
 				//Enemy lider.
 				
 
@@ -74,9 +74,9 @@ namespace Assets.Scripts.Model
                             
                             int UnDamage = 0;
 
-							CityModel cityFiend = new DamagePopulationHelper().GetCityLider(lider);
+                        CityModel cityFiend = new DamagePopulationHelper().GetCityLider(lider).TargetCity;
 
-							CityModel liderCityMy = new UtilModelCity().GetCityModel(TownList, lider);
+                        CityModel liderCityMy = new UtilModelCity().GetCityModel(TownList, lider);
 
                             if (GetMessageDictionary(itemExecute.Key).ChangePopulation)
 							{

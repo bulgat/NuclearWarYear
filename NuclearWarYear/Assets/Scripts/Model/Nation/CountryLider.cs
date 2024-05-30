@@ -25,7 +25,7 @@ public class CountryLider
 	private List<CityModel> _TownListOwn;
 
 	private int _maxPopulation;
-	private CityModel _targetCitySelectPlayer;
+	private TargetCityModel _targetCitySelectPlayer;
 
 	private string Name;
 	//private string EventTotalTurn;
@@ -195,11 +195,11 @@ public class CountryLider
 	public GameObject GetCentralBuildingPropogation() {
 		return PropagandaBuilding;
 	}
-	public void SetTargetCitySelectPlayer(CityModel targetCitySelectPlayer){
+	public void SetTargetCitySelectPlayer(TargetCityModel targetCitySelectPlayer){
 		
 		_targetCitySelectPlayer =targetCitySelectPlayer;
 	}
-	public CityModel GetTargetCitySelectPlayer(){
+	public TargetCityModel GetTargetCitySelectPlayer(){
 		return _targetCitySelectPlayer;
 	}
 

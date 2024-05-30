@@ -260,21 +260,25 @@ public class MainModel
 	}
 
 
-	public void SelectCityEnemyTargetPlayer(int CityId) {
+	public void SelectCityEnemyTargetPlayer(int CityId,int LiderFlagId) {
 		CityModel selectCityTarget = null;
-		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, this.GetCurrenPlayer().FlagId);
+		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, LiderFlagId);
 
-		foreach (CityModel townCity in this.TownList) {
+        CityModel enemyTownCity = this.TownList.FirstOrDefault(a=>a.GetId() == CityId);
 
-			if (townCity.GetId() == CityId) {
-				selectCityTarget = townCity;
-				liderPlayer.GetCommandLiderFirst().SetTargetCity(townCity);
+        CountryLider enemyliderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, LiderFlagId);
 
-				liderPlayer.SetTargetCitySelectPlayer(townCity);
+        //foreach (CityModel townCity in this.TownList) {
 
-			}
+			//if (townCity.GetId() == CityId) {
+				selectCityTarget = enemyTownCity;
+				//liderPlayer.GetCommandLiderFirst().SetTargetCity(townCity);
+                liderPlayer.GetCommandLiderFirst().SetTargetCity(new TargetCityModel(enemyTownCity, enemyliderPlayer));
+                liderPlayer.SetTargetCitySelectPlayer(new TargetCityModel(enemyTownCity, enemyliderPlayer));
 
-		}
+			//}
+
+		//}
 
 		if (this.GetCurrenPlayer().FlagId != selectCityTarget.FlagId) {
 
@@ -283,9 +287,9 @@ public class MainModel
             CountryLider fiendLider1 = new BuildingCentralHelper().GetFiendLider(CountryLiderList, this.GetCurrenPlayer().FlagId);
             CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList, this.GetCurrenPlayer().FlagId, false, TownList, liderPlayer, fiendLider1);
 
-			liderPlayer.SetTargetCitySelectPlayer(targetCityPlayer);
-
-		}
+			//liderPlayer.SetTargetCitySelectPlayer(targetCityPlayer);
+            liderPlayer.SetTargetCitySelectPlayer(new TargetCityModel(targetCityPlayer, fiendLider1));
+        }
 
 
 	}

@@ -313,7 +313,7 @@ public class MenuScript : MonoBehaviour
         
         City selectCityTarget = ClearCityTargetMark(CityId,true);
 
-        _controller.SelectCityEnemyTargetPlayer(CityId);
+        _controller.SelectCityEnemyTargetPlayer(CityId, _mainModel.GetCurrentPlayerFlag());
 
         // TargetSity
         if (_mainModel.GetCurrentPlayerFlag() != selectCityTarget.FlagId)
@@ -510,7 +510,7 @@ public class MenuScript : MonoBehaviour
     }
     private CityModel TargetManager(CountryLider lider)
     {
-        CityModel cityTown = lider.GetCommandLider().First().GetTargetCity();
+        CityModel cityTown = lider.GetCommandLider().First().GetTargetCity().TargetCity;
         if (cityTown != null)
         {
             GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);

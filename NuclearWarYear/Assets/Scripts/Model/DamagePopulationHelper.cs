@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DamagePopulationHelper
 {
-	public CityModel GetCityLider(CountryLider lider)
+	public TargetCityModel GetCityLider(CountryLider lider)
 	{
 		return lider.GetCommandLiderFirst().GetTargetCity();
 

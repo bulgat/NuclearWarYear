@@ -23,7 +23,7 @@ namespace Assets.Scripts.Model.createCommand
                     actionCommand = eventFortuneIncident.Name.ToString();
                     commandLider = new CommandLider(actionCommand);
                     commandLider.SetVisibleEventList(eventFortuneIncident.Name.ToString(), true);
-                    commandLider.SetTargetCity(targetCityModel.TargetCity);
+                    commandLider.SetTargetCity(targetCityModel);
                     commandLider.SetTargetLider(targetCityModel.EnemyLider);
                 }
             }

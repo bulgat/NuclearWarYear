@@ -96,7 +96,7 @@ public class SwitchActionHelper
     {
         if (AIfiend)
         {
-            commandLider.SetTargetCity(targetCityModel.TargetCity);
+            commandLider.SetTargetCity(targetCityModel);
             commandLider.SetTargetLider(enemyLider);
         }
     }
@@ -133,7 +133,7 @@ public class SwitchActionHelper
                 else
                 {
                     commandLider.SetVisibleAttackBomber(true);
-                    commandLider.SetTargetCity(targetCityModel.TargetCity);
+                    commandLider.SetTargetCity(targetCityModel);
                     commandLider.SetTargetLider(targetCityModel.EnemyLider);
                     commandLider.SetAttackBomber(countryLider.GetBomber());
                 }
@@ -146,7 +146,7 @@ public class SwitchActionHelper
                 else
                 {
                     commandLider.SetVisibleEventList(GlobalParam.ActionCommand.AttackMissle.ToString(), true);
-                    commandLider.SetTargetCity(targetCityModel.TargetCity);
+                    commandLider.SetTargetCity(targetCityModel);
                     commandLider.SetTargetLider(targetCityModel.EnemyLider);
                     commandLider.SetAttackMissle(countryLider.GetMissle());
                 }

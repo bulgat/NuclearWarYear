@@ -10,7 +10,7 @@ public class CommandLider
 
 	private List<IWeapon> _MissleList;
 
-	private CityModel _TargetCity;
+	private TargetCityModel _TargetCity;
 
 	private int MissleId;
 
@@ -123,7 +123,7 @@ public class CommandLider
 		return _reportProducedWeaponList;
 
 	}
-	public void SetTargetCity(CityModel TargetCity)
+	public void SetTargetCity(TargetCityModel TargetCity)
 	{
 		if (TargetCity == null)
 		{
@@ -133,7 +133,7 @@ public class CommandLider
 	}
 
 
-    public CityModel GetTargetCity(){
+    public TargetCityModel GetTargetCity(){
 
 		return this._TargetCity;
 	

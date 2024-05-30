@@ -132,9 +132,9 @@ public class Controller
 
     }
 
-    public void SelectCityEnemyTargetPlayer(int CityId)
+    public void SelectCityEnemyTargetPlayer(int CityId,int FlagId)
 	{
-            _mainModel.SelectCityEnemyTargetPlayer(CityId);
+            _mainModel.SelectCityEnemyTargetPlayer(CityId, FlagId);
     }
 
     public void ResetSelectCityEnemyTargetPlayer(int CityId)

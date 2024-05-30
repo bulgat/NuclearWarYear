@@ -11,6 +11,6 @@ public class LiderHelper
 		}
 		//CityModel city = lider.GetCommandLiderFirst().GetTargetCity().TargetCity;	
 		return new LiderHelperOne().GetLiderOne(CountryLiderList,
-			lider.GetCommandLiderFirst().GetTargetCity().FlagId);
+			lider.GetCommandLiderFirst().GetTargetCity().TargetCity.FlagId);
 	}
 }
