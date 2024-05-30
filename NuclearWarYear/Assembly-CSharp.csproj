@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\Controller\CityEvent.cs" />
     <Compile Include="Assets\Scripts\Model\paramTable\DictionaryEssence.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewCircleBomber.cs" />
+    <Compile Include="Assets\Scripts\View\ViewResourcуBase.cs" />
     <Compile Include="Assets\Scripts\Model\LiderHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildWeapon.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\Weapon.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Assets\Scripts\Controller\EventSendLider.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\IStatePopulationEvent.cs" />
+    <Compile Include="Assets\Scripts\View\ViewNewPaperMethod.cs" />
     <Compile Include="Assets\Scripts\Model\CityHelperList.cs" />
     <Compile Include="Assets\Scripts\Model\scenario\ScenarioLider.cs" />
     <Compile Include="Assets\Scripts\MenuVictory.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="Assets\Scripts\Model\paramTable\EventFortuneIncident.cs" />
     <Compile Include="Assets\Scripts\UFOmodel.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\IWeapon.cs" />
+    <Compile Include="Assets\Scripts\Model\TargetCityModel.cs" />
     <Compile Include="Assets\Scripts\Model\turnEvent\MainTurnLider.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\Bomber.cs" />
     <Compile Include="Assets\Scripts\Model\turnEvent\UtilModelCity.cs" />
@@ -141,8 +144,6 @@
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\ViewCanvasReport.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\View\ViewNewPaperMethod.cs" />
-    <Compile Include="Assets\Scripts\View\ViewResourcуBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

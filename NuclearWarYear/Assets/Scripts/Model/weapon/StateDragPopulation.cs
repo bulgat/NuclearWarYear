@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Model.weapon
 {
-    public class StateDragPopulation:PopulationEvent,IStatePopulationEvent
+    public class StateDragPopulation:PopulationEvent
     {
         public string Name { get; set; } = "Drag";
         public StateDragPopulation(string message, int population, CityModel myCity, CityModel fiendCity, CountryLider fiendCountryLider) {

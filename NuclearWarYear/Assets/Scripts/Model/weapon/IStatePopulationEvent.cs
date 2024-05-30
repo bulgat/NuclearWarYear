@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Model.weapon
 {
+    /*
     public interface IStatePopulationEvent
     {
         public CityModel GetMyCity();
@@ -13,5 +14,5 @@ namespace Assets.Scripts.Model.weapon
         public CountryLider GetFiendLider();
         public int GetMyPopulation();
         public int GetFiendPopulation();
-    }
+    }*/
 }

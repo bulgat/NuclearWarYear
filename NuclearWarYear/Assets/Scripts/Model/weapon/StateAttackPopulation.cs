@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Model.weapon
 {
-    public class StateAttackPopulation:PopulationEvent,IStatePopulationEvent
+    public class StateAttackPopulation:PopulationEvent
     {
         public string Name { get; set; } = "Attack";
         public StateAttackPopulation(string message,int ChangePopulation,CityModel fiendCity, CountryLider fiendCountryLider) {

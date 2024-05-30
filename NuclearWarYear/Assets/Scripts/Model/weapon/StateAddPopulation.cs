@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Model.weapon
 {
-    public class StateAddPopulation:PopulationEvent,IStatePopulationEvent
+    public class StateAddPopulation:PopulationEvent
     {
         public string Name { get; set; } = "Add";
         public StateAddPopulation(string message,int population,CityModel myCity, CountryLider fiendCountryLider) {

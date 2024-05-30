@@ -13,7 +13,7 @@ public class Incident: Weapon,IWeapon
     private static int UnicId = 0;
     public string ReleaseMessage { get; private set; }
     public int ReleasePopulation { get; private set; }
-    public IStatePopulationEvent PopulationEvent { get; private set; }
+    public PopulationEvent PopulationEvent { get; private set; }
     private bool ShowLider { get; set; }
 
     public Incident(string name, DictionaryEssence.TypeWeapon type, int id, string message,int damage,int IdImage) {
@@ -23,7 +23,7 @@ public class Incident: Weapon,IWeapon
         this.Type = type;
         this.Damage = damage;
         this.Message = message;
-        this.PopulationEvent = new PopulationEvent() as IStatePopulationEvent;
+        this.PopulationEvent = new PopulationEvent();
         this.Uid = UnicId++;
 
      }
@@ -70,8 +70,8 @@ public class Incident: Weapon,IWeapon
     }
     string GetNameFiendLider() {
         Debug.Log("  Ima ------------------------------------------------------------------ " + this.Name);
-        Debug.Log(this.ShowLider+" Z Z"+ GlobalParam.MessageDictionary[this.Name].ShowFiend + " Z"+ this.Name + " Z lider = "  + this.PopulationEvent.GetFiendLider());
-        if (this.PopulationEvent.GetFiendLider() == null)
+        Debug.Log(this.ShowLider+" Z Z"+ GlobalParam.MessageDictionary[this.Name].ShowFiend + " Z"+ this.Name + " Z lider = "  + this.PopulationEvent.FiendCountryLider);
+        if (this.PopulationEvent.FiendCountryLider == null)
         {
             return "";
         }
@@ -79,7 +79,7 @@ public class Incident: Weapon,IWeapon
         {
             return "";
         }
-        return this.PopulationEvent.GetFiendLider().GetName(); 
+        return this.PopulationEvent.FiendCountryLider.GetName(); 
     }
     string GetDamagePopulation()
     {
@@ -88,7 +88,7 @@ public class Incident: Weapon,IWeapon
         {
             return "";
         }
-        int population  = Mathf.Max(this.PopulationEvent.GetMyPopulation(), this.PopulationEvent.GetMyPopulation());
+        int population  = Mathf.Max(this.PopulationEvent.MyPopulation, this.PopulationEvent.MyPopulation);
         if (population > 0)
         {
             return population.ToString();
@@ -101,10 +101,10 @@ public class Incident: Weapon,IWeapon
     {
         return this.MemberwiseClone() as Incident;
     }
-    public void SetReleaseMessage(IStatePopulationEvent statePopulationEvent,bool showFiend)
+    public void SetReleaseMessage(PopulationEvent statePopulationEvent,bool showFiend)
     {
         this.PopulationEvent = statePopulationEvent;
-        if (statePopulationEvent.GetFiendLider() == null)
+        if (statePopulationEvent.FiendCountryLider == null)
         {
             throw new ArgumentNullException("not lider");
         }
