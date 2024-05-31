@@ -494,7 +494,7 @@ public class MenuScript : MonoBehaviour
         buildingCentral.SetTargetBomber(TargetManager(lider));
 
         StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
-        Debug.Log(" --------------- ##  Lider  mage =" + CommandIncident.GetName());
+        
         Debug.Log( "  DoneMoveMadeCurrentP = Ufo     =" + CommandIncident.GetMessage());
         Debug.Log( "  &    ______ _____ _____ ___" +CommandIncident.Name);
     }
@@ -510,7 +510,7 @@ public class MenuScript : MonoBehaviour
     }
     private CityModel TargetManager(CountryLider lider)
     {
-        CityModel cityTown = lider.GetCommandLider().First().GetTargetCity().TargetCity;
+        CityModel cityTown = lider.GetCommandLider().First()._TargetCity.TargetCity;
         if (cityTown != null)
         {
             GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);

@@ -7,7 +7,7 @@ public class DamagePopulationHelper
 {
 	public TargetCityModel GetCityLider(CountryLider lider)
 	{
-		return lider.GetCommandLiderFirst().GetTargetCity();
+		return lider.GetCommandLiderFirst()._TargetCity;
 
     }
     public void SetDamagePopulation( CityModel cityModel,int Damage){

@@ -26,7 +26,8 @@ namespace Assets.Scripts.Model
             
             if (lider.GetCommandLider() != null)
 			{
-				CityModel cityModelTarget = lider.GetCommandLiderFirst().GetTargetCity().TargetCity;
+				Debug.Log(lider.GetCommandLiderFirst()+"   __   lider = " +lider.GetCommandLiderFirst()._TargetCity+" flag = "+ lider.FlagId);
+				CityModel cityModelTarget = lider.GetCommandLiderFirst()._TargetCity.TargetCity;
 				//Enemy lider.
 				
 
@@ -93,20 +94,21 @@ namespace Assets.Scripts.Model
 							if (GetMessageDictionary(itemExecute.Key).Ammunition)
 							{
 								lider.AddMissle(lider.GetCommandLiderFirst().GetMissle());
-								List<string> reportProducedWeaponList = lider.GetCommandLiderFirst().GetReportProducedWeaponList();
-								report = string.Join(", ", reportProducedWeaponList.ToArray());
+                            Debug.Log(" --------------- ##  Lider  m  =" + lider.GetCommandLiderFirst()._reportProducedWeaponList);
+                            List<string> reportProducedWeaponList = lider.GetCommandLiderFirst()._reportProducedWeaponList;
+                            report = string.Join(", ", reportProducedWeaponList.ToArray());
 							}
 							
                             message = lider.SetEventTotalMessageTurn(report, itemExecute.Key);
 							lider.SetCommandRealise(lider.GetCommandLiderFirst());
-							if (DictionaryEssence.TypeEvent.Propaganda.ToString() == itemExecute.Key ||
-							DictionaryEssence.TypeEvent.Defectors.ToString() ==itemExecute.Key) 
+							if (GlobalParam.TypeEvent.Propaganda.ToString() == itemExecute.Key ||
+                            GlobalParam.TypeEvent.Defectors.ToString() ==itemExecute.Key) 
 						{
                             Debug.Log("  _animat  = "+ enemylider);
                             CommandIncident.SetReleaseMessage(new StateDragPopulation(message, UnDamage, liderCityMy, cityFiend, enemylider), GetMessageDictionary(itemExecute.Key).ShowFiend);
                                 return CommandIncident;
                             }
-							bool doubleCity = itemExecute.Key == DictionaryEssence.TypeEvent.Propaganda.ToString() || itemExecute.Key == DictionaryEssence.TypeEvent.Defectors.ToString();
+							bool doubleCity = itemExecute.Key == GlobalParam.TypeEvent.Propaganda.ToString() || itemExecute.Key == GlobalParam.TypeEvent.Defectors.ToString();
 
                             CommandIncident.SetReleaseMessage(new StateAddPopulation(message, -UnDamage, liderCityMy,enemylider), GetMessageDictionary(itemExecute.Key).ShowFiend);
                             return CommandIncident;
@@ -126,7 +128,7 @@ namespace Assets.Scripts.Model
 					else
 					{
 						//bool explode0;
-						if (lider.GetCommandLiderFirst().GetTargetCity() != null)
+						if (lider.GetCommandLiderFirst()._TargetCity != null)
 						{
 							if (lider.GetCommandLiderFirst().GetAttackBomber() != null)
 							{
@@ -147,12 +149,12 @@ namespace Assets.Scripts.Model
                 }
 
                 // attack Missle
-                if (lider.GetCommandLiderFirst().GetNameExecute(DictionaryEssence.TypeEvent.AttackMissle.ToString()))
+                if (lider.GetCommandLiderFirst().GetNameExecute(GlobalParam.TypeEvent.AttackMissle.ToString()))
 				{
 
 					if (enemylider.GetCommandLiderFirst().GetDefence()==false)
 					{
-						if (lider.GetCommandLiderFirst().GetTargetCity() != null)
+						if (lider.GetCommandLiderFirst()._TargetCity != null)
 						{
 
 							if (lider.GetCommandLiderFirst().GetAttackMissle() != null)

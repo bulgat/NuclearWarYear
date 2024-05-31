@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Model.param;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -73,14 +74,14 @@ public class BuildingCentral : MonoBehaviour
 
         this.buildingCentralModel = new BuildingCentralModel();
         VisibleObjList = new Dictionary<string, bool>();
-        VisibleObjList.Add(DictionaryEssence.TypeEvent.Bomber.ToString(), false);
-        VisibleObjList.Add(DictionaryEssence.TypeEvent.AttackBomber.ToString(), false);
-        VisibleObjList.Add(DictionaryEssence.TypeEvent.AttackMissle.ToString(), false);
-        VisibleObjList.Add(DictionaryEssence.TypeEvent.Defectors.ToString(), false);
-        VisibleObjList.Add(DictionaryEssence.TypeEvent.Ufo.ToString(), false);
-        VisibleObjList.Add(DictionaryEssence.TypeEvent.Baby.ToString(), false);
-        VisibleObjList.Add(DictionaryEssence.TypeEvent.RocketRich.ToString(), false);
-        VisibleObjList.Add(DictionaryEssence.TypeEvent.CrazyCow.ToString(), false);
+        VisibleObjList.Add(GlobalParam.TypeEvent.Bomber.ToString(), false);
+        VisibleObjList.Add(GlobalParam.TypeEvent.AttackBomber.ToString(), false);
+        VisibleObjList.Add(GlobalParam.TypeEvent.AttackMissle.ToString(), false);
+        VisibleObjList.Add(GlobalParam.TypeEvent.Defectors.ToString(), false);
+        VisibleObjList.Add(GlobalParam.TypeEvent.Ufo.ToString(), false);
+        VisibleObjList.Add(GlobalParam.TypeEvent.Baby.ToString(), false);
+        VisibleObjList.Add(GlobalParam.TypeEvent.RocketRich.ToString(), false);
+        VisibleObjList.Add(GlobalParam.TypeEvent.CrazyCow.ToString(), false);
     }
     public void SetTargetBomber(CityModel target)
     {
@@ -97,26 +98,26 @@ public class BuildingCentral : MonoBehaviour
     public void UpdateVisibleBuilding(string NameCommand)
     {
 
-        Propaganda.SetActive(NameCommand==DictionaryEssence.TypeEvent.Propaganda.ToString());
-        BuildingIndustry.SetActive(NameCommand== DictionaryEssence.TypeEvent.Building.ToString());
-        DefenceObject.SetActive(NameCommand== DictionaryEssence.TypeEvent.Defence.ToString());
-        MissleObject.SetActive(NameCommand==DictionaryEssence.TypeEvent.Missle.ToString());
-        Airport.SetActive(NameCommand==DictionaryEssence.TypeEvent.Airport.ToString());
-        AirportAttack.SetActive(NameCommand== DictionaryEssence.TypeEvent.AttackAirport.ToString());
+        Propaganda.SetActive(NameCommand== GlobalParam.TypeEvent.Propaganda.ToString());
+        BuildingIndustry.SetActive(NameCommand== GlobalParam.TypeEvent.Build.ToString());
+        DefenceObject.SetActive(NameCommand== GlobalParam.TypeEvent.Defence.ToString());
+        MissleObject.SetActive(NameCommand== GlobalParam.TypeEvent.Missle.ToString());
+        Airport.SetActive(NameCommand== GlobalParam.TypeEvent.Airport.ToString());
+        AirportAttack.SetActive(NameCommand== GlobalParam.TypeEvent.AttackAirport.ToString());
 
-        VisibleObjList[DictionaryEssence.TypeEvent.AttackBomber.ToString()] = NameCommand == DictionaryEssence.TypeEvent.AttackBomber.ToString();
-        VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()] = NameCommand == DictionaryEssence.TypeEvent.AttackMissle.ToString();
-        VisibleObjList[DictionaryEssence.TypeEvent.Defectors.ToString()] = NameCommand == DictionaryEssence.TypeEvent.Defectors.ToString();
-        VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()] = NameCommand == DictionaryEssence.TypeEvent.Ufo.ToString();
-        VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()] = NameCommand == DictionaryEssence.TypeEvent.Baby.ToString();
-        VisibleObjList[DictionaryEssence.TypeEvent.RocketRich.ToString()] = NameCommand == DictionaryEssence.TypeEvent.RocketRich.ToString();
-        VisibleObjList[DictionaryEssence.TypeEvent.CrazyCow.ToString()] = NameCommand == DictionaryEssence.TypeEvent.CrazyCow.ToString();
+        VisibleObjList[GlobalParam.TypeEvent.AttackBomber.ToString()] = NameCommand == GlobalParam.TypeEvent.AttackBomber.ToString();
+        VisibleObjList[GlobalParam.TypeEvent.AttackMissle.ToString()] = NameCommand == GlobalParam.TypeEvent.AttackMissle.ToString();
+        VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()] = NameCommand == GlobalParam.TypeEvent.Defectors.ToString();
+        VisibleObjList[GlobalParam.TypeEvent.Ufo.ToString()] = NameCommand == GlobalParam.TypeEvent.Ufo.ToString();
+        VisibleObjList[GlobalParam.TypeEvent.Baby.ToString()] = NameCommand == GlobalParam.TypeEvent.Baby.ToString();
+        VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()] = NameCommand == GlobalParam.TypeEvent.RocketRich.ToString();
+        VisibleObjList[GlobalParam.TypeEvent.CrazyCow.ToString()] = NameCommand == GlobalParam.TypeEvent.CrazyCow.ToString();
 
 
         if (WingMissle != null)
         {
-            WingMissle.SetActive(NameCommand== DictionaryEssence.TypeEvent.AttackMissle.ToString());
-            MissleOpenObject.SetActive(NameCommand== DictionaryEssence.TypeEvent.AttackMissle.ToString());
+            WingMissle.SetActive(NameCommand== GlobalParam.TypeEvent.AttackMissle.ToString());
+            MissleOpenObject.SetActive(NameCommand== GlobalParam.TypeEvent.AttackMissle.ToString());
             /*
             WingMissle.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.AttackMissle.ToString()]);
             MissleOpenObject.SetActive(commandLider.VisibleEventList[DictionaryEssence.TypeEvent.AttackMissle.ToString()]);
@@ -127,11 +128,11 @@ public class BuildingCentral : MonoBehaviour
         if (BomberObject != null)
         {
             //if (commandLider.GetVisibleBomber() || commandLider.GetVisibleAttackBomber())
-             if(NameCommand== DictionaryEssence.TypeEvent.Bomber.ToString()|| NameCommand== DictionaryEssence.TypeEvent.AttackBomber.ToString())
+             if(NameCommand== GlobalParam.TypeEvent.Bomber.ToString()|| NameCommand== GlobalParam.TypeEvent.AttackBomber.ToString())
             {
                 bool vis = true;
                 BomberObject.SetActive(vis);
-                VisibleObjList[DictionaryEssence.TypeEvent.Bomber.ToString()] = vis;
+                VisibleObjList[GlobalParam.TypeEvent.Bomber.ToString()] = vis;
             }
 
         }
@@ -139,40 +140,40 @@ public class BuildingCentral : MonoBehaviour
         if (UfoObject != null)
         {
 
-            if (NameCommand== DictionaryEssence.TypeEvent.Ufo.ToString() 
-                || NameCommand== DictionaryEssence.TypeEvent.Baby.ToString()
-                || NameCommand == DictionaryEssence.TypeEvent.CrazyCow.ToString()
-                || NameCommand == DictionaryEssence.TypeEvent.RocketRich.ToString()
-                || NameCommand == DictionaryEssence.TypeEvent.Defectors.ToString()
-                || NameCommand == DictionaryEssence.TypeEvent.AttackMissle.ToString()
+            if (NameCommand== GlobalParam.TypeEvent.Ufo.ToString() 
+                || NameCommand== GlobalParam.TypeEvent.Baby.ToString()
+                || NameCommand == GlobalParam.TypeEvent.CrazyCow.ToString()
+                || NameCommand == GlobalParam.TypeEvent.RocketRich.ToString()
+                || NameCommand == GlobalParam.TypeEvent.Defectors.ToString()
+                || NameCommand == GlobalParam.TypeEvent.AttackMissle.ToString()
                 )
             {
                 
                 UfoObject.SetActive(true);
                 UFOmodel uFOmodel = UfoObject.GetComponent<UFOmodel>();
-                if (NameCommand== DictionaryEssence.TypeEvent.Ufo.ToString())
+                if (NameCommand== GlobalParam.TypeEvent.Ufo.ToString())
                 {
-                    uFOmodel.SetVisible(DictionaryEssence.TypeEvent.Ufo.ToString());
+                    uFOmodel.SetVisible(GlobalParam.TypeEvent.Ufo.ToString());
                 }
-                if (NameCommand== DictionaryEssence.TypeEvent.Baby.ToString())
+                if (NameCommand== GlobalParam.TypeEvent.Baby.ToString())
                 {
-                    uFOmodel.SetVisible(DictionaryEssence.TypeEvent.Baby.ToString());
+                    uFOmodel.SetVisible(GlobalParam.TypeEvent.Baby.ToString());
                 }
-                if (NameCommand == DictionaryEssence.TypeEvent.CrazyCow.ToString())
+                if (NameCommand == GlobalParam.TypeEvent.CrazyCow.ToString())
                 {
-                    uFOmodel.SetVisible(DictionaryEssence.TypeEvent.CrazyCow.ToString());
+                    uFOmodel.SetVisible(GlobalParam.TypeEvent.CrazyCow.ToString());
                 }
-                if (NameCommand == DictionaryEssence.TypeEvent.RocketRich.ToString())
+                if (NameCommand == GlobalParam.TypeEvent.RocketRich.ToString())
                 {
-                    uFOmodel.SetVisible(DictionaryEssence.TypeEvent.RocketRich.ToString());
+                    uFOmodel.SetVisible(GlobalParam.TypeEvent.RocketRich.ToString());
                 }
-                if (NameCommand == DictionaryEssence.TypeEvent.Defectors.ToString())
+                if (NameCommand == GlobalParam.TypeEvent.Defectors.ToString())
                 {
-                    uFOmodel.SetVisible(DictionaryEssence.TypeEvent.Defectors.ToString());
+                    uFOmodel.SetVisible(GlobalParam.TypeEvent.Defectors.ToString());
                 }
-                if (NameCommand == DictionaryEssence.TypeEvent.AttackMissle.ToString())
+                if (NameCommand == GlobalParam.TypeEvent.AttackMissle.ToString())
                 {
-                    uFOmodel.SetVisible(DictionaryEssence.TypeEvent.AttackMissle.ToString());
+                    uFOmodel.SetVisible(GlobalParam.TypeEvent.AttackMissle.ToString());
                 }
             }
             else
@@ -190,11 +191,11 @@ public class BuildingCentral : MonoBehaviour
         if (this._animationProcess)
         {
 
-            if (VisibleObjList[DictionaryEssence.TypeEvent.Bomber.ToString()])
+            if (VisibleObjList[GlobalParam.TypeEvent.Bomber.ToString()])
             {
 
 
-                if (VisibleObjList[DictionaryEssence.TypeEvent.AttackBomber.ToString()] == false)
+                if (VisibleObjList[GlobalParam.TypeEvent.AttackBomber.ToString()] == false)
                 {
 
                     if (BomberObject != null)
@@ -227,12 +228,12 @@ public class BuildingCentral : MonoBehaviour
             }
 
 
-            if (VisibleObjList[DictionaryEssence.TypeEvent.Ufo.ToString()] 
-                || VisibleObjList[DictionaryEssence.TypeEvent.Baby.ToString()]
-                || VisibleObjList[DictionaryEssence.TypeEvent.CrazyCow.ToString()]
-                || VisibleObjList[DictionaryEssence.TypeEvent.RocketRich.ToString()]
-                || VisibleObjList[DictionaryEssence.TypeEvent.Defectors.ToString()]
-                || VisibleObjList[DictionaryEssence.TypeEvent.AttackMissle.ToString()]
+            if (VisibleObjList[GlobalParam.TypeEvent.Ufo.ToString()] 
+                || VisibleObjList[GlobalParam.TypeEvent.Baby.ToString()]
+                || VisibleObjList[GlobalParam.TypeEvent.CrazyCow.ToString()]
+                || VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()]
+                || VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()]
+                || VisibleObjList[GlobalParam.TypeEvent.AttackMissle.ToString()]
                 )
             {
                 Debug.Log(  "    ange  = " + UfoObject);

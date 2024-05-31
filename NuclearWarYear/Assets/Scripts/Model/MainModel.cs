@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.Model;
+using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.scenario;
 using Assets.Scripts.Model.turnEvent;
 using System.Collections;
@@ -61,26 +62,26 @@ public class MainModel
 		ParamLider paramLider = new ParamLider();
 
 
-		List<ScenarioLider> scenarioLider_ar = paramLider.ScenarioLider_ar;
+		//List<ScenarioLider> scenarioLider_ar = paramLider.ScenarioLider_ar;
 
 		this.CountryLiderList = new List<CountryLider>();
-		this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryEssence().GetIncident(1), new DictionaryEssence().GetIncident(4) }, CountryLiderPropagandaBuildingList[0], TownList, scenarioLider_ar[0], 1));
-		this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryEssence().GetIncident(1), new DictionaryEssence().GetIncident(4) }, CountryLiderPropagandaBuildingList[1], TownList, scenarioLider_ar[1], 2));
-		this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryEssence().GetIncident(1), new DictionaryEssence().GetIncident(4) }, CountryLiderPropagandaBuildingList[2], TownList, scenarioLider_ar[2], 3));
+		this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryEssence().GetIncident(1), new DictionaryEssence().GetIncident(4) }, CountryLiderPropagandaBuildingList[0], TownList, GlobalParam.ParamLiderList[0], 1));
+		this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryEssence().GetIncident(1), new DictionaryEssence().GetIncident(4) }, CountryLiderPropagandaBuildingList[1], TownList, GlobalParam.ParamLiderList[1], 2));
+		this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryEssence().GetIncident(1), new DictionaryEssence().GetIncident(4) }, CountryLiderPropagandaBuildingList[2], TownList, GlobalParam.ParamLiderList[2], 3));
 
 
 		if (SettingPlayer.TwoPlayerGame)
 		{
-			this.CountryLiderList.Add(new CountryLider(true, new List<IWeapon>() { new DictionaryEssence().GetIncident(1), new DictionaryEssence().GetIncident(4) }, CountryLiderPropagandaBuildingList[3], TownList, scenarioLider_ar[3], 4));
+			this.CountryLiderList.Add(new CountryLider(true, new List<IWeapon>() { new DictionaryEssence().GetIncident(1), new DictionaryEssence().GetIncident(4) }, CountryLiderPropagandaBuildingList[3], TownList, GlobalParam.ParamLiderList[3], 4));
 		} else
 		{
-			this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryEssence().GetIncident(1), new DictionaryEssence().GetIncident(4) }, CountryLiderPropagandaBuildingList[3], TownList, scenarioLider_ar[3], 4));
+			this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { new DictionaryEssence().GetIncident(1), new DictionaryEssence().GetIncident(4) }, CountryLiderPropagandaBuildingList[3], TownList, GlobalParam.ParamLiderList[3], 4));
 		}
 
 		this.CountryLiderList.Add(new CountryLider(true, new List<IWeapon>() { new DictionaryEssence().GetIncident(1),
 			new DictionaryEssence().GetIncident(2),new DictionaryEssence().GetIncident (4),new DictionaryEssence().GetIncident(5),
 			new DictionaryEssence().GetIncident(6),new DictionaryEssence().GetIncident(7)},
-			CountryLiderPropagandaBuildingList[4], TownList, scenarioLider_ar[4], 5));
+			CountryLiderPropagandaBuildingList[4], TownList, GlobalParam.ParamLiderList[4], 5));
 
 		this.FlagIdPlayerList = new List<int>();
 		foreach (var item in this.CountryLiderList)
@@ -191,49 +192,49 @@ public class MainModel
 
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, "Propaganda", this.GetCurrenPlayer().FlagId, 0));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Propaganda, this.GetCurrenPlayer().FlagId, 0));
 
 
 	}
 	public void SetBuildingPlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, "Building", this.GetCurrenPlayer().FlagId, 0));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Build, this.GetCurrenPlayer().FlagId, 0));
 
 		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId);
 	}
 	public void SetDefencePlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, "Defence", this.GetCurrenPlayer().FlagId, 0));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Defence, this.GetCurrenPlayer().FlagId, 0));
 
 		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId);
 	}
 	public void SetMisslePlayer(int FlagId, int MissleId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, "Missle", this.GetCurrenPlayer().FlagId, MissleId));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Missle, this.GetCurrenPlayer().FlagId, MissleId));
 
 		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId);
 	}
 	public void SetAttackMisslePlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, "AttackMissle", this.GetCurrenPlayer().FlagId, 0));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.AttackMissle, this.GetCurrenPlayer().FlagId, 0));
 
 		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId);
 	}
 	public void SetBomberPlayer(int FlagId, int BomberId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, "Bomber", this.GetCurrenPlayer().FlagId, BomberId));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Bomber, this.GetCurrenPlayer().FlagId, BomberId));
 
 		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId);
 	}
 	public void SetAttackBomberPlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, "AttackBomber", this.GetCurrenPlayer().FlagId, 0));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.AttackBomber, this.GetCurrenPlayer().FlagId, 0));
 
 		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId);
 	}
@@ -268,17 +269,13 @@ public class MainModel
 
         CountryLider enemyliderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, LiderFlagId);
 
-        //foreach (CityModel townCity in this.TownList) {
-
-			//if (townCity.GetId() == CityId) {
+ 
 				selectCityTarget = enemyTownCity;
-				//liderPlayer.GetCommandLiderFirst().SetTargetCity(townCity);
+
                 liderPlayer.GetCommandLiderFirst().SetTargetCity(new TargetCityModel(enemyTownCity, enemyliderPlayer));
                 liderPlayer.SetTargetCitySelectPlayer(new TargetCityModel(enemyTownCity, enemyliderPlayer));
 
-			//}
 
-		//}
 
 		if (this.GetCurrenPlayer().FlagId != selectCityTarget.FlagId) {
 
@@ -287,7 +284,6 @@ public class MainModel
             CountryLider fiendLider1 = new BuildingCentralHelper().GetFiendLider(CountryLiderList, this.GetCurrenPlayer().FlagId);
             CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList, this.GetCurrenPlayer().FlagId, false, TownList, liderPlayer, fiendLider1);
 
-			//liderPlayer.SetTargetCitySelectPlayer(targetCityPlayer);
             liderPlayer.SetTargetCitySelectPlayer(new TargetCityModel(targetCityPlayer, fiendLider1));
         }
 

@@ -69,7 +69,7 @@ public class Incident: Weapon,IWeapon
         return "" + lider.GetName() + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
     }
     string GetNameFiendLider() {
-        Debug.Log("  Ima ------------------------------------------------------------------ " + this.Name);
+        
         Debug.Log(this.ShowLider+" Z Z"+ GlobalParam.MessageDictionary[this.Name].ShowFiend + " Z"+ this.Name + " Z lider = "  + this.PopulationEvent.FiendCountryLider);
         if (this.PopulationEvent.FiendCountryLider == null)
         {

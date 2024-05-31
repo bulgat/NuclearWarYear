@@ -10,7 +10,7 @@ public class CommandLider
 
 	private List<IWeapon> _MissleList;
 
-	private TargetCityModel _TargetCity;
+	public TargetCityModel _TargetCity { private set; get; }
 
 	private int MissleId;
 
@@ -18,16 +18,14 @@ public class CommandLider
 	private IWeapon _AttackBomber;
 	private Incident IncidentCommand;
 	public CountryLider LiderFiend { get; private set; }
-	List<string> _reportProducedWeaponList;
-    List<string> VisibleList;
+	public List<string> _reportProducedWeaponList { get; private set; }
+List<string> VisibleList;
 	
     public CommandLider(string nameCommand) {
 		this._MissleList = new List<IWeapon>();
         this.IncidentCommand = new DictionaryEssence ().BuildIncident( nameCommand);
         
         this.VisibleList = new List<string>();
-        // this.NameCommand = nameCommand;
-       
     }
 	public bool GetNameExecute(string Name)
 	{
@@ -118,11 +116,7 @@ public class CommandLider
 		_reportProducedWeaponList = ReportProducedWeaponList;
 
 	}
-	public List<string> GetReportProducedWeaponList()
-    {
-		return _reportProducedWeaponList;
 
-	}
 	public void SetTargetCity(TargetCityModel TargetCity)
 	{
 		if (TargetCity == null)
@@ -133,11 +127,7 @@ public class CommandLider
 	}
 
 
-    public TargetCityModel GetTargetCity(){
 
-		return this._TargetCity;
-	
-	}
 	public void SetTargetLider(CountryLider nameLiderFiend)
 	{
 

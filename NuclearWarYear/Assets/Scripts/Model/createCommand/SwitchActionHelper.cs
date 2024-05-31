@@ -15,8 +15,10 @@ public class SwitchActionHelper
     
 
     public List<CommandLider> SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
-        List<CityModel> TownList, int FlagIdPlayer, string actionCommand, int FlagId,int MissleId)
+        List<CityModel> TownList, int FlagIdPlayer, GlobalParam.TypeEvent actionCommand, int FlagId,int MissleId)
     {
+        Debug.Log("======  actionCommand =" + actionCommand);
+
         List<CommandLider> commandLiderList = new List<CommandLider>();
 
         ResetAction();
@@ -24,45 +26,48 @@ public class SwitchActionHelper
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         bool AIfiend = FlagId != FlagIdPlayer;
 
-        CommandLider commandLider = new CommandLider(actionCommand);
+        CommandLider commandLider = new CommandLider(actionCommand.ToString());
         CountryLider fiendLider1 = new BuildingCentralHelper().GetFiendLider(CountryLiderList, countryLider.FlagId);
         TargetCityModel targetCityModel 
             = new TargetCityModel(new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider, fiendLider1), fiendLider1);
 
-
+        Debug.Log(FlagId+"  Im ------------------------------------------------------------- " + commandLider);
 
         //Change Ai Command
         if (AIfiend)
         {
-            if (actionCommand== DictionaryEssence.TypeWeapon.Missle.ToString())
+            if (actionCommand== GlobalParam.TypeEvent.Missle)
             {
                 MissleId = countryLider.GetRandomMissleSizeId(DictionaryEssence.TypeWeapon.Missle);
                 if (MissleId== 0)
                 {
-                    actionCommand = GlobalParam.ActionCommand.Propaganda.ToString();
+                    actionCommand = GlobalParam.TypeEvent.Propaganda;
                 }
              
             }
            
-            if(actionCommand == DictionaryEssence.TypeWeapon.Bomber.ToString())
+            if(actionCommand == GlobalParam.TypeEvent.Bomber)
             {
                 MissleId = countryLider.GetRandomMissleSizeId(DictionaryEssence.TypeWeapon.Bomber);
                 //bomber
                 if (MissleId == 0)
                 {
-                    actionCommand = GlobalParam.ActionCommand.Propaganda.ToString();
+                    actionCommand = GlobalParam.TypeEvent.Propaganda;
                 }
             }
             
-            if(actionCommand == GlobalParam.ActionCommand.Defence.ToString())
+            if(actionCommand == GlobalParam.TypeEvent.Defence)
             {
                 if (countryLider.GetDefenceWeapon().Count() <= 0)
                 {
-                    actionCommand = GlobalParam.ActionCommand.Propaganda.ToString();
+                    actionCommand = GlobalParam.TypeEvent.Propaganda;
                 }
             }
 
-         }
+         } else
+        {
+
+        }
      
         
 
@@ -73,7 +78,7 @@ public class SwitchActionHelper
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(targetCityModel, MissleId, FlagId, AIfiend, TownList, CountryLiderList, countryLider);
        
 
-        this.TreatmentCommand(actionCommand, commandLider, targetCityModel, MissleId, FlagId, AIfiend, TownList,
+        this.TreatmentCommand(actionCommand.ToString(), commandLider, targetCityModel, MissleId, FlagId, AIfiend, TownList,
         CountryLiderList, countryLider);
 
         if (countryLider.GetTargetCitySelectPlayer() != null)
@@ -110,7 +115,7 @@ public class SwitchActionHelper
                 commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Propaganda.ToString(), true);
                 targetCityModel.TargetCity  = new ModGameEngine().GetCityRandomFlagId(TownList, CountryLiderList[4], FlagId, AIfiend);
                 break;
-            case "Building":
+            case "Build":
                 commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Build.ToString(), true);
                 BuildWeapon buildWeapon = new BuildWeapon();
                 commandLider.AddMissle(buildWeapon.AddLiderBuildWeaponSwithAction());

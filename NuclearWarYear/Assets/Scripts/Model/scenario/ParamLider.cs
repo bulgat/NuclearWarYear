@@ -8,6 +8,7 @@ namespace Assets.Scripts.Model.scenario
 {
     public class ParamLider
     {
+        /*
         public List<ScenarioLider> ScenarioLider_ar;
         public ParamLider() {
             ScenarioLider_ar = new List<ScenarioLider>();
@@ -18,6 +19,6 @@ namespace Assets.Scripts.Model.scenario
             ScenarioLider_ar.Add(new ScenarioLider(5, "Zed",4));
             ScenarioLider_ar.Add(new ScenarioLider(6, "Сталин", 4));
         }
-        
+        */
     }
 }

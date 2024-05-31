@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Model.param;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,16 @@ namespace Assets.Scripts.Model.createCommand
 {
     public class RandomActionCommand
     {
-        public string GetRandomActionCommand()
+        public GlobalParam.TypeEvent GetRandomActionCommand()
         {
-            List<string> nameCommandList = new List<string>() {
-            "Propaganda",
-            "Building",
-            "Defence",
-            "Missle",
-            "Bomber"
-        };
+            List<GlobalParam.TypeEvent> nameCommandList = new List<GlobalParam.TypeEvent>() 
+            {
+                GlobalParam.TypeEvent.Propaganda,
+                GlobalParam.TypeEvent.Build,
+                GlobalParam.TypeEvent.Defence,
+                GlobalParam.TypeEvent.Missle,
+                GlobalParam.TypeEvent.Bomber
+            };
             int indexCommand = UnityEngine.Random.Range(0, nameCommandList.Count);
             return nameCommandList[indexCommand];
         }
