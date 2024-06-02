@@ -27,7 +27,8 @@ namespace Assets.Scripts.Model
             if (lider.GetCommandLider() != null)
 			{
 				Debug.Log(lider.GetCommandLiderFirst()+"   __   lider = " +lider.GetCommandLiderFirst()._TargetCity+" flag = "+ lider.FlagId);
-				CityModel cityModelTarget = lider.GetCommandLiderFirst()._TargetCity.TargetCity;
+                Debug.Log("   _____ _____ _____ ___" + lider.GetCommandLiderFirst()._TargetCity.TargetCity);
+                CityModel cityModelTarget = lider.GetCommandLiderFirst()._TargetCity.TargetCity;
 				//Enemy lider.
 				
 
@@ -38,7 +39,7 @@ namespace Assets.Scripts.Model
                     if (CommandIncident.Name == itemExecute.Key)
 					{
 
-                        if (itemExecute.Key== GlobalParam.ActionCommand.Missle.ToString())
+                        if (itemExecute.Key== GlobalParam.TypeEvent.Missle)
 						{
                             lider.MissleId = lider.GetCommandLiderFirst().GetSizeIdMissle();
                             message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderFirst().GetIncident().GetMessage(), lider.GetCommandLiderFirst().GetIncident().GetName());
@@ -47,7 +48,7 @@ namespace Assets.Scripts.Model
                             
 							return CommandIncident;
                         }
-                        if (itemExecute.Key == GlobalParam.ActionCommand.Bomber.ToString())
+                        if (itemExecute.Key == GlobalParam.TypeEvent.Bomber)
                         {
                             lider.MissleId = lider.GetCommandLiderFirst().GetSizeIdMissle();
                             message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderFirst().GetIncident().GetMessage(), lider.GetCommandLiderFirst().GetIncident().GetName());
@@ -101,14 +102,14 @@ namespace Assets.Scripts.Model
 							
                             message = lider.SetEventTotalMessageTurn(report, itemExecute.Key);
 							lider.SetCommandRealise(lider.GetCommandLiderFirst());
-							if (GlobalParam.TypeEvent.Propaganda.ToString() == itemExecute.Key ||
-                            GlobalParam.TypeEvent.Defectors.ToString() ==itemExecute.Key) 
+							if (GlobalParam.TypeEvent.Propaganda == itemExecute.Key ||
+                            GlobalParam.TypeEvent.Defectors ==itemExecute.Key) 
 						{
                             Debug.Log("  _animat  = "+ enemylider);
                             CommandIncident.SetReleaseMessage(new StateDragPopulation(message, UnDamage, liderCityMy, cityFiend, enemylider), GetMessageDictionary(itemExecute.Key).ShowFiend);
                                 return CommandIncident;
                             }
-							bool doubleCity = itemExecute.Key == GlobalParam.TypeEvent.Propaganda.ToString() || itemExecute.Key == GlobalParam.TypeEvent.Defectors.ToString();
+							bool doubleCity = itemExecute.Key == GlobalParam.TypeEvent.Propaganda || itemExecute.Key == GlobalParam.TypeEvent.Defectors;
 
                             CommandIncident.SetReleaseMessage(new StateAddPopulation(message, -UnDamage, liderCityMy,enemylider), GetMessageDictionary(itemExecute.Key).ShowFiend);
                             return CommandIncident;
@@ -149,7 +150,7 @@ namespace Assets.Scripts.Model
                 }
 
                 // attack Missle
-                if (lider.GetCommandLiderFirst().GetNameExecute(GlobalParam.TypeEvent.AttackMissle.ToString()))
+                if (lider.GetCommandLiderFirst().GetNameExecute(GlobalParam.TypeEvent.AttackMissle))
 				{
 
 					if (enemylider.GetCommandLiderFirst().GetDefence()==false)
@@ -218,7 +219,7 @@ namespace Assets.Scripts.Model
             }
 			return cityModelLider;
         }
-		private TurnEventExecute GetMessageDictionary(string key)
+		private TurnEventExecute GetMessageDictionary(GlobalParam.TypeEvent key)
 		{
 			return GlobalParam.MessageDictionary[key];
 

@@ -5,6 +5,7 @@ using System.Linq;
 using Assets.Scripts.Model.scenario;
 using Assets.Scripts.Model;
 using Assets.Scripts.Model.Nation;
+using Assets.Scripts.Model.param;
 
 [System.Serializable]
 public class CountryLider 
@@ -57,14 +58,14 @@ public class CountryLider
 		}
 		_maxPopulation=GetAllOwnPopulation();
 		_RelationShip = new RelationShip();
-		this.EventTotalTurn = new IncidentEvent("Propaganda");
+		this.EventTotalTurn = new IncidentEvent(GlobalParam.TypeEvent.Propaganda);
 	}
 	public void DoneMoveMade(bool Value)
     {
 		MoveMade = Value;
 
 	}
-	public string SetEventTotalMessageTurn(string eventTotalTurn, string eventName)
+	public string SetEventTotalMessageTurn(string eventTotalTurn, GlobalParam.TypeEvent eventName)
     {
 		this.EventTotalTurn = new IncidentEvent(eventName) { EventMessage = eventTotalTurn};
 		return this.EventTotalTurn.EventMessage;

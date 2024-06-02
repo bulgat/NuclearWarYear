@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Model.param;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon 
 {
 	public int Id;
-	public string Name;
+	public GlobalParam.TypeEvent Name;
 	public int Size;
 	public int Damage;
 	public DictionaryEssence.TypeWeapon Type;

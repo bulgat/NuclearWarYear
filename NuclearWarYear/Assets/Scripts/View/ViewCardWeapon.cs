@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Assets.Scripts.Model.param;
 public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
 {
     private int Id;
@@ -27,9 +28,9 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     {
         
     }
-    public void SetParam(string text, List<Sprite> iconCardList,int id)
+    public void SetParam(GlobalParam.TypeEvent text, List<Sprite> iconCardList,int id)
     {
-        Text.text = text;
+        Text.text = text.ToString();
 
         var iconCard = gameObject.transform.GetChild(1);
         ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();

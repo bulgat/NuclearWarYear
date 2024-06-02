@@ -1,11 +1,12 @@
 ﻿using Assets.Scripts.Model;
+using Assets.Scripts.Model.param;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Defence : Weapon,IWeapon
 {
-   public Defence(string name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id, int IdImage = 0)
+   public Defence(GlobalParam.TypeEvent name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id, int IdImage = 0)
 	{
 		this.Id = id;
 		this.Name = name;
@@ -18,7 +19,7 @@ public class Defence : Weapon,IWeapon
 	{
 		return this.Id;
 	}
-	public string GetName()
+	public GlobalParam.TypeEvent GetName()
 	{
 		return this.Name;
 	}

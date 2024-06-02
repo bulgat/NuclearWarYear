@@ -12,41 +12,41 @@ using Assets.Scripts.Model;
 
 public class SwitchActionHelper
 {
-    
+
 
     public List<CommandLider> SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
-        List<CityModel> TownList, int FlagIdPlayer, GlobalParam.TypeEvent actionCommand, int FlagId,int MissleId)
+        List<CityModel> TownList, int FlagIdPlayer, GlobalParam.TypeEvent actionCommand, int FlagId, int MissleId)
     {
-        Debug.Log("======  actionCommand =" + actionCommand);
+        Debug.Log("$$===== SET  actionCommand =" + actionCommand);
 
         List<CommandLider> commandLiderList = new List<CommandLider>();
 
         ResetAction();
-    
+
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         bool AIfiend = FlagId != FlagIdPlayer;
 
-        CommandLider commandLider = new CommandLider(actionCommand.ToString());
+        CommandLider commandLider = new CommandLider(actionCommand);
         CountryLider fiendLider1 = new BuildingCentralHelper().GetFiendLider(CountryLiderList, countryLider.FlagId);
-        TargetCityModel targetCityModel 
+        TargetCityModel targetCityModel
             = new TargetCityModel(new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider, fiendLider1), fiendLider1);
 
-        Debug.Log(FlagId+"  Im ------------------------------------------------------------- " + commandLider);
+        
 
         //Change Ai Command
         if (AIfiend)
         {
-            if (actionCommand== GlobalParam.TypeEvent.Missle)
+            if (actionCommand == GlobalParam.TypeEvent.Missle)
             {
                 MissleId = countryLider.GetRandomMissleSizeId(DictionaryEssence.TypeWeapon.Missle);
-                if (MissleId== 0)
+                if (MissleId == 0)
                 {
                     actionCommand = GlobalParam.TypeEvent.Propaganda;
                 }
-             
+
             }
-           
-            if(actionCommand == GlobalParam.TypeEvent.Bomber)
+
+            if (actionCommand == GlobalParam.TypeEvent.Bomber)
             {
                 MissleId = countryLider.GetRandomMissleSizeId(DictionaryEssence.TypeWeapon.Bomber);
                 //bomber
@@ -55,8 +55,8 @@ public class SwitchActionHelper
                     actionCommand = GlobalParam.TypeEvent.Propaganda;
                 }
             }
-            
-            if(actionCommand == GlobalParam.TypeEvent.Defence)
+
+            if (actionCommand == GlobalParam.TypeEvent.Defence)
             {
                 if (countryLider.GetDefenceWeapon().Count() <= 0)
                 {
@@ -64,19 +64,21 @@ public class SwitchActionHelper
                 }
             }
 
-         } else
-        {
-
+            AiAddTargetCity(targetCityModel, commandLider, fiendLider1);
         }
-     
-        
+        else
+        {
+            //add auto target city
+            if (commandLider._TargetCity?.TargetCity==null) {
+                AiAddTargetCity(targetCityModel, commandLider, fiendLider1);
+            }
+        }
 
 
-        AiTargetCity(AIfiend, targetCityModel, commandLider, fiendLider1);
 
         // Счастливая карта!
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(targetCityModel, MissleId, FlagId, AIfiend, TownList, CountryLiderList, countryLider);
-       
+
 
         this.TreatmentCommand(actionCommand.ToString(), commandLider, targetCityModel, MissleId, FlagId, AIfiend, TownList,
         CountryLiderList, countryLider);
@@ -85,44 +87,44 @@ public class SwitchActionHelper
         {
             commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
         }
-        
+
 
         commandLider.SetTargetLider(CountryLiderList.Where(a => a.FlagId == targetCityModel.TargetCity.FlagId).FirstOrDefault());
 
         commandLiderList.Add(commandLider);
         if (commandLiderFortune != null)
         {
-            
+
             commandLiderList.Add(commandLiderFortune);
         }
         return commandLiderList;
     }
-    private void AiTargetCity(bool AIfiend, TargetCityModel targetCityModel, CommandLider commandLider,CountryLider enemyLider)
+    private void AiAddTargetCity(TargetCityModel targetCityModel, CommandLider commandLider, CountryLider enemyLider)
     {
-        if (AIfiend)
-        {
-            commandLider.SetTargetCity(targetCityModel);
-            commandLider.SetTargetLider(enemyLider);
-        }
+        //if (AIfiend)
+        //{
+        commandLider.SetTargetCity(targetCityModel);
+        commandLider.SetTargetLider(enemyLider);
+        //}
     }
- private void TreatmentCommand(string actionCommand, CommandLider commandLider,
-     TargetCityModel targetCityModel, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
-        List<CountryLider> CountryLiderList, CountryLider countryLider)
+    private void TreatmentCommand(string actionCommand, CommandLider commandLider,
+        TargetCityModel targetCityModel, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
+           List<CountryLider> CountryLiderList, CountryLider countryLider)
     {
         switch (actionCommand)
         {
             case "Propaganda":
-                commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Propaganda.ToString(), true);
-                targetCityModel.TargetCity  = new ModGameEngine().GetCityRandomFlagId(TownList, CountryLiderList[4], FlagId, AIfiend);
+                commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
+                targetCityModel.TargetCity = new ModGameEngine().GetCityRandomFlagId(TownList, CountryLiderList[4], FlagId, AIfiend);
                 break;
             case "Build":
-                commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Build.ToString(), true);
+                commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Build, true);
                 BuildWeapon buildWeapon = new BuildWeapon();
                 commandLider.AddMissle(buildWeapon.AddLiderBuildWeaponSwithAction());
                 commandLider.AddReportProducedWeaponList(buildWeapon.GetReportProducedWeaponList());
                 break;
             case "Defence":
-                commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Defence.ToString(), true);
+                commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Defence, true);
                 break;
             case "Missle":
                 commandLider.SetVisibleMissle(true, MissleId);
@@ -133,7 +135,7 @@ public class SwitchActionHelper
             case "AttackBomber":
                 if (targetCityModel == null)
                 {
-                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Propaganda.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
                 }
                 else
                 {
@@ -146,11 +148,11 @@ public class SwitchActionHelper
             case "AttackMissle":
                 if (targetCityModel == null)
                 {
-                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.Propaganda.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
                 }
                 else
                 {
-                    commandLider.SetVisibleEventList(GlobalParam.ActionCommand.AttackMissle.ToString(), true);
+                    commandLider.SetVisibleEventList(GlobalParam.TypeEvent.AttackMissle, true);
                     commandLider.SetTargetCity(targetCityModel);
                     commandLider.SetTargetLider(targetCityModel.EnemyLider);
                     commandLider.SetAttackMissle(countryLider.GetMissle());
@@ -161,5 +163,5 @@ public class SwitchActionHelper
                 break;
         }
     }
-    
+
 }

@@ -9,9 +9,9 @@ namespace Assets.Scripts.Model.paramTable
 {
     public class EventFortuneIncident
     {
-        public GlobalParam.ActionCommand Name { get; private set; }
+        public GlobalParam.TypeEvent Name { get; private set; }
         public int Random {  get; private set; }
-        public EventFortuneIncident(GlobalParam.ActionCommand name, int random)
+        public EventFortuneIncident(GlobalParam.TypeEvent name, int random)
         {
             this.Name = name;
             this.Random = random;

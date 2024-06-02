@@ -16,7 +16,7 @@ public class Incident: Weapon,IWeapon
     public PopulationEvent PopulationEvent { get; private set; }
     private bool ShowLider { get; set; }
 
-    public Incident(string name, DictionaryEssence.TypeWeapon type, int id, string message,int damage,int IdImage) {
+    public Incident(GlobalParam.TypeEvent name, DictionaryEssence.TypeWeapon type, int id, string message,int damage,int IdImage) {
 		this.Name=name;
 		this.Id = id;
 		this.IdImage = IdImage;
@@ -41,7 +41,7 @@ public class Incident: Weapon,IWeapon
         return this.Id;
     }
 
-    public string GetName()
+    public GlobalParam.TypeEvent GetName()
     {
         return this.Name;
     }

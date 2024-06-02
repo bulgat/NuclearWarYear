@@ -14,15 +14,15 @@ namespace Assets.Scripts.Model.createCommand
         List<CountryLider> CountryLiderList, CountryLider countryLider)
         {
             CommandLider commandLider = null;
-            string actionCommand = null;
+            GlobalParam.TypeEvent actionCommand = GlobalParam.TypeEvent.None;
 
             foreach(EventFortuneIncident eventFortuneIncident in GlobalParam.EventFortuneIncidentList)
             {
                 if ((int)UnityEngine.Random.Range(0.0f, eventFortuneIncident.Random) == 1)
                 {
-                    actionCommand = eventFortuneIncident.Name.ToString();
+                    actionCommand = eventFortuneIncident.Name;
                     commandLider = new CommandLider(actionCommand);
-                    commandLider.SetVisibleEventList(eventFortuneIncident.Name.ToString(), true);
+                    commandLider.SetVisibleEventList(eventFortuneIncident.Name, true);
                     commandLider.SetTargetCity(targetCityModel);
                     commandLider.SetTargetLider(targetCityModel.EnemyLider);
                 }

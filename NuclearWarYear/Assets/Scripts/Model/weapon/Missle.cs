@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Model;
+using Assets.Scripts.Model.param;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class Missle : Weapon, IWeapon
 {
 
-	public Missle(string name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id) {
+	public Missle(GlobalParam.TypeEvent name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id) {
 		this.Id = id;
 		this.Name =name;
 		this.Size =size;
@@ -17,7 +18,7 @@ public class Missle : Weapon, IWeapon
 	{
 		return this.Id;
 	}
-	public string GetName()
+	public GlobalParam.TypeEvent GetName()
 	{
 		return this.Name;
 	}

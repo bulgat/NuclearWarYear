@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using Assets.Scripts.Model.createCommand;
 using Assets.Scripts.Model.param;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class AICreateCommand 
 {
@@ -35,15 +36,21 @@ public class AICreateCommand
 				}
 			
 				actionNameCommand = new RandomActionCommand().GetRandomActionCommand();
+			} 
+			else
+			{
+				Debug.Log(lider.GetCommandLiderFirst().GetNameCommandFirst() + "    ---------------------------------------------------- actionNameCommand =" + actionNameCommand);
+				//auto command player
+
+				if (actionNameCommand == GlobalParam.TypeEvent.None) {
+					actionNameCommand = GlobalParam.TypeEvent.Propaganda;
+
+				}
 			}
-			//auto command player
-			if (actionNameCommand == GlobalParam.TypeEvent.None) {
-				actionNameCommand = GlobalParam.TypeEvent.Propaganda;
 
-            }
+            
 
-
-			lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer,
+            lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer,
 				actionNameCommand, lider.FlagId,0));
 		}
 	}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Model.param;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Assets.Scripts.Model
     public interface IWeapon
     {
         public int GetId();
-        public string GetName();
+        public GlobalParam.TypeEvent GetName();
         public DictionaryEssence.TypeWeapon GetTypeWeapon();
         public int GetSize();
         public int GetDamage();

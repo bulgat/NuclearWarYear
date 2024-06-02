@@ -214,7 +214,8 @@ public class MainModel
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
 		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Missle, this.GetCurrenPlayer().FlagId, MissleId));
-
+        Debug.Log("&&&& ====    " );
+        Debug.Log("&&&& ====  SetMisslePlayer = "+ GlobalParam.TypeEvent.Missle+ " countryLider = " + countryLider);
 		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId);
 	}
 	public void SetAttackMisslePlayer(int FlagId) {

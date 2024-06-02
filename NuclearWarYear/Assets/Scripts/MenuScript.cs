@@ -496,7 +496,7 @@ public class MenuScript : MonoBehaviour
         StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
         
         Debug.Log( "  DoneMoveMadeCurrentP = Ufo     =" + CommandIncident.GetMessage());
-        Debug.Log( "  &    ______ _____ _____ ___" +CommandIncident.Name);
+        
     }
     private IEnumerator AfterTurnOneLider(Incident CommandIncident, CountryLider lider)
     {
