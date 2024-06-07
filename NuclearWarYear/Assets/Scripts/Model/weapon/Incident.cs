@@ -84,12 +84,14 @@ public class Incident: Weapon,IWeapon
     }
     string GetDamagePopulation()
     {
-        
+        Debug.Log("000 GetDamagePopulation "+ Mathf.Max(-9, 0));
         if (this.PopulationEvent == null)
         {
             return "";
         }
-        int population  = Mathf.Max(this.PopulationEvent.MyPopulation, this.PopulationEvent.MyPopulation);
+        
+        int population  = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
+        Debug.Log("001 GetDamagePopulation " + this.PopulationEvent.MyPopulation + "-" + this.PopulationEvent.FiendPopulation+ " population = "+ population);
         if (population > 0)
         {
             return population.ToString();
@@ -105,6 +107,7 @@ public class Incident: Weapon,IWeapon
     public void SetReleaseMessage(PopulationEvent statePopulationEvent,bool showFiend)
     {
         this.PopulationEvent = statePopulationEvent;
+        Debug.Log(this.PopulationEvent.FiendPopulation+ "    ---- --------------------------------------------- actionNameComm  =" + this.PopulationEvent.MyPopulation);
         if (statePopulationEvent.FiendCountryLider == null)
         {
             throw new ArgumentNullException("not lider");

@@ -26,8 +26,8 @@ namespace Assets.Scripts.Model
 
             if (lider.GetCommandLider() != null)
             {
-                Debug.Log(GetMessageDictionary(CommandIncident.Name).ChangePopulation+"   _   lider   flag = " + CommandIncident.Name);
-                Debug.Log("   _____ _____ _____ ___" + lider.GetCommandLiderFirst()._TargetCity.TargetCity);
+                Debug.Log("ChangePopulation = " + GetMessageDictionary(CommandIncident.Name).ChangePopulation+"   _   lider   flag = " + CommandIncident.Name);
+                
                 CityModel cityModelTarget = lider.GetCommandLiderFirst()._TargetCity.TargetCity;
                 //Enemy lider.
 
@@ -83,6 +83,7 @@ namespace Assets.Scripts.Model
                         if (GetMessageDictionary(itemExecute.Key).ChangePopulation)
                         {
                             UnDamage = AddAndRemovePopulation(cityModelTarget, liderCityMy, lider, GetMessageDictionary(itemExecute.Key).Random, TownList);
+                            Debug.Log(itemExecute.Key+"    __ _____ _____ UnDamage = " + UnDamage);
                         }
                         string report = CommandIncident.GetMessage() + UnDamage;
                         lider.GetCommandLiderFirst().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, GetMessageDictionary(itemExecute.Key).NegativeMood);
@@ -105,12 +106,12 @@ namespace Assets.Scripts.Model
                         if (GlobalParam.TypeEvent.Propaganda == itemExecute.Key ||
                         GlobalParam.TypeEvent.Defectors == itemExecute.Key)
                         {
-                            Debug.Log("  _animat  = " + enemylider);
+                            
                             CommandIncident.SetReleaseMessage(new StateDragPopulation(message, UnDamage, liderCityMy, cityFiend, enemylider), GetMessageDictionary(itemExecute.Key).ShowFiend);
                             return CommandIncident;
                         }
                         bool doubleCity = itemExecute.Key == GlobalParam.TypeEvent.Propaganda || itemExecute.Key == GlobalParam.TypeEvent.Defectors;
-
+Debug.Log(itemExecute.Key+"  _ani   = " + UnDamage);
                         CommandIncident.SetReleaseMessage(new StateAddPopulation(message, -UnDamage, liderCityMy, enemylider), GetMessageDictionary(itemExecute.Key).ShowFiend);
                         return CommandIncident;
 

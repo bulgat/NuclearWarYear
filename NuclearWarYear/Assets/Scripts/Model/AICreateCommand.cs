@@ -39,7 +39,7 @@ public class AICreateCommand
 			} 
 			else
 			{
-				Debug.Log(lider.GetCommandLiderFirst().GetNameCommandFirst() + "    ---------------------------------------------------- actionNameCommand =" + actionNameCommand);
+				
 				//auto command player
 
 				if (actionNameCommand == GlobalParam.TypeEvent.None) {
