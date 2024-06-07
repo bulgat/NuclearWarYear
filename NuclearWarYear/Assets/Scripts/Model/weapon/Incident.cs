@@ -16,14 +16,14 @@ public class Incident: Weapon,IWeapon
     public PopulationEvent PopulationEvent { get; private set; }
     private bool ShowLider { get; set; }
 
-    public Incident(GlobalParam.TypeEvent name, DictionaryEssence.TypeWeapon type, int id, string message,int damage,int IdImage) {
+    public Incident(GlobalParam.TypeEvent name, DictionaryEssence.TypeWeapon type, int id, string message, DamageParam damageParam) {
 		this.Name=name;
 		this.Id = id;
-		this.IdImage = IdImage;
+		this.IdImage = damageParam.IdImage;
         this.Type = type;
-        this.Damage = damage;
+        this.Damage = damageParam.Damage;
         this.Message = message;
-        this.PopulationEvent = new PopulationEvent();
+        //this.PopulationEvent = new PopulationEvent();
         this.Uid = UnicId++;
 
      }
@@ -66,11 +66,12 @@ public class Incident: Weapon,IWeapon
     }
     public string FullMessage(CountryLider lider)
     {
+        Debug.Log( " Z Z" + GetMessage() + "   lider = " + GetDamagePopulation());
         return "" + lider.GetName() + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
     }
     string GetNameFiendLider() {
         
-        Debug.Log(this.ShowLider+" Z Z"+ GlobalParam.MessageDictionary[this.Name].ShowFiend + " Z"+ this.Name + " Z lider = "  + this.PopulationEvent.FiendCountryLider);
+        
         if (this.PopulationEvent.FiendCountryLider == null)
         {
             return "";

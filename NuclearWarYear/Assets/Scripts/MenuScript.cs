@@ -352,8 +352,6 @@ public class MenuScript : MonoBehaviour
         if (Player)
         {
             //reset?
-            //EventController cityEvent = new EventController(Controller.Command.ResetSelectCityEnemyTargetPlayer, new CityEvent(0));
-            //_controller.SendCommand(cityEvent);
             _controller.ResetSelectCityEnemyTargetPlayer(0);
         }
         return selectCityTarget;
@@ -420,10 +418,7 @@ public class MenuScript : MonoBehaviour
             
             ViewTacticReal viewTacticReal = this.CanTacticReal.AddComponent<ViewTacticReal>();
             viewTacticReal.Init(this.FlagImageList, this.IconCardList,this.TownViewList,this.UICardTownList);
-            viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idImage, this.LiderImageList, this._mainModel, lider.FlagId-1);
-
-
-       
+            viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idImage, this.LiderImageList, this._mainModel, lider.FlagId-1);  
     }
 
     void TurnButtonMethod(Button buttonPressed)
@@ -495,7 +490,7 @@ public class MenuScript : MonoBehaviour
 
         StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
         
-        Debug.Log( "  DoneMoveMadeCurrentP = Ufo     =" + CommandIncident.GetMessage());
+        Debug.Log( "  DoneMoveMadeCurrentP = Uf     =" + CommandIncident.GetMessage());
         
     }
     private IEnumerator AfterTurnOneLider(Incident CommandIncident, CountryLider lider)

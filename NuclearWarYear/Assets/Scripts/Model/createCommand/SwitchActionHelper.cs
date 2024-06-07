@@ -17,7 +17,7 @@ public class SwitchActionHelper
     public List<CommandLider> SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
         List<CityModel> TownList, int FlagIdPlayer, GlobalParam.TypeEvent actionCommand, int FlagId, int MissleId)
     {
-        Debug.Log("$$===== SET  actionCommand =" + actionCommand);
+        
 
         List<CommandLider> commandLiderList = new List<CommandLider>();
 
