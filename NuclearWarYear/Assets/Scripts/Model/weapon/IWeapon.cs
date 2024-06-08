@@ -11,7 +11,7 @@ namespace Assets.Scripts.Model
     {
         public int GetId();
         public GlobalParam.TypeEvent GetName();
-        public DictionaryEssence.TypeWeapon GetTypeWeapon();
+        public GlobalParam.TypeEvent GetTypeWeapon();
         public int GetSize();
         public int GetDamage();
         public void SetDamage(int damage);

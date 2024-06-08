@@ -26,7 +26,7 @@ public class CommandLider
     {
         this._MissleList = new List<IWeapon>();
         this.IncidentCommand = new DictionaryEssence().BuildIncident(nameCommand);
-        Debug.Log(this.IncidentCommand.GetDamage()+"   $===== SET  actionComm  = " + this.IncidentCommand.Damage);
+        
         this.VisibleList = new List<GlobalParam.TypeEvent>();
     }
     public bool GetNameExecute(GlobalParam.TypeEvent Name)

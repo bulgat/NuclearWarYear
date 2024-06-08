@@ -21,16 +21,21 @@ public class AICreateCommand
             GlobalParam.TypeEvent actionNameCommand = GlobalParam.TypeEvent.None;
 
             if (lider.FlagId!=FlagIdPlayer){
-
-				if (lider.ReleaseCommandList != null){
-					if(lider.ReleaseCommandList.First().GetVisibleMissle() ){
+                Debug.Log( lider.GetName()+ "    ---- ------------------------------------------ NameComm  =" + lider.FlagId);
+                Debug.Log("000 GetDamagePopul = " + lider.ReleaseCommandList);
+                if (lider.ReleaseCommandList != null)
+				{
+                    Debug.Log( "   $ === SET  "+ lider.FlagId + " actionC  = "  );
+                    if (lider.ReleaseCommandList.Last().Type == GlobalParam.TypeEvent.Missle ){
 						
 						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, GlobalParam.TypeEvent.AttackMissle,lider.FlagId,0));
 						continue;
 					}
-					if(lider.ReleaseCommandList.First().GetVisibleBomber() ){
-						
-						lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, GlobalParam.TypeEvent.AttackBomber,lider.FlagId,0));
+					Debug.Log("   Bomber = " ) ;
+					if(lider.ReleaseCommandList.Last().Type == GlobalParam.TypeEvent.Bomber)
+                    {
+                        
+                        lider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction,CountryLiderList, TownList,FlagIdPlayer, GlobalParam.TypeEvent.AttackBomber,lider.FlagId,0));
 						continue;
 					}
 				}

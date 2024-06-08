@@ -16,7 +16,7 @@ public class Incident: Weapon,IWeapon
     public PopulationEvent PopulationEvent { get; private set; }
     private bool ShowLider { get; set; }
 
-    public Incident(GlobalParam.TypeEvent name, DictionaryEssence.TypeWeapon type, int id, string message, DamageParam damageParam) {
+    public Incident(GlobalParam.TypeEvent name, GlobalParam.TypeEvent type, int id, string message, DamageParam damageParam) {
 		this.Name=name;
 		this.Id = id;
 		this.IdImage = damageParam.IdImage;
@@ -51,7 +51,7 @@ public class Incident: Weapon,IWeapon
         return 1;
     }
 
-    public DictionaryEssence.TypeWeapon GetTypeWeapon()
+    public GlobalParam.TypeEvent GetTypeWeapon()
     {
         return this.Type;
     }
@@ -84,7 +84,7 @@ public class Incident: Weapon,IWeapon
     }
     string GetDamagePopulation()
     {
-        Debug.Log("000 GetDamagePopulation "+ Mathf.Max(-9, 0));
+        
         if (this.PopulationEvent == null)
         {
             return "";
@@ -107,7 +107,7 @@ public class Incident: Weapon,IWeapon
     public void SetReleaseMessage(PopulationEvent statePopulationEvent,bool showFiend)
     {
         this.PopulationEvent = statePopulationEvent;
-        Debug.Log(this.PopulationEvent.FiendPopulation+ "    ---- --------------------------------------------- actionNameComm  =" + this.PopulationEvent.MyPopulation);
+        
         if (statePopulationEvent.FiendCountryLider == null)
         {
             throw new ArgumentNullException("not lider");

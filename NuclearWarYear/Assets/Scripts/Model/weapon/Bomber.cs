@@ -8,7 +8,7 @@ public class Bomber: Weapon,IWeapon
 {
 
 	
-	public Bomber(GlobalParam.TypeEvent name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id, int IdImage = 0) {
+	public Bomber(GlobalParam.TypeEvent name, int size, int damage, GlobalParam.TypeEvent Type,int id, int IdImage = 0) {
 		this.Id = id;
 		Name=name;
 		Size=size;
@@ -24,7 +24,7 @@ public class Bomber: Weapon,IWeapon
 	{
 		return this.Name;
 	}
-	public DictionaryEssence.TypeWeapon GetTypeWeapon()
+	public GlobalParam.TypeEvent GetTypeWeapon()
 	{
 		return this.Type;
 

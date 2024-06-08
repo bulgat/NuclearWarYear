@@ -9,7 +9,7 @@ public class Weapon
 	public GlobalParam.TypeEvent Name;
 	public int Size;
 	public int Damage;
-	public DictionaryEssence.TypeWeapon Type;
+	public GlobalParam.TypeEvent Type;
     public int IdImage;
     public string Message;
 	public int Uid;

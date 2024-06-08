@@ -38,7 +38,7 @@ public class SwitchActionHelper
         {
             if (actionCommand == GlobalParam.TypeEvent.Missle)
             {
-                MissleId = countryLider.GetRandomMissleSizeId(DictionaryEssence.TypeWeapon.Missle);
+                MissleId = countryLider.GetRandomMissleSizeId(GlobalParam.TypeEvent.Missle);
                 if (MissleId == 0)
                 {
                     actionCommand = GlobalParam.TypeEvent.Propaganda;
@@ -48,7 +48,7 @@ public class SwitchActionHelper
 
             if (actionCommand == GlobalParam.TypeEvent.Bomber)
             {
-                MissleId = countryLider.GetRandomMissleSizeId(DictionaryEssence.TypeWeapon.Bomber);
+                MissleId = countryLider.GetRandomMissleSizeId(GlobalParam.TypeEvent.Bomber);
                 //bomber
                 if (MissleId == 0)
                 {

@@ -20,7 +20,7 @@ namespace Assets.Scripts.Model.param
         {
             Build, Bomber, HeavyBomber, Defence, Propaganda, Industry, Ufo, Baby, RocketRich,
             CrazyCow, Defectors, Missle,
-            AttackBomber, AttackMissle, Airport, AttackAirport,None
+            AttackBomber, AttackMissle, Airport, AttackAirport, Incident,None
         }
 
         public static List<EventFortuneIncident> EventFortuneIncidentList= new List<EventFortuneIncident>()

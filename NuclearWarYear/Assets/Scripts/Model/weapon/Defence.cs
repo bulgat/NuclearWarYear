@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Defence : Weapon,IWeapon
 {
-   public Defence(GlobalParam.TypeEvent name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id, int IdImage = 0)
+   public Defence(GlobalParam.TypeEvent name, int size, int damage, GlobalParam.TypeEvent Type,int id, int IdImage = 0)
 	{
 		this.Id = id;
 		this.Name = name;
@@ -23,7 +23,7 @@ public class Defence : Weapon,IWeapon
 	{
 		return this.Name;
 	}
-	public DictionaryEssence.TypeWeapon GetTypeWeapon()
+	public GlobalParam.TypeEvent GetTypeWeapon()
 	{
 		return this.Type;
 

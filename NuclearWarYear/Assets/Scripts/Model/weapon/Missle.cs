@@ -7,7 +7,7 @@ using UnityEngine;
 public class Missle : Weapon, IWeapon
 {
 
-	public Missle(GlobalParam.TypeEvent name, int size, int damage, DictionaryEssence.TypeWeapon Type,int id) {
+	public Missle(GlobalParam.TypeEvent name, int size, int damage, GlobalParam.TypeEvent Type,int id) {
 		this.Id = id;
 		this.Name =name;
 		this.Size =size;
@@ -22,7 +22,7 @@ public class Missle : Weapon, IWeapon
 	{
 		return this.Name;
 	}
-	public DictionaryEssence.TypeWeapon GetTypeWeapon()
+	public GlobalParam.TypeEvent GetTypeWeapon()
     {
 		return this.Type;
 
