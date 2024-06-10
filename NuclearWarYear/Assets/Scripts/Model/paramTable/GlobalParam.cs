@@ -19,7 +19,7 @@ namespace Assets.Scripts.Model.param
         public enum TypeEvent
         {
             Build, Bomber, HeavyBomber, Defence, Propaganda, Industry, Ufo, Baby, RocketRich,
-            CrazyCow, Defectors, Missle,
+            CrazyCow, Defectors, Missle, HeavyMissle,
             AttackBomber, AttackMissle, Airport, AttackAirport, Incident,None
         }
 
@@ -45,6 +45,7 @@ namespace Assets.Scripts.Model.param
             {TypeEvent.Defence, new TurnEventExecute( null, 0, false, true, false,true, false,false) },
             {TypeEvent.Airport, new TurnEventExecute( null, 0, false, true, false,false, true,false) },
             {TypeEvent.Missle, new TurnEventExecute( null, 0, false, true, false, false, true,false) },
+            {TypeEvent.HeavyMissle, new TurnEventExecute( null, 0, false, true, false, false, true,false) },
             {TypeEvent.Bomber, new TurnEventExecute( null, 0, false, true, false, false, true,false) } };
 
         public static List<ScenarioLider> ParamLiderList = new List<ScenarioLider>()

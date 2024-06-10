@@ -8,13 +8,14 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Incident: Weapon,IWeapon
+public class Incident : Weapon, IWeapon
 {
     private static int UnicId = 0;
     public string ReleaseMessage { get; private set; }
     public int ReleasePopulation { get; private set; }
     public PopulationEvent PopulationEvent { get; private set; }
     private bool ShowLider { get; set; }
+    public int Year {private set; get;}
 
     public Incident(GlobalParam.TypeEvent name, GlobalParam.TypeEvent type, int id, string message, DamageParam damageParam) {
 		this.Name=name;
@@ -23,12 +24,11 @@ public class Incident: Weapon,IWeapon
         this.Type = type;
         this.Damage = damageParam.Damage;
         this.Message = message;
-        //this.PopulationEvent = new PopulationEvent();
         this.Uid = UnicId++;
-
      }
     public int MutationDamage()
     {
+        Debug.Log(1 + "   = MutationDamage =    " + this.Damage);
         return UnityEngine.Random.Range(1, this.Damage);
     }
     public int GetDamage()
@@ -99,7 +99,14 @@ public class Incident: Weapon,IWeapon
         return "";
 
     }
-
+    public int GetYear()
+    {
+        return this.Year;
+    }
+    public void SetYear(int value)
+    {
+        this.Year = value;
+    }
     public Incident Copy()
     {
         return this.MemberwiseClone() as Incident;

@@ -15,7 +15,7 @@ public class SwitchActionHelper
 
 
     public List<CommandLider> SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
-        List<CityModel> TownList, int FlagIdPlayer, GlobalParam.TypeEvent actionCommand, int FlagId, int MissleId)
+        List<CityModel> TownList, int FlagIdPlayer, GlobalParam.TypeEvent actionCommand, int FlagId, int MissleId, int Year)
     {
         
 
@@ -26,7 +26,7 @@ public class SwitchActionHelper
         CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         bool AIfiend = FlagId != FlagIdPlayer;
 
-        CommandLider commandLider = new CommandLider(actionCommand);
+        CommandLider commandLider = new CommandLider(actionCommand, Year);
         CountryLider fiendLider1 = new BuildingCentralHelper().GetFiendLider(CountryLiderList, countryLider.FlagId);
         TargetCityModel targetCityModel
             = new TargetCityModel(new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer, AIfiend, TownList, countryLider, fiendLider1), fiendLider1);
@@ -77,7 +77,7 @@ public class SwitchActionHelper
 
 
         // Счастливая карта!
-        CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(targetCityModel, MissleId, FlagId, AIfiend, TownList, CountryLiderList, countryLider);
+        CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(targetCityModel, MissleId, FlagId, AIfiend, TownList, CountryLiderList, countryLider,Year);
 
 
         this.TreatmentCommand(actionCommand.ToString(), commandLider, targetCityModel, MissleId, FlagId, AIfiend, TownList,
@@ -101,11 +101,8 @@ public class SwitchActionHelper
     }
     private void AiAddTargetCity(TargetCityModel targetCityModel, CommandLider commandLider, CountryLider enemyLider)
     {
-        //if (AIfiend)
-        //{
         commandLider.SetTargetCity(targetCityModel);
         commandLider.SetTargetLider(enemyLider);
-        //}
     }
     private void TreatmentCommand(string actionCommand, CommandLider commandLider,
         TargetCityModel targetCityModel, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,

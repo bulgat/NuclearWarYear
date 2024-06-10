@@ -11,7 +11,7 @@ namespace Assets.Scripts.Model.createCommand
     internal class CreateFortune
     {
         public CommandLider FortuneEvent(TargetCityModel targetCityModel, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
-        List<CountryLider> CountryLiderList, CountryLider countryLider)
+        List<CountryLider> CountryLiderList, CountryLider countryLider,int Year)
         {
             CommandLider commandLider = null;
             GlobalParam.TypeEvent actionCommand = GlobalParam.TypeEvent.None;
@@ -21,7 +21,7 @@ namespace Assets.Scripts.Model.createCommand
                 if ((int)UnityEngine.Random.Range(0.0f, eventFortuneIncident.Random) == 1)
                 {
                     actionCommand = eventFortuneIncident.Name;
-                    commandLider = new CommandLider(actionCommand);
+                    commandLider = new CommandLider(actionCommand, Year);
                     commandLider.SetVisibleEventList(eventFortuneIncident.Name, true);
                     commandLider.SetTargetCity(targetCityModel);
                     commandLider.SetTargetLider(targetCityModel.EnemyLider);

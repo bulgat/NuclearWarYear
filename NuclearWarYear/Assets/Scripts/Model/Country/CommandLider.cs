@@ -22,10 +22,10 @@ public class CommandLider
     public List<string> _reportProducedWeaponList { get; private set; }
     List<GlobalParam.TypeEvent> VisibleList;
 
-    public CommandLider(GlobalParam.TypeEvent nameCommand)
+    public CommandLider(GlobalParam.TypeEvent nameCommand,int Year)
     {
         this._MissleList = new List<IWeapon>();
-        this.IncidentCommand = new DictionaryEssence().BuildIncident(nameCommand);
+        this.IncidentCommand = new DictionaryEssence().BuildIncident(nameCommand, Year);
         
         this.VisibleList = new List<GlobalParam.TypeEvent>();
     }

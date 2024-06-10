@@ -14,7 +14,7 @@ namespace Assets.Scripts.Model.Nation
         public string EventMessage { get;set;}
         public IncidentEvent(GlobalParam.TypeEvent Name) {
             this.NameEvent = Name.ToString();
-            this.IdEvent = new DictionaryEssence().GetIdEvent(Name);
+            this.IdEvent = new DictionaryEssence().GetIdEventName(Name);
         }
         
     }

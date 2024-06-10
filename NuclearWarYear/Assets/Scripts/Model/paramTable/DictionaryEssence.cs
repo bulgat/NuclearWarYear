@@ -14,7 +14,7 @@ public class DictionaryEssence
 
 
         new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 0,"Ракеты приведены в готовность",new DamageParam(10,0)),
-        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 1, "Ракеты приведены в готовность",new DamageParam(20,0)),
+        new Incident(GlobalParam.TypeEvent.HeavyMissle, GlobalParam.TypeEvent.Missle, 1, "Ракеты приведены в готовность",new DamageParam(40,0)),
         new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 2, "Ракеты приведены в готовность",new DamageParam(50,0)),
         new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 3, "Ракеты приведены в готовность",new DamageParam(100, 0)),
 
@@ -43,23 +43,28 @@ public class DictionaryEssence
         new Incident(GlobalParam.TypeEvent.Airport, GlobalParam.TypeEvent.Defence, 19, "Бомбардировщики приведены в готовность",new DamageParam(0, 4))
     };
      
-	public int GetIdEvent(GlobalParam.TypeEvent Name)
+	public int GetIdEventName(GlobalParam.TypeEvent Name)
 	{
         
         return allEssenceList.Where(a=>a.Name== Name).FirstOrDefault().IdImage;
 
     }
+    public List<Weapon> GetIdTypeEventList(GlobalParam.TypeEvent type)
+    {
 
+        return allEssenceList.Where(a => a.Type == type).ToList();
+
+    }
 
     public Incident GetIncident(int Id)
     {
         
         return allEssenceList.FirstOrDefault(a => a.Id == Id) as Incident;
     }
-    public Incident BuildIncident(GlobalParam.TypeEvent Name)
+    public Incident BuildIncident(GlobalParam.TypeEvent Name,int Year)
     {
         Incident incident = allEssenceList.FirstOrDefault(a => a.Name == Name) as Incident;
-        
+        incident.SetYear(Year);
         incident.MutationDamage();
         return incident;
     }

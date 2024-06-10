@@ -229,6 +229,7 @@ Debug.Log(itemExecute.Key+"  _ani   = " + UnDamage);
         }
         private TurnEventExecute GetMessageDictionary(GlobalParam.TypeEvent key)
         {
+            
             return GlobalParam.MessageDictionary[key];
 
         }
