@@ -28,7 +28,7 @@ public class Incident : Weapon, IWeapon
      }
     public int MutationDamage()
     {
-        Debug.Log(1 + "   = MutationDamage =    " + this.Damage);
+        
         return UnityEngine.Random.Range(1, this.Damage);
     }
     public int GetDamage()
@@ -66,13 +66,13 @@ public class Incident : Weapon, IWeapon
     }
     public string FullMessage(CountryLider lider)
     {
-        Debug.Log( " Z Z" + GetMessage() + "   lider = " + GetDamagePopulation());
+        Debug.Log( " Z Z" + GetMessage() + "   lider = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
         return "" + lider.GetName() + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
     }
     string GetNameFiendLider() {
         
         
-        if (this.PopulationEvent.FiendCountryLider == null)
+        if (this.PopulationEvent?.FiendCountryLider == null)
         {
             return "";
         }

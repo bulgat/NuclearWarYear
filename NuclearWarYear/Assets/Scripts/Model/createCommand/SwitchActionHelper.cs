@@ -15,7 +15,7 @@ public class SwitchActionHelper
 
 
     public List<CommandLider> SwitchAction(Action ResetAction, List<CountryLider> CountryLiderList,
-        List<CityModel> TownList, int FlagIdPlayer, GlobalParam.TypeEvent actionCommand, int FlagId, int MissleId, int Year)
+        List<CityModel> TownList, int FlagIdPlayer, GlobalParam.TypeEvent actionCommand, int FlagId, int Year)
     {
         
 
@@ -36,6 +36,7 @@ public class SwitchActionHelper
         //Change Ai Command
         if (AIfiend)
         {
+            /*
             if (actionCommand == GlobalParam.TypeEvent.Missle)
             {
                 MissleId = countryLider.GetRandomMissleSizeId(GlobalParam.TypeEvent.Missle);
@@ -45,7 +46,7 @@ public class SwitchActionHelper
                 }
 
             }
-
+            
             if (actionCommand == GlobalParam.TypeEvent.Bomber)
             {
                 MissleId = countryLider.GetRandomMissleSizeId(GlobalParam.TypeEvent.Bomber);
@@ -55,7 +56,7 @@ public class SwitchActionHelper
                     actionCommand = GlobalParam.TypeEvent.Propaganda;
                 }
             }
-
+*/
             if (actionCommand == GlobalParam.TypeEvent.Defence)
             {
                 if (countryLider.GetDefenceWeapon().Count() <= 0)
@@ -77,11 +78,11 @@ public class SwitchActionHelper
 
 
         // Счастливая карта!
-        CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(targetCityModel, MissleId, FlagId, AIfiend, TownList, CountryLiderList, countryLider,Year);
+        CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(targetCityModel,  FlagId, AIfiend, TownList, CountryLiderList, countryLider,Year);
 
 
-        this.TreatmentCommand(actionCommand.ToString(), commandLider, targetCityModel, MissleId, FlagId, AIfiend, TownList,
-        CountryLiderList, countryLider);
+        this.TreatmentCommand(actionCommand.ToString(), commandLider, targetCityModel, FlagId, AIfiend, TownList,
+        CountryLiderList, countryLider, fiendLider1);
 
         if (countryLider.GetTargetCitySelectPlayer() != null)
         {
@@ -105,14 +106,14 @@ public class SwitchActionHelper
         commandLider.SetTargetLider(enemyLider);
     }
     private void TreatmentCommand(string actionCommand, CommandLider commandLider,
-        TargetCityModel targetCityModel, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
-           List<CountryLider> CountryLiderList, CountryLider countryLider)
+        TargetCityModel targetCityModel,  int FlagId, bool AIfiend, List<CityModel> TownList,
+           List<CountryLider> CountryLiderList, CountryLider countryLider, CountryLider countryLiderFiend)
     {
         switch (actionCommand)
         {
             case "Propaganda":
                 commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
-                targetCityModel.TargetCity = new ModGameEngine().GetCityRandomFlagId(TownList, CountryLiderList[4], FlagId, AIfiend);
+                targetCityModel.TargetCity = new ModGameEngine().GetCityRandomFlagId(TownList, countryLiderFiend, FlagId, AIfiend);
                 break;
             case "Build":
                 commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Build, true);
@@ -124,10 +125,10 @@ public class SwitchActionHelper
                 commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Defence, true);
                 break;
             case "Missle":
-                commandLider.SetVisibleMissle(true, MissleId);
+                commandLider.SetVisibleMissle(true);
                 break;
             case "Bomber":
-                commandLider.SetVisibleBomber(true, MissleId);
+                commandLider.SetVisibleBomber(true);
                 break;
             case "AttackBomber":
                 if (targetCityModel == null)

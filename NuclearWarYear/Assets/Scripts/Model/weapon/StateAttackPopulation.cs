@@ -13,10 +13,6 @@ namespace Assets.Scripts.Model.weapon
             this.Message = message;
             this.FiendPopulation = ChangePopulation;
             this.FiendCity = fiendCity;
-            //if (fiendCountryLider == null)
-            //{
-            //    throw new ArgumentNullException("not lider");
-            //}
             this.FiendCountryLider = fiendCountryLider;
         }
         public CityModel GetMyCity()

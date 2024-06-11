@@ -10,7 +10,7 @@ namespace Assets.Scripts.Model.createCommand
 {
     internal class CreateFortune
     {
-        public CommandLider FortuneEvent(TargetCityModel targetCityModel, int MissleId, int FlagId, bool AIfiend, List<CityModel> TownList,
+        public CommandLider FortuneEvent(TargetCityModel targetCityModel, int FlagId, bool AIfiend, List<CityModel> TownList,
         List<CountryLider> CountryLiderList, CountryLider countryLider,int Year)
         {
             CommandLider commandLider = null;

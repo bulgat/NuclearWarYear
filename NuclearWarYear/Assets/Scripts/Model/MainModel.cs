@@ -18,7 +18,7 @@ public class MainModel
 	public bool _endGame;
 	private int CityIncrementId;
 	private int CurrenPlayerFlag { set; get; }
-	private int CountYear;
+	public int CountYear { private set; get; }
 	public MainModel(List<GameObject> countryLiderPropagandaBuildingList) {
 		InitModel(countryLiderPropagandaBuildingList);
 	}
@@ -197,24 +197,24 @@ public class MainModel
 
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Propaganda, this.GetCurrenPlayer().FlagId, 0, CountYear));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Propaganda, this.GetCurrenPlayer().FlagId, CountYear));
 
 
 	}
 	public void SetBuildingPlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Build, this.GetCurrenPlayer().FlagId, 0, CountYear));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Build, this.GetCurrenPlayer().FlagId, CountYear));
 
-		new AICreateCommand().EstimationSetCommandAi(ResetAction,
+		new AICreateCommand().EstimationSetCommandAiAll(ResetAction,
 			CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId, CountYear);
 	}
 	public void SetDefencePlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Defence, this.GetCurrenPlayer().FlagId, 0, CountYear));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Defence, this.GetCurrenPlayer().FlagId, CountYear));
 
-		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId, CountYear);
+		new AICreateCommand().EstimationSetCommandAiAll(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId, CountYear);
 	}
 	public void SetCommandIncident(int FlagId, TypeEvent nameEvent)
 	{
@@ -222,7 +222,7 @@ public class MainModel
 
 		List<CommandLider> commandLiderList = new List<CommandLider>();
 		CommandLider commandLider = new CommandLider(nameEvent,CountYear);
-			//= new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Missle, this.GetCurrenPlayer().FlagId, MissleId);
+
         commandLiderList.Add(commandLider);
 
         countryLider.SetCommandLider(commandLiderList);
@@ -230,8 +230,9 @@ public class MainModel
 
         Debug.Log(commandLiderList.Count + "  & == "+ commandLider.GetIncident().GetName() + " SetMisslePlayer = " + GlobalParam.TypeEvent.Missle);
         Debug.Log(nameEvent+"   countryLider = " + countryLider.ReleaseCommandList.Count );
-		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId, CountYear);
-	}
+		//new AICreateCommand().EstimationSetCommandAiAll(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId, CountYear);
+        new AICreateCommand().SetCommandOneLider(countryLider,ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId, CountYear);
+    }
 
 	public void SetMisslePlayer(int FlagId, TypeEvent nameEvent) {
 		SetCommandIncident(FlagId, nameEvent);
@@ -239,26 +240,20 @@ public class MainModel
 	public void SetAttackMisslePlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.AttackMissle, this.GetCurrenPlayer().FlagId, 0, CountYear));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.AttackMissle, this.GetCurrenPlayer().FlagId, CountYear));
 
-		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId, CountYear);
+		new AICreateCommand().EstimationSetCommandAiAll(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId, CountYear);
 	}
 	public void SetBomberPlayer(int FlagId, TypeEvent nameEvent) {
-		/*
-		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.Bomber, this.GetCurrenPlayer().FlagId, BomberId));
-
-		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId);
-        */
 		SetCommandIncident(FlagId, nameEvent);
     }
 	public void SetAttackBomberPlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.AttackBomber, this.GetCurrenPlayer().FlagId, 0,CountYear));
+		countryLider.SetCommandLider(new SwitchActionHelper().SwitchAction(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, GlobalParam.TypeEvent.AttackBomber, this.GetCurrenPlayer().FlagId,CountYear));
 
-		new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId, CountYear);
+		new AICreateCommand().EstimationSetCommandAiAll(ResetAction, CountryLiderList, TownList, this.GetCurrenPlayer().FlagId, this.GetCurrenPlayer().FlagId, CountYear);
 	}
 	public void SetLiderTargetPlayer(int FlagId) {
 		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, this.GetCurrenPlayer().FlagId);
@@ -345,7 +340,8 @@ public class MainModel
     public void TurnAi()
 	{
 		CountYear++;
-        new AICreateCommand().EstimationSetCommandAi(ResetAction, CountryLiderList,
+        //List<CountryLider> CountryLiderAiList = CountryLiderList.Where(a=>a.FlagId!= GetCurrenFlagPlayer()).ToList();
+        new AICreateCommand().EstimationSetCommandAiAll(ResetAction, CountryLiderList,
 		   GetTownList(), GetCurrenFlagPlayer(), GetCurrenFlagPlayer(), CountYear);
 	}
 	public string GetAllMessageTurn()

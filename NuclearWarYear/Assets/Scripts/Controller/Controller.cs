@@ -6,23 +6,25 @@ using UnityEngine;
 public class Controller 
 {
 	private MainModel _mainModel;
+	/*
 	public enum Command
 	{
 		//Bomber,
-		AttackMissle,
-		LiderTargetPlayer,
-		Warhead,
-		TotalTurn,
-	}
+		//AttackMissle,
+		//LiderTargetPlayer,
+		//Warhead,
+		//TotalTurn,
+	}*/
 	public Controller(MainModel MainModel) {
 		_mainModel = MainModel;
 	}
-	public void SendCommand(EventController eventController) {
-	
+	//public void SendCommand(EventController eventController) {
+	/*
 		if (eventController.NameCommand == Command.AttackMissle){
 			_mainModel.SetAttackMisslePlayer(eventController.EventSend.FlagId);
 			return;
 		}
+	*/
 		/*
 		if (eventController.NameCommand == Command.Bomber){
 	
@@ -30,27 +32,40 @@ public class Controller
 			return;
 		}
 		*/
-
+		/*
 		if (eventController.NameCommand == Command.LiderTargetPlayer){
 	
 			_mainModel.SetLiderTargetPlayer(eventController.EventSend.FlagId);
 			return;
-		}
+		}*/
+		/*
 		if (eventController.NameCommand == Command.Warhead){
 	
 			_mainModel.SetWarheadMethodPlayer(eventController.EventSend.FlagId);
 			return;
-		}
+		}*/
+		/*
 		if (eventController.NameCommand == Command.TotalTurn){
 
 			_mainModel.TotalTurn(eventController.EventSend.FlagId);
 			return;
 		}
-		
-		throw new System.Exception("Not Command controller"); 
-	}
-
-
+		*/
+		//throw new System.Exception("Not Command controller"); 
+	//}
+    /*
+    public void TotalTurn(int FlagId)
+	{
+        _mainModel.TotalTurn(FlagId);
+    }*/
+    public void AttackMissle(int FlagId)
+	{
+        _mainModel.SetAttackMisslePlayer(FlagId);
+    }
+    public void LiderTargetPlayer(int FlagId)
+    {
+        _mainModel.SetLiderTargetPlayer(FlagId);
+    }
     public void Defence(int FlagId)
 	{
             _mainModel.SetDefencePlayer(FlagId);

@@ -26,7 +26,7 @@ int canvasIndex = 1;
     {
         
         
-Debug.Log("   IdIm "+ gameObject.transform.GetChild(canvasIndex));
+
 
         gameObject.transform.GetChild(canvasIndex).GetChild(1).GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
         ViewIconCard viewIconCard = gameObject.transform.GetChild(canvasIndex).GetChild(2).GetComponent<ViewIconCard>();

@@ -145,10 +145,7 @@ public class MenuScript : MonoBehaviour
         new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
 
         _controller.TurnAi();
-        /*
-        new AICreateCommand().EstimationSetCommandAi(ResetAction, _mainModel.CountryLiderList,
-            _mainModel.GetTownList(), _mainModel.GetCurrentPlayerFlag(), _mainModel.GetCurrentPlayerFlag());
-        */
+   
         SelectCountryOne();
         SetAllCityVisibleComponent();
 
@@ -178,7 +175,7 @@ public class MenuScript : MonoBehaviour
             TownCardInfo townCardInfo = CardTown.GetComponent<TownCardInfo>();
             City townCity = town.GetComponent<City>();
             townCardInfo.SetParam(this.FlagImageList, townCity);
-            //CardWing.transform.parent = CanvasMap.transform;
+
             this.UICardTownList.Add(CardTown);
 
         }
@@ -196,7 +193,6 @@ public class MenuScript : MonoBehaviour
         }
         this.CardButtonList.Clear();
         //CardWeapon
-        //panelMain
 
         List<IWeapon> missleList = _mainModel.GetStaticWeapon();
 
@@ -492,7 +488,7 @@ public class MenuScript : MonoBehaviour
 
         StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
 
-        Debug.Log("  DoneMoveMadeCurrentP = Uf     =" + CommandIncident.GetMessage());
+        Debug.Log(" year = "+_mainModel.CountYear+"  DoneMoveMadeCurrentP = Uf     =" + CommandIncident.GetMessage());
 
     }
     private IEnumerator AfterTurnOneLider(Incident CommandIncident, CountryLider lider)
@@ -579,8 +575,11 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     void LiderButton_1_Method(Button buttonPressed)
     {
         ResetCountryOutline();
+        /*
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(1));
         _controller.SendCommand(eventController);
+        */
+        _controller.LiderTargetPlayer(1);
 
         SelectCountryOne();
 
@@ -590,8 +589,11 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     void LiderButton_2_Method(Button buttonPressed)
     {
         ResetCountryOutline();
+        /*
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(2));
         _controller.SendCommand(eventController);
+        */
+        _controller.LiderTargetPlayer(2);
 
         ClearCityTargetMark(0, false);
         CountryLineList[2].SetActive(true);
@@ -599,8 +601,11 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     void LiderButton_3_Method(Button buttonPressed)
     {
         ResetCountryOutline();
+        /*
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(3));
         _controller.SendCommand(eventController);
+        */
+        _controller.LiderTargetPlayer(3);
 
         ClearCityTargetMark(0, false);
         CountryLineList[3].SetActive(true);
@@ -608,8 +613,12 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     void LiderButton_4_Method(Button buttonPressed)
     {
         ResetCountryOutline();
+        /*
         EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(4));
         _controller.SendCommand(eventController);
+        */
+        _controller.LiderTargetPlayer(4);
+
         ClearCityTargetMark(0, false);
         CountryLineList[1].SetActive(true);
     }
@@ -692,8 +701,11 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
                 printMessage.Append("\n Ready. Select target for missle");
             }
             CircleImageReadyParam(1, true);
+            /*
             EventController eventController = new EventController(Controller.Command.AttackMissle, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
             _controller.SendCommand(eventController);
+            */
+            _controller.AttackMissle(_mainModel.GetCurrenFlagPlayer());
         }
 
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());

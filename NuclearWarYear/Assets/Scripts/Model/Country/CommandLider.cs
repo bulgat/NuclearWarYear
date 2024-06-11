@@ -13,7 +13,7 @@ public class CommandLider
 
     public TargetCityModel _TargetCity { private set; get; }
 
-    private int MissleId;
+    //private int MissleId;
 
     private IWeapon _AttackMissle;
     private IWeapon _AttackBomber;
@@ -52,27 +52,28 @@ public class CommandLider
     {
         this.VisibleList.Add(Key);
     }
+    /*
     public int GetSizeIdMissle()
     {
         return this.MissleId;
 
     }
-
-    public void SetVisibleMissle(bool visibleMissle, int MissleId)
+    */
+    public void SetVisibleMissle(bool visibleMissle)
     {
         this.VisibleList.Add(GlobalParam.TypeEvent.Missle);
-        this.MissleId = MissleId;
+        //this.MissleId = MissleId;
 
     }
     public bool GetVisibleMissle()
     {
         return this.IncidentCommand.Name == GlobalParam.TypeEvent.Missle;
     }
-    public void SetVisibleBomber(bool visibleBomber, int MissleId)
+    public void SetVisibleBomber(bool visibleBomber)
     {
         this.VisibleList.Add(GlobalParam.TypeEvent.Bomber);
         this.VisibleList.Add(GlobalParam.TypeEvent.Airport);
-        this.MissleId = MissleId;
+        //this.MissleId = MissleId;
     }
 
 
