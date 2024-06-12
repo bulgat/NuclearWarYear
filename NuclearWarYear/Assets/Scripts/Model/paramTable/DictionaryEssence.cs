@@ -63,7 +63,7 @@ public class DictionaryEssence
     }
     public Incident BuildIncident(GlobalParam.TypeEvent Name,int Year)
     {
-        Debug.Log( "   = MutationDam  =    " + Name);
+   
         Incident incident = allEssenceList.FirstOrDefault(a => a.Name == Name) as Incident;
         incident.SetYear(Year);
         incident.MutationDamage();

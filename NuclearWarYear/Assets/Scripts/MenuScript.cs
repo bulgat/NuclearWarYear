@@ -488,7 +488,7 @@ public class MenuScript : MonoBehaviour
 
         StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
 
-        Debug.Log(" year = "+_mainModel.CountYear+"  DoneMoveMadeCurrentP = Uf     =" + CommandIncident.GetMessage());
+        Debug.Log(" year = "+_mainModel.CountYear+"  DoneMoveMadeCurrentP "+ CommandIncident.Name+ " f     =" + CommandIncident.GetMessage());
 
     }
     private IEnumerator AfterTurnOneLider(Incident CommandIncident, CountryLider lider)
@@ -533,7 +533,7 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
         if (missleList.Contains(IdMissle))
         {
             
-            Debug.Log(IdMissle + "    ---- ---- -----------------" + missleBomberIncident.Type + "---- -------- Name   =" + missleBomberIncident.Name);
+            
             _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
             CanvasReportWindow("Prepare a missle ", IdMissle);
         }

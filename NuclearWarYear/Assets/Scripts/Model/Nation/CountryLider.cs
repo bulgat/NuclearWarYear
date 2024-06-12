@@ -37,16 +37,16 @@ public class CountryLider
 	public int GraphicId { get; }
 	public bool MoveMade { private set; get; }
 	public CountryLider(bool player,List<IWeapon> missleList,
-		GameObject PropagandaBuild,List<CityModel> TownList, ScenarioLider scenarioLider,int CountryId) {
-		this.FlagId = scenarioLider.FlagId;
+		GameObject PropagandaBuild,List<CityModel> TownList, ScenarioLider scenarioLider,int CountryId) 
+	{
+		this._CommandLiderList = new List<CommandLider>();
+        this.FlagId = scenarioLider.FlagId;
 		this.Player = player;
 		this._MissleList=missleList;
 		PropagandaBuilding = PropagandaBuild;
 		this.Name = scenarioLider.Name;
 		this.GraphicId = scenarioLider.GraphicId;
-
         this._TownListOwn = new List<CityModel>();
-		
 
 		foreach(CityModel TownCity in TownList){
 			
@@ -111,9 +111,11 @@ public class CountryLider
 
 	}
 
-    public void SetCommandLider(List<CommandLider> commandLiderList)
+    public void AddCommandLiderList(List<CommandLider> commandLiderList)
 	{
 		this._CommandLiderList = commandLiderList;
+
+        //this._CommandLiderList.AddRange(commandLiderList);
 	}
 	public int GetAllOwnPopulation() {
 		int maxPopulation=0;

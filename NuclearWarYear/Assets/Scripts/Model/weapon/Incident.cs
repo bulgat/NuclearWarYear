@@ -55,7 +55,10 @@ public class Incident : Weapon, IWeapon
     {
         return this.Type;
     }
-
+    public void SetTypeWeapon(GlobalParam.TypeEvent valueType)
+    {
+        this.Type = valueType;
+    }
     public void SetDamage(int damage)
     {
         this.Damage = damage;
@@ -66,7 +69,7 @@ public class Incident : Weapon, IWeapon
     }
     public string FullMessage(CountryLider lider)
     {
-        Debug.Log( " Z Z" + GetMessage() + "   lider = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
+        Debug.Log(lider.GetName()+" = Z^^^^^^^^ " + GetMessage() + "   lider = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
         return "" + lider.GetName() + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
     }
     string GetNameFiendLider() {

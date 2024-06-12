@@ -114,7 +114,7 @@ namespace Assets.Scripts.Model
                             return CommandIncident;
                         }
                         bool doubleCity = itemExecute.Key == GlobalParam.TypeEvent.Propaganda || itemExecute.Key == GlobalParam.TypeEvent.Defectors;
-                        Debug.Log(itemExecute.Key + "  _an   = " + CommandIncident.GetDamage());
+                        
                         CommandIncident.SetReleaseMessage(new StateAddPopulation(message, -CommandIncident.GetDamage(), liderCityMy, enemylider), GetMessageDictionary(itemExecute.Key).ShowFiend);
                         lider.SetCommandRealise(CommandIncident);
                         return CommandIncident;
