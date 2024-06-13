@@ -68,6 +68,7 @@
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <Compile Include="Assets\Scripts\BuildingCentral.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewRocketRich.cs" />
+    <Compile Include="Assets\Scripts\Model\weapon\DamageParam.cs" />
     <Compile Include="Assets\Scripts\View\ViewSendAnimObj.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\Incident.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\Defence.cs" />
@@ -127,7 +128,6 @@
     <Compile Include="Assets\Scripts\Model\CityHelperList.cs" />
     <Compile Include="Assets\Scripts\Model\scenario\ScenarioLider.cs" />
     <Compile Include="Assets\Scripts\MenuVictory.cs" />
-    <Compile Include="Assets\Scripts\Controller\EventController.cs" />
     <Compile Include="Assets\Scripts\Model\TargetHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildingCentralModel.cs" />
     <Compile Include="Assets\Scripts\Model\createCommand\RandomActionCommand.cs" />
@@ -144,7 +144,6 @@
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\ViewCanvasReport.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\Model\weapon\DamageParam.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

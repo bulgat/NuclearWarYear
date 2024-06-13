@@ -88,7 +88,7 @@ namespace Assets.Scripts.Model
                         //Debug.Log(itemExecute.Key+"    __ _____ _____ UnDamage = " + UnDamage);
                         //}
                         string report = CommandIncident.GetMessage() + CommandIncident.GetDamage();
-                        lider.GetCommandLiderFirst().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, GetMessageDictionary(itemExecute.Key).NegativeMood);
+                        lider.GetCommandLiderFirst().LiderFiend._RelationFeind.SetNegativeMood(lider.FlagId, GetMessageDictionary(itemExecute.Key).NegativeMood);
 
                         if (GetMessageDictionary(itemExecute.Key).MessageSecond != null)
                         {
@@ -147,7 +147,7 @@ namespace Assets.Scripts.Model
                     }
 
                     message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderFirst().GetIncident().GetMessage() + damageAttackCount + " у " + lider.GetCommandLiderFirst().LiderFiend.GetName(), lider.GetCommandLiderFirst().GetIncident().GetName());
-                    lider.GetCommandLiderFirst().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, 25);
+                    lider.GetCommandLiderFirst().LiderFiend._RelationFeind.SetNegativeMood(lider.FlagId, 25);
 
                     CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, damageAttackCount, cityModelTarget, enemylider),
                         GetMessageDictionary(lider.GetCommandLiderFirst().GetNameCommandFirst()).ShowFiend);
@@ -177,7 +177,7 @@ namespace Assets.Scripts.Model
                     message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderFirst().GetIncident().GetMessage() + damageAttackCount +
                         " у " + lider.GetCommandLiderFirst().LiderFiend.GetName(),
                         lider.GetCommandLiderFirst().GetIncident().GetName());
-                    lider.GetCommandLider().First().LiderFiend._RelationShip.SetNegativeMood(lider.FlagId, 25);
+                    lider.GetCommandLider().First().LiderFiend._RelationFeind.SetNegativeMood(lider.FlagId, 25);
 
                     CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, damageAttackCount, cityModelTarget, enemylider),
                         GetMessageDictionary(lider.GetCommandLiderFirst().GetNameCommandFirst()).ShowFiend);

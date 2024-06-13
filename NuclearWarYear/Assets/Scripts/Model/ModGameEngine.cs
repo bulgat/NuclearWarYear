@@ -8,36 +8,40 @@ public class ModGameEngine
         int FlagIdOwnerAI,
         bool AI)
     {
-
-        CountryLider countryLiderVictim = Lider._RelationShip.GetHighlyHatredLiderRandom();
-        List<CityModel> TargetCityListVictim= countryLiderVictim.GetOwnTownListLiderFilterPopulation();
-
-        List<CityModel> TargetCityList = new List<CityModel>();
-        if (AI)
+        
+        CityModel target = null;
+        if (Lider != null)
         {
+            CountryLider countryLiderVictim = Lider._RelationFeind.GetHighlyHatredLiderRandom();
+            List<CityModel> TargetCityListVictim = countryLiderVictim.GetOwnTownListLiderFilterPopulation();
 
-            TargetCityList = TargetCityListVictim;
-
-
-        } else
-        {
-
-            foreach (CityModel townCity in TownList)
+            List<CityModel> TargetCityList = new List<CityModel>();
+            if (AI)
             {
-                if (townCity.FlagId == Lider.FlagIdAttack)
+
+                TargetCityList = TargetCityListVictim;
+
+
+            }
+            else
+            {
+
+                foreach (CityModel townCity in TownList)
                 {
-                    if (townCity.GetPopulation() > 0)
+                    if (townCity.FlagId == Lider.FlagIdAttack)
                     {
-                        TargetCityList.Add(townCity);
+                        if (townCity.GetPopulation() > 0)
+                        {
+                            TargetCityList.Add(townCity);
+
+                        }
 
                     }
-
                 }
             }
+            int indexTownBomber = Random.Range(0, TargetCityList.Count);
+            target = TargetCityList[indexTownBomber];
         }
-        int indexTownBomber = Random.Range(0, TargetCityList.Count);
-        CityModel target = TargetCityList[indexTownBomber];
-
         return target;
     }
 }

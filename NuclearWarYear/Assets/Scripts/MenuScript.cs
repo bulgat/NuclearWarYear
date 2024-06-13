@@ -19,6 +19,7 @@ using UnityEngine.Video;
 
 public class MenuScript : MonoBehaviour
 {
+    public Text TurnYear;
     public GameObject CardWeapon;
     public List<Sprite> IconCardList;
     public List<GameObject> UICardTownList;
@@ -142,7 +143,7 @@ public class MenuScript : MonoBehaviour
 
         NewPaperButton.onClick.AddListener(() => ButtonNewPaper());
 
-        new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
+        
 
         _controller.TurnAi();
    
@@ -164,7 +165,7 @@ public class MenuScript : MonoBehaviour
 
         CreateTownInfoList();
 
-
+        new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
     }
     void CreateTownInfoList()
     {
@@ -841,6 +842,7 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
         }
         DrawTownInfoList();
         UpdateJoystick();
+        TurnYear.text = _mainModel.CountYear.ToString();
     }
     void DrawTownInfoList()
     {

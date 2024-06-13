@@ -129,10 +129,10 @@ public class CommandLider
 
     public void SetTargetCity(TargetCityModel TargetCity)
     {
-        if (TargetCity == null)
-        {
-            throw new System.Exception("TargetCity");
-        }
+        //if (TargetCity == null)
+        //{
+        //    throw new System.Exception("TargetCity");
+        //}
         this._TargetCity = TargetCity;
     }
 

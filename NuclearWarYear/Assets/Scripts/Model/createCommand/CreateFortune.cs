@@ -2,16 +2,17 @@
 using Assets.Scripts.Model.paramTable;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Model.createCommand
 {
     internal class CreateFortune
     {
-        public CommandLider FortuneEvent(TargetCityModel targetCityModel, int FlagId, bool AIfiend, List<CityModel> TownList,
-        List<CountryLider> CountryLiderList, CountryLider countryLider,int Year)
+        public CommandLider FortuneEvent( bool AIfiend, CountryLider countryLider,int Year)
         {
             CommandLider commandLider = null;
             GlobalParam.TypeEvent actionCommand = GlobalParam.TypeEvent.None;
@@ -20,14 +21,15 @@ namespace Assets.Scripts.Model.createCommand
             {
                 if ((int)UnityEngine.Random.Range(0.0f, eventFortuneIncident.Random) == 1)
                 {
+                    UnityEngine.Debug.Log(countryLider.GetTargetCitySelectPlayer()+ "  RESU  PLAYER  = Mutation  =    ");
                     actionCommand = eventFortuneIncident.Name;
                     commandLider = new CommandLider(actionCommand, Year);
                     commandLider.SetVisibleEventList(eventFortuneIncident.Name, true);
-                    commandLider.SetTargetCity(targetCityModel);
-                    commandLider.SetTargetLider(targetCityModel.EnemyLider);
+                    commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
+                    commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
                 }
             }
-
+            
             
             return commandLider;
         }

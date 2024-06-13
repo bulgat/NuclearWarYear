@@ -27,13 +27,14 @@ public class CountryLider
 
 	private int _maxPopulation;
 	private TargetCityModel _targetCitySelectPlayer;
+    public CountryLider FiendLider { private set; get; }
 
-	private string Name;
-	//private string EventTotalTurn;
+    private string Name;
+
 	IncidentEvent EventTotalTurn;
 
     public int MissleId;
-	public RelationShip _RelationShip;
+	public RelationShip _RelationFeind;
 	public int GraphicId { get; }
 	public bool MoveMade { private set; get; }
 	public CountryLider(bool player,List<IWeapon> missleList,
@@ -57,7 +58,7 @@ public class CountryLider
 			}
 		}
 		_maxPopulation=GetAllOwnPopulation();
-		_RelationShip = new RelationShip();
+		_RelationFeind = new RelationShip();
 		this.EventTotalTurn = new IncidentEvent(GlobalParam.TypeEvent.Propaganda);
 	}
 	public void DoneMoveMade(bool Value)
@@ -82,7 +83,7 @@ public class CountryLider
 	
 	public int GetMood(int FlagId)
     {
-		return _RelationShip.GetMood(FlagId);
+		return _RelationFeind.GetMood(FlagId);
     }
 	public void SetDead()
 	{
@@ -134,12 +135,8 @@ public class CountryLider
 	public int GetBomberCount() {
 		return this._MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).Count();
 	}
-
-
 	public List<IWeapon> GetDefenceWeapon()
 	{
-        
-        
         return this._MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).ToList();
 	}
 
@@ -198,9 +195,9 @@ public class CountryLider
 	public GameObject GetCentralBuildingPropogation() {
 		return PropagandaBuilding;
 	}
-	public void SetTargetCitySelectPlayer(TargetCityModel targetCitySelectPlayer){
-		
-		_targetCitySelectPlayer =targetCitySelectPlayer;
+	public void SetTargetCity(TargetCityModel targetCitySelectPlayer){
+		FiendLider = targetCitySelectPlayer.EnemyLider;
+        _targetCitySelectPlayer =targetCitySelectPlayer;
 	}
 	public TargetCityModel GetTargetCitySelectPlayer(){
 		return _targetCitySelectPlayer;
