@@ -18,10 +18,11 @@ public class SwitchActionHelper
     public List<CommandLider> SwitchAction(List<CountryLider> CountryLiderList,
         List<CityModel> TownList, int FlagIdPlayer, CommandLider commandLider,
         CountryLider countryLider, int Year, CountryLider fiendLider1,
-        TargetCityModel targetCityModel, CommandLider commandLiderFortune)
+        //TargetCityModel targetCityModel, 
+        CommandLider commandLiderFortune)
     {
 
-
+        TargetCityModel targetCityModel = countryLider.GetTargetCitySelectPlayer();
         List<CommandLider> commandLiderList = new List<CommandLider>();
 
         //ResetAction();
@@ -71,7 +72,7 @@ Debug.Log("0000-- ---- -- --- -- targetCityModel = " + targetCityModel + " -----
             countryLider.FlagId != FlagIdPlayer, TownList, CountryLiderList, countryLider, Year);
         */
 
-        this.TreatmentCommand(commandLider.GetNameCommandFirst(), commandLider, targetCityModel, countryLider.FlagId,
+        this.TreatmentCommand(commandLider.GetNameCommandFirst(), commandLider,  countryLider.FlagId,
             countryLider.FlagId != FlagIdPlayer, TownList,
         CountryLiderList, countryLider);
 
@@ -98,7 +99,8 @@ Debug.Log("0000-- ---- -- --- -- targetCityModel = " + targetCityModel + " -----
         commandLider.SetTargetLider(enemyLider);
     }
     private void TreatmentCommand(GlobalParam.TypeEvent actionCommand, CommandLider commandLider,
-        TargetCityModel targetCityModel, int FlagId, bool AIfiend, List<CityModel> TownList,
+        //TargetCityModel targetCityModel, 
+        int FlagId, bool AIfiend, List<CityModel> TownList,
            List<CountryLider> CountryLiderList, CountryLider countryLider)
     {
         
@@ -106,7 +108,12 @@ Debug.Log("0000-- ---- -- --- -- targetCityModel = " + targetCityModel + " -----
         {
             case GlobalParam.TypeEvent.Propaganda:
                 commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
-                targetCityModel.TargetCity = new ModGameEngine().GetCityRandomFlagId(TownList, countryLider.FiendLider, FlagId, AIfiend);
+                Debug.Log(countryLider.GetName()+ " =  countryLider.FiendLider  = " + countryLider);
+                Debug.Log( " 0000  countryLider.FiendLider  = " + countryLider.FiendLider);
+                var target = countryLider.GetTargetCitySelectPlayer();
+                Debug.Log(" 0001  countryLider.FiendLider  = " + countryLider.GetTargetCitySelectPlayer());
+                Debug.Log(" 0002  countryLider.FiendLider  = " + countryLider.GetTargetCitySelectPlayer().TargetCity);
+                countryLider.GetTargetCitySelectPlayer().TargetCity= new ModGameEngine().GetCityRandomFlagId(TownList, countryLider.FiendLider, FlagId, AIfiend);
                 break;
             case GlobalParam.TypeEvent.Build:
                 commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Build, true);
@@ -124,28 +131,28 @@ Debug.Log("0000-- ---- -- --- -- targetCityModel = " + targetCityModel + " -----
                 commandLider.SetVisibleBomber(true);
                 break;
             case GlobalParam.TypeEvent.AttackBomber:
-                if (targetCityModel == null)
+                if (countryLider.GetTargetCitySelectPlayer() == null)
                 {
                     commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
                 }
                 else
                 {
                     commandLider.SetVisibleAttackBomber(true);
-                    commandLider.SetTargetCity(targetCityModel);
-                    commandLider.SetTargetLider(targetCityModel.EnemyLider);
+                    commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
+                    commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
                     commandLider.SetAttackBomber(countryLider.GetBomber());
                 }
                 break;
             case GlobalParam.TypeEvent.AttackMissle:
-                if (targetCityModel == null)
+                if (countryLider.GetTargetCitySelectPlayer() == null)
                 {
                     commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
                 }
                 else
                 {
                     commandLider.SetVisibleEventList(GlobalParam.TypeEvent.AttackMissle, true);
-                    commandLider.SetTargetCity(targetCityModel);
-                    commandLider.SetTargetLider(targetCityModel.EnemyLider);
+                    commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
+                    commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
                     commandLider.SetAttackMissle(countryLider.GetMissle());
                 }
                 break;

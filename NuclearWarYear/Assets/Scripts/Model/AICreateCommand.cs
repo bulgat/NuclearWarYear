@@ -72,7 +72,7 @@ public class AICreateCommand
             TownList, FlagIdPlayer,
             commandLider, lider,
             CountYear, fiendLider1,
-            targetCityModel, commandLiderFortune);
+             commandLiderFortune);
         Debug.Log("Co lider = " + lider.GetName()+ " DamageP  commandLidersList = " + commandLidersList.Count + "   damage = " );
         lider.AddCommandLiderList(commandLidersList);
     }
