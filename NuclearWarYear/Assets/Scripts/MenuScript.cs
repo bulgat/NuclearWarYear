@@ -350,8 +350,9 @@ public class MenuScript : MonoBehaviour
         }
         if (Player)
         {
+            Debug.Log("  a  reset? "  );
             //reset?
-            _controller.ResetSelectCityEnemyTargetPlayer(0);
+            _controller.ResetSelectCityEnemyTargetPlayer();
         }
         return selectCityTarget;
     }

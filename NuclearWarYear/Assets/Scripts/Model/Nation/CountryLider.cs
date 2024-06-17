@@ -17,6 +17,8 @@ public class CountryLider
 	
 	public GameObject PropagandaBuilding;
 	private List<CommandLider> _CommandLiderList;
+    public  List<CommandLider> StackCommandLiderList { private set; get; }
+
     public List<Incident> ReleaseCommandList { private set; get; }
     private bool _dead;
 	private List<IWeapon> _MissleList;
@@ -41,6 +43,7 @@ public class CountryLider
 		GameObject PropagandaBuild,List<CityModel> TownList, ScenarioLider scenarioLider,int CountryId) 
 	{
 		this._CommandLiderList = new List<CommandLider>();
+        this.StackCommandLiderList = new List<CommandLider>();
         this.FlagId = scenarioLider.FlagId;
 		this.Player = player;
 		this._MissleList=missleList;
@@ -115,9 +118,9 @@ public class CountryLider
     public void AddCommandLiderList(List<CommandLider> commandLiderList)
 	{
 		this._CommandLiderList = commandLiderList;
-
+        this.StackCommandLiderList.AddRange(commandLiderList);
         //this._CommandLiderList.AddRange(commandLiderList);
-	}
+    }
 	public int GetAllOwnPopulation() {
 		int maxPopulation=0;
 		foreach(CityModel TownCity in _TownListOwn){
@@ -195,7 +198,12 @@ public class CountryLider
 	public GameObject GetCentralBuildingPropogation() {
 		return PropagandaBuilding;
 	}
-	public void SetTargetCity(TargetCityModel targetCitySelectPlayer){
+    public void ResetTargetCity()
+    {
+        FiendLider = null;
+        _targetCitySelectPlayer = null;
+    }
+    public void SetTargetCity(TargetCityModel targetCitySelectPlayer){
 		FiendLider = targetCitySelectPlayer.EnemyLider;
         _targetCitySelectPlayer =targetCitySelectPlayer;
 	}

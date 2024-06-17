@@ -35,7 +35,7 @@ public class AICreateCommand
             actionNameCommand = ChangeIncidentCommand(lider, actionNameCommand, CountYear);
 
         }
-        Debug.Log(lider.GetName() + "  a  = " + actionNameCommand);
+        
         if (actionNameCommand == GlobalParam.TypeEvent.None)
         {
             if (lider.FlagId != FlagIdPlayer)

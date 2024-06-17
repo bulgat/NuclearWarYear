@@ -89,9 +89,9 @@ public class Controller
             _mainModel.SelectCityEnemyTargetPlayer(CityId, FlagId);
     }
 
-    public void ResetSelectCityEnemyTargetPlayer(int CityId)
+    public void ResetSelectCityEnemyTargetPlayer()
 	{
-            _mainModel.ResetSelectCityEnemyTargetPlayer(CityId);
+            _mainModel.ResetSelectCityEnemyTargetPlayer();
     }
 
     public void AttackBomber(int FlagId)

@@ -350,10 +350,12 @@ public class MainModel
 
 
 	}
-	public void ResetSelectCityEnemyTargetPlayer(int CityId) {
+	public void ResetSelectCityEnemyTargetPlayer() {
 		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, this.GetCurrenPlayer().FlagId);
-		liderPlayer.SetTargetCity(null);
-	}
+		//liderPlayer.SetTargetCity(null);
+        liderPlayer.ResetTargetCity();
+
+    }
 	public void ResetAction() {
 
 
