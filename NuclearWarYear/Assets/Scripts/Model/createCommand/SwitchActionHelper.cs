@@ -80,7 +80,7 @@ Debug.Log("0000-- ---- -- --- -- targetCityModel = " + targetCityModel + " -----
         {
             commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
         }
-        Debug.Log(targetCityModel+"    Li = "+ countryLider .GetName()+ " Rel TargetCity =" + targetCityModel.TargetCity);
+        Debug.Log(targetCityModel+"    Li = "+ countryLider.Name + " Rel TargetCity =" + targetCityModel.TargetCity);
 
         commandLider.SetTargetLider(CountryLiderList.Where(a => a.FlagId == targetCityModel.TargetCity.FlagId).FirstOrDefault());
 
@@ -108,7 +108,7 @@ Debug.Log("0000-- ---- -- --- -- targetCityModel = " + targetCityModel + " -----
         {
             case GlobalParam.TypeEvent.Propaganda:
                 commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
-                Debug.Log(countryLider.GetName()+ " =  countryLider.FiendLider  = " + countryLider);
+                Debug.Log(countryLider.Name + " =  countryLider.FiendLider  = " + countryLider);
                 Debug.Log( " 0000  countryLider.FiendLider  = " + countryLider.FiendLider);
                 var target = countryLider.GetTargetCitySelectPlayer();
                 Debug.Log(" 0001  countryLider.FiendLider  = " + countryLider.GetTargetCitySelectPlayer());

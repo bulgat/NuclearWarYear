@@ -307,12 +307,12 @@ public class MainModel
 	public void TotalTurn(int FlagId) {
 
 		foreach (CountryLider lider in this.CountryLiderList) {
-			new MainSetTurnLider().SatisfyEventOneLiderTurn(lider.FlagId, this.CountryLiderList, this.TownList, lider.GetCommandLiderFirst().GetIncident());
+			new MainSetTurnLider().SatisfyEventOneLiderTurn(lider.FlagId, this.CountryLiderList, this.TownList, lider.GetCommandLiderFirst(CountYear).GetIncident(), CountYear);
 		}
 	}
 	public Incident SatisfyOneLiderTurn(int FlagId, Incident CommandIncident)
 	{
-		return new MainSetTurnLider().SatisfyEventOneLiderTurn(FlagId, CountryLiderList, TownList, CommandIncident);
+		return new MainSetTurnLider().SatisfyEventOneLiderTurn(FlagId, CountryLiderList, TownList, CommandIncident, CountYear);
 	}
 
 
@@ -330,9 +330,9 @@ public class MainModel
 
 		liderPlayer.AddCommandLiderList(new List<CommandLider>() { new CommandLider(GlobalParam.TypeEvent.Propaganda, CountYear) });
 
-        var command = liderPlayer.GetCommandLiderFirst();
+        var command = liderPlayer.GetCommandLiderFirst(CountYear);
 
-                liderPlayer.GetCommandLiderFirst().SetTargetCity(new TargetCityModel(enemyTownCity, enemyliderPlayer));
+                liderPlayer.GetCommandLiderFirst(CountYear).SetTargetCity(new TargetCityModel(enemyTownCity, enemyliderPlayer));
                 liderPlayer.SetTargetCity(new TargetCityModel(enemyTownCity, enemyliderPlayer));
 
 
@@ -396,7 +396,7 @@ public class MainModel
         foreach (CountryLider lider in this.CountryLiderList)
         {
 
-            foreach (CommandLider commandLider in lider.GetCommandLider())
+            foreach (CommandLider commandLider in lider.GetStackCommandLider(CountYear))
             {
 
                 //StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.GetIncident()));

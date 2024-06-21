@@ -21,7 +21,7 @@ public class CommandLider
     public CountryLider LiderFiend { get; private set; }
     public List<string> _reportProducedWeaponList { get; private set; }
     List<GlobalParam.TypeEvent> VisibleList;
-
+    //public int Year {  get; private set; }
     public CommandLider(GlobalParam.TypeEvent nameCommand,int Year)
     {
         this._MissleList = new List<IWeapon>();

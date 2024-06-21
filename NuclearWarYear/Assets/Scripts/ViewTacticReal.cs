@@ -17,9 +17,6 @@ int canvasIndex = 1;
         this._IconCardList = IconCardList;
         this._TownViewList = TownViewList;
         this._UICardTownList = UICardTownList;
-
-        //ViewIconCard viewIconCard = gameObject.transform.GetChild(0).GetChild(2).GetComponent<ViewIconCard>();
-        //viewIconCard.SetParam(this._IconCardList, 4);
     }
  
     public void CanvasTacticRealSetText(string InfoText, int FlagIndex,int IdImage, List<Sprite> LiderImageList, MainModel mainModel, int indexLider)

@@ -41,7 +41,7 @@ namespace Assets.Scripts.View
             if (textLider != null)
             {
                 
-                textLider.GetComponent<Text>().text = liderPlayer.GetName();
+                textLider.GetComponent<Text>().text = liderPlayer.Name;
             }
             //var textPopulation = gameObject.transform.GetChild(4);
 

@@ -73,7 +73,7 @@ public class AICreateCommand
             commandLider, lider,
             CountYear, fiendLider1,
              commandLiderFortune);
-        Debug.Log("Co lider = " + lider.GetName()+ " DamageP  commandLidersList = " + commandLidersList.Count + "   damage = " );
+        Debug.Log("Co lider = " + lider.Name+ " DamageP  commandLidersList = " + commandLidersList.Count + "   damage = " );
         lider.AddCommandLiderList(commandLidersList);
     }
 
@@ -98,7 +98,7 @@ public class AICreateCommand
             {
                 if (lider.ReleaseCommandList.Last().Type == GlobalParam.TypeEvent.Missle)
                 {
-                    Debug.Log(lider.GetName()+"  @@@@@@@@@@@@@@@@@ I = AttackMissle   "+ lider.ReleaseCommandList.Last().Name);
+                    Debug.Log(lider.Name+"  @@@@@@@@@@@@@@@@@ I = AttackMissle   "+ lider.ReleaseCommandList.Last().Name);
                     //actionNameCommand = GlobalParam.TypeEvent.AttackMissle;
                     lider.ReleaseCommandList.Last().SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
                 }
@@ -108,7 +108,7 @@ public class AICreateCommand
                     lider.ReleaseCommandList.Last().SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
                 }
             }
-            Debug.Log(lider.GetName() + "  result (" + lider.ReleaseCommandList.Last().GetYear() + ") year = "
+            Debug.Log(lider.Name + "  result (" + lider.ReleaseCommandList.Last().GetYear() + ") year = "
                 + lider.ReleaseCommandList.Last().GetYear() + "  CountYear = " + countYear +
                 "      LAST  type = " + lider.ReleaseCommandList.Last().Type + " =   type =    " + type.GetName());
             

@@ -69,8 +69,8 @@ public class Incident : Weapon, IWeapon
     }
     public string FullMessage(CountryLider lider)
     {
-        Debug.Log(lider.GetName()+" = Z^^^^^^^^ " + GetMessage() + "   lider = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
-        return "" + lider.GetName() + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
+        Debug.Log(lider.Name +" = Z^^^^^^^^ " + GetMessage() + "   lider = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
+        return "" + lider.Name + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
     }
     string GetNameFiendLider() {
         
@@ -83,7 +83,7 @@ public class Incident : Weapon, IWeapon
         {
             return "";
         }
-        return this.PopulationEvent.FiendCountryLider.GetName(); 
+        return this.PopulationEvent.FiendCountryLider.Name; 
     }
     string GetDamagePopulation()
     {

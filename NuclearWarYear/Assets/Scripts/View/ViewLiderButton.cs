@@ -60,7 +60,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
 
         
 
-        if (countryLider.GetCommandLiderFirst().GetVisibleBomber())
+        if (countryLider.GetCommandLiderFirst(_mainModel.CountYear).GetVisibleBomber())
         {
             if (this.IconCircleReadyList!=null)
             {
@@ -68,7 +68,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
                 circleReady.sprite = this.IconCircleReadyList[0];
             }
         }
-        if (countryLider.GetCommandLiderFirst().GetVisibleMissle())
+        if (countryLider.GetCommandLiderFirst(_mainModel.CountYear).GetVisibleMissle())
         {
             if (this.IconCircleReadyList != null)
             {
@@ -78,7 +78,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         }
 
 
-        GetComponentInChildren<UnityEngine.UI.Text>().text = this.Lider.GetName() +
+        GetComponentInChildren<UnityEngine.UI.Text>().text = this.Lider.Name +
             " (" + this.Lider.GetAllOwnPopulation() + ")";
         
         

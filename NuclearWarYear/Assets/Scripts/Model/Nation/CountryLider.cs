@@ -16,7 +16,7 @@ public class CountryLider
 	public bool Player;
 	
 	public GameObject PropagandaBuilding;
-	private List<CommandLider> _CommandLiderList;
+	//private List<CommandLider> _CommandLiderList;
     public  List<CommandLider> StackCommandLiderList { private set; get; }
 
     public List<Incident> ReleaseCommandList { private set; get; }
@@ -31,9 +31,9 @@ public class CountryLider
 	private TargetCityModel _targetCitySelectPlayer;
     public CountryLider FiendLider { private set; get; }
 
-    private string Name;
+    public string Name { private set; get; }
 
-	IncidentEvent EventTotalTurn;
+    IncidentEvent EventTotalTurn;
 
     public int MissleId;
 	public RelationShip _RelationFeind;
@@ -42,7 +42,7 @@ public class CountryLider
 	public CountryLider(bool player,List<IWeapon> missleList,
 		GameObject PropagandaBuild,List<CityModel> TownList, ScenarioLider scenarioLider,int CountryId) 
 	{
-		this._CommandLiderList = new List<CommandLider>();
+		//this._CommandLiderList = new List<CommandLider>();
         this.StackCommandLiderList = new List<CommandLider>();
         this.FlagId = scenarioLider.FlagId;
 		this.Player = player;
@@ -78,12 +78,13 @@ public class CountryLider
 	public IncidentEvent GetEventTotalTurn() {
 		return this.EventTotalTurn;
 	}
+	/*
 	public string GetName()
 	{
 		return this.Name;
 
 	}
-	
+	*/
 	public int GetMood(int FlagId)
     {
 		return _RelationFeind.GetMood(FlagId);
@@ -96,18 +97,20 @@ public class CountryLider
 	{
 		return this._dead;
 	}
-	public List<CommandLider> GetCommandLider()
+	public List<CommandLider> GetStackCommandLider(int Year)
 	{
-		return this._CommandLiderList;
+		return this.StackCommandLiderList.Where(a=>a.GetIncident().Year == Year).ToList();
 	}
-    public CommandLider GetCommandLiderFirst()
+    public CommandLider GetCommandLiderFirst(int CountYear)
     {
+		/*
 		if (this._CommandLiderList == null)
 		{
 			return null;
-		}
-        
-        return this._CommandLiderList.FirstOrDefault();
+		}*/
+		Debug.Log("GetCommandLiderFirst  CountYear = " + CountYear);
+        //return this._CommandLiderList.FirstOrDefault();
+        return this.StackCommandLiderList.FirstOrDefault(a=>a.GetIncident().Year == CountYear);
     }
 	public void SetCommandRealise(Incident commandLider)
 	{
@@ -117,7 +120,7 @@ public class CountryLider
 
     public void AddCommandLiderList(List<CommandLider> commandLiderList)
 	{
-		this._CommandLiderList = commandLiderList;
+		//this._CommandLiderList = commandLiderList;
         this.StackCommandLiderList.AddRange(commandLiderList);
         //this._CommandLiderList.AddRange(commandLiderList);
     }

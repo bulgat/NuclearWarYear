@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class LiderHelper 
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+public class LiderHelper
 {
-	public CountryLider GetLiderEnemy(List<CountryLider> CountryLiderList,CountryLider lider){
+	public CountryLider GetLiderEnemy(List<CountryLider> CountryLiderList,CountryLider lider,int CountYear)
+    {
 		
-		if(lider.GetCommandLiderFirst()._TargetCity == null){
+		if(lider.GetCommandLiderFirst(CountYear)._TargetCity == null){
             return null;
 		}
 		//CityModel city = lider.GetCommandLiderFirst().GetTargetCity().TargetCity;	
 		return new LiderHelperOne().GetLiderOne(CountryLiderList,
-			lider.GetCommandLiderFirst()._TargetCity.TargetCity.FlagId);
+			lider.GetCommandLiderFirst(CountYear)._TargetCity.TargetCity.FlagId);
 	}
 }

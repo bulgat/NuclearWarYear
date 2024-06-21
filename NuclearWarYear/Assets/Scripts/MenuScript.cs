@@ -450,7 +450,7 @@ public class MenuScript : MonoBehaviour
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
 
-            foreach (CommandLider commandLider in lider.GetCommandLider())
+            foreach (CommandLider commandLider in lider.GetStackCommandLider(_mainModel.CountYear))
             {
 
                 StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.GetIncident()));
@@ -505,7 +505,7 @@ public class MenuScript : MonoBehaviour
     }
     private CityModel TargetManager(CountryLider lider)
     {
-        CityModel cityTown = lider.GetCommandLider().First()._TargetCity.TargetCity;
+        CityModel cityTown = lider.GetStackCommandLider(_mainModel.CountYear).First()._TargetCity.TargetCity;
         if (cityTown != null)
         {
             GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);
@@ -690,7 +690,7 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
 
         CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
 
-        if (liderPlayer0.GetCommandLider().First().GetVisibleMissle())
+        if (liderPlayer0.GetStackCommandLider(_mainModel.CountYear).First().GetVisibleMissle())
         {
 
             var cityTarget = liderPlayer0.GetTargetCitySelectPlayer();
@@ -711,7 +711,7 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
         }
 
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
-        if (liderPlayer.GetCommandLiderFirst().GetVisibleBomber())
+        if (liderPlayer.GetCommandLiderFirst(_mainModel.CountYear).GetVisibleBomber())
         {
 
             var cityTarget = liderPlayer.GetTargetCitySelectPlayer();
