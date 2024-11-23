@@ -23,7 +23,7 @@ namespace Assets.Scripts.Model.createCommand
                 {
                     UnityEngine.Debug.Log(countryLider.GetTargetCitySelectPlayer()+ "  RESU  PLAYER  = Mutation  =    ");
                     actionCommand = eventFortuneIncident.Name;
-                    commandLider = new CommandLider(actionCommand, Year);
+                    commandLider = new CommandLider(actionCommand, countryLider._RelationFeind.GetHighlyHatredLiderRandom(), Year);
                     commandLider.SetVisibleEventList(eventFortuneIncident.Name, true);
                     commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
                     commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);

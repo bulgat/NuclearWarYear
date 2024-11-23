@@ -6,6 +6,7 @@ using Assets.Scripts.Model.scenario;
 using Assets.Scripts.Model;
 using Assets.Scripts.Model.Nation;
 using Assets.Scripts.Model.param;
+using static Assets.Scripts.Model.param.GlobalParam;
 
 [System.Serializable]
 public class CountryLider 
@@ -16,7 +17,6 @@ public class CountryLider
 	public bool Player;
 	
 	public GameObject PropagandaBuilding;
-	//private List<CommandLider> _CommandLiderList;
     public  List<CommandLider> StackCommandLiderList { private set; get; }
 
     public List<Incident> ReleaseCommandList { private set; get; }
@@ -42,7 +42,6 @@ public class CountryLider
 	public CountryLider(bool player,List<IWeapon> missleList,
 		GameObject PropagandaBuild,List<CityModel> TownList, ScenarioLider scenarioLider,int CountryId) 
 	{
-		//this._CommandLiderList = new List<CommandLider>();
         this.StackCommandLiderList = new List<CommandLider>();
         this.FlagId = scenarioLider.FlagId;
 		this.Player = player;
@@ -78,13 +77,7 @@ public class CountryLider
 	public IncidentEvent GetEventTotalTurn() {
 		return this.EventTotalTurn;
 	}
-	/*
-	public string GetName()
-	{
-		return this.Name;
 
-	}
-	*/
 	public int GetMood(int FlagId)
     {
 		return _RelationFeind.GetMood(FlagId);
@@ -99,17 +92,20 @@ public class CountryLider
 	}
 	public List<CommandLider> GetStackCommandLider(int Year)
 	{
+
 		return this.StackCommandLiderList.Where(a=>a.GetIncident().Year == Year).ToList();
 	}
-    public CommandLider GetCommandLiderFirst(int CountYear)
+    public CommandLider GetCommandLiderOne(int CountYear)
     {
-		/*
-		if (this._CommandLiderList == null)
+		if (this.StackCommandLiderList.Count == 0)
 		{
-			return null;
-		}*/
-		Debug.Log("GetCommandLiderFirst  CountYear = " + CountYear);
-        //return this._CommandLiderList.FirstOrDefault();
+Debug.LogWarning("Error GetCommandLiderFirst   "  );
+            //this.StackCommandLiderList.Add( new DictionaryEssence().BuildIncident(GlobalParam.TypeEvent.Propaganda, CountYear)) ;
+            this.StackCommandLiderList.Add(new CommandLider(GlobalParam.TypeEvent.Propaganda, this._RelationFeind.GetHighlyHatredLiderRandom(), CountYear));
+        }
+
+		
+
         return this.StackCommandLiderList.FirstOrDefault(a=>a.GetIncident().Year == CountYear);
     }
 	public void SetCommandRealise(Incident commandLider)
@@ -120,9 +116,7 @@ public class CountryLider
 
     public void AddCommandLiderList(List<CommandLider> commandLiderList)
 	{
-		//this._CommandLiderList = commandLiderList;
         this.StackCommandLiderList.AddRange(commandLiderList);
-        //this._CommandLiderList.AddRange(commandLiderList);
     }
 	public int GetAllOwnPopulation() {
 		int maxPopulation=0;

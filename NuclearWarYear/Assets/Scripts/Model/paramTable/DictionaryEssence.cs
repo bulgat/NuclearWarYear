@@ -30,7 +30,7 @@ public class DictionaryEssence
 
         new Incident(GlobalParam.TypeEvent.Ufo, GlobalParam.TypeEvent.Incident, 10, "Ufo инопланитяне прибыли в город +",new DamageParam(-5,11)),
         new Incident(GlobalParam.TypeEvent.Baby, GlobalParam.TypeEvent.Incident, 11, "Бэбибум прибавка населения +",new DamageParam(-5, 12)),
-        new Incident(GlobalParam.TypeEvent.RocketRich, GlobalParam.TypeEvent.Incident, 12, "Богатые и Маск постороили ракету на Луну ",new DamageParam(5, 13)),
+        new Incident(GlobalParam.TypeEvent.RocketRich, GlobalParam.TypeEvent.Incident, 12, "Богатые граждвне с помощью Маска постороили ракету на Луну ",new DamageParam(5, 13)),
         new Incident(GlobalParam.TypeEvent.CrazyCow, GlobalParam.TypeEvent.Incident, 13,"Ковид-сумашедшествие от коров",new DamageParam(5, 14)),
 
         new Incident(GlobalParam.TypeEvent.Build, GlobalParam.TypeEvent.Incident, 14, "Производство вооружения ",new DamageParam(0, 8)),

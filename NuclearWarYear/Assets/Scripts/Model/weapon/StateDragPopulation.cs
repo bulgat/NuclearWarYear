@@ -9,13 +9,14 @@ namespace Assets.Scripts.Model.weapon
     public class StateDragPopulation:PopulationEvent
     {
         public string Name { get; set; } = "Drag";
-        public StateDragPopulation(string message, int population, CityModel myCity, CityModel fiendCity, CountryLider fiendCountryLider) {
+        public StateDragPopulation(string message, int population,
+            CityModel myCity, CityModel fiendCity, CountryLider fiendCountryLider):base(fiendCountryLider) {
             this.Message = message;
             this.MyPopulation = population;
             this.FiendPopulation = -population;
             this.MyCity = myCity;
             this.FiendCity = fiendCity;
-            this.FiendCountryLider = fiendCountryLider;
+            //this.FiendCountryLider = fiendCountryLider;
         }
         public CityModel GetMyCity()
         {

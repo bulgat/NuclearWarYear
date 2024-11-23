@@ -25,27 +25,13 @@ public class SwitchActionHelper
         TargetCityModel targetCityModel = countryLider.GetTargetCitySelectPlayer();
         List<CommandLider> commandLiderList = new List<CommandLider>();
 
-        //ResetAction();
-
-        //bool AIfiend = countryLider.FlagId != FlagIdPlayer;
-
-        //CountryLider fiendLider1 = new BuildingCentralHelper().GetFiendLider(CountryLiderList, countryLider.FlagId);
-        //CountryLider fiendLider1 = countryLider._RelationFeind.GetHighlyHatredLiderRandom();
-
-        /*
-        TargetCityModel targetCityModel
-            = new TargetCityModel(new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer,
-            countryLider.FlagId != FlagIdPlayer, TownList, countryLider, fiendLider1), fiendLider1);
-        */
-        //Change Ai Command
         if (countryLider.FlagId != FlagIdPlayer)
         {
             if (commandLider.GetNameCommandFirst() == GlobalParam.TypeEvent.Defence)
             {
                 if (countryLider.GetDefenceWeapon().Count() <= 0)
                 {
-                    commandLider = new CommandLider(GlobalParam.TypeEvent.Propaganda, Year);
-                    //commandLider.Se = GlobalParam.TypeEvent.Propaganda;
+                    commandLider = new CommandLider(GlobalParam.TypeEvent.Propaganda, countryLider._RelationFeind.GetHighlyHatredLiderRandom(), Year);
                 }
             }
 
@@ -54,24 +40,12 @@ public class SwitchActionHelper
         }
         else
         {
-            Debug.Log( "    ---- ---- ------ ---- -- -------- N  =" + commandLider._TargetCity?.TargetCity);
-            //add auto target city
-            //commandLider._TargetCity?.TargetCity
             if (commandLider._TargetCity == null)
             {
                 
                 AiAddTargetCity(targetCityModel, commandLider, fiendLider1);
-Debug.Log("0000-- ---- -- --- -- targetCityModel = " + targetCityModel + " -------- N  =" + commandLider._TargetCity?.TargetCity);
             }
         }
-
-
-        /*
-        // Счастливая карта!
-        CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(targetCityModel, countryLider.FlagId,
-            countryLider.FlagId != FlagIdPlayer, TownList, CountryLiderList, countryLider, Year);
-        */
-
         this.TreatmentCommand(commandLider.GetNameCommandFirst(), commandLider,  countryLider.FlagId,
             countryLider.FlagId != FlagIdPlayer, TownList,
         CountryLiderList, countryLider);
@@ -90,7 +64,6 @@ Debug.Log("0000-- ---- -- --- -- targetCityModel = " + targetCityModel + " -----
 
             commandLiderList.Add(commandLiderFortune);
         }
-        Debug.Log(Year+"    ---- ---- ------ ---- -- -------- Name   =" + commandLiderList.First().GetNameCommandFirst());
         return commandLiderList;
     }
     private void AiAddTargetCity(TargetCityModel targetCityModel, CommandLider commandLider, CountryLider enemyLider)
@@ -109,10 +82,10 @@ Debug.Log("0000-- ---- -- --- -- targetCityModel = " + targetCityModel + " -----
             case GlobalParam.TypeEvent.Propaganda:
                 commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
                 Debug.Log(countryLider.Name + " =  countryLider.FiendLider  = " + countryLider);
-                Debug.Log( " 0000  countryLider.FiendLider  = " + countryLider.FiendLider);
+                
                 var target = countryLider.GetTargetCitySelectPlayer();
-                Debug.Log(" 0001  countryLider.FiendLider  = " + countryLider.GetTargetCitySelectPlayer());
-                Debug.Log(" 0002  countryLider.FiendLider  = " + countryLider.GetTargetCitySelectPlayer().TargetCity);
+                
+                
                 countryLider.GetTargetCitySelectPlayer().TargetCity= new ModGameEngine().GetCityRandomFlagId(TownList, countryLider.FiendLider, FlagId, AIfiend);
                 break;
             case GlobalParam.TypeEvent.Build:

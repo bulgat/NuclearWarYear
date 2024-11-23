@@ -33,47 +33,43 @@ public class AICreateCommand
         if (lider.ReleaseCommandList != null)
         {
             actionNameCommand = ChangeIncidentCommand(lider, actionNameCommand, CountYear);
-
         }
-        
+
         if (actionNameCommand == GlobalParam.TypeEvent.None)
         {
             if (lider.FlagId != FlagIdPlayer)
             {
                 actionNameCommand = new RandomActionCommand().GetRandomActionCommand();
-
             }
             else
             {
-                
                 actionNameCommand = GlobalParam.TypeEvent.Propaganda;
             }
         }
-        
-            CountryLider fiendLider1 = lider._RelationFeind.GetHighlyHatredLiderRandom();
 
-            TargetCityModel targetCityModel
-                = new TargetCityModel(new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer,
-                lider.FlagId != FlagIdPlayer, TownList, lider, fiendLider1), fiendLider1);
+        CountryLider fiendLider1 = lider._RelationFeind.GetHighlyHatredLiderRandom();
 
-        if (lider.FlagId!=_flagIdPlayer) {
+        TargetCityModel targetCityModel
+            = new TargetCityModel(new TargetHelper().GetTargetRandom(CountryLiderList, FlagIdPlayer,
+            lider.FlagId != FlagIdPlayer, TownList, lider, fiendLider1), fiendLider1);
+
+        if (lider.FlagId != _flagIdPlayer)
+        {
             lider.SetTargetCity(targetCityModel);
         }
 
+        // Счастливая карта!
+        CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
+            lider.FlagId != FlagIdPlayer, lider, CountYear);
 
-            // Счастливая карта!
-            CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
-                lider.FlagId != FlagIdPlayer, lider, CountYear);
-        
-
-        CommandLider commandLider = new CommandLider(actionNameCommand, CountYear);
+        CommandLider commandLider = new CommandLider(actionNameCommand, fiendLider1, CountYear);
         ResetAction();
         List<CommandLider> commandLidersList = new SwitchActionHelper().SwitchAction(CountryLiderList,
             TownList, FlagIdPlayer,
             commandLider, lider,
             CountYear, fiendLider1,
              commandLiderFortune);
-        Debug.Log("Co lider = " + lider.Name+ " DamageP  commandLidersList = " + commandLidersList.Count + "   damage = " );
+
         lider.AddCommandLiderList(commandLidersList);
     }
 
@@ -98,20 +94,15 @@ public class AICreateCommand
             {
                 if (lider.ReleaseCommandList.Last().Type == GlobalParam.TypeEvent.Missle)
                 {
-                    Debug.Log(lider.Name+"  @@@@@@@@@@@@@@@@@ I = AttackMissle   "+ lider.ReleaseCommandList.Last().Name);
-                    //actionNameCommand = GlobalParam.TypeEvent.AttackMissle;
                     lider.ReleaseCommandList.Last().SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
                 }
                 if (lider.ReleaseCommandList.Last().Type == GlobalParam.TypeEvent.Bomber)
                 {
-                    //actionNameCommand = GlobalParam.TypeEvent.AttackBomber;
                     lider.ReleaseCommandList.Last().SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
                 }
             }
-            Debug.Log(lider.Name + "  result (" + lider.ReleaseCommandList.Last().GetYear() + ") year = "
-                + lider.ReleaseCommandList.Last().GetYear() + "  CountYear = " + countYear +
-                "      LAST  type = " + lider.ReleaseCommandList.Last().Type + " =   type =    " + type.GetName());
-            
+
+
         }
         return actionNameCommand;
     }

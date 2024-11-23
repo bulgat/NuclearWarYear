@@ -51,15 +51,13 @@ int canvasIndex = 1;
     {
         float h = gameObject.GetComponent<RectTransform>().rect.height;
         int count = 0;
-        //Debug.Log(gameObject.name+"   I  -- -  in  " + gameObject.transform.GetChild(0).name);
-        //Debug.Log(gameObject.name + "   I     in  " + gameObject.transform.GetChild(1).name);
+
         if (this._TownViewList != null)
         {
             foreach (var town in this._TownViewList)
             {
                 Vector3 coordinates = Camera.main.WorldToScreenPoint(town.transform.position);
                 this._UICardTownList[count].transform.SetParent(gameObject.transform.GetChild(0));
-                //this._UICardTownList[count].transform.SetParent(gameObject.transform);
                 this._UICardTownList[count].transform.position = new Vector3(coordinates.x, coordinates.y - h / 10, coordinates.z);
 
                 //Population

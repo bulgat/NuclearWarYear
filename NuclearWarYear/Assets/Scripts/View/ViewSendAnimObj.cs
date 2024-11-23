@@ -1,3 +1,4 @@
+using Assets.Scripts.View;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class ViewSendAnimObj
 
             bool returnBomber = false;
             float offset = 260f;
-            GameObject cityTown = GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
+            GameObject cityTown = new SearchTownObject().GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
             City city = cityTown.GetComponent<City>();
             Vector3 targetBomber = cityTown.transform.position;
             if (AirPlane)
@@ -69,17 +70,5 @@ public class ViewSendAnimObj
 
         }
     }
-    public GameObject GetTownViewWithId(CityModel cityModel, List<GameObject> TownList)
-    {
-        foreach (GameObject cityTown in TownList)
-        {
-            City city = cityTown.GetComponent<City>();
-            if (city.GetId() == cityModel.GetId())
-            {
-                return cityTown;
 
-            }
-        }
-        return null;
-    }
 }

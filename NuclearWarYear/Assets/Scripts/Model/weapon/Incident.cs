@@ -17,7 +17,8 @@ public class Incident : Weapon, IWeapon
     private bool ShowLider { get; set; }
     public int Year {private set; get;}
 
-    public Incident(GlobalParam.TypeEvent name, GlobalParam.TypeEvent type, int id, string message, DamageParam damageParam) {
+    public Incident(GlobalParam.TypeEvent name, GlobalParam.TypeEvent type,
+        int id, string message, DamageParam damageParam) {
 		this.Name=name;
 		this.Id = id;
 		this.IdImage = damageParam.IdImage;
@@ -69,12 +70,13 @@ public class Incident : Weapon, IWeapon
     }
     public string FullMessage(CountryLider lider)
     {
-        Debug.Log(lider.Name +" = Z^^^^^^^^ " + GetMessage() + "   lider = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
+        Debug.Log( "@@@I  - GetDamagePopulation() -  " + GetDamagePopulation()+ " GetNameFiendLider() = " + GetNameFiendLider());
+        Debug.Log("@@@I " + lider.Name +" = Z^^^^^  " + GetMessage() + "   lider = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
         return "" + lider.Name + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
     }
     string GetNameFiendLider() {
-        
-        
+        Debug.Log("    ---- ---- ------ -- -   =" + this.PopulationEvent.FiendCountryLider);
+
         if (this.PopulationEvent?.FiendCountryLider == null)
         {
             return "";
@@ -83,6 +85,7 @@ public class Incident : Weapon, IWeapon
         {
             return "";
         }
+        
         return this.PopulationEvent.FiendCountryLider.Name; 
     }
     string GetDamagePopulation()
@@ -118,10 +121,6 @@ public class Incident : Weapon, IWeapon
     {
         this.PopulationEvent = statePopulationEvent;
         
-        if (statePopulationEvent.FiendCountryLider == null)
-        {
-            throw new ArgumentNullException("not lider");
-        }
         this.ShowLider = showFiend;
     }
 

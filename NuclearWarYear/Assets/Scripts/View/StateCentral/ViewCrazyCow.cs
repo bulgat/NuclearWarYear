@@ -1,3 +1,4 @@
+using Assets.Scripts.View;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class ViewCrazyCow : ViewSendAnimObj
         {
 
             float offset = 260f;
-            GameObject cityTown = GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
+            GameObject cityTown = new SearchTownObject().GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
             City city = cityTown.GetComponent<City>();
             Vector3 targetBomber = cityTown.transform.position;
             

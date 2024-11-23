@@ -7,11 +7,11 @@ public class LiderHelper
 	public CountryLider GetLiderEnemy(List<CountryLider> CountryLiderList,CountryLider lider,int CountYear)
     {
 		
-		if(lider.GetCommandLiderFirst(CountYear)._TargetCity == null){
+		if(lider.GetCommandLiderOne(CountYear)._TargetCity == null){
             return null;
 		}
 		//CityModel city = lider.GetCommandLiderFirst().GetTargetCity().TargetCity;	
 		return new LiderHelperOne().GetLiderOne(CountryLiderList,
-			lider.GetCommandLiderFirst(CountYear)._TargetCity.TargetCity.FlagId);
+			lider.GetCommandLiderOne(CountYear)._TargetCity.TargetCity.FlagId);
 	}
 }

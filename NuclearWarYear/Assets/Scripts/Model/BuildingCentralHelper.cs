@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingCentralHelper 
+public class BuildingCentralHelper
 {
-   public BuildingCentral GetBuildingCentral(CountryLider CountryLider)
+    public BuildingCentral GetBuildingCentral(CountryLider CountryLider)
     {
 
-				return CountryLider.PropagandaBuilding.GetComponent<BuildingCentral>();
+        return CountryLider.PropagandaBuilding.GetComponent<BuildingCentral>();
 
-	}
-	public CountryLider GetFiendLider(List<CountryLider> CountryLiderList, int FlagId)
-	{
+    }
+    public CountryLider GetFiendLider(List<CountryLider> CountryLiderList, int FlagId)
+    {
         foreach (CountryLider CountryLider in CountryLiderList)
         {
             if (CountryLider.FlagId == FlagId)

@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Linq;
 
 public class RelationShip {
-   // public int Mood { set; get; }
     private List<CountryLider> _CountryLiderList;
     List<RelationMood> RelationMoodList;
 
@@ -30,6 +29,7 @@ public class RelationShip {
     }
     public void SetNegativeMood(int FlagId,int NegativeMood)
     {
+        
         RelationMood relationLider = this.RelationMoodList.Where(a => a.Lider.FlagId == FlagId).FirstOrDefault();
         relationLider.SetNegativeMood(NegativeMood);
        

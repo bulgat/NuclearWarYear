@@ -22,12 +22,13 @@ public class CommandLider
     public List<string> _reportProducedWeaponList { get; private set; }
     List<GlobalParam.TypeEvent> VisibleList;
     //public int Year {  get; private set; }
-    public CommandLider(GlobalParam.TypeEvent nameCommand,int Year)
+    public CommandLider(GlobalParam.TypeEvent nameCommand, CountryLider liderFiend,int Year)
     {
         this._MissleList = new List<IWeapon>();
         this.IncidentCommand = new DictionaryEssence().BuildIncident(nameCommand, Year);
         
         this.VisibleList = new List<GlobalParam.TypeEvent>();
+        this.LiderFiend = liderFiend;
     }
     public bool GetNameExecute(GlobalParam.TypeEvent Name)
     {
@@ -52,18 +53,10 @@ public class CommandLider
     {
         this.VisibleList.Add(Key);
     }
-    /*
-    public int GetSizeIdMissle()
-    {
-        return this.MissleId;
 
-    }
-    */
     public void SetVisibleMissle(bool visibleMissle)
     {
         this.VisibleList.Add(GlobalParam.TypeEvent.Missle);
-        //this.MissleId = MissleId;
-
     }
     public bool GetVisibleMissle()
     {
@@ -73,9 +66,7 @@ public class CommandLider
     {
         this.VisibleList.Add(GlobalParam.TypeEvent.Bomber);
         this.VisibleList.Add(GlobalParam.TypeEvent.Airport);
-        //this.MissleId = MissleId;
     }
-
 
     public bool GetVisibleBomber()
     {

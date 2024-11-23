@@ -32,13 +32,8 @@ public class MenuScript : MonoBehaviour
     public Image CanvasResourcePlayerImageLider;
     public Image CanvasResourceFlagImageLider;
     public Text CanvasResourcePlayerTextLider;
-
     public GameObject CanvasReportPrefabs;
-
-    //public Text CanvasReportTextMessage;
-
     public List<GameObject> MapNationFlagList;
-
     public Text CanvasResourcePlayerPopulation;
 
     public GameObject NuclearMap;
@@ -51,16 +46,12 @@ public class MenuScript : MonoBehaviour
     public GameObject TownCard;
 
     public Button ButtonResource;
-
-
     public Button TurnButton;
-
     public Button LiderButton_1;
     public Button LiderButton_2;
     public Button LiderButton_3;
     public Button LiderButton_4;
     public Button LiderButton_5;
-
     public Button NewPaperButton;
 
     public List<Sprite> LiderImageList;
@@ -85,7 +76,6 @@ public class MenuScript : MonoBehaviour
     MainModel _mainModel;
     private int flagIdPlayer;
     public Text TextTypeWriter;
-
 
     float NuclearMapLeftX = 2.5f;
     float NuclearMapRightX = -2.4f;
@@ -117,8 +107,6 @@ public class MenuScript : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // all objects are loaded, call other methods
-
         // StartCoroutine(PrintTypeWriter("LOAD SCENE"));
     }
 
@@ -350,7 +338,7 @@ public class MenuScript : MonoBehaviour
         }
         if (Player)
         {
-            Debug.Log("  a  reset? "  );
+            
             //reset?
             _controller.ResetSelectCityEnemyTargetPlayer();
         }
@@ -489,15 +477,10 @@ public class MenuScript : MonoBehaviour
         buildingCentral.SetTargetBomber(TargetManager(lider));
 
         StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
-
-        Debug.Log(" year = "+_mainModel.CountYear+"  DoneMoveMadeCurrentP "+ CommandIncident.Name+ " f     =" + CommandIncident.GetMessage());
-
     }
     private IEnumerator AfterTurnOneLider(Incident CommandIncident, CountryLider lider)
     {
         yield return new WaitForSeconds(this.waitTurnTime - 1.0f);
-
-
 
         _controller.ReleasePopulationEvent(CommandIncident);
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
@@ -511,7 +494,6 @@ public class MenuScript : MonoBehaviour
             GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);
             City city = viewTown.GetComponent<City>();
 
-
             GameObject targetCityObj = new CityGameObjHelper().GetCityCameObjectWithId(TownViewList, cityTown.GetId());
 
         }
@@ -520,37 +502,29 @@ public class MenuScript : MonoBehaviour
 
     void MissleMethodClick(int IdMissle)
     {
-
         foreach (var item in this.CardButtonList)
         {
             item.transform.localScale = new Vector2(1, 1);
         }
 
-
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
         var missleList = new DictionaryEssence().GetIdTypeEventList(GlobalParam.TypeEvent.Missle).Select(a => { return a.Id; }).ToList();
 
-var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
+        var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
 
         if (missleList.Contains(IdMissle))
         {
-            
-            
             _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
             CanvasReportWindow("Prepare a missle ", IdMissle);
         }
         if (new int[2] { 4, 5 }.Contains(IdMissle))
         {
-            //EventController eventController = new EventController(Controller.Command.Bomber, new EventBomber(_mainModel.GetCurrenFlagPlayer(), IdMissle));
-            //_controller.SendCommand(eventController);
-
             _controller.SetBomber(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
             CanvasReportWindow("Prepare bomber", IdMissle);
 
         }
         if (new int[2] { 6, 7 }.Contains(IdMissle))
         {
-
             _controller.Defence(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(" defence", IdMissle);
         }
@@ -562,12 +536,9 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
         }
         if (new int[1] { 8 }.Contains(IdMissle))
         {
-
             _controller.Building(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(" build weapon", IdMissle);
         }
-
-
     }
 
     void SelectCountryOne()
@@ -577,10 +548,7 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     void LiderButton_1_Method(Button buttonPressed)
     {
         ResetCountryOutline();
-        /*
-        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(1));
-        _controller.SendCommand(eventController);
-        */
+  
         _controller.LiderTargetPlayer(1);
 
         SelectCountryOne();
@@ -591,10 +559,7 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     void LiderButton_2_Method(Button buttonPressed)
     {
         ResetCountryOutline();
-        /*
-        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(2));
-        _controller.SendCommand(eventController);
-        */
+
         _controller.LiderTargetPlayer(2);
 
         ClearCityTargetMark(0, false);
@@ -603,10 +568,7 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     void LiderButton_3_Method(Button buttonPressed)
     {
         ResetCountryOutline();
-        /*
-        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(3));
-        _controller.SendCommand(eventController);
-        */
+   
         _controller.LiderTargetPlayer(3);
 
         ClearCityTargetMark(0, false);
@@ -615,10 +577,7 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     void LiderButton_4_Method(Button buttonPressed)
     {
         ResetCountryOutline();
-        /*
-        EventController eventController = new EventController(Controller.Command.LiderTargetPlayer, new EventSendLider(4));
-        _controller.SendCommand(eventController);
-        */
+  
         _controller.LiderTargetPlayer(4);
 
         ClearCityTargetMark(0, false);
@@ -653,11 +612,8 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
         CountryLineList[4].SetActive(false);
     }
 
-
-
     void ResetAction()
     {
-
         _mainModel.ResetAction();
     }
     // Main time
@@ -670,7 +626,6 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     // fast time
     private IEnumerator AnimationPlayer(float AnimationTime)
     {
-
         yield return new WaitForSeconds(AnimationTime);
 
         _controller.ChangeCurrentPlayer();
@@ -703,15 +658,12 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
                 printMessage.Append("\n Ready. Select target for missle");
             }
             CircleImageReadyParam(1, true);
-            /*
-            EventController eventController = new EventController(Controller.Command.AttackMissle, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-            _controller.SendCommand(eventController);
-            */
+
             _controller.AttackMissle(_mainModel.GetCurrenFlagPlayer());
         }
 
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
-        if (liderPlayer.GetCommandLiderFirst(_mainModel.CountYear).GetVisibleBomber())
+        if (liderPlayer.GetCommandLiderOne(_mainModel.CountYear).GetVisibleBomber())
         {
 
             var cityTarget = liderPlayer.GetTargetCitySelectPlayer();
@@ -730,11 +682,7 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
 
             _controller.AttackBomber(_mainModel.GetCurrenFlagPlayer());
         }
-
-
         ManagerButton();
-
-
 
         SetAllCityVisibleComponent();
         CanvasReportWindow(printMessage.ToString(), 0);
@@ -743,7 +691,6 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     }
     private void CanvasReportWindow(string PrintMessage, int IdEvent)
     {
-
         if (0 == PrintMessage.Length)
         {
             return;
@@ -752,14 +699,11 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
         ViewCanvasReport viewCanvasReport = canvasReport.GetComponent<ViewCanvasReport>();
         viewCanvasReport.SetMessage(PrintMessage);
         viewCanvasReport.SetParam(this.IconCardList, IdEvent);
-
     }
 
     private void ManagerButton()
     {
-
         new ViewManageWeapon().ManagerButton(this, this._mainModel);
-
     }
 
 
@@ -768,7 +712,6 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
         CircleReady.enabled = Visible;
 
         CircleReady.sprite = IconCircleReadyList[IndexImage];
-
     }
 
     private void UpdatePanelVisible()
@@ -778,12 +721,9 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
         {
             Destroy(this.CanTacticReal);
         }
-
     }
     private void SetAllCityVisibleLabelView(bool Visible)
     {
-
-
         if (TownViewList != null)
         {
             foreach (GameObject city in TownViewList)
@@ -803,7 +743,6 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
     {
         UpdatePanelVisible();
 
-
         CountryLider fiendLider = new BuildingCentralHelper().GetFiendLider(_mainModel.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
         BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(fiendLider);
 
@@ -819,27 +758,20 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
 
         if (_mainModel._endGame)
         {
-
             SceneManager.LoadScene("Victory", LoadSceneMode.Single);
         }
         if (Input.GetMouseButtonDown(0))
         {
-
-
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
             RaycastHit2D hit2D = Physics2D.Raycast(mousePos2D, Vector2.zero);
             if (hit2D)
             {
-
                 City city = hit2D.transform.gameObject.GetComponent<City>();
                 SelectCityTargetIdPlayer(city.GetId());
 
-
                 ViewCardWeapon viewCardWeapon = hit2D.transform.gameObject.GetComponent<ViewCardWeapon>();
-
             }
-
         }
         DrawTownInfoList();
         UpdateJoystick();
@@ -858,8 +790,6 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
             //Population
             count++;
         }
-
-
     }
     void UpdateJoystick()
     {
@@ -872,7 +802,6 @@ var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
             _targetNuclearMap.z);
         }
         NuclearMap.transform.position = _targetNuclearMap;
-
     }
     private void MoveAi()
     {

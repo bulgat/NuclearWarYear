@@ -126,8 +126,6 @@ public class Controller
     public void TurnAi()
 	{
 		_mainModel.TurnAi();
-        //new AICreateCommand().EstimationSetCommandAi(_mainModel.ResetAction, _mainModel.CountryLiderList,
-         //  _mainModel.GetTownList(), _mainModel.GetCurrenFlagPlayer(), _mainModel.GetCurrenFlagPlayer());
     }
     public Incident TurnSatisfyOneLider(int flagId, Incident CommandIncident)
 	{
