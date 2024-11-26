@@ -117,9 +117,7 @@ public class BuildingCentral : MonoBehaviour
             }
 
         }
-         Debug.Log( "   I n  "  );
-        //if (UfoObject != null)
-        //{
+
 
         if (NameCommand== GlobalParam.TypeEvent.Ufo 
                 || NameCommand== GlobalParam.TypeEvent.Baby
@@ -162,9 +160,6 @@ public class BuildingCentral : MonoBehaviour
                 UfoObject.SetActive(false);
                 //UfoObject.transform.position = GetTarget();
             }
-        //}
-   
-        //UFOObject
     }
 
     void Update()
@@ -231,7 +226,7 @@ public class BuildingCentral : MonoBehaviour
             }
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
             {
-                 Debug.Log(  "    ang  = " + UfoObject);
+                 
 
                 targetBomber = new Vector3(targetBomber.x + 5, targetBomber.y + 5, targetBomber.z);
 

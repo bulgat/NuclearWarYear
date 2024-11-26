@@ -62,7 +62,7 @@ public class AICreateCommand
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
             lider.FlagId != FlagIdPlayer, lider, CountYear);
 
-        CommandLider commandLider = new CommandLider(actionNameCommand, fiendLider1, CountYear);
+        CommandLider commandLider = new CommandLider(actionNameCommand, fiendLider1, CountYear, targetCityModel);
         ResetAction();
         List<CommandLider> commandLidersList = new SwitchActionHelper().SwitchAction(CountryLiderList,
             TownList, FlagIdPlayer,

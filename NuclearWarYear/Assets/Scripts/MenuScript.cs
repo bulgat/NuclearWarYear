@@ -132,7 +132,7 @@ public class MenuScript : MonoBehaviour
         NewPaperButton.onClick.AddListener(() => ButtonNewPaper());
 
 
-        _controller.SelectCityEnemyTargetPlayer(3, _mainModel.GetCurrenFlagPlayer());
+        _controller.SelectCityEnemyTargetPlayer(null, _mainModel.GetCurrenFlagPlayer());
         _controller.TurnAi();
    
         SelectCountryOne();

@@ -75,12 +75,13 @@ public class Incident : Weapon, IWeapon
         return "" + lider.Name + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
     }
     string GetNameFiendLider() {
-        Debug.Log("    ---- ---- ------ -- -   =" + this.PopulationEvent.FiendCountryLider);
+        
 
         if (this.PopulationEvent?.FiendCountryLider == null)
         {
             return "";
         }
+Debug.Log("    ---- -- ------ -- -   =" + this.PopulationEvent.FiendCountryLider);
         if (GlobalParam.MessageDictionary[this.Name].ShowFiend == false)
         {
             return "";
@@ -93,16 +94,16 @@ public class Incident : Weapon, IWeapon
         
         if (this.PopulationEvent == null)
         {
-            return "";
+            return "-0-";
         }
-        
+        Debug.Log(  "    Li l TargetCity =" + this.PopulationEvent.FiendCountryLider);
         int population  = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
         Debug.Log("001 GetDamagePopulation " + this.PopulationEvent.MyPopulation + "-" + this.PopulationEvent.FiendPopulation+ " population = "+ population);
         if (population > 0)
         {
             return population.ToString();
         }
-        return "";
+        return "_0_";
 
     }
     public int GetYear()
@@ -119,6 +120,7 @@ public class Incident : Weapon, IWeapon
     }
     public void SetReleaseMessage(PopulationEvent statePopulationEvent,bool showFiend)
     {
+        Debug.Log(" =  countryLi   "+ statePopulationEvent.MyPopulation + "-" + statePopulationEvent.FiendPopulation+ " statePopulationEvent  = " + statePopulationEvent);
         this.PopulationEvent = statePopulationEvent;
         
         this.ShowLider = showFiend;

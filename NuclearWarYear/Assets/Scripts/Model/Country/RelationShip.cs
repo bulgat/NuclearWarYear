@@ -6,9 +6,11 @@ using System.Linq;
 public class RelationShip {
     private List<CountryLider> _CountryLiderList;
     List<RelationMood> RelationMoodList;
+    int FlagId;
 
-    public RelationShip()
+    public RelationShip(int liderFlagId)
     {
+        FlagId = liderFlagId;
         //Mood = 100;
     }
     public void InitRelationContry(List<CountryLider> CountryLiderList)
@@ -27,18 +29,18 @@ public class RelationShip {
         
         return relationLider.Mood;
     }
-    public void SetNegativeMood(int FlagId,int NegativeMood)
+    public void SetNegativeMood(int flagId,int NegativeMood)
     {
         
-        RelationMood relationLider = this.RelationMoodList.Where(a => a.Lider.FlagId == FlagId).FirstOrDefault();
+        RelationMood relationLider = this.RelationMoodList.Where(a => a.Lider.FlagId == flagId).FirstOrDefault();
         relationLider.SetNegativeMood(NegativeMood);
        
     }
     public CountryLider GetHighlyHatredLiderRandom()
     {
-        List<RelationMood> relationMoodListSort = this.RelationMoodList.OrderBy(a => a.Mood).ToList();
+        List<RelationMood> relationMoodListSort = this.RelationMoodList.Where(a=>a.Lider.FlagId!= FlagId).OrderBy(a => a.Mood).ToList();
         int curveRandom = CurveRandom();
-
+        Debug.Log("Propag "+ FlagId + "  RES  "+ relationMoodListSort[curveRandom].Lider .FlagId+ "= Mutation  =    "+ relationMoodListSort[curveRandom].Lider.Name+" flag = "+ relationMoodListSort[curveRandom].Lider.FlagId);
         return relationMoodListSort[curveRandom].Lider;  
     }
     int CurveRandom()

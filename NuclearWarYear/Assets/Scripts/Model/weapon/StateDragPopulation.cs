@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Model.weapon
 {
@@ -10,13 +11,17 @@ namespace Assets.Scripts.Model.weapon
     {
         public string Name { get; set; } = "Drag";
         public StateDragPopulation(string message, int population,
-            CityModel myCity, CityModel fiendCity, CountryLider fiendCountryLider):base(fiendCountryLider) {
+            CityModel myCity, 
+            CityModel fiendCity,
+            CountryLider fiendCountryLider):base(fiendCountryLider) {
+
             this.Message = message;
             this.MyPopulation = population;
             this.FiendPopulation = -population;
             this.MyCity = myCity;
             this.FiendCity = fiendCity;
-            //this.FiendCountryLider = fiendCountryLider;
+
+            Debug.Log("    an  = " + fiendCountryLider.Name);
         }
         public CityModel GetMyCity()
         {

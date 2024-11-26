@@ -14,8 +14,6 @@ namespace Assets.Scripts.Model.weapon
             this.Message = message;
             this.MyPopulation = population;
             this.MyCity= myCity;
-
-            //this.FiendCountryLider = fiendCountryLider;
         }
 
         public CityModel GetMyCity()

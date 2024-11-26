@@ -60,7 +60,7 @@ public class CountryLider
 			}
 		}
 		_maxPopulation=GetAllOwnPopulation();
-		_RelationFeind = new RelationShip();
+		_RelationFeind = new RelationShip(FlagId);
 		this.EventTotalTurn = new IncidentEvent(GlobalParam.TypeEvent.Propaganda);
 	}
 	public void DoneMoveMade(bool Value)
@@ -100,8 +100,7 @@ public class CountryLider
 		if (this.StackCommandLiderList.Count == 0)
 		{
 Debug.LogWarning("Error GetCommandLiderFirst   "  );
-            //this.StackCommandLiderList.Add( new DictionaryEssence().BuildIncident(GlobalParam.TypeEvent.Propaganda, CountYear)) ;
-            this.StackCommandLiderList.Add(new CommandLider(GlobalParam.TypeEvent.Propaganda, this._RelationFeind.GetHighlyHatredLiderRandom(), CountYear));
+            //this.StackCommandLiderList.Add(new CommandLider(GlobalParam.TypeEvent.Propaganda, this._RelationFeind.GetHighlyHatredLiderRandom(), CountYear));
         }
 
 		
@@ -137,12 +136,19 @@ Debug.LogWarning("Error GetCommandLiderFirst   "  );
 	}
 	public List<IWeapon> GetDefenceWeapon()
 	{
+
+		foreach(var item  in this._MissleList)
+		{
+Debug.Log("D " + this._MissleList.Count + "   me    = "+ item);
+		}
+
         return this._MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).ToList();
 	}
 
 	public IWeapon GetBomber() {
 
-		return this._MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).FirstOrDefault();
+        
+        return this._MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).FirstOrDefault();
 	}
 	public void RemoveBomber() {
 
@@ -201,10 +207,19 @@ Debug.LogWarning("Error GetCommandLiderFirst   "  );
         _targetCitySelectPlayer = null;
     }
     public void SetTargetCity(TargetCityModel targetCitySelectPlayer){
-		FiendLider = targetCitySelectPlayer.EnemyLider;
+
+        UnityEngine.Debug.Log("F  "+ FlagId + "  Fort  = " + targetCitySelectPlayer.EnemyLider.FlagId);
+        if (targetCitySelectPlayer.EnemyLider.FlagId == FlagId)
+        {
+
+        }
+        FiendLider = targetCitySelectPlayer.EnemyLider;
         _targetCitySelectPlayer =targetCitySelectPlayer;
 	}
 	public TargetCityModel GetTargetCitySelectPlayer(){
+
+	
+
 		return _targetCitySelectPlayer;
 	}
 

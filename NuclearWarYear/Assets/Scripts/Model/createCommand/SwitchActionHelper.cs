@@ -31,7 +31,7 @@ public class SwitchActionHelper
             {
                 if (countryLider.GetDefenceWeapon().Count() <= 0)
                 {
-                    commandLider = new CommandLider(GlobalParam.TypeEvent.Propaganda, countryLider._RelationFeind.GetHighlyHatredLiderRandom(), Year);
+                    commandLider = new CommandLider(GlobalParam.TypeEvent.Propaganda, countryLider._RelationFeind.GetHighlyHatredLiderRandom(), Year, targetCityModel);
                 }
             }
 
@@ -49,12 +49,12 @@ public class SwitchActionHelper
         this.TreatmentCommand(commandLider.GetNameCommandFirst(), commandLider,  countryLider.FlagId,
             countryLider.FlagId != FlagIdPlayer, TownList,
         CountryLiderList, countryLider);
-
+        /*
         if (countryLider.GetTargetCitySelectPlayer() != null)
         {
             commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
         }
-        Debug.Log(targetCityModel+"    Li = "+ countryLider.Name + " Rel TargetCity =" + targetCityModel.TargetCity);
+        */
 
         commandLider.SetTargetLider(CountryLiderList.Where(a => a.FlagId == targetCityModel.TargetCity.FlagId).FirstOrDefault());
 
@@ -68,7 +68,7 @@ public class SwitchActionHelper
     }
     private void AiAddTargetCity(TargetCityModel targetCityModel, CommandLider commandLider, CountryLider enemyLider)
     {
-        commandLider.SetTargetCity(targetCityModel);
+        //commandLider.SetTargetCity(targetCityModel);
         commandLider.SetTargetLider(enemyLider);
     }
     private void TreatmentCommand(GlobalParam.TypeEvent actionCommand, CommandLider commandLider,
@@ -81,7 +81,7 @@ public class SwitchActionHelper
         {
             case GlobalParam.TypeEvent.Propaganda:
                 commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
-                Debug.Log(countryLider.Name + " =  countryLider.FiendLider  = " + countryLider);
+                
                 
                 var target = countryLider.GetTargetCitySelectPlayer();
                 
@@ -111,7 +111,7 @@ public class SwitchActionHelper
                 else
                 {
                     commandLider.SetVisibleAttackBomber(true);
-                    commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
+                    //commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
                     commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
                     commandLider.SetAttackBomber(countryLider.GetBomber());
                 }
@@ -124,7 +124,7 @@ public class SwitchActionHelper
                 else
                 {
                     commandLider.SetVisibleEventList(GlobalParam.TypeEvent.AttackMissle, true);
-                    commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
+                    //commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
                     commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
                     commandLider.SetAttackMissle(countryLider.GetMissle());
                 }

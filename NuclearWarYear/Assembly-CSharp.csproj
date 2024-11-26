@@ -60,6 +60,7 @@
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
     <Compile Include="Assets\Scripts\Model\CheckVictory.cs" />
     <Compile Include="Assets\Scripts\Model\MainModel.cs" />
+    <Compile Include="Assets\Scripts\Model\turnEvent\CreateMissleIncident.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewCrazyCow.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
     <Compile Include="Assets\Scripts\View\ViewManageWeapon.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Scripts\Model\weapon\Incident.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\Defence.cs" />
     <Compile Include="Assets\Scripts\View\ViewLiderHelper.cs" />
+    <Compile Include="Assets\Scripts\Model\turnEvent\CreateBomberIncident.cs" />
     <Compile Include="Assets\Scripts\Fortune.cs" />
     <Compile Include="Assets\Scripts\Controller\EventBomber.cs" />
     <Compile Include="Assets\Scripts\TownCardInfo.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Assets\Scripts\Model\paramTable\GlobalParam.cs" />
     <Compile Include="Assets\Scripts\Model\Nation\LiderHelperOne.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
+    <Compile Include="Assets\Scripts\View\SearchTownObject.cs" />
     <Compile Include="Assets\Scripts\Model\DamagePopulationHelper.cs" />
     <Compile Include="Assets\Scripts\Model\scenario\ParamLider.cs" />
     <Compile Include="Assets\Scripts\Controller\EventMissle.cs" />
@@ -120,6 +123,7 @@
     <Compile Include="Assets\Scripts\MenuStart.cs" />
     <Compile Include="Assets\Scripts\Model\CityModel.cs" />
     <Compile Include="Assets\Scripts\Model\Country\RelationMood.cs" />
+    <Compile Include="Assets\Scripts\Model\turnEvent\CreateSimpleIncident.cs" />
     <Compile Include="Assets\Scripts\Controller\EventSendLider.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\IStatePopulationEvent.cs" />
@@ -143,10 +147,6 @@
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\ViewCanvasReport.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\View\SearchTownObject.cs" />
-    <Compile Include="Assets\Scripts\Model\turnEvent\CreateSimpleIncident.cs" />
-    <Compile Include="Assets\Scripts\Model\turnEvent\CreateBomberIncident.cs" />
-    <Compile Include="Assets\Scripts\Model\turnEvent\CreateMissleIncident.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

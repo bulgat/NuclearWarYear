@@ -12,8 +12,6 @@ namespace Assets.Scripts.Model.weapon
         public string Message { get; protected set; }
         public CityModel MyCity { get; protected set; }
         public CityModel FiendCity { get; protected set; }
-
-
         public CountryLider FiendCountryLider { get; private set; }
         public bool DoubleCity { get; protected set; }
         public int MyPopulation { get; protected set; }

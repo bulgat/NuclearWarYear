@@ -22,14 +22,14 @@ public class DictionaryEssence
         new Incident(GlobalParam.TypeEvent.HeavyBomber, GlobalParam.TypeEvent.Bomber, 5, "Бомбардировщики приведены в готовность",new DamageParam(50,5)),
 
         new Incident(GlobalParam.TypeEvent.Defence, GlobalParam.TypeEvent.Defence, 6, "Защитные системы приведены в готовность",new DamageParam(0,6)),
-        new Incident(GlobalParam.TypeEvent.Defence, GlobalParam.TypeEvent.Defence, 7, "Защитные системы приведены в готовность",new DamageParam(0, 6)),
+        new Incident(GlobalParam.TypeEvent.HeavyDefence, GlobalParam.TypeEvent.Defence, 7, "Защитные системы приведены в готовность",new DamageParam(0, 6)),
 
-        new Incident(GlobalParam.TypeEvent.Propaganda, GlobalParam.TypeEvent.Defence, 9, "Под воздействием пропаганды, население сбежало к ",new DamageParam(0,9)),
+        new Incident(GlobalParam.TypeEvent.Propaganda, GlobalParam.TypeEvent.Defence, 9, "Под воздействием пропаганды, население сбежало к ",new DamageParam(3,9)),
 
-        new Incident(GlobalParam.TypeEvent.Industry, GlobalParam.TypeEvent.Defence, 8, "Производство вооружения ",new DamageParam(0, 8)),
+        //new Incident(GlobalParam.TypeEvent.Industry, GlobalParam.TypeEvent.Defence, 8, "Производство вооружения ",new DamageParam(0, 6)),
 
         new Incident(GlobalParam.TypeEvent.Ufo, GlobalParam.TypeEvent.Incident, 10, "Ufo инопланитяне прибыли в город +",new DamageParam(-5,11)),
-        new Incident(GlobalParam.TypeEvent.Baby, GlobalParam.TypeEvent.Incident, 11, "Бэбибум прибавка населения +",new DamageParam(-5, 12)),
+        new Incident(GlobalParam.TypeEvent.Baby, GlobalParam.TypeEvent.Incident, 11, "Бэбибум прибавка населения +",new DamageParam(5, 12)),
         new Incident(GlobalParam.TypeEvent.RocketRich, GlobalParam.TypeEvent.Incident, 12, "Богатые граждвне с помощью Маска постороили ракету на Луну ",new DamageParam(5, 13)),
         new Incident(GlobalParam.TypeEvent.CrazyCow, GlobalParam.TypeEvent.Incident, 13,"Ковид-сумашедшествие от коров",new DamageParam(5, 14)),
 
@@ -60,6 +60,11 @@ public class DictionaryEssence
     {
         
         return allEssenceList.FirstOrDefault(a => a.Id == Id) as Incident;
+    }
+    public Incident GetIncident(GlobalParam.TypeEvent type)
+    {
+        Debug.Log(type+"  incident = " + allEssenceList.FirstOrDefault(a => a.Type == type));
+        return allEssenceList.FirstOrDefault(a => a.Name == type) as Incident;
     }
     public Incident BuildIncident(GlobalParam.TypeEvent Name,int Year)
     {

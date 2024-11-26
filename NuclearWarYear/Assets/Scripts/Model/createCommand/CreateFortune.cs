@@ -21,11 +21,11 @@ namespace Assets.Scripts.Model.createCommand
             {
                 if ((int)UnityEngine.Random.Range(0.0f, eventFortuneIncident.Random) == 1)
                 {
-                    UnityEngine.Debug.Log(countryLider.GetTargetCitySelectPlayer()+ "  RESU  PLAYER  = Mutation  =    ");
+                    
                     actionCommand = eventFortuneIncident.Name;
-                    commandLider = new CommandLider(actionCommand, countryLider._RelationFeind.GetHighlyHatredLiderRandom(), Year);
+                    commandLider = new CommandLider(actionCommand, countryLider._RelationFeind.GetHighlyHatredLiderRandom(), Year, countryLider.GetTargetCitySelectPlayer());
                     commandLider.SetVisibleEventList(eventFortuneIncident.Name, true);
-                    commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
+                    //commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
                     commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
                 }
             }

@@ -18,7 +18,7 @@ namespace Assets.Scripts.Model.param
 
         public enum TypeEvent
         {
-            Build, Bomber, HeavyBomber, Defence, Propaganda, Industry, Ufo, Baby, RocketRich,
+            Build, Bomber, HeavyBomber, Defence, HeavyDefence,Propaganda, Ufo, Baby, RocketRich,
             CrazyCow, Defectors, Missle, HeavyMissle,
             AttackBomber, AttackMissle, Airport, AttackAirport, Incident,None
         }

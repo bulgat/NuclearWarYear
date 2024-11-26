@@ -3,6 +3,7 @@ using Assets.Scripts.Model.weapon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -17,27 +18,6 @@ namespace Assets.Scripts.Model.turnEvent
         {
             string message = "";
 
-            //if (CommandIncident.Name == key)
-            //{
-
-            if (CommandIncident.Name == GlobalParam.TypeEvent.Missle)
-            {
-                message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderOne(CountYear).GetIncident().GetMessage(), lider.GetCommandLiderOne(CountYear).GetIncident().GetName());
-                lider.RemoveMissle();
-                CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider), turnEventExecute.ShowFiend);
-                lider.SetCommandRealise(CommandIncident);
-                //return CommandIncident;
-                return message;
-            }
-            if (CommandIncident.Name == GlobalParam.TypeEvent.Bomber)
-            {
-                message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderOne(CountYear).GetIncident().GetMessage(), lider.GetCommandLiderOne(CountYear).GetIncident().GetName());
-                lider.RemoveBomber();
-                CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider), turnEventExecute.ShowFiend);
-                lider.SetCommandRealise(CommandIncident);
-                //return CommandIncident;
-                return message;
-            }
 
             if (turnEventExecute.RemoveDefenceWeapon ||
                 turnEventExecute.Airport)
@@ -53,8 +33,7 @@ namespace Assets.Scripts.Model.turnEvent
                 }
                 CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider), turnEventExecute.ShowFiend);
                 lider.SetCommandRealise(CommandIncident);
-                //return CommandIncident;
-                return message;
+                //return message;
             }
             CityModel cityFiend = new DamagePopulationHelper().GetCityLider(lider, CountYear).TargetCity;
 
@@ -73,7 +52,7 @@ namespace Assets.Scripts.Model.turnEvent
             if (turnEventExecute.Ammunition)
             {
                 lider.AddMissle(lider.GetCommandLiderOne(CountYear).GetMissle());
-                Debug.Log(" --------------- ##  Lider  m  =" + lider.GetCommandLiderOne(CountYear)._reportProducedWeaponList);
+                
                 if (lider.GetCommandLiderOne(CountYear)._reportProducedWeaponList != null)
                 {
                     List<string> reportProducedWeaponList = lider.GetCommandLiderOne(CountYear)._reportProducedWeaponList;
@@ -81,27 +60,77 @@ namespace Assets.Scripts.Model.turnEvent
                 }
             }
 
+
+            switch (CommandIncident.Name)
+            {
+                case GlobalParam.TypeEvent.Missle:
+                    message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderOne(CountYear).GetIncident().GetMessage(), lider.GetCommandLiderOne(CountYear).GetIncident().GetName());
+                    lider.RemoveMissle();
+                    CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider), turnEventExecute.ShowFiend);
+                    lider.SetCommandRealise(CommandIncident);
+                    break;
+                case GlobalParam.TypeEvent.Bomber:
+                    message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderOne(CountYear).GetIncident().GetMessage(), lider.GetCommandLiderOne(CountYear).GetIncident().GetName());
+                    lider.RemoveBomber();
+                    CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider), turnEventExecute.ShowFiend);
+                    lider.SetCommandRealise(CommandIncident);
+                    break;
+                case GlobalParam.TypeEvent.Propaganda:
+                    Debug.Log("   I n  ");
+                    CommandIncident.SetReleaseMessage(new StateDragPopulation(message, CommandIncident.GetDamage(),
+                        liderCityMy, 
+                        cityFiend, 
+                        enemylider), turnEventExecute.ShowFiend);
+                    lider.SetCommandRealise(CommandIncident);
+                    break;
+                case GlobalParam.TypeEvent.Build:
+                    CommandIncident.SetReleaseMessage(new StateDragPopulation(message, CommandIncident.GetDamage(),
+                         liderCityMy,
+                         cityFiend,
+                         enemylider), turnEventExecute.ShowFiend);
+                    lider.SetCommandRealise(CommandIncident);
+                    break;
+                case GlobalParam.TypeEvent.Ufo:
+                    CommandIncident.SetReleaseMessage(new StateDragPopulation(message, CommandIncident.GetDamage(),
+                         liderCityMy,
+                         cityFiend,
+                         enemylider), turnEventExecute.ShowFiend);
+                    lider.SetCommandRealise(CommandIncident);
+                    break;
+                case GlobalParam.TypeEvent.Baby:
+                    CommandIncident.SetReleaseMessage(new StateDragPopulation(message, CommandIncident.GetDamage(),
+                        liderCityMy,
+                        cityFiend,
+                        enemylider), turnEventExecute.ShowFiend);
+                    lider.SetCommandRealise(CommandIncident);
+                    break;
+                case GlobalParam.TypeEvent.RocketRich:
+                    CommandIncident.SetReleaseMessage(new StateDragPopulation(message, CommandIncident.GetDamage(),
+                         liderCityMy,
+                         cityFiend,
+                         enemylider), turnEventExecute.ShowFiend);
+                    lider.SetCommandRealise(CommandIncident);
+                    break;
+                case GlobalParam.TypeEvent.Defectors:
+                    CommandIncident.SetReleaseMessage(new StateDragPopulation(message, CommandIncident.GetDamage(),
+                        liderCityMy, 
+                        cityFiend, 
+                        enemylider), turnEventExecute.ShowFiend);
+                    lider.SetCommandRealise(CommandIncident);
+                    break;
+                default:
+                    break;
+            }
+
+
+
             message = lider.SetEventTotalMessageTurn(report, CommandIncident.Name);
 
-            if (GlobalParam.TypeEvent.Propaganda == CommandIncident.Name ||
-            GlobalParam.TypeEvent.Defectors == CommandIncident.Name)
-            {
+            //bool doubleCity = CommandIncident.Name == GlobalParam.TypeEvent.Propaganda || CommandIncident.Name == GlobalParam.TypeEvent.Defectors;
 
-                CommandIncident.SetReleaseMessage(new StateDragPopulation(message, CommandIncident.GetDamage(),
-                    liderCityMy, cityFiend, enemylider), turnEventExecute.ShowFiend);
-                lider.SetCommandRealise(CommandIncident);
-                //return CommandIncident;
-                return message;
-            }
-            bool doubleCity = CommandIncident.Name == GlobalParam.TypeEvent.Propaganda || CommandIncident.Name == GlobalParam.TypeEvent.Defectors;
-
-            CommandIncident.SetReleaseMessage(new StateAddPopulation(message, -CommandIncident.GetDamage(),
-                liderCityMy, enemylider), turnEventExecute.ShowFiend);
-            lider.SetCommandRealise(CommandIncident);
-            //return CommandIncident;
-            return message;
-
-            //}
+            //CommandIncident.SetReleaseMessage(new StateAddPopulation(message, -CommandIncident.GetDamage(),
+               // liderCityMy, enemylider), turnEventExecute.ShowFiend);
+            //lider.SetCommandRealise(CommandIncident);
             return message;
         }
     }
