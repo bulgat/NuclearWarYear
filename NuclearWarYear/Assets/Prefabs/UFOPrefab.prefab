@@ -213,6 +213,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3253ef786f9836c4c97d74f6067515cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UFO: {fileID: 6331571662929992774}
+  Stork: {fileID: 5297766068697413451}
+  Cow: {fileID: 6464545719166227872}
+  RocketRich: {fileID: 2036262790498243478}
+  Defectors: {fileID: 5795518762673385087}
+  Missle: {fileID: 209224887243287695}
 --- !u!1 &5297766068697413451
 GameObject:
   m_ObjectHideFlags: 0

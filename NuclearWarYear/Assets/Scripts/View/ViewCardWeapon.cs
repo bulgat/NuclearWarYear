@@ -34,6 +34,7 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
 
         var iconCard = gameObject.transform.GetChild(1);
         ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
+        Debug.Log( "  incide  = " + id);
         viewIconCard.SetParam(iconCardList,id);
 
         this.Id = id;

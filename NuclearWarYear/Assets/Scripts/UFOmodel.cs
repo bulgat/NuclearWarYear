@@ -5,21 +5,22 @@ using static UnityEditor.Progress;
 
 public class UFOmodel : MonoBehaviour
 {
-    private GameObject UFO;
-    private GameObject Stork;
-    private GameObject Cow;
-    private GameObject RocketRich;
-    private GameObject Defectors;
-    private GameObject Missle;
+    public GameObject UFO;
+    public GameObject Stork;
+    public GameObject Cow;
+    public GameObject RocketRich;
+    public GameObject Defectors;
+    public GameObject Missle;
     private void Awake()
     {
-        
+        /*
         this.UFO = gameObject.transform.GetChild(0).gameObject;
         this.Stork = gameObject.transform.GetChild(1).gameObject;
         this.Cow = gameObject.transform.GetChild(2).gameObject;
         this.RocketRich = gameObject.transform.GetChild(3).gameObject;
         this.Defectors = gameObject.transform.GetChild(4).gameObject;
         this.Missle = gameObject.transform.GetChild(5).gameObject;
+        */
     }
     void Start()
     {

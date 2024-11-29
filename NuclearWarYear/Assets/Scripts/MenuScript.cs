@@ -188,20 +188,17 @@ public class MenuScript : MonoBehaviour
         missleList.AddRange(_mainModel.GetCurrentWeapon());
 
         int count = 0;
-        foreach (var item in missleList)
+        foreach (IWeapon item in missleList)
         {
-
-
             GameObject CardWing = Instantiate(CardWeapon, new Vector2(100 + (count * 100), 100), Quaternion.identity);
             CardWing.transform.SetParent(panelMain.transform);
             ViewCardWeapon viewCardWeapon = CardWing.GetComponent<ViewCardWeapon>();
-            viewCardWeapon.SetParam(item.GetName(), IconCardList, item.GetId());
+            Debug.Log("  myTownCity = " + item.GetImageId() + "     " + item.GetName());
+            viewCardWeapon.SetParam(item.GetName(), IconCardList, item.GetImageId());
             viewCardWeapon.SetCallback(MissleMethodClick);
             this.CardButtonList.Add(CardWing);
             count++;
         }
-
-
     }
     void SetImageLiderButton()
     {

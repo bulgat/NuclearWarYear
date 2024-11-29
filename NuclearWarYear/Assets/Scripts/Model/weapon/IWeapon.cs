@@ -10,6 +10,7 @@ namespace Assets.Scripts.Model
     public interface IWeapon
     {
         public int GetId();
+        public int GetImageId();
         public GlobalParam.TypeEvent GetName();
         public GlobalParam.TypeEvent GetTypeWeapon();
         public int GetSize();

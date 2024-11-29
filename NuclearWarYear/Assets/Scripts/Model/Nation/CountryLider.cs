@@ -136,12 +136,6 @@ Debug.LogWarning("Error GetCommandLiderFirst   "  );
 	}
 	public List<IWeapon> GetDefenceWeapon()
 	{
-
-		foreach(var item  in this._MissleList)
-		{
-Debug.Log("D " + this._MissleList.Count + "   me    = "+ item);
-		}
-
         return this._MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).ToList();
 	}
 

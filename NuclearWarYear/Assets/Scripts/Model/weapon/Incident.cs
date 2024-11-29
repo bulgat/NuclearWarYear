@@ -126,4 +126,8 @@ Debug.Log("    ---- -- ------ -- -   =" + this.PopulationEvent.FiendCountryLider
         this.ShowLider = showFiend;
     }
 
+    public int GetImageId()
+    {
+        return this.IdImage;
+    }
 }

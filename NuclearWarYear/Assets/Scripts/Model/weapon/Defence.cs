@@ -47,4 +47,9 @@ public class Defence : Weapon,IWeapon
     {
         throw new System.NotImplementedException();
     }
+
+    public int GetImageId()
+    {
+        return this.IdImage;
+    }
 }

@@ -4,6 +4,7 @@ using Assets.Scripts.Model.createCommand;
 using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.scenario;
 using Assets.Scripts.Model.turnEvent;
+using Assets.Scripts.View;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,11 @@ public class MainModel
 
 	private void InitModel(List<GameObject> countryLiderPropagandaBuildingList) {
 
+        BindCity bindCity = new BindCity();
+		this.TownList = bindCity.GetBindCity(this);
 
-
-		this.CountryLiderPropagandaBuildingList = countryLiderPropagandaBuildingList;
+        this.CountryLiderPropagandaBuildingList = countryLiderPropagandaBuildingList;
+		/*
 		this.TownList = new List<CityModel>();
 		this.TownList.Add(new CityModel(1, GetIncrementCityId()));
 		this.TownList.Add(new CityModel(1, GetIncrementCityId()));
@@ -60,12 +63,15 @@ public class MainModel
 		this.TownList.Add(new CityModel(5, GetIncrementCityId()));
 		this.TownList.Add(new CityModel(5, GetIncrementCityId()));
 		this.TownList.Add(new CityModel(5, GetIncrementCityId()));
+		*/
+		//this.CountryLiderList = new List<CountryLider>();
 
-		this.CountryLiderList = new List<CountryLider>();
+        this.CountryLiderList = new BindLider().GetBindLider(this.TownList, CountYear, CountryLiderPropagandaBuildingList);
 
-		ParamLider paramLider = new ParamLider();
+        //ParamLider paramLider = new ParamLider();
 
-		this.CountryLiderList = new List<CountryLider>();
+        //this.CountryLiderList = new List<CountryLider>();
+		/*
 		this.CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() 
 		{ new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle),
 			new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber) 
@@ -99,6 +105,7 @@ public class MainModel
 			new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Defence),
 			new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Defence)},
 			CountryLiderPropagandaBuildingList[4], TownList, GlobalParam.ParamLiderList[4], 5));
+		*/
 
 		this.FlagIdPlayerList = new List<int>();
 		foreach (var item in this.CountryLiderList)
@@ -175,7 +182,7 @@ public class MainModel
 		return this.CurrenPlayerFlag;
 
 	}
-	private int GetIncrementCityId()
+	public int GetIncrementCityId()
 	{
 		return this.CityIncrementId++;
 	}
@@ -350,8 +357,6 @@ public class MainModel
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(this.CountryLiderList, LiderFlagId);
 
         CityModel enemyTownCity = this.TownList.Where(a=>a.FlagId!=LiderFlagId).FirstOrDefault();
-
-		Debug.Log("P enemyTownCity = "+ enemyTownCity.FlagId+"     "+ LiderFlagId);
 
         CountryLider enemyliderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, enemyTownCity.FlagId);
 
