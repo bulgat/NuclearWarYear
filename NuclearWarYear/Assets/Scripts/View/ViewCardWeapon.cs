@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Assets.Scripts.Model.param;
+using Assets.Scripts.Model;
+
 public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
 {
-    private int Id;
+    private IWeapon Id;
     public Text Text;
-    System.Action<int> callback;
+    System.Action<IWeapon> callback;
     private List<Sprite> IconCardList;
     public Image SpriteIcon;
     void Start()
@@ -19,7 +21,6 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // OnClick code goes here ...
 
         this.callback(this.Id);
         gameObject.transform.localScale = new Vector2(2, 2);
@@ -28,18 +29,18 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     {
         
     }
-    public void SetParam(GlobalParam.TypeEvent text, List<Sprite> iconCardList,int id)
+    public void SetParam( List<Sprite> iconCardList, IWeapon item)
     {
-        Text.text = text.ToString();
+        Text.text = item.GetName().ToString();
 
         var iconCard = gameObject.transform.GetChild(1);
         ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
-        Debug.Log( "  incide  = " + id);
-        viewIconCard.SetParam(iconCardList,id);
+        
+        viewIconCard.SetParam(iconCardList, item.GetImageId());
 
-        this.Id = id;
+        this.Id = item;
     }
-    public void SetCallback(System.Action<int> Callback)
+    public void SetCallback(System.Action<IWeapon> Callback)
     {
         
 

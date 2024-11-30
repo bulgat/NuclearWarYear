@@ -40,7 +40,7 @@ public class RelationShip {
     {
         List<RelationMood> relationMoodListSort = this.RelationMoodList.Where(a=>a.Lider.FlagId!= FlagId).OrderBy(a => a.Mood).ToList();
         int curveRandom = CurveRandom();
-        Debug.Log("Propag "+ FlagId + "  RES  "+ relationMoodListSort[curveRandom].Lider .FlagId+ "= Mutation  =    "+ relationMoodListSort[curveRandom].Lider.Name+" flag = "+ relationMoodListSort[curveRandom].Lider.FlagId);
+        
         return relationMoodListSort[curveRandom].Lider;  
     }
     int CurveRandom()

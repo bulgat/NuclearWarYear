@@ -202,7 +202,7 @@ Debug.LogWarning("Error GetCommandLiderFirst   "  );
     }
     public void SetTargetCity(TargetCityModel targetCitySelectPlayer){
 
-        UnityEngine.Debug.Log("F  "+ FlagId + "  Fort  = " + targetCitySelectPlayer.EnemyLider.FlagId);
+        
         if (targetCitySelectPlayer.EnemyLider.FlagId == FlagId)
         {
 

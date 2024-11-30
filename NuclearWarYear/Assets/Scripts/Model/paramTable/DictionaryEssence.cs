@@ -10,18 +10,26 @@ public class DictionaryEssence
 {
     public enum TypeWeapon { Missle, Bomber, Defence, Incident }
 
+    public static List<string> MessagePrepareList = new List<string>()
+    {
+        "Подготовка ракет",
+        "Подготовка бомбандировщиков",
+        "Подготовка системы перехвата ракет",
+        "Подготовка сенсаций в СМИ",
+        "Производство вооружения"
+    };
     private static List<Weapon> allEssenceList = new List<Weapon>() {
 
 
         new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 0,"Ракеты приведены в готовность",new DamageParam(10,0)),
-        new Incident(GlobalParam.TypeEvent.HeavyMissle, GlobalParam.TypeEvent.Missle, 1, "Ракеты приведены в готовность",new DamageParam(40,0)),
-        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 2, "Ракеты приведены в готовность",new DamageParam(50,0)),
-        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 3, "Ракеты приведены в готовность",new DamageParam(100, 0)),
+        new Incident(GlobalParam.TypeEvent.HeavyMissle, GlobalParam.TypeEvent.Missle, 1, "Ракеты приведены в готовность",new DamageParam(40,1)),
+        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 2, "Ракеты приведены в готовность",new DamageParam(50,2)),
+        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 3, "Ракеты приведены в готовность",new DamageParam(100, 3)),
 
         new Incident(GlobalParam.TypeEvent.Bomber, GlobalParam.TypeEvent.Bomber, 4,"Бомбардировщики приведены в готовность",new DamageParam(10,4)),
         new Incident(GlobalParam.TypeEvent.HeavyBomber, GlobalParam.TypeEvent.Bomber, 5, "Бомбардировщики приведены в готовность",new DamageParam(50,5)),
 
-        new Incident(GlobalParam.TypeEvent.Defence, GlobalParam.TypeEvent.Defence, 6, "Защитные системы приведены в готовность",new DamageParam(0,6)),
+        new Incident(GlobalParam.TypeEvent.Defence, GlobalParam.TypeEvent.Defence, 6, "Защитные системы приведены в готовность",new DamageParam(0,7)),
         new Incident(GlobalParam.TypeEvent.HeavyDefence, GlobalParam.TypeEvent.Defence, 7, "Защитные системы приведены в готовность",new DamageParam(0, 6)),
 
         new Incident(GlobalParam.TypeEvent.Propaganda, GlobalParam.TypeEvent.Defence, 9, "Под воздействием пропаганды, население сбежало к ",new DamageParam(3,10)),

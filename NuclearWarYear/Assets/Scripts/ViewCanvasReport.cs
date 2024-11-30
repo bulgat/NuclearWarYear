@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class ViewCanvasReport : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class ViewCanvasReport : MonoBehaviour
     }
     public void SetMessage(string message)
     {
-       
+        Debug.Log("   " + message + "  For = " );
         var textMessage = gameObject.transform.GetChild(0).GetChild(2);
 
         textMessage.GetComponent<Text>().text = message;

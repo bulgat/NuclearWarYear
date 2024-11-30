@@ -3136,6 +3136,8 @@ MonoBehaviour:
     type: 3}
   NewPaperPrefabs: {fileID: 2439378756843800583, guid: c5494e1af1f0d8540a291746e4c5af82,
     type: 3}
+  BlockBackgroundPrefabs: {fileID: 544642922281048627, guid: b8db27dd43472634fbb5fb36564d99eb,
+    type: 3}
   CanvasResourcePlayerImageLider: {fileID: 0}
   CanvasResourceFlagImageLider: {fileID: 0}
   CanvasResourcePlayerTextLider: {fileID: 0}

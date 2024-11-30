@@ -126,11 +126,13 @@
     <Compile Include="Assets\Scripts\Model\turnEvent\CreateSimpleIncident.cs" />
     <Compile Include="Assets\Scripts\Controller\EventSendLider.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
+    <Compile Include="Assets\Scripts\Model\BindCity.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\IStatePopulationEvent.cs" />
     <Compile Include="Assets\Scripts\View\ViewNewPaperMethod.cs" />
     <Compile Include="Assets\Scripts\Model\CityHelperList.cs" />
     <Compile Include="Assets\Scripts\Model\scenario\ScenarioLider.cs" />
     <Compile Include="Assets\Scripts\MenuVictory.cs" />
+    <Compile Include="Assets\Scripts\Model\BindLider.cs" />
     <Compile Include="Assets\Scripts\Model\TargetHelper.cs" />
     <Compile Include="Assets\Scripts\Model\BuildingCentralModel.cs" />
     <Compile Include="Assets\Scripts\Model\createCommand\RandomActionCommand.cs" />
@@ -147,8 +149,6 @@
     <Compile Include="Assets\Scripts\Model\AICreateCommand.cs" />
     <Compile Include="Assets\Scripts\ViewCanvasReport.cs" />
     <Compile Include="Assets\Scripts\Model\LiveLider.cs" />
-    <Compile Include="Assets\Scripts\Model\BindCity.cs" />
-    <Compile Include="Assets\Scripts\Model\BindLider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
