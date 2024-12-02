@@ -115,7 +115,9 @@ Debug.LogWarning("Error GetCommandLiderFirst   "  );
 
     public void AddCommandLiderList(List<CommandLider> commandLiderList)
 	{
+        Debug.Log(Name+"    --- -- -- --  L =" + commandLiderList.Count+ " command "+ commandLiderList.FirstOrDefault().GetNameCommandFirst());
         this.StackCommandLiderList.AddRange(commandLiderList);
+        Debug.Log(" StackCommandLiderList L = "+ this.StackCommandLiderList.Count);
     }
 	public int GetAllOwnPopulation() {
 		int maxPopulation=0;

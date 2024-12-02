@@ -153,11 +153,16 @@ public class MainModel
         ResetAction();
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
                 countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear);
-        countryLider.AddCommandLiderList(new SwitchActionHelper().SwitchAction(
+
+		List<CommandLider> сommandLiderList = new SwitchActionHelper().SwitchAction(
 			CountryLiderList, TownList,
 			this.GetCurrenPlayer().FlagId, commandLider,
 			this.GetCurrenPlayer(), CountYear,
-			countryLider.FiendLider, commandLiderFortune));
+			countryLider.FiendLider, commandLiderFortune);
+
+        Debug.Log("@@@I  - GetDamagePopulati  GetNameFiendLider() L = " + сommandLiderList.Count);
+
+        countryLider.AddCommandLiderList(сommandLiderList);
 
 
 	}
@@ -362,7 +367,7 @@ public class MainModel
 
             foreach (CommandLider commandLider in lider.GetStackCommandLider(CountYear))
             {
-
+				
                 //StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.GetIncident()));
                 //indexLiderTime++;
                 text += "\n"+commandLider.GetIncident().FullMessage(lider);

@@ -10,9 +10,6 @@ namespace Assets.Scripts.View
     {
         public void SetPropagand(MenuScript menuScript,int FlagId, MainModel _mainModel)
         {
-
-            //EventController eventController = new EventController(Controller.Command.Propaganda, new EventSendLider(_mainModel.GetCurrenFlagPlayer()));
-            //menuScript._controller.SendCommand(eventController);
             menuScript._controller.Propaganda(_mainModel.GetCurrenFlagPlayer());
         }
     }

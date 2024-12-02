@@ -427,11 +427,12 @@ public class MenuScript : MonoBehaviour
 
         TacticReal("Начало хода", GlobalParam.StartTurnIdFlag, GlobalParam.StartTurnIdImage, _mainModel.CountryLiderList.FirstOrDefault());
 
+        Debug.Log("  mTownCi   I     n =  "+ _mainModel.CountryLiderList.Count);
         // accept animation Central Building Propagation
         int indexLiderTime = 0;
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
-
+            Debug.Log(_mainModel.CountYear+"   countr Li   = " + lider.GetStackCommandLider(_mainModel.CountYear).Count);
             foreach (CommandLider commandLider in lider.GetStackCommandLider(_mainModel.CountYear))
             {
 
@@ -454,7 +455,7 @@ public class MenuScript : MonoBehaviour
         }
         CircleImageReadyParam(0, false);
 
-        Debug.Log("  myTownCi   I     na    " );
+        
         blockBackground =  Instantiate(BlockBackgroundPrefabs, new Vector2(Canvas.transform.position.x, Canvas.transform.position.y), Quaternion.identity);
         blockBackground.transform.parent = Canvas.transform;
     }

@@ -16,12 +16,17 @@ public class AICreateCommand
     public void EstimationSetCommandAiAll(Action ResetAction, List<CountryLider> CountryLiderList,
         List<CityModel> TownList, int _flagIdPlayer, int FlagIdPlayer, int CountYear)
     {
-        // all country lider
+        // 
+        
         foreach (CountryLider lider in CountryLiderList)
         {
+Debug.Log(lider.Name+"  all country lider   TargetCity  L =" + CountryLiderList.Count);
             // only fiend
-            SetCommandOneLider(lider, ResetAction, CountryLiderList,
-        TownList, _flagIdPlayer, FlagIdPlayer, CountYear);
+            if (lider.FlagId != FlagIdPlayer)
+            {
+                SetCommandOneLider(lider, ResetAction, CountryLiderList,
+            TownList, _flagIdPlayer, FlagIdPlayer, CountYear);
+            }
 
         }
     }
@@ -70,6 +75,7 @@ public class AICreateCommand
             CountYear, fiendLider1,
              commandLiderFortune);
 
+        Debug.Log("00 etDamagePopula   commandLidersList L = " + commandLidersList.Count + " population = " );
         lider.AddCommandLiderList(commandLidersList);
     }
 

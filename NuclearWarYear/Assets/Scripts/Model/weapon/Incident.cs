@@ -70,7 +70,7 @@ public class Incident : Weapon, IWeapon
     }
     public string FullMessage(CountryLider lider)
     {
-        Debug.Log( "@@@I  - GetDamagePopulation() -  " + GetDamagePopulation()+ " GetNameFiendLider() = " + GetNameFiendLider());
+        
         Debug.Log("@@@I " + lider.Name +" = Z^^^^^  " + GetMessage() + "   lider = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
         return "" + lider.Name + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
     }
@@ -81,7 +81,7 @@ public class Incident : Weapon, IWeapon
         {
             return "";
         }
-Debug.Log("    ---- -- ------ -- -   =" + this.PopulationEvent.FiendCountryLider);
+
         if (GlobalParam.MessageDictionary[this.Name].ShowFiend == false)
         {
             return "";
@@ -96,9 +96,9 @@ Debug.Log("    ---- -- ------ -- -   =" + this.PopulationEvent.FiendCountryLider
         {
             return "-0-";
         }
-        Debug.Log(  "    Li l TargetCity =" + this.PopulationEvent.FiendCountryLider);
+        
         int population  = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
-        Debug.Log("001 GetDamagePopulation " + this.PopulationEvent.MyPopulation + "-" + this.PopulationEvent.FiendPopulation+ " population = "+ population);
+        
         if (population > 0)
         {
             return population.ToString();
