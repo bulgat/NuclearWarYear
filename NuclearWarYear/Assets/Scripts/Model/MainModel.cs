@@ -117,12 +117,6 @@ public class MainModel
 	{
 		return this.CityIncrementId++;
 	}
-	public void DoneMoveMadeCurrentPlayer()
-	{
-		CountryLider countryLider = this.GetLiderOne(this.CurrenPlayerFlag);
-		countryLider.DoneMoveMade(true);
-
-	}
 	public void ResetDoneMoveAll()
 	{
 		foreach (var item in this.CountryLiderList)
@@ -358,18 +352,21 @@ public class MainModel
 		CountYear++;
         new AICreateCommand().EstimationSetCommandAiAll(ResetAction, CountryLiderList,
 		   GetTownList(), GetCurrenFlagPlayer(), GetCurrenFlagPlayer(), CountYear);
-	}
-	public string GetAllMessageTurn()
+
+        CountryLider countryLider = this.GetLiderOne(this.CurrenPlayerFlag);
+        countryLider.DoneMoveMade(true);
+
+        //this.DoneMoveMadeCurrentPlayer();
+    }
+	public string GetAllMessageTurn(bool debug=false)
 	{
         var text = "";
         foreach (CountryLider lider in this.CountryLiderList)
         {
-
+            
             foreach (CommandLider commandLider in lider.GetStackCommandLider(CountYear))
             {
-				
-                //StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.GetIncident()));
-                //indexLiderTime++;
+                Debug.Log(" TownCi   L =  " + lider.GetStackCommandLider(CountYear));
                 text += "\n"+commandLider.GetIncident().FullMessage(lider);
             }
 

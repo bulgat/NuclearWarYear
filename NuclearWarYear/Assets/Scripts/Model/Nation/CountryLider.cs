@@ -92,8 +92,8 @@ public class CountryLider
 	}
 	public List<CommandLider> GetStackCommandLider(int Year)
 	{
-
-		return this.StackCommandLiderList.Where(a=>a.GetIncident().Year == Year).ToList();
+        Debug.Log(" ePopulation  id   StackCommandLiderList.Count = " + this.StackCommandLiderList.Count);
+        return this.StackCommandLiderList.Where(a=>a.GetIncident().Year == Year).ToList();
 	}
     public CommandLider GetCommandLiderOne(int CountYear)
     {

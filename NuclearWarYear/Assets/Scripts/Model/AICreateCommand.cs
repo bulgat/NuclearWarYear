@@ -16,18 +16,15 @@ public class AICreateCommand
     public void EstimationSetCommandAiAll(Action ResetAction, List<CountryLider> CountryLiderList,
         List<CityModel> TownList, int _flagIdPlayer, int FlagIdPlayer, int CountYear)
     {
-        // 
-        
         foreach (CountryLider lider in CountryLiderList)
         {
-Debug.Log(lider.Name+"  all country lider   TargetCity  L =" + CountryLiderList.Count);
+            Debug.Log(lider.Name+"  all country lider   TargetCity  L =" + CountryLiderList.Count);
             // only fiend
             if (lider.FlagId != FlagIdPlayer)
             {
                 SetCommandOneLider(lider, ResetAction, CountryLiderList,
             TownList, _flagIdPlayer, FlagIdPlayer, CountYear);
             }
-
         }
     }
     public void SetCommandOneLider(CountryLider lider, Action ResetAction, List<CountryLider> CountryLiderList,

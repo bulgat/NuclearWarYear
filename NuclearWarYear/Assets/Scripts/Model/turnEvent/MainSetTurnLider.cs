@@ -54,7 +54,7 @@ namespace Assets.Scripts.Model
             Debug.Log("D r = " + CommandIncident.Name);
             
             Debug.Log("D --------------- ##  Lid  =" + CommandIncident.PopulationEvent);
-            //Debug.Log("D ChangePopulation = " + CommandIncident.PopulationEvent.FiendPopulation + "   _   lid   flag = " + CommandIncident.PopulationEvent.MyPopulation);
+            
 
             //CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, CommandIncident.GetDamage(), cityModelTarget, enemylider),
             //   GetMessageDictionary(lider.GetCommandLiderOne(CountYear).GetNameCommandFirst()).ShowFiend);

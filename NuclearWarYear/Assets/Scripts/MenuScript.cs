@@ -152,7 +152,7 @@ public class MenuScript : MonoBehaviour
 
         CreateTownInfoList();
 
-        new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
+        //new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
     }
     void CreateTownInfoList()
     {
@@ -407,7 +407,7 @@ public class MenuScript : MonoBehaviour
     {
         _controller.TurnAi();
 
-        _controller.DoneMoveMadeCurrentPlayer();
+        //_controller.DoneMoveMadeCurrentPlayer();
 
         //Ходы игроков.
         //Все игроки сходили?
@@ -427,12 +427,12 @@ public class MenuScript : MonoBehaviour
 
         TacticReal("Начало хода", GlobalParam.StartTurnIdFlag, GlobalParam.StartTurnIdImage, _mainModel.CountryLiderList.FirstOrDefault());
 
-        Debug.Log("  mTownCi   I     n =  "+ _mainModel.CountryLiderList.Count);
+        
         // accept animation Central Building Propagation
         int indexLiderTime = 0;
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
-            Debug.Log(_mainModel.CountYear+"   countr Li   = " + lider.GetStackCommandLider(_mainModel.CountYear).Count);
+            
             foreach (CommandLider commandLider in lider.GetStackCommandLider(_mainModel.CountYear))
             {
 

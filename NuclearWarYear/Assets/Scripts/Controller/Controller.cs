@@ -105,14 +105,14 @@ public class Controller
 	{
             _mainModel.ChangeCurrentPlayer();
     }
-
+	/*
     public void DoneMoveMadeCurrentPlayer()
 	{
 
             _mainModel.DoneMoveMadeCurrentPlayer();
 
     }
-
+	*/
     public void SetMissle(int FlagId,GlobalParam.TypeEvent nameEvent)
 	{
             _mainModel.SetMisslePlayer(FlagId, nameEvent);
