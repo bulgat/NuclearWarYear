@@ -18,19 +18,19 @@ namespace Assets.Scripts.Model
     {
 
         public Incident SatisfyEventOneLiderTurn(int FlagId, List<CountryLider> CountryLiderList,
-            List<CityModel> TownList, Incident CommandIncident,int CountYear)
+            List<CityModel> TownList, Incident CommandIncident,int CountYear, MainModel mainModel)
         {
             string message = "";
 
             CountryLider lider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
             
-            CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider,CountYear);
+            CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider,CountYear,mainModel);
             Debug.Log("  == " + lider.Name + " SetMisslePl = " + enemylider.Name);
 
-            CityModel cityModelTarget = lider.GetCommandLiderOne(CountYear)._TargetCity.TargetCity;
+            CityModel cityModelTarget = mainModel.GetCommandLider(CountYear, FlagId)._TargetCity.TargetCity;
 
-            if (lider.GetStackCommandLider(CountYear) != null)
+            if (mainModel.GetCommandLider(CountYear, FlagId) != null)
             {
  
                 //Enemy lider.
@@ -40,13 +40,13 @@ namespace Assets.Scripts.Model
                     TurnEventExecute turnEventExecute = GlobalParam.MessageDictionary[CommandIncident.Name];
 
                 message = new CreateSimpleIncident().CreateMessageIncident(turnEventExecute, lider,
-                       ref CommandIncident,  CountYear,  enemylider, TownList);
+                       ref CommandIncident,  CountYear,  enemylider, TownList, mainModel);
 
                 message = new CreateBomberIncident().CreateAttackBomber(lider, CountYear, enemylider,
-            ref CommandIncident, cityModelTarget);
+            ref CommandIncident, cityModelTarget, mainModel);
 
                 message = new CreateMissleIncident().CreateAttackMissle(lider, CountYear,enemylider,
-            ref CommandIncident, cityModelTarget);
+            ref CommandIncident, cityModelTarget, mainModel);
 
                 
 
@@ -54,28 +54,14 @@ namespace Assets.Scripts.Model
             Debug.Log("D r = " + CommandIncident.Name);
             
             Debug.Log("D --------------- ##  Lid  =" + CommandIncident.PopulationEvent);
-            
-
-            //CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, CommandIncident.GetDamage(), cityModelTarget, enemylider),
-            //   GetMessageDictionary(lider.GetCommandLiderOne(CountYear).GetNameCommandFirst()).ShowFiend);
-            //lider.SetCommandRealise(CommandIncident);
-
-
 
             if (CommandIncident.PopulationEvent==null)
             {
                 Debug.Log(" 0002  country  Fie Lider  = "+CommandIncident);
                 throw new Exception("not event");
             }
-
-
             return CommandIncident;
         }
-
-        
-        
-        
-
 
         private TurnEventExecute GetMessageDictionary(GlobalParam.TypeEvent key)
         {

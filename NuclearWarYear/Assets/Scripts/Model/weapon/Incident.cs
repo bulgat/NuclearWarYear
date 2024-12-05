@@ -71,7 +71,7 @@ public class Incident : Weapon, IWeapon
     public string FullMessage(CountryLider lider)
     {
         
-        Debug.Log("@@@I " + lider.Name +" = Z^^^^^  " + GetMessage() + "   lider = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
+        Debug.Log("FullMessage  @@I " + lider.Name +" =  ^^^^  " + GetMessage() + "   lid  = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
         return "" + lider.Name + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
     }
     string GetNameFiendLider() {

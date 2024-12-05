@@ -58,25 +58,27 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         flagImage.sprite = FlagImageList[indexLider];
         circleReady.enabled = false;
 
-        
 
-        if (countryLider.GetCommandLiderOne(_mainModel.CountYear).GetVisibleBomber())
+        if (_mainModel.GetCommandLider(_mainModel.CountYear, PlayerFlagId) != null)
         {
-            if (this.IconCircleReadyList!=null)
+            if (_mainModel.GetCommandLider(_mainModel.CountYear, PlayerFlagId).GetVisibleBomber())
             {
-                circleReady.enabled = true;
-                circleReady.sprite = this.IconCircleReadyList[0];
+                if (this.IconCircleReadyList != null)
+                {
+                    circleReady.enabled = true;
+                    circleReady.sprite = this.IconCircleReadyList[0];
+                }
+            }
+
+            if (_mainModel.GetCommandLider(_mainModel.CountYear, PlayerFlagId).GetVisibleMissle())
+            {
+                if (this.IconCircleReadyList != null)
+                {
+                    circleReady.enabled = true;
+                    circleReady.sprite = IconCircleReadyList[1];
+                }
             }
         }
-        if (countryLider.GetCommandLiderOne(_mainModel.CountYear).GetVisibleMissle())
-        {
-            if (this.IconCircleReadyList != null)
-            {
-                circleReady.enabled = true;
-                circleReady.sprite = IconCircleReadyList[1];
-            }
-        }
-
 
         GetComponentInChildren<UnityEngine.UI.Text>().text = this.Lider.Name +
             " (" + this.Lider.GetAllOwnPopulation() + ")";

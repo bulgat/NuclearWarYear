@@ -433,7 +433,7 @@ public class MenuScript : MonoBehaviour
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
             
-            foreach (CommandLider commandLider in lider.GetStackCommandLider(_mainModel.CountYear))
+            foreach (CommandLider commandLider in this._mainModel.GetCommandLiderList(_mainModel.CountYear,lider.FlagId))
             {
 
                 StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.GetIncident()));
@@ -487,7 +487,7 @@ public class MenuScript : MonoBehaviour
     }
     private CityModel TargetManager(CountryLider lider)
     {
-        CityModel cityTown = lider.GetStackCommandLider(_mainModel.CountYear).First()._TargetCity.TargetCity;
+        CityModel cityTown = this._mainModel.GetCommandLider(_mainModel.CountYear,lider.FlagId)._TargetCity.TargetCity;
         if (cityTown != null)
         {
             GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);
@@ -519,15 +519,13 @@ public class MenuScript : MonoBehaviour
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[0], IdMissle);
         }
         if (Missle.GetName()== GlobalParam.TypeEvent.Bomber || Missle.GetName() == GlobalParam.TypeEvent.HeavyBomber)
-        {
-            Debug.Log("  inc  = ");
+        { 
             _controller.SetBomber(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[1], IdMissle);
 
         }
         if (Missle.GetName() == GlobalParam.TypeEvent.Defence || Missle.GetName() == GlobalParam.TypeEvent.HeavyDefence)
         {
-            Debug.Log("Prop   tation  =    " + IdMissle + " flag = ");
             _controller.Defence(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[2], IdMissle);
         }
@@ -595,9 +593,10 @@ public class MenuScript : MonoBehaviour
     {
 
         GameObject CanResPlayer = Instantiate(NewPaperPrefabs, new Vector2(100, 100), Quaternion.identity);
-        CanResPlayer.transform.parent = panelMain.transform;
+        //CanResPlayer.transform.parent = panelMain.transform;
         ViewNewPaperMethod viewResourceMethod = CanResPlayer.GetComponent<ViewNewPaperMethod>();
         viewResourceMethod.SetResourceMethodTable(this, this.LiderImageList, this.FlagImageList, this._mainModel);
+        Debug.Log("ButtonNewPaper------------------");
         viewResourceMethod.SetMessage(_mainModel.GetAllMessageTurn());
 
     }
@@ -644,7 +643,7 @@ public class MenuScript : MonoBehaviour
 
         CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
 
-        if (liderPlayer0.GetStackCommandLider(_mainModel.CountYear).First().GetVisibleMissle())
+        if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer0.FlagId).GetVisibleMissle())
         {
 
             var cityTarget = liderPlayer0.GetTargetCitySelectPlayer();
@@ -662,9 +661,8 @@ public class MenuScript : MonoBehaviour
         }
 
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
-        if (liderPlayer.GetCommandLiderOne(_mainModel.CountYear).GetVisibleBomber())
+        if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer.FlagId).GetVisibleBomber())
         {
-
             var cityTarget = liderPlayer.GetTargetCitySelectPlayer();
             if (cityTarget == null)
             {

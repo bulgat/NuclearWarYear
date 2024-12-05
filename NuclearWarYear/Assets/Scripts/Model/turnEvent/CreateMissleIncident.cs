@@ -11,21 +11,21 @@ namespace Assets.Scripts.Model.turnEvent
     internal class CreateMissleIncident
     {
         public string CreateAttackMissle(CountryLider lider, int CountYear, CountryLider enemylider,
-            ref Incident CommandIncident, CityModel cityModelTarget)
+            ref Incident CommandIncident, CityModel cityModelTarget, MainModel mainModel)
         {
             string message = "";
             int damageAttackCount = 0;
-            if (lider.GetCommandLiderOne(CountYear).GetNameExecute(GlobalParam.TypeEvent.AttackMissle))
+            if (mainModel.GetCommandLider(CountYear,lider.FlagId).GetNameExecute(GlobalParam.TypeEvent.AttackMissle))
             {
 
-                if (enemylider.GetCommandLiderOne(CountYear).GetDefence() == false)
+                if (mainModel.GetCommandLider(CountYear, enemylider.FlagId).GetDefence() == false)
                 {
-                    if (lider.GetCommandLiderOne(CountYear)._TargetCity != null)
+                    if (mainModel.GetCommandLider(CountYear, lider.FlagId)._TargetCity != null)
                     {
 
-                        if (lider.GetCommandLiderOne(CountYear).GetAttackMissle() != null)
+                        if (mainModel.GetCommandLider(CountYear, lider.FlagId).GetAttackMissle() != null)
                         {
-                            damageAttackCount = lider.GetCommandLiderOne(CountYear).GetAttackMissle().GetDamage();
+                            damageAttackCount = mainModel.GetCommandLider(CountYear, lider.FlagId).GetAttackMissle().GetDamage();
 
                         }
                     }
@@ -33,13 +33,13 @@ namespace Assets.Scripts.Model.turnEvent
                 }
                 lider.RemoveMissle();
 
-                message = lider.SetEventTotalMessageTurn(lider.GetCommandLiderOne(CountYear).GetIncident().GetMessage() + damageAttackCount +
-                    " у " + lider.GetCommandLiderOne(CountYear).LiderFiend.Name,
-                    lider.GetCommandLiderOne(CountYear).GetIncident().GetName());
-                lider.GetStackCommandLider(CountYear).First().LiderFiend._RelationFeind.SetNegativeMood(lider.FlagId, 25);
+                message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetMessage() + damageAttackCount +
+                    " у " + mainModel.GetCommandLider(CountYear, lider.FlagId).LiderFiend.Name,
+                    mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetName());
+                mainModel.GetCommandLider(CountYear, lider.FlagId).LiderFiend._RelationFeind.SetNegativeMood(lider.FlagId, 25);
 
                 CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, damageAttackCount, cityModelTarget, enemylider),
-                    GlobalParam.MessageDictionary[lider.GetCommandLiderOne(CountYear).GetNameCommandFirst()].ShowFiend);
+                    GlobalParam.MessageDictionary[mainModel.GetCommandLider(CountYear, lider.FlagId).GetNameCommandFirst()].ShowFiend);
                 lider.SetCommandRealise(CommandIncident);
                 //return CommandIncident;
             }

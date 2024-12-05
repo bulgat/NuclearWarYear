@@ -31,7 +31,9 @@ public class SwitchActionHelper
             {
                 if (countryLider.GetDefenceWeapon().Count() <= 0)
                 {
-                    commandLider = new CommandLider(GlobalParam.TypeEvent.Propaganda, countryLider._RelationFeind.GetHighlyHatredLiderRandom(), Year, targetCityModel);
+                    commandLider = new CommandLider(GlobalParam.TypeEvent.Propaganda,
+                        countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
+                        Year, targetCityModel, countryLider.FlagId);
                 }
             }
 

@@ -19,7 +19,8 @@ public class CommandLider
     public CountryLider LiderFiend { get; private set; }
     public List<string> _reportProducedWeaponList { get; private set; }
     List<GlobalParam.TypeEvent> VisibleList;
-    public CommandLider(GlobalParam.TypeEvent nameCommand, CountryLider liderFiend,int Year, TargetCityModel TargetCity)
+    public int LiderId;
+    public CommandLider(GlobalParam.TypeEvent nameCommand, CountryLider liderFiend,int Year, TargetCityModel TargetCity, int LiderId)
     {
         this._MissleList = new List<IWeapon>();
         this.IncidentCommand = new DictionaryEssence().BuildIncident(nameCommand, Year);
@@ -27,6 +28,7 @@ public class CommandLider
         this.VisibleList = new List<GlobalParam.TypeEvent>();
         this.LiderFiend = liderFiend;
         _TargetCity = TargetCity;
+        this.LiderId = LiderId;
     }
     public bool GetNameExecute(GlobalParam.TypeEvent Name)
     {

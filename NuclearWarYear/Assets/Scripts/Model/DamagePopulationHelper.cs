@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class DamagePopulationHelper
 {
-	public TargetCityModel GetCityLider(CountryLider lider,int CountYear)
+	public TargetCityModel GetCityLider(CountryLider lider,int CountYear, MainModel mainModel)
 	{
-		return lider.GetCommandLiderOne(CountYear)._TargetCity;
+		return mainModel.GetCommandLider(CountYear,lider.FlagId)._TargetCity;
 
     }
     public void SetDamagePopulation( CityModel cityModel,int Damage){
@@ -28,8 +28,6 @@ public class DamagePopulationHelper
             //}
             
         }
-
-		//return false;
 	}
 	
 }

@@ -4,14 +4,15 @@ using UnityEngine;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 public class LiderHelper
 {
-	public CountryLider GetLiderEnemy(List<CountryLider> CountryLiderList,CountryLider lider,int CountYear)
+	public CountryLider GetLiderEnemy(List<CountryLider> CountryLiderList,CountryLider lider,
+		int CountYear, MainModel mainModel)
     {
 		
-		if(lider.GetCommandLiderOne(CountYear)._TargetCity == null){
+		if(mainModel.GetCommandLider(CountYear,lider.FlagId)._TargetCity == null){
             return null;
 		}
         
         return new LiderHelperOne().GetLiderOne(CountryLiderList,
-			lider.GetCommandLiderOne(CountYear)._TargetCity.TargetCity.FlagId);
+            mainModel.GetCommandLider(CountYear,lider.FlagId)._TargetCity.TargetCity.FlagId);
 	}
 }

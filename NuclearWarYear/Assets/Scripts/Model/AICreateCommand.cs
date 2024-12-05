@@ -14,7 +14,7 @@ public class AICreateCommand
 {
 
     public void EstimationSetCommandAiAll(Action ResetAction, List<CountryLider> CountryLiderList,
-        List<CityModel> TownList, int _flagIdPlayer, int FlagIdPlayer, int CountYear)
+        List<CityModel> TownList, int _flagIdPlayer, int FlagIdPlayer, int CountYear, MainModel mainModel)
     {
         foreach (CountryLider lider in CountryLiderList)
         {
@@ -23,12 +23,12 @@ public class AICreateCommand
             if (lider.FlagId != FlagIdPlayer)
             {
                 SetCommandOneLider(lider, ResetAction, CountryLiderList,
-            TownList, _flagIdPlayer, FlagIdPlayer, CountYear);
+            TownList, _flagIdPlayer, FlagIdPlayer, CountYear, mainModel);
             }
         }
     }
     public void SetCommandOneLider(CountryLider lider, Action ResetAction, List<CountryLider> CountryLiderList,
-        List<CityModel> TownList, int _flagIdPlayer, int FlagIdPlayer, int CountYear)
+        List<CityModel> TownList, int _flagIdPlayer, int FlagIdPlayer, int CountYear,MainModel mainModel)
     {
         GlobalParam.TypeEvent actionNameCommand = GlobalParam.TypeEvent.None;
 
@@ -64,7 +64,7 @@ public class AICreateCommand
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
             lider.FlagId != FlagIdPlayer, lider, CountYear);
 
-        CommandLider commandLider = new CommandLider(actionNameCommand, fiendLider1, CountYear, targetCityModel);
+        CommandLider commandLider = new CommandLider(actionNameCommand, fiendLider1, CountYear, targetCityModel, lider.FlagId);
         ResetAction();
         List<CommandLider> commandLidersList = new SwitchActionHelper().SwitchAction(CountryLiderList,
             TownList, FlagIdPlayer,
@@ -73,7 +73,7 @@ public class AICreateCommand
              commandLiderFortune);
 
         Debug.Log("00 etDamagePopula   commandLidersList L = " + commandLidersList.Count + " population = " );
-        lider.AddCommandLiderList(commandLidersList);
+        mainModel.MainStackCommandLiderList.AddRange(commandLidersList);
     }
 
 

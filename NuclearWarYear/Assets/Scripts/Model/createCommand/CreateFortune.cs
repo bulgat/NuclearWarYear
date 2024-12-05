@@ -23,7 +23,9 @@ namespace Assets.Scripts.Model.createCommand
                 {
                     
                     actionCommand = eventFortuneIncident.Name;
-                    commandLider = new CommandLider(actionCommand, countryLider._RelationFeind.GetHighlyHatredLiderRandom(), Year, countryLider.GetTargetCitySelectPlayer());
+                    commandLider = new CommandLider(actionCommand,
+                        countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
+                        Year, countryLider.GetTargetCitySelectPlayer(), countryLider.FlagId);
                     commandLider.SetVisibleEventList(eventFortuneIncident.Name, true);
                     //commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
                     commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
