@@ -25,7 +25,6 @@ public class Incident : Weapon, IWeapon
         this.Type = type;
         this.Damage = damageParam.Damage;
         this.Message = message;
-        this.Uid = UnicId++;
      }
     public int MutationDamage()
     {
@@ -71,8 +70,11 @@ public class Incident : Weapon, IWeapon
     public string FullMessage(CountryLider lider)
     {
         
-        Debug.Log("FullMessage  @@I " + lider.Name +" =  ^^^^  " + GetMessage() + "   lid  = " + GetDamagePopulation()+"   Year = "+Year+" name = "+Name);
-        return "" + lider.Name + "  : " + GetMessage() + ": " + GetDamagePopulation() + " * " + GetNameFiendLider();
+        
+        if (String.IsNullOrEmpty(GetDamagePopulation())) {
+            return $"{lider.Name}   : {GetMessage()}.";
+        }
+        return $"{lider.Name}   : {GetMessage()}: {GetDamagePopulation()} от {GetNameFiendLider()}.";
     }
     string GetNameFiendLider() {
         
@@ -94,7 +96,7 @@ public class Incident : Weapon, IWeapon
         
         if (this.PopulationEvent == null)
         {
-            return "-0-";
+            return "";
         }
         
         int population  = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
@@ -103,7 +105,7 @@ public class Incident : Weapon, IWeapon
         {
             return population.ToString();
         }
-        return "_0_";
+        return "";
 
     }
     public int GetYear()
@@ -113,6 +115,7 @@ public class Incident : Weapon, IWeapon
     public void SetYear(int value)
     {
         this.Year = value;
+        this.Uid = UnicId++;
     }
     public Incident Copy()
     {
@@ -120,7 +123,7 @@ public class Incident : Weapon, IWeapon
     }
     public void SetReleaseMessage(PopulationEvent statePopulationEvent,bool showFiend)
     {
-        Debug.Log(" =  countryLi   "+ statePopulationEvent.MyPopulation + "-" + statePopulationEvent.FiendPopulation+ " statePopulationEvent  = " + statePopulationEvent);
+        
         this.PopulationEvent = statePopulationEvent;
         
         this.ShowLider = showFiend;

@@ -18,23 +18,26 @@ public class AICreateCommand
     {
         foreach (CountryLider lider in CountryLiderList)
         {
-            Debug.Log(lider.Name+"  all country lider   TargetCity  L =" + CountryLiderList.Count);
+            
             // only fiend
             if (lider.FlagId != FlagIdPlayer)
             {
-                SetCommandOneLider(lider, ResetAction, CountryLiderList,
+                List<CommandLider> commandList = SetCommandOneLider(lider, ResetAction, CountryLiderList,
             TownList, _flagIdPlayer, FlagIdPlayer, CountYear, mainModel);
+                Debug.Log(lider.Name+ "  co   lider commandList L = " + commandList .Count()+ "getCity  L =" + CountryLiderList.Count);
+                mainModel.MainStackCommandLiderList.AddRange(commandList);
             }
         }
     }
-    public void SetCommandOneLider(CountryLider lider, Action ResetAction, List<CountryLider> CountryLiderList,
+    public List<CommandLider> SetCommandOneLider(CountryLider lider, Action ResetAction, List<CountryLider> CountryLiderList,
         List<CityModel> TownList, int _flagIdPlayer, int FlagIdPlayer, int CountYear,MainModel mainModel)
     {
         GlobalParam.TypeEvent actionNameCommand = GlobalParam.TypeEvent.None;
 
         if (lider.ReleaseCommandList != null)
         {
-            actionNameCommand = ChangeIncidentCommand(lider, actionNameCommand, CountYear);
+            Debug.Log("FullMessage  @@ =  ^^   li  Year  ame = "  );
+            actionNameCommand = ChangeIncidentCommand(lider, actionNameCommand, CountYear,mainModel);
         }
 
         if (actionNameCommand == GlobalParam.TypeEvent.None)
@@ -64,6 +67,8 @@ public class AICreateCommand
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
             lider.FlagId != FlagIdPlayer, lider, CountYear);
 
+        Debug.Log("D commandLiderFortune = " + commandLiderFortune);
+
         CommandLider commandLider = new CommandLider(actionNameCommand, fiendLider1, CountYear, targetCityModel, lider.FlagId);
         ResetAction();
         List<CommandLider> commandLidersList = new SwitchActionHelper().SwitchAction(CountryLiderList,
@@ -73,16 +78,17 @@ public class AICreateCommand
              commandLiderFortune);
 
         Debug.Log("00 etDamagePopula   commandLidersList L = " + commandLidersList.Count + " population = " );
-        mainModel.MainStackCommandLiderList.AddRange(commandLidersList);
+        //mainModel.MainStackCommandLiderList.AddRange(commandLidersList);
+        return commandLidersList;
     }
 
 
-    private GlobalParam.TypeEvent ChangeIncidentCommand(CountryLider lider, GlobalParam.TypeEvent actionNameCommand, int countYear)
+    private GlobalParam.TypeEvent ChangeIncidentCommand(CountryLider lider, GlobalParam.TypeEvent actionNameCommand, int countYear, MainModel mainModel)
     {
         //auto command player
         var type = lider.ReleaseCommandList?.FirstOrDefault();
 
-
+        Debug.Log(" =  country tePopulationEvent  = " + type);
 
         if (type == null)
         {

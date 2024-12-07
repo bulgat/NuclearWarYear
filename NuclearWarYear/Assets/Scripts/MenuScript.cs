@@ -642,42 +642,47 @@ public class MenuScript : MonoBehaviour
         StringBuilder printMessage = new StringBuilder("");
 
         CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
-
-        if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer0.FlagId).GetVisibleMissle())
+        Debug.Log("liderPlayer0 = "+ this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer0.FlagId));
+        if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer0.FlagId) != null)
         {
-
-            var cityTarget = liderPlayer0.GetTargetCitySelectPlayer();
-            if (cityTarget == null)
+            if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer0.FlagId).GetVisibleMissle())
             {
-                printMessage.Append("\n Ready. Not target for missle. Select Target!");
-            }
-            else
-            {
-                printMessage.Append("\n Ready. Select target for missle");
-            }
-            CircleImageReadyParam(1, true);
 
-            _controller.AttackMissle(_mainModel.GetCurrenFlagPlayer());
+                var cityTarget = liderPlayer0.GetTargetCitySelectPlayer();
+                if (cityTarget == null)
+                {
+                    printMessage.Append("\n Ready. Not target for missle. Select Target!");
+                }
+                else
+                {
+                    printMessage.Append("\n Ready. Select target for missle");
+                }
+                CircleImageReadyParam(1, true);
+
+                _controller.AttackMissle(_mainModel.GetCurrenFlagPlayer());
+            }
         }
-
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
-        if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer.FlagId).GetVisibleBomber())
+        if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer.FlagId) != null)
         {
-            var cityTarget = liderPlayer.GetTargetCitySelectPlayer();
-            if (cityTarget == null)
+            if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer.FlagId).GetVisibleBomber())
             {
+                var cityTarget = liderPlayer.GetTargetCitySelectPlayer();
+                if (cityTarget == null)
+                {
 
-                printMessage.Append("\n not target. Select Target!");
+                    printMessage.Append("\n not target. Select Target!");
+                }
+                else
+                {
+
+                    printMessage.Append("\n select target bomber");
+                }
+
+                CircleImageReadyParam(0, true);
+
+                _controller.AttackBomber(_mainModel.GetCurrenFlagPlayer());
             }
-            else
-            {
-
-                printMessage.Append("\n select target bomber");
-            }
-
-            CircleImageReadyParam(0, true);
-
-            _controller.AttackBomber(_mainModel.GetCurrenFlagPlayer());
         }
         ManagerButton();
 

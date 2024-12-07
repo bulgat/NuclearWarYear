@@ -60,7 +60,7 @@ namespace Assets.Scripts.Model.turnEvent
                     report = string.Join(", ", reportProducedWeaponList.ToArray());
                 }
             }
-
+            Debug.Log("   I   "+ CommandIncident.Name);
 
             switch (CommandIncident.Name)
             {
@@ -79,8 +79,8 @@ namespace Assets.Scripts.Model.turnEvent
                     lider.SetCommandRealise(CommandIncident);
                     break;
                 case GlobalParam.TypeEvent.Propaganda:
-                    Debug.Log("   I n  ");
-                    CommandIncident.SetReleaseMessage(new StateDragPopulation(message, CommandIncident.GetDamage(),
+                    
+                    CommandIncident.SetReleaseMessage(new StateDragPopulation(message, -CommandIncident.GetDamage(),
                         liderCityMy, 
                         cityFiend, 
                         enemylider), turnEventExecute.ShowFiend);

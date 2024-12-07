@@ -32,7 +32,7 @@ public class DictionaryEssence
         new Incident(GlobalParam.TypeEvent.Defence, GlobalParam.TypeEvent.Defence, 6, "Защитные системы приведены в готовность",new DamageParam(0,7)),
         new Incident(GlobalParam.TypeEvent.HeavyDefence, GlobalParam.TypeEvent.Defence, 7, "Защитные системы приведены в готовность",new DamageParam(0, 6)),
 
-        new Incident(GlobalParam.TypeEvent.Propaganda, GlobalParam.TypeEvent.Defence, 9, "Под воздействием пропаганды, население сбежало к ",new DamageParam(3,10)),
+        new Incident(GlobalParam.TypeEvent.Propaganda, GlobalParam.TypeEvent.Defence, 9, "Под воздействием пропаганды, население сбежало ",new DamageParam(3,10)),
 
         new Incident(GlobalParam.TypeEvent.Ufo, GlobalParam.TypeEvent.Incident, 10, "Ufo инопланитяне прибыли в город +",new DamageParam(5,12)),
         new Incident(GlobalParam.TypeEvent.Baby, GlobalParam.TypeEvent.Incident, 11, "Бэбибум прибавка населения +",new DamageParam(5, 13)),
@@ -65,18 +65,20 @@ public class DictionaryEssence
     public Incident GetIncident(int Id)
     {
         
-        return allEssenceList.FirstOrDefault(a => a.Id == Id) as Incident;
+        return (allEssenceList.FirstOrDefault(a => a.Id == Id) as Incident).Copy();
     }
     public Incident GetIncident(GlobalParam.TypeEvent type)
     {
         
-        return allEssenceList.FirstOrDefault(a => a.Name == type) as Incident;
+        return (allEssenceList.FirstOrDefault(a => a.Name == type) as Incident).Copy();
     }
     public Incident BuildIncident(GlobalParam.TypeEvent Name,int Year)
     {
    
-        Incident incident = allEssenceList.FirstOrDefault(a => a.Name == Name) as Incident;
+        Incident incident = (allEssenceList.FirstOrDefault(a => a.Name == Name) as Incident).Copy();
+        
         incident.SetYear(Year);
+        Debug.Log("D "+ incident + "--" + incident.Uid + "----  ##  =" + Year);
         incident.MutationDamage();
         return incident;
     }

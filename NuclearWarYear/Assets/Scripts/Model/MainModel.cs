@@ -400,20 +400,23 @@ public class MainModel
         var text = "";
         foreach (CountryLider lider in this.CountryLiderList)
         {
-            foreach (CommandLider commandLider in GetCommandLiderList(CountYear, lider.FlagId))
+            
+			foreach (CommandLider commandLider in GetCommandLiderList(CountYear, lider.FlagId))
 			{
                 text += "\n" + commandLider.GetIncident().FullMessage(lider);
             }
-			/*
-            Debug.Log("  in   = ");
-            foreach (CommandLider commandLider in lider.GetStackCommandLider(CountYear))
-            {
-                Debug.Log(" TownC   L =  " + lider.GetStackCommandLider(CountYear));
-                text += "\n"+commandLider.GetIncident().FullMessage(lider);
-            }
-			*/
 
         }
-		return text;
+        Debug.Log("  in   = ");
+        foreach (CountryLider lider in this.CountryLiderList)
+        {
+            foreach (CommandLider commandLider in GetCommandLiderList(CountYear, lider.FlagId))
+			{
+				Debug.Log(CountYear+" Town =  " + commandLider.GetIncident().Year+"  uid = "+ commandLider.GetIncident().Uid);
+			}
+        }
+
+
+        return text;
     }
 }

@@ -51,13 +51,13 @@ namespace Assets.Scripts.Model
                 
 
             }
-            Debug.Log("D r = " + CommandIncident.Name);
             
-            Debug.Log("D --------------- ##  Lid  =" + CommandIncident.PopulationEvent);
+            
+            
 
             if (CommandIncident.PopulationEvent==null)
             {
-                Debug.Log(" 0002  country  Fie Lider  = "+CommandIncident);
+                Debug.Log(" 0002  country  Fi Lider  = "+CommandIncident);
                 throw new Exception("not event");
             }
             return CommandIncident;
