@@ -36,8 +36,9 @@ public class AICreateCommand
 
         if (lider.ReleaseCommandList != null)
         {
-            Debug.Log("FullMessage  @@ =  ^^   li  Year  ame = "  );
+            
             actionNameCommand = ChangeIncidentCommand(lider, actionNameCommand, CountYear,mainModel);
+            Debug.Log(" commandLiderFortune   ChangeIncidentCommand = " + actionNameCommand);
         }
 
         if (actionNameCommand == GlobalParam.TypeEvent.None)
@@ -45,6 +46,7 @@ public class AICreateCommand
             if (lider.FlagId != FlagIdPlayer)
             {
                 actionNameCommand = new RandomActionCommand().GetRandomActionCommand();
+                Debug.Log("ChangeIncidentCommand      Message  @@ =  ^^    Year actionNameCommand= "+ actionNameCommand);
             }
             else
             {
@@ -67,7 +69,7 @@ public class AICreateCommand
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
             lider.FlagId != FlagIdPlayer, lider, CountYear);
 
-        Debug.Log("D commandLiderFortune = " + commandLiderFortune);
+        
 
         CommandLider commandLider = new CommandLider(actionNameCommand, fiendLider1, CountYear, targetCityModel, lider.FlagId);
         ResetAction();
@@ -77,7 +79,7 @@ public class AICreateCommand
             CountYear, fiendLider1,
              commandLiderFortune);
 
-        Debug.Log("00 etDamagePopula   commandLidersList L = " + commandLidersList.Count + " population = " );
+        
         //mainModel.MainStackCommandLiderList.AddRange(commandLidersList);
         return commandLidersList;
     }
@@ -88,7 +90,7 @@ public class AICreateCommand
         //auto command player
         var type = lider.ReleaseCommandList?.FirstOrDefault();
 
-        Debug.Log(" =  country tePopulationEvent  = " + type);
+        
 
         if (type == null)
         {
@@ -99,20 +101,33 @@ public class AICreateCommand
         {
             actionNameCommand = type.GetName();
 
-            if (lider.ReleaseCommandList.Last().GetYear() == countYear - 1)
+            var lastYeatCommandList0 = lider.ReleaseCommandList.Where(a => a.GetYear() == countYear).ToList();
+            var lastYeatCommandList = lider.ReleaseCommandList.Where(a => a.GetYear() == countYear - 1).ToList();
+            Debug.Log(lider.Name + "__lider.ReleaseCommandList = " + lider.ReleaseCommandList.Count + "   PopulationEvent = " + type.GetName() + " actionNameCommand = " + actionNameCommand+"  LL= "+ lastYeatCommandList.Count()+" L = "+ lastYeatCommandList0.Count());
+
+            foreach (var item in lastYeatCommandList)
             {
-                if (lider.ReleaseCommandList.Last().Type == GlobalParam.TypeEvent.Missle)
+                Debug.Log(lider.Name + "__lastYeatCommand  L = "+ lastYeatCommandList.Count()+ "  item.Type ="+ item.Type);
+                //if (lider.ReleaseCommandList.Last().GetYear() == countYear - 1)
+                //{
+                    if (item.Type == GlobalParam.TypeEvent.Missle)
                 {
-                    lider.ReleaseCommandList.Last().SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
-                }
-                if (lider.ReleaseCommandList.Last().Type == GlobalParam.TypeEvent.Bomber)
-                {
-                    lider.ReleaseCommandList.Last().SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
-                }
+                        item.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
+                        Debug.Log(lider.Name + "001 SetTypeWeapon");
+                        return GlobalParam.TypeEvent.AttackMissle;
+                    }
+                    if (item.Type == GlobalParam.TypeEvent.Bomber)
+                    {
+                        item.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
+                        Debug.Log(lider.Name + "002 SetTypeWeapon");
+                        return GlobalParam.TypeEvent.AttackBomber;
+                    }
+                    Debug.Log(lider.Name + " DamagePopula   commandLidersList L = " + lider.ReleaseCommandList.Last().GetTypeWeapon() + " population = ");
+                //}
             }
 
-
         }
+        Debug.Log(lider.Name+"__ChangeIncidentCommand  type = " + type + "   PopulationEvent = " + type.GetName()+ " actionNameCommand = "+ actionNameCommand);
         return actionNameCommand;
     }
 
