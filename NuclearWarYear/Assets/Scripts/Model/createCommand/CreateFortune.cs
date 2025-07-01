@@ -12,27 +12,46 @@ namespace Assets.Scripts.Model.createCommand
 {
     internal class CreateFortune
     {
-        public CommandLider FortuneEvent( bool AIfiend, CountryLider countryLider,int Year)
+        public CommandLider FortuneEvent( bool AIfiend, CountryLider countryLider,int Year, bool testMode)
         {
-            CommandLider commandLider = null;
-            GlobalParam.TypeEvent actionCommand = GlobalParam.TypeEvent.None;
+            if (testMode)
+            {
+                return GetFortuneEvent(countryLider, Year, GlobalParam.EventFortuneIncidentList[3]);
+            }
 
-            foreach(EventFortuneIncident eventFortuneIncident in GlobalParam.EventFortuneIncidentList)
+
+
+            EventFortuneIncident eventFortuneIncidentRandom = null;
+
+            foreach (EventFortuneIncident eventFortuneIncident in GlobalParam.EventFortuneIncidentList)
             {
                 if ((int)UnityEngine.Random.Range(0.0f, eventFortuneIncident.Random) == 1)
                 {
-                    
-                    actionCommand = eventFortuneIncident.Name;
-                    commandLider = new CommandLider(actionCommand,
-                        countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-                        Year, countryLider.GetTargetCitySelectPlayer(), countryLider.FlagId);
-                    commandLider.SetVisibleEventList(eventFortuneIncident.Name, true);
-                    //commandLider.SetTargetCity(countryLider.GetTargetCitySelectPlayer());
-                    commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
+                    eventFortuneIncidentRandom = eventFortuneIncident;
+                    break;
+
                 }
             }
+            if (eventFortuneIncidentRandom!=null)
+            {
+                return GetFortuneEvent(countryLider, Year, eventFortuneIncidentRandom);
+            }
+
             
-            
+            return null;
+        }
+        private CommandLider GetFortuneEvent(CountryLider countryLider, int Year, 
+            EventFortuneIncident eventFortuneIncident) {
+            GlobalParam.TypeEvent actionCommand = GlobalParam.TypeEvent.None;
+                            actionCommand = eventFortuneIncident.Name;
+                    CommandLider commandLider = null;
+                    commandLider = new CommandLider(actionCommand,
+                        countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
+                        Year,
+                        countryLider.GetTargetCitySelectPlayer(),
+                        countryLider.FlagId);
+                    commandLider.SetVisibleEventList(eventFortuneIncident.Name, true);
+                    commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
             return commandLider;
         }
     }

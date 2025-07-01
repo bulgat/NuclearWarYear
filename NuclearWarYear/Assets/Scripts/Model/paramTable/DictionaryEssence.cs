@@ -78,7 +78,6 @@ public class DictionaryEssence
         Incident incident = (allEssenceList.FirstOrDefault(a => a.Name == Name) as Incident).Copy();
         
         incident.SetYear(Year);
-        Debug.Log("D "+ incident + "--" + incident.Uid + "----  ##  =" + Year);
         incident.MutationDamage();
         return incident;
     }

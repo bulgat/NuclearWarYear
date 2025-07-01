@@ -221,8 +221,6 @@ Debug.LogWarning("Error GetCommandLiderFirst   "  );
 	}
 	public TargetCityModel GetTargetCitySelectPlayer(){
 
-	
-
 		return _targetCitySelectPlayer;
 	}
 

@@ -60,7 +60,6 @@ namespace Assets.Scripts.Model.turnEvent
                     report = string.Join(", ", reportProducedWeaponList.ToArray());
                 }
             }
-            Debug.Log("   I   "+ CommandIncident.Name);
 
             switch (CommandIncident.Name)
             {

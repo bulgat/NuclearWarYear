@@ -11,8 +11,10 @@ namespace Assets.Scripts.Model.param
 {
     public class GlobalParam
     {
+        public static bool TestMode = false;
         public static int StartTurnIdImage = 18;
         public static int StartTurnIdFlag = 5;
+
         public enum ActionCommand { Propaganda, Defence, Defectors, Ufo, Baby,
             RocketRich, CrazyCow, Build, AttackMissle, AttackBomber, Bomber, Missle,None }
 

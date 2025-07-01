@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.Model;
+using Assets.Scripts.Model.AiTurn;
 using Assets.Scripts.Model.createCommand;
 using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.scenario;
@@ -144,13 +145,14 @@ public class MainModel
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
         CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != FlagId).FirstOrDefault();
+        CityModel myCity = this.GetTownList().Where(a => a.FlagId == FlagId).FirstOrDefault();
 
         CommandLider commandLider = new CommandLider(GlobalParam.TypeEvent.Propaganda,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			CountYear,new TargetCityModel(enemyTownCity, countryLider.FiendLider),FlagId);
+			CountYear,new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider),FlagId);
         ResetAction();
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
-                countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear);
+                countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear,false);
 
 		List<CommandLider> сommandLiderList = new SwitchActionHelper().SwitchAction(
 			CountryLiderList, TownList,
@@ -160,7 +162,6 @@ public class MainModel
 
         Debug.Log("@@@I  - GetDamagePopulati  GetNameFiendLider() L = " + сommandLiderList.Count);
 
-        //countryLider.AddCommandLiderList(сommandLiderList);
         MainStackCommandLiderList.AddRange(сommandLiderList);
 
 
@@ -169,13 +170,14 @@ public class MainModel
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
         CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != FlagId).FirstOrDefault();
+        CityModel myCity = this.GetTownList().Where(a => a.FlagId == FlagId).FirstOrDefault();
 
         CommandLider commandLider = new CommandLider(GlobalParam.TypeEvent.Build,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			CountYear,new TargetCityModel(enemyTownCity, countryLider.FiendLider), FlagId);
+			CountYear,new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider), FlagId);
         ResetAction();
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
-                countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear);
+                countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear,false);
         MainStackCommandLiderList.AddRange(new SwitchActionHelper().SwitchAction( CountryLiderList, TownList,
 			this.GetCurrenPlayer().FlagId, commandLider, 
 			this.GetCurrenPlayer(), CountYear,
@@ -190,13 +192,14 @@ public class MainModel
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
         CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != FlagId).FirstOrDefault();
+        CityModel myCity = this.GetTownList().Where(a => a.FlagId == FlagId).FirstOrDefault();
 
         CommandLider commandLider = new CommandLider(GlobalParam.TypeEvent.Defence,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			CountYear,new TargetCityModel(enemyTownCity, countryLider.FiendLider), FlagId);
+			CountYear,new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider), FlagId);
         ResetAction();
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
-                countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear);
+                countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear,false);
         MainStackCommandLiderList.AddRange(new SwitchActionHelper().SwitchAction(CountryLiderList, TownList, 
 			this.GetCurrenPlayer().FlagId, commandLider,
 			this.GetCurrenPlayer(), CountYear,
@@ -211,19 +214,21 @@ public class MainModel
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
         CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != FlagId).FirstOrDefault();
+        CityModel myCity = this.GetTownList().Where(a => a.FlagId == FlagId).FirstOrDefault();
+
         CountryLider enemyliderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, enemyTownCity.FlagId);
 
         List<CommandLider> commandLiderList = new List<CommandLider>();
 		CommandLider commandLider = new CommandLider(nameEvent,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			CountYear,new TargetCityModel(enemyTownCity, enemyliderPlayer), FlagId);
+			CountYear,new TargetCityModel(enemyTownCity, myCity, enemyliderPlayer), FlagId);
 
         commandLiderList.Add(commandLider);
 
         MainStackCommandLiderList.AddRange(commandLiderList);
 		countryLider.SetCommandRealise(commandLider.GetIncident());
 
-        new AICreateCommand().SetCommandOneLider(countryLider,ResetAction,
+        new CreateCommandLider().CommandOneLider(countryLider,ResetAction,
 			CountryLiderList, TownList, this.GetCurrenPlayer().FlagId,
 			this.GetCurrenPlayer().FlagId, CountYear, this);
     }
@@ -233,14 +238,16 @@ public class MainModel
     }
 	public void SetAttackMisslePlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
-        CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != countryLider.FiendLider.FlagId).FirstOrDefault();
+        
+		CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != countryLider.FiendLider.FlagId).FirstOrDefault();
+        CityModel myCity = this.GetTownList().Where(a => a.FlagId == countryLider.FiendLider.FlagId).FirstOrDefault();
 
         CommandLider commandLider = new CommandLider(GlobalParam.TypeEvent.AttackMissle,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			CountYear,new TargetCityModel(enemyTownCity, countryLider.FiendLider), FlagId);
+			CountYear,new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider), FlagId);
         ResetAction();
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
-               countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear);
+               countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear, false);
         MainStackCommandLiderList.AddRange(new SwitchActionHelper().SwitchAction(CountryLiderList, TownList,
 			this.GetCurrenPlayer().FlagId, commandLider, 
 			this.GetCurrenPlayer(), CountYear,
@@ -256,14 +263,16 @@ public class MainModel
     }
 	public void SetAttackBomberPlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
-        CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != countryLider.FiendLider.FlagId).FirstOrDefault();
+        
+		CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != countryLider.FiendLider.FlagId).FirstOrDefault();
+        CityModel myCity = this.GetTownList().Where(a => a.FlagId == countryLider.FiendLider.FlagId).FirstOrDefault();
 
         CommandLider commandLider = new CommandLider(GlobalParam.TypeEvent.AttackBomber,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			CountYear, new TargetCityModel(enemyTownCity,countryLider.FiendLider), FlagId);
+			CountYear, new TargetCityModel(enemyTownCity,myCity, countryLider.FiendLider), FlagId);
         ResetAction();
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
-               countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear);
+               countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear, false);
         MainStackCommandLiderList.AddRange(new SwitchActionHelper().SwitchAction( CountryLiderList, TownList,
 			this.GetCurrenPlayer().FlagId, commandLider,
             this.GetCurrenPlayer(), CountYear,
@@ -315,27 +324,22 @@ public class MainModel
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(this.CountryLiderList, LiderFlagId);
 
         CityModel enemyTownCity = this.GetTownList().Where(a=>a.FlagId!=LiderFlagId).FirstOrDefault();
+        CityModel myCity = this.GetTownList().Where(a => a.FlagId == LiderFlagId).FirstOrDefault();
 
         CountryLider enemyliderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, enemyTownCity.FlagId);
 
  
 				selectCityTarget = enemyTownCity;
-        /*
-              countryLider.AddCommandLiderList(new List<CommandLider>() {
-                  new CommandLider(GlobalParam.TypeEvent.Propaganda,
-                  countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-                  CountYear, new TargetCityModel(enemyTownCity, enemyliderPlayer)) });*/
+
 
         this.MainStackCommandLiderList.AddRange(new List<CommandLider>() {
             new CommandLider(GlobalParam.TypeEvent.Propaganda,
             countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-            CountYear, new TargetCityModel(enemyTownCity, enemyliderPlayer),LiderFlagId) });
+            CountYear, new TargetCityModel(enemyTownCity,myCity, enemyliderPlayer),LiderFlagId) });
 
-        //CommandLider command = countryLider.GetCommandLiderOne(CountYear);
         CommandLider command0 = GetCommandLider(CountYear, countryLider.FlagId);
 
-        //countryLider.GetCommandLiderOne(CountYear).SetTargetCity(new TargetCityModel(enemyTownCity, enemyliderPlayer));
-        countryLider.SetTargetCity(new TargetCityModel(enemyTownCity, enemyliderPlayer));
+        countryLider.SetTargetCity(new TargetCityModel(enemyTownCity, myCity, enemyliderPlayer));
 
 
 
@@ -345,9 +349,10 @@ public class MainModel
             // auto Set attack
             
             CountryLider fiendLider1 = new BuildingCentralHelper().GetFiendLider(CountryLiderList, this.GetCurrenPlayer().FlagId);
-            CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(CountryLiderList, this.GetCurrenPlayer().FlagId, false, TownList, countryLider, fiendLider1);
+            CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(
+				CountryLiderList, fiendLider1,true, new TargetHelper().GetRandomCity(TownList, countryLider, this.GetCurrenPlayer().FlagId, false));
 
-            countryLider.SetTargetCity(new TargetCityModel(targetCityPlayer, fiendLider1));
+            countryLider.SetTargetCity(new TargetCityModel(targetCityPlayer, myCity, fiendLider1));
         }
 
 
@@ -393,7 +398,6 @@ public class MainModel
         CountryLider countryLider = this.GetLiderOne(this.CurrenPlayerFlag);
         countryLider.DoneMoveMade(true);
 
-        //this.DoneMoveMadeCurrentPlayer();
     }
 	public string GetAllMessageTurn(bool debug=false)
 	{

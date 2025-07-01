@@ -17,6 +17,7 @@ using UnityEditor.VersionControl;
 using Assets.Scripts.Model.param;
 using UnityEngine.Video;
 using static UnityEditor.Progress;
+using UnityEditor;
 
 public class MenuScript : MonoBehaviour
 {
@@ -406,12 +407,8 @@ public class MenuScript : MonoBehaviour
     void TurnButtonMethod()
     {
         _controller.TurnAi();
-
-        //_controller.DoneMoveMadeCurrentPlayer();
-
         //Ходы игроков.
         //Все игроки сходили?
-
 
         if (this._mainModel.EveryonePlayerWent() == false)
         {
@@ -472,7 +469,9 @@ public class MenuScript : MonoBehaviour
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.ViewStartStateObject(TownViewList, waitTime + (this.waitTurnTime * indexLider), lider, CommandIncident);
 
-        buildingCentral.SetTargetBomber(TargetManager(lider));
+        //buildingCentral.SetTargetBomber(TargetManager(lider));
+
+        buildingCentral.buildingCentralModel.SetTargetBomber(TargetManager(lider));
 
         StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
     }
@@ -488,6 +487,9 @@ public class MenuScript : MonoBehaviour
     private CityModel TargetManager(CountryLider lider)
     {
         CityModel cityTown = this._mainModel.GetCommandLider(_mainModel.CountYear,lider.FlagId)._TargetCity.TargetCity;
+
+        Debug.Log( "  co   lider commandLis getCity  L =" + cityTown);
+
         if (cityTown != null)
         {
             GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);
