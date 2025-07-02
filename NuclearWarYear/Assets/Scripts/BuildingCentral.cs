@@ -209,7 +209,6 @@ public class BuildingCentral : MonoBehaviour
             
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
             {
-                Debug.Log("RICH ChangeIncidentCommand      Message  @@ =     Year actionNameCommand= " );
 
                 targetBomber = new Vector3(targetBomber.x + 5, targetBomber.y + 5, targetBomber.z);
 

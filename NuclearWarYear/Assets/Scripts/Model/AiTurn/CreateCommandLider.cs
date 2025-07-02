@@ -16,7 +16,7 @@ namespace Assets.Scripts.Model.AiTurn
         {
             GlobalParam.TypeEvent actionNameCommand = GlobalParam.TypeEvent.None;
             //CityModel myCity = this.GetTownList().Where(a => a.FlagId == LiderFlagId).FirstOrDefault();
-            CityModel myCity = null;
+            CityModel myCity = lider.GetFirstCityHelper();
 
             if (lider.ReleaseCommandList != null)
             {

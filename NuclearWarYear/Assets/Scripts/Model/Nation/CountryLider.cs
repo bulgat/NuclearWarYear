@@ -192,7 +192,13 @@ public class CountryLider
 
 		return _targetCitySelectPlayer;
 	}
-
+	public CityModel GetFirstCityHelper() {
+        int index = UnityEngine.Random.Range(0, _TownListOwn.Count);
+		Debug.Log("RICH ChangeIncidentCommand      Message   =   actionNameCommand= "+ index);
+        return _TownListOwn[index];
+        
+        //return _TownListOwn.Where(a => a.FlagId == FlagId).FirstOrDefault();
+    }
 
 	public List<IWeapon> GetMissleList()
 	{
