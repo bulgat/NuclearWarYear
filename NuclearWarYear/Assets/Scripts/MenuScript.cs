@@ -153,7 +153,6 @@ public class MenuScript : MonoBehaviour
 
         CreateTownInfoList();
 
-        //new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
     }
     void CreateTownInfoList()
     {
@@ -359,12 +358,7 @@ public class MenuScript : MonoBehaviour
 
         if (_visiblePanel)
         {
-            /*
-            float speed = 1.0f;
 
-            float step = speed * Time.deltaTime; // calculate distance to move
-            NuclearMap.transform.position = Vector3.MoveTowards(NuclearMap.transform.position, _targetNuclearMap, step);
-            */
         }
         else
         {
@@ -488,8 +482,6 @@ public class MenuScript : MonoBehaviour
     {
         CityModel cityTown = this._mainModel.GetCommandLider(_mainModel.CountYear,lider.FlagId)._TargetCity.TargetCity;
 
-        Debug.Log( "  co   lider commandLis getCity  L =" + cityTown);
-
         if (cityTown != null)
         {
             GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);
@@ -595,7 +587,6 @@ public class MenuScript : MonoBehaviour
     {
 
         GameObject CanResPlayer = Instantiate(NewPaperPrefabs, new Vector2(100, 100), Quaternion.identity);
-        //CanResPlayer.transform.parent = panelMain.transform;
         ViewNewPaperMethod viewResourceMethod = CanResPlayer.GetComponent<ViewNewPaperMethod>();
         viewResourceMethod.SetResourceMethodTable(this, this.LiderImageList, this.FlagImageList, this._mainModel);
         Debug.Log("ButtonNewPaper------------------");

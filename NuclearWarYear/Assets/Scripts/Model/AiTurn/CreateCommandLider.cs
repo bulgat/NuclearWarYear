@@ -53,6 +53,7 @@ namespace Assets.Scripts.Model.AiTurn
 
             if (lider.FlagId != _flagIdPlayer)
             {
+                Debug.Log("    lider commandLis getCity  L =" + myCity+"--");
                 lider.SetTargetCity(targetCityModel);
             }
 
@@ -91,31 +92,26 @@ namespace Assets.Scripts.Model.AiTurn
 
                 var lastYeatCommandList0 = lider.ReleaseCommandList.Where(a => a.GetYear() == countYear).ToList();
                 var lastYeatCommandList = lider.ReleaseCommandList.Where(a => a.GetYear() == countYear - 1).ToList();
-                Debug.Log(lider.Name + "__lider.ReleaseCommandList = " + lider.ReleaseCommandList.Count + "   PopulationEvent = " + type.GetName() + " actionNameCommand = " + actionNameCommand + "  LL= " + lastYeatCommandList.Count() + " L = " + lastYeatCommandList0.Count());
 
                 foreach (var item in lastYeatCommandList)
                 {
-                    Debug.Log(lider.Name + "__lastYeatCommand  L = " + lastYeatCommandList.Count() + "  item.Type =" + item.Type);
-                    //if (lider.ReleaseCommandList.Last().GetYear() == countYear - 1)
-                    //{
+
                     if (item.Type == GlobalParam.TypeEvent.Missle)
                     {
                         item.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
-                        Debug.Log(lider.Name + "001 SetTypeWeapon");
+
                         return GlobalParam.TypeEvent.AttackMissle;
                     }
                     if (item.Type == GlobalParam.TypeEvent.Bomber)
                     {
                         item.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
-                        Debug.Log(lider.Name + "002 SetTypeWeapon");
+
                         return GlobalParam.TypeEvent.AttackBomber;
                     }
-                    Debug.Log(lider.Name + " DamagePopula   commandLidersList L = " + lider.ReleaseCommandList.Last().GetTypeWeapon() + " population = ");
-                    //}
+
                 }
 
             }
-            Debug.Log(lider.Name + "__ChangeIncidentCommand  type = " + type + "   PopulationEvent = " + type.GetName() + " actionNameCommand = " + actionNameCommand);
             return actionNameCommand;
         }
     }

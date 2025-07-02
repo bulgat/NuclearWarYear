@@ -17,7 +17,6 @@ public class CountryLider
 	public bool Player;
 	
 	public GameObject PropagandaBuilding;
-    //public  List<CommandLider> StackCommandLiderList { private set; get; }
 
     public List<Incident> ReleaseCommandList { private set; get; }
     private bool _dead;
@@ -42,7 +41,6 @@ public class CountryLider
 	public CountryLider(bool player,List<IWeapon> missleList,
 		GameObject PropagandaBuild,List<CityModel> TownList, ScenarioLider scenarioLider,int CountryId) 
 	{
-        //this.StackCommandLiderList = new List<CommandLider>();
         this.FlagId = scenarioLider.FlagId;
 		this.Player = player;
 		this._MissleList=missleList;
@@ -90,42 +88,13 @@ public class CountryLider
 	{
 		return this._dead;
 	}
-	/*
-	public List<CommandLider> GetStackCommandLider(int Year)
-	{
-        Debug.Log(" ePopulation    StackCommandLiderList.Count = " 
-			+ this.StackCommandLiderList.Count+" L = "
-			+ this.StackCommandLiderList.Where(a => a.GetIncident().Year == Year).Count());
-        return this.StackCommandLiderList.Where(a=>a.GetIncident().Year == Year).ToList();
-	}
-	*/
-	/*
-    public CommandLider GetCommandLiderOne(int CountYear)
-    {
-		if (this.StackCommandLiderList.Count == 0)
-		{
-Debug.LogWarning("Error GetCommandLiderFirst   "  );
-            //this.StackCommandLiderList.Add(new CommandLider(GlobalParam.TypeEvent.Propaganda, this._RelationFeind.GetHighlyHatredLiderRandom(), CountYear));
-        }
 
-		
-
-        return this.StackCommandLiderList.FirstOrDefault(a=>a.GetIncident().Year == CountYear);
-    }
-	*/
 	public void SetCommandRealise(Incident commandLider)
 	{
 		this.ReleaseCommandList = new List<Incident>() { commandLider  };
 
 	}
-	/*
-    public void AddCommandLiderList(List<CommandLider> commandLiderList)
-	{
-        Debug.Log(Name+"    --- -- -- --  L =" + commandLiderList.Count+ " command "+ commandLiderList.FirstOrDefault().GetNameCommandFirst());
-        this.StackCommandLiderList.AddRange(commandLiderList);
-        Debug.Log(" StackCommandLiderList L = "+ this.StackCommandLiderList.Count);
-    }
-	*/
+
 	public int GetAllOwnPopulation() {
 		int maxPopulation=0;
 		foreach(CityModel TownCity in _TownListOwn){

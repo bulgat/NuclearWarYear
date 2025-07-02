@@ -19,8 +19,6 @@ namespace Assets.Scripts.Model.createCommand
                 return GetFortuneEvent(countryLider, Year, GlobalParam.EventFortuneIncidentList[3]);
             }
 
-
-
             EventFortuneIncident eventFortuneIncidentRandom = null;
 
             foreach (EventFortuneIncident eventFortuneIncident in GlobalParam.EventFortuneIncidentList)
@@ -37,11 +35,14 @@ namespace Assets.Scripts.Model.createCommand
                 return GetFortuneEvent(countryLider, Year, eventFortuneIncidentRandom);
             }
 
-            
             return null;
         }
         private CommandLider GetFortuneEvent(CountryLider countryLider, int Year, 
-            EventFortuneIncident eventFortuneIncident) {
+            EventFortuneIncident eventFortuneIncident) 
+        {
+            var kol = countryLider.GetTargetCitySelectPlayer();
+            UnityEngine.Debug.Log("  ==  tMisslePl = " + kol.MyCity+"--"+kol.TargetCity);
+
             GlobalParam.TypeEvent actionCommand = GlobalParam.TypeEvent.None;
                             actionCommand = eventFortuneIncident.Name;
                     CommandLider commandLider = null;

@@ -20,8 +20,6 @@ namespace Assets.Scripts.Model.weapon
             this.FiendPopulation = -population;
             this.MyCity = myCity;
             this.FiendCity = fiendCity;
-
-            Debug.Log("    an  = " + fiendCountryLider.Name);
         }
         public CityModel GetMyCity()
         {

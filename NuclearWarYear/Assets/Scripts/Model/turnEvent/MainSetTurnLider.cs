@@ -24,9 +24,7 @@ namespace Assets.Scripts.Model
 
             CountryLider lider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-            
             CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider,CountYear,mainModel);
-            Debug.Log("  == " + lider.Name + " SetMisslePl = " + enemylider.Name);
 
             CityModel cityModelTarget = mainModel.GetCommandLider(CountYear, FlagId)._TargetCity.TargetCity;
 
