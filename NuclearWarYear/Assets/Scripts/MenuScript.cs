@@ -18,12 +18,18 @@ using Assets.Scripts.Model.param;
 using UnityEngine.Video;
 using static UnityEditor.Progress;
 using UnityEditor;
+using UnityEngine.Serialization;
 
 public class MenuScript : MonoBehaviour
 {
     public Text TurnYear;
-    public GameObject CardWeapon;
+    [SerializeField, FormerlySerializedAs("CardWeapon")]
+    public GameObject Card;
+    [TextArea(1, 3)]
+    public string weaponHelp = "список карточек оружия";
+    [SerializeField,Tooltip("список карточек оружия")]
     public List<Sprite> IconCardList;
+    [Space(30)]
     public List<GameObject> UICardTownList;
 
     public GameObject panelMain;
@@ -189,7 +195,7 @@ public class MenuScript : MonoBehaviour
         int count = 0;
         foreach (IWeapon item in missleList)
         {
-            GameObject CardWing = Instantiate(CardWeapon, new Vector2(100 + (count * 100), 100), Quaternion.identity);
+            GameObject CardWing = Instantiate(Card, new Vector2(100 + (count * 100), 100), Quaternion.identity);
             CardWing.transform.SetParent(panelMain.transform);
             ViewCardWeapon viewCardWeapon = CardWing.GetComponent<ViewCardWeapon>();
             
