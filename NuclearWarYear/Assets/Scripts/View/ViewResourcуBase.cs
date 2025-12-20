@@ -14,7 +14,8 @@ namespace Assets.Scripts.View
         public Text textPopulation;
         private void Start()
         {
-            ButtonCloseResource.onClick.AddListener(() => ButtonCloseResourceMethod(ButtonCloseResource));
+
+            ButtonCloseResource.onClick.AddListener(() => ButtonCloseResourceMethod());
         }
         public virtual void SetResourceMethodTable(MenuScript menuScript, List<Sprite> LiderImageList, List<Sprite> FlagImageList, MainModel _mainModel)
         {
@@ -23,12 +24,12 @@ namespace Assets.Scripts.View
         }
         public void SetMessage(string message)
         {
-            //var textPopulation = gameObject.transform.GetChild(4);
 
             textPopulation.GetComponent<Text>().text = message;
         }
-        void ButtonCloseResourceMethod(Button buttonCloseResource)
+        void ButtonCloseResourceMethod()
         {
+
             Destroy(gameObject);
         }
     }

@@ -42,8 +42,8 @@ namespace Assets.Scripts.Model.turnEvent
                     + " у " + mainModel.GetCommandLider(CountYear, lider.FlagId).LiderFiend.Name, mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetName());
                 mainModel.GetCommandLider(CountYear, lider.FlagId).LiderFiend._RelationFeind.SetNegativeMood(lider.FlagId, 25);
 
-                CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, damageAttackCount, cityModelTarget, enemylider),
-                    GlobalParam.MessageDictionary[mainModel.GetCommandLider(CountYear, lider.FlagId).GetNameCommandFirst()].ShowFiend);
+                CommandIncident.SetReleaseMessage(GlobalParam.MessageDictionary[mainModel.GetCommandLider(CountYear, lider.FlagId).GetNameCommandFirst()].ShowFiend);
+                CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, damageAttackCount, cityModelTarget, enemylider));
                 lider.SetCommandRealise(CommandIncident);
                 //return CommandIncident;
             }

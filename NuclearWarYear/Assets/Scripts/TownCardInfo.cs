@@ -1,18 +1,20 @@
+using Assets.Scripts.Model.paramTable;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TownCardInfo : MonoBehaviour
 {
-    private int Population { get; set; }
 
     private City TownCity { get; set; }
     private List<Sprite> FlagImageList { get; set; }
-    Text infoText;
+    Text InfoText;
+    private TMP_Text NameCityText { get; set; }
+
     public TownCardInfo()
     {
-        this.Population = 44;
     }
     public void SetParam(List<Sprite> FlagImageList, City townCity)
     {
@@ -23,13 +25,14 @@ public class TownCardInfo : MonoBehaviour
     {
         Image flagImage = gameObject.transform.GetChild(1).GetComponent<Image>();
         flagImage.sprite = this.FlagImageList[this.TownCity.FlagId];
-        this.infoText = gameObject.transform.GetChild(2).GetComponent<Text>();
-        
+        this.InfoText = gameObject.transform.GetChild(2).GetComponent<Text>();
+        this.NameCityText = gameObject.transform.GetChild(3).GetComponent<TMP_Text>();
+        gameObject.transform.localScale = new Vector2(UIparam.TownCardSize.X, UIparam.TownCardSize.Y);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        infoText.text = this.TownCity.CityTownModel.GetPopulation().ToString();
+        InfoText.text = this.TownCity.CityTownModel.GetPopulation().ToString();
+        this.NameCityText.text = this.TownCity.CityTownModel.Name;    
     }
 }

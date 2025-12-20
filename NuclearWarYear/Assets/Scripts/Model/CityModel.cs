@@ -9,12 +9,13 @@ public class CityModel
     private int _futurePopulation;
     private int Id;
     public int CountryId { get; }
-    public CityModel(int countryId, int id) {
+    public string Name ="Tok";
+    public CityModel(int countryId, int id, string name) {
         this.CountryId = countryId;
         _population = 40;
         _futurePopulation = _population;
         this.Id = id;
-        
+        this.Name = name;
     }
  
     public int GetId()

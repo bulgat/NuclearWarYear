@@ -117,7 +117,7 @@ public class SwitchActionHelper
                 {
                     commandLider.SetVisibleEventList(GlobalParam.TypeEvent.AttackMissle, true);
                     commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
-                    commandLider.SetAttackMissle(countryLider.GetMissle());
+                    commandLider.SetAttackMissle(countryLider.GetMissleFirst());
                 }
                 break;
             default:

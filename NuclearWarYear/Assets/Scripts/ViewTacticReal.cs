@@ -1,6 +1,8 @@
 using Assets.Scripts.Model.param;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,10 +21,11 @@ int canvasIndex = 1;
         this._UICardTownList = UICardTownList;
     }
  
-    public void CanvasTacticRealSetText(string InfoText, int FlagIndex,int IdImage, List<Sprite> LiderImageList, MainModel mainModel, int indexLider)
+    public void CanvasTacticRealSetText(string InfoText, int FlagIndex,int IdImage,
+        List<Sprite> LiderImageList, MainModel mainModel, int indexLider)
     {
-        
-        
+
+        Debug.Log("04============ =" + IdImage);
 
 
         gameObject.transform.GetChild(canvasIndex).GetChild(1).GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;

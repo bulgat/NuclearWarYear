@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Model.param;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,35 +11,16 @@ namespace Assets.Scripts.View
     {
         public List<CityModel> GetBindCity( MainModel mainModel) {
             List<CityModel> TownList = new List<CityModel>();
-            TownList.Add(new CityModel(1, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(1, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(1, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(1, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(1, mainModel.GetIncrementCityId()));
 
-            TownList.Add(new CityModel(2, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(2, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(2, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(2, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(2, mainModel.GetIncrementCityId()));
+            for(int indexFlag = 1; indexFlag < 6; indexFlag++)
+            {
+                for (int z = 0; z < 5; z++)
+                {
+                    
+                    TownList.Add(new CityModel(indexFlag, mainModel.GetIncrementCityId(), GlobalParam.ParamLiderList[indexFlag - 1].NameCity[z]));
+                }
+            }
 
-            TownList.Add(new CityModel(3, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(3, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(3, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(3, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(3, mainModel.GetIncrementCityId()));
-
-            TownList.Add(new CityModel(4, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(4, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(4, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(4, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(4, mainModel.GetIncrementCityId()));
-
-            TownList.Add(new CityModel(5, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(5, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(5, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(5, mainModel.GetIncrementCityId()));
-            TownList.Add(new CityModel(5, mainModel.GetIncrementCityId()));
 
             return TownList;
         }

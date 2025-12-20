@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -74,8 +75,30 @@ public class Incident : Weapon, IWeapon
         if (String.IsNullOrEmpty(GetDamagePopulation())) {
             return $"{lider.Name}   : {GetMessage()}.";
         }
-        return $"{lider.Name}   : {GetMessage()}: {GetDamagePopulation()} от {GetNameFiendLider()}.";
+
+        string message = MutationMessage();
+
+
+
+
+        return $"{lider.Name}   : {message}: {GetDamagePopulation()} {GetNameFiendLider()}.";
     }
+    string MutationMessage()
+    {
+
+        if (PopulationEvent.MyCity == null && PopulationEvent.FiendCity == null)
+        {
+            return GetMessage();
+        }
+        if (PopulationEvent.MyCity != null && PopulationEvent.FiendCity != null)
+        {
+            Debug.Log("077    PopulationEvent= " + PopulationEvent.MyCity.Name+" fiend "+ PopulationEvent.FiendCity.Name);
+            return String.Format(GetMessage(), PopulationEvent.MyCity.Name, PopulationEvent.FiendCity.Name);
+        }
+        Debug.Log("078 PopulationEvent = " + PopulationEvent.MyCity.Name);
+        return String.Format(GetMessage(), PopulationEvent.MyCity.Name, "");
+    }
+
     string GetNameFiendLider() {
         
 
@@ -121,13 +144,16 @@ public class Incident : Weapon, IWeapon
     {
         return this.MemberwiseClone() as Incident;
     }
-    public void SetReleaseMessage(PopulationEvent statePopulationEvent,bool showFiend)
+    public void SetReleaseMessage(bool showFiend)
     {
-        
-        this.PopulationEvent = statePopulationEvent;
-        
         this.ShowLider = showFiend;
     }
+    public void SetPopulationEvent(PopulationEvent statePopulationEvent)
+    {
+        this.PopulationEvent = statePopulationEvent;
+
+    }
+
 
     public int GetImageId()
     {

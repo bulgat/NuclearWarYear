@@ -10,7 +10,6 @@ public class City : MonoBehaviour
     GameObject NuclearExplode;
 	public GameObject Shield;
 	public GameObject AttackTarget;
-	//public GameObject Flag;
 	public List<Sprite> FlagImageList;
 
 	public int FlagId=0;
@@ -27,34 +26,21 @@ public class City : MonoBehaviour
     public Animator animator;
     private void Await() {
 
-        
-        //animator.Play(0);
     }
 	
     void Start()
     {
-
-        
 		AttackTarget.SetActive(false);
-
 		NuclearExplode = gameObject.transform.GetChild(3).gameObject;
-
 animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         
         if (animator)
         {
-
              animator.enabled = false;
-            //animator.StopPlayback();
         }
-        //NuclearExplode.GetComponent().S
-
         NuclearExplode.SetActive(false);
-        //animator.enabled = true;
-        //animator.Play(0);
     }
 
-    // Update is called once per frame
     void Update()
     {
 		ChangeViewTown();
@@ -62,19 +48,11 @@ animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
 	}
 	 void OnMouseDown()
     {
-		//print("0000_["+ _SelectCityTargetIdPlayer + "] City ibleComponent [  "+ CityTownModel 
-		//	+ " ]    = "+ _IdCity+"  "+ CityTownModel.GetId());
-		//_SelectCityTargetIdPlayer(CityTownModel.GetId());
-
     }
 	public void SetCityModelView(CityModel cityModel)
     {
 		this.CityTownModel = cityModel;
 		this.FlagId = cityModel.FlagId-1;
-		//var spriteRenderer = Flag.GetComponent<SpriteRenderer>();
-
-		//spriteRenderer.sprite = FlagImageList[this.FlagId];
-
 	}
 	public void ChangeViewTown(){
 		var spriteTown = NuclearTown.GetComponent<SpriteRenderer>();
@@ -106,7 +84,6 @@ animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
 				return;
 			}
 			spriteTown.sprite = _TownSpriteList[5];
-			//Flag.SetActive(false);
 		}
 	}
 	public void ClearTargetAim(){

@@ -11,13 +11,18 @@ namespace Assets.Scripts.View
     {
         public GameObject GetTownViewWithId(CityModel cityModel, List<GameObject> TownList)
         {
+            
             foreach (GameObject cityTown in TownList)
             {
                 City city = cityTown.GetComponent<City>();
-                if (city.GetId() == cityModel.GetId())
+                if (city != null)
                 {
-                    return cityTown;
+                    
+                    if (city.GetId() == cityModel.GetId())
+                    {
+                        return cityTown;
 
+                    }
                 }
             }
             return null;

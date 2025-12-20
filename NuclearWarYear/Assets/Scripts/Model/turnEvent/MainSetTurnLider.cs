@@ -37,8 +37,10 @@ namespace Assets.Scripts.Model
 
                     TurnEventExecute turnEventExecute = GlobalParam.MessageDictionary[CommandIncident.Name];
 
-                message = new CreateSimpleIncident().CreateMessageIncident(turnEventExecute, lider,
-                       ref CommandIncident,  CountYear,  enemylider, TownList, mainModel);
+                message = new CreateSimpleIncident().CreateMessageIncident(turnEventExecute,
+                    lider,
+                       ref CommandIncident, 
+                       CountYear,  enemylider, TownList, mainModel);
 
                 message = new CreateBomberIncident().CreateAttackBomber(lider, CountYear, enemylider,
             ref CommandIncident, cityModelTarget, mainModel);
@@ -55,7 +57,7 @@ namespace Assets.Scripts.Model
 
             if (CommandIncident.PopulationEvent==null)
             {
-                Debug.Log(" 0002  country  Fi Lider  = "+CommandIncident);
+                Debug.Log(" 0002  country   Lider  = "+CommandIncident.Name);
                 throw new Exception("not event");
             }
             return CommandIncident;

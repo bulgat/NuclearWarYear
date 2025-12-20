@@ -1,5 +1,7 @@
 ﻿using Assets.Scripts.Model.param;
+using Assets.Scripts.Model.paramTable;
 using Assets.Scripts.View;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +56,6 @@ public class BuildingCentral : MonoBehaviour
         AirportAttack.SetActive(false);
         MissleOpenObject.SetActive(false);
 
-        this.buildingCentralModel = new BuildingCentralModel();
         VisibleObjList = new Dictionary<string, bool>();
         VisibleObjList.Add(GlobalParam.TypeEvent.Bomber.ToString(), false);
         VisibleObjList.Add(GlobalParam.TypeEvent.AttackBomber.ToString(), false);
@@ -67,12 +68,7 @@ public class BuildingCentral : MonoBehaviour
 
 
     }
-    //public void SetTargetBomber(CityModel target)
-    //{
-        // Vector3
-        //this.buildingCentralModel.SetTargetBomber(target);
 
-    //}
     public void UpdateVisibleBuilding(GlobalParam.TypeEvent NameCommand)
     {
 
@@ -154,10 +150,14 @@ public class BuildingCentral : MonoBehaviour
                 UfoObject.SetActive(false);
             }
 
-        Debug.Log("RICH  Fortune geIncidentCommand = " + GetTarget());
-        if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
+        if (buildingCentralModel != null)
         {
-            UfoObject.transform.position = GetTarget();
+            if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
+            {
+
+                UfoObject.transform.position = GetTarget(buildingCentralModel);
+
+            }
         }
     }
 
@@ -193,14 +193,13 @@ public class BuildingCentral : MonoBehaviour
                         Speed, transform, _animationTimeProcess, TownList, buildingCentralModel);
                 }
             }
-            Vector3 targetBomber = GetTarget();
+            Vector3 targetBomber = GetTarget(buildingCentralModel);
 
             if (VisibleObjList[GlobalParam.TypeEvent.Ufo.ToString()] 
                 || VisibleObjList[GlobalParam.TypeEvent.Baby.ToString()]
                 || VisibleObjList[GlobalParam.TypeEvent.CrazyCow.ToString()]
                 || VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()]
                 || VisibleObjList[GlobalParam.TypeEvent.AttackMissle.ToString()]
-                //|| VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()]
                 )
             {
                 UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(UfoObject.transform.position,
@@ -209,8 +208,7 @@ public class BuildingCentral : MonoBehaviour
             
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
             {
-
-                targetBomber = new Vector3(targetBomber.x + 5, targetBomber.y + 5, targetBomber.z);
+                targetBomber = new Vector3(targetBomber.x + UIparam.OutFieldCosmic.X, targetBomber.y + +UIparam.OutFieldCosmic.Y, targetBomber.z);
 
 
                 UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(UfoObject.transform.position,
@@ -218,13 +216,15 @@ public class BuildingCentral : MonoBehaviour
             } 
         }
     }
-    Vector3 GetTarget()
+    Vector3 GetTarget(BuildingCentralModel buildingCentralModel)
     {
+        if (buildingCentralModel == null)
+        {
+            return Vector3.zero;
+        }
         GameObject cityTown = new SearchTownObject().GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
         City city = cityTown.GetComponent<City>();
         Vector3 targetBomber = cityTown.transform.position;
-
-        Debug.Log(" - RICH-   ="+ cityTown);
 
         return targetBomber;
     }

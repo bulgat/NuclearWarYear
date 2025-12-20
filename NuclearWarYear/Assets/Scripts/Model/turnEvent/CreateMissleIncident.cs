@@ -38,10 +38,10 @@ namespace Assets.Scripts.Model.turnEvent
                     mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetName());
                 mainModel.GetCommandLider(CountYear, lider.FlagId).LiderFiend._RelationFeind.SetNegativeMood(lider.FlagId, 25);
 
-                CommandIncident.SetReleaseMessage(new StateAttackPopulation(message, damageAttackCount, cityModelTarget, enemylider),
+                CommandIncident.SetReleaseMessage(
                     GlobalParam.MessageDictionary[mainModel.GetCommandLider(CountYear, lider.FlagId).GetNameCommandFirst()].ShowFiend);
-                lider.SetCommandRealise(CommandIncident);
-                //return CommandIncident;
+                CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, damageAttackCount, cityModelTarget, enemylider));
+               lider.SetCommandRealise(CommandIncident);
             }
 
             return message;

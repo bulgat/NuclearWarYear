@@ -15,7 +15,7 @@ namespace Assets.Scripts.Model.AiTurn
         List<CityModel> TownList, int _flagIdPlayer, int FlagIdPlayer, int CountYear, MainModel mainModel)
         {
             GlobalParam.TypeEvent actionNameCommand = GlobalParam.TypeEvent.None;
-            //CityModel myCity = this.GetTownList().Where(a => a.FlagId == LiderFlagId).FirstOrDefault();
+
             CityModel myCity = lider.GetFirstCityHelper();
 
             if (lider.ReleaseCommandList != null)
@@ -39,27 +39,28 @@ namespace Assets.Scripts.Model.AiTurn
             CountryLider fiendLider1 = lider._RelationFeind.GetHighlyHatredLiderRandom();
 
             var randTarget = new TargetHelper()
-                .GetTargetRandom(CountryLiderList,
-                //FlagIdPlayer,
-                //lider.FlagId != FlagIdPlayer, TownList, 
-                //lider,
-                fiendLider1, true, new TargetHelper().GetRandomCity(
+                .GetTargetRandom(
+                CountryLiderList,
+                fiendLider1,
+                true,
+                new TargetHelper().GetRandomCity(
                     TownList,
-        lider, fiendLider1.FlagId,
-        true));
+                    lider, 
+                    fiendLider1.FlagId,
+                    true));
 
             TargetCityModel targetCityModel
                 = new TargetCityModel(randTarget, myCity, fiendLider1);
 
             if (lider.FlagId != _flagIdPlayer)
             {
-                Debug.Log("    lider commandLis getCity  L =" + myCity+"--");
+
                 lider.SetTargetCity(targetCityModel);
             }
 
             // Счастливая карта!
             CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
-                lider.FlagId != FlagIdPlayer, lider, CountYear,GlobalParam.TestMode);
+                lider.FlagId != FlagIdPlayer, lider, CountYear);
 
 
 

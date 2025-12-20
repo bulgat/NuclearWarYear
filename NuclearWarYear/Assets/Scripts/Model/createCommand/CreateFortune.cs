@@ -1,22 +1,16 @@
 ﻿using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.paramTable;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Model.createCommand
 {
     internal class CreateFortune
     {
-        public CommandLider FortuneEvent( bool AIfiend, CountryLider countryLider,int Year, bool testMode)
+        public CommandLider FortuneEvent( bool AIfiend, CountryLider countryLider,int Year)
         {
-            if (testMode)
+            if (GlobalParam.TestMode)
             {
-                return GetFortuneEvent(countryLider, Year, GlobalParam.EventFortuneIncidentList[3]);
+                return GetFortuneEvent(countryLider, Year, GlobalParam.EventFortuneIncidentList[4]);
             }
 
             EventFortuneIncident eventFortuneIncidentRandom = null;
@@ -41,7 +35,6 @@ namespace Assets.Scripts.Model.createCommand
             EventFortuneIncident eventFortuneIncident) 
         {
             var kol = countryLider.GetTargetCitySelectPlayer();
-            UnityEngine.Debug.Log("  ==  tMisslePl = " + kol.MyCity+"--"+kol.TargetCity);
 
             GlobalParam.TypeEvent actionCommand = GlobalParam.TypeEvent.None;
                             actionCommand = eventFortuneIncident.Name;
