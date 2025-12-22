@@ -18,7 +18,7 @@ public class UFOmodel : MonoBehaviour
     {
 
     }
-    public void SetVisible(string Id)
+    public void SetVisible(string nameId)
     {
         this.UFO.SetActive(false);
         this.Stork.SetActive(false);
@@ -26,7 +26,7 @@ public class UFOmodel : MonoBehaviour
         this.RocketRich.SetActive(false);
         this.Defectors.SetActive(false);
         this.Missle.SetActive(false);
-        switch (Id)
+        switch (nameId)
         {
             case "Ufo":
             this.UFO.SetActive(true);

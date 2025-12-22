@@ -25,7 +25,6 @@ namespace Assets.Scripts.View
             Image image = imageLider.GetComponent<Image>();
             if (image != null)
             {
-                Debug.Log(liderPlayer.GraphicId + "  liderP  = " + flagId+"__"+ new ViewLiderHelper().GetNumberSpriteLider(liderPlayer.GraphicId, 0));
                 image.sprite = LiderImageList[
                     new ViewLiderHelper().GetNumberSpriteLider(liderPlayer.GraphicId, 0)];
             }

@@ -25,9 +25,6 @@ int canvasIndex = 1;
         List<Sprite> LiderImageList, MainModel mainModel, int indexLider)
     {
 
-        Debug.Log("04============ =" + IdImage);
-
-
         gameObject.transform.GetChild(canvasIndex).GetChild(1).GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
         ViewIconCard viewIconCard = gameObject.transform.GetChild(canvasIndex).GetChild(2).GetComponent<ViewIconCard>();
         viewIconCard.SetParam(this._IconCardList, IdImage);

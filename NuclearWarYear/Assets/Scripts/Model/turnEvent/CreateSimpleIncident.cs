@@ -17,7 +17,6 @@ namespace Assets.Scripts.Model.turnEvent
             List<CityModel> TownList, MainModel mainModel)
         {
             string message = "";
-            Debug.Log("00============= " + CommandIncident);
 
             if (turnEventExecute.RemoveDefenceWeapon ||
                 turnEventExecute.Airport)
@@ -71,12 +70,22 @@ namespace Assets.Scripts.Model.turnEvent
                     CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider));
                     lider.SetCommandRealise(CommandIncident);
                     break;
+                case GlobalParam.TypeEvent.AttackMissle:
+                    CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
+                    CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), cityFiend, enemylider));
+                    lider.SetCommandRealise(CommandIncident);
+                    break;
                 case GlobalParam.TypeEvent.Bomber:
                     message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetMessage(),
                         mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetName());
                     lider.RemoveBomber();
                     CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
                     CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider));
+                    lider.SetCommandRealise(CommandIncident);
+                    break;
+                case GlobalParam.TypeEvent.AttackBomber:
+                    CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
+                    CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), cityFiend, enemylider));
                     lider.SetCommandRealise(CommandIncident);
                     break;
                 case GlobalParam.TypeEvent.Propaganda:

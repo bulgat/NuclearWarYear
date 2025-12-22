@@ -14,6 +14,7 @@ namespace Assets.Scripts.Model.weapon
             this.Message = message;
             this.FiendPopulation = ChangePopulation;
             this.FiendCity = fiendCity;
+            this.GreatTarget = fiendCity;
         }
         public CityModel GetMyCity()
         {

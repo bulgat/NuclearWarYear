@@ -5,7 +5,7 @@ using UnityEngine;
 public class ViewCircleBomber : ViewSendAnimObj
 {
     public void SendBomberAndWingState(GameObject bomberObject, bool SetAnglePosition,
-         int Speed, Transform transform, float animationTimeProcess, List<GameObject> TownList, BuildingCentralModel buildingCentralModel)
+         int Speed, Transform transform, float animationTimeProcess, List<GameObject> TownList, TargetModel buildingCentralModel)
     {
 
         if (bomberObject != null)

@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class TargetHelper 
+public class TargetHelper
 {
-	public CityModel GetTargetRandom(
-		List<CountryLider> CountryLiderList,
+    public CityModel GetTargetRandom(
+        List<CountryLider> CountryLiderList,
         CountryLider fiendLider1,
-		bool setTarget,
+        bool setTarget,
         CityModel targetTownCity
-        ) 
-	{
-            BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(fiendLider1);
+        )
+    {
+        BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(fiendLider1);
 
         if (setTarget)
-		{
-			buildingCentral.buildingCentralModel = new BuildingCentralModel(targetTownCity);
-		}
+        {
+            buildingCentral.SetTargetModel(new TargetModel(targetTownCity));
+        }
 
         return targetTownCity;
 
-	}
-	public CityModel GetRandomCity(List<CityModel> TownList,
+    }
+    public CityModel GetRandomCity(List<CityModel> TownList,
         CountryLider countryLider, int FlagIdPlayer,
         bool AIturn)
-	{
-return new ModGameEngine().GetCityRandomFlagId(TownList, countryLider, FlagIdPlayer, AIturn);
-	}
+    {
+        return new ModGameEngine().GetCityRandomFlagId(TownList, countryLider, FlagIdPlayer, AIturn);
+    }
 }

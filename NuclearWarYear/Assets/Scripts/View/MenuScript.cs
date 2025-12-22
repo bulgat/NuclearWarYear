@@ -1,24 +1,25 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Model;
+using Assets.Scripts.Model.param;
+using Assets.Scripts.Model.weapon;
+using Assets.Scripts.View;
+using System;
 using System.Collections;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using UnityEngine.SceneManagement;
-using System.Text;
 using System.Reflection;
-using Assets.Scripts.View;
-using Assets.Scripts.Model;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
-using static UnityEngine.ParticleSystem;
+using System.Text;
 using System.Xml.Linq;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.VersionControl;
-using Assets.Scripts.Model.param;
-using UnityEngine.Video;
-using static UnityEditor.Progress;
-using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
+using UnityEngine.Video;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
+using static UnityEditor.Progress;
+using static UnityEngine.ParticleSystem;
 
 public class MenuScript : MonoBehaviour
 {
@@ -52,7 +53,6 @@ public class MenuScript : MonoBehaviour
     private Vector3 _targetNuclearMap;
 
     public GameObject Canvas;
-    //public GameObject CardGamePrefabs;
     public Image CircleReady;
 
     public GameObject TownCard;
@@ -455,14 +455,23 @@ public class MenuScript : MonoBehaviour
 
         CommandIncident = _controller.TurnSatisfyOneLider(lider.FlagId, CommandIncident);
 
-        Debug.Log(" CommandIncident = " + CommandIncident.Name);
-
-        this.TacticReal(CommandIncident.FullMessage(lider), lider.FlagId - 1, CommandIncident.IdImage, lider);
+        this.TacticReal(CommandIncident.FullMessage(lider), lider.FlagId - 1, CommandIncident.IdImage,
+            lider);
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
-        buildingCentral.ViewStartStateObject(TownViewList, waitTime + (this.waitTurnTime * indexLider), lider, CommandIncident);
+        buildingCentral.ViewStartStateObject(TownViewList, waitTime + (this.waitTurnTime * indexLider),
+            lider, CommandIncident);
 
-        buildingCentral.buildingCentralModel = new BuildingCentralModel(TargetManager(lider));
+        Debug.Log("0770  pulationEve   fie - " + CommandIncident.FullMessage(lider));
+
+        if (CommandIncident.PopulationEvent.GreatTarget != null)
+        {
+            buildingCentral.SetTargetModel(new TargetModel(CommandIncident.PopulationEvent.GreatTarget));
+        } else
+        {
+            buildingCentral.SetTargetModel(new TargetModel(TargetManager(lider)));
+        }
+
 
         StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
     }

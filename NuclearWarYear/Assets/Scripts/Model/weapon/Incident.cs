@@ -70,13 +70,14 @@ public class Incident : Weapon, IWeapon
     }
     public string FullMessage(CountryLider lider)
     {
-        
-        
-        if (String.IsNullOrEmpty(GetDamagePopulation())) {
-            return $"{lider.Name}   : {GetMessage()}.";
-        }
-
         string message = MutationMessage();
+        
+        //if (String.IsNullOrEmpty(GetDamagePopulation())) {
+            //Debug.Log("0890 PopulationE   = " + GetMessage()+ "  this.PopulationEvent = [" + this.PopulationEvent+"]");
+            //return $"{lider.Name}   : {GetMessage()}.";
+        //}
+
+        
 
 
 
@@ -85,18 +86,23 @@ public class Incident : Weapon, IWeapon
     }
     string MutationMessage()
     {
-
+        Debug.Log("078 PopulationEve  = " + GetMessage());
         if (PopulationEvent.MyCity == null && PopulationEvent.FiendCity == null)
         {
             return GetMessage();
         }
         if (PopulationEvent.MyCity != null && PopulationEvent.FiendCity != null)
         {
-            Debug.Log("077    PopulationEvent= " + PopulationEvent.MyCity.Name+" fiend "+ PopulationEvent.FiendCity.Name);
             return String.Format(GetMessage(), PopulationEvent.MyCity.Name, PopulationEvent.FiendCity.Name);
         }
-        Debug.Log("078 PopulationEvent = " + PopulationEvent.MyCity.Name);
-        return String.Format(GetMessage(), PopulationEvent.MyCity.Name, "");
+        if (PopulationEvent.MyCity != null) {
+            return String.Format(GetMessage(), PopulationEvent.MyCity.Name, "");
+        }
+        if (PopulationEvent.FiendCity != null)
+        {
+            return String.Format(GetMessage(), PopulationEvent.FiendCity.Name);
+        }
+        return String.Format(GetMessage(), "");
     }
 
     string GetNameFiendLider() {
@@ -116,14 +122,13 @@ public class Incident : Weapon, IWeapon
     }
     string GetDamagePopulation()
     {
-        
-        if (this.PopulationEvent == null)
-        {
-            return "";
-        }
-        
+
         int population  = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
-        
+        if (PopulationEvent.FiendCity != null)
+        {
+            Debug.Log("0888 Populat    = " + PopulationEvent.FiendCity.Name);
+        }
+        Debug.Log("0889 Populatio    = " + population);
         if (population > 0)
         {
             return population.ToString();

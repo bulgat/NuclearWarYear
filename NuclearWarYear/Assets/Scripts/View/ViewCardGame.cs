@@ -6,7 +6,7 @@ public class ViewCardGame : MonoBehaviour, IPointerDownHandler, IPointerClickHan
     IPointerUpHandler, IPointerExitHandler, IPointerEnterHandler,
     IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    // Start is called before the first frame update
+
     void Start()
     {
         
@@ -17,7 +17,6 @@ public class ViewCardGame : MonoBehaviour, IPointerDownHandler, IPointerClickHan
 		Destroy(gameObject);
 	}
 
-    // Update is called once per frame
     void Update()
     {
         

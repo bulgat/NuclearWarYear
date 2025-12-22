@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingCentralModel 
+public class TargetModel 
 {
 	private CityModel _targetBomber;
-	public BuildingCentralModel(CityModel target)
+	public TargetModel(CityModel target)
 	{
 		if (target == null) {
 			throw new Exception("Exception Target bomber not null! ");

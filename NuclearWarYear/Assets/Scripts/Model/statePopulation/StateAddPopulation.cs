@@ -14,6 +14,7 @@ namespace Assets.Scripts.Model.weapon
             this.Message = message;
             this.MyPopulation = population;
             this.MyCity= myCity;
+            this.GreatTarget = myCity;
         }
 
         public CityModel GetMyCity()

@@ -6,7 +6,7 @@ using UnityEngine;
 public class ViewAttackMissle : ViewSendAnimObj
 {
     public void SendBomberAndWingState(GameObject bomberObject,
-        int Speed, Transform transform, float animationTimeProcess, List<GameObject> TownList, BuildingCentralModel buildingCentralModel)
+        int Speed, Transform transform, float animationTimeProcess, List<GameObject> TownList, TargetModel buildingCentralModel)
     {
 
         float step = Speed * Time.deltaTime; // calculate distance to move

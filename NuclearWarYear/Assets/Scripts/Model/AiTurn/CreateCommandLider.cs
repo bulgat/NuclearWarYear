@@ -18,10 +18,12 @@ namespace Assets.Scripts.Model.AiTurn
 
             CityModel myCity = lider.GetFirstCityHelper();
 
+
+
             if (lider.ReleaseCommandList != null)
             {
 
-                actionNameCommand = ChangeIncidentCommand(lider, actionNameCommand, CountYear, mainModel);
+                actionNameCommand = new ChangeIncident().ChangeIncidentCommand(lider, actionNameCommand, CountYear, mainModel);
             }
 
             if (actionNameCommand == GlobalParam.TypeEvent.None)
@@ -74,46 +76,6 @@ namespace Assets.Scripts.Model.AiTurn
 
             return commandLidersList;
         }
-
-        private GlobalParam.TypeEvent ChangeIncidentCommand(CountryLider lider, GlobalParam.TypeEvent actionNameCommand, int countYear, MainModel mainModel)
-        {
-            //auto command player
-            var type = lider.ReleaseCommandList?.FirstOrDefault();
-
-
-
-            if (type == null)
-            {
-                actionNameCommand = GlobalParam.TypeEvent.Propaganda;
-
-            }
-            else
-            {
-                actionNameCommand = type.GetName();
-
-                var lastYeatCommandList0 = lider.ReleaseCommandList.Where(a => a.GetYear() == countYear).ToList();
-                var lastYeatCommandList = lider.ReleaseCommandList.Where(a => a.GetYear() == countYear - 1).ToList();
-
-                foreach (var item in lastYeatCommandList)
-                {
-
-                    if (item.Type == GlobalParam.TypeEvent.Missle)
-                    {
-                        item.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
-
-                        return GlobalParam.TypeEvent.AttackMissle;
-                    }
-                    if (item.Type == GlobalParam.TypeEvent.Bomber)
-                    {
-                        item.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
-
-                        return GlobalParam.TypeEvent.AttackBomber;
-                    }
-
-                }
-
-            }
-            return actionNameCommand;
-        }
+        
     }
 }

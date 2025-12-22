@@ -21,6 +21,7 @@ namespace Assets.Scripts.Model.weapon
             this.FiendPopulation = -population;
             this.MyCity = myCity;
             this.FiendCity = fiendCity;
+            this.GreatTarget = myCity;
         }
         public CityModel GetMyCity()
         {

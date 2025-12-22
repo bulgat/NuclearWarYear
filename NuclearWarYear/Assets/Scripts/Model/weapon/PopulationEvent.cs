@@ -16,6 +16,7 @@ namespace Assets.Scripts.Model.weapon
         public bool DoubleCity { get; protected set; }
         public int MyPopulation { get; protected set; }
         public int FiendPopulation { get; protected set; }
+        public CityModel GreatTarget { get; protected set; }
 
         public PopulationEvent(CountryLider fiendCountryLider)
         {

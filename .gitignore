@@ -107,3 +107,4 @@ crashlytics-build.properties
 *.bin
 *.gbc
 *.log
+*.png.meta

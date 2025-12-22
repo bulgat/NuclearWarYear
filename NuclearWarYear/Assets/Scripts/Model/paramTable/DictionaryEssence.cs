@@ -38,8 +38,8 @@ public class DictionaryEssence
         new Incident(GlobalParam.TypeEvent.CrazyCow, GlobalParam.TypeEvent.Incident, 13,"Ковид-безумие сумашедшедших коров, поразило {0} ",new DamageParam(5, 15)),
 
         new Incident(GlobalParam.TypeEvent.Build, GlobalParam.TypeEvent.Incident, 14, "Производство вооружения ",new DamageParam(0, 6)),
-        new Incident(GlobalParam.TypeEvent.AttackBomber, GlobalParam.TypeEvent.Incident, 15, "От ядерного взрыва с бомбардировщика население уменьшилось на ",new DamageParam(1,10)),
-        new Incident(GlobalParam.TypeEvent.AttackMissle, GlobalParam.TypeEvent.Incident, 16, "От ядерного взрыва ракеты население уменьшилось на ",new DamageParam(1,16)),
+        new Incident(GlobalParam.TypeEvent.AttackBomber, GlobalParam.TypeEvent.Incident, 15, "От ядерного взрыва с бомбардировщика население {0} уменьшилось на ",new DamageParam(10,11)),
+        new Incident(GlobalParam.TypeEvent.AttackMissle, GlobalParam.TypeEvent.Incident, 16, "От ядерного взрыва ракеты население {0} уменьшилось на ",new DamageParam(10,16)),
         new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Incident, 17, "Ракеты приведены в готовность",new DamageParam(0, 0)),
 
         new Incident(GlobalParam.TypeEvent.Defectors, GlobalParam.TypeEvent.Incident, 18, "Перебежчики сбежали ",new DamageParam(5, 17)),
