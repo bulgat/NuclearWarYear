@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class TownCardInfo : MonoBehaviour
 {
 
-    private City TownCity { get; set; }
+    private CityView TownCity { get; set; }
     private List<Sprite> FlagImageList { get; set; }
     Text InfoText;
     private TMP_Text NameCityText { get; set; }
@@ -16,7 +16,7 @@ public class TownCardInfo : MonoBehaviour
     public TownCardInfo()
     {
     }
-    public void SetParam(List<Sprite> FlagImageList, City townCity)
+    public void SetParam(List<Sprite> FlagImageList, CityView townCity)
     {
         this.TownCity = townCity;
         this.FlagImageList = FlagImageList;

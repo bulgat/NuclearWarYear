@@ -145,7 +145,6 @@ public class MenuScript : MonoBehaviour
         _controller.TurnAi();
    
         SelectCountryOne();
-        SetAllCityVisibleComponent();
 
         SetImageLiderButton();
         ChangeImageLider();
@@ -170,7 +169,7 @@ public class MenuScript : MonoBehaviour
         {
             GameObject CardTown = Instantiate(TownCard, new Vector2(100, 100), Quaternion.identity);
             TownCardInfo townCardInfo = CardTown.GetComponent<TownCardInfo>();
-            City townCity = town.GetComponent<City>();
+            CityView townCity = town.GetComponent<CityView>();
             townCardInfo.SetParam(this.FlagImageList, townCity);
 
             this.UICardTownList.Add(CardTown);
@@ -269,34 +268,52 @@ public class MenuScript : MonoBehaviour
     {
 
         this.TownViewList = new List<GameObject>();
-        GameObject[] TownListView = GameObject.FindGameObjectsWithTag("Town");
+        //GameObject[] TownListView = GameObject.FindGameObjectsWithTag("Town");
 
         List<CityModel> cityModelList = _mainModel.GetTownList();
 
-        for (int i = 0; i < TownListView.Length; i++)
-        {
+        //for (int i = 0; i < TownListView.Length; i++)
+        //{
 
             foreach (CityModel cityModel in cityModelList)
             {
-                City townCity = TownListView[i].GetComponent<City>();
+                GameObject townView = GetTownCity(cityModel.GetId());
+                CityView townCity = townView.GetComponent<CityView>();
+
+                //CityView townCity = TownListView[i].GetComponent<CityView>();
                 if (townCity.ViewId == cityModel.GetId())
                 {
+    
                     townCity.SetCityModelView(cityModel);
                     townCity.SetId(cityModel.GetId(), SelectCityTargetIdPlayer, TownSpriteList);
 
-                    this.TownViewList.Add(TownListView[i]);
+                    this.TownViewList.Add(townView);
                 }
             }
 
 
-        }
+        //}
 
     }
+    GameObject GetTownCity(int cityId)
+    {
+        GameObject[] TownListView = GameObject.FindGameObjectsWithTag("Town");
+        for (int i = 0; i < TownListView.Length; i++)
+        {
+            CityView townCity = TownListView[i].GetComponent<CityView>();
+            if (townCity.ViewId == cityId)
+            {
+                return TownListView[i];
+            }
+        }
+        return null;
+    }
+
 
     private void SelectCityTargetIdPlayer(int CityId)
     {
 
-        City selectCityTarget = ClearCityTargetMark(CityId, true);
+        CityView selectCityTarget = ClearCityTargetMark(CityId, true);
 
         _controller.SelectCityEnemyTargetPlayer(CityId, _mainModel.GetCurrentPlayerFlag());
 
@@ -314,16 +331,16 @@ public class MenuScript : MonoBehaviour
         }
 
     }
-    private City ClearCityTargetMark(int CityId, bool Player)
+    private CityView ClearCityTargetMark(int CityId, bool Player)
     {
 
-        City selectCityTarget = null;
+        CityView selectCityTarget = null;
         foreach (GameObject city in TownViewList)
         {
             if (city != null)
             {
 
-                City townCity = city.GetComponent<City>();
+                CityView townCity = city.GetComponent<CityView>();
                 townCity.ClearTargetAim();
 
                 if (townCity.GetId() == CityId)
@@ -341,21 +358,6 @@ public class MenuScript : MonoBehaviour
             _controller.ResetSelectCityEnemyTargetPlayer();
         }
         return selectCityTarget;
-    }
-    private void SetAllCityVisibleComponent()
-    {
-        if (TownViewList != null)
-        {
-            foreach (var city in TownViewList)
-            {
-                if (city)
-                {
-                    City townCity = city.GetComponent<City>();
-                    townCity.SetVisibleExplode(false);
-                    townCity.SetVisibleShild(false);
-                }
-            }
-        }
     }
     void MoveMapNuclear()
     {
@@ -436,12 +438,7 @@ public class MenuScript : MonoBehaviour
         StartCoroutine(AnimationPlayer(openWaitTime + _animationTime));
 
         // reset view
-        foreach (GameObject city in TownViewList)
-        {
-            City townCity = city.GetComponent<City>();
-            townCity.SetVisibleExplode(false);
-            townCity.SetVisibleShild(false);
-        }
+
         CircleImageReadyParam(0, false);
 
         
@@ -469,6 +466,7 @@ public class MenuScript : MonoBehaviour
             buildingCentral.SetTargetModel(new TargetModel(CommandIncident.PopulationEvent.GreatTarget));
         } else
         {
+
             buildingCentral.SetTargetModel(new TargetModel(TargetManager(lider)));
         }
 
@@ -478,11 +476,26 @@ public class MenuScript : MonoBehaviour
     private IEnumerator AfterTurnOneLider(Incident CommandIncident, CountryLider lider)
     {
         yield return new WaitForSeconds(this.waitTurnTime - 1.0f);
-
+        
         _controller.ReleasePopulationEvent(CommandIncident);
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.ViewEndState();
         
+        if (CommandIncident.PopulationEvent!=null)
+        {
+            if (CommandIncident.PopulationEvent.FiendCity != null)
+            {
+                if (CommandIncident.ExplodeNuclear)
+                {
+                    GameObject cityViewObj = GetTownCity(CommandIncident.PopulationEvent.FiendCity.GetId());
+                    CityView cityView = cityViewObj.GetComponent<CityView>();
+                    cityView.SetVisibleExplode(true);
+                    Debug.Log("0773 BAMB!!! **** pulation   - " + CommandIncident.PopulationEvent.FiendCity.Name);
+                }
+            }
+        }
+
+        //Дать анимацию ядерного взрыва.
     }
     private CityModel TargetManager(CountryLider lider)
     {
@@ -491,7 +504,7 @@ public class MenuScript : MonoBehaviour
         if (cityTown != null)
         {
             GameObject viewTown = new ViewTown().GetTownViewWithId(TownViewList, cityTown);
-            City city = viewTown.GetComponent<City>();
+            CityView city = viewTown.GetComponent<CityView>();
 
             GameObject targetCityObj = new CityGameObjHelper().GetCityCameObjectWithId(TownViewList, cityTown.GetId());
 
@@ -683,7 +696,6 @@ public class MenuScript : MonoBehaviour
         }
         ManagerButton();
 
-        SetAllCityVisibleComponent();
         CanvasReportWindow(printMessage.ToString(), 0);
 
         RefreshViewCard();
@@ -728,7 +740,7 @@ public class MenuScript : MonoBehaviour
             {
                 if (city)
                 {
-                    City townCity = city.GetComponent<City>();
+                    CityView townCity = city.GetComponent<CityView>();
                     townCity.SetVisibleLabel(Visible);
                 }
 
@@ -759,7 +771,7 @@ public class MenuScript : MonoBehaviour
             RaycastHit2D hit2D = Physics2D.Raycast(mousePos2D, Vector2.zero);
             if (hit2D)
             {
-                City city = hit2D.transform.gameObject.GetComponent<City>();
+                CityView city = hit2D.transform.gameObject.GetComponent<CityView>();
                 SelectCityTargetIdPlayer(city.GetId());
 
                 ViewCardWeapon viewCardWeapon = hit2D.transform.gameObject.GetComponent<ViewCardWeapon>();

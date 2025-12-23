@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ViewMoveDeflectors : ViewSendAnimObj
+public class ViewMoveDeflectors : SendAnim
 {
     public Vector3 SendBomberAndWingState(
         Vector3 bomberObject,

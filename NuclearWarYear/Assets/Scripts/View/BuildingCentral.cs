@@ -225,7 +225,7 @@ public class BuildingCentral : MonoBehaviour
             return Vector3.zero;
         }
         GameObject cityTown = new SearchTownObject().GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
-        City city = cityTown.GetComponent<City>();
+        CityView city = cityTown.GetComponent<CityView>();
         Vector3 targetBomber = cityTown.transform.position;
 
         return targetBomber;

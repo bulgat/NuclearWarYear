@@ -18,56 +18,46 @@ namespace Assets.Scripts.Model
     {
 
         public Incident SatisfyEventOneLiderTurn(int FlagId, List<CountryLider> CountryLiderList,
-            List<CityModel> TownList, Incident CommandIncident,int CountYear, MainModel mainModel)
+            List<CityModel> TownList, Incident CommandIncident, int CountYear, MainModel mainModel)
         {
-            string message = "";
+
 
             CountryLider lider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
-            CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider,CountYear,mainModel);
+            CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider, CountYear, mainModel);
 
             CityModel cityModelTarget = mainModel.GetCommandLider(CountYear, FlagId)._TargetCity.TargetCity;
 
             if (mainModel.GetCommandLider(CountYear, FlagId) != null)
             {
- 
+
                 //Enemy lider.
 
                 TurnEventExecute commandIncidentName = GlobalParam.MessageDictionary[CommandIncident.Name];
 
-                    TurnEventExecute turnEventExecute = GlobalParam.MessageDictionary[CommandIncident.Name];
+                TurnEventExecute turnEventExecute = GlobalParam.MessageDictionary[CommandIncident.Name];
 
-                message = new CreateSimpleIncident().CreateMessageIncident(turnEventExecute,
-                    lider,
-                       ref CommandIncident, 
-                       CountYear,  enemylider, TownList, mainModel);
+                new CreateSimpleIncident().CreateMessageIncident(turnEventExecute,
+                  lider,
+                     ref CommandIncident,
+                     CountYear, enemylider, TownList, mainModel);
 
-                message = new CreateBomberIncident().CreateAttackBomber(lider, CountYear, enemylider,
-            ref CommandIncident, cityModelTarget, mainModel);
+                new CreateBomberIncident().CreateAttackBomber(lider, CountYear, enemylider,
+                   ref CommandIncident, cityModelTarget, mainModel,
+                   mainModel.GetCommandLider(CountYear, lider.FlagId).GetVisibleAttackBomber(), "Бомбардировщики сбиты");
 
-                message = new CreateMissleIncident().CreateAttackMissle(lider, CountYear,enemylider,
-            ref CommandIncident, cityModelTarget, mainModel);
-
-                
+                new CreateBomberIncident().CreateAttackBomber(lider, CountYear, enemylider,
+                    ref CommandIncident, cityModelTarget, mainModel,
+                    mainModel.GetCommandLider(CountYear, lider.FlagId).GetVisibleAttackRocket(), "Ракеты сбиты");
 
             }
-            
-            
-            
 
-            if (CommandIncident.PopulationEvent==null)
+            if (CommandIncident.PopulationEvent == null)
             {
-                Debug.Log(" 0002  country   Lider  = "+CommandIncident.Name);
+                Debug.Log(" 0002  country   Lider  = " + CommandIncident.Name);
                 throw new Exception("not event");
             }
             return CommandIncident;
-        }
-
-        private TurnEventExecute GetMessageDictionary(GlobalParam.TypeEvent key)
-        {
-
-            return GlobalParam.MessageDictionary[key];
-
         }
     }
 }

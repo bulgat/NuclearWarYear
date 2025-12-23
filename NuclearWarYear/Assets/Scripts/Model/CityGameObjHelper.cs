@@ -6,7 +6,7 @@ public class CityGameObjHelper
 {
 	public GameObject GetCityCameObjectWithId(List<GameObject> TownList, int CityId) {
 		foreach(GameObject city in TownList){
-			City townCity = city.GetComponent<City>();
+			CityView townCity = city.GetComponent<CityView>();
 			if(townCity.GetId() ==CityId){
 				return city;
 			}

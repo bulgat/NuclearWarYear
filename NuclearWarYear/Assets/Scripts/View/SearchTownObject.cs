@@ -14,7 +14,7 @@ namespace Assets.Scripts.View
             
             foreach (GameObject cityTown in TownList)
             {
-                City city = cityTown.GetComponent<City>();
+                CityView city = cityTown.GetComponent<CityView>();
                 if (city != null)
                 {
                     

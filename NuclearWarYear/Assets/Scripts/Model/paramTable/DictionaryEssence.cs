@@ -20,30 +20,51 @@ public class DictionaryEssence
     };
     private static List<Weapon> allEssenceList = new List<Weapon>() {
 
-        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 0,"Ракеты приведены в готовность",new DamageParam(10,0)),
-        new Incident(GlobalParam.TypeEvent.HeavyMissle, GlobalParam.TypeEvent.Missle, 1, "Ракеты приведены в готовность",new DamageParam(40,1)),
-        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 2, "Ракеты приведены в готовность",new DamageParam(50,2)),
-        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 3, "Ракеты приведены в готовность",new DamageParam(100, 3)),
+        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 0,
+            "Ракеты приведены в готовность",new DamageParam(10,0),false),
+        new Incident(GlobalParam.TypeEvent.HeavyMissle, GlobalParam.TypeEvent.Missle, 1, 
+            "Ракеты приведены в готовность",new DamageParam(40,1),false),
+        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 2, 
+            "Ракеты приведены в готовность",new DamageParam(50,2), false),
+        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 3, 
+            "Ракеты приведены в готовность",new DamageParam(100, 3), false),
 
-        new Incident(GlobalParam.TypeEvent.Bomber, GlobalParam.TypeEvent.Bomber, 4,"Бомбардировщики приведены в готовность",new DamageParam(10,4)),
-        new Incident(GlobalParam.TypeEvent.HeavyBomber, GlobalParam.TypeEvent.Bomber, 5, "Бомбардировщики приведены в готовность",new DamageParam(50,5)),
-        new Incident(GlobalParam.TypeEvent.Defence, GlobalParam.TypeEvent.Defence, 6, "Защитные системы приведены в готовность",new DamageParam(0,7)),
-        new Incident(GlobalParam.TypeEvent.HeavyDefence, GlobalParam.TypeEvent.Defence, 7, "Защитные системы приведены в готовность",new DamageParam(0, 6)),
+        new Incident(GlobalParam.TypeEvent.Bomber, GlobalParam.TypeEvent.Bomber, 4,
+            "Бомбардировщики приведены в готовность",new DamageParam(10,4),false),
+        new Incident(GlobalParam.TypeEvent.HeavyBomber, GlobalParam.TypeEvent.Bomber, 5, 
+            "Бомбардировщики приведены в готовность",new DamageParam(50,5), false),
+        new Incident(GlobalParam.TypeEvent.Defence, GlobalParam.TypeEvent.Defence, 6, 
+            "Защитные системы приведены в готовность",new DamageParam(0,7), false),
+        new Incident(GlobalParam.TypeEvent.HeavyDefence, GlobalParam.TypeEvent.Defence, 7, 
+            "Защитные системы приведены в готовность",new DamageParam(0, 6), false),
 
-        new Incident(GlobalParam.TypeEvent.Propaganda, GlobalParam.TypeEvent.Defence, 9, "Под воздействием пропаганды, население {0} сбежало в {1}",new DamageParam(3,10)),
+        new Incident(GlobalParam.TypeEvent.Propaganda, GlobalParam.TypeEvent.Defence, 9, 
+            "Под воздействием пропаганды, население {0} сбежало в {1}",new DamageParam(3,10), false),
 
-        new Incident(GlobalParam.TypeEvent.Ufo, GlobalParam.TypeEvent.Incident, 10, "Ufo инопланитяне прибыли в город +",new DamageParam(5,12)),
-        new Incident(GlobalParam.TypeEvent.Baby, GlobalParam.TypeEvent.Incident, 11, "Бэбибум прибавка населения +",new DamageParam(5, 13)),
-        new Incident(GlobalParam.TypeEvent.RocketRich, GlobalParam.TypeEvent.Incident, 12, "Богатые граждане {0} с помощью Маска постороили ракету на Луну ",new DamageParam(5, 14)),
-        new Incident(GlobalParam.TypeEvent.CrazyCow, GlobalParam.TypeEvent.Incident, 13,"Ковид-безумие сумашедшедших коров, поразило {0} ",new DamageParam(5, 15)),
+        new Incident(GlobalParam.TypeEvent.Ufo, GlobalParam.TypeEvent.Incident, 10, 
+            "Ufo инопланитяне прибыли в город +",new DamageParam(5,12), false),
+        new Incident(GlobalParam.TypeEvent.Baby, GlobalParam.TypeEvent.Incident, 11, 
+            "Бэбибум прибавка населения +",new DamageParam(5, 13), false),
+        new Incident(GlobalParam.TypeEvent.RocketRich, GlobalParam.TypeEvent.Incident, 12, 
+            "Богатые граждане {0} с помощью Маска постороили ракету на Луну ",new DamageParam(5, 14), false),
+        new Incident(GlobalParam.TypeEvent.CrazyCow, GlobalParam.TypeEvent.Incident, 13,
+            "Ковид-безумие сумашедшедших коров, поразило {0} ",new DamageParam(5, 15), false),
 
-        new Incident(GlobalParam.TypeEvent.Build, GlobalParam.TypeEvent.Incident, 14, "Производство вооружения ",new DamageParam(0, 6)),
-        new Incident(GlobalParam.TypeEvent.AttackBomber, GlobalParam.TypeEvent.Incident, 15, "От ядерного взрыва с бомбардировщика население {0} уменьшилось на ",new DamageParam(10,11)),
-        new Incident(GlobalParam.TypeEvent.AttackMissle, GlobalParam.TypeEvent.Incident, 16, "От ядерного взрыва ракеты население {0} уменьшилось на ",new DamageParam(10,16)),
-        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Incident, 17, "Ракеты приведены в готовность",new DamageParam(0, 0)),
+        new Incident(GlobalParam.TypeEvent.Build, GlobalParam.TypeEvent.Incident, 14, 
+            "Производство вооружения ",new DamageParam(0, 6), false),
 
-        new Incident(GlobalParam.TypeEvent.Defectors, GlobalParam.TypeEvent.Incident, 18, "Перебежчики сбежали ",new DamageParam(5, 17)),
-        new Incident(GlobalParam.TypeEvent.Airport, GlobalParam.TypeEvent.Defence, 19, "Бомбардировщики приведены в готовность",new DamageParam(0, 4))
+        new Incident(GlobalParam.TypeEvent.AttackBomber, GlobalParam.TypeEvent.Incident, 15, 
+            "От ядерного взрыва с бомбардировщика население {0} уменьшилось на ",new DamageParam(10,11),true),
+        new Incident(GlobalParam.TypeEvent.AttackMissle, GlobalParam.TypeEvent.Incident, 16, 
+            "От ядерного взрыва ракеты население {0} уменьшилось на ",new DamageParam(10,16),true),
+        
+        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Incident, 17, 
+            "Ракеты приведены в готовность",new DamageParam(0, 0), false),
+
+        new Incident(GlobalParam.TypeEvent.Defectors, GlobalParam.TypeEvent.Incident, 18, 
+            "Перебежчики сбежали ",new DamageParam(5, 17), false),
+        new Incident(GlobalParam.TypeEvent.Airport, GlobalParam.TypeEvent.Defence, 19, 
+            "Бомбардировщики приведены в готовность",new DamageParam(0, 4), false)
     };
      
 	public int GetIdEventName(GlobalParam.TypeEvent Name)

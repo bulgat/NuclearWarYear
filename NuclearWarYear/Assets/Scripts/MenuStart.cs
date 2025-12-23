@@ -18,16 +18,12 @@ public class MenuStart : MonoBehaviour
 	void StartMethod(Button buttonPressed)
 	{
         SettingPlayer.TwoPlayerGame = false;
-        //Application.LoadLevel("SampleScene");
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
-       // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
     void Start2PlayerMethod(Button buttonPressed)
     {
         SettingPlayer.TwoPlayerGame = true;
-        //Application.LoadLevel("SampleScene");
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
     void Update()
     {

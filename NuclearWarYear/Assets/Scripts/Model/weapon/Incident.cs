@@ -17,15 +17,17 @@ public class Incident : Weapon, IWeapon
     public PopulationEvent PopulationEvent { get; private set; }
     private bool ShowLider { get; set; }
     public int Year {private set; get;}
+    public bool ExplodeNuclear { private set; get; }
 
     public Incident(GlobalParam.TypeEvent name, GlobalParam.TypeEvent type,
-        int id, string message, DamageParam damageParam) {
+        int id, string message, DamageParam damageParam, bool explodeNuclear) {
 		this.Name=name;
 		this.Id = id;
 		this.IdImage = damageParam.IdImage;
         this.Type = type;
         this.Damage = damageParam.Damage;
         this.Message = message;
+        this.ExplodeNuclear = explodeNuclear;
      }
     public int MutationDamage()
     {
@@ -71,22 +73,14 @@ public class Incident : Weapon, IWeapon
     public string FullMessage(CountryLider lider)
     {
         string message = MutationMessage();
-        
-        //if (String.IsNullOrEmpty(GetDamagePopulation())) {
-            //Debug.Log("0890 PopulationE   = " + GetMessage()+ "  this.PopulationEvent = [" + this.PopulationEvent+"]");
-            //return $"{lider.Name}   : {GetMessage()}.";
-        //}
 
-        
+        int population = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
 
-
-
-
-        return $"{lider.Name}   : {message}: {GetDamagePopulation()} {GetNameFiendLider()}.";
+        return $"{lider.Name}   : {message} {(population>0? ":"+population:"")} {GetNameFiendLider()}.";
     }
     string MutationMessage()
     {
-        Debug.Log("078 PopulationEve  = " + GetMessage());
+
         if (PopulationEvent.MyCity == null && PopulationEvent.FiendCity == null)
         {
             return GetMessage();
@@ -120,15 +114,16 @@ public class Incident : Weapon, IWeapon
         
         return this.PopulationEvent.FiendCountryLider.Name; 
     }
+    /*
     string GetDamagePopulation()
     {
 
         int population  = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
         if (PopulationEvent.FiendCity != null)
         {
-            Debug.Log("0888 Populat    = " + PopulationEvent.FiendCity.Name);
+            Debug.Log("0888 Populat    = " + PopulationEvent.FiendCity.Name+ " population = "+population);
         }
-        Debug.Log("0889 Populatio    = " + population);
+        
         if (population > 0)
         {
             return population.ToString();
@@ -136,6 +131,7 @@ public class Incident : Weapon, IWeapon
         return "";
 
     }
+    */
     public int GetYear()
     {
         return this.Year;

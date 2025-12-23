@@ -10,7 +10,16 @@ namespace Assets.Scripts.Model.turnEvent
     {
         public CityModel GetCityModel(List<CityModel> TownList, CountryLider lider)
         {
-            List<CityModel> liderCityList = new CityHelperList().GetListCityFlagId(TownList, lider.FlagId);
+            List<CityModel> liderCityList = new CityHelperList().GetListCityFlagId(TownList, lider.FlagId,true);
+            int indexTown = UnityEngine.Random.Range(0, liderCityList.Count);
+
+
+            CityModel liderCityMy = liderCityList[indexTown];
+            return liderCityMy;
+        }
+        public CityModel GetFiendCity(List<CityModel> TownList, CountryLider lider)
+        {
+            List<CityModel> liderCityList = new CityHelperList().GetListCityFlagId(TownList, lider.FlagId, false);
             int indexTown = UnityEngine.Random.Range(0, liderCityList.Count);
 
 

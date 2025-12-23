@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ViewCircleBomber : ViewSendAnimObj
+public class ViewCircleBomber : SendAnim
 {
     public void SendBomberAndWingState(GameObject bomberObject, bool SetAnglePosition,
          int Speed, Transform transform, float animationTimeProcess, List<GameObject> TownList, TargetModel buildingCentralModel)

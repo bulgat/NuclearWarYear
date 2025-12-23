@@ -10,7 +10,7 @@ public class CheckVictory
 		CountryLider liveLider;
 		//count
 		foreach(CountryLider lider in CountryLiderList){
-			List<CityModel> targetCityList = new CityHelperList().GetListCityFlagId(TownList,lider.FlagId);
+			List<CityModel> targetCityList = new CityHelperList().GetListCityFlagId(TownList,lider.FlagId,true);
 			int population =0;
 			foreach(CityModel city in targetCityList){
 				population+=city.GetPopulation();

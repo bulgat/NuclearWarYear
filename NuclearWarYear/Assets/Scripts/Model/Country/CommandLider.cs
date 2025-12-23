@@ -87,6 +87,10 @@ public class CommandLider
     {
         return this.IncidentCommand?.Name == GlobalParam.TypeEvent.AttackBomber;
     }
+    public bool GetVisibleAttackRocket()
+    {
+        return this.IncidentCommand?.Name == GlobalParam.TypeEvent.AttackMissle;
+    }
 
     public GlobalParam.TypeEvent GetNameCommandFirst()
     {
@@ -99,10 +103,6 @@ public class CommandLider
         return this.IncidentCommand.Name == GlobalParam.TypeEvent.Defence;
     }
 
-    public IWeapon GetAttackBomber()
-    {
-        return _AttackBomber;
-    }
     public void SetAttackBomber(IWeapon AttackBomber)
     {
         _AttackBomber = AttackBomber;
@@ -129,10 +129,6 @@ public class CommandLider
         this.LiderFiend = nameLiderFiend;
     }
 
-    public IWeapon GetAttackMissle()
-    {
-        return this._AttackMissle;
-    }
     public void SetAttackMissle(IWeapon AttackMissle)
     {
         this._AttackMissle = AttackMissle;
