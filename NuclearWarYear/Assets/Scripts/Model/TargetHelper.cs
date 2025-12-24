@@ -5,10 +5,11 @@ using static UnityEngine.GraphicsBuffer;
 
 public class TargetHelper
 {
-    public CityModel GetTargetRandom(
+    public void SetTargetBuilding(
         List<CountryLider> CountryLiderList,
         CountryLider fiendLider1,
         bool setTarget,
+        CityModel myCity,
         CityModel targetTownCity
         )
     {
@@ -16,12 +17,15 @@ public class TargetHelper
 
         if (setTarget)
         {
-            buildingCentral.SetTargetModel(new TargetModel(targetTownCity));
+            buildingCentral.SetTargetModel(new TargetModel(myCity), new TargetModel(targetTownCity));
         }
 
-        return targetTownCity;
+
 
     }
+   
+
+
     public CityModel GetRandomCity(List<CityModel> TownList,
         CountryLider countryLider, int FlagIdPlayer,
         bool AIturn)

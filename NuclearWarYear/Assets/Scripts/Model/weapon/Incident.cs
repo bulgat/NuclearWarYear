@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Model;
 using Assets.Scripts.Model.param;
+using Assets.Scripts.Model.paramTable;
 using Assets.Scripts.Model.weapon;
 using System;
 using System.Collections;
@@ -19,8 +20,9 @@ public class Incident : Weapon, IWeapon
     public int Year {private set; get;}
     public bool ExplodeNuclear { private set; get; }
 
+    public EventFortuneIncident Fortune { private set; get; }
     public Incident(GlobalParam.TypeEvent name, GlobalParam.TypeEvent type,
-        int id, string message, DamageParam damageParam, bool explodeNuclear) {
+        int id, string message, DamageParam damageParam, bool explodeNuclear, EventFortuneIncident fortune) {
 		this.Name=name;
 		this.Id = id;
 		this.IdImage = damageParam.IdImage;
@@ -28,6 +30,7 @@ public class Incident : Weapon, IWeapon
         this.Damage = damageParam.Damage;
         this.Message = message;
         this.ExplodeNuclear = explodeNuclear;
+        this.Fortune = fortune;
      }
     public int MutationDamage()
     {
@@ -114,24 +117,7 @@ public class Incident : Weapon, IWeapon
         
         return this.PopulationEvent.FiendCountryLider.Name; 
     }
-    /*
-    string GetDamagePopulation()
-    {
-
-        int population  = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
-        if (PopulationEvent.FiendCity != null)
-        {
-            Debug.Log("0888 Populat    = " + PopulationEvent.FiendCity.Name+ " population = "+population);
-        }
-        
-        if (population > 0)
-        {
-            return population.ToString();
-        }
-        return "";
-
-    }
-    */
+   
     public int GetYear()
     {
         return this.Year;

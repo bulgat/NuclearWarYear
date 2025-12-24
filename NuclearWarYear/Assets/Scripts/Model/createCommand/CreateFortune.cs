@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.paramTable;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Model.createCommand
@@ -10,16 +11,16 @@ namespace Assets.Scripts.Model.createCommand
         {
             if (GlobalParam.TestMode)
             {
-                return GetFortuneEvent(countryLider, Year, GlobalParam.EventFortuneIncidentList[4]);
+                return GetFortuneEvent(countryLider, Year, DictionaryEssence.GetFortune().FirstOrDefault(a=>a.Id == 18).Fortune);
             }
 
             EventFortuneIncident eventFortuneIncidentRandom = null;
 
-            foreach (EventFortuneIncident eventFortuneIncident in GlobalParam.EventFortuneIncidentList)
+            foreach (var eventFortuneIncident in DictionaryEssence.GetFortune())
             {
-                if ((int)UnityEngine.Random.Range(0.0f, eventFortuneIncident.Random) == 1)
+                if ((int)UnityEngine.Random.Range(0.0f, eventFortuneIncident.Fortune.Random) == 1)
                 {
-                    eventFortuneIncidentRandom = eventFortuneIncident;
+                    eventFortuneIncidentRandom = eventFortuneIncident.Fortune;
                     break;
 
                 }

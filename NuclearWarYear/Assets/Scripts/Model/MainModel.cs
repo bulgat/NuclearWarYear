@@ -349,8 +349,10 @@ public class MainModel
             // auto Set attack
             
             CountryLider fiendLider1 = new BuildingCentralHelper().GetFiendLider(CountryLiderList, this.GetCurrenPlayer().FlagId);
-            CityModel targetCityPlayer = new TargetHelper().GetTargetRandom(
-				CountryLiderList, fiendLider1,true, new TargetHelper().GetRandomCity(TownList, countryLider, this.GetCurrenPlayer().FlagId, false));
+			CityModel targetCityPlayer = new TargetHelper().GetRandomCity(TownList, countryLider, this.GetCurrenPlayer().FlagId, false);
+
+             new TargetHelper().SetTargetBuilding(
+				CountryLiderList, fiendLider1,true, myCity, targetCityPlayer);
 
             countryLider.SetTargetCity(new TargetCityModel(targetCityPlayer, myCity, fiendLider1));
         }

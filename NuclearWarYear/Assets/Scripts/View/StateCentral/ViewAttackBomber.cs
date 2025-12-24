@@ -7,7 +7,8 @@ public class ViewAttackBomber : SendAnim
 {
     public void SendBomberAndWingState(GameObject bomberObject, 
         
-        int Speed, Transform transform, float animationTimeProcess, List<GameObject> TownList, TargetModel buildingCentralModel)
+        int Speed, Transform transform, float animationTimeProcess, List<GameObject> TownList,
+        TargetModel buildingCentralModel)
     {
 
         float step = Speed * Time.deltaTime; // calculate distance to move

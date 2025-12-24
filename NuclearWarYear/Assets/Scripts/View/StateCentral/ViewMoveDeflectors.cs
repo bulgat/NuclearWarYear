@@ -10,7 +10,6 @@ public class ViewMoveDeflectors : SendAnim
         Transform transform,
         float animationTimeProcess,
         List<GameObject> TownList,
-        TargetModel buildingCentralModel,
         bool returnBomber,
         Vector3 targetBomber)
     {

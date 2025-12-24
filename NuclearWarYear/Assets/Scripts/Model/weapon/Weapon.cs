@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Model.param;
+using Assets.Scripts.Model.paramTable;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,5 +14,5 @@ public class Weapon
     public int IdImage;
     public string Message;
 	public int Uid;
-	
+	public EventFortuneIncident Fortune;
 }

@@ -459,15 +459,16 @@ public class MenuScript : MonoBehaviour
         buildingCentral.ViewStartStateObject(TownViewList, waitTime + (this.waitTurnTime * indexLider),
             lider, CommandIncident);
 
-        Debug.Log("0770  pulationEve   fie - " + CommandIncident.FullMessage(lider));
+        
 
         if (CommandIncident.PopulationEvent.GreatTarget != null)
         {
-            buildingCentral.SetTargetModel(new TargetModel(CommandIncident.PopulationEvent.GreatTarget));
+            Debug.Log("0770  pulationE   - " + CommandIncident.PopulationEvent.MyCity.Name +" ____ "+ CommandIncident.PopulationEvent.GreatTarget.Name);
+            buildingCentral.SetTargetModel(new TargetModel(CommandIncident.PopulationEvent.MyCity), new TargetModel(CommandIncident.PopulationEvent.FiendCity));
         } else
         {
 
-            buildingCentral.SetTargetModel(new TargetModel(TargetManager(lider)));
+            buildingCentral.SetTargetModel(new TargetModel(CommandIncident.PopulationEvent.MyCity), new TargetModel(TargetManager(lider)));
         }
 
 

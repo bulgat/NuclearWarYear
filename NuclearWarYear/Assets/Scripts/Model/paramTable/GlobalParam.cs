@@ -11,12 +11,9 @@ namespace Assets.Scripts.Model.param
 {
     public class GlobalParam
     {
-        public static bool TestMode = false;
+        public static bool TestMode = true;
         public static int StartTurnIdImage = 18;
         public static int StartTurnIdFlag = 5;
-
-        public enum ActionCommand { Propaganda, Defence, Defectors, Ufo, Baby,
-            RocketRich, CrazyCow, Build, AttackMissle, AttackBomber, Bomber, Missle,None }
 
         public enum TypeEvent
         {
@@ -25,14 +22,6 @@ namespace Assets.Scripts.Model.param
             AttackBomber, AttackMissle, Airport, AttackAirport, Incident,None
         }
 
-        public static List<EventFortuneIncident> EventFortuneIncidentList= new List<EventFortuneIncident>()
-        {
-            new EventFortuneIncident(GlobalParam.TypeEvent.Defectors,30),
-            new EventFortuneIncident(GlobalParam.TypeEvent.Ufo,32),
-            new EventFortuneIncident(GlobalParam.TypeEvent.Baby,32),
-            new EventFortuneIncident(GlobalParam.TypeEvent.RocketRich, 30),
-            new EventFortuneIncident(GlobalParam.TypeEvent.CrazyCow,30)
-        };
         public static Dictionary<GlobalParam.TypeEvent, TurnEventExecute> MessageDictionary = new Dictionary<GlobalParam.TypeEvent, TurnEventExecute>() {
             { TypeEvent.RocketRich, new TurnEventExecute(null,0,false,true,false,false, false,false)},
             { TypeEvent.Baby, new TurnEventExecute( null, 0,false, true, false,false, false,false) },

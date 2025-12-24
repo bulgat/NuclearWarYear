@@ -39,20 +39,23 @@ namespace Assets.Scripts.Model.AiTurn
             }
 
             CountryLider fiendLider1 = lider._RelationFeind.GetHighlyHatredLiderRandom();
+            CityModel targetTownCity = new TargetHelper().GetRandomCity(
+                    TownList,
+                    lider,
+                    fiendLider1.FlagId,
+                    true);
 
-            var randTarget = new TargetHelper()
-                .GetTargetRandom(
+            new TargetHelper()
+                .SetTargetBuilding(
                 CountryLiderList,
                 fiendLider1,
                 true,
-                new TargetHelper().GetRandomCity(
-                    TownList,
-                    lider, 
-                    fiendLider1.FlagId,
-                    true));
+                myCity,
+                targetTownCity
+                );
 
             TargetCityModel targetCityModel
-                = new TargetCityModel(randTarget, myCity, fiendLider1);
+                = new TargetCityModel(targetTownCity, myCity, fiendLider1);
 
             if (lider.FlagId != _flagIdPlayer)
             {

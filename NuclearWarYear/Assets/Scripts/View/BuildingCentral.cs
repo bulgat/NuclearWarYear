@@ -32,7 +32,9 @@ public class BuildingCentral : MonoBehaviour
 
     bool _animationProcess;
     float _animationTimeProcess;
-    public TargetModel TargetBuildingModel {  get; private set; }
+    public TargetModel MyCity { get; private set; }
+    public TargetModel TargetCity {  get; private set; }
+    
     List<GameObject> TownList;
 
     public void Awake()
@@ -65,9 +67,10 @@ public class BuildingCentral : MonoBehaviour
 
 
     }
-    public void SetTargetModel(TargetModel targetBuildingModel)
+    public void SetTargetModel(TargetModel myCity, TargetModel targetBuildingModel)
     {
-        TargetBuildingModel = targetBuildingModel;
+        MyCity = myCity;
+        TargetCity = targetBuildingModel;
     }
 
     public void UpdateVisibleBuilding(GlobalParam.TypeEvent NameCommand)
@@ -130,7 +133,6 @@ public class BuildingCentral : MonoBehaviour
             }
             if (NameCommand == GlobalParam.TypeEvent.CrazyCow)
             {
-                Debug.Log("04======= CrazyCow = "+ TargetBuildingModel.GetTargetBomber().Name);
                 uFOmodel.SetVisible(GlobalParam.TypeEvent.CrazyCow.ToString());
             }
             if (NameCommand == GlobalParam.TypeEvent.RocketRich)
@@ -152,12 +154,12 @@ public class BuildingCentral : MonoBehaviour
             UfoObject.SetActive(false);
         }
 
-        if (TargetBuildingModel != null)
+        if (TargetCity != null)
         {
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
             {
 
-                UfoObject.transform.position = GetTarget(TargetBuildingModel);
+                UfoObject.transform.position = GetTarget(TargetCity);
 
             }
         }
@@ -192,20 +194,35 @@ public class BuildingCentral : MonoBehaviour
                 else
                 {
                     new ViewAttackBomber().SendBomberAndWingState(BomberObject,
-                        Speed, transform, _animationTimeProcess, TownList, TargetBuildingModel);
+                        Speed, transform, _animationTimeProcess, TownList, TargetCity);
                 }
             }
-            Vector3 targetBomber = GetTarget(TargetBuildingModel);
+            
+            Vector3 targetBomber = GetTarget(TargetCity);
+
+            if (VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()])
+            {
+                Debug.Log("040                  MyCity = " + MyCity.GetTargetBomber().Name);
+                Debug.Log("041 ## pul   lid TargetCity = " + TargetCity.GetTargetBomber().Name);
+                // Vector3 targetBomber0 = GetTarget(TargetCity);
+                UfoObject.transform.position = new WithToInMove().SendWithToInMoveState(
+                               UfoObject.transform.position,
+                                   Speed, transform, _animationTimeProcess, TownList,  false, TargetCity);
+            }
+            
+
+            
 
             if (VisibleObjList[GlobalParam.TypeEvent.Ufo.ToString()]
                 || VisibleObjList[GlobalParam.TypeEvent.Baby.ToString()]
                 || VisibleObjList[GlobalParam.TypeEvent.CrazyCow.ToString()]
-                || VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()]
+                //|| VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()]
                 || VisibleObjList[GlobalParam.TypeEvent.AttackMissle.ToString()]
                 )
             {
-                UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(UfoObject.transform.position,
-                        Speed, transform, _animationTimeProcess, TownList, TargetBuildingModel, false, targetBomber);
+                UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(
+                    UfoObject.transform.position,
+                        Speed, transform, _animationTimeProcess, TownList, false, targetBomber);
             }
 
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
@@ -214,7 +231,7 @@ public class BuildingCentral : MonoBehaviour
 
 
                 UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(UfoObject.transform.position,
-                        Speed, transform, _animationTimeProcess, TownList, TargetBuildingModel, false, targetBomber);
+                        Speed, transform, _animationTimeProcess, TownList, false, targetBomber);
             }
         }
     }
@@ -240,7 +257,7 @@ public class BuildingCentral : MonoBehaviour
 
 
         this.TownList = townList;
-        CreateObject();
+        CreateObject(CommandIncident.GetName());
 
         DestroyObject(TimeDelete);
         UpdateVisibleBuilding(CommandIncident.GetName());
@@ -249,14 +266,23 @@ public class BuildingCentral : MonoBehaviour
     {
         this._animationProcess = false;
     }
-    private void CreateObject()
+    private void CreateObject(GlobalParam.TypeEvent NameCommand)
     {
         WingMissle = Instantiate(WingMisslePrefabs, Propaganda.transform.position, Quaternion.identity);
         WingMissle.transform.parent = transform;
         BomberObject = Instantiate(BomberObjectPrefabs, Propaganda.transform.position, Quaternion.identity);
         BomberObject.transform.parent = transform;
 
-        UfoObject = Instantiate(UfoPrefabs, Propaganda.transform.position + new Vector3(0, 4, 24), Quaternion.identity);
+        Vector3 startPosition = new Vector3(0, 4, 24);
+
+        Debug.Log("04= = ra  " + MyCity + " TownList = "+ TownList.Count + " MyCity.GetTargetBomber() = " + MyCity.GetTargetBomber());
+        if (NameCommand == GlobalParam.TypeEvent.Defectors)
+        {
+            startPosition = new SearchTownObject().GetTownViewWithId(MyCity.GetTargetBomber(), TownList).transform.position;
+        }
+        
+
+        UfoObject = Instantiate(UfoPrefabs, Propaganda.transform.position + startPosition, Quaternion.identity);
     }
     private void DestroyObject(float TimeDelete)
     {
