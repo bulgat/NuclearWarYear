@@ -17,7 +17,7 @@ public class WithToInMove
 
         float step = Speed * Time.deltaTime; // calculate distance to move
 
-        GameObject cityTown = new SearchTownObject().GetTownViewWithId(targetBomber.GetTargetBomber(), TownList);
+        GameObject cityTown = new SearchTownObject().GetTownViewWithId(targetBomber.GetTarget(), TownList);
 
         if (bomberObject != null)
         {

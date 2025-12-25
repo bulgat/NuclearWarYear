@@ -33,7 +33,7 @@ public class BuildingCentral : MonoBehaviour
     bool _animationProcess;
     float _animationTimeProcess;
     public TargetModel MyCity { get; private set; }
-    public TargetModel TargetCity {  get; private set; }
+    public TargetModel FiendCity {  get; private set; }
     
     List<GameObject> TownList;
 
@@ -70,7 +70,17 @@ public class BuildingCentral : MonoBehaviour
     public void SetTargetModel(TargetModel myCity, TargetModel targetBuildingModel)
     {
         MyCity = myCity;
-        TargetCity = targetBuildingModel;
+        FiendCity = targetBuildingModel;
+
+        if (FiendCity != null)
+        {
+            if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
+            {
+                Debug.Log("0008 RocketRich " + GetTarget(FiendCity) + " f = " + FiendCity.GetTarget().Name);
+                UfoObject.transform.position = GetTarget(MyCity);
+
+            }
+        }
     }
 
     public void UpdateVisibleBuilding(GlobalParam.TypeEvent NameCommand)
@@ -154,15 +164,7 @@ public class BuildingCentral : MonoBehaviour
             UfoObject.SetActive(false);
         }
 
-        if (TargetCity != null)
-        {
-            if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
-            {
 
-                UfoObject.transform.position = GetTarget(TargetCity);
-
-            }
-        }
     }
 
     void Update()
@@ -194,30 +196,32 @@ public class BuildingCentral : MonoBehaviour
                 else
                 {
                     new ViewAttackBomber().SendBomberAndWingState(BomberObject,
-                        Speed, transform, _animationTimeProcess, TownList, TargetCity);
+                        Speed, transform, _animationTimeProcess, TownList, FiendCity);
                 }
             }
-            
-            Vector3 targetBomber = GetTarget(TargetCity);
+
+            Vector3 targetBomber = GetTarget(FiendCity);
 
             if (VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()])
             {
-                Debug.Log("040                  MyCity = " + MyCity.GetTargetBomber().Name);
-                Debug.Log("041 ## pul   lid TargetCity = " + TargetCity.GetTargetBomber().Name);
                 // Vector3 targetBomber0 = GetTarget(TargetCity);
                 UfoObject.transform.position = new WithToInMove().SendWithToInMoveState(
                                UfoObject.transform.position,
-                                   Speed, transform, _animationTimeProcess, TownList,  false, TargetCity);
+                                   Speed, transform, _animationTimeProcess, TownList, false, FiendCity);
             }
-            
-
-            
 
             if (VisibleObjList[GlobalParam.TypeEvent.Ufo.ToString()]
                 || VisibleObjList[GlobalParam.TypeEvent.Baby.ToString()]
                 || VisibleObjList[GlobalParam.TypeEvent.CrazyCow.ToString()]
-                //|| VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()]
-                || VisibleObjList[GlobalParam.TypeEvent.AttackMissle.ToString()]
+                )
+            {
+                UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(
+                UfoObject.transform.position,
+                    Speed, transform, _animationTimeProcess, TownList, false, GetTarget(MyCity));
+            }
+            
+
+            if (VisibleObjList[GlobalParam.TypeEvent.AttackMissle.ToString()]
                 )
             {
                 UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(
@@ -227,21 +231,21 @@ public class BuildingCentral : MonoBehaviour
 
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
             {
-                targetBomber = new Vector3(targetBomber.x + UIparam.OutFieldCosmic.X, targetBomber.y + +UIparam.OutFieldCosmic.Y, targetBomber.z);
+                var targetBomberRich = new Vector3(targetBomber.x + UIparam.OutFieldCosmic.X, targetBomber.y + +UIparam.OutFieldCosmic.Y, targetBomber.z);
 
 
                 UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(UfoObject.transform.position,
-                        Speed, transform, _animationTimeProcess, TownList, false, targetBomber);
+                        Speed, transform, _animationTimeProcess, TownList, false, targetBomberRich);
             }
         }
     }
-    Vector3 GetTarget(TargetModel buildingCentralModel)
+    Vector3 GetTarget(TargetModel buildingCentral)
     {
-        if (buildingCentralModel == null)
+        if (buildingCentral == null)
         {
             return Vector3.zero;
         }
-        GameObject cityTown = new SearchTownObject().GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
+        GameObject cityTown = new SearchTownObject().GetTownViewWithId(buildingCentral.GetTarget(), TownList);
         CityView city = cityTown.GetComponent<CityView>();
         Vector3 targetBomber = cityTown.transform.position;
 
@@ -274,11 +278,16 @@ public class BuildingCentral : MonoBehaviour
         BomberObject.transform.parent = transform;
 
         Vector3 startPosition = new Vector3(0, 4, 24);
+        
 
-        Debug.Log("04= = ra  " + MyCity + " TownList = "+ TownList.Count + " MyCity.GetTargetBomber() = " + MyCity.GetTargetBomber());
+        Debug.Log("0004=   " + MyCity + " TownList = "+ TownList.Count + " MyCity.GetTargetBomber() = " + MyCity);
         if (NameCommand == GlobalParam.TypeEvent.Defectors)
         {
-            startPosition = new SearchTownObject().GetTownViewWithId(MyCity.GetTargetBomber(), TownList).transform.position;
+            Debug.Log("0005   f  = " + MyCity.GetTarget() .Name+ " f = ");
+            if (MyCity != null)
+            {
+                startPosition = new SearchTownObject().GetTownViewWithId(MyCity.GetTarget(), TownList).transform.position;
+            }
         }
         
 

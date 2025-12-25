@@ -11,7 +11,7 @@ namespace Assets.Scripts.Model.createCommand
         {
             if (GlobalParam.TestMode)
             {
-                return GetFortuneEvent(countryLider, Year, DictionaryEssence.GetFortune().FirstOrDefault(a=>a.Id == 18).Fortune);
+                return GetFortuneEvent(countryLider, Year, DictionaryEssence.GetFortune().FirstOrDefault(a=>a.Id == 13).Fortune);
             }
 
             EventFortuneIncident eventFortuneIncidentRandom = null;

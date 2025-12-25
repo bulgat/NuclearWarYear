@@ -11,7 +11,7 @@ namespace Assets.Scripts.Model.param
 {
     public class GlobalParam
     {
-        public static bool TestMode = true;
+        public static bool TestMode = false;
         public static int StartTurnIdImage = 18;
         public static int StartTurnIdFlag = 5;
 

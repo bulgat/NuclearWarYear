@@ -43,9 +43,9 @@ public class DictionaryEssence
             "Под воздействием пропаганды, население {0} сбежало в {1}",new DamageParam(3,10), false, null),
 
         new Incident(GlobalParam.TypeEvent.Ufo, GlobalParam.TypeEvent.Incident, 10, 
-            "Ufo инопланитяне прибыли в город +",new DamageParam(5,12), false, new EventFortuneIncident(GlobalParam.TypeEvent.Ufo,32)),
+            "Ufo инопланитяне прибыли в город {0}",new DamageParam(-5,12), false, new EventFortuneIncident(GlobalParam.TypeEvent.Ufo,32)),
         new Incident(GlobalParam.TypeEvent.Baby, GlobalParam.TypeEvent.Incident, 11, 
-            "Бэбибум прибавка населения +",new DamageParam(5, 13), false, new EventFortuneIncident(GlobalParam.TypeEvent.Baby,32)),
+            "Бэбибум прибавка населения {0}",new DamageParam(-5, 13), false, new EventFortuneIncident(GlobalParam.TypeEvent.Baby,32)),
         new Incident(GlobalParam.TypeEvent.RocketRich, GlobalParam.TypeEvent.Incident, 12, 
             "Богатые граждане {0} с помощью Маска постороили ракету на Луну ",new DamageParam(5, 14), false,new EventFortuneIncident(GlobalParam.TypeEvent.RocketRich, 30)),
         new Incident(GlobalParam.TypeEvent.CrazyCow, GlobalParam.TypeEvent.Incident, 13,

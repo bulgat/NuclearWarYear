@@ -15,9 +15,8 @@ namespace Assets.Scripts.View
             foreach (GameObject cityTown in TownList)
             {
                 CityView city = cityTown.GetComponent<CityView>();
-                if (city != null)
+                if (city != null && cityModel!=null)
                 {
-                    
                     if (city.GetId() == cityModel.GetId())
                     {
                         return cityTown;

@@ -17,7 +17,7 @@ public class ViewAttackBomber : SendAnim
 
             bool returnBomber = false;
             float offset = 260f;
-            GameObject cityTown = new SearchTownObject().GetTownViewWithId(buildingCentralModel.GetTargetBomber(), TownList);
+            GameObject cityTown = new SearchTownObject().GetTownViewWithId(buildingCentralModel.GetTarget(), TownList);
             CityView city = cityTown.GetComponent<CityView>();
             Vector3 targetBomber = cityTown.transform.position;
            

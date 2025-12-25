@@ -463,7 +463,7 @@ public class MenuScript : MonoBehaviour
 
         if (CommandIncident.PopulationEvent.GreatTarget != null)
         {
-            Debug.Log("0770  pulationE   - " + CommandIncident.PopulationEvent.MyCity.Name +" ____ "+ CommandIncident.PopulationEvent.GreatTarget.Name);
+            Debug.Log("0770  pu "+ lider.Name+ "    my - " + CommandIncident.PopulationEvent.MyCity.Name +" ____f = "+ CommandIncident.PopulationEvent.FiendCity.Name);
             buildingCentral.SetTargetModel(new TargetModel(CommandIncident.PopulationEvent.MyCity), new TargetModel(CommandIncident.PopulationEvent.FiendCity));
         } else
         {

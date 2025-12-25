@@ -10,11 +10,12 @@ namespace Assets.Scripts.Model.weapon
     {
         public string Name { get; set; } = "Add";
         public StateAddPopulation(string message,int population,
-            CityModel myCity, CountryLider fiendCountryLider):base(fiendCountryLider) {
+            CityModel myCity, CityModel fiendCity, CountryLider fiendCountryLider):base(fiendCountryLider) {
             this.Message = message;
             this.MyPopulation = population;
             this.MyCity= myCity;
             this.GreatTarget = myCity;
+            this.FiendCity = fiendCity;
         }
 
         public CityModel GetMyCity()

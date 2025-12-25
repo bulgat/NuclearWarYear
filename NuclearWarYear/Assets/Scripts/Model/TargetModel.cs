@@ -13,7 +13,7 @@ public class TargetModel
 		//}
 		this._targetBomber = target;
 	}
-	public CityModel GetTargetBomber()
+	public CityModel GetTarget()
 	{
 		return this._targetBomber;
 	}

@@ -373,7 +373,6 @@ public class MainModel
 	}
 	public void ReleasePopulationEvent(Incident CommandIncident)
 	{
-		Debug.Log("0890 my = "+CommandIncident.PopulationEvent.MyPopulation+" fiend = "+ CommandIncident.PopulationEvent.FiendPopulation);
         new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.MyCity, CommandIncident.PopulationEvent.MyPopulation);
 		new DamagePopulationHelper().SetDamagePopulation(CommandIncident.PopulationEvent.FiendCity, CommandIncident.PopulationEvent.FiendPopulation);
 	}
