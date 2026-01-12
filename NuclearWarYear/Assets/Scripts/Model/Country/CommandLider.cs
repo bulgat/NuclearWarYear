@@ -15,7 +15,7 @@ public class CommandLider
 
     private IWeapon _AttackMissle;
     private IWeapon _AttackBomber;
-    private Incident IncidentCommand;
+    public Incident IncidentCommand { private set; get; }
     public CountryLider LiderFiend { get; private set; }
     public List<string> _reportProducedWeaponList { get; private set; }
     List<GlobalParam.TypeEvent> VisibleList;
@@ -48,11 +48,7 @@ public class CommandLider
 
         return false;
     }
-    public Incident GetIncident()
-    {
-        return this.IncidentCommand;
 
-    }
 
     public void SetVisibleEventList(GlobalParam.TypeEvent Key, bool Value)
     {

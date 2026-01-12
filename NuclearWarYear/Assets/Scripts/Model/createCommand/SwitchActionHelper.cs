@@ -15,7 +15,8 @@ public class SwitchActionHelper
 {
 
 
-    public List<CommandLider> SwitchAction(List<CountryLider> CountryLiderList,
+    public List<CommandLider> SwitchAction(
+        List<CountryLider> CountryLiderList,
         List<CityModel> TownList, int FlagIdPlayer, CommandLider commandLider,
         CountryLider countryLider, int Year, CountryLider fiendLider1,
         CommandLider commandLiderFortune)
@@ -59,6 +60,7 @@ public class SwitchActionHelper
 
             commandLiderList.Add(commandLiderFortune);
         }
+
         return commandLiderList;
     }
     private void AiAddTargetCity(TargetCityModel targetCityModel, CommandLider commandLider, CountryLider enemyLider)

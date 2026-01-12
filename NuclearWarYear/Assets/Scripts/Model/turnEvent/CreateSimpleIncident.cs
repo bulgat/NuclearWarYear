@@ -23,12 +23,12 @@ namespace Assets.Scripts.Model.turnEvent
             {
                 if (turnEventExecute.Airport)
                 {
-                    message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetMessage(),
-                        mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetName());
+                    message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetMessage(),
+                        mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());
                 }
                 else
                 {
-                    message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetMessage(), mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetName());
+                    message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetMessage(), mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());
                     lider.RemoveDefenceWeapon();
                 }
                 CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
@@ -65,8 +65,8 @@ namespace Assets.Scripts.Model.turnEvent
             switch (CommandIncident.Name)
             {
                 case GlobalParam.TypeEvent.Missle:
-                    message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetMessage(),
-                        mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetName());
+                    message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetMessage(),
+                        mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());
                     lider.RemoveMissle();
                     CommandIncident.SetReleaseMessage( turnEventExecute.ShowFiend);
                     CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider));
@@ -78,8 +78,8 @@ namespace Assets.Scripts.Model.turnEvent
                     lider.SetCommandRealise(CommandIncident);
                     break;
                 case GlobalParam.TypeEvent.Bomber:
-                    message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetMessage(),
-                        mainModel.GetCommandLider(CountYear, lider.FlagId).GetIncident().GetName());
+                    message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetMessage(),
+                        mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());
                     lider.RemoveBomber();
                     CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
                     CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider));

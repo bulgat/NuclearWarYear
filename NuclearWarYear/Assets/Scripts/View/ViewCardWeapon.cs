@@ -15,8 +15,7 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     public Image SpriteIcon;
     void Start()
     {
-        //gameObject.transform.onClick.AddListener(() => DefenceMethod(DefenceButton));
-        
+
     }
 
     public void OnPointerClick(PointerEventData eventData)

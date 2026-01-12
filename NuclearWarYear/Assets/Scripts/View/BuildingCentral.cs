@@ -280,10 +280,9 @@ public class BuildingCentral : MonoBehaviour
         Vector3 startPosition = new Vector3(0, 4, 24);
         
 
-        Debug.Log("0004=   " + MyCity + " TownList = "+ TownList.Count + " MyCity.GetTargetBomber() = " + MyCity);
+
         if (NameCommand == GlobalParam.TypeEvent.Defectors)
         {
-            Debug.Log("0005   f  = " + MyCity.GetTarget() .Name+ " f = ");
             if (MyCity != null)
             {
                 startPosition = new SearchTownObject().GetTownViewWithId(MyCity.GetTarget(), TownList).transform.position;

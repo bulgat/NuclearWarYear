@@ -18,6 +18,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using static UnityEditor.Progress;
 using static UnityEngine.ParticleSystem;
 
@@ -203,7 +204,7 @@ public class MenuScript : MonoBehaviour
             
             
             viewCardWeapon.SetParam(IconCardList, item);
-            viewCardWeapon.SetCallback(MissleMethodClick);
+            viewCardWeapon.SetCallback(ClickCardPlayer);
             this.CardButtonList.Add(CardWing);
             count++;
         }
@@ -423,11 +424,11 @@ public class MenuScript : MonoBehaviour
         int indexLiderTime = 0;
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
-            
+            Debug.Log("0774 CountYear =" + _mainModel.CountYear + " Town MyCi GetTargetBomb = " + _mainModel.CountryLiderList.Count+" Li "+ lider.Name+" list = "+ this._mainModel.GetCommandLiderList(_mainModel.CountYear, lider.FlagId).Count);
             foreach (CommandLider commandLider in this._mainModel.GetCommandLiderList(_mainModel.CountYear,lider.FlagId))
             {
-
-                StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.GetIncident()));
+                Debug.Log("0775 __f = " + lider.Name+ "  commandLider =");
+                StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.IncidentCommand));
                 indexLiderTime++;
             }
 
@@ -463,7 +464,6 @@ public class MenuScript : MonoBehaviour
 
         if (CommandIncident.PopulationEvent.GreatTarget != null)
         {
-            Debug.Log("0770  pu "+ lider.Name+ "    my - " + CommandIncident.PopulationEvent.MyCity.Name +" ____f = "+ CommandIncident.PopulationEvent.FiendCity.Name);
             buildingCentral.SetTargetModel(new TargetModel(CommandIncident.PopulationEvent.MyCity), new TargetModel(CommandIncident.PopulationEvent.FiendCity));
         } else
         {
@@ -513,9 +513,11 @@ public class MenuScript : MonoBehaviour
         return cityTown;
     }
 
-    void MissleMethodClick(IWeapon Missle)
+    void ClickCardPlayer(IWeapon cardAction)
     {
-        int IdMissle = Missle.GetImageId();
+        
+
+        int IdMissle = cardAction.GetImageId();
         foreach (var item in this.CardButtonList)
         {
             item.transform.localScale = new Vector2(1, 1);
@@ -526,31 +528,33 @@ public class MenuScript : MonoBehaviour
 
         var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
 
-        if (missleList.Any(a=>a.Name== Missle.GetName()))
+        Debug.Log("click CARD = " + cardAction.GetName());
+        if (missleList.Any(a=>a.Name== cardAction.GetName()))
         {
             
             _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[0], IdMissle);
         }
-        if (Missle.GetName()== GlobalParam.TypeEvent.Bomber || Missle.GetName() == GlobalParam.TypeEvent.HeavyBomber)
+        if (cardAction.GetName()== GlobalParam.TypeEvent.Bomber || cardAction.GetName() == GlobalParam.TypeEvent.HeavyBomber)
         { 
             _controller.SetBomber(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[1], IdMissle);
 
         }
-        if (Missle.GetName() == GlobalParam.TypeEvent.Defence || Missle.GetName() == GlobalParam.TypeEvent.HeavyDefence)
+        if (cardAction.GetName() == GlobalParam.TypeEvent.Defence || cardAction.GetName() == GlobalParam.TypeEvent.HeavyDefence)
         {
             _controller.Defence(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[2], IdMissle);
         }
-        if (Missle.GetName() == GlobalParam.TypeEvent.Propaganda)
+        if (cardAction.GetName() == GlobalParam.TypeEvent.Propaganda)
         {
             new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
 
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[3], IdMissle);
         }
-        if (Missle.GetName() == GlobalParam.TypeEvent.Build)
+        if (cardAction.GetName() == GlobalParam.TypeEvent.Build)
         {
+            Debug.Log("0000 click CARD = " + cardAction.GetName());
             _controller.Building(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[4], IdMissle);
         }
