@@ -531,30 +531,34 @@ public class MenuScript : MonoBehaviour
         Debug.Log("click CARD = " + cardAction.GetName());
         if (missleList.Any(a=>a.Name== cardAction.GetName()))
         {
-            
+
             _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[0], IdMissle);
         }
         if (cardAction.GetName()== GlobalParam.TypeEvent.Bomber || cardAction.GetName() == GlobalParam.TypeEvent.HeavyBomber)
-        { 
+        {
+            Debug.Log("0102 click CARD = " + cardAction.GetName());
             _controller.SetBomber(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[1], IdMissle);
 
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Defence || cardAction.GetName() == GlobalParam.TypeEvent.HeavyDefence)
         {
+
             _controller.Defence(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[2], IdMissle);
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Propaganda)
         {
-            new ViewPlayerButton().SetPropagand(this, this._mainModel.GetCurrenFlagPlayer(), this._mainModel);
+
+
+            _controller.Propaganda(_mainModel.GetCurrenFlagPlayer());
 
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[3], IdMissle);
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Build)
         {
-            Debug.Log("0000 click CARD = " + cardAction.GetName());
+
             _controller.Building(_mainModel.GetCurrenFlagPlayer());
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[4], IdMissle);
         }

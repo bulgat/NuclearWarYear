@@ -142,24 +142,30 @@ public class MainModel
 		return this.CountryLiderList.Where(a => a.FlagId != this.GetCurrentPlayerFlag()).ToList();
 	}
 	public void SetPropagandPlayer(int FlagId) {
-
-		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
+        int futureYear = CountYear + 1;
+        CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
         CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != FlagId).FirstOrDefault();
         CityModel myCity = this.GetTownList().Where(a => a.FlagId == FlagId).FirstOrDefault();
 
-        CommandLider commandLider = new CommandLider(GlobalParam.TypeEvent.Propaganda,
+        CommandLider commandLider = new CommandLider(
+			GlobalParam.TypeEvent.Propaganda,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			CountYear,new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider),FlagId);
+            futureYear,
+			new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider),
+			FlagId);
         ResetAction();
 
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
                 countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear);
 
 		List<CommandLider> сommandLiderList = new SwitchActionHelper().SwitchAction(
-			CountryLiderList, TownList,
-			this.GetCurrenPlayer().FlagId, commandLider,
-			this.GetCurrenPlayer(), CountYear,
+			CountryLiderList, 
+			TownList,
+			this.GetCurrenPlayer().FlagId, 
+			commandLider,
+			this.GetCurrenPlayer(), 
+			futureYear,
 			countryLider.FiendLider, commandLiderFortune);
 
         Debug.Log("@@@I  - GetDamagePopulati  GetNameFiendLider() L = " + сommandLiderList.Count);
@@ -210,48 +216,70 @@ public class MainModel
 
     }
 	public void SetDefencePlayer(int FlagId) {
-		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
+        int futureYear = CountYear + 1;
+        CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
         CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != FlagId).FirstOrDefault();
         CityModel myCity = this.GetTownList().Where(a => a.FlagId == FlagId).FirstOrDefault();
 
-        CommandLider commandLider = new CommandLider(GlobalParam.TypeEvent.Defence,
+        CommandLider commandLider = new CommandLider(
+			GlobalParam.TypeEvent.Defence,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			CountYear,new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider), FlagId);
+            futureYear,
+			new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider),
+			FlagId);
         ResetAction();
+
         CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
                 countryLider.FlagId != GetCurrentPlayerFlag(), countryLider, CountYear);
-        MainStackCommandLiderList.AddRange(new SwitchActionHelper().SwitchAction(CountryLiderList, TownList, 
-			this.GetCurrenPlayer().FlagId, commandLider,
-			this.GetCurrenPlayer(), CountYear,
-			countryLider.FiendLider,  commandLiderFortune));
 
+        MainStackCommandLiderList.AddRange(new SwitchActionHelper().SwitchAction(CountryLiderList, TownList, 
+			this.GetCurrenPlayer().FlagId, 
+			commandLider,
+			this.GetCurrenPlayer(), 
+			futureYear,
+			countryLider.FiendLider,
+			commandLiderFortune));
+		/*
 		new AICreateCommand().EstimationSetCommandAiAll(ResetAction, CountryLiderList,
 			TownList, this.GetCurrenPlayer().FlagId,
 			this.GetCurrenPlayer().FlagId, CountYear, this);
+		*/
 	}
 	public void SetCommandIncident(int FlagId, TypeEvent nameEvent)
 	{
-		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
+        int futureYear = CountYear + 1;
+        CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
 
         CityModel enemyTownCity = this.GetTownList().Where(a => a.FlagId != FlagId).FirstOrDefault();
         CityModel myCity = this.GetTownList().Where(a => a.FlagId == FlagId).FirstOrDefault();
 
-        CountryLider enemyliderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, enemyTownCity.FlagId);
+        CountryLider enemyliderPlayer = new LiderHelperOne().GetLiderOne(
+			this.CountryLiderList,
+			enemyTownCity.FlagId);
 
         List<CommandLider> commandLiderList = new List<CommandLider>();
-		CommandLider commandLider = new CommandLider(nameEvent,
+		CommandLider commandLider = new CommandLider(
+			nameEvent,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			CountYear,new TargetCityModel(enemyTownCity, myCity, enemyliderPlayer), FlagId);
+            futureYear,
+			new TargetCityModel(enemyTownCity, myCity, enemyliderPlayer),
+			FlagId);
 
         commandLiderList.Add(commandLider);
 
         MainStackCommandLiderList.AddRange(commandLiderList);
 		countryLider.SetCommandRealise(commandLider.IncidentCommand);
 
-        new CreateCommandLider().CommandOneLider(countryLider,ResetAction,
-			CountryLiderList, TownList, this.GetCurrenPlayer().FlagId,
-			this.GetCurrenPlayer().FlagId, CountYear, this);
+        new CreateCommandLider().CommandOneLider(
+			countryLider,
+			ResetAction,
+			CountryLiderList,
+			TownList,
+			this.GetCurrenPlayer().FlagId,
+			this.GetCurrenPlayer().FlagId,
+            futureYear,
+			this);
     }
 
 	public void SetMisslePlayer(int FlagId, TypeEvent nameEvent) {
@@ -398,8 +426,6 @@ public class MainModel
 	}
 	public List<IWeapon> GetEternalWeapon()
 	{
-        //this.GetLiderOne(this.CurrenPlayerFlag).GetAllMissle();
-
 
         List<IWeapon> missleList = new List<IWeapon>();
         missleList.Add(new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Build));
@@ -408,9 +434,7 @@ public class MainModel
 	}
 	public List<IWeapon> GetCurrentWeapon()
 	{
-		//List<IWeapon> missleList = new List<IWeapon>();
-		//missleList.AddRange(GetCurrenPlayer().GetDefenceWeapon());
-		//missleList.AddRange(GetCurrenPlayer().GetMissleList());
+
 		return this.GetLiderOne(this.CurrenPlayerFlag).GetAllMissle();
 	}
     public void TurnAi()
