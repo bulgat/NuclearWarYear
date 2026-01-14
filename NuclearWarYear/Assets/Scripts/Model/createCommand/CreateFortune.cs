@@ -35,7 +35,7 @@ namespace Assets.Scripts.Model.createCommand
         private CommandLider GetFortuneEvent(CountryLider countryLider, int Year, 
             EventFortuneIncident eventFortuneIncident) 
         {
-            var kol = countryLider.GetTargetCitySelectPlayer();
+            var kol = countryLider.TargetCitySelectPlayer;
 
             GlobalParam.TypeEvent actionCommand = GlobalParam.TypeEvent.None;
                             actionCommand = eventFortuneIncident.Name;
@@ -43,10 +43,10 @@ namespace Assets.Scripts.Model.createCommand
                     commandLider = new CommandLider(actionCommand,
                         countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
                         Year,
-                        countryLider.GetTargetCitySelectPlayer(),
+                        countryLider.TargetCitySelectPlayer,
                         countryLider.FlagId);
                     commandLider.SetVisibleEventList(eventFortuneIncident.Name, true);
-                    commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
+                    commandLider.SetTargetLider(countryLider.TargetCitySelectPlayer.EnemyLider);
             return commandLider;
         }
     }

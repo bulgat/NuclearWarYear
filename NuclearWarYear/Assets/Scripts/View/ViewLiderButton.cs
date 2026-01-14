@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Assets.Scripts.View;
+using System.Linq;
 
 public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
 {
@@ -12,7 +13,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
     List<Sprite> IconCircleReadyList;
     List<Sprite> IconCardList;
     MainModel _mainModel;
-    CountryLider Lider;
+    public CountryLider Lider;
     public void Init(List<Sprite> liderImageList,List<Sprite> flagImageList, MainModel mainModel,
         List<Sprite> iconCircleReadyList, List<Sprite> iconCardList,CountryLider Lider)
     {
@@ -23,7 +24,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         this.IconCircleReadyList = iconCircleReadyList;
         this.IconCardList = iconCardList;
     }
-    public void ButtonLiderFrame(int PlayerFlagId)
+    public void ButtonLiderFrame(int FlagId)
     {
         
         var allImage_ar = GetComponentsInChildren<Image>();
@@ -32,10 +33,14 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         var LiderImage_1 = allImage_ar[1].GetComponent<Image>();
         var flagImage = allImage_ar[2].GetComponent<Image>();
         var circleReady = allImage_ar[4].GetComponent<Image>();
-   
-        int indexLider = this.Lider.GraphicId;
-        CountryLider countryLider = _mainModel.CountryLiderList[indexLider];
-        int moodLider = countryLider.GetMood(PlayerFlagId);
+
+        //int indexLider = this.Lider.GraphicId;
+
+        //CountryLider countryLider = _mainModel.CountryLiderList[indexLider];
+
+        CountryLider countryLider = _mainModel.CountryLiderList.FirstOrDefault(a=>a.FlagId == FlagId);
+        
+        int moodLider = countryLider.GetMood(FlagId);
         
         var imageMood = 0;
         if (moodLider > 90)
@@ -51,14 +56,14 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
             imageMood = 7;
         }
 
-        LiderImage_1.sprite = LiderImageList[new ViewLiderHelper().GetNumberSpriteLider(indexLider, imageMood)];
-        flagImage.sprite = FlagImageList[indexLider];
+        LiderImage_1.sprite = LiderImageList[new ViewLiderHelper().GetNumberSpriteLider(countryLider.FlagId-1, imageMood)];
+        flagImage.sprite = FlagImageList[countryLider.FlagId - 1];
         circleReady.enabled = false;
 
 
-        if (_mainModel.GetCommandLider(_mainModel.CountYear, PlayerFlagId) != null)
+        if (_mainModel.GetCommandLider(_mainModel.CountYear, FlagId) != null)
         {
-            if (_mainModel.GetCommandLider(_mainModel.CountYear, PlayerFlagId).GetVisibleBomber())
+            if (_mainModel.GetCommandLider(_mainModel.CountYear, FlagId).GetVisibleBomber())
             {
                 if (this.IconCircleReadyList != null)
                 {
@@ -67,7 +72,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
                 }
             }
 
-            if (_mainModel.GetCommandLider(_mainModel.CountYear, PlayerFlagId).GetVisibleMissle())
+            if (_mainModel.GetCommandLider(_mainModel.CountYear, FlagId).GetVisibleMissle())
             {
                 if (this.IconCircleReadyList != null)
                 {

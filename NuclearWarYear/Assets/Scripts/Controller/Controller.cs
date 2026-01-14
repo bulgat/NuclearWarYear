@@ -6,63 +6,13 @@ using UnityEngine;
 public class Controller
 {
     private MainModel _mainModel;
-    /*
-	public enum Command
-	{
-		//Bomber,
-		//AttackMissle,
-		//LiderTargetPlayer,
-		//Warhead,
-		//TotalTurn,
-	}*/
+
     public Controller(MainModel MainModel)
     {
         _mainModel = MainModel;
     }
-    //public void SendCommand(EventController eventController) {
-    /*
-		if (eventController.NameCommand == Command.AttackMissle){
-			_mainModel.SetAttackMisslePlayer(eventController.EventSend.FlagId);
-			return;
-		}
-	*/
-    /*
-    if (eventController.NameCommand == Command.Bomber){
 
-        _mainModel.SetBomberPlayer(eventController.EventSend.FlagId, eventController.EventSend.Id);
-        return;
-    }
-    */
-    /*
-    if (eventController.NameCommand == Command.LiderTargetPlayer){
 
-        _mainModel.SetLiderTargetPlayer(eventController.EventSend.FlagId);
-        return;
-    }*/
-    /*
-    if (eventController.NameCommand == Command.Warhead){
-
-        _mainModel.SetWarheadMethodPlayer(eventController.EventSend.FlagId);
-        return;
-    }*/
-    /*
-    if (eventController.NameCommand == Command.TotalTurn){
-
-        _mainModel.TotalTurn(eventController.EventSend.FlagId);
-        return;
-    }
-    */
-    //throw new System.Exception("Not Command controller"); 
-    //}
-    /*
-    public void TotalTurn(int FlagId)
-	{
-        _mainModel.TotalTurn(FlagId);
-    }*/
-    public void AttackMissle(int FlagId)
-    {
-        _mainModel.SetAttackMisslePlayer(FlagId);
-    }
     public void LiderTargetPlayer(int FlagId)
     {
         _mainModel.SetLiderTargetPlayer(FlagId);
@@ -94,26 +44,19 @@ public class Controller
     {
         _mainModel.ResetSelectCityEnemyTargetPlayer();
     }
-
-    public void AttackBomber(int FlagId)
+    public void AttackActionLast(int FlagId, bool missle)
     {
-        _mainModel.SetAttackBomberPlayer(FlagId);
+        _mainModel.SetAttackMisslePlayer(FlagId, missle);
 
     }
+
 
 
     public void ChangeCurrentPlayer()
     {
         _mainModel.ChangeCurrentPlayer();
     }
-    /*
-    public void DoneMoveMadeCurrentPlayer()
-	{
-
-            _mainModel.DoneMoveMadeCurrentPlayer();
-
-    }
-	*/
+  
     public void SetMissle(int FlagId, GlobalParam.TypeEvent nameEvent)
     {
         _mainModel.SetMisslePlayer(FlagId, nameEvent);

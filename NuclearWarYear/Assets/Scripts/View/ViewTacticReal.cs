@@ -41,7 +41,7 @@ int canvasIndex = 1;
             null,
             mainModel.GetCountryLiderList()[indexLider]);
 
-        viewLiderButton.ButtonLiderFrame(mainModel.GetCurrentPlayerFlag());
+        viewLiderButton.ButtonLiderFrame(mainModel.GetCountryLiderList()[indexLider].FlagId);
     }
     private void Update()
     {

@@ -245,8 +245,15 @@ public class BuildingCentral : MonoBehaviour
         {
             return Vector3.zero;
         }
+        if (buildingCentral.GetTarget()==null)
+        {
+            return Vector3.zero;
+        }
+
         GameObject cityTown = new SearchTownObject().GetTownViewWithId(buildingCentral.GetTarget(), TownList);
+
         CityView city = cityTown.GetComponent<CityView>();
+
         Vector3 targetBomber = cityTown.transform.position;
 
         return targetBomber;

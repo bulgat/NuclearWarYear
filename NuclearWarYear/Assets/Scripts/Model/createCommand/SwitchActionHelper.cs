@@ -22,7 +22,7 @@ public class SwitchActionHelper
         CommandLider commandLiderFortune)
     {
 
-        TargetCityModel targetCityModel = countryLider.GetTargetCitySelectPlayer();
+        TargetCityModel targetCityModel = countryLider.TargetCitySelectPlayer;
         List<CommandLider> commandLiderList = new List<CommandLider>();
 
         if (countryLider.FlagId != FlagIdPlayer)
@@ -78,10 +78,10 @@ public class SwitchActionHelper
                 commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
                 
                 
-                var target = countryLider.GetTargetCitySelectPlayer();
+                var target = countryLider.TargetCitySelectPlayer;
                 
                 
-                countryLider.GetTargetCitySelectPlayer().TargetCity= new ModGameEngine().GetCityRandomFlagId(TownList, countryLider.FiendLider, FlagId, AIfiend);
+                countryLider.TargetCitySelectPlayer.TargetCity= new ModGameEngine().GetCityRandomFlagId(TownList, countryLider.FiendLider, FlagId, AIfiend);
                 break;
             case GlobalParam.TypeEvent.Build:
                 commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Build, true);
@@ -99,26 +99,26 @@ public class SwitchActionHelper
                 commandLider.SetVisibleBomber(true);
                 break;
             case GlobalParam.TypeEvent.AttackBomber:
-                if (countryLider.GetTargetCitySelectPlayer() == null)
+                if (countryLider.TargetCitySelectPlayer == null)
                 {
                     commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
                 }
                 else
                 {
                     commandLider.SetVisibleAttackBomber(true);
-                    commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
+                    commandLider.SetTargetLider(countryLider.TargetCitySelectPlayer.EnemyLider);
                     commandLider.SetAttackBomber(countryLider.GetBomber());
                 }
                 break;
             case GlobalParam.TypeEvent.AttackMissle:
-                if (countryLider.GetTargetCitySelectPlayer() == null)
+                if (countryLider.TargetCitySelectPlayer == null)
                 {
                     commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
                 }
                 else
                 {
                     commandLider.SetVisibleEventList(GlobalParam.TypeEvent.AttackMissle, true);
-                    commandLider.SetTargetLider(countryLider.GetTargetCitySelectPlayer().EnemyLider);
+                    commandLider.SetTargetLider(countryLider.TargetCitySelectPlayer.EnemyLider);
                     commandLider.SetAttackMissle(countryLider.GetMissleFirst());
                 }
                 break;

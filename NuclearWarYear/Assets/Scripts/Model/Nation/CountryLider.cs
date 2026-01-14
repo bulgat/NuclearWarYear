@@ -15,19 +15,14 @@ public class CountryLider
     public int ViewIdImageFlag;
     [SerializeField]
     public bool Player;
-
     public GameObject PropagandaBuilding;
-
     public List<Incident> ReleaseCommandList { private set; get; }
     private bool _dead;
     private List<IWeapon> _MissleList;
-
     public int FlagIdAttack = 1;
-
     private List<CityModel> _TownListOwn;
-
     private int _maxPopulation;
-    private TargetCityModel _targetCitySelectPlayer;
+    public TargetCityModel TargetCitySelectPlayer { private set; get; }
     public CountryLider FiendLider { private set; get; }
 
     public string Name { private set; get; }
@@ -113,7 +108,6 @@ public class CountryLider
         return _TownListOwn.Where(a => a.GetPopulation() > 0).ToList();
 
     }
-    //Defence
 
     public int GetBomberCount()
     {
@@ -178,18 +172,14 @@ public class CountryLider
     public void ResetTargetCity()
     {
         FiendLider = null;
-        _targetCitySelectPlayer = null;
+        TargetCitySelectPlayer = null;
     }
     public void SetTargetCity(TargetCityModel targetCitySelectPlayer)
     {
         FiendLider = targetCitySelectPlayer.EnemyLider;
-        _targetCitySelectPlayer = targetCitySelectPlayer;
+        TargetCitySelectPlayer = targetCitySelectPlayer;
     }
-    public TargetCityModel GetTargetCitySelectPlayer()
-    {
-
-        return _targetCitySelectPlayer;
-    }
+ 
     public CityModel GetFirstCityHelper()
     {
         int index = UnityEngine.Random.Range(0, _TownListOwn.Count);
