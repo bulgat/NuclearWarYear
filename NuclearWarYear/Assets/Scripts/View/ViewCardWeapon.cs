@@ -8,9 +8,9 @@ using Assets.Scripts.Model;
 
 public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
 {
-    private IWeapon Id;
+    private Incident _incident;
     public Text Text;
-    System.Action<IWeapon> callback;
+    System.Action<Incident> callback;
     private List<Sprite> IconCardList;
     public Image SpriteIcon;
     void Start()
@@ -21,25 +21,29 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
 
-        this.callback(this.Id);
+        this.callback(this._incident);
         gameObject.transform.localScale = new Vector2(2, 2);
     }
     void Update()
     {
         
     }
-    public void SetParam( List<Sprite> iconCardList, IWeapon item)
+    public void SetParam( List<Sprite> iconCardList, Incident incident)
     {
-        Text.text = item.GetName().ToString();
 
-        var iconCard = gameObject.transform.GetChild(1);
-        ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
-        
-        viewIconCard.SetParam(iconCardList, item.GetImageId());
+        if (incident != null)
+        {
+            Text.text = incident.GetName().ToString();
 
-        this.Id = item;
+            var iconCard = gameObject.transform.GetChild(1);
+            ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
+
+            viewIconCard.SetParam(iconCardList, incident.GetImageId());
+
+            this._incident = incident;
+        }
     }
-    public void SetCallback(System.Action<IWeapon> Callback)
+    public void SetCallback(System.Action<Incident> Callback)
     {
         
 

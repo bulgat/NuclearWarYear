@@ -9,10 +9,15 @@ namespace Assets.Scripts.Model.weapon
     public class StateAttackPopulation:PopulationEvent
     {
         public string Name { get; set; } = "Attack";
-        public StateAttackPopulation(string message,int ChangePopulation,
-            CityModel fiendCity, CountryLider fiendCountryLider):base(fiendCountryLider) {
+        public StateAttackPopulation(
+            string message,
+            int ChangeDamagePopulation,
+            CityModel fiendCity,
+            CountryLider fiendCountryLider
+            ):base(fiendCountryLider) 
+        {
             this.Message = message;
-            this.FiendPopulation = ChangePopulation;
+            this.FiendPopulation = ChangeDamagePopulation;
             this.FiendCity = fiendCity;
             this.GreatTarget = fiendCity;
         }

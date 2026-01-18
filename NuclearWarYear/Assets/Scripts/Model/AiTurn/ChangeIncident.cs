@@ -13,7 +13,11 @@ namespace Assets.Scripts.Model.AiTurn
 {
     public class ChangeIncident
     {
-        public GlobalParam.TypeEvent ChangeIncidentCommand(CountryLider lider, GlobalParam.TypeEvent actionNameCommand, int countYear, MainModel mainModel)
+        public GlobalParam.TypeEvent MutationIncidentCommand(
+            CountryLider lider,
+            GlobalParam.TypeEvent actionNameCommand,
+            int countYear,
+            MainModel mainModel)
         {
             //auto command player
             var typeCommand = lider.ReleaseCommandList?.FirstOrDefault();
@@ -25,28 +29,30 @@ namespace Assets.Scripts.Model.AiTurn
             }
             else
             {
-                Debug.Log( "0769  lider __ command = " + typeCommand.GetName());
+                
                 actionNameCommand = typeCommand.GetName();
 
-                var lastYeatCommandList0 = lider.ReleaseCommandList.Where(a => a.GetYear() == countYear).ToList();
-                var lastYeatCommandList = lider.ReleaseCommandList.Where(a => a.GetYear() == countYear - 1).ToList();
+                List<Incident> lastYeatCommandList = lider.ReleaseCommandList.Where(a => a.GetYear() == countYear - 1).ToList();
 
-                foreach (var item in lastYeatCommandList)
+                foreach (Incident command in lastYeatCommandList)
                 {
-
-                    if (item.Type == GlobalParam.TypeEvent.Missle)
+                    Debug.Log( "07069 id = "+ command.Id+ "_ command = " + command.GetTypeWeapon());
+                    if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, command))
                     {
-                        item.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
 
+                        command.SetSecondIncident(new DictionaryEssence().BuildIncident(command.GetTypeWeapon(), mainModel.CountYear));
+                        command.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
+                        Debug.Log("07070  "+ command.Id+ "  command    =  " + command.GetTypeWeapon());
                         return GlobalParam.TypeEvent.AttackMissle;
                     }
-                    if (item.Type == GlobalParam.TypeEvent.Bomber)
+                    if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, command))
                     {
-                        item.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
-
+                        command.SetSecondIncident(new DictionaryEssence().BuildIncident(command.GetTypeWeapon(), mainModel.CountYear));
+                        command.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
+                        Debug.Log("07071 "+ command.Id+ " command   =  " + command.GetTypeWeapon());
                         return GlobalParam.TypeEvent.AttackBomber;
                     }
-
+                    
                 }
 
             }

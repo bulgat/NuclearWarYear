@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Model;
+using Assets.Scripts.Model.AiTurn;
 using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.weapon;
 using Assets.Scripts.View;
@@ -108,20 +109,6 @@ public class MenuScript : MonoBehaviour
         this.CountryLiderList = _mainModel.GetCountryLiderList();
 
     }
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // StartCoroutine(PrintTypeWriter("LOAD SCENE"));
-    }
 
     void Start()
     {
@@ -195,14 +182,14 @@ public class MenuScript : MonoBehaviour
         missleList.AddRange(_mainModel.GetCurrentWeapon());
 
         int count = 0;
-        foreach (IWeapon item in missleList)
+        foreach (Incident incident in missleList)
         {
             GameObject CardWing = Instantiate(Card, new Vector2(100 + (count * 100), 100), Quaternion.identity);
             CardWing.transform.SetParent(panelMain.transform);
             ViewCardWeapon viewCardWeapon = CardWing.GetComponent<ViewCardWeapon>();
-            
-            
-            viewCardWeapon.SetParam(IconCardList, item);
+
+            Debug.Log("0055 CommandIncident miss  = " + incident);
+            viewCardWeapon.SetParam(IconCardList, incident);
             viewCardWeapon.SetCallback(ClickCardPlayer);
             this.CardButtonList.Add(CardWing);
             count++;
@@ -418,7 +405,7 @@ public class MenuScript : MonoBehaviour
             Debug.Log("0774 CountYear =" + _mainModel.CountYear + " Town MyCi GetTargetBomb = " + _mainModel.CountryLiderList.Count+" Li "+ lider.Name+" list = "+ this._mainModel.GetCommandLiderList(_mainModel.CountYear, lider.FlagId).Count);
             foreach (CommandLider commandLider in this._mainModel.GetCommandLiderList(_mainModel.CountYear,lider.FlagId))
             {
-                Debug.Log("0775 __f = " + lider.Name+ "  commandLider =");
+                Debug.Log("0775   = " + lider.Name+ "  commandLider =");
                 StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.IncidentCommand));
                 indexLiderTime++;
             }
@@ -426,8 +413,12 @@ public class MenuScript : MonoBehaviour
         }
         float openWaitTime = waitTime + this.waitTurnTime * _mainModel.CountryLiderList.Count();
 
-        StartCoroutine(OpenMenu(openWaitTime));
-        StartCoroutine(AnimationPlayer(openWaitTime + _animationTime));
+        StartCoroutine(
+            OpenMenu(openWaitTime)
+            );
+        StartCoroutine(
+            AnimationPlayerEndTurn(openWaitTime + _animationTime)
+            );
 
         // reset view
 
@@ -451,8 +442,7 @@ public class MenuScript : MonoBehaviour
         buildingCentral.ViewStartStateObject(TownViewList, waitTime + (this.waitTurnTime * indexLider),
             lider, CommandIncident);
 
-        
-
+   
         if (CommandIncident.PopulationEvent.GreatTarget != null)
         {
             buildingCentral.SetTargetModel(new TargetModel(CommandIncident.PopulationEvent.MyCity), new TargetModel(CommandIncident.PopulationEvent.FiendCity));
@@ -504,7 +494,7 @@ public class MenuScript : MonoBehaviour
         return cityTown;
     }
 
-    void ClickCardPlayer(IWeapon cardAction)
+    void ClickCardPlayer(Incident cardAction)
     {
         
 
@@ -515,17 +505,17 @@ public class MenuScript : MonoBehaviour
         }
 
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
-        var missleList = new DictionaryEssence().GetIdTypeEventList(GlobalParam.TypeEvent.Missle).ToList();
 
         var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
-
-        if (missleList.Any(a=>a.Name== cardAction.GetName()))
+        //if (missleList.Any(a => a.Name == cardAction.GetName()))
+        if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, cardAction))
         {
 
             _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
             CanvasReportWindow(DictionaryEssence.MessagePrepareList[0], IdMissle);
         }
-        if (cardAction.GetName()== GlobalParam.TypeEvent.Bomber || cardAction.GetName() == GlobalParam.TypeEvent.HeavyBomber)
+        //if (cardAction.GetName()== GlobalParam.TypeEvent.Bomber || cardAction.GetName() == GlobalParam.TypeEvent.HeavyBomber)
+        if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, cardAction))
         {
 
             _controller.SetBomber(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
@@ -632,7 +622,7 @@ public class MenuScript : MonoBehaviour
         NuclearMap.transform.position = _targetNuclearMap;
     }
     // fast time
-    private IEnumerator AnimationPlayer(float AnimationTime)
+    private IEnumerator AnimationPlayerEndTurn(float AnimationTime)
     {
         yield return new WaitForSeconds(AnimationTime);
 
@@ -651,48 +641,15 @@ public class MenuScript : MonoBehaviour
     {
         StringBuilder printMessage = new StringBuilder("");
 
-        CountryLider liderPlayer0 = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
-        if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer0.FlagId) != null)
+        TurnFinally turnFinally = _controller.TurnFinality();
+        printMessage.Append(turnFinally.Message);
+        CircleImageReadyParam(turnFinally.TypeAttack, turnFinally.Attack);
+        /*
+        if (turnFinally.Attack)
         {
-            if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer0.FlagId).GetVisibleMissle())
-            {
-
-                var cityTarget = liderPlayer0.TargetCitySelectPlayer;
-                if (cityTarget == null)
-                {
-                    printMessage.Append("\n Ready. Not target for missle. Select Target!");
-                }
-                else
-                {
-                    printMessage.Append("\n Ready. Select target for missle");
-                }
-                CircleImageReadyParam(1, true);
-                Debug.Log("0080  EnableButtonPlayer= ");
-                _controller.AttackActionLast(_mainModel.GetCurrenFlagPlayer(),true);
-            }
+            _controller.SetAttackActionLast(_mainModel.GetCurrenFlagPlayer(), turnFinally.Missle);
         }
-        CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
-        if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer.FlagId) != null)
-        {
-            if (this._mainModel.GetCommandLider(_mainModel.CountYear, liderPlayer.FlagId).GetVisibleBomber())
-            {
-                var cityTarget = liderPlayer.TargetCitySelectPlayer;
-                if (cityTarget == null)
-                {
-
-                    printMessage.Append("\n not target. Select Target!");
-                }
-                else
-                {
-
-                    printMessage.Append("\n select target bomber");
-                }
-
-                CircleImageReadyParam(0, true);
-
-                _controller.AttackActionLast(_mainModel.GetCurrenFlagPlayer(),false);
-            }
-        }
+ */
         ManagerButton();
 
         CanvasReportWindow(printMessage.ToString(), 0);
@@ -759,9 +716,9 @@ public class MenuScript : MonoBehaviour
         SetAllCityVisibleLabelView(_visiblePanel == false);
         MoveMapNuclear();
 
-        if (_mainModel._endGame)
+        if (_mainModel.EndGame)
         {
-            SceneManager.LoadScene("Victory", LoadSceneMode.Single);
+            SceneManager.LoadScene(GlobalParam.Scene.Victory.ToString(), LoadSceneMode.Single);
         }
         if (Input.GetMouseButtonDown(0))
         {

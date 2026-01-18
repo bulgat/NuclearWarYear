@@ -19,10 +19,18 @@ public class Incident : Weapon, IWeapon
     private bool ShowLider { get; set; }
     public int Year {private set; get;}
     public bool ExplodeNuclear { private set; get; }
-
+    public Incident SecondIncident { private set; get; }
     public EventFortuneIncident Fortune { private set; get; }
-    public Incident(GlobalParam.TypeEvent name, GlobalParam.TypeEvent type,
-        int id, string message, DamageParam damageParam, bool explodeNuclear, EventFortuneIncident fortune) {
+    public Incident(
+        GlobalParam.TypeEvent name,
+        GlobalParam.TypeEvent type,
+        int id,
+        string message,
+        DamageParam damageParam,
+        bool explodeNuclear,
+        EventFortuneIncident fortune
+        ) 
+    {
 		this.Name=name;
 		this.Id = id;
 		this.IdImage = damageParam.IdImage;
@@ -75,29 +83,35 @@ public class Incident : Weapon, IWeapon
     }
     public string FullMessage(CountryLider lider)
     {
-        string message = MutationMessage();
+       
 
+        string message = MutationMessage();
+        if (this.PopulationEvent == null)
+        {
+            return message;
+        }
         int population = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
 
         return $"{lider.Name}   : {message} {(population>0? ":"+population:"")} {GetNameFiendLider()}.";
     }
     string MutationMessage()
     {
-
-        if (PopulationEvent.MyCity == null && PopulationEvent.FiendCity == null)
+        Debug.Log("0600  message incident = " + GetMessage()+ " PopulationEvent = "+ PopulationEvent);
+        if (PopulationEvent?.MyCity == null && PopulationEvent?.FiendCity == null)
         {
             return GetMessage();
         }
-        if (PopulationEvent.MyCity != null && PopulationEvent.FiendCity != null)
+        if (PopulationEvent?.MyCity != null && PopulationEvent?.FiendCity != null)
         {
             return String.Format(GetMessage(), PopulationEvent.MyCity.Name, PopulationEvent.FiendCity.Name);
         }
-        if (PopulationEvent.MyCity != null) {
+        if (PopulationEvent?.MyCity != null) {
             return String.Format(GetMessage(), PopulationEvent.MyCity.Name, "");
         }
-        if (PopulationEvent.FiendCity != null)
+        if (PopulationEvent?.FiendCity != null)
         {
-            return String.Format(GetMessage(), PopulationEvent.FiendCity.Name);
+            Debug.Log("0601"+this.Name+" message incident = " + GetMessage());
+            return String.Format(GetMessage(), PopulationEvent?.FiendCity.Name);
         }
         return String.Format(GetMessage(), "");
     }
@@ -145,5 +159,9 @@ public class Incident : Weapon, IWeapon
     public int GetImageId()
     {
         return this.IdImage;
+    }
+    public void SetSecondIncident(Incident secondIncident)
+    {
+        SecondIncident = secondIncident;
     }
 }

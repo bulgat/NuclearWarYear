@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Model.param;
+﻿using Assets.Scripts.Model;
+using Assets.Scripts.Model.param;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,6 @@ public class Controller
     {
         _mainModel = MainModel;
     }
-
 
     public void LiderTargetPlayer(int FlagId)
     {
@@ -30,9 +30,7 @@ public class Controller
 
     public void Propaganda(int FlagId)
     {
-
         _mainModel.SetPropagandPlayer(FlagId);
-
     }
 
     public void SelectCityEnemyTargetPlayer(int? CityId, int FlagId)
@@ -44,12 +42,6 @@ public class Controller
     {
         _mainModel.ResetSelectCityEnemyTargetPlayer();
     }
-    public void AttackActionLast(int FlagId, bool missle)
-    {
-        _mainModel.SetAttackMisslePlayer(FlagId, missle);
-
-    }
-
 
 
     public void ChangeCurrentPlayer()
@@ -71,6 +63,11 @@ public class Controller
     {
         _mainModel.TurnAi();
     }
+    public TurnFinally TurnFinality()
+    {
+        return _mainModel.TurnFinality();
+    }
+
     public Incident TurnSatisfyOneLider(int flagId, Incident CommandIncident)
     {
         return _mainModel.SatisfyOneLiderTurn(flagId, CommandIncident);

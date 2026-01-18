@@ -18,9 +18,9 @@ public class CountryLider
     public GameObject PropagandaBuilding;
     public List<Incident> ReleaseCommandList { private set; get; }
     private bool _dead;
-    private List<IWeapon> _MissleList;
+    private List<IWeapon> _missleList;
     public int FlagIdAttack = 1;
-    private List<CityModel> _TownListOwn;
+    private List<CityModel> _townListOwn;
     private int _maxPopulation;
     public TargetCityModel TargetCitySelectPlayer { private set; get; }
     public CountryLider FiendLider { private set; get; }
@@ -39,11 +39,11 @@ public class CountryLider
     {
         this.FlagId = scenarioLider.FlagId;
         this.Player = player;
-        this._MissleList = missleList;
+        this._missleList = missleList;
         PropagandaBuilding = PropagandaBuild;
         this.Name = scenarioLider.Name;
         this.GraphicId = scenarioLider.GraphicId;
-        this._TownListOwn = new List<CityModel>();
+        this._townListOwn = new List<CityModel>();
 
         foreach (CityModel TownCity in TownList)
         {
@@ -51,7 +51,7 @@ public class CountryLider
             if (CountryId == TownCity.CountryId)
             {
                 TownCity.FlagId = scenarioLider.FlagId;
-                _TownListOwn.Add(TownCity);
+                _townListOwn.Add(TownCity);
 
             }
         }
@@ -97,7 +97,7 @@ public class CountryLider
     public int GetAllOwnPopulation()
     {
         int maxPopulation = 0;
-        foreach (CityModel TownCity in _TownListOwn)
+        foreach (CityModel TownCity in _townListOwn)
         {
             maxPopulation += TownCity.GetPopulation();
         }
@@ -105,56 +105,52 @@ public class CountryLider
     }
     public List<CityModel> GetOwnTownListLiderFilterPopulation()
     {
-        return _TownListOwn.Where(a => a.GetPopulation() > 0).ToList();
+        return _townListOwn.Where(a => a.GetPopulation() > 0).ToList();
 
     }
 
     public int GetBomberCount()
     {
-        return this._MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).Count();
+        return this._missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).Count();
     }
     public List<IWeapon> GetDefenceWeapon()
     {
-        return this._MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).ToList();
+        return this._missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).ToList();
     }
 
     public IWeapon GetBomber()
     {
 
 
-        return this._MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).FirstOrDefault();
-    }
-    public void RemoveBomber()
-    {
-
-        IWeapon bomberWeapon = _MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).FirstOrDefault();
-        _MissleList.Remove(bomberWeapon);
+        return this._missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).FirstOrDefault();
     }
 
 
     public void RemoveDefenceWeapon()
     {
 
-        IWeapon defenceWeapon = _MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).FirstOrDefault();
-        _MissleList.Remove(defenceWeapon);
+        IWeapon defenceWeapon = _missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).FirstOrDefault();
+        _missleList.Remove(defenceWeapon);
     }
 
     
     public int GetMissleCount()
     {
-        return _MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Missle).Count();
+        return _missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Missle).Count();
     }
     
     public IWeapon GetMissleFirst()
     {
-        return _MissleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Missle).FirstOrDefault();
+        Debug.Log("00800  a AttackBomber "+ _missleList);
+        return _missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Missle).FirstOrDefault();
     }
-    public void RemoveMissle()
+    public void RemoveWeapon(GlobalParam.TypeEvent name)
     {
+        var deleteMissle = _missleList.FirstOrDefault(a => a.GetName() == name);
 
-        if (this._MissleList.Count > 0)
+        if (deleteMissle != null)
         {
-            this._MissleList.RemoveAt(0);
+            _missleList.Remove(deleteMissle);
         }
 
     }
@@ -162,7 +158,7 @@ public class CountryLider
     {
         if (missleList != null)
         {
-            _MissleList.AddRange(missleList);
+            _missleList.AddRange(missleList);
         }
     }
     public GameObject GetCentralBuildingPropogation()
@@ -182,13 +178,13 @@ public class CountryLider
  
     public CityModel GetFirstCityHelper()
     {
-        int index = UnityEngine.Random.Range(0, _TownListOwn.Count);
-        return _TownListOwn[index];
+        int index = UnityEngine.Random.Range(0, _townListOwn.Count);
+        return _townListOwn[index];
     }
 
-    public List<IWeapon> GetAllMissle()
+    public List<IWeapon> GetAllWeapon()
     {
-        return _MissleList;
+        return _missleList;
     }
 
 

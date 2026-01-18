@@ -14,8 +14,14 @@ using Assets.Scripts.Model.AiTurn;
 public class AICreateCommand
 {
 
-    public void EstimationSetCommandAiAll(Action ResetAction, List<CountryLider> CountryLiderList,
-        List<CityModel> TownList, int _flagIdPlayer, int FlagIdPlayer, int CountYear, MainModel mainModel)
+    public void EstimationCreateCommandAiAll(
+        Action ResetAction,
+        List<CountryLider> CountryLiderList,
+        List<CityModel> TownList,
+        int _flagIdPlayer,
+        int FlagIdPlayer,
+        int CountYear,
+        MainModel mainModel)
     {
         foreach (CountryLider lider in CountryLiderList)
         {

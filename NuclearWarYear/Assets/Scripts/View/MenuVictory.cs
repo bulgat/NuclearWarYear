@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Assets.Scripts.Model.param;
 
 public class MenuVictory : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class MenuVictory : MonoBehaviour
     }
 	void ReturnAttackMethod(Button buttonPressed)
 	{
-        SceneManager.LoadScene("MenuStart", LoadSceneMode.Single);
+        SceneManager.LoadScene(GlobalParam.Scene.MenuStart.ToString(), LoadSceneMode.Single);
     }
 
     void Update()

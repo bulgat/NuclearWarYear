@@ -15,6 +15,16 @@ namespace Assets.Scripts.Model.param
         public static int StartTurnIdImage = 18;
         public static int StartTurnIdFlag = 5;
 
+        public static List<TypeEvent> GroupMissleList = new List<TypeEvent>()
+        {
+            TypeEvent.Missle,TypeEvent.HeavyMissle
+        };
+
+        public static List<TypeEvent> GroupBomberList = new List<TypeEvent>()
+        {
+            TypeEvent.Bomber,TypeEvent.HeavyBomber
+        };
+
         public enum TypeEvent
         {
             Build, Bomber, HeavyBomber, Defence, HeavyDefence,Propaganda, Ufo, Baby, RocketRich,
@@ -22,7 +32,13 @@ namespace Assets.Scripts.Model.param
             AttackBomber, AttackMissle, Airport, AttackAirport, Incident,None
         }
 
-        public static Dictionary<GlobalParam.TypeEvent, TurnEventExecute> MessageDictionary = new Dictionary<GlobalParam.TypeEvent, TurnEventExecute>() {
+        public enum Scene
+        {
+            MenuStart, Victory, GameScene
+        }
+
+        public static Dictionary<GlobalParam.TypeEvent, TurnEventExecute> MessageDictionary = 
+            new Dictionary<GlobalParam.TypeEvent, TurnEventExecute>() {
             { TypeEvent.RocketRich, new TurnEventExecute(null,0,false,true,false,false, false,false)},
             { TypeEvent.Baby, new TurnEventExecute( null, 0,false, true, false,false, false,false) },
             {TypeEvent.Ufo, new TurnEventExecute( null, 0, false,true, false,false, false,false) },
@@ -37,7 +53,9 @@ namespace Assets.Scripts.Model.param
             {TypeEvent.Airport, new TurnEventExecute( null, 0, false, true, false,false, true,false) },
             {TypeEvent.Missle, new TurnEventExecute( null, 0, false, true, false, false, true,false) },
             {TypeEvent.HeavyMissle, new TurnEventExecute( null, 0, false, true, false, false, true,false) },
-            {TypeEvent.Bomber, new TurnEventExecute( null, 0, false, true, false, false, true,false) } };
+            {TypeEvent.Bomber, new TurnEventExecute( null, 0, false, true, false, false, true,false) } ,
+            {TypeEvent.HeavyBomber, new TurnEventExecute( null, 0, false, true, false, false, true,false) }
+        };
 
         public static List<ScenarioLider> ParamLiderList = new List<ScenarioLider>()
         {

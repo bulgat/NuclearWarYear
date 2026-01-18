@@ -44,11 +44,13 @@ namespace Assets.Scripts.Model
 
                 new CreateBomberIncident().CreateAttackBomber(lider, CountYear, enemylider,
                    ref CommandIncident, cityModelTarget, mainModel,
-                   mainModel.GetCommandLider(CountYear, lider.FlagId).GetVisibleAttackBomber(), "Бомбардировщики сбиты");
+                   mainModel.GetCommandLider(CountYear, lider.FlagId).GetVisibleAttackBomber(),
+                   "Бомбардировщики сбиты");
 
                 new CreateBomberIncident().CreateAttackBomber(lider, CountYear, enemylider,
                     ref CommandIncident, cityModelTarget, mainModel,
-                    mainModel.GetCommandLider(CountYear, lider.FlagId).GetVisibleAttackRocket(), "Ракеты сбиты");
+                    mainModel.GetCommandLider(CountYear, lider.FlagId).GetVisibleAttackRocket(),
+                    "Ракеты сбиты");
 
             }
 

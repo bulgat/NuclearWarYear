@@ -23,7 +23,7 @@ namespace Assets.Scripts.Model.AiTurn
             if (lider.ReleaseCommandList != null)
             {
 
-                actionNameCommand = new ChangeIncident().ChangeIncidentCommand(lider, actionNameCommand, CountYear, mainModel);
+                actionNameCommand = new ChangeIncident().MutationIncidentCommand(lider, actionNameCommand, CountYear, mainModel);
             }
 
             if (actionNameCommand == GlobalParam.TypeEvent.None)
@@ -71,10 +71,14 @@ namespace Assets.Scripts.Model.AiTurn
 
             CommandLider commandLider = new CommandLider(actionNameCommand, fiendLider1, CountYear, targetCityModel, lider.FlagId);
             ResetAction();
-            List<CommandLider> commandLidersList = new SwitchActionHelper().SwitchAction(CountryLiderList,
-                TownList, FlagIdPlayer,
-                commandLider, lider,
-                CountYear, fiendLider1,
+            List<CommandLider> commandLidersList = new ActionCommandHelper().CreateAction(
+                CountryLiderList,
+                TownList,
+                FlagIdPlayer,
+                commandLider,
+                lider,
+                CountYear,
+                fiendLider1,
                  commandLiderFortune);
 
             return commandLidersList;

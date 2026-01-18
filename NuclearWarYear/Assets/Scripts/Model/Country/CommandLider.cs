@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Model;
+using Assets.Scripts.Model.AiTurn;
 using Assets.Scripts.Model.param;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,11 +26,14 @@ public class CommandLider
         CountryLider liderFiend,
         int Year,
         TargetCityModel TargetCity,
-        int LiderId)
+        int LiderId,
+        Incident secondIncident = null
+        )
     {
         this._MissleList = new List<IWeapon>();
         this.IncidentCommand = new DictionaryEssence().BuildIncident(nameCommand, Year);
-        
+        this.IncidentCommand.SetSecondIncident(secondIncident);
+
         this.VisibleList = new List<GlobalParam.TypeEvent>();
         this.LiderFiend = liderFiend;
         _TargetCity = TargetCity;
@@ -61,7 +65,8 @@ public class CommandLider
     }
     public bool GetVisibleMissle()
     {
-        return this.IncidentCommand.Name == GlobalParam.TypeEvent.Missle;
+        return new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList ,IncidentCommand);
+        //return this.IncidentCommand.Name == GlobalParam.TypeEvent.Missle;
     }
     public void SetVisibleBomber(bool visibleBomber)
     {
@@ -71,8 +76,8 @@ public class CommandLider
 
     public bool GetVisibleBomber()
     {
-
-        return this.IncidentCommand?.Name == GlobalParam.TypeEvent.Bomber;
+        return new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, IncidentCommand);
+        //return this.IncidentCommand?.Name == GlobalParam.TypeEvent.Bomber;
     }
     public void SetVisibleAttackBomber(bool visibleAttackBomber)
     {
@@ -88,7 +93,7 @@ public class CommandLider
         return this.IncidentCommand?.Name == GlobalParam.TypeEvent.AttackMissle;
     }
 
-    public GlobalParam.TypeEvent GetNameCommandFirst()
+    public GlobalParam.TypeEvent GetNameCommand()
     {
         return IncidentCommand.Name;
     }

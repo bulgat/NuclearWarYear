@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using Assets.Scripts;
+using Assets.Scripts.Model.param;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using Assets.Scripts;
+using UnityEngine.UI;
 
 public class MenuStart : MonoBehaviour
 {
@@ -18,12 +19,12 @@ public class MenuStart : MonoBehaviour
 	void StartMethod(Button buttonPressed)
 	{
         SettingPlayer.TwoPlayerGame = false;
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SceneManager.LoadScene(GlobalParam.Scene.GameScene.ToString(), LoadSceneMode.Single);
     }
     void Start2PlayerMethod(Button buttonPressed)
     {
         SettingPlayer.TwoPlayerGame = true;
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SceneManager.LoadScene(GlobalParam.Scene.GameScene.ToString(), LoadSceneMode.Single);
     }
     void Update()
     {

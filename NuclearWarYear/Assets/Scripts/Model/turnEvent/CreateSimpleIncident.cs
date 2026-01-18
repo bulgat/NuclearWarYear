@@ -36,7 +36,6 @@ namespace Assets.Scripts.Model.turnEvent
                 lider.SetCommandRealise(CommandIncident);
             }
             // TODE: нужен рандом по настроению.
-            //CityModel cityFiend0 = new DamagePopulationHelper().GetCityLider(lider, CountYear, mainModel).TargetCity;
             CityModel cityFiend = new UtilModelCity().GetFiendCity(TownList, lider);
             
             CityModel myCity = new UtilModelCity().GetCityModel(TownList, lider);
@@ -66,8 +65,7 @@ namespace Assets.Scripts.Model.turnEvent
             {
                 case GlobalParam.TypeEvent.Missle:
                     message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetMessage(),
-                        mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());
-                    lider.RemoveMissle();
+                        mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());                   
                     CommandIncident.SetReleaseMessage( turnEventExecute.ShowFiend);
                     CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider));
                     lider.SetCommandRealise(CommandIncident);
@@ -80,7 +78,6 @@ namespace Assets.Scripts.Model.turnEvent
                 case GlobalParam.TypeEvent.Bomber:
                     message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetMessage(),
                         mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());
-                    lider.RemoveBomber();
                     CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
                     CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider));
                     lider.SetCommandRealise(CommandIncident);
@@ -107,7 +104,6 @@ namespace Assets.Scripts.Model.turnEvent
                     lider.SetCommandRealise(CommandIncident);
                     break;
                 case GlobalParam.TypeEvent.Ufo:
-                    Debug.Log("UFO myCity ="+ myCity.Name+"  f = "+ cityFiend.Name);
                     CommandIncident.SetReleaseMessage( turnEventExecute.ShowFiend);
                     CommandIncident.SetPopulationEvent(new StateDragPopulation(message,
                         CommandIncident.GetDamage(),
@@ -125,9 +121,6 @@ namespace Assets.Scripts.Model.turnEvent
                     lider.SetCommandRealise(CommandIncident);
                     break;
                 case GlobalParam.TypeEvent.RocketRich:
-
-                    Debug.Log("0100 myCity = "+ myCity.Name);
-                    Debug.Log("0101 cityFiend = " + cityFiend.Name);
                     CommandIncident.SetReleaseMessage( turnEventExecute.ShowFiend);
                     CommandIncident.SetPopulationEvent(new StateDragPopulation(message,
                         CommandIncident.GetDamage(),
@@ -137,8 +130,6 @@ namespace Assets.Scripts.Model.turnEvent
                     lider.SetCommandRealise(CommandIncident);
                     break;
                 case GlobalParam.TypeEvent.CrazyCow:
-                    Debug.Log("120  i ortu my city = " + myCity.Name);
-                    Debug.Log("121 ==== city fiend = " + cityFiend.Name);
                     CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
                     CommandIncident.SetPopulationEvent(
                         new StateAddPopulation(message,
@@ -162,8 +153,6 @@ namespace Assets.Scripts.Model.turnEvent
                 default:
                     break;
             }
-
-
 
             message = lider.SetEventTotalMessageTurn(report, CommandIncident.Name);
 

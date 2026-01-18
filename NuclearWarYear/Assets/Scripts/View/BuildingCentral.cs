@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Model.param;
+﻿using Assets.Scripts.Model.AiTurn;
+using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.paramTable;
 using Assets.Scripts.View;
 using System.Collections.Generic;
@@ -76,20 +77,22 @@ public class BuildingCentral : MonoBehaviour
         {
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
             {
-                Debug.Log("0008 RocketRich " + GetTarget(FiendCity) + " f = " + FiendCity.GetTarget().Name);
+                Debug.Log("0008 RocketRich " + GetTarget(MyCity) );
                 UfoObject.transform.position = GetTarget(MyCity);
 
             }
         }
     }
 
-    public void UpdateVisibleBuilding(GlobalParam.TypeEvent NameCommand)
+    public void UpdateVisibleBuilding(Incident incident)
     {
+        var NameCommand = incident.GetName();
 
         Propaganda.SetActive(NameCommand == GlobalParam.TypeEvent.Propaganda);
         BuildingIndustry.SetActive(NameCommand == GlobalParam.TypeEvent.Build);
         DefenceObject.SetActive(NameCommand == GlobalParam.TypeEvent.Defence);
-        MissleObject.SetActive(NameCommand == GlobalParam.TypeEvent.Missle);
+        //MissleObject.SetActive(NameCommand == GlobalParam.TypeEvent.Missle);
+        MissleObject.SetActive(new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, incident));
         Airport.SetActive(NameCommand == GlobalParam.TypeEvent.Airport);
         AirportAttack.SetActive(NameCommand == GlobalParam.TypeEvent.AttackAirport);
 
@@ -113,7 +116,7 @@ public class BuildingCentral : MonoBehaviour
         if (BomberObject != null)
         {
 
-            if (NameCommand == GlobalParam.TypeEvent.Bomber || NameCommand == GlobalParam.TypeEvent.AttackBomber)
+            if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, incident) || NameCommand == GlobalParam.TypeEvent.AttackBomber)
             {
                 bool vis = true;
                 BomberObject.SetActive(vis);
@@ -204,7 +207,6 @@ public class BuildingCentral : MonoBehaviour
 
             if (VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()])
             {
-                // Vector3 targetBomber0 = GetTarget(TargetCity);
                 UfoObject.transform.position = new WithToInMove().SendWithToInMoveState(
                                UfoObject.transform.position,
                                    Speed, transform, _animationTimeProcess, TownList, false, FiendCity);
@@ -259,7 +261,11 @@ public class BuildingCentral : MonoBehaviour
         return targetBomber;
     }
 
-    public void ViewStartStateObject(List<GameObject> townList, float TimeDelete, CountryLider lider, Incident CommandIncident)
+    public void ViewStartStateObject(
+        List<GameObject> townList,
+        float TimeDelete,
+        CountryLider lider,
+        Incident CommandIncident)
     {
 
         this._animationProcess = true;
@@ -271,7 +277,7 @@ public class BuildingCentral : MonoBehaviour
         CreateObject(CommandIncident.GetName());
 
         DestroyObject(TimeDelete);
-        UpdateVisibleBuilding(CommandIncident.GetName());
+        UpdateVisibleBuilding(CommandIncident);
     }
     public void ViewEndState()
     {
