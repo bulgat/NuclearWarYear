@@ -9,9 +9,14 @@ namespace Assets.Scripts.Model.createCommand
 {
     internal class SwichFullCommand
     {
-        public void TreatmentCommand(GlobalParam.TypeEvent actionCommand, CommandLider commandLider,
-        int FlagId, bool AIfiend, List<CityModel> TownList,
-           List<CountryLider> CountryLiderList, CountryLider countryLider)
+        public void TreatmentCommand(
+            GlobalParam.TypeEvent actionCommand,
+            CommandLider commandLider,
+            int FlagId,
+            bool AIfiend,
+            List<CityModel> TownList,
+           List<CountryLider> CountryLiderList,
+           CountryLider countryLider)
         {
 
             switch (actionCommand)

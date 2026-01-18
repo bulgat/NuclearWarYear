@@ -10,7 +10,7 @@ using static Assets.Scripts.Model.param.GlobalParam;
 public class CommandLider
 {
 
-    private List<IWeapon> _MissleList;
+    private List<Incident> _MissleList;
 
     public TargetCityModel _TargetCity { private set; get; }
 
@@ -30,8 +30,9 @@ public class CommandLider
         Incident secondIncident = null
         )
     {
-        this._MissleList = new List<IWeapon>();
+        this._MissleList = new List<Incident>();
         this.IncidentCommand = new DictionaryEssence().BuildIncident(nameCommand, Year);
+        Debug.Log(" IncidentCommand "+ nameCommand + " =  "+ IncidentCommand.Id+"  ==== uid "+ IncidentCommand.UnicalId);
         this.IncidentCommand.SetSecondIncident(secondIncident);
 
         this.VisibleList = new List<GlobalParam.TypeEvent>();
@@ -66,7 +67,6 @@ public class CommandLider
     public bool GetVisibleMissle()
     {
         return new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList ,IncidentCommand);
-        //return this.IncidentCommand.Name == GlobalParam.TypeEvent.Missle;
     }
     public void SetVisibleBomber(bool visibleBomber)
     {
@@ -77,7 +77,6 @@ public class CommandLider
     public bool GetVisibleBomber()
     {
         return new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, IncidentCommand);
-        //return this.IncidentCommand?.Name == GlobalParam.TypeEvent.Bomber;
     }
     public void SetVisibleAttackBomber(bool visibleAttackBomber)
     {
@@ -101,7 +100,6 @@ public class CommandLider
     public bool GetDefence()
     {
         return new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, this.IncidentCommand);
-        //return this.IncidentCommand.Name == GlobalParam.TypeEvent.Defence;
     }
 
     public void SetAttackBomber(IWeapon AttackBomber)
@@ -110,11 +108,11 @@ public class CommandLider
     }
 
 
-    public List<IWeapon> GetMissle()
+    public List<Incident> GetMissle()
     {
         return this._MissleList;
     }
-    public void AddMissle(List<IWeapon> MissleList)
+    public void AddMissle(List<Incident> MissleList)
     {
         this._MissleList = MissleList;
     }

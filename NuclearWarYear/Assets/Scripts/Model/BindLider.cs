@@ -19,17 +19,17 @@ namespace Assets.Scripts.Model
         {
 
             List<CountryLider>  CountryLiderList = new List<CountryLider>();
-            CountryLiderList.Add(new CountryLider(false, new List<IWeapon>()
+            CountryLiderList.Add(new CountryLider(false, new List<Incident>()
         { new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle),
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber)
         },
             countryLiderPropagandaBuildingList[0], TownList, GlobalParam.ParamLiderList[0], 1));
-            CountryLiderList.Add(new CountryLider(false, new List<IWeapon>()
+            CountryLiderList.Add(new CountryLider(false, new List<Incident>()
         {
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle),
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber)
         }, countryLiderPropagandaBuildingList[1], TownList, GlobalParam.ParamLiderList[1], 2));
-            CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() {
+            CountryLiderList.Add(new CountryLider(false, new List<Incident>() {
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle),
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber)
         }, countryLiderPropagandaBuildingList[2], TownList, GlobalParam.ParamLiderList[2], 3));
@@ -37,17 +37,17 @@ namespace Assets.Scripts.Model
 
             if (SettingPlayer.TwoPlayerGame)
             {
-                CountryLiderList.Add(new CountryLider(true, new List<IWeapon>() { new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle),
+                CountryLiderList.Add(new CountryLider(true, new List<Incident>() { new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle),
                 new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber) }, countryLiderPropagandaBuildingList[3], TownList, GlobalParam.ParamLiderList[3], 4));
             }
             else
             {
-                CountryLiderList.Add(new CountryLider(false, new List<IWeapon>() { 
+                CountryLiderList.Add(new CountryLider(false, new List<Incident>() { 
                     new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle),
                 new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber) }, countryLiderPropagandaBuildingList[3], TownList, GlobalParam.ParamLiderList[3], 4));
             }
 
-            CountryLiderList.Add(new CountryLider(true, new List<IWeapon>() { new DictionaryEssence().BuildIncident(
+            CountryLiderList.Add(new CountryLider(true, new List<Incident>() { new DictionaryEssence().BuildIncident(
                 GlobalParam.TypeEvent.Missle,CountYear),
                 
             new DictionaryEssence().BuildIncident(GlobalParam.TypeEvent.HeavyMissle, CountYear),

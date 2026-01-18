@@ -392,7 +392,7 @@ public class MainModel
 		missleList.Add(new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Propaganda));
 		return missleList;
 	}
-	public List<IWeapon> GetCurrentWeapon()
+	public List<Incident> GetCurrentWeapon()
 	{
 
 		return this.GetLiderOne(this.CurrenPlayerFlag).GetAllWeapon();
@@ -499,15 +499,6 @@ public class MainModel
             }
 
         }
-
-        foreach (CountryLider lider in this.CountryLiderList)
-        {
-            foreach (CommandLider commandLider in GetCommandLiderList(CountYear, lider.FlagId))
-			{
-				Debug.Log(CountYear+" Town =  " + commandLider.IncidentCommand.Year+"  uid = "+ commandLider.IncidentCommand.Uid);
-			}
-        }
-
 
         return text;
     }

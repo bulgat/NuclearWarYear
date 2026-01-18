@@ -9,16 +9,9 @@ using static UnityEditor.Progress;
 
 public class DictionaryEssence 
 {
+    private static int IdEssence = 0;
     public enum TypeWeapon { Missle, Bomber, Defence, Incident }
-    /*
-    public static List<string> MessagePrepareList = new List<string>()
-    {
-        "Подготовка ракет",
-        "Подготовка бомбандировщиков",
-        "Подготовка системы перехвата ракет",
-        "Подготовка сенсаций в СМИ",
-        "Производство вооружения"
-    };*/
+
     private static List<Incident> allEssenceList = new List<Incident>() {
 
         new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 0,
@@ -117,6 +110,7 @@ public class DictionaryEssence
         
         incident.SetYear(Year);
         incident.MutationDamage();
+        incident.UnicalId = DictionaryEssence.GetUnicalId();
         return incident;
     }
     public static List<Incident> GetFortune()
@@ -124,4 +118,8 @@ public class DictionaryEssence
         return allEssenceList.Where(a=>a.Fortune!=null).ToList();
     }
 
+    public static int GetUnicalId()
+    {
+        return IdEssence += 1;
+    }
 }

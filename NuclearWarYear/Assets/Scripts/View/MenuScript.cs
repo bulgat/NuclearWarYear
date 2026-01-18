@@ -432,31 +432,31 @@ public class MenuScript : MonoBehaviour
         blockBackground.transform.parent = Canvas.transform;
     }
 
-    private IEnumerator TurnOneLider(CountryLider lider, int indexLider, Incident CommandIncident)
+    private IEnumerator TurnOneLider(CountryLider lider, int indexLider, Incident incident)
     {
         yield return new WaitForSeconds(this.waitTime + (this.waitTurnTime * indexLider));
 
-        CommandIncident = _controller.TurnSatisfyOneLider(lider.FlagId, CommandIncident);
+        incident = _controller.TurnSatisfyOneLider(lider.FlagId, incident);
 
-        this.TacticReal(CommandIncident.FullMessage(lider), lider.FlagId - 1, CommandIncident.IdImage,
+        this.TacticReal(incident.FullMessage(lider), lider.FlagId - 1, incident.IdImage,
             lider);
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
         buildingCentral.ViewStartStateObject(TownViewList, waitTime + (this.waitTurnTime * indexLider),
-            lider, CommandIncident);
+            lider, incident);
 
    
-        if (CommandIncident.PopulationEvent.GreatTarget != null)
+        if (incident.PopulationEvent.GreatTarget != null)
         {
-            buildingCentral.SetTargetModel(new TargetModel(CommandIncident.PopulationEvent.MyCity), new TargetModel(CommandIncident.PopulationEvent.FiendCity));
+            buildingCentral.SetTargetModel(new TargetModel(incident.PopulationEvent.MyCity), new TargetModel(incident.PopulationEvent.FiendCity));
         } else
         {
 
-            buildingCentral.SetTargetModel(new TargetModel(CommandIncident.PopulationEvent.MyCity), new TargetModel(TargetManager(lider)));
+            buildingCentral.SetTargetModel(new TargetModel(incident.PopulationEvent.MyCity), new TargetModel(TargetManager(lider)));
         }
 
 
-        StartCoroutine(AfterTurnOneLider(CommandIncident, lider));
+        StartCoroutine(AfterTurnOneLider(incident, lider));
     }
     private IEnumerator AfterTurnOneLider(Incident CommandIncident, CountryLider lider)
     {
@@ -470,27 +470,29 @@ public class MenuScript : MonoBehaviour
         {
             if (CommandIncident.PopulationEvent.FiendCity != null)
             {
-                if (CommandIncident.ExplodeNuclear)
+                if (CommandIncident.PopulationEvent.FiendPopulation > 0)
                 {
-                    GameObject cityViewObj = GetTownCity(CommandIncident.PopulationEvent.FiendCity.GetId());
-                    CityView cityView = cityViewObj.GetComponent<CityView>();
-                    cityView.SetVisibleExplode(true);
-                    //defence
-                    CountryLider enemyLider = new LiderHelperOne().GetLiderOne(CountryLiderList, CommandIncident.PopulationEvent.FiendCity.FlagId);
-                    if (enemyLider != null) {
-                        Debug.Log("0400 CountYe  Town MyCi GetTargetBo  list = " + enemyLider.ReleaseCommandList.Count);
-                        foreach (var incident in enemyLider.ReleaseCommandList)
+                    if (CommandIncident.ExplodeNuclear)
+                    {
+                        GameObject cityViewObj = GetTownCity(CommandIncident.PopulationEvent.FiendCity.GetId());
+                        CityView cityView = cityViewObj.GetComponent<CityView>();
+                        cityView.SetVisibleExplode(true);
+                        //defence
+                        CountryLider enemyLider = new LiderHelperOne().GetLiderOne(CountryLiderList, CommandIncident.PopulationEvent.FiendCity.FlagId);
+                        if (enemyLider != null)
                         {
-                            Debug.Log("0400 incident = " + incident.Name);
-                            if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, incident))
+                            Debug.Log("0400 CountYe  Town My  GetTargetBo  list = " + enemyLider.ReleaseCommandList.Count);
+                            foreach (var incident in enemyLider.ReleaseCommandList)
                             {
-                                cityView.SetVisibleDefence(true);
-                            }
+                                Debug.Log("0400 incident = " + incident.Name);
+                                if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, incident))
+                                {
+                                    cityView.SetVisibleDefence(true);
+                                }
 
+                            }
                         }
                     }
-                    //
-                    
                 }
             }
         }

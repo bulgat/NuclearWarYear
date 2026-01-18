@@ -22,7 +22,7 @@ namespace Assets.Scripts.Model.turnEvent
                     Debug.Log("0906  ADD   missle = "+ commandLider.IncidentCommand.Name);
                 if (commandLider.IncidentCommand.SecondIncident != null)
                 {
-                    lider.AddMissle(new List<IWeapon>() { commandLider.IncidentCommand.SecondIncident });
+                    lider.AddMissle(new List<Incident>() { commandLider.IncidentCommand.SecondIncident });
                 } else
                 {
                     //throw new Exception("Error Second incident null");

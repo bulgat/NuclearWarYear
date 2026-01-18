@@ -91,7 +91,6 @@ public class BuildingCentral : MonoBehaviour
         Propaganda.SetActive(NameCommand == GlobalParam.TypeEvent.Propaganda);
         BuildingIndustry.SetActive(NameCommand == GlobalParam.TypeEvent.Build);
         DefenceObject.SetActive(NameCommand == GlobalParam.TypeEvent.Defence);
-        //MissleObject.SetActive(NameCommand == GlobalParam.TypeEvent.Missle);
         MissleObject.SetActive(new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, incident));
         Airport.SetActive(NameCommand == GlobalParam.TypeEvent.Airport);
         AirportAttack.SetActive(NameCommand == GlobalParam.TypeEvent.AttackAirport);

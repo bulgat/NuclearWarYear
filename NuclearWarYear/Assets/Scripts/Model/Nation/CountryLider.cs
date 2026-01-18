@@ -18,7 +18,7 @@ public class CountryLider
     public GameObject PropagandaBuilding;
     public List<Incident> ReleaseCommandList { private set; get; }
     private bool _dead;
-    private List<IWeapon> _missleList;
+    private List<Incident> _missleList;
     public int FlagIdAttack = 1;
     private List<CityModel> _townListOwn;
     private int _maxPopulation;
@@ -33,9 +33,13 @@ public class CountryLider
     public RelationShip _RelationFeind;
     public int GraphicId { get; }
     public bool MoveMade { private set; get; }
-    public CountryLider(bool player, List<IWeapon> missleList,
-        GameObject PropagandaBuild, List<CityModel> TownList,
-        ScenarioLider scenarioLider, int CountryId)
+    public CountryLider(
+        bool player,
+        List<Incident> missleList,
+        GameObject PropagandaBuild,
+        List<CityModel> TownList,
+        ScenarioLider scenarioLider,
+        int CountryId)
     {
         this.FlagId = scenarioLider.FlagId;
         this.Player = player;
@@ -113,7 +117,7 @@ public class CountryLider
     {
         return this._missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).Count();
     }
-    public List<IWeapon> GetDefenceWeapon()
+    public List<Incident> GetDefenceWeapon()
     {
         return this._missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).ToList();
     }
@@ -129,7 +133,7 @@ public class CountryLider
     public void RemoveDefenceWeapon()
     {
 
-        IWeapon defenceWeapon = _missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).FirstOrDefault();
+        Incident defenceWeapon = _missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).FirstOrDefault();
         _missleList.Remove(defenceWeapon);
     }
 
@@ -141,7 +145,7 @@ public class CountryLider
     
     public IWeapon GetMissleFirst()
     {
-        Debug.Log("00800  a AttackBomber "+ _missleList);
+        Debug.Log("00800   AttackBomber id = "+ _missleList.FirstOrDefault()?.Id);
         return _missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Missle).FirstOrDefault();
     }
     public void RemoveWeapon(GlobalParam.TypeEvent name)
@@ -154,7 +158,7 @@ public class CountryLider
         }
 
     }
-    public void AddMissle(List<IWeapon> missleList)
+    public void AddMissle(List<Incident> missleList)
     {
         if (missleList != null)
         {
@@ -182,7 +186,7 @@ public class CountryLider
         return _townListOwn[index];
     }
 
-    public List<IWeapon> GetAllWeapon()
+    public List<Incident> GetAllWeapon()
     {
         return _missleList;
     }

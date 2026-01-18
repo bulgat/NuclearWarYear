@@ -18,7 +18,7 @@ namespace Assets.Scripts.Model.weapon
             ):base(fiendCountryLider) 
         {
 
-            this.Message = message;
+            //this.Message = message;
             this.FiendPopulation = ChangeDamagePopulation;
             this.FiendCity = fiendCity;
             this.GreatTarget = fiendCity;

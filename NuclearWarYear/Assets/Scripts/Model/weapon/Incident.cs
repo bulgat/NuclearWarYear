@@ -12,7 +12,7 @@ using UnityEngine.Rendering;
 
 public class Incident : Weapon, IWeapon
 {
-    private static int UnicId = 0;
+    public int UnicalId = 0;
     public string ReleaseMessage { get; private set; }
     public string PrepareMessage { get; private set; }
     public int ReleasePopulation { get; private set; }
@@ -42,6 +42,7 @@ public class Incident : Weapon, IWeapon
         this.ExplodeNuclear = explodeNuclear;
         this.Fortune = fortune;
         this.PrepareMessage = prepareMessage;
+        this.UnicalId = DictionaryEssence.GetUnicalId();
      }
     public int MutationDamage()
     {
@@ -118,7 +119,11 @@ public class Incident : Weapon, IWeapon
         }
         return String.Format(GetMessage(), "");
     }
-
+    public void SetMessage(string newMessage)
+    {
+        Debug.Log("0602  id = "+Id+" NEW message incident = " + newMessage);
+        this.Message = newMessage;
+    }
     string GetNameFiendLider() {
         
 
@@ -142,7 +147,7 @@ public class Incident : Weapon, IWeapon
     public void SetYear(int value)
     {
         this.Year = value;
-        this.Uid = UnicId++;
+        this.Uid = UnicalId++;
     }
     public Incident Copy()
     {

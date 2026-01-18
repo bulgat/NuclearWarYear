@@ -25,8 +25,7 @@ namespace Assets.Scripts.Model
             {
                 Debug.Log("_0811  - GetDamagePo GetNameFiendLider  futureYear = " + futureYear);
 
-                Debug.Log("_0809 BAMB!  ** ti   - " + enemyTownCity.Name);
-
+         
                 commandLider = new CommandLider(
                     GlobalParam.TypeEvent.AttackMissle,
                     countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
@@ -36,38 +35,13 @@ namespace Assets.Scripts.Model
                     turnFinally.OldIncident
                     );
 
-                //mainModel.ResetAction();
-                /*
-                                commandLiderFortune = new CreateFortune().FortuneEvent(
-                                       countryLider.FlagId != mainModel.GetCurrentPlayerFlag(),
-                                       countryLider,
-                                       futureYear);
-                                Debug.Log("_0810  b L = " + mainModel.MainStackCommandLiderList?.Count);
-
-                                mainModel.MainStackCommandLiderList.AddRange(
-                                    new ActionCommandHelper().CreateAction(
-                                        mainModel.CountryLiderList,
-                                        mainModel.TownList,
-                                        mainModel.GetCurrenPlayer().FlagId,
-                                        commandLider,
-                                        mainModel.GetCurrenPlayer(),
-                                        futureYear,
-                                        countryLider.FiendLider,
-                                        commandLiderFortune)
-                                    );
-                                */
-
-                Debug.Log("_0812  bui = " + commandLider.IncidentCommand.Name + " CountYear = " + mainModel.CountYear);
+                Debug.Log("_0812  bui = " + commandLider.IncidentCommand.Name + " CountYear = " + mainModel.CountYear+"  ");
 
             }
             else
             {
-                Debug.Log("0814 Add AttackBomber  com  LiderList = " + mainModel.GetCommandLiderList(mainModel.CountYear + 1, FlagId).Count);
-                //CountryLider countryLider = new LiderHelperOne().GetLiderOne(mainModel.CountryLiderList, FlagId);
-                //CityModel enemyTownCity = countryLider.TargetCitySelectPlayer.TargetCity;
-
-                //CityModel myCity = mainModel.GetTownList().Where(a => a.FlagId == countryLider.FiendLider.FlagId).FirstOrDefault();
-
+                Debug.Log("0814 Add AttackBomber turnFinally.OldIncident = " + turnFinally.OldIncident + " LiderList = " + mainModel.GetCommandLiderList(mainModel.CountYear + 1, FlagId).Count);
+     
                 commandLider = new CommandLider(
                     GlobalParam.TypeEvent.AttackBomber,
                     countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
@@ -76,9 +50,11 @@ namespace Assets.Scripts.Model
                     FlagId,
                     turnFinally.OldIncident
                     );
-                commandLider.IncidentCommand.SetSecondIncident(turnFinally.OldIncident);
+                
 
             }
+            Debug.Log("0814 Add AttackBomber "+ commandLider.IncidentCommand .UnicalId+ "  Finally.OldIncident "+ turnFinally.OldIncident + " LiderList = " + commandLider.IncidentCommand.Id);
+            commandLider.IncidentCommand.SetSecondIncident(turnFinally.OldIncident);
             mainModel.ResetAction();
 
             commandLiderFortune = new CreateFortune().FortuneEvent(

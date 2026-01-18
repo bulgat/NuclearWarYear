@@ -12,9 +12,14 @@ namespace Assets.Scripts.Model.turnEvent
 {
     public class CreateSimpleIncident
     {
-        public string CreateMessageIncident(TurnEventExecute turnEventExecute,
-            CountryLider lider, ref Incident CommandIncident, int CountYear, CountryLider enemylider,
-            List<CityModel> TownList, MainModel mainModel)
+        public string CreateMessageIncident(
+            TurnEventExecute turnEventExecute,
+            CountryLider lider,
+            ref Incident incident,
+            int CountYear,
+            CountryLider enemylider,
+            List<CityModel> TownList,
+            MainModel mainModel)
         {
             string message = "";
 
@@ -31,16 +36,16 @@ namespace Assets.Scripts.Model.turnEvent
                     message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetMessage(), mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());
                     lider.RemoveDefenceWeapon();
                 }
-                CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
-                CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider));
-                lider.SetCommandRealise(CommandIncident);
+                incident.SetReleaseMessage(turnEventExecute.ShowFiend);
+                incident.SetPopulationEvent(new StateAttackPopulation(message, incident.GetDamage(), null, enemylider));
+                lider.SetCommandRealise(incident);
             }
             // TODE: нужен рандом по настроению.
             CityModel cityFiend = new UtilModelCity().GetFiendCity(TownList, lider);
             
             CityModel myCity = new UtilModelCity().GetCityModel(TownList, lider);
 
-            string report = CommandIncident.GetMessage() + CommandIncident.GetDamage();
+            string report = incident.GetMessage() + incident.GetDamage();
 
 
             mainModel.GetCommandLider(CountYear, lider.FlagId).LiderFiend._RelationFeind.SetNegativeMood(lider.FlagId, turnEventExecute.NegativeMood);
@@ -61,102 +66,102 @@ namespace Assets.Scripts.Model.turnEvent
                 }
             }
 
-            switch (CommandIncident.Name)
+            switch (incident.Name)
             {
                 case GlobalParam.TypeEvent.Missle:
                     message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetMessage(),
                         mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());                   
-                    CommandIncident.SetReleaseMessage( turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    incident.SetReleaseMessage( turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateAttackPopulation(message, incident.GetDamage(), null, enemylider));
+                    lider.SetCommandRealise(incident);
                     break;
                 case GlobalParam.TypeEvent.AttackMissle:
-                    Debug.Log("0055 INCIDENT AttackMissle Lider   lectTarget  dea   CommandIncident  SEC = " + CommandIncident.SecondIncident);
-                    CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.SecondIncident.Damage, cityFiend, enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    Debug.Log("0055 INCIDENT AttackMissle Lider "+ incident.Id + " Target  "+ incident.UnicalId + " CommandIncident  SEC = " + incident.SecondIncident);
+                    incident.SetReleaseMessage(turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateAttackPopulation(message, incident.SecondIncident.Damage, cityFiend, enemylider));
+                    lider.SetCommandRealise(incident);
                     break;
                 case GlobalParam.TypeEvent.Bomber:
                     message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetMessage(),
                         mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());
-                    CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), null, enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    incident.SetReleaseMessage(turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateAttackPopulation(message, incident.GetDamage(), null, enemylider));
+                    lider.SetCommandRealise(incident);
                     break;
                 case GlobalParam.TypeEvent.AttackBomber:
-                    Debug.Log("0055 NuclearExplode Populati  AttackBomber  =   SEC = " + CommandIncident.SecondIncident);
-                    CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.SecondIncident.GetDamage(), cityFiend, enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    Debug.Log("0055 NuclearExplode  "+ incident.Id+ "  Po "+ incident.UnicalId + " AttackBomber  =   SEC = " + incident.SecondIncident);
+                    incident.SetReleaseMessage(turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateAttackPopulation(message, incident.SecondIncident.GetDamage(), cityFiend, enemylider));
+                    lider.SetCommandRealise(incident);
                     break;
                 case GlobalParam.TypeEvent.Propaganda:
-                    CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateDragPopulation(message, -CommandIncident.GetDamage(),
+                    incident.SetReleaseMessage(turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateDragPopulation(message, -incident.GetDamage(),
                         myCity,
                         cityFiend,
                         enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    lider.SetCommandRealise(incident);
                     break;
                 case GlobalParam.TypeEvent.Build:
-                    CommandIncident.SetReleaseMessage( turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateDragPopulation(message, CommandIncident.GetDamage(),
+                    incident.SetReleaseMessage( turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateDragPopulation(message, incident.GetDamage(),
                          myCity,
                          cityFiend,
                          enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    lider.SetCommandRealise(incident);
                     break;
                 case GlobalParam.TypeEvent.Ufo:
-                    CommandIncident.SetReleaseMessage( turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateDragPopulation(message,
-                        CommandIncident.GetDamage(),
+                    incident.SetReleaseMessage( turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateDragPopulation(message,
+                        incident.GetDamage(),
                          myCity,
                          cityFiend,
                          enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    lider.SetCommandRealise(incident);
                     break;
                 case GlobalParam.TypeEvent.Baby:
-                    CommandIncident.SetReleaseMessage( turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateDragPopulation(message, CommandIncident.GetDamage(),
+                    incident.SetReleaseMessage( turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateDragPopulation(message, incident.GetDamage(),
                         myCity,
                         cityFiend,
                         enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    lider.SetCommandRealise(incident);
                     break;
                 case GlobalParam.TypeEvent.RocketRich:
-                    CommandIncident.SetReleaseMessage( turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateDragPopulation(message,
-                        CommandIncident.GetDamage(),
+                    incident.SetReleaseMessage( turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateDragPopulation(message,
+                        incident.GetDamage(),
                          myCity,
                          cityFiend,
                          enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    lider.SetCommandRealise(incident);
                     break;
                 case GlobalParam.TypeEvent.CrazyCow:
-                    CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(
+                    incident.SetReleaseMessage(turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(
                         new StateAddPopulation(message,
-                        CommandIncident.GetDamage(),
+                        incident.GetDamage(),
                          myCity,
                          cityFiend,
                          enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    lider.SetCommandRealise(incident);
                     break;
                 case GlobalParam.TypeEvent.Defectors:
         
-                    CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateDragPopulation(
+                    incident.SetReleaseMessage(turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateDragPopulation(
                         message, 
-                        CommandIncident.GetDamage(),
+                        incident.GetDamage(),
                         myCity,
                         cityFiend,
                         enemylider));
-                    lider.SetCommandRealise(CommandIncident);
+                    lider.SetCommandRealise(incident);
                     break;
                 default:
                     break;
             }
 
-            message = lider.SetEventTotalMessageTurn(report, CommandIncident.Name);
+            message = lider.SetEventTotalMessageTurn(report, incident.Name);
 
             return message;
         }

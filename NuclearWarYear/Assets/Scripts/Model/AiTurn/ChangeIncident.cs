@@ -13,16 +13,16 @@ namespace Assets.Scripts.Model.AiTurn
 {
     public class ChangeIncident
     {
-        public GlobalParam.TypeEvent MutationIncidentCommand(
+        public IncidentAttack MutationIncidentCommand(
             CountryLider lider,
             GlobalParam.TypeEvent actionNameCommand,
             int countYear,
             MainModel mainModel)
         {
             //auto command player
-            var typeCommand = lider.ReleaseCommandList?.FirstOrDefault();
+            Incident incident = lider.ReleaseCommandList?.FirstOrDefault();
 
-            if (typeCommand == null)
+            if (incident == null)
             {
                 actionNameCommand = GlobalParam.TypeEvent.Propaganda;
 
@@ -30,31 +30,47 @@ namespace Assets.Scripts.Model.AiTurn
             else
             {
                 
-                actionNameCommand = typeCommand.GetName();
+                actionNameCommand = incident.GetName();
 
                 List<Incident> lastYeatCommandList = lider.ReleaseCommandList.Where(a => a.GetYear() == countYear - 1).ToList();
 
-                foreach (Incident command in lastYeatCommandList)
+                foreach (Incident incid in lastYeatCommandList)
                 {
-                    if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, command))
+                    
+                    Debug.Log("_0055 BAMB " + incident.UnicalId+ "   - " + incident.Id);
+                    if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, incid))
                     {
                         
-                        command.SetSecondIncident(new DictionaryEssence().BuildIncident(command.GetTypeWeapon(), mainModel.CountYear));
-                        command.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
-Debug.Log("0055   "+command.SecondIncident);
-                        return GlobalParam.TypeEvent.AttackMissle;
+                        var secondIncident = new DictionaryEssence().BuildIncident(incid.GetTypeWeapon(), mainModel.CountYear);
+                        incid.SetSecondIncident(secondIncident);
+                        incid.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
+                        Debug.Log("0055   SecondIncident = " + incid.SecondIncident);
+
+                        return new IncidentAttack()
+                        {
+                            TypeEvent = GlobalParam.TypeEvent.AttackMissle,
+                            SecondIncident = secondIncident
+                        };
                     }
-                    if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, command))
+                    if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, incid))
                     {
-                        command.SetSecondIncident(new DictionaryEssence().BuildIncident(command.GetTypeWeapon(), mainModel.CountYear));
-                        command.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
-                        return GlobalParam.TypeEvent.AttackBomber;
+                        Debug.Log("_0055 BAMB!  **   - " + incident.Id+ "  SecondIncident = " + incid.SecondIncident);
+                        var secondIncident = new DictionaryEssence().BuildIncident(incid.GetTypeWeapon(), mainModel.CountYear);
+                        incid.SetSecondIncident(new DictionaryEssence().BuildIncident(incid.GetTypeWeapon(), mainModel.CountYear));
+                        incid.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
+                        return new IncidentAttack()
+                        {
+                            TypeEvent = GlobalParam.TypeEvent.AttackMissle,
+                            SecondIncident = secondIncident
+                        };
                     }
-                    
                 }
 
             }
-            return actionNameCommand;
+            return new IncidentAttack()
+            {
+                TypeEvent = GlobalParam.TypeEvent.AttackMissle,
+            };
         }
     }
 }

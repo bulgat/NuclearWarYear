@@ -9,7 +9,7 @@ namespace Assets.Scripts.Model.weapon
     public class PopulationEvent
 
     {
-        public string Message { get; protected set; }
+        //public string Message { get; protected set; }
         public CityModel MyCity { get; protected set; }
         public CityModel FiendCity { get; protected set; }
         public CountryLider FiendCountryLider { get; private set; }

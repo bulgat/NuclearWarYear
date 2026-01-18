@@ -12,7 +12,7 @@ public class Weapon
 	public int Damage { protected set; get; }
 	public GlobalParam.TypeEvent Type;
     public int IdImage;
-    public string Message;
+    protected string Message;
 	public int Uid;
 	public EventFortuneIncident Fortune;
 }

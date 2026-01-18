@@ -11,19 +11,27 @@ namespace Assets.Scripts.Model.AiTurn
 {
     public class CreateCommandLider
     {
-        public List<CommandLider> CommandOneLider(CountryLider lider, Action ResetAction, List<CountryLider> CountryLiderList,
-        List<CityModel> TownList, int _flagIdPlayer, int FlagIdPlayer, int CountYear, MainModel mainModel)
+        public List<CommandLider> CommandOneLider(
+            CountryLider lider,
+            Action ResetAction,
+            List<CountryLider> CountryLiderList,
+            List<CityModel> TownList,
+            int _flagIdPlayer,
+            int FlagIdPlayer,
+            int CountYear,
+            MainModel mainModel)
         {
             GlobalParam.TypeEvent actionNameCommand = GlobalParam.TypeEvent.None;
 
             CityModel myCity = lider.GetFirstCityHelper();
 
-
+            IncidentAttack incidentAttack = null;
 
             if (lider.ReleaseCommandList != null)
             {
 
-                actionNameCommand = new ChangeIncident().MutationIncidentCommand(lider, actionNameCommand, CountYear, mainModel);
+                incidentAttack = new ChangeIncident().MutationIncidentCommand(lider, actionNameCommand, CountYear, mainModel);
+                actionNameCommand = incidentAttack.TypeEvent;
             }
 
             if (actionNameCommand == GlobalParam.TypeEvent.None)
@@ -69,8 +77,16 @@ namespace Assets.Scripts.Model.AiTurn
 
 
 
-            CommandLider commandLider = new CommandLider(actionNameCommand, fiendLider1, CountYear, targetCityModel, lider.FlagId);
+            CommandLider commandLider = new CommandLider(
+                actionNameCommand,
+                fiendLider1,
+                CountYear,
+                targetCityModel,
+                lider.FlagId,
+                incidentAttack?.SecondIncident
+                );
             ResetAction();
+
             List<CommandLider> commandLidersList = new ActionCommandHelper().CreateAction(
                 CountryLiderList,
                 TownList,

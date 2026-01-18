@@ -10,9 +10,9 @@ using System.Threading.Tasks;
     {
         private List<string> _reportProducedWeaponList;
     
-    public List<IWeapon> AddLiderBuildWeaponSwithAction()
+    public List<Incident> AddLiderBuildWeaponSwithAction()
     {
-        List<IWeapon> resultList = new List<IWeapon>();
+        List<Incident> resultList = new List<Incident>();
         List<bool> randomAddWeaponList = new List<bool>();
         this._reportProducedWeaponList = new List<string>();
         for (int i = 0; i < 6; i++)
