@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Assets.Scripts.Model.param;
 using Assets.Scripts.Model;
+using Assets.Scripts.Model.paramTable;
 
 public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
 {
@@ -22,7 +23,9 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     {
 
         this.callback(this._incident);
-        gameObject.transform.localScale = new Vector2(2, 2);
+        gameObject.transform.localScale = UIparam.CardSelectScale;
+        gameObject.transform.position = new Vector2(gameObject.transform.position.x, Screen.height/UIparam.CardSelectCoefHeight);
+
     }
     void Update()
     {
@@ -33,7 +36,7 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
 
         if (incident != null)
         {
-            Text.text = incident.GetName().ToString();
+            Text.text = incident.GetName().ToString() +(incident.Damage>0 ? " Damage: " + incident.Damage:"");
 
             var iconCard = gameObject.transform.GetChild(1);
             ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
@@ -45,8 +48,6 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     }
     public void SetCallback(System.Action<Incident> Callback)
     {
-        
-
         this.callback = Callback;
     }
 }

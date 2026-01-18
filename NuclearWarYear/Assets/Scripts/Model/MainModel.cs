@@ -297,7 +297,8 @@ public class MainModel
 
 	public Incident SatisfyOneLiderTurn(int FlagId, Incident CommandIncident)
 	{
-		return new MainSetTurnLider().SatisfyEventOneLiderTurn(FlagId, CountryLiderList,
+        CountryLider lider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
+        return new MainSetTurnLider().SatisfyEventOneLiderTurn(lider, CountryLiderList,
 			TownList, CommandIncident, CountYear, this);
 	}
 	public CommandLider GetCommandLider(int CountYear, int FlagId)
@@ -398,7 +399,7 @@ public class MainModel
 	}
 	public void TurnAi()
 	{
-
+        Debug.Log("0055    CommandIncident   CountYear = " + CountYear);
 
         CountYear++;
 		

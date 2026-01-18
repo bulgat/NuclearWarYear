@@ -13,7 +13,7 @@ namespace Assets.Scripts.Model.turnEvent
 {
     public class CreateBomberIncident
     {
-        public bool CreateAttackBomber(
+        public bool CreateAttackMissleBomber(
             CountryLider lider,
             int CountYear,
             CountryLider enemylider,
@@ -21,9 +21,12 @@ namespace Assets.Scripts.Model.turnEvent
             CityModel cityModelTarget,
             MainModel mainModel,
             bool VisibleAttackRocketAndBomber,
-            string negativeMessage)
+            string negativeMessage,
+            bool missle
+            )
         {
             bool deadRocketAndBomber = false;
+            //deadRocketAndBomber = true;
 
             if (VisibleAttackRocketAndBomber)
             {
@@ -43,17 +46,28 @@ namespace Assets.Scripts.Model.turnEvent
                     message = negativeMessage;
                 } else
                 {
-                    //add bomber
-                    new RemoveBomber().AddBomber(mainModel, lider);
+                    if (missle == false)
+                    {
+                        //add bomber
+                        new RemoveBomber().AddBomber(mainModel, lider);
+                    }
+
+                Debug.Log("0981 DEAD  untYear name =" + lider.Name + " Town  "+ message + " GetTargetBomb =  = " + deadRocketAndBomber+" inc = "+ CommandIncident.Name);
                 }
-                Debug.Log("0981 CountYear name =" + lider.Name + " Town  "+ message + " GetTargetBomb =  = " + deadRocketAndBomber);
-                
 
+                if (CommandIncident.SecondIncident != null)
+                {
 
-                CommandIncident.SetReleaseMessage(GlobalParam.MessageDictionary[mainModel.GetCommandLider(CountYear, lider.FlagId).GetNameCommand()].ShowFiend);
-                CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, deadRocketAndBomber?0:CommandIncident.Damage, cityModelTarget, enemylider));
+                    CommandIncident.SetReleaseMessage(GlobalParam.MessageDictionary[mainModel.GetCommandLider(CountYear, lider.FlagId).GetNameCommand()].ShowFiend);
+                    CommandIncident.SetPopulationEvent(
+                        new StateAttackPopulation(message,
+                        //deadRocketAndBomber?0:CommandIncident.Damage,
+                        deadRocketAndBomber ? 0 : CommandIncident.SecondIncident.Damage,
+                        cityModelTarget,
+                        enemylider));
+                }
                 lider.SetCommandRealise(CommandIncident);
-                Debug.Log("0982 City   Lider "+(deadRocketAndBomber ? 0 : CommandIncident.Damage) +"  selectTarget  deadBomber = " + deadRocketAndBomber+ " CommandIncident = "+ CommandIncident.Message);
+
             }
             return deadRocketAndBomber;
         }

@@ -71,8 +71,9 @@ namespace Assets.Scripts.Model.turnEvent
                     lider.SetCommandRealise(CommandIncident);
                     break;
                 case GlobalParam.TypeEvent.AttackMissle:
+                    Debug.Log("0055 INCIDENT AttackMissle Lider   lectTarget  dea   CommandIncident  SEC = " + CommandIncident.SecondIncident);
                     CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), cityFiend, enemylider));
+                    CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.SecondIncident.Damage, cityFiend, enemylider));
                     lider.SetCommandRealise(CommandIncident);
                     break;
                 case GlobalParam.TypeEvent.Bomber:
@@ -83,8 +84,9 @@ namespace Assets.Scripts.Model.turnEvent
                     lider.SetCommandRealise(CommandIncident);
                     break;
                 case GlobalParam.TypeEvent.AttackBomber:
+                    Debug.Log("0055 NuclearExplode Populati  AttackBomber  =   SEC = " + CommandIncident.SecondIncident);
                     CommandIncident.SetReleaseMessage(turnEventExecute.ShowFiend);
-                    CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.GetDamage(), cityFiend, enemylider));
+                    CommandIncident.SetPopulationEvent(new StateAttackPopulation(message, CommandIncident.SecondIncident.GetDamage(), cityFiend, enemylider));
                     lider.SetCommandRealise(CommandIncident);
                     break;
                 case GlobalParam.TypeEvent.Propaganda:

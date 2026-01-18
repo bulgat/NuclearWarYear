@@ -27,7 +27,7 @@ public class TownCardInfo : MonoBehaviour
         flagImage.sprite = this.FlagImageList[this.TownCity.FlagId];
         this.InfoText = gameObject.transform.GetChild(2).GetComponent<Text>();
         this.NameCityText = gameObject.transform.GetChild(3).GetComponent<TMP_Text>();
-        gameObject.transform.localScale = new Vector2(UIparam.TownCardSize.X, UIparam.TownCardSize.Y);
+        gameObject.transform.localScale = new Vector2(UIparam.TownCardSize.x, UIparam.TownCardSize.y);
     }
 
     void Update()

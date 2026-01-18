@@ -36,20 +36,18 @@ namespace Assets.Scripts.Model.AiTurn
 
                 foreach (Incident command in lastYeatCommandList)
                 {
-                    Debug.Log( "07069 id = "+ command.Id+ "_ command = " + command.GetTypeWeapon());
                     if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, command))
                     {
-
+                        
                         command.SetSecondIncident(new DictionaryEssence().BuildIncident(command.GetTypeWeapon(), mainModel.CountYear));
                         command.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
-                        Debug.Log("07070  "+ command.Id+ "  command    =  " + command.GetTypeWeapon());
+Debug.Log("0055   "+command.SecondIncident);
                         return GlobalParam.TypeEvent.AttackMissle;
                     }
                     if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, command))
                     {
                         command.SetSecondIncident(new DictionaryEssence().BuildIncident(command.GetTypeWeapon(), mainModel.CountYear));
                         command.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
-                        Debug.Log("07071 "+ command.Id+ " command   =  " + command.GetTypeWeapon());
                         return GlobalParam.TypeEvent.AttackBomber;
                     }
                     

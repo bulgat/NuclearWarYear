@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Model.weapon
 {
@@ -16,6 +17,7 @@ namespace Assets.Scripts.Model.weapon
             CountryLider fiendCountryLider
             ):base(fiendCountryLider) 
         {
+
             this.Message = message;
             this.FiendPopulation = ChangeDamagePopulation;
             this.FiendCity = fiendCity;

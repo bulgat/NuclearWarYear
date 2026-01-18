@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Model;
 using Assets.Scripts.Model.AiTurn;
 using Assets.Scripts.Model.param;
+using Assets.Scripts.Model.paramTable;
 using Assets.Scripts.Model.weapon;
 using Assets.Scripts.View;
 using System;
@@ -118,7 +119,7 @@ public class MenuScript : MonoBehaviour
 
         ButtonResource.onClick.AddListener(() => ButtonResourceMethod());
 
-        TurnButton.onClick.AddListener(() => TurnButtonMethod());
+        TurnButton.onClick.AddListener(() => TurnButtonMethod(TurnButton));
 
         LiderButton_1.onClick.AddListener(() => LiderButton_1_Method(LiderButton_1));
         LiderButton_2.onClick.AddListener(() => LiderButton_2_Method(LiderButton_2));
@@ -140,7 +141,7 @@ public class MenuScript : MonoBehaviour
 
         CircleImageReadyParam(0, false);
 
-        GlueTownView();
+        GlueTownListView();
 
         RefreshViewCard();
 
@@ -181,14 +182,16 @@ public class MenuScript : MonoBehaviour
 
         missleList.AddRange(_mainModel.GetCurrentWeapon());
 
+        float sizeWidth = (Screen.width/3) / missleList.Count;
+
         int count = 0;
         foreach (Incident incident in missleList)
         {
-            GameObject CardWing = Instantiate(Card, new Vector2(100 + (count * 100), 100), Quaternion.identity);
+            GameObject CardWing = Instantiate(Card, new Vector2(10 + (count * sizeWidth), Screen.height/UIparam.CardCoefHeight), Quaternion.identity);
             CardWing.transform.SetParent(panelMain.transform);
+            CardWing.transform.localScale = UIparam.CardScale;
             ViewCardWeapon viewCardWeapon = CardWing.GetComponent<ViewCardWeapon>();
 
-            Debug.Log("0055 CommandIncident miss  = " + incident);
             viewCardWeapon.SetParam(IconCardList, incident);
             viewCardWeapon.SetCallback(ClickCardPlayer);
             this.CardButtonList.Add(CardWing);
@@ -251,7 +254,7 @@ public class MenuScript : MonoBehaviour
         MapNationFlagList[Index].GetComponent<SpriteRenderer>().sprite = FlagImageList[countryLider.GraphicId];
 
     }
-    private void GlueTownView()
+    private void GlueTownListView()
     {
 
         this.TownViewList = new List<GameObject>();
@@ -377,8 +380,9 @@ public class MenuScript : MonoBehaviour
         viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idImage, this.LiderPortraitList, this._mainModel, lider.FlagId - 1);
     }
 
-    void TurnButtonMethod()
+    void TurnButtonMethod(Button turnButton)
     {
+        turnButton.enabled = true;
         _controller.TurnAi();
         //Ходы игроков.
         //Все игроки сходили?
@@ -402,10 +406,9 @@ public class MenuScript : MonoBehaviour
         int indexLiderTime = 0;
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
-            Debug.Log("0774 CountYear =" + _mainModel.CountYear + " Town MyCi GetTargetBomb = " + _mainModel.CountryLiderList.Count+" Li "+ lider.Name+" list = "+ this._mainModel.GetCommandLiderList(_mainModel.CountYear, lider.FlagId).Count);
             foreach (CommandLider commandLider in this._mainModel.GetCommandLiderList(_mainModel.CountYear,lider.FlagId))
             {
-                Debug.Log("0775   = " + lider.Name+ "  commandLider =");
+
                 StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.IncidentCommand));
                 indexLiderTime++;
             }
@@ -472,7 +475,22 @@ public class MenuScript : MonoBehaviour
                     GameObject cityViewObj = GetTownCity(CommandIncident.PopulationEvent.FiendCity.GetId());
                     CityView cityView = cityViewObj.GetComponent<CityView>();
                     cityView.SetVisibleExplode(true);
+                    //defence
+                    CountryLider enemyLider = new LiderHelperOne().GetLiderOne(CountryLiderList, CommandIncident.PopulationEvent.FiendCity.FlagId);
+                    if (enemyLider != null) {
+                        Debug.Log("0400 CountYe  Town MyCi GetTargetBo  list = " + enemyLider.ReleaseCommandList.Count);
+                        foreach (var incident in enemyLider.ReleaseCommandList)
+                        {
+                            Debug.Log("0400 incident = " + incident.Name);
+                            if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, incident))
+                            {
+                                cityView.SetVisibleDefence(true);
+                            }
 
+                        }
+                    }
+                    //
+                    
                 }
             }
         }
@@ -496,37 +514,37 @@ public class MenuScript : MonoBehaviour
 
     void ClickCardPlayer(Incident cardAction)
     {
-        
+
 
         int IdMissle = cardAction.GetImageId();
         foreach (var item in this.CardButtonList)
         {
-            item.transform.localScale = new Vector2(1, 1);
+            item.transform.localScale = UIparam.CardScale;
+            item.transform.position = new Vector2(item.transform.position.x, Screen.height / UIparam.CardCoefHeight);
         }
 
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
 
         var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
-        //if (missleList.Any(a => a.Name == cardAction.GetName()))
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, cardAction))
         {
 
             _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
-            CanvasReportWindow(DictionaryEssence.MessagePrepareList[0], IdMissle);
+            //CanvasReportWindow(cardAction.PrepareMessage, IdMissle);
         }
-        //if (cardAction.GetName()== GlobalParam.TypeEvent.Bomber || cardAction.GetName() == GlobalParam.TypeEvent.HeavyBomber)
+
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, cardAction))
         {
 
             _controller.SetBomber(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
-            CanvasReportWindow(DictionaryEssence.MessagePrepareList[1], IdMissle);
+            //CanvasReportWindow(cardAction.PrepareMessage, IdMissle);
 
         }
-        if (cardAction.GetName() == GlobalParam.TypeEvent.Defence || cardAction.GetName() == GlobalParam.TypeEvent.HeavyDefence)
+        if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, cardAction))
         {
 
             _controller.Defence(_mainModel.GetCurrenFlagPlayer());
-            CanvasReportWindow(DictionaryEssence.MessagePrepareList[2], IdMissle);
+            //CanvasReportWindow(cardAction.PrepareMessage, IdMissle);
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Propaganda)
         {
@@ -534,14 +552,16 @@ public class MenuScript : MonoBehaviour
 
             _controller.Propaganda(_mainModel.GetCurrenFlagPlayer());
 
-            CanvasReportWindow(DictionaryEssence.MessagePrepareList[3], IdMissle);
+            //CanvasReportWindow(cardAction.PrepareMessage, IdMissle);
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Build)
         {
 
             _controller.Building(_mainModel.GetCurrenFlagPlayer());
-            CanvasReportWindow(DictionaryEssence.MessagePrepareList[4], IdMissle);
+
         }
+        Debug.Log("0055    Lider Attack "+ cardAction.Name);
+        CanvasReportWindow(String.Format( cardAction.PrepareMessage +" {0} ",(cardAction.Damage>0? "\n Damage: "+ cardAction.Damage +" килотонн": "")), IdMissle);
     }
 
     void SelectCountryOne()
@@ -739,13 +759,13 @@ public class MenuScript : MonoBehaviour
     }
     void DrawTownInfoList()
     {
-        float h = gameObject.GetComponent<RectTransform>().rect.height;
+        float height = gameObject.GetComponent<RectTransform>().rect.height;
         int count = 0;
         foreach (var town in this.TownViewList)
         {
             Vector3 coordinates = Camera.main.WorldToScreenPoint(town.transform.position);
             UICardTownList[count].transform.SetParent(gameObject.transform.GetChild(0));
-            UICardTownList[count].transform.position = new Vector3(coordinates.x, coordinates.y - h / 10, coordinates.z);
+            UICardTownList[count].transform.position = new Vector3(coordinates.x, coordinates.y - height / 10, coordinates.z);
 
             //Population
             count++;

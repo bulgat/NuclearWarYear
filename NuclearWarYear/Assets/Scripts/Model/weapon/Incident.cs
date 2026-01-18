@@ -14,6 +14,7 @@ public class Incident : Weapon, IWeapon
 {
     private static int UnicId = 0;
     public string ReleaseMessage { get; private set; }
+    public string PrepareMessage { get; private set; }
     public int ReleasePopulation { get; private set; }
     public PopulationEvent PopulationEvent { get; private set; }
     private bool ShowLider { get; set; }
@@ -28,7 +29,8 @@ public class Incident : Weapon, IWeapon
         string message,
         DamageParam damageParam,
         bool explodeNuclear,
-        EventFortuneIncident fortune
+        EventFortuneIncident fortune,
+        string prepareMessage
         ) 
     {
 		this.Name=name;
@@ -39,6 +41,7 @@ public class Incident : Weapon, IWeapon
         this.Message = message;
         this.ExplodeNuclear = explodeNuclear;
         this.Fortune = fortune;
+        this.PrepareMessage = prepareMessage;
      }
     public int MutationDamage()
     {
@@ -96,7 +99,7 @@ public class Incident : Weapon, IWeapon
     }
     string MutationMessage()
     {
-        Debug.Log("0600  message incident = " + GetMessage()+ " PopulationEvent = "+ PopulationEvent);
+        Debug.Log("0600  message incident = " + GetMessage()+ " PopulationEvent = "+ PopulationEvent+" name = "+Name);
         if (PopulationEvent?.MyCity == null && PopulationEvent?.FiendCity == null)
         {
             return GetMessage();

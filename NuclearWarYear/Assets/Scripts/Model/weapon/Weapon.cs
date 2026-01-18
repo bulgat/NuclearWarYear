@@ -9,7 +9,7 @@ public class Weapon
 	public int Id;
 	public GlobalParam.TypeEvent Name;
 	public int Size;
-	public int Damage;
+	public int Damage { protected set; get; }
 	public GlobalParam.TypeEvent Type;
     public int IdImage;
     public string Message;

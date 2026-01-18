@@ -233,7 +233,7 @@ public class BuildingCentral : MonoBehaviour
 
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
             {
-                var targetBomberRich = new Vector3(targetBomber.x + UIparam.OutFieldCosmic.X, targetBomber.y + +UIparam.OutFieldCosmic.Y, targetBomber.z);
+                var targetBomberRich = new Vector3(targetBomber.x + UIparam.OutFieldCosmic.x, targetBomber.y + +UIparam.OutFieldCosmic.y, targetBomber.z);
 
 
                 UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(UfoObject.transform.position,

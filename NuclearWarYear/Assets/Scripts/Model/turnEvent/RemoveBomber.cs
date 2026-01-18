@@ -17,11 +17,7 @@ namespace Assets.Scripts.Model.turnEvent
             {
 
                 Debug.Log("0905  AddBomber    "+ commandLider.IncidentCommand.Id + "  remove SECOND = " + commandLider.IncidentCommand.SecondIncident);
-                //if (remove)
-                //{
-                //    lider.RemoveWeapon(commandLider.IncidentCommand.Name);
-                //} else
-                //{
+ 
 
                     Debug.Log("0906  ADD   missle = "+ commandLider.IncidentCommand.Name);
                 if (commandLider.IncidentCommand.SecondIncident != null)
@@ -29,10 +25,9 @@ namespace Assets.Scripts.Model.turnEvent
                     lider.AddMissle(new List<IWeapon>() { commandLider.IncidentCommand.SecondIncident });
                 } else
                 {
-                    throw new Exception("Error Second incident null");
+                    //throw new Exception("Error Second incident null");
                 }
-
-                //}
+ 
             }
 
         }

@@ -40,12 +40,13 @@ public class CityView : MonoBehaviour
             animator.enabled = false;
         }
         NuclearExplode.SetActive(false);
+        Shield.SetActive(false);
     }
 
     void Update()
     {
         ChangeViewTown();
-        Shield.SetActive(false);
+
     }
     void OnMouseDown()
     {
@@ -116,18 +117,15 @@ public class CityView : MonoBehaviour
     }
     public void SetVisibleExplode(bool Visible)
     {
-
-
-
         NuclearExplode.SetActive(Visible);
         animator.enabled = Visible;
         if (Visible)
         {
-            Debug.Log("078 NuclearExplode Population   = ");
+
             animator.Play(0);
         }
     }
-    public void SetVisibleShild(bool Visible)
+    public void SetVisibleDefence(bool Visible)
     {
         Shield.SetActive(Visible);
     }

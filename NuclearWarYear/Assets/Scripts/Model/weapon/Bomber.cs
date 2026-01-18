@@ -13,7 +13,7 @@ public class Bomber: Weapon,IWeapon
 		Name=name;
 		Size=size;
 		Damage=damage;
-		this.Type = Type;
+		this.Type = name;
 		this.IdImage=IdImage;
 	}
 	public int GetId()

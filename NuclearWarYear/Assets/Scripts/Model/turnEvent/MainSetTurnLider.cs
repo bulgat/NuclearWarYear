@@ -17,18 +17,24 @@ namespace Assets.Scripts.Model
     public class MainSetTurnLider
     {
 
-        public Incident SatisfyEventOneLiderTurn(int FlagId, List<CountryLider> CountryLiderList,
-            List<CityModel> TownList, Incident CommandIncident, int CountYear, MainModel mainModel)
+        public Incident SatisfyEventOneLiderTurn(
+            //int FlagId,
+            CountryLider lider,
+            List<CountryLider> CountryLiderList,
+            List<CityModel> TownList,
+            Incident CommandIncident,
+            int CountYear,
+            MainModel mainModel)
         {
 
 
-            CountryLider lider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
+            
 
             CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider, CountYear, mainModel);
+            CommandLider commandLider = mainModel.GetCommandLider(CountYear, lider.FlagId);
+            CityModel cityModelTarget = commandLider._TargetCity.TargetCity;
 
-            CityModel cityModelTarget = mainModel.GetCommandLider(CountYear, FlagId)._TargetCity.TargetCity;
-
-            if (mainModel.GetCommandLider(CountYear, FlagId) != null)
+            if (commandLider != null)
             {
 
                 //Enemy lider.
@@ -42,16 +48,19 @@ namespace Assets.Scripts.Model
                      ref CommandIncident,
                      CountYear, enemylider, TownList, mainModel);
 
-                new CreateBomberIncident().CreateAttackBomber(lider, CountYear, enemylider,
-                   ref CommandIncident, cityModelTarget, mainModel,
-                   mainModel.GetCommandLider(CountYear, lider.FlagId).GetVisibleAttackBomber(),
-                   "Бомбардировщики сбиты");
+    
 
-                new CreateBomberIncident().CreateAttackBomber(lider, CountYear, enemylider,
+                new CreateBomberIncident().CreateAttackMissleBomber(
+                    lider, CountYear, enemylider,
                     ref CommandIncident, cityModelTarget, mainModel,
-                    mainModel.GetCommandLider(CountYear, lider.FlagId).GetVisibleAttackRocket(),
-                    "Ракеты сбиты");
+                    commandLider.GetVisibleAttackRocket(),
+                    "Ракеты сбиты",true);
 
+                new CreateBomberIncident().CreateAttackMissleBomber(
+                    lider, CountYear, enemylider,
+                   ref CommandIncident, cityModelTarget, mainModel,
+                   commandLider.GetVisibleAttackBomber(),
+                   "Бомбардировщики сбиты", false);
             }
 
             if (CommandIncident.PopulationEvent == null)

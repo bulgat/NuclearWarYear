@@ -100,8 +100,8 @@ public class CommandLider
 
     public bool GetDefence()
     {
-
-        return this.IncidentCommand.Name == GlobalParam.TypeEvent.Defence;
+        return new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, this.IncidentCommand);
+        //return this.IncidentCommand.Name == GlobalParam.TypeEvent.Defence;
     }
 
     public void SetAttackBomber(IWeapon AttackBomber)

@@ -15,6 +15,11 @@ namespace Assets.Scripts.Model.param
         public static int StartTurnIdImage = 18;
         public static int StartTurnIdFlag = 5;
 
+        public static List<TypeEvent> GroupDefenceList = new List<TypeEvent>()
+        {
+            TypeEvent.Defence,TypeEvent.HeavyDefence
+        };
+
         public static List<TypeEvent> GroupMissleList = new List<TypeEvent>()
         {
             TypeEvent.Missle,TypeEvent.HeavyMissle
