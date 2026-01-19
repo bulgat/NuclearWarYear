@@ -25,7 +25,10 @@ namespace Assets.Scripts.Model.AiTurn
             if (incident == null)
             {
                 actionNameCommand = GlobalParam.TypeEvent.Propaganda;
-
+                return new IncidentAttack()
+                {
+                    TypeEvent = GlobalParam.TypeEvent.Propaganda,
+                };
             }
             else
             {
@@ -37,7 +40,7 @@ namespace Assets.Scripts.Model.AiTurn
                 foreach (Incident incid in lastYeatCommandList)
                 {
                     
-                    Debug.Log("_0055 BAMB " + incident.UnicalId+ "   - " + incident.Id);
+                    Debug.Log("_0055 BAMB " + incident.UnicalId+ "   - " + incident.Id+ "  incid = "+ incid.Name);
                     if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, incid))
                     {
                         
@@ -67,10 +70,7 @@ namespace Assets.Scripts.Model.AiTurn
                 }
 
             }
-            return new IncidentAttack()
-            {
-                TypeEvent = GlobalParam.TypeEvent.AttackMissle,
-            };
+            return null;
         }
     }
 }
