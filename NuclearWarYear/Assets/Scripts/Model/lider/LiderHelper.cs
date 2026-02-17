@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+﻿using System.Collections.Generic;
+
 public class LiderHelper
 {
 	public CountryLider GetLiderEnemy(List<CountryLider> CountryLiderList,CountryLider lider,

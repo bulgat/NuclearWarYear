@@ -3,19 +3,13 @@ using Assets.Scripts.Model;
 using Assets.Scripts.Model.AiTurn;
 using Assets.Scripts.Model.createCommand;
 using Assets.Scripts.Model.param;
-using Assets.Scripts.Model.scenario;
-using Assets.Scripts.Model.testReport;
-using Assets.Scripts.Model.turnEvent;
 using Assets.Scripts.View;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using static Assets.Scripts.Model.param.GlobalParam;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class MainModel
 {

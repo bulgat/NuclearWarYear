@@ -1,15 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using System.Linq;
-using static ActionCommandHelper;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
-using static UnityEditor.Progress;
 using Assets.Scripts.Model.createCommand;
 using Assets.Scripts.Model.param;
 using Assets.Scripts.Model;
-using static Assets.Scripts.Model.param.GlobalParam;
 
 public class ActionCommandHelper
 {

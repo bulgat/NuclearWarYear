@@ -1,16 +1,8 @@
 ﻿using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.turnEvent;
-using Assets.Scripts.Model.weapon;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-using static UnityEditor.Progress;
-using static UnityEngine.ParticleSystem;
 
 namespace Assets.Scripts.Model
 {

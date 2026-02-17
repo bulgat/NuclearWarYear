@@ -3,12 +3,7 @@ using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.paramTable;
 using Assets.Scripts.Model.weapon;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Incident : Weapon, IWeapon
 {

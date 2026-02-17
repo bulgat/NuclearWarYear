@@ -1,11 +1,8 @@
 ﻿using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.paramTable;
 using Assets.Scripts.Model.weapon;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using static UnityEditor.Progress;
 
 public class DictionaryEssence 
 {
