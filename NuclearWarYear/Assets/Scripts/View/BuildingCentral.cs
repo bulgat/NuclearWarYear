@@ -311,6 +311,13 @@ public class BuildingCentral : MonoBehaviour
                 startPosition = new SearchTownObject().GetTownViewWithId(MyCity.GetTarget(), TownList).transform.position;
             }
         }
+
+        // Ракета должна вылетать из атакующей страны (позиции здания пропаганды),
+        // поэтому без смещения.
+        if (NameCommand == GlobalParam.TypeEvent.AttackMissle)
+        {
+            startPosition = Vector3.zero;
+        }
         
 
         UfoObject = Instantiate(UfoPrefabs, Propaganda.transform.position + startPosition, Quaternion.identity);
