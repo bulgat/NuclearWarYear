@@ -292,6 +292,12 @@ public class BuildingCentral : MonoBehaviour
     public void ViewEndState()
     {
         this._animationProcess = false;
+
+        // Скрываем все движущиеся объекты сразу после завершения хода,
+        // чтобы они не оставались видимыми на сцене до отложенного Destroy(TimeDelete).
+        if (WingMissle != null) WingMissle.SetActive(false);
+        if (BomberObject != null) BomberObject.SetActive(false);
+        if (UfoObject != null) UfoObject.SetActive(false);
     }
     private void CreateObject(GlobalParam.TypeEvent NameCommand)
     {
