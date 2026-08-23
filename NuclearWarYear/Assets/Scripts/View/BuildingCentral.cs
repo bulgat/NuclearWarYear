@@ -228,6 +228,17 @@ public class BuildingCentral : MonoBehaviour
                 UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(
                     UfoObject.transform.position,
                         Speed, transform, _animationTimeProcess, TownList, false, targetBomber);
+
+                // Поворачиваем ракету носом к цели.
+                // missleRotationOffset компенсирует исходную ориентацию спрайта (обычно нос смотрит вверх, поэтому -90).
+                // Если спрайт нарисован иначе - подберите это значение.
+                const float missleRotationOffset = -90f;
+                Vector2 missleDirection = (Vector2)targetBomber - (Vector2)UfoObject.transform.position;
+                if (missleDirection.sqrMagnitude > 0.01f)
+                {
+                    float missleAngle = Mathf.Atan2(missleDirection.y, missleDirection.x) * Mathf.Rad2Deg;
+                    UfoObject.transform.rotation = Quaternion.Euler(Vector3.forward * (missleAngle + missleRotationOffset));
+                }
             }
 
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
