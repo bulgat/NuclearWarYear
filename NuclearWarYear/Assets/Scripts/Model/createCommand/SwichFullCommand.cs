@@ -27,8 +27,13 @@ namespace Assets.Scripts.Model.createCommand
 
                     var target = countryLider.TargetCitySelectPlayer;
 
-
-                    countryLider.TargetCitySelectPlayer.TargetCity = new ModGameEngine().GetCityRandomFlagId(TownList, countryLider.FiendLider, FlagId, AIfiend);
+                    // Выбранную игроком цель атаки нельзя перезаписывать случайным городом.
+                    // Автоматически выбирать случайную цель при Propaganda может только ИИ.
+                    // Иначе ракета/самолёт через ход полетит в соседний город вместо намеченного.
+                    if (AIfiend && target != null)
+                    {
+                        target.TargetCity = new ModGameEngine().GetCityRandomFlagId(TownList, countryLider.FiendLider, FlagId, AIfiend);
+                    }
                     break;
                 case GlobalParam.TypeEvent.Build:
                     commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Build, true);
