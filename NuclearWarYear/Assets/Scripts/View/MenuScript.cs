@@ -367,7 +367,8 @@ public class MenuScript : MonoBehaviour
 
         ViewTacticReal viewTacticReal = this.CanTacticReal.AddComponent<ViewTacticReal>();
         viewTacticReal.Init(this.FlagImageList, this.IconCardList, this.TownViewList, this.UICardTownList);
-        viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idImage, this.LiderPortraitList, this._mainModel, lider.FlagId - 1);
+        viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idImage, this.LiderPortraitList, 
+            this._mainModel, lider.GetIndexLider());
     }
 
     void TurnButtonMethod(Button turnButton)
@@ -428,7 +429,7 @@ public class MenuScript : MonoBehaviour
 
         incident = _controller.TurnSatisfyOneLider(lider.FlagId, incident);
 
-        this.TacticReal(incident.FullMessage(lider), lider.FlagId - 1, incident.IdImage,
+        this.TacticReal(incident.FullMessage(lider), lider.GetIndexLider(), incident.IdImage,
             lider);
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();

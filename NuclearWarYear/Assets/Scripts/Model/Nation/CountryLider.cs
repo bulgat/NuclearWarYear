@@ -190,6 +190,9 @@ public class CountryLider
     {
         return _missleList;
     }
-
+    public int GetIndexLider()
+    {
+        return FlagId - 1;
+    }
 
 }

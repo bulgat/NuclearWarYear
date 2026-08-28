@@ -35,7 +35,7 @@ namespace Assets.Scripts.View
                 var childFlag = gameObject.transform.GetChild(0).GetChild(5);
                 Transform flagLider = childFlag;
                 flagLider.GetComponent<Image>().sprite = FlagImageList[
-                     flagId - 1];
+                     liderPlayer.GetIndexLider()];
             }
 
             var textLider = gameObject.transform.GetChild(0).GetChild(3);

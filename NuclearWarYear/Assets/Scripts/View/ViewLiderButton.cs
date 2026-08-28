@@ -57,7 +57,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         }
 
         LiderImage_1.sprite = LiderImageList[new ViewLiderHelper().GetNumberSpriteLider(countryLider.FlagId-1, imageMood)];
-        flagImage.sprite = FlagImageList[countryLider.FlagId - 1];
+        flagImage.sprite = FlagImageList[countryLider.GetIndexLider()];
         circleReady.enabled = false;
 
 
