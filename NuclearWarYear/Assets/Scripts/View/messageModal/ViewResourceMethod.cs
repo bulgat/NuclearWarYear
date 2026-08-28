@@ -17,6 +17,7 @@ namespace Assets.Scripts.View
             MainModel _mainModel)
         {
 
+            Debug.Log("0055 BA  -   inc flagId = " + _mainModel.GetCurrenFlagPlayer());
             int flagId = _mainModel.GetCurrenFlagPlayer();
             CountryLider liderPlayer = _mainModel.GetLiderOne(flagId);
    

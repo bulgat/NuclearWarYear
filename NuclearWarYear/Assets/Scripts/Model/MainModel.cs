@@ -35,8 +35,6 @@ public class MainModel
 
 		this.CountryLiderPropagandaBuildingList = countryLiderPropagandaBuildingList;
 
-
-
 		this.CountryLiderList = new BindLider().GetBindLider(this.TownList, CountYear, CountryLiderPropagandaBuildingList);
 
 

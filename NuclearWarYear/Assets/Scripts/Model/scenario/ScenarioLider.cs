@@ -15,8 +15,8 @@ namespace Assets.Scripts.Model.scenario
         public List<string> NameCity { get; }
         public ScenarioLider(int flagId,string name,int graphicId, List<string> nameCity)
         {
-            this.Name = name;
             this.FlagId = flagId;
+            this.Name = name;
             this.GraphicId = graphicId;
             this.NameCity = nameCity;
         }

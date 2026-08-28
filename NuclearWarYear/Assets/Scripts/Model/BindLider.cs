@@ -29,21 +29,19 @@ namespace Assets.Scripts.Model
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle),
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber)
         }, countryLiderPropagandaBuildingList[2], TownList, GlobalParam.ParamLiderList[2], 3));
+            
 
-
-            if (SettingPlayer.TwoPlayerGame)
-            {
-                CountryLiderList.Add(new CountryLider(true, new List<Incident>() { new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle),
-                new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber) }, countryLiderPropagandaBuildingList[3], TownList, GlobalParam.ParamLiderList[3], 4));
-            }
-            else
-            {
-                CountryLiderList.Add(new CountryLider(false, new List<Incident>() { 
+                CountryLiderList.Add(new CountryLider(false, 
+                    new List<Incident>() { 
                     new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle),
-                new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber) }, countryLiderPropagandaBuildingList[3], TownList, GlobalParam.ParamLiderList[3], 4));
-            }
+                new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber) }, 
+                    countryLiderPropagandaBuildingList[3], 
+                    TownList, 
+                    GlobalParam.ParamLiderList[3], 4));
+            
 
-            CountryLiderList.Add(new CountryLider(true, new List<Incident>() { new DictionaryEssence().BuildIncident(
+            CountryLiderList.Add(new CountryLider(true, 
+                new List<Incident>() { new DictionaryEssence().BuildIncident(
                 GlobalParam.TypeEvent.Missle,CountYear),
                 
             new DictionaryEssence().BuildIncident(GlobalParam.TypeEvent.HeavyMissle, CountYear),
@@ -52,7 +50,11 @@ namespace Assets.Scripts.Model
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Defence),
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Defence)
                 },
-                countryLiderPropagandaBuildingList[4], TownList, GlobalParam.ParamLiderList[4], 5));
+                countryLiderPropagandaBuildingList[4],
+                TownList, GlobalParam.ParamLiderList[4], 5));
+
+
+
             return CountryLiderList;
         }
     }

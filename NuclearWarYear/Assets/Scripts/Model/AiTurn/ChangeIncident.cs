@@ -39,8 +39,7 @@ namespace Assets.Scripts.Model.AiTurn
 
                 foreach (Incident incid in lastYeatCommandList)
                 {
-                    
-                    Debug.Log("_0055 BAMB " + incident.UnicalId+ "   - " + incident.Id+ "  incid = "+ incid.Name);
+
                     if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, incid))
                     {
                         
