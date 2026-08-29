@@ -53,7 +53,7 @@ namespace Assets.Scripts.Model
             mainModel.ResetAction();
 
             commandLiderFortune = new CreateFortune().FortuneEvent(
-                   countryLider.FlagId != mainModel.GetCurrentPlayerFlag(),
+                   countryLider.FlagId != mainModel.GetCurrentPlayerFlag().FlagId,
                    countryLider,
                    futureYear);
 

@@ -11,7 +11,7 @@ namespace Assets.Scripts.View
     {
         public void ManagerButton(MenuScript menuScript, MainModel _mainModel)
         {
-            int flagId = _mainModel.GetCurrenFlagPlayer();
+            int flagId = _mainModel.GetCurrenFlagPlayer().FlagId;
             CountryLider lider = _mainModel.GetLiderOne(flagId);
   
         }

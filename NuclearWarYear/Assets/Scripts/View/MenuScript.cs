@@ -96,7 +96,7 @@ public class MenuScript : MonoBehaviour
         this.CountryLiderList = null;
 
         _mainModel = new MainModel(CountryLiderPropagandaBuildingList);
-        this.flagIdPlayer = _mainModel.GetCurrentPlayerFlag();
+        this.flagIdPlayer = _mainModel.GetCurrentPlayerFlag().FlagId;
         this.CountryLiderList = _mainModel.GetCountryLiderList();
 
     }
@@ -119,7 +119,7 @@ public class MenuScript : MonoBehaviour
 
         NewPaperButton.onClick.AddListener(() => ButtonNewPaper());
 
-        _controller.SelectCityEnemyTargetPlayer(null, _mainModel.GetCurrenFlagPlayer());
+        _controller.SelectCityEnemyTargetPlayer(null, _mainModel.GetCurrenFlagPlayer().FlagId);
         _controller.TurnAi();
    
         SelectCountryOne();
@@ -287,10 +287,10 @@ public class MenuScript : MonoBehaviour
 
         CityView selectCityTarget = ClearCityTargetMark(CityId, true);
 
-        _controller.SelectCityEnemyTargetPlayer(CityId, _mainModel.GetCurrentPlayerFlag());
+        _controller.SelectCityEnemyTargetPlayer(CityId, _mainModel.GetCurrentPlayerFlag().FlagId);
 
         // TargetSity
-        if (_mainModel.GetCurrentPlayerFlag() != selectCityTarget.FlagId)
+        if (_mainModel.GetCurrentPlayerFlag().FlagId != selectCityTarget.FlagId)
         {
             selectCityTarget.SetTargetAim(true);
         }
@@ -350,7 +350,7 @@ public class MenuScript : MonoBehaviour
 
     void RefreshPlayerView()
     {
-        this.flagIdPlayer = this._mainModel.GetCurrentPlayerFlag();
+        this.flagIdPlayer = this._mainModel.GetCurrentPlayerFlag().FlagId;
 
         SetImageLiderButton();
         ChangeImageLider();
@@ -516,41 +516,39 @@ public class MenuScript : MonoBehaviour
             item.transform.position = new Vector2(item.transform.position.x, Screen.height / UIparam.CardCoefHeight);
         }
 
-        CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
+        CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer().FlagId);
 
         var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, cardAction))
         {
 
-            _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
-            //CanvasReportWindow(cardAction.PrepareMessage, IdMissle);
+            _controller.SetMissle(_mainModel.GetCurrenFlagPlayer().FlagId, missleBomberIncident.Name);
+
         }
 
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, cardAction))
         {
 
-            _controller.SetBomber(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
-            //CanvasReportWindow(cardAction.PrepareMessage, IdMissle);
+            _controller.SetBomber(_mainModel.GetCurrenFlagPlayer().FlagId, missleBomberIncident.Name);
 
         }
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, cardAction))
         {
 
-            _controller.Defence(_mainModel.GetCurrenFlagPlayer());
-            //CanvasReportWindow(cardAction.PrepareMessage, IdMissle);
+            _controller.Defence(_mainModel.GetCurrenFlagPlayer().FlagId);
+
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Propaganda)
         {
 
 
-            _controller.Propaganda(_mainModel.GetCurrenFlagPlayer());
+            _controller.Propaganda(_mainModel.GetCurrenFlagPlayer().FlagId);
 
-            //CanvasReportWindow(cardAction.PrepareMessage, IdMissle);
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Build)
         {
 
-            _controller.Building(_mainModel.GetCurrenFlagPlayer());
+            _controller.Building(_mainModel.GetCurrenFlagPlayer().FlagId);
 
         }
         Debug.Log("0055    Lider Attack "+ cardAction.Name);
@@ -719,7 +717,7 @@ public class MenuScript : MonoBehaviour
     void Update()
     {
         UpdatePanelVisible();
-        CountryLider fiendLider = new BuildingCentralHelper().GetFiendLider(_mainModel.CountryLiderList, _mainModel.GetCurrenFlagPlayer());
+        CountryLider fiendLider = new BuildingCentralHelper().GetFiendLider(_mainModel.CountryLiderList, _mainModel.GetCurrenFlagPlayer().FlagId);
         BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(fiendLider);
 
         //player
@@ -781,7 +779,7 @@ public class MenuScript : MonoBehaviour
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
 
-            if (lider.FlagId != _mainModel.GetCurrenFlagPlayer())
+            if (lider.FlagId != _mainModel.GetCurrenFlagPlayer().FlagId)
             {
                 CountryLider fiendLider = new BuildingCentralHelper().GetFiendLider(_mainModel.CountryLiderList, lider.FlagId);
                 BuildingCentral buildingCentral = new BuildingCentralHelper().GetBuildingCentral(fiendLider);
