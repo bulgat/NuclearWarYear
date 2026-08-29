@@ -17,8 +17,8 @@ int canvasIndex = 1;
         this._UICardTownList = UICardTownList;
     }
  
-    public void CanvasTacticRealSetText(string InfoText, int FlagIndex,int IdImage,
-        List<Sprite> LiderImageList, MainModel mainModel, int indexLider)
+    public void CanvasTacticRealSetText(string InfoText,int IdImage,
+        List<Sprite> LiderImageList, MainModel mainModel, CountryLider indexLider)
     {
 
         gameObject.transform.GetChild(canvasIndex).GetChild(1).GetComponentInChildren<UnityEngine.UI.Text>().text = InfoText;
@@ -26,18 +26,18 @@ int canvasIndex = 1;
         viewIconCard.SetParam(this._IconCardList, IdImage);
 
         ViewIconCard viewIconCard0 = gameObject.transform.GetChild(canvasIndex).GetChild(3).GetComponent<ViewIconCard>();
-        viewIconCard0.SetParam(this._FlagImageList, FlagIndex);
+        viewIconCard0.SetParam(this._FlagImageList, indexLider.GetIndexLider());
         
         ViewLiderButton viewLiderButton = gameObject.transform.GetChild(canvasIndex).GetChild(4).GetComponent<ViewLiderButton>();
 
-        viewLiderButton.gameObject.SetActive(FlagIndex != GlobalParam.StartTurnIdFlag);
+        //viewLiderButton.gameObject.SetActive(indexLider.GetIndexLider() != GlobalParam.StartTurnIdFlag);
 
         viewLiderButton.Init(LiderImageList, this._FlagImageList, mainModel,
             null, 
             null,
-            mainModel.GetCountryLiderList()[indexLider]);
+            indexLider);
 
-        viewLiderButton.ButtonLiderFrame(mainModel.GetCountryLiderList()[indexLider].FlagId);
+        viewLiderButton.ButtonLiderFrame(mainModel.GetCountryLiderList()[indexLider.GetIndexLider()].FlagId);
     }
     private void Update()
     {

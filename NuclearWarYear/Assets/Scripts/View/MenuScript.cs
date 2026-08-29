@@ -356,7 +356,7 @@ public class MenuScript : MonoBehaviour
         ChangeImageLider();
 
     }
-    void TacticReal(string EventMessage, int indexFlagId, int idImage, CountryLider lider)
+    void TacticReal(string EventMessage, int idImage, CountryLider lider)
     {
 
 
@@ -367,8 +367,8 @@ public class MenuScript : MonoBehaviour
 
         ViewTacticReal viewTacticReal = this.CanTacticReal.AddComponent<ViewTacticReal>();
         viewTacticReal.Init(this.FlagImageList, this.IconCardList, this.TownViewList, this.UICardTownList);
-        viewTacticReal.CanvasTacticRealSetText(EventMessage, indexFlagId, idImage, this.LiderPortraitList, 
-            this._mainModel, lider.GetIndexLider());
+        viewTacticReal.CanvasTacticRealSetText(EventMessage, idImage, this.LiderPortraitList, 
+            this._mainModel, lider);
     }
 
     void TurnButtonMethod(Button turnButton)
@@ -390,7 +390,7 @@ public class MenuScript : MonoBehaviour
         _visiblePanel = false;
         MoveMapNuclear();
 
-        TacticReal("Начало хода", GlobalParam.StartTurnIdFlag, GlobalParam.StartTurnIdImage, _mainModel.CountryLiderList.FirstOrDefault());
+        TacticReal("Начало хода", GlobalParam.StartTurnIdImage, _mainModel.CountryLiderList.FirstOrDefault());
 
         
         // accept animation Central Building Propagation
@@ -429,7 +429,7 @@ public class MenuScript : MonoBehaviour
 
         incident = _controller.TurnSatisfyOneLider(lider.FlagId, incident);
 
-        this.TacticReal(incident.FullMessage(lider), lider.GetIndexLider(), incident.IdImage,
+        this.TacticReal(incident.FullMessage(lider), incident.IdImage,
             lider);
 
         BuildingCentral buildingCentral = lider.GetCentralBuildingPropogation().GetComponent<BuildingCentral>();
