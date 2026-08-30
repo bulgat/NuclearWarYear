@@ -27,17 +27,17 @@ namespace Assets.Scripts.View
             if (image != null)
             {
                 image.sprite = LiderImageList[
-                    new ViewLiderHelper().GetNumberSpriteLider(liderPlayer.GraphicId, 0)];
+                    new ViewLiderHelper().GetNumberSpriteLider(liderPlayer.GetIndexLider(), 0)];
             }
+            Debug.Log("0056   SecondIncide  = " + FlagImageList.Count);
 
-
-            if (gameObject.transform.childCount > 4)
-            {
-                var childFlag = gameObject.transform.GetChild(0).GetChild(5);
+            //if (gameObject.transform.childCount > 4)
+            //{
+            var childFlag = gameObject.transform.GetChild(0).GetChild(5);
                 Transform flagLider = childFlag;
                 flagLider.GetComponent<Image>().sprite = FlagImageList[
-                     liderPlayer.GetIndexLider()];
-            }
+                     liderPlayer.FlagId-1];
+            //}
 
             var textLider = gameObject.transform.GetChild(0).GetChild(3);
             if (textLider != null)
@@ -47,9 +47,10 @@ namespace Assets.Scripts.View
             }
  
             SetMessage(
-                " population " + _mainModel.GetCountryLiderList()[4].GetAllOwnPopulation()
-                + "\n missle " + _mainModel.GetCountryLiderList()[4].GetMissleCount()
-                + "\n bomber " + _mainModel.GetCountryLiderList()[4].GetBomberCount()
+                " population " + _mainModel.GetCountryLiderList()[liderPlayer.GetIndexLider()].GetAllOwnPopulation()
+                + "\n missle " + _mainModel.GetCountryLiderList()[liderPlayer.GetIndexLider()].GetMissleCount()
+                + "\n bomber " + _mainModel.GetCountryLiderList()[liderPlayer.GetIndexLider()].GetBomberCount()
+                + "\n defence " + _mainModel.GetCountryLiderList()[liderPlayer.GetIndexLider()].GetDefenceWeapon().Count()
                 );
         }
         

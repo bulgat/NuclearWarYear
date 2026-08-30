@@ -46,7 +46,7 @@ namespace Assets.Scripts.Model.AiTurn
                         var secondIncident = new DictionaryEssence().BuildIncident(incid.GetTypeWeapon(), mainModel.CountYear);
                         incid.SetSecondIncident(secondIncident);
                         incid.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
-                        Debug.Log("0055   SecondIncident = " + incid.SecondIncident);
+                        
 
                         return new IncidentAttack()
                         {
