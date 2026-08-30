@@ -37,7 +37,7 @@ int canvasIndex = 1;
             null,
             indexLider);
 
-        viewLiderButton.ButtonLiderFrame(mainModel.GetCountryLiderList()[indexLider.GetIndexLider()].FlagId);
+        viewLiderButton.ButtonLiderFrame(indexLider);
     }
     private void Update()
     {

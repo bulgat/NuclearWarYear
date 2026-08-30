@@ -227,17 +227,17 @@ public class MenuScript : MonoBehaviour
     {
 
         ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
-        viewLiderButton.ButtonLiderFrame(viewLiderButton.Lider.FlagId);
+        viewLiderButton.ButtonLiderFrame(viewLiderButton.Lider);
 
         ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
-        viewLiderButton_2.ButtonLiderFrame(viewLiderButton_2.Lider.FlagId);
+        viewLiderButton_2.ButtonLiderFrame(viewLiderButton_2.Lider);
 
 
         ViewLiderButton viewLiderButton_3 = LiderButton_3.GetComponent<ViewLiderButton>();
-        viewLiderButton_3.ButtonLiderFrame(viewLiderButton_3.Lider.FlagId);
+        viewLiderButton_3.ButtonLiderFrame(viewLiderButton_3.Lider);
 
         ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
-        viewLiderButton_4.ButtonLiderFrame(viewLiderButton_4.Lider.FlagId);
+        viewLiderButton_4.ButtonLiderFrame(viewLiderButton_4.Lider);
     }
     private void ChangeFlag(int Index, CountryLider countryLider)
     {

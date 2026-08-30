@@ -24,7 +24,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         this.IconCircleReadyList = iconCircleReadyList;
         this.IconCardList = iconCardList;
     }
-    public void ButtonLiderFrame(int FlagId)
+    public void ButtonLiderFrame(CountryLider lider)
     {
         
         var allImage_ar = GetComponentsInChildren<Image>();
@@ -38,9 +38,9 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
 
         //CountryLider countryLider = _mainModel.CountryLiderList[indexLider];
 
-        CountryLider countryLider = _mainModel.CountryLiderList.FirstOrDefault(a=>a.FlagId == FlagId);
+        CountryLider countryLider = _mainModel.CountryLiderList.FirstOrDefault(a=>a.FlagId == lider.FlagId);
         
-        int moodLider = countryLider.GetMood(FlagId);
+        int moodLider = countryLider.GetMood(lider.FlagId);
         
         var imageMood = 0;
         if (moodLider > 90)
@@ -61,9 +61,9 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         circleReady.enabled = false;
 
 
-        if (_mainModel.GetCommandLider(_mainModel.CountYear, FlagId) != null)
+        if (_mainModel.GetCommandLider(_mainModel.CountYear, lider.FlagId) != null)
         {
-            if (_mainModel.GetCommandLider(_mainModel.CountYear, FlagId).GetVisibleBomber())
+            if (_mainModel.GetCommandLider(_mainModel.CountYear, lider.FlagId).GetVisibleBomber())
             {
                 if (this.IconCircleReadyList != null)
                 {
@@ -72,7 +72,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
                 }
             }
 
-            if (_mainModel.GetCommandLider(_mainModel.CountYear, FlagId).GetVisibleMissle())
+            if (_mainModel.GetCommandLider(_mainModel.CountYear, lider.FlagId).GetVisibleMissle())
             {
                 if (this.IconCircleReadyList != null)
                 {
