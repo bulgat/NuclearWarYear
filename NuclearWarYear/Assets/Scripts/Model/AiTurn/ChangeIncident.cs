@@ -56,7 +56,7 @@ namespace Assets.Scripts.Model.AiTurn
                     }
                     if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, incid))
                     {
-                        Debug.Log("_0055 BAMB!  **   - " + incident.Id+ "  SecondIncident = " + incid.SecondIncident);
+
                         var secondIncident = new DictionaryEssence().BuildIncident(incid.GetTypeWeapon(), mainModel.CountYear);
                         incid.SetSecondIncident(new DictionaryEssence().BuildIncident(incid.GetTypeWeapon(), mainModel.CountYear));
                         incid.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);

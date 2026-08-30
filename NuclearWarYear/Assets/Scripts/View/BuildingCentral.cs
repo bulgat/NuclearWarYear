@@ -2,6 +2,7 @@
 using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.paramTable;
 using Assets.Scripts.View;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -77,9 +78,12 @@ public class BuildingCentral : MonoBehaviour
         {
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
             {
-                Debug.Log("0008 RocketRich " + GetTarget(MyCity) );
-                UfoObject.transform.position = GetTarget(MyCity);
-
+                Debug.Log("0608 RocketRich " + GetTarget(MyCity) );
+                Debug.Log("0609  _Crea  L " + UfoObject);
+                if (UfoObject != null)
+                {
+                    UfoObject.transform.position = GetTarget(MyCity);
+                }
             }
         }
     }
@@ -314,7 +318,11 @@ public class BuildingCentral : MonoBehaviour
         {
             if (MyCity != null)
             {
-                startPosition = new SearchTownObject().GetTownViewWithId(MyCity.GetTarget(), TownList).transform.position;
+                Debug.Log("0155 BA  SecondIncident = " + MyCity.GetTarget());
+                if (MyCity.GetTarget() != null)
+                {
+                    startPosition = new SearchTownObject().GetTownViewWithId(MyCity.GetTarget(), TownList).transform.position;
+                }
             }
         }
 

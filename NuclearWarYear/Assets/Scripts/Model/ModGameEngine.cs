@@ -40,6 +40,8 @@ public class ModGameEngine
                 }
             }
             int indexTownBomber = Random.Range(0, TargetCityList.Count);
+            Debug.Log("0702  Crea L " + TargetCityList.Count);
+            Debug.Log("0703  Crea  name = " + indexTownBomber);
             target = TargetCityList[indexTownBomber];
         }
         return target;

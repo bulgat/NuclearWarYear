@@ -31,10 +31,10 @@ namespace Assets.Scripts.Model.AiTurn
             {
                 var list = mainModel.GetCommandLiderList(mainModel.CountYear - 1, lider.FlagId);
 
-                Debug.Log("0600  _Create L " + list.First().GetNameCommand());
-                Debug.Log("0601  _Create L " + list.Count);
-                Debug.Log("0602  Create L " + lider.ReleaseCommandList.Count);
-                Debug.Log("0603  Create name = " + lider.ReleaseCommandList.First().Name);
+
+                
+                
+                
                 Debug.Log("0604  CreateCommand " + actionNameCommand );
                 incidentAttack = new ChangeIncident().MutationIncidentCommand(
                     lider,
