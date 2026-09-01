@@ -655,12 +655,7 @@ public class MenuScript : MonoBehaviour
         TurnFinally turnFinally = _controller.TurnFinality();
         printMessage.Append(turnFinally.Message);
         CircleImageReadyParam(turnFinally.TypeAttack, turnFinally.Attack);
-        /*
-        if (turnFinally.Attack)
-        {
-            _controller.SetAttackActionLast(_mainModel.GetCurrenFlagPlayer(), turnFinally.Missle);
-        }
- */
+
         ManagerButton();
 
         CanvasReportWindow(printMessage.ToString(), 0);
