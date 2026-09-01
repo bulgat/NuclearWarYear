@@ -17,10 +17,10 @@ public class DictionaryEssence
         new Incident(GlobalParam.TypeEvent.HeavyMissle, GlobalParam.TypeEvent.Missle, 1, 
             "Ракеты приведены в готовность",new DamageParam(40,1),false,
             null,"Подготовка ракет"),
-        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 2, 
+        new Incident(GlobalParam.TypeEvent.SuperMissle, GlobalParam.TypeEvent.Missle, 2, 
             "Ракеты приведены в готовность",new DamageParam(50,2), false,
             null, "Подготовка ракет"),
-        new Incident(GlobalParam.TypeEvent.Missle, GlobalParam.TypeEvent.Missle, 3, 
+        new Incident(GlobalParam.TypeEvent.MegaMissle, GlobalParam.TypeEvent.Missle, 3, 
             "Ракеты приведены в готовность",new DamageParam(100, 3), false,
             null, "Подготовка ракет"),
 
