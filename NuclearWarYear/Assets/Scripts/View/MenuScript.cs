@@ -628,7 +628,7 @@ public class MenuScript : MonoBehaviour
         GameObject CanResPlayer = Instantiate(NewPaperPrefabs, new Vector2(100, 100), Quaternion.identity);
         ViewNewPaperMethod viewResourceMethod = CanResPlayer.GetComponent<ViewNewPaperMethod>();
         viewResourceMethod.SetResourceMethodTable(this, this.LiderPortraitList, this.FlagImageList, this._mainModel);
-        viewResourceMethod.SetMessage(_mainModel.GetAllMessageTurn());
+        viewResourceMethod.SetMessageList(_mainModel.GetAllMessageTurn());
 
     }
 

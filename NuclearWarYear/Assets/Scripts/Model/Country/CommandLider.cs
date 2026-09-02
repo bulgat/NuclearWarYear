@@ -32,8 +32,7 @@ public class CommandLider
     {
         this._MissleList = new List<Incident>();
         this.IncidentCommand = new DictionaryEssence().BuildIncident(nameCommand, Year);
-        Debug.Log(" IncidentCommand "+ nameCommand + " =  "+ IncidentCommand.Id+
-            "  ==== uid "+ IncidentCommand.UnicalId+"                 name = "+ IncidentCommand.Name);
+
         this.IncidentCommand.SetSecondIncident(secondIncident);
 
         this.VisibleList = new List<GlobalParam.TypeEvent>();

@@ -55,7 +55,7 @@ namespace Assets.Scripts.Model
 
             if (incident.PopulationEvent == null)
             {
-                Debug.Log(" 0002  country   Lider  = " + incident.Name);
+
                 throw new Exception("not event");
             }
             return incident;

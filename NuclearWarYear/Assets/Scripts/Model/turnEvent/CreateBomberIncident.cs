@@ -32,7 +32,7 @@ namespace Assets.Scripts.Model.turnEvent
                 if (mainModel.GetCommandLider(CountYear, enemylider.FlagId).GetDefence())
                 {
                     //new RemoveBomber().DeadOrAddBomber(mainModel, lider, true);
-                    Debug.Log("0979   commandLider DEAD ROCKET AND BOMBER  =  "  );
+
                     deadRocketAndBomber = true;
                 }
 
@@ -43,8 +43,7 @@ namespace Assets.Scripts.Model.turnEvent
                 if (deadRocketAndBomber)
                 {
                     message = negativeMessage;
-                    Debug.Log("0980 DEAD BOMBER");
-        
+
                     if (missle == false)
                     {
                         //add bomber
@@ -55,7 +54,7 @@ namespace Assets.Scripts.Model.turnEvent
                         CommandIncident.SetMessage("Ракеты сбиты");
                     }
 
-                        Debug.Log("0981 DEAD  untYear name =" + lider.Name + " Town  " + message + " GetTargetBomb =  = " + deadRocketAndBomber + " inc = " + CommandIncident.Name);
+                        
                 }
 
                 if (CommandIncident.SecondIncident != null)

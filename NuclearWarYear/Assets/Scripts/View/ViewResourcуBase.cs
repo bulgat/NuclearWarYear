@@ -22,7 +22,7 @@ namespace Assets.Scripts.View
 
   
         }
-        public void SetMessage(string message)
+        public virtual void SetMessage(string message)
         {
 
             textPopulation.GetComponent<Text>().text = message;

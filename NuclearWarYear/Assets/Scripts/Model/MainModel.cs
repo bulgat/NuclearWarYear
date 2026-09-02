@@ -298,7 +298,14 @@ public class MainModel
 
 		return this.MainStackCommandLiderList.FirstOrDefault(a => a.IncidentCommand.Year == CountYear && a.LiderId == FlagId);
 	}
-	public List<CommandLider> GetCommandLiderList(int CountYear, int FlagId)
+    public List<int> GetYearLiderCount()
+	{
+		return this.MainStackCommandLiderList.GroupBy(a => a.IncidentCommand.Year).Select(a=>a.FirstOrDefault().IncidentCommand.Year).ToList();
+
+    }
+
+
+    public List<CommandLider> GetCommandLiderList(int CountYear, int FlagId)
 	{
 		return this.MainStackCommandLiderList.Where(a => a.IncidentCommand.Year == CountYear && a.LiderId == FlagId).ToList();
 	}
@@ -391,7 +398,7 @@ public class MainModel
 	}
 	public void TurnAi()
 	{
-        Debug.Log("0055    CommandIncident   CountYear = " + CountYear);
+
 
         CountYear++;
 		
@@ -479,19 +486,30 @@ public class MainModel
         return turnFinally;
     }
 
-	public string GetAllMessageTurn(bool debug=false)
+	public List<string> GetAllMessageTurn(bool debug=false)
 	{
-        var text = "";
-        foreach (CountryLider lider in this.CountryLiderList)
-        {
-            
-			foreach (CommandLider commandLider in GetCommandLiderList(CountYear, lider.FlagId))
+
+  
+
+
+        var textList = new List<string>();
+		foreach (var year in GetYearLiderCount())
+		{
+            Debug.Log("0979   commandLider DEAD ROCKET AND     =  " + year);
+            var text = "";
+			foreach (CountryLider lider in this.CountryLiderList)
 			{
-                text += "\n" + commandLider.IncidentCommand.FullMessage(lider);
-            }
 
-        }
+				foreach (CommandLider commandLider in GetCommandLiderList(year, lider.FlagId))
+				{
+					text += "\n" + commandLider.IncidentCommand.FullMessage(lider);
+				}
 
-        return text;
+			}
+			textList.Add(text);
+		}
+        Debug.Log("0980 DEAD BOMB "+ textList.Count);
+
+        return textList;
     }
 }

@@ -48,7 +48,7 @@ namespace Assets.Scripts.Model
                 
 
             }
-            Debug.Log("0814 Add AttackBomber "+ commandLider.IncidentCommand .UnicalId+ "  Finally.OldIncident "+ turnFinally.OldIncident + " LiderList = " + commandLider.IncidentCommand.Id);
+            
             commandLider.IncidentCommand.SetSecondIncident(turnFinally.OldIncident);
             mainModel.ResetAction();
 
