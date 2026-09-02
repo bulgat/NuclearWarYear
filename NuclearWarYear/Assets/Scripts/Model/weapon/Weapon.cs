@@ -15,4 +15,5 @@ public class Weapon
     protected string Message;
 	public int Uid;
 	public EventFortuneIncident Fortune;
+	public bool Mortal;
 }

@@ -96,7 +96,7 @@ public class MenuScript : MonoBehaviour
         this.CountryLiderList = null;
 
         _mainModel = new MainModel(CountryLiderPropagandaBuildingList);
-        this.flagIdPlayer = _mainModel.GetCurrentPlayerFlag().FlagId;
+        this.flagIdPlayer = _mainModel.GetCurrentPlayer().FlagId;
         this.CountryLiderList = _mainModel.GetCountryLiderList();
 
     }
@@ -287,10 +287,10 @@ public class MenuScript : MonoBehaviour
 
         CityView selectCityTarget = ClearCityTargetMark(CityId, true);
 
-        _controller.SelectCityEnemyTargetPlayer(CityId, _mainModel.GetCurrentPlayerFlag().FlagId);
+        _controller.SelectCityEnemyTargetPlayer(CityId, _mainModel.GetCurrentPlayer().FlagId);
 
         // TargetSity
-        if (_mainModel.GetCurrentPlayerFlag().FlagId != selectCityTarget.FlagId)
+        if (_mainModel.GetCurrentPlayer().FlagId != selectCityTarget.FlagId)
         {
             selectCityTarget.SetTargetAim(true);
         }
@@ -350,7 +350,7 @@ public class MenuScript : MonoBehaviour
 
     void RefreshPlayerView()
     {
-        this.flagIdPlayer = this._mainModel.GetCurrentPlayerFlag().FlagId;
+        this.flagIdPlayer = this._mainModel.GetCurrentPlayer().FlagId;
 
         SetImageLiderButton();
         ChangeImageLider();
@@ -509,7 +509,7 @@ public class MenuScript : MonoBehaviour
     {
 
 
-        int IdMissle = cardAction.GetImageId();
+        int idImageEvent = cardAction.GetImageId();
         foreach (var item in this.CardButtonList)
         {
             item.transform.localScale = UIparam.CardScale;
@@ -518,7 +518,7 @@ public class MenuScript : MonoBehaviour
 
         CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, _mainModel.GetCurrenFlagPlayer().FlagId);
 
-        var missleBomberIncident = new DictionaryEssence().GetIncident(IdMissle);
+        var missleBomberIncident = new DictionaryEssence().GetIncident(idImageEvent);
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, cardAction))
         {
 
@@ -540,7 +540,22 @@ public class MenuScript : MonoBehaviour
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Propaganda)
         {
+            Debug.Log("0054    Lider At  Propaganda "  );
 
+            if (_mainModel.GetCurrentPlayer().TargetCitySelectPlayer.TargetCity.GetId() == 0)
+            {
+                Debug.Log("0055  CreateComman = "  );
+                if (UIparam.HelpSelectTargetPropaganda == false)
+                {
+                    CanvasReportWindow("Выберете страну для действия пропаганды", idImageEvent);
+                    UIparam.HelpSelectTargetPropaganda = true;
+                    return;
+                }
+            }
+
+
+            Debug.Log("0056  Creat  "+_mainModel.GetCurrentPlayer().TargetCitySelectPlayer.TargetCity.GetId());
+            Debug.Log("0057  CreateCommand C = "  );
 
             _controller.Propaganda(_mainModel.GetCurrenFlagPlayer().FlagId);
 
@@ -551,8 +566,13 @@ public class MenuScript : MonoBehaviour
             _controller.Building(_mainModel.GetCurrenFlagPlayer().FlagId);
 
         }
-        Debug.Log("0055    Lider Attack "+ cardAction.Name);
-        CanvasReportWindow(String.Format( cardAction.PrepareMessage +" {0} ",(cardAction.Damage>0? "\n Damage: "+ cardAction.Damage +" килотонн": "")), IdMissle);
+        if (cardAction.Mortal)
+        {
+            CanvasReportWindow(String.Format(cardAction.PrepareMessage + " {0} ", (cardAction.Damage > 0 ? "\n Damage: " + cardAction.Damage + " килотонн" : "")), idImageEvent);
+        } else
+        {
+            CanvasReportWindow(String.Format(cardAction.PrepareMessage), idImageEvent);
+        }
     }
 
     void SelectCountryOne()

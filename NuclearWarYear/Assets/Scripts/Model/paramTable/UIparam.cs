@@ -15,5 +15,6 @@ namespace Assets.Scripts.Model.paramTable
         static public int CardCoefHeight= 10;
         static public Vector2 CardSelectScale = new Vector2(1.5f, 1.5f);
         static public int CardSelectCoefHeight = 5;
+        static public bool HelpSelectTargetPropaganda = false;
     }
 }

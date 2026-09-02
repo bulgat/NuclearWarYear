@@ -31,11 +31,6 @@ namespace Assets.Scripts.Model.AiTurn
             {
                 var list = mainModel.GetCommandLiderList(mainModel.CountYear - 1, lider.FlagId);
 
-
-                
-                
-                
-                Debug.Log("0604  CreateCommand " + actionNameCommand );
                 incidentAttack = new ChangeIncident().MutationIncidentCommand(
                     lider,
                     actionNameCommand,
@@ -46,7 +41,7 @@ namespace Assets.Scripts.Model.AiTurn
                 {
                     actionNameCommand = incidentAttack.TypeEvent;
                 }
-                Debug.Log("0605  CreateCommand " + actionNameCommand + "  SEC = " + incidentAttack?.SecondIncident);
+
             }
 
             if (actionNameCommand == GlobalParam.TypeEvent.None)
@@ -90,7 +85,7 @@ namespace Assets.Scripts.Model.AiTurn
             CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
                 lider.FlagId != FlagIdPlayer, lider, CountYear);
 
-            Debug.Log("0606  CreateCommand "+ actionNameCommand + "  SEC = "+ incidentAttack?.SecondIncident);
+
 
             CommandLider commandLider = new CommandLider(
                 actionNameCommand,
