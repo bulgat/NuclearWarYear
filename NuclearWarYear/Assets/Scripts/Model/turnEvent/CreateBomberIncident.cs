@@ -25,20 +25,14 @@ namespace Assets.Scripts.Model.turnEvent
             bool missle
             )
         {
-            bool deadRocketAndBomber = false;
+            bool deadRocketAndBomber = mainModel.GetCommandLider(CountYear, enemylider).GetDefence();
 
             if (VisibleAttackRocketAndBomber)
             {
-                if (mainModel.GetCommandLider(CountYear, enemylider.FlagId).GetDefence())
-                {
-                    //new RemoveBomber().DeadOrAddBomber(mainModel, lider, true);
 
-                    deadRocketAndBomber = true;
-                }
-
-                string message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetMessage()  
-                    + " у " + mainModel.GetCommandLider(CountYear, lider.FlagId).LiderFiend.Name, mainModel.GetCommandLider(CountYear, lider.FlagId).IncidentCommand.GetName());
-                mainModel.GetCommandLider(CountYear, lider.FlagId).LiderFiend._RelationFeind.SetNegativeMood(lider.FlagId, 25);
+                string message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider).IncidentCommand.GetMessage()  
+                    + " у " + mainModel.GetCommandLider(CountYear, lider).LiderFiend.Name, mainModel.GetCommandLider(CountYear, lider).IncidentCommand.GetName());
+                mainModel.GetCommandLider(CountYear, lider).LiderFiend._RelationFeind.SetNegativeMood(lider.FlagId, 25);
 
                 if (deadRocketAndBomber)
                 {
@@ -60,7 +54,7 @@ namespace Assets.Scripts.Model.turnEvent
                 if (CommandIncident.SecondIncident != null)
                 {
 
-                    CommandIncident.SetReleaseMessage(GlobalParam.MessageDictionary[mainModel.GetCommandLider(CountYear, lider.FlagId).GetNameCommand()].ShowFiend);
+                    CommandIncident.SetReleaseMessage(GlobalParam.MessageDictionary[mainModel.GetCommandLider(CountYear, lider).GetNameCommand()].ShowFiend);
                     CommandIncident.SetPopulationEvent(
                         new StateAttackPopulation(
                             message,

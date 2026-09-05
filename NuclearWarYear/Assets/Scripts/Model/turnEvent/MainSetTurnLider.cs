@@ -19,7 +19,7 @@ namespace Assets.Scripts.Model
         {
 
             CountryLider enemylider = new LiderHelper().GetLiderEnemy(CountryLiderList, lider, CountYear, mainModel);
-            CommandLider commandLider = mainModel.GetCommandLider(CountYear, lider.FlagId);
+            CommandLider commandLider = mainModel.GetCommandLider(CountYear, lider);
             CityModel cityModelTarget = commandLider._TargetCity.TargetCity;
 
             if (commandLider != null)
@@ -41,16 +41,26 @@ namespace Assets.Scripts.Model
                      mainModel);
 
                 new CreateBomberIncident().CreateAttackMissleBomber(
-                    lider, CountYear, enemylider,
-                    ref incident, cityModelTarget, mainModel,
+                    lider, 
+                    CountYear, 
+                    enemylider,
+                    ref incident, 
+                    cityModelTarget, 
+                    mainModel,
                     commandLider.GetVisibleAttackRocket(),
-                    "Ракеты сбиты",true);
+                    "Ракеты сбиты",
+                    true);
 
                 new CreateBomberIncident().CreateAttackMissleBomber(
-                    lider, CountYear, enemylider,
-                   ref incident, cityModelTarget, mainModel,
+                    lider, 
+                    CountYear, 
+                    enemylider,
+                   ref incident, 
+                   cityModelTarget, 
+                   mainModel,
                    commandLider.GetVisibleAttackBomber(),
-                   "Бомбардировщики сбиты", false);
+                   "Бомбардировщики сбиты", 
+                   false);
             }
 
             if (incident.PopulationEvent == null)

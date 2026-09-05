@@ -318,7 +318,7 @@ public class BuildingCentral : MonoBehaviour
         {
             if (MyCity != null)
             {
-                Debug.Log("0155 BA  SecondIncident = " + MyCity.GetTarget());
+
                 if (MyCity.GetTarget() != null)
                 {
                     startPosition = new SearchTownObject().GetTownViewWithId(MyCity.GetTarget(), TownList).transform.position;

@@ -46,7 +46,7 @@ public class MenuScript : MonoBehaviour
     private Vector3 _targetNuclearMap;
 
     public GameObject Canvas;
-    public Image CircleReady;
+    public GameObject CircleReady;
 
     public GameObject TownCard;
 
@@ -129,7 +129,7 @@ public class MenuScript : MonoBehaviour
 
         VisibleMarkerPlayer();
 
-        CircleImageReadyParam(0, false);
+        CircleImageReadyParam(0, false,null);
 
         GlueTownListView();
 
@@ -249,7 +249,7 @@ public class MenuScript : MonoBehaviour
 
         this.TownViewList = new List<GameObject>();
 
-        List<CityModel> cityModelList = _mainModel.GetTownList();
+        List<CityModel> cityModelList = _mainModel.GetAllTownList();
 
             foreach (CityModel cityModel in cityModelList)
             {
@@ -416,7 +416,7 @@ public class MenuScript : MonoBehaviour
 
         // reset view
 
-        CircleImageReadyParam(0, false);
+        CircleImageReadyParam(0, false,null);
 
         
         blockBackground =  Instantiate(BlockBackgroundPrefabs, new Vector2(Canvas.transform.position.x, Canvas.transform.position.y), Quaternion.identity);
@@ -472,10 +472,10 @@ public class MenuScript : MonoBehaviour
                         CountryLider enemyLider = new LiderHelperOne().GetLiderOne(CountryLiderList, CommandIncident.PopulationEvent.FiendCity.FlagId);
                         if (enemyLider != null)
                         {
-                            Debug.Log("0400 CountYe  Town My  GetTargetBo  list = " + enemyLider.ReleaseCommandList.Count);
+
                             foreach (var incident in enemyLider.ReleaseCommandList)
                             {
-                                Debug.Log("0400 incident = " + incident.Name);
+                                
                                 if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, incident))
                                 {
                                     cityView.SetVisibleDefence(true);
@@ -492,7 +492,7 @@ public class MenuScript : MonoBehaviour
     }
     private CityModel TargetManager(CountryLider lider)
     {
-        CityModel cityTown = this._mainModel.GetCommandLider(_mainModel.CountYear,lider.FlagId)._TargetCity.TargetCity;
+        CityModel cityTown = this._mainModel.GetCommandLider(_mainModel.CountYear,lider)._TargetCity.TargetCity;
 
         if (cityTown != null)
         {
@@ -540,11 +540,11 @@ public class MenuScript : MonoBehaviour
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Propaganda)
         {
-            Debug.Log("0054    Lider At  Propaganda "  );
+            
 
             if (_mainModel.GetCurrentPlayer().TargetCitySelectPlayer.TargetCity.GetId() == 0)
             {
-                Debug.Log("0055  CreateComman = "  );
+                
                 if (UIparam.HelpSelectTargetPropaganda == false)
                 {
                     CanvasReportWindow("Выберете страну для действия пропаганды", idImageEvent);
@@ -674,7 +674,7 @@ public class MenuScript : MonoBehaviour
 
         TurnFinally turnFinally = _controller.TurnFinality();
         printMessage.Append(turnFinally.Message);
-        CircleImageReadyParam(turnFinally.TypeAttack, turnFinally.Attack);
+        CircleImageReadyParam(turnFinally.TypeAttack, turnFinally.Attack, turnFinally.OldIncident);
 
         ManagerButton();
 
@@ -700,10 +700,15 @@ public class MenuScript : MonoBehaviour
     }
 
 
-    private void CircleImageReadyParam(int IndexImage, bool Visible)
+    private void CircleImageReadyParam(int IndexImage, bool Visible,Incident incident)
     {
-        CircleReady.enabled = Visible;
-        CircleReady.sprite = IconCircleReadyList[IndexImage];
+
+        ViewCircleReady viewCircleReady = CircleReady.GetComponent<ViewCircleReady>();
+                                    Debug.Log("0400 CountYe  Town My  GetTargetBo  li  = " + viewCircleReady);
+        viewCircleReady.SetParam(Visible, IconCircleReadyList[IndexImage], incident);
+
+        //CircleReady.enabled = Visible;
+        //CircleReady.sprite = IconCircleReadyList[IndexImage];
     }
 
     private void UpdatePanelVisible()

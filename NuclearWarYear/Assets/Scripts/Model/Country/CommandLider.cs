@@ -20,13 +20,13 @@ public class CommandLider
     public CountryLider LiderFiend { get; private set; }
     public List<string> _reportProducedWeaponList { get; private set; }
     List<GlobalParam.TypeEvent> VisibleList;
-    public int LiderId;
+    public CountryLider Lider { get; private set; }
     public CommandLider(
         GlobalParam.TypeEvent nameCommand,
         CountryLider liderFiend,
         int Year,
         TargetCityModel TargetCity,
-        int LiderId,
+        CountryLider Lider,
         Incident secondIncident = null
         )
     {
@@ -38,7 +38,7 @@ public class CommandLider
         this.VisibleList = new List<GlobalParam.TypeEvent>();
         this.LiderFiend = liderFiend;
         _TargetCity = TargetCity;
-        this.LiderId = LiderId;
+        this.Lider = Lider;
     }
     public bool GetNameExecute(GlobalParam.TypeEvent Name)
     {
@@ -99,6 +99,7 @@ public class CommandLider
 
     public bool GetDefence()
     {
+        Debug.Log("0279   com Lid DEAD ROCKET "+Lider.Name +"  GetDefence() =  " + this.IncidentCommand.Name+" type = "+ this.IncidentCommand.Type + " any = "+ GlobalParam.GroupDefenceList.Any(a => a == this.IncidentCommand.Type));
         return new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, this.IncidentCommand);
     }
 

@@ -92,7 +92,7 @@ namespace Assets.Scripts.Model.AiTurn
                 fiendLider1,
                 CountYear,
                 targetCityModel,
-                lider.FlagId,
+                lider,
                 incidentAttack?.SecondIncident
                 );
             ResetAction();

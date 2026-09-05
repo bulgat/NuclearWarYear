@@ -13,12 +13,12 @@ namespace Assets.Scripts.Model
             CommandLider commandLider = null;
             CountryLider countryLider = new LiderHelperOne().GetLiderOne(mainModel.CountryLiderList, FlagId);
             CityModel enemyTownCity = countryLider.TargetCitySelectPlayer.TargetCity;
-            CityModel myCity = mainModel.GetTownList().Where(a => a.FlagId == countryLider.FiendLider.FlagId).FirstOrDefault();
+            CityModel myCity = mainModel.GetAllTownList().Where(a => a.FlagId == countryLider.FiendLider.FlagId).FirstOrDefault();
 
             CommandLider commandLiderFortune = null;
             if (turnFinally.Missle)
             {
-                Debug.Log("_0811  - GetDamagePo GetNameFiendLider  futureYear = " + futureYear);
+
 
          
                 commandLider = new CommandLider(
@@ -26,23 +26,21 @@ namespace Assets.Scripts.Model
                     countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
                     futureYear,
                     new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider),
-                    FlagId,
+                    countryLider,
                     turnFinally.OldIncident
                     );
 
-                Debug.Log("_0812  bui = " + commandLider.IncidentCommand.Name + " CountYear = " + mainModel.CountYear+"  ");
 
             }
             else
             {
-                Debug.Log("0814 Add AttackBomber turnFinally.OldIncident = " + turnFinally.OldIncident + " LiderList = " + mainModel.GetCommandLiderList(mainModel.CountYear + 1, FlagId).Count);
-     
+
                 commandLider = new CommandLider(
                     GlobalParam.TypeEvent.AttackBomber,
                     countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
                     futureYear,
                     new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider),
-                    FlagId,
+                    countryLider,
                     turnFinally.OldIncident
                     );
                 

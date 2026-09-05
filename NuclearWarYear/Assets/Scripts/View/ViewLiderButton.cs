@@ -34,9 +34,6 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         var flagImage = allImage_ar[2].GetComponent<Image>();
         var circleReady = allImage_ar[4].GetComponent<Image>();
 
-        //int indexLider = this.Lider.GraphicId;
-
-        //CountryLider countryLider = _mainModel.CountryLiderList[indexLider];
 
         CountryLider countryLider = _mainModel.CountryLiderList.FirstOrDefault(a=>a.FlagId == lider.FlagId);
         
@@ -61,9 +58,9 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         circleReady.enabled = false;
 
 
-        if (_mainModel.GetCommandLider(_mainModel.CountYear, lider.FlagId) != null)
+        if (_mainModel.GetCommandLider(_mainModel.CountYear, lider) != null)
         {
-            if (_mainModel.GetCommandLider(_mainModel.CountYear, lider.FlagId).GetVisibleBomber())
+            if (_mainModel.GetCommandLider(_mainModel.CountYear, lider).GetVisibleBomber())
             {
                 if (this.IconCircleReadyList != null)
                 {
@@ -72,7 +69,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
                 }
             }
 
-            if (_mainModel.GetCommandLider(_mainModel.CountYear, lider.FlagId).GetVisibleMissle())
+            if (_mainModel.GetCommandLider(_mainModel.CountYear, lider).GetVisibleMissle())
             {
                 if (this.IconCircleReadyList != null)
                 {

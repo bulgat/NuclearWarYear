@@ -8,7 +8,7 @@ namespace Assets.Scripts.Model.AiTurn
     {
         public bool GroupWeaponPresence(List<GlobalParam.TypeEvent> groupWeaponList,Incident command)
         {
-            return groupWeaponList.Any(a => a == command.Type);
+            return groupWeaponList.Any(a => a == command.Name);
 
         }
 

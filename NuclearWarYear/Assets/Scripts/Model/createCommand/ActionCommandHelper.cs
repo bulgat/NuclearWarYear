@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Assets.Scripts.Model;
 using Assets.Scripts.Model.createCommand;
 using Assets.Scripts.Model.param;
-using Assets.Scripts.Model;
-
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
+using static UnityEngine.ParticleSystem;
 public class ActionCommandHelper
 {
 
@@ -31,7 +33,7 @@ public class ActionCommandHelper
                 {
                     commandLider = new CommandLider(GlobalParam.TypeEvent.Propaganda,
                         countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-                        Year, targetCityModel, countryLider.FlagId);
+                        Year, targetCityModel, countryLider);
                 }
             }
 
@@ -54,6 +56,10 @@ public class ActionCommandHelper
             TownList,
             CountryLiderList,
             countryLider);
+        Debug.Log("0811  - GetDamagePo GetNameFiendLider  futureYe  = " + commandLider);
+
+        Debug.Log("0812  b  CountYear = " + CountryLiderList);
+        Debug.Log("0813 A AttackBomber turnFinally.OldIncident = " + targetCityModel.TargetCity + " LiderList = "  );
 
         commandLider.SetTargetLider(CountryLiderList.Where(a => a.FlagId == targetCityModel.TargetCity.FlagId).FirstOrDefault());
 

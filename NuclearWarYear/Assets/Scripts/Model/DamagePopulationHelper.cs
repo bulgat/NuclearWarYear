@@ -7,7 +7,7 @@ public class DamagePopulationHelper
 {
 	public TargetCityModel GetCityLider(CountryLider lider,int CountYear, MainModel mainModel)
 	{
-		return mainModel.GetCommandLider(CountYear,lider.FlagId)._TargetCity;
+		return mainModel.GetCommandLider(CountYear,lider)._TargetCity;
 
     }
     public void SetDamagePopulation( CityModel cityModel,int Damage){

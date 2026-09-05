@@ -6,11 +6,11 @@ public class LiderHelper
 		int CountYear, MainModel mainModel)
     {
 		
-		if(mainModel.GetCommandLider(CountYear,lider.FlagId)._TargetCity == null){
+		if(mainModel.GetCommandLider(CountYear,lider)._TargetCity == null){
             return null;
 		}
         
         return new LiderHelperOne().GetLiderOne(CountryLiderList,
-            mainModel.GetCommandLider(CountYear,lider.FlagId)._TargetCity.TargetCity.FlagId);
+            mainModel.GetCommandLider(CountYear,lider)._TargetCity.TargetCity.FlagId);
 	}
 }
