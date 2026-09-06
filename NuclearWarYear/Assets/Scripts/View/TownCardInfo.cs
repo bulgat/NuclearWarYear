@@ -33,6 +33,10 @@ public class TownCardInfo : MonoBehaviour
     void Update()
     {
         InfoText.text = this.TownCity.CityTownModel.GetPopulation().ToString();
-        this.NameCityText.text = this.TownCity.CityTownModel.Name;    
+        this.NameCityText.text = this.TownCity.CityTownModel.Name;
+        if (this.TownCity.CityTownModel.GetPopulation() <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

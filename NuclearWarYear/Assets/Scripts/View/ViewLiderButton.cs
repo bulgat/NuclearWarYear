@@ -24,7 +24,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         this.IconCircleReadyList = iconCircleReadyList;
         this.IconCardList = iconCardList;
     }
-    public void ButtonLiderFrame(int FlagId)
+    public void ButtonLiderFrame(CountryLider lider)
     {
         
         var allImage_ar = GetComponentsInChildren<Image>();
@@ -34,13 +34,10 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         var flagImage = allImage_ar[2].GetComponent<Image>();
         var circleReady = allImage_ar[4].GetComponent<Image>();
 
-        //int indexLider = this.Lider.GraphicId;
 
-        //CountryLider countryLider = _mainModel.CountryLiderList[indexLider];
-
-        CountryLider countryLider = _mainModel.CountryLiderList.FirstOrDefault(a=>a.FlagId == FlagId);
+        CountryLider countryLider = _mainModel.CountryLiderList.FirstOrDefault(a=>a.FlagId == lider.FlagId);
         
-        int moodLider = countryLider.GetMood(FlagId);
+        int moodLider = countryLider.GetMood(lider.FlagId);
         
         var imageMood = 0;
         if (moodLider > 90)
@@ -57,13 +54,13 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         }
 
         LiderImage_1.sprite = LiderImageList[new ViewLiderHelper().GetNumberSpriteLider(countryLider.FlagId-1, imageMood)];
-        flagImage.sprite = FlagImageList[countryLider.FlagId - 1];
+        flagImage.sprite = FlagImageList[countryLider.GetIndexLider()];
         circleReady.enabled = false;
 
 
-        if (_mainModel.GetCommandLider(_mainModel.CountYear, FlagId) != null)
+        if (_mainModel.GetCommandLider(_mainModel.CountYear, lider) != null)
         {
-            if (_mainModel.GetCommandLider(_mainModel.CountYear, FlagId).GetVisibleBomber())
+            if (_mainModel.GetCommandLider(_mainModel.CountYear, lider).GetVisibleBomber())
             {
                 if (this.IconCircleReadyList != null)
                 {
@@ -72,7 +69,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
                 }
             }
 
-            if (_mainModel.GetCommandLider(_mainModel.CountYear, FlagId).GetVisibleMissle())
+            if (_mainModel.GetCommandLider(_mainModel.CountYear, lider).GetVisibleMissle())
             {
                 if (this.IconCircleReadyList != null)
                 {

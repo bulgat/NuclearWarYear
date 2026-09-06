@@ -39,15 +39,14 @@ namespace Assets.Scripts.Model.AiTurn
 
                 foreach (Incident incid in lastYeatCommandList)
                 {
-                    
-                    Debug.Log("_0055 BAMB " + incident.UnicalId+ "   - " + incident.Id+ "  incid = "+ incid.Name);
+
                     if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, incid))
                     {
                         
                         var secondIncident = new DictionaryEssence().BuildIncident(incid.GetTypeWeapon(), mainModel.CountYear);
                         incid.SetSecondIncident(secondIncident);
                         incid.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
-                        Debug.Log("0055   SecondIncident = " + incid.SecondIncident);
+                        
 
                         return new IncidentAttack()
                         {
@@ -57,7 +56,7 @@ namespace Assets.Scripts.Model.AiTurn
                     }
                     if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, incid))
                     {
-                        Debug.Log("_0055 BAMB!  **   - " + incident.Id+ "  SecondIncident = " + incid.SecondIncident);
+
                         var secondIncident = new DictionaryEssence().BuildIncident(incid.GetTypeWeapon(), mainModel.CountYear);
                         incid.SetSecondIncident(new DictionaryEssence().BuildIncident(incid.GetTypeWeapon(), mainModel.CountYear));
                         incid.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);

@@ -44,7 +44,7 @@ namespace Assets.Scripts.Model.createCommand
                         countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
                         Year,
                         countryLider.TargetCitySelectPlayer,
-                        countryLider.FlagId);
+                        countryLider);
                     commandLider.SetVisibleEventList(eventFortuneIncident.Name, true);
                     commandLider.SetTargetLider(countryLider.TargetCitySelectPlayer.EnemyLider);
             return commandLider;

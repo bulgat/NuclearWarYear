@@ -2,6 +2,7 @@
 using Assets.Scripts.Model.param;
 using Assets.Scripts.Model.paramTable;
 using Assets.Scripts.View;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -77,9 +78,12 @@ public class BuildingCentral : MonoBehaviour
         {
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
             {
-                Debug.Log("0008 RocketRich " + GetTarget(MyCity) );
-                UfoObject.transform.position = GetTarget(MyCity);
-
+                Debug.Log("0608 RocketRich " + GetTarget(MyCity) );
+                Debug.Log("0609  _Crea  L " + UfoObject);
+                if (UfoObject != null)
+                {
+                    UfoObject.transform.position = GetTarget(MyCity);
+                }
             }
         }
     }
@@ -228,6 +232,17 @@ public class BuildingCentral : MonoBehaviour
                 UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(
                     UfoObject.transform.position,
                         Speed, transform, _animationTimeProcess, TownList, false, targetBomber);
+
+                // Поворачиваем ракету носом к цели.
+                // missleRotationOffset компенсирует исходную ориентацию спрайта (обычно нос смотрит вверх, поэтому -90).
+                // Если спрайт нарисован иначе - подберите это значение.
+                const float missleRotationOffset = -90f;
+                Vector2 missleDirection = (Vector2)targetBomber - (Vector2)UfoObject.transform.position;
+                if (missleDirection.sqrMagnitude > 0.01f)
+                {
+                    float missleAngle = Mathf.Atan2(missleDirection.y, missleDirection.x) * Mathf.Rad2Deg;
+                    UfoObject.transform.rotation = Quaternion.Euler(Vector3.forward * (missleAngle + missleRotationOffset));
+                }
             }
 
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
@@ -281,6 +296,12 @@ public class BuildingCentral : MonoBehaviour
     public void ViewEndState()
     {
         this._animationProcess = false;
+
+        // Скрываем все движущиеся объекты сразу после завершения хода,
+        // чтобы они не оставались видимыми на сцене до отложенного Destroy(TimeDelete).
+        if (WingMissle != null) WingMissle.SetActive(false);
+        if (BomberObject != null) BomberObject.SetActive(false);
+        if (UfoObject != null) UfoObject.SetActive(false);
     }
     private void CreateObject(GlobalParam.TypeEvent NameCommand)
     {
@@ -297,8 +318,19 @@ public class BuildingCentral : MonoBehaviour
         {
             if (MyCity != null)
             {
-                startPosition = new SearchTownObject().GetTownViewWithId(MyCity.GetTarget(), TownList).transform.position;
+
+                if (MyCity.GetTarget() != null)
+                {
+                    startPosition = new SearchTownObject().GetTownViewWithId(MyCity.GetTarget(), TownList).transform.position;
+                }
             }
+        }
+
+        // Ракета должна вылетать из атакующей страны (позиции здания пропаганды),
+        // поэтому без смещения.
+        if (NameCommand == GlobalParam.TypeEvent.AttackMissle)
+        {
+            startPosition = Vector3.zero;
         }
         
 
