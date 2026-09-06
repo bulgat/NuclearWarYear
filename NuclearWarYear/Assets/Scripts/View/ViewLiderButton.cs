@@ -26,7 +26,12 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
     }
     public void ButtonLiderFrame(CountryLider lider)
     {
-        
+        if (lider.GetDead())
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         var allImage_ar = GetComponentsInChildren<Image>();
 
 

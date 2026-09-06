@@ -13,6 +13,13 @@ public class ModGameEngine
         if (Lider != null)
         {
             CountryLider countryLiderVictim = Lider._RelationFeind.GetHighlyHatredLiderRandom();
+
+            // Живых врагов не осталось — цели для атаки нет.
+            if (countryLiderVictim == null)
+            {
+                return null;
+            }
+
             List<CityModel> TargetCityListVictim = countryLiderVictim.GetOwnTownListLiderFilterPopulation();
 
             List<CityModel> TargetCityList = new List<CityModel>();
@@ -41,7 +48,7 @@ public class ModGameEngine
             }
             if (TargetCityList.Count > 0)
             {
-                Debug.Log("0701  SecondIncident = " + TargetCityList.Count);
+
                 int indexTownBomber = Random.Range(0, TargetCityList.Count);
                 Debug.Log("0702  Crea L " + TargetCityList.Count);
                 Debug.Log("0703  Crea  name = " + indexTownBomber);

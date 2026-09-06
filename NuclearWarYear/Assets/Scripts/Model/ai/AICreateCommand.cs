@@ -19,8 +19,8 @@ public class AICreateCommand
     {
         foreach (CountryLider lider in CountryLiderList)
         {
-            // only fiend
-            if (lider.FlagId != FlagIdPlayer)
+            // only fiend, skip destroyed countries (no cities left)
+            if (lider.FlagId != FlagIdPlayer && !lider.GetDead())
             {
                 List<CommandLider> commandList = new CreateCommandLider()
                     .CommandOneLider(lider, ResetAction, CountryLiderList,

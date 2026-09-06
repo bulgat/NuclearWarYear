@@ -59,9 +59,17 @@ public class ActionCommandHelper
         Debug.Log("0811  - GetDamagePo GetNameFiendLider  futureYe  = " + commandLider);
 
         Debug.Log("0812  b  CountYear = " + CountryLiderList);
-        Debug.Log("0813 A AttackBomber turnFinally.OldIncident = " + targetCityModel.TargetCity + " LiderList = "  );
 
-        commandLider.SetTargetLider(CountryLiderList.Where(a => a.FlagId == targetCityModel.TargetCity.FlagId).FirstOrDefault());
+        if (targetCityModel?.TargetCity != null)
+        {
+            commandLider.SetTargetLider(CountryLiderList.Where(a => a.FlagId == targetCityModel.TargetCity.FlagId).FirstOrDefault());
+        }
+        else
+        {
+            // У лидера-цели не осталось живых городов — атаковать некого,
+            // превращаем ход в безобидную пропаганду, чтобы не зависнуть.
+            commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
+        }
 
         commandLiderList.Add(commandLider);
         if (commandLiderFortune != null)

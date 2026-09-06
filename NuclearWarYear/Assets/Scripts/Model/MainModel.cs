@@ -427,6 +427,18 @@ public class MainModel
 		countryLider.DoneMoveMade(true);
 
 	}
+
+	public bool VisibleCardLaunchWeapon()
+	{
+        CommandLider commandLider = GetCommandLider(CountYear, GetCurrenFlagPlayer());
+		if (commandLider != null)
+		{
+			return (commandLider.GetVisibleMissle() == true || commandLider.GetVisibleBomber() == true)==false;
+
+        }
+		return true;
+    }
+
 	public TurnFinally TurnFinality(){
         TurnFinally turnFinally = new TurnFinally();
         StringBuilder printMessage = new StringBuilder();

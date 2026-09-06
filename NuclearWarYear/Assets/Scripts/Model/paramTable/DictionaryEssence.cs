@@ -46,7 +46,7 @@ public class DictionaryEssence
             false),
 
         new Incident(GlobalParam.TypeEvent.Propaganda, GlobalParam.TypeEvent.Defence, 9, 
-            "Под воздействием пропаганды, население {0} сбежало в {1}",new DamageParam(3,10), false,
+            "Под воздействием пропаганды, население {0} сбежало в {1}",new DamageParam(6,10), false,
             null,"Подготовка сенсаций в СМИ",
             false),
 

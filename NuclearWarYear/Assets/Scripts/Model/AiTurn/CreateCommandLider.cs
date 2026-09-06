@@ -57,6 +57,13 @@ namespace Assets.Scripts.Model.AiTurn
             }
 
             CountryLider fiendLider1 = lider._RelationFeind.GetHighlyHatredLiderRandom();
+
+            // Живых врагов не осталось — игра окончена, ход формировать не из чего.
+            if (fiendLider1 == null)
+            {
+                return new List<CommandLider>();
+            }
+
             CityModel targetTownCity = new TargetHelper().GetRandomCity(
                     TownList,
                     lider,

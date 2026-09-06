@@ -13,6 +13,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class MenuScript : MonoBehaviour
 {
@@ -174,18 +175,22 @@ public class MenuScript : MonoBehaviour
 
         float sizeWidth = (Screen.width/3) / missleList.Count;
 
-        int count = 0;
-        foreach (Incident incident in missleList)
+        Debug.Log("0901  SecondIncide  = " + _mainModel.VisibleCardLaunchWeapon());
+        if (_mainModel.VisibleCardLaunchWeapon())
         {
-            GameObject CardWing = Instantiate(Card, new Vector2(10 + (count * sizeWidth), Screen.height/UIparam.CardCoefHeight), Quaternion.identity);
-            CardWing.transform.SetParent(panelMain.transform);
-            CardWing.transform.localScale = UIparam.CardScale;
-            ViewCardWeapon viewCardWeapon = CardWing.GetComponent<ViewCardWeapon>();
+            int count = 0;
+            foreach (Incident incident in missleList)
+            {
+                GameObject CardWing = Instantiate(Card, new Vector2(10 + (count * sizeWidth), Screen.height / UIparam.CardCoefHeight), Quaternion.identity);
+                CardWing.transform.SetParent(panelMain.transform);
+                CardWing.transform.localScale = UIparam.CardScale;
+                ViewCardWeapon viewCardWeapon = CardWing.GetComponent<ViewCardWeapon>();
 
-            viewCardWeapon.SetParam(IconCardList, incident);
-            viewCardWeapon.SetCallback(ClickCardPlayer);
-            this.CardButtonList.Add(CardWing);
-            count++;
+                viewCardWeapon.SetParam(IconCardList, incident);
+                viewCardWeapon.SetCallback(ClickCardPlayer);
+                this.CardButtonList.Add(CardWing);
+                count++;
+            }
         }
         Destroy(blockBackground);
     }
@@ -217,17 +222,14 @@ public class MenuScript : MonoBehaviour
     void SetFlagNation()
     {
         List<CountryLider> fiendLider_ar = _mainModel.GetCountryLiderList();
-        ChangeFlag(0, fiendLider_ar[0]);
-        ChangeFlag(1, fiendLider_ar[1]);
-        ChangeFlag(2, fiendLider_ar[2]);
-        ChangeFlag(3, fiendLider_ar[3]);
-        ChangeFlag(4, fiendLider_ar[4]);
+
     }
     private void ChangeImageLider()
     {
 
         ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
         viewLiderButton.ButtonLiderFrame(viewLiderButton.Lider);
+        //LiderButton_1.enabled = false;
 
         ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
         viewLiderButton_2.ButtonLiderFrame(viewLiderButton_2.Lider);
@@ -239,11 +241,7 @@ public class MenuScript : MonoBehaviour
         ViewLiderButton viewLiderButton_4 = LiderButton_4.GetComponent<ViewLiderButton>();
         viewLiderButton_4.ButtonLiderFrame(viewLiderButton_4.Lider);
     }
-    private void ChangeFlag(int Index, CountryLider countryLider)
-    {
-        MapNationFlagList[Index].GetComponent<SpriteRenderer>().sprite = FlagImageList[countryLider.GraphicId];
 
-    }
     private void GlueTownListView()
     {
 

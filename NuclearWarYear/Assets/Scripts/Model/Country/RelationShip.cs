@@ -38,10 +38,24 @@ public class RelationShip {
     }
     public CountryLider GetHighlyHatredLiderRandom()
     {
-        List<RelationMood> relationMoodListSort = this.RelationMoodList.Where(a=>a.Lider.FlagId!= FlagId).OrderBy(a => a.Mood).ToList();
+        // Только живые лидеры могут быть целью (у мёртвых нет городов).
+        List<RelationMood> relationMoodListSort = this.RelationMoodList
+            .Where(a => a.Lider.FlagId != FlagId && !a.Lider.GetDead())
+            .OrderBy(a => a.Mood)
+            .ToList();
+
+        if (relationMoodListSort.Count <= 0)
+        {
+            return null;
+        }
+
         int curveRandom = CurveRandom();
-        
-        return relationMoodListSort[curveRandom].Lider;  
+        if (curveRandom >= relationMoodListSort.Count)
+        {
+            curveRandom = relationMoodListSort.Count - 1;
+        }
+
+        return relationMoodListSort[curveRandom].Lider;
     }
     int CurveRandom()
     {

@@ -69,7 +69,7 @@ namespace Assets.Scripts.Model.param
 
             new ScenarioLider(1, "Путин", 0, new List<string>(){"Moscow","Peterburg","Vladivostok","Novosibirsk","Sevastopol"}),
             new ScenarioLider(2, "Зеленс", 1, new List<string>(){"Kiev","Odessa","Lvov","Harkov","Nikolaev"}),
-            new ScenarioLider(3, "Байден", 2, new List<string>(){"Vashington","New-York","Los angeles","Chicago","Houston"}),
+            new ScenarioLider(3, "Трамп", 2, new List<string>(){"Vashington","New-York","Los angeles","Chicago","Houston"}),
             new ScenarioLider(4, "Си Цзип", 3, new List<string>(){"Pekin","Shanghai","Chongqing","Beijing","Chengdu"}),
             new ScenarioLider(5, "Цезарь", 5, new List < string >() { "Rome", "Konstantinopol", "Alexandria", "Siracuse", "Efes" }),
             new ScenarioLider(6, "Сталин", 4, new List < string >() { "Moscow", "Peterburg", "Vladivostok", "Novosibirsk", "Sevastopol" })
