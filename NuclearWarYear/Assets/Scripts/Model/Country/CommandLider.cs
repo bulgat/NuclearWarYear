@@ -21,6 +21,7 @@ public class CommandLider
     public List<string> _reportProducedWeaponList { get; private set; }
     List<GlobalParam.TypeEvent> VisibleList;
     public CountryLider Lider { get; private set; }
+    private int _year;
     public CommandLider(
         GlobalParam.TypeEvent nameCommand,
         CountryLider liderFiend,
@@ -39,6 +40,7 @@ public class CommandLider
         this.LiderFiend = liderFiend;
         _TargetCity = TargetCity;
         this.Lider = Lider;
+        _year = Year;
     }
     public bool GetNameExecute(GlobalParam.TypeEvent Name)
     {
@@ -91,7 +93,10 @@ public class CommandLider
     {
         return this.IncidentCommand?.Name == GlobalParam.TypeEvent.AttackMissle;
     }
-
+    public void SetNameCommand(GlobalParam.TypeEvent nameCommand)
+    {
+        this.IncidentCommand = new DictionaryEssence().BuildIncident(nameCommand, _year);
+    }
     public GlobalParam.TypeEvent GetNameCommand()
     {
         return IncidentCommand.Name;
@@ -99,7 +104,7 @@ public class CommandLider
 
     public bool GetDefence()
     {
-        Debug.Log("0279   com Lid DEAD ROCKET "+Lider.Name +"  GetDefence() =  " + this.IncidentCommand.Name+" type = "+ this.IncidentCommand.Type + " any = "+ GlobalParam.GroupDefenceList.Any(a => a == this.IncidentCommand.Type));
+
         return new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, this.IncidentCommand);
     }
 

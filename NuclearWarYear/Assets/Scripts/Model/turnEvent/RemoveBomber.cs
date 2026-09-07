@@ -9,13 +9,10 @@ namespace Assets.Scripts.Model.turnEvent
         public void AddBomber(MainModel mainModel, CountryLider lider)
         {
             
-            foreach (CommandLider commandLider in mainModel.GetCommandLiderList(mainModel.CountYear, lider.FlagId))
+            foreach (CommandLider commandLider in mainModel.GetCommandLiderList(mainModel.CountYear, lider))
             {
 
-                Debug.Log("0905  AddBomber    "+ commandLider.IncidentCommand.Id + "  remove SECOND = " + commandLider.IncidentCommand.SecondIncident);
- 
 
-                    Debug.Log("0906  ADD   missle = "+ commandLider.IncidentCommand.Name);
                 if (commandLider.IncidentCommand.SecondIncident != null)
                 {
                     lider.AddMissle(new List<Incident>() { commandLider.IncidentCommand.SecondIncident });

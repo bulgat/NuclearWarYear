@@ -29,7 +29,7 @@ namespace Assets.Scripts.Model.AiTurn
 
             if (lider.ReleaseCommandList != null)
             {
-                var list = mainModel.GetCommandLiderList(mainModel.CountYear - 1, lider.FlagId);
+                var list = mainModel.GetCommandLiderList(mainModel.CountYear - 1, lider);
 
                 incidentAttack = new ChangeIncident().MutationIncidentCommand(
                     lider,
@@ -102,6 +102,7 @@ namespace Assets.Scripts.Model.AiTurn
                 lider,
                 incidentAttack?.SecondIncident
                 );
+
             ResetAction();
 
             List<CommandLider> commandLidersList = new ActionCommandHelper().CreateAction(

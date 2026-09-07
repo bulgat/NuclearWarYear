@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SendAnim 
 {
+    /*
     public void SendBomberAndWing(GameObject bomberObject, bool AirPlane,
         bool RotationAndExplode, bool RocketRich, bool CrazyCow,
         int Speed,Transform transform,float animationTimeProcess, List<GameObject> TownList, TargetModel buildingCentralModel)
@@ -60,5 +61,5 @@ public class SendAnim
 
         }
     }
-
+    */
 }

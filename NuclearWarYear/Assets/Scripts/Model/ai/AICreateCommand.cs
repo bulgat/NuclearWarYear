@@ -12,7 +12,7 @@ public class AICreateCommand
         Action ResetAction,
         List<CountryLider> CountryLiderList,
         List<CityModel> TownList,
-        int _flagIdPlayer,
+        int flagIdPlayer,
         int FlagIdPlayer,
         int CountYear,
         MainModel mainModel)
@@ -23,8 +23,15 @@ public class AICreateCommand
             if (lider.FlagId != FlagIdPlayer && !lider.GetDead())
             {
                 List<CommandLider> commandList = new CreateCommandLider()
-                    .CommandOneLider(lider, ResetAction, CountryLiderList,
-            TownList, _flagIdPlayer, FlagIdPlayer, CountYear, mainModel);
+                    .CommandOneLider(
+                        lider,
+                        ResetAction,
+                        CountryLiderList,
+                        TownList, 
+                        flagIdPlayer, 
+                        FlagIdPlayer, 
+                        CountYear, 
+                        mainModel);
 
                 mainModel.MainStackCommandLiderList.AddRange(commandList);
             }

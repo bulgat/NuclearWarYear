@@ -22,5 +22,15 @@ namespace Assets.Scripts.Model.createCommand
             int indexCommand = UnityEngine.Random.Range(0, nameCommandList.Count);
             return nameCommandList[indexCommand];
         }
+        public GlobalParam.TypeEvent GetRandomNeutralCommand()
+        {
+            List<GlobalParam.TypeEvent> nameCommandList = new List<GlobalParam.TypeEvent>()
+            {
+                GlobalParam.TypeEvent.Propaganda,
+                GlobalParam.TypeEvent.Build,
+            };
+            int indexCommand = UnityEngine.Random.Range(0, nameCommandList.Count);
+            return nameCommandList[indexCommand];
+        }
     }
 }

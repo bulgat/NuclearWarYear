@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Model;
+using Assets.Scripts.Model.param;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,33 +26,33 @@ using System.Threading.Tasks;
         }
         if (randomAddWeaponList[0])
         {
-            resultList.Add(new DictionaryEssence().GetIncident(1) );
+            resultList.Add(new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Missle) );
             this._reportProducedWeaponList.Add("ракета Light");
         }
         if (randomAddWeaponList[1])
         {
-            resultList.Add(new DictionaryEssence().GetIncident(2));
+            resultList.Add(new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.HeavyMissle));
             this._reportProducedWeaponList.Add("ракета Medium");
         }
         if (randomAddWeaponList[2])
         {
-            resultList.Add(new DictionaryEssence().GetIncident(3));
+            resultList.Add(new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.SuperMissle));
             this._reportProducedWeaponList.Add("ракета Heavy");
         }
         if (randomAddWeaponList[3])
         {
-            resultList.Add(new DictionaryEssence().GetIncident(4));
+            resultList.Add(new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.MegaMissle));
             this._reportProducedWeaponList.Add("ракета S Heavy");
         }
         if (randomAddWeaponList[4])
         {
-            resultList.Add(new DictionaryEssence().GetIncident(4));
+            resultList.Add(new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Bomber));
             this._reportProducedWeaponList.Add("бомбардировщик");
         }
 
         if (randomAddWeaponList[5])
         {
-            resultList.Add(new DictionaryEssence().GetIncident(6));
+            resultList.Add(new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Defence));
             this._reportProducedWeaponList.Add("Противоракеты");
         }
         

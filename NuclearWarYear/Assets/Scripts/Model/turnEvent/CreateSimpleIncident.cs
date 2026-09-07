@@ -65,7 +65,7 @@ namespace Assets.Scripts.Model.turnEvent
                     report = string.Join(", ", reportProducedWeaponList.ToArray());
                 }
             }
-
+            Debug.Log("179   com Lid DEAD ROCK "+ lider .Name+ "  GetDefence  typ ny = " + incident.Name);
             switch (incident.Name)
             {
                 case GlobalParam.TypeEvent.Missle:

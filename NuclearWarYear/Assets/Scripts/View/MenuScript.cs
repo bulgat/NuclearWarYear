@@ -395,7 +395,7 @@ public class MenuScript : MonoBehaviour
         int indexLiderTime = 0;
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
-            foreach (CommandLider commandLider in this._mainModel.GetCommandLiderList(_mainModel.CountYear,lider.FlagId))
+            foreach (CommandLider commandLider in this._mainModel.GetCommandLiderList(_mainModel.CountYear,lider))
             {
 
                 StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.IncidentCommand));
@@ -425,7 +425,7 @@ public class MenuScript : MonoBehaviour
     {
         yield return new WaitForSeconds(this.waitTime + (this.waitTurnTime * indexLider));
 
-        incident = _controller.TurnSatisfyOneLider(lider.FlagId, incident);
+        incident = _controller.TurnSatisfyOneLider(lider, incident);
 
         this.TacticReal(incident.FullMessage(lider), incident.IdImage,
             lider);

@@ -282,15 +282,15 @@ public class MainModel
 
 	public void SetWarheadMethodPlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, this.GetCurrenPlayer().FlagId);
-		countryLider.GetBomber().SetDamage(countryLider.GetBomber().GetDamage());
+		countryLider.GetBomberFirst().SetDamage(countryLider.GetBomberFirst().GetDamage());
 		countryLider.GetMissleFirst().SetDamage(countryLider.GetMissleFirst().GetDamage());
 
 	}
 
-	public Incident SatisfyOneLiderTurn(int FlagId, Incident CommandIncident)
+	public Incident SatisfyOneLiderTurn(CountryLider country, Incident CommandIncident)
 	{
-        CountryLider lider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
-        return new MainSetTurnLider().SatisfyEventOneLiderTurn(lider, CountryLiderList,
+        //CountryLider lider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
+        return new MainSetTurnLider().SatisfyEventOneLiderTurn(country, CountryLiderList,
 			TownList, CommandIncident, CountYear, this);
 	}
 	public CommandLider GetCommandLider(int CountYear, CountryLider lider)
@@ -305,9 +305,9 @@ public class MainModel
     }
 
 
-    public List<CommandLider> GetCommandLiderList(int CountYear, int FlagId)
+    public List<CommandLider> GetCommandLiderList(int CountYear, CountryLider FlagId)
 	{
-		return this.MainStackCommandLiderList.Where(a => a.IncidentCommand.Year == CountYear && a.Lider.FlagId == FlagId).ToList();
+		return this.MainStackCommandLiderList.Where(a => a.IncidentCommand.Year == CountYear && a.Lider.FlagId == FlagId.FlagId).ToList();
 	}
 
 	private CityModel GetGuaranteeEnemyCity(int? CityId, int FlagId)
@@ -416,7 +416,7 @@ public class MainModel
         foreach (CountryLider lider in CountryLiderList)
         {
 
-            foreach (CommandLider commandLider in GetCommandLiderList(CountYear, lider.FlagId))
+            foreach (CommandLider commandLider in GetCommandLiderList(CountYear, lider))
             {
 					lider.RemoveWeapon(commandLider.IncidentCommand.Name);
             }
@@ -512,7 +512,7 @@ public class MainModel
 			foreach (CountryLider lider in this.CountryLiderList)
 			{
 
-				foreach (CommandLider commandLider in GetCommandLiderList(year, lider.FlagId))
+				foreach (CommandLider commandLider in GetCommandLiderList(year, lider))
 				{
 					text += "\n" + commandLider.IncidentCommand.FullMessage(lider);
 				}

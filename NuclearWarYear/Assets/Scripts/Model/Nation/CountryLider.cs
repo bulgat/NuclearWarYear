@@ -18,7 +18,7 @@ public class CountryLider
     public GameObject PropagandaBuilding;
     public List<Incident> ReleaseCommandList { private set; get; }
     private bool _dead;
-    private List<Incident> _missleList;
+    public List<Incident> WeaponList { private set; get; }
     public int FlagIdAttack = 1;
     private List<CityModel> _townListOwn;
     private int _maxPopulation;
@@ -43,7 +43,7 @@ public class CountryLider
     {
         this.FlagId = scenarioLider.FlagId;
         this.Player = player;
-        this._missleList = missleList;
+        this.WeaponList = missleList;
         PropagandaBuilding = PropagandaBuild;
         this.Name = scenarioLider.Name;
         this.GraphicId = scenarioLider.GraphicId;
@@ -115,46 +115,49 @@ public class CountryLider
 
     public int GetBomberCount()
     {
-        return this._missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).Count();
+        return this.WeaponList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).Count();
     }
     public List<Incident> GetDefenceWeapon()
     {
-        return this._missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).ToList();
+        return this.WeaponList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).ToList();
     }
-
-    public IWeapon GetBomber()
+    public IWeapon GetDefenceFirst()
+    {
+        return this.WeaponList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).FirstOrDefault();
+    }
+    public IWeapon GetBomberFirst()
     {
 
 
-        return this._missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).FirstOrDefault();
+        return this.WeaponList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Bomber).FirstOrDefault();
     }
 
 
     public void RemoveDefenceWeapon()
     {
 
-        Incident defenceWeapon = _missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).FirstOrDefault();
-        _missleList.Remove(defenceWeapon);
+        Incident defenceWeapon = WeaponList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Defence).FirstOrDefault();
+        WeaponList.Remove(defenceWeapon);
     }
 
     
     public int GetMissleCount()
     {
-        return _missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Missle).Count();
+        return WeaponList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Missle).Count();
     }
     
     public IWeapon GetMissleFirst()
     {
-        Debug.Log("00800   AttackBomber id = "+ _missleList.FirstOrDefault()?.Id);
-        return _missleList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Missle).FirstOrDefault();
+
+        return WeaponList.Where(a => a.GetTypeWeapon() == GlobalParam.TypeEvent.Missle).FirstOrDefault();
     }
     public void RemoveWeapon(GlobalParam.TypeEvent name)
     {
-        var deleteMissle = _missleList.FirstOrDefault(a => a.GetName() == name);
+        var deleteMissle = WeaponList.FirstOrDefault(a => a.GetName() == name);
 
         if (deleteMissle != null)
         {
-            _missleList.Remove(deleteMissle);
+            WeaponList.Remove(deleteMissle);
         }
 
     }
@@ -162,7 +165,7 @@ public class CountryLider
     {
         if (missleList != null)
         {
-            _missleList.AddRange(missleList);
+            WeaponList.AddRange(missleList);
         }
     }
     public GameObject GetCentralBuildingPropogation()
@@ -188,7 +191,7 @@ public class CountryLider
 
     public List<Incident> GetAllWeapon()
     {
-        return _missleList;
+        return WeaponList;
     }
     public int GetIndexLider()
     {

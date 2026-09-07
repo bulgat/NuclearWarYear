@@ -10,16 +10,16 @@ namespace Assets.Scripts.Model.createCommand
     internal class SwichFullCommand
     {
         public void TreatmentCommand(
-            GlobalParam.TypeEvent actionCommand,
+            //GlobalParam.TypeEvent actionNameCommand,
             CommandLider commandLider,
-            int FlagId,
+            CountryLider FlagId,
             bool AIfiend,
             List<CityModel> TownList,
            List<CountryLider> CountryLiderList,
            CountryLider countryLider)
         {
 
-            switch (actionCommand)
+            switch (commandLider.GetNameCommand())
             {
                 case GlobalParam.TypeEvent.Propaganda:
                     commandLider.SetVisibleEventList(GlobalParam.TypeEvent.Propaganda, true);
@@ -32,7 +32,7 @@ namespace Assets.Scripts.Model.createCommand
                     // Иначе ракета/самолёт через ход полетит в соседний город вместо намеченного.
                     if (AIfiend && target != null)
                     {
-                        target.TargetCity = new ModGameEngine().GetCityRandomFlagId(TownList, countryLider.FiendLider, FlagId, AIfiend);
+                        target.TargetCity = new ModGameEngine().GetCityRandomFlagId(TownList, countryLider.FiendLider, FlagId.FlagId, AIfiend);
                     }
                     break;
                 case GlobalParam.TypeEvent.Build:
@@ -59,7 +59,7 @@ namespace Assets.Scripts.Model.createCommand
                     {
                         commandLider.SetVisibleAttackBomber(true);
                         commandLider.SetTargetLider(countryLider.TargetCitySelectPlayer.EnemyLider);
-                        commandLider.SetAttackBomber(countryLider.GetBomber());
+                        commandLider.SetAttackBomber(countryLider.GetBomberFirst());
                     }
                     break;
                 case GlobalParam.TypeEvent.AttackMissle:

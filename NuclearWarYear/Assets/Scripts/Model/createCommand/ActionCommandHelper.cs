@@ -36,29 +36,79 @@ public class ActionCommandHelper
                         Year, targetCityModel, countryLider);
                 }
             }
+            Debug.Log("8109  - FIEND Command  tDamagePo GetNameFiendLider  futu    = " + commandLider.GetNameCommand());
+            AiAddTargetCity(commandLider, fiendLider1);
 
-            AiAddTargetCity(targetCityModel, commandLider, fiendLider1);
+            
 
+
+            new SwichFullCommand().TreatmentCommand(
+                commandLider,
+                countryLider,
+                true,
+                TownList,
+                CountryLiderList,
+                countryLider);
+
+            
+            if (commandLider.GetNameCommand() == GlobalParam.TypeEvent.Missle)
+            {
+                
+                if (countryLider.GetMissleCount() > 0)
+                {
+                    Debug.Log("8110  A   miss = " + countryLider.Name);
+                    Debug.Log("8111   Year = " + countryLider.GetMissleFirst().GetName());
+                    Debug.Log("8112     AttackBomb  = " + string.Join(",", countryLider.WeaponList.Select(a => a.Name)) + " L = " + countryLider.GetMissleCount());
+
+                    commandLider.SetNameCommand(countryLider.GetMissleFirst().GetName());
+                    Debug.Log("8113  A Bomb  remove SECOND = " + commandLider.GetNameCommand());
+                }
+                else
+                {
+                    commandLider.SetNameCommand(new RandomActionCommand().GetRandomNeutralCommand());
+                }
+            }
+            if (commandLider.GetNameCommand() == GlobalParam.TypeEvent.Bomber)
+            {
+                if (countryLider.GetBomberCount() > 0)
+                {
+                    commandLider.SetNameCommand(countryLider.GetBomberFirst().GetName());
+                } else
+                {
+                    commandLider.SetNameCommand(new RandomActionCommand().GetRandomNeutralCommand());
+                }
+            }
+            if (commandLider.GetNameCommand() == GlobalParam.TypeEvent.Defence)
+            {
+                if (countryLider.GetDefenceWeapon().Count() > 0)
+                {
+                    commandLider.SetNameCommand(countryLider.GetDefenceFirst().GetName());
+                }
+                else
+                {
+                    commandLider.SetNameCommand(new RandomActionCommand().GetRandomNeutralCommand());
+                }
+            }
         }
         else
         {
             if (commandLider._TargetCity == null)
             {
                 
-                AiAddTargetCity(targetCityModel, commandLider, fiendLider1);
+                AiAddTargetCity(commandLider, fiendLider1);
             }
+            new SwichFullCommand().TreatmentCommand(
+                commandLider, 
+                countryLider,
+                false,
+                TownList,
+                CountryLiderList,
+                countryLider);
         }
-        new SwichFullCommand().TreatmentCommand(
-            commandLider.GetNameCommand(),
-            commandLider, 
-            countryLider.FlagId,
-            countryLider.FlagId != FlagIdPlayer,
-            TownList,
-            CountryLiderList,
-            countryLider);
-        Debug.Log("0811  - GetDamagePo GetNameFiendLider  futureYe  = " + commandLider);
 
-        Debug.Log("0812  b  CountYear = " + CountryLiderList);
+
+
+        
 
         if (targetCityModel?.TargetCity != null)
         {
@@ -80,7 +130,7 @@ public class ActionCommandHelper
 
         return commandLiderList;
     }
-    private void AiAddTargetCity(TargetCityModel targetCityModel, CommandLider commandLider, CountryLider enemyLider)
+    private void AiAddTargetCity(CommandLider commandLider, CountryLider enemyLider)
     {
         commandLider.SetTargetLider(enemyLider);
     }
