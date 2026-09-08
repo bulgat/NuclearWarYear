@@ -68,9 +68,9 @@ public class Controller
         return _mainModel.TurnFinality();
     }
 
-    public Incident TurnSatisfyOneLider(CountryLider flagId, Incident CommandIncident)
+    public Incident TurnSatisfyOneLider(CountryLider lider, Incident CommandIncident)
     {
-        return _mainModel.SatisfyOneLiderTurn(flagId, CommandIncident);
+        return _mainModel.SatisfyOneLiderTurn(lider, CommandIncident);
     }
     public void ReleasePopulationEvent(Incident CommandIncident)
     {

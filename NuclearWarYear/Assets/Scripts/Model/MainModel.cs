@@ -289,7 +289,6 @@ public class MainModel
 
 	public Incident SatisfyOneLiderTurn(CountryLider country, Incident CommandIncident)
 	{
-        //CountryLider lider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId);
         return new MainSetTurnLider().SatisfyEventOneLiderTurn(country, CountryLiderList,
 			TownList, CommandIncident, CountYear, this);
 	}
