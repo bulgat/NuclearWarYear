@@ -93,7 +93,11 @@ public class DictionaryEssence
         new Incident(GlobalParam.TypeEvent.Airport, GlobalParam.TypeEvent.Defence, 19, 
             "Бомбардировщики приведены в готовность",new DamageParam(0, 4), false,
             null,"Подготовка бомбандировщиков",
-            false)
+            false),
+        new Incident(GlobalParam.TypeEvent.Rain, GlobalParam.TypeEvent.Incident, 20,
+            "Радиоктивный дождь, от взорванной ядерной ракеты {0} ",new DamageParam(5, 15), false,
+            new EventFortuneIncident(GlobalParam.TypeEvent.CrazyCow,0),"",
+            true),
     };
      
 	public int GetIdEventName(GlobalParam.TypeEvent Name)
