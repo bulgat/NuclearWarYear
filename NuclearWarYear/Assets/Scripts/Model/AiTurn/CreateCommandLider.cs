@@ -16,8 +16,7 @@ namespace Assets.Scripts.Model.AiTurn
             Action ResetAction,
             List<CountryLider> CountryLiderList,
             List<CityModel> TownList,
-            int _flagIdPlayer,
-            int FlagIdPlayer,
+            int flagIdPlayer,
             int CountYear,
             MainModel mainModel)
         {
@@ -46,7 +45,7 @@ namespace Assets.Scripts.Model.AiTurn
 
             if (actionNameCommand == GlobalParam.TypeEvent.None)
             {
-                if (lider.FlagId != FlagIdPlayer)
+                if (lider.FlagId != flagIdPlayer)
                 {
                     actionNameCommand = new RandomActionCommand().GetRandomActionCommand();
                 }
@@ -82,7 +81,7 @@ namespace Assets.Scripts.Model.AiTurn
             TargetCityModel targetCityModel
                 = new TargetCityModel(targetTownCity, myCity, fiendLider1);
 
-            if (lider.FlagId != _flagIdPlayer)
+            if (lider.FlagId != flagIdPlayer)
             {
 
                 lider.SetTargetCity(targetCityModel);
@@ -90,7 +89,7 @@ namespace Assets.Scripts.Model.AiTurn
 
             // Счастливая карта!
             CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
-                lider.FlagId != FlagIdPlayer, lider, CountYear);
+                lider.FlagId != flagIdPlayer, lider, CountYear);
 
 
 
@@ -108,7 +107,7 @@ namespace Assets.Scripts.Model.AiTurn
             List<CommandLider> commandLidersList = new ActionCommandHelper().CreateAction(
                 CountryLiderList,
                 TownList,
-                FlagIdPlayer,
+                flagIdPlayer,
                 commandLider,
                 lider,
                 CountYear,

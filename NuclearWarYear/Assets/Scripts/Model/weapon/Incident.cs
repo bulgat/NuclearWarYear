@@ -84,14 +84,22 @@ public class Incident : Weapon, IWeapon
     }
     public string FullMessage(CountryLider lider)
     {
-       
+   
 
         string message = MutationMessage();
         if (this.PopulationEvent == null)
         {
             return message;
         }
-        int population = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
+        // Расчет фактического уменьшения населения, а не урона оружия.
+        // Настоящее уменьшение ограничено текущим населением города (не может уйти ниже 0).
+        int damagePopulation = Mathf.Max(Mathf.Abs(this.PopulationEvent.MyPopulation), Mathf.Abs(this.PopulationEvent.FiendPopulation));
+        CityModel targetCity = this.PopulationEvent.GreatTarget ?? this.PopulationEvent.FiendCity;
+        int population = damagePopulation;
+        if (targetCity != null)
+        {
+            population = Mathf.Min(damagePopulation, targetCity.GetPopulation());
+        }
 
         return $"{lider.Name}   : {message} {(population>0? ":"+population:"")} {GetNameFiendLider()}.";
     }

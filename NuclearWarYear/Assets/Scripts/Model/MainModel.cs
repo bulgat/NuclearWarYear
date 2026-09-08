@@ -261,7 +261,6 @@ public class MainModel
 			CountryLiderList,
 			TownList,
 			this.GetCurrenPlayer().FlagId,
-			this.GetCurrenPlayer().FlagId,
 			futureYear,
 			this);
 	}
@@ -406,7 +405,6 @@ public class MainModel
 			ResetAction,
 			CountryLiderList,
 		   GetAllTownList(),
-		   GetCurrenFlagPlayer().FlagId,
 		   GetCurrenFlagPlayer().FlagId,
 		   CountYear,
 		   this);

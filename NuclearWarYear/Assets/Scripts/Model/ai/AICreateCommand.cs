@@ -13,14 +13,13 @@ public class AICreateCommand
         List<CountryLider> CountryLiderList,
         List<CityModel> TownList,
         int flagIdPlayer,
-        int FlagIdPlayer,
         int CountYear,
         MainModel mainModel)
     {
         foreach (CountryLider lider in CountryLiderList)
         {
             // only fiend, skip destroyed countries (no cities left)
-            if (lider.FlagId != FlagIdPlayer && !lider.GetDead())
+            if (lider.FlagId != flagIdPlayer && !lider.GetDead())
             {
                 List<CommandLider> commandList = new CreateCommandLider()
                     .CommandOneLider(
@@ -29,7 +28,6 @@ public class AICreateCommand
                         CountryLiderList,
                         TownList, 
                         flagIdPlayer, 
-                        FlagIdPlayer, 
                         CountYear, 
                         mainModel);
 
