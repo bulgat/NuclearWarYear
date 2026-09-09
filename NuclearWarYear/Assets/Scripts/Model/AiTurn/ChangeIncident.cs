@@ -43,7 +43,7 @@ namespace Assets.Scripts.Model.AiTurn
                     if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, incid))
                     {
                         
-                        var secondIncident = new DictionaryEssence().BuildIncident(incid.GetName(), mainModel.CountYear);
+                        var secondIncident = new DictionaryEssence().BuildIncident(incid.GetName(), mainModel._gameParam.CountYear);
                         incid.SetSecondIncident(secondIncident);
                         incid.SetTypeWeapon(GlobalParam.TypeEvent.AttackMissle);
                         
@@ -57,8 +57,8 @@ namespace Assets.Scripts.Model.AiTurn
                     if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, incid))
                     {
 
-                        var secondIncident = new DictionaryEssence().BuildIncident(incid.GetName(), mainModel.CountYear);
-                        incid.SetSecondIncident(new DictionaryEssence().BuildIncident(incid.GetName(), mainModel.CountYear));
+                        var secondIncident = new DictionaryEssence().BuildIncident(incid.GetName(), mainModel._gameParam.CountYear);
+                        incid.SetSecondIncident(new DictionaryEssence().BuildIncident(incid.GetName(), mainModel._gameParam.CountYear));
                         incid.SetTypeWeapon(GlobalParam.TypeEvent.AttackBomber);
                         return new IncidentAttack()
                         {

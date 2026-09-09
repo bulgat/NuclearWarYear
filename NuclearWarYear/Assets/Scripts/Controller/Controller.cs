@@ -17,18 +17,18 @@ public class Controller
     {
         _mainModel.SetLiderTargetPlayer(FlagId);
     }
-    public void Defence(int FlagId)
+    public void Defence(CountryLider FlagId)
     {
         _mainModel.SetDefencePlayer(FlagId);
     }
 
-    public void Building(int FlagId)
+    public void Building(CountryLider FlagId)
     {
         _mainModel.SetBuildingPlayer(FlagId);
 
     }
 
-    public void Propaganda(int FlagId)
+    public void Propaganda(CountryLider FlagId)
     {
         _mainModel.SetPropagandPlayer(FlagId);
     }
@@ -49,12 +49,12 @@ public class Controller
         _mainModel.ChangeCurrentPlayer();
     }
   
-    public void SetMissle(int FlagId, GlobalParam.TypeEvent nameEvent)
+    public void SetMissle(CountryLider FlagId, GlobalParam.TypeEvent nameEvent)
     {
         _mainModel.SetMisslePlayer(FlagId, nameEvent);
         return;
     }
-    public void SetBomber(int FlagId, GlobalParam.TypeEvent nameEvent)
+    public void SetBomber(CountryLider FlagId, GlobalParam.TypeEvent nameEvent)
     {
         _mainModel.SetBomberPlayer(FlagId, nameEvent);
         return;

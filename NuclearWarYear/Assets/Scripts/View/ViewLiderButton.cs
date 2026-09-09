@@ -63,9 +63,9 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         circleReady.enabled = false;
 
 
-        if (_mainModel.GetCommandLider(_mainModel.CountYear, lider) != null)
+        if (_mainModel.GetCommandLider(_mainModel._gameParam.CountYear, lider) != null)
         {
-            if (_mainModel.GetCommandLider(_mainModel.CountYear, lider).GetVisibleBomber())
+            if (_mainModel.GetCommandLider(_mainModel._gameParam.CountYear, lider).GetVisibleBomber())
             {
                 if (this.IconCircleReadyList != null)
                 {
@@ -74,7 +74,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
                 }
             }
 
-            if (_mainModel.GetCommandLider(_mainModel.CountYear, lider).GetVisibleMissle())
+            if (_mainModel.GetCommandLider(_mainModel._gameParam.CountYear, lider).GetVisibleMissle())
             {
                 if (this.IconCircleReadyList != null)
                 {

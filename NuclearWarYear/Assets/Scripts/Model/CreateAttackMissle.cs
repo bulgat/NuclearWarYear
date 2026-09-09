@@ -9,7 +9,7 @@ namespace Assets.Scripts.Model
     {
         public void SetAttackMisslePlayer(MainModel mainModel, int FlagId, TurnFinally turnFinally)
         {
-            int futureYear = mainModel.CountYear + 1;
+            int futureYear = mainModel._gameParam.CountYear + 1;
             CommandLider commandLider = null;
             CountryLider countryLider = new LiderHelperOne().GetLiderOne(mainModel.CountryLiderList, FlagId);
             CityModel enemyTownCity = countryLider.TargetCitySelectPlayer.TargetCity;
@@ -48,7 +48,7 @@ namespace Assets.Scripts.Model
             }
             
             commandLider.IncidentCommand.SetSecondIncident(turnFinally.OldIncident);
-            mainModel.ResetAction();
+            mainModel.ResetActionCheckVictory();
 
             commandLiderFortune = new CreateFortune().FortuneEvent(
                    countryLider.FlagId != mainModel.GetCurrentPlayer().FlagId,

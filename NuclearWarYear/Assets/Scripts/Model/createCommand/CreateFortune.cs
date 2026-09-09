@@ -35,12 +35,11 @@ namespace Assets.Scripts.Model.createCommand
         private CommandLider GetFortuneEvent(CountryLider countryLider, int Year, 
             EventFortuneIncident eventFortuneIncident) 
         {
-            var kol = countryLider.TargetCitySelectPlayer;
 
-            GlobalParam.TypeEvent actionCommand = GlobalParam.TypeEvent.None;
-                            actionCommand = eventFortuneIncident.Name;
-                    CommandLider commandLider = null;
-                    commandLider = new CommandLider(actionCommand,
+            GlobalParam.TypeEvent actionCommand = eventFortuneIncident.Name;
+
+            CommandLider commandLider = new CommandLider(
+                        actionCommand,
                         countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
                         Year,
                         countryLider.TargetCitySelectPlayer,

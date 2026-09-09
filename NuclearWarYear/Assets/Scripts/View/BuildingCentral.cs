@@ -79,7 +79,7 @@ public class BuildingCentral : MonoBehaviour
             if (VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()])
             {
                 Debug.Log("0608 RocketRich " + GetTarget(MyCity) );
-                Debug.Log("0609  _Crea  L " + UfoObject);
+
                 if (UfoObject != null)
                 {
                     UfoObject.transform.position = GetTarget(MyCity);

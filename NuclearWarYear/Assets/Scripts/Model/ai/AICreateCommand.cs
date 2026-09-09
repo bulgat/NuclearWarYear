@@ -9,25 +9,23 @@ public class AICreateCommand
 {
 
     public void EstimationCreateCommandAiAll(
-        Action ResetAction,
         List<CountryLider> CountryLiderList,
         List<CityModel> TownList,
-        int flagIdPlayer,
+        CountryLider flagPlayer,
         int CountYear,
         MainModel mainModel)
     {
         foreach (CountryLider lider in CountryLiderList)
         {
             // only fiend, skip destroyed countries (no cities left)
-            if (lider.FlagId != flagIdPlayer && !lider.GetDead())
+            if (lider.FlagId != flagPlayer.FlagId && !lider.GetDead())
             {
                 List<CommandLider> commandList = new CreateCommandLider()
-                    .CommandOneLider(
+                    .GetCommandOneLiderList(
                         lider,
-                        ResetAction,
                         CountryLiderList,
                         TownList, 
-                        flagIdPlayer, 
+                        flagPlayer, 
                         CountYear, 
                         mainModel);
 

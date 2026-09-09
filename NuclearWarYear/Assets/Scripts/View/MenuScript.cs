@@ -395,7 +395,7 @@ public class MenuScript : MonoBehaviour
         int indexLiderTime = 0;
         foreach (CountryLider lider in _mainModel.CountryLiderList)
         {
-            foreach (CommandLider commandLider in this._mainModel.GetCommandLiderList(_mainModel.CountYear,lider))
+            foreach (CommandLider commandLider in this._mainModel.GetCommandLiderList(_mainModel._gameParam.CountYear, lider))
             {
 
                 StartCoroutine(TurnOneLider(lider, indexLiderTime, commandLider.IncidentCommand));
@@ -490,7 +490,7 @@ public class MenuScript : MonoBehaviour
     }
     private CityModel TargetManager(CountryLider lider)
     {
-        CityModel cityTown = this._mainModel.GetCommandLider(_mainModel.CountYear,lider)._TargetCity.TargetCity;
+        CityModel cityTown = this._mainModel.GetCommandLider(_mainModel._gameParam.CountYear, lider)._TargetCity.TargetCity;
 
         if (cityTown != null)
         {
@@ -520,20 +520,20 @@ public class MenuScript : MonoBehaviour
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, cardAction))
         {
 
-            _controller.SetMissle(_mainModel.GetCurrenFlagPlayer().FlagId, missleBomberIncident.Name);
+            _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
 
         }
 
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, cardAction))
         {
 
-            _controller.SetBomber(_mainModel.GetCurrenFlagPlayer().FlagId, missleBomberIncident.Name);
+            _controller.SetBomber(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
 
         }
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, cardAction))
         {
 
-            _controller.Defence(_mainModel.GetCurrenFlagPlayer().FlagId);
+            _controller.Defence(_mainModel.GetCurrenFlagPlayer());
 
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Propaganda)
@@ -555,13 +555,13 @@ public class MenuScript : MonoBehaviour
             Debug.Log("0056  Creat  "+_mainModel.GetCurrentPlayer().TargetCitySelectPlayer.TargetCity.GetId());
             Debug.Log("0057  CreateCommand C = "  );
 
-            _controller.Propaganda(_mainModel.GetCurrenFlagPlayer().FlagId);
+            _controller.Propaganda(_mainModel.GetCurrenFlagPlayer());
 
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Build)
         {
 
-            _controller.Building(_mainModel.GetCurrenFlagPlayer().FlagId);
+            _controller.Building(_mainModel.GetCurrenFlagPlayer());
 
         }
         if (cardAction.Mortal)
@@ -641,7 +641,7 @@ public class MenuScript : MonoBehaviour
 
     void ResetAction()
     {
-        _mainModel.ResetAction();
+        _mainModel.ResetActionCheckVictory();
     }
     // Main time
     private IEnumerator OpenMenu(float WaitTimeOpen)
@@ -705,8 +705,6 @@ public class MenuScript : MonoBehaviour
                                     Debug.Log("0400 CountYe  Town My  GetTargetBo  li  = " + viewCircleReady);
         viewCircleReady.SetParam(Visible, IconCircleReadyList[IndexImage], incident);
 
-        //CircleReady.enabled = Visible;
-        //CircleReady.sprite = IconCircleReadyList[IndexImage];
     }
 
     private void UpdatePanelVisible()
@@ -764,7 +762,7 @@ public class MenuScript : MonoBehaviour
         }
         DrawTownInfoList();
         UpdateJoystick();
-        TurnYear.text = _mainModel.CountYear.ToString();
+        TurnYear.text = _mainModel._gameParam.CountYear.ToString();
     }
     void DrawTownInfoList()
     {

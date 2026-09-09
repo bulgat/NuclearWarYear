@@ -9,7 +9,7 @@ namespace Assets.Scripts.Model.turnEvent
         public void AddBomber(MainModel mainModel, CountryLider lider)
         {
             
-            foreach (CommandLider commandLider in mainModel.GetCommandLiderList(mainModel.CountYear, lider))
+            foreach (CommandLider commandLider in mainModel.GetCommandLiderList(mainModel._gameParam.CountYear, lider))
             {
 
 

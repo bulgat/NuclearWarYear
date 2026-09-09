@@ -62,12 +62,13 @@ namespace Assets.Scripts.Model
                    "Бомбардировщики сбиты", 
                    false);
             }
-
+            Debug.Log("0702     AttackBo= "+ incident.Name);
             if (incident.PopulationEvent == null)
             {
 
                 throw new Exception("not event");
             }
+            Debug.Log("0703  Cr   name = " + incident);
             return incident;
         }
     }

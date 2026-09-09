@@ -36,7 +36,7 @@ public class ActionCommandHelper
                         Year, targetCityModel, countryLider);
                 }
             }
-            Debug.Log("8109  - FIEND Command  tDamagePo GetNameFiendLider  futu    = " + commandLider.GetNameCommand());
+
             AiAddTargetCity(commandLider, fiendLider1);
 
             
@@ -56,9 +56,6 @@ public class ActionCommandHelper
                 
                 if (countryLider.GetMissleCount() > 0)
                 {
-                    Debug.Log("8110  A   miss = " + countryLider.Name);
-                    Debug.Log("8111   Year = " + countryLider.GetMissleFirst().GetName());
-                    Debug.Log("8112     AttackBomb  = " + string.Join(",", countryLider.WeaponList.Select(a => a.Name)) + " L = " + countryLider.GetMissleCount());
 
                     commandLider.SetNameCommand(countryLider.GetMissleFirst().GetName());
                     Debug.Log("8113  A Bomb  remove SECOND = " + commandLider.GetNameCommand());

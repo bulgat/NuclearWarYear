@@ -11,12 +11,11 @@ namespace Assets.Scripts.Model.AiTurn
 {
     public class CreateCommandLider
     {
-        public List<CommandLider> CommandOneLider(
+        public List<CommandLider> GetCommandOneLiderList(
             CountryLider lider,
-            Action ResetAction,
             List<CountryLider> CountryLiderList,
             List<CityModel> TownList,
-            int flagIdPlayer,
+            CountryLider flagPlayer,
             int CountYear,
             MainModel mainModel)
         {
@@ -28,7 +27,7 @@ namespace Assets.Scripts.Model.AiTurn
 
             if (lider.ReleaseCommandList != null)
             {
-                var list = mainModel.GetCommandLiderList(mainModel.CountYear - 1, lider);
+                var list = mainModel.GetCommandLiderList(mainModel._gameParam.CountYear - 1, lider);
 
                 incidentAttack = new ChangeIncident().MutationIncidentCommand(
                     lider,
@@ -45,7 +44,7 @@ namespace Assets.Scripts.Model.AiTurn
 
             if (actionNameCommand == GlobalParam.TypeEvent.None)
             {
-                if (lider.FlagId != flagIdPlayer)
+                if (lider.FlagId != flagPlayer.FlagId)
                 {
                     actionNameCommand = new RandomActionCommand().GetRandomActionCommand();
                 }
@@ -81,7 +80,7 @@ namespace Assets.Scripts.Model.AiTurn
             TargetCityModel targetCityModel
                 = new TargetCityModel(targetTownCity, myCity, fiendLider1);
 
-            if (lider.FlagId != flagIdPlayer)
+            if (lider.FlagId != flagPlayer.FlagId)
             {
 
                 lider.SetTargetCity(targetCityModel);
@@ -89,7 +88,7 @@ namespace Assets.Scripts.Model.AiTurn
 
             // Счастливая карта!
             CommandLider commandLiderFortune = new CreateFortune().FortuneEvent(
-                lider.FlagId != flagIdPlayer, lider, CountYear);
+                lider.FlagId != flagPlayer.FlagId, lider, CountYear);
 
 
 
@@ -102,12 +101,11 @@ namespace Assets.Scripts.Model.AiTurn
                 incidentAttack?.SecondIncident
                 );
 
-            ResetAction();
 
             List<CommandLider> commandLidersList = new ActionCommandHelper().CreateAction(
                 CountryLiderList,
                 TownList,
-                flagIdPlayer,
+                flagPlayer.FlagId,
                 commandLider,
                 lider,
                 CountYear,
