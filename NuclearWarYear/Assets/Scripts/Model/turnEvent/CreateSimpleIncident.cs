@@ -80,7 +80,7 @@ namespace Assets.Scripts.Model.turnEvent
                     incident.SetReleaseMessage(turnEventExecute.ShowFiend);
                     incident.SetPopulationEvent(new StateAttackPopulation(message, incident.SecondIncident.Damage, cityFiend, enemylider));
                     lider.SetCommandRealise(incident);
-                    mainModel._gameParam.AddRain(cityFiend.Name);
+                    mainModel._gameParam.AddRain(cityFiend);
                     break;
                 case GlobalParam.TypeEvent.Bomber:
                     message = lider.SetEventTotalMessageTurn(mainModel.GetCommandLider(CountYear, lider).IncidentCommand.GetMessage(),
@@ -94,7 +94,7 @@ namespace Assets.Scripts.Model.turnEvent
                     incident.SetReleaseMessage(turnEventExecute.ShowFiend);
                     incident.SetPopulationEvent(new StateAttackPopulation(message, incident.SecondIncident.GetDamage(), cityFiend, enemylider));
                     lider.SetCommandRealise(incident);
-                    mainModel._gameParam.AddRain(cityFiend.Name);
+                    mainModel._gameParam.AddRain(cityFiend);
                     break;
                 case GlobalParam.TypeEvent.Propaganda:
                     incident.SetReleaseMessage(turnEventExecute.ShowFiend);
@@ -154,6 +154,14 @@ namespace Assets.Scripts.Model.turnEvent
                     incident.SetPopulationEvent(new StateDragPopulation(
                         message, 
                         incident.GetDamage(),
+                        myCity,
+                        cityFiend,
+                        enemylider));
+                    lider.SetCommandRealise(incident);
+                    break;
+                case GlobalParam.TypeEvent.Rain:
+                    incident.SetReleaseMessage(turnEventExecute.ShowFiend);
+                    incident.SetPopulationEvent(new StateDragPopulation(message, incident.GetDamage(),
                         myCity,
                         cityFiend,
                         enemylider));

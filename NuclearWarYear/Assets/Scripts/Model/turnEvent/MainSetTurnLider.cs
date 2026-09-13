@@ -63,12 +63,13 @@ namespace Assets.Scripts.Model
                    false);
             }
             Debug.Log("0702     AttackBo= "+ incident.Name);
+            Debug.Log("0703 cidentComma =   name = "+ incident.PopulationEvent);
             if (incident.PopulationEvent == null)
             {
 
                 throw new Exception("not event");
             }
-            Debug.Log("0703  Cr   name = " + incident);
+            Debug.Log("0704   name = " + incident);
             return incident;
         }
     }

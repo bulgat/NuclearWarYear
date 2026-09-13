@@ -17,7 +17,7 @@ namespace Assets.Scripts.Model.createCommand
             Debug.Log("08108  _Cre "+ mainModel._gameParam.RainList.Count);
             var CountryLiderLifeList = CountryLiderList.Where(a => a.GetDead() == false).ToList();
             var list = new List<string>();
-            foreach (string item in mainModel._gameParam.RainList) {
+            foreach (CityModel item in mainModel._gameParam.RainList) {
                 Debug.Log("08109  Cr L " );
                 int index = (int)UnityEngine.Random.Range(0.0f, CountryLiderLifeList.Count());
                 CountryLider victim = CountryLiderList[index];
@@ -26,7 +26,7 @@ namespace Assets.Scripts.Model.createCommand
                 
                 CommandLider command = new CommandLider(
                         GlobalParam.TypeEvent.Rain,
-                        null,
+                        CountryLiderLifeList[index],
                         mainModel._gameParam.CountYear,
                         victim.TargetCitySelectPlayer,
                         victim);

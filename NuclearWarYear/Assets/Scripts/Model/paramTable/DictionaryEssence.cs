@@ -95,9 +95,9 @@ public class DictionaryEssence
             null,"Подготовка бомбандировщиков",
             false),
         new Incident(GlobalParam.TypeEvent.Rain, GlobalParam.TypeEvent.Incident, 20,
-            "Радиоктивный дождь, от взорванной ядерной ракеты {0} ",new DamageParam(5, 15), false,
-            new EventFortuneIncident(GlobalParam.TypeEvent.CrazyCow,0),"",
-            true),
+            "Радиоктивный дождь, от взорванной ядерной ракеты {0} ",new DamageParam(5, 20), false,
+            new EventFortuneIncident(GlobalParam.TypeEvent.Baby,32),"",
+            false),
     };
      
 	public int GetIdEventName(GlobalParam.TypeEvent Name)

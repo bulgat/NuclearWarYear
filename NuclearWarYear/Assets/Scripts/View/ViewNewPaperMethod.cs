@@ -19,7 +19,6 @@ namespace Assets.Scripts.View
 
         public void Awake()
         {
-            Debug.Log("0700 IncidentComma =   name = "  );
             ButtonBack.onClick.AddListener(() => ButtonBackMethod());
             ButtonNext.onClick.AddListener(() => ButtonNextMethod());
         }
