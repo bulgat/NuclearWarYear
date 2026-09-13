@@ -1,3 +1,4 @@
+using Assets.Scripts.Model.param;
 using UnityEngine;
 
 public class UFOmodel : MonoBehaviour
@@ -8,6 +9,7 @@ public class UFOmodel : MonoBehaviour
     public GameObject RocketRich;
     public GameObject Defectors;
     public GameObject Missle;
+    public GameObject Rain;
     private void Awake()
     {
     }
@@ -15,7 +17,7 @@ public class UFOmodel : MonoBehaviour
     {
 
     }
-    public void SetVisible(string nameId)
+    public void SetVisible(GlobalParam.TypeEvent nameId)
     {
         this.UFO.SetActive(false);
         this.Stork.SetActive(false);
@@ -23,30 +25,34 @@ public class UFOmodel : MonoBehaviour
         this.RocketRich.SetActive(false);
         this.Defectors.SetActive(false);
         this.Missle.SetActive(false);
+        this.Rain.SetActive(false);
         switch (nameId)
         {
-            case "Ufo":
-            this.UFO.SetActive(true);
-            break;
-            case "Baby":
-            this.Stork.SetActive(true);
-            break;
-            case "CrazyCow":
+            case GlobalParam.TypeEvent.Ufo:
+                this.UFO.SetActive(true);
+                break;
+            case GlobalParam.TypeEvent.Baby:
+                this.Stork.SetActive(true);
+                break;
+            case GlobalParam.TypeEvent.CrazyCow:
                 this.Cow.SetActive(true);
                 break;
-            case "RocketRich":
+            case GlobalParam.TypeEvent.RocketRich:
                 this.RocketRich.SetActive(true);
                 break;
-            case "Defectors":
+            case GlobalParam.TypeEvent.Defectors:
                 this.Defectors.SetActive(true);
                 break;
-            case "AttackMissle":
+            case GlobalParam.TypeEvent.AttackMissle:
                 this.Missle.SetActive(true);
+                break;
+            case GlobalParam.TypeEvent.Rain:
+                this.Rain.SetActive(true);
                 break;
         }
     }
     void Update()
     {
-        
+
     }
 }

@@ -66,7 +66,7 @@ public class BuildingCentral : MonoBehaviour
         VisibleObjList.Add(GlobalParam.TypeEvent.Baby.ToString(), false);
         VisibleObjList.Add(GlobalParam.TypeEvent.RocketRich.ToString(), false);
         VisibleObjList.Add(GlobalParam.TypeEvent.CrazyCow.ToString(), false);
-
+        VisibleObjList.Add(GlobalParam.TypeEvent.Rain.ToString(), false);
 
     }
     public void SetTargetModel(TargetModel myCity, TargetModel targetBuildingModel)
@@ -106,7 +106,7 @@ public class BuildingCentral : MonoBehaviour
         VisibleObjList[GlobalParam.TypeEvent.Baby.ToString()] = NameCommand == GlobalParam.TypeEvent.Baby;
         VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()] = NameCommand == GlobalParam.TypeEvent.RocketRich;
         VisibleObjList[GlobalParam.TypeEvent.CrazyCow.ToString()] = NameCommand == GlobalParam.TypeEvent.CrazyCow;
-
+        VisibleObjList[GlobalParam.TypeEvent.Rain.ToString()] = NameCommand == GlobalParam.TypeEvent.Rain;
 
         if (WingMissle != null)
         {
@@ -134,6 +134,7 @@ public class BuildingCentral : MonoBehaviour
                 || NameCommand == GlobalParam.TypeEvent.RocketRich
                 || NameCommand == GlobalParam.TypeEvent.Defectors
                 || NameCommand == GlobalParam.TypeEvent.AttackMissle
+                || NameCommand == GlobalParam.TypeEvent.Rain
                 )
         {
 
@@ -141,28 +142,31 @@ public class BuildingCentral : MonoBehaviour
             UFOmodel uFOmodel = UfoObject.GetComponent<UFOmodel>();
             if (NameCommand == GlobalParam.TypeEvent.Ufo)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.Ufo.ToString());
+                uFOmodel.SetVisible(GlobalParam.TypeEvent.Ufo);
             }
             if (NameCommand == GlobalParam.TypeEvent.Baby)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.Baby.ToString());
+                uFOmodel.SetVisible(GlobalParam.TypeEvent.Baby);
             }
             if (NameCommand == GlobalParam.TypeEvent.CrazyCow)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.CrazyCow.ToString());
+                uFOmodel.SetVisible(GlobalParam.TypeEvent.CrazyCow);
             }
             if (NameCommand == GlobalParam.TypeEvent.RocketRich)
             {
-
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.RocketRich.ToString());
+                uFOmodel.SetVisible(GlobalParam.TypeEvent.RocketRich);
             }
             if (NameCommand == GlobalParam.TypeEvent.Defectors)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.Defectors.ToString());
+                uFOmodel.SetVisible(GlobalParam.TypeEvent.Defectors);
             }
             if (NameCommand == GlobalParam.TypeEvent.AttackMissle)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.AttackMissle.ToString());
+                uFOmodel.SetVisible(GlobalParam.TypeEvent.AttackMissle);
+            }
+            if (NameCommand == GlobalParam.TypeEvent.Rain)
+            {
+                uFOmodel.SetVisible(GlobalParam.TypeEvent.Rain);
             }
         }
         else
@@ -218,6 +222,7 @@ public class BuildingCentral : MonoBehaviour
             if (VisibleObjList[GlobalParam.TypeEvent.Ufo.ToString()]
                 || VisibleObjList[GlobalParam.TypeEvent.Baby.ToString()]
                 || VisibleObjList[GlobalParam.TypeEvent.CrazyCow.ToString()]
+                || VisibleObjList[GlobalParam.TypeEvent.Rain.ToString()]
                 )
             {
                 UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(

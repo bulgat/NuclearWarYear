@@ -133,6 +133,7 @@
     <Compile Include="Assets\Scripts\Model\Nation\CountryLider.cs" />
     <Compile Include="Assets\Scripts\Model\TurnFinally.cs" />
     <Compile Include="Assets\Scripts\Model\createCommand\SwichFullCommand.cs" />
+    <Compile Include="Assets\Scripts\Model\paramTable\GameParam.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\Missle.cs" />
     <Compile Include="Assets\Scripts\View\ViewCardWeapon.cs" />
     <Compile Include="Assets\Scripts\Model\DamagePopulationHelper.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Assets\Scripts\View\SearchTownObject.cs" />
     <Compile Include="Assets\Scripts\Model\paramTable\DictionaryEssence.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\DamageParam.cs" />
+    <Compile Include="Assets\Scripts\Model\createCommand\CreateFalloutRain.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
     <Compile Include="Assets\Scripts\Model\turnEvent\UtilModelCity.cs" />
     <Compile Include="Assets\Scripts\Model\CityHelperList.cs" />
