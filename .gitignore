@@ -107,7 +107,7 @@ crashlytics-build.properties
 *.bin
 *.gbc
 *.log
-*.png.meta
+#*.png.meta
 
 /NuclearWarYear/Library/Artifacts/*
 /NuclearWarYear/Library/Artifacts/00
