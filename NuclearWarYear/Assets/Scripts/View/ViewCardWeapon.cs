@@ -12,6 +12,7 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     private Incident _incident;
     public Text Text;
     System.Action<Incident> callback;
+    System.Action<Incident> refreshViewCallback;
     private List<Sprite> IconCardList;
     public Image SpriteIcon;
     void Start()
@@ -23,7 +24,21 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     {
         Debug.Log("0802  tackBo= "  );
         this.callback(this._incident);
+        // Пересобираем раскладку карт. RefreshViewCard сбросит предыдущую карту в ряд
+        // и анимирует выбранную (this._incident) в центр.
+        this.refreshViewCallback?.Invoke(this._incident);
+    }
+
+    public void AnimateToCenter()
+    {
         StartCoroutine(MoveCardToCenter());
+    }
+
+    public bool MatchesIncident(Incident incident)
+    {
+        return incident != null && _incident != null
+            && incident.GetName() == _incident.GetName()
+            && incident.GetImageId() == _incident.GetImageId();
     }
 
     IEnumerator MoveCardToCenter()
@@ -73,5 +88,9 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     public void SetCallback(System.Action<Incident> Callback)
     {
         this.callback = Callback;
+    }
+    public void SetRefreshViewCallback(System.Action<Incident> RefreshViewCallback)
+    {
+        this.refreshViewCallback = RefreshViewCallback;
     }
 }

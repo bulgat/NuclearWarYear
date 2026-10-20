@@ -156,7 +156,7 @@ public class MenuScript : MonoBehaviour
         }
     }
 
-    void RefreshViewCard()
+    void RefreshViewCard(Incident selectIncident = null)
     {
         if (this.CardButtonList == null)
         {
@@ -188,8 +188,23 @@ public class MenuScript : MonoBehaviour
 
                 viewCardWeapon.SetParam(IconCardList, incident);
                 viewCardWeapon.SetCallback(ClickCardPlayer);
+                viewCardWeapon.SetRefreshViewCallback(RefreshViewCard);
                 this.CardButtonList.Add(CardWing);
                 count++;
+            }
+
+            // Анимируем выбранную карту в центр, если такая есть.
+            if (selectIncident != null)
+            {
+                foreach (var card in this.CardButtonList)
+                {
+                    ViewCardWeapon cardWeapon = card.GetComponent<ViewCardWeapon>();
+                    if (cardWeapon != null && cardWeapon.MatchesIncident(selectIncident))
+                    {
+                        cardWeapon.AnimateToCenter();
+                        break;
+                    }
+                }
             }
         }
         Destroy(blockBackground);
