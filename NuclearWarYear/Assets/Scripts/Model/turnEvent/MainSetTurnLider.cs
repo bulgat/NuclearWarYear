@@ -62,7 +62,7 @@ namespace Assets.Scripts.Model
                    "Бомбардировщики сбиты", 
                    false);
             }
-            Debug.Log("0702     AttackBo= "+ incident.Name);
+            
             Debug.Log("0703 cidentComma =   name = "+ incident.PopulationEvent);
             if (incident.PopulationEvent == null)
             {
