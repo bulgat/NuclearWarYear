@@ -17,6 +17,7 @@ public class Incident : Weapon, IWeapon
     public bool ExplodeNuclear { private set; get; }
     public Incident SecondIncident { private set; get; }
     public EventFortuneIncident Fortune { private set; get; }
+    public CityModel RainFromCity { private set; get; }
     public Incident(
         GlobalParam.TypeEvent name,
         GlobalParam.TypeEvent type,
@@ -110,6 +111,10 @@ public class Incident : Weapon, IWeapon
         {
             return GetMessage();
         }
+        if (this.Name == GlobalParam.TypeEvent.Rain && RainFromCity != null)
+        {
+            return String.Format(GetMessage(), RainFromCity.Name);
+        }
         if (PopulationEvent?.MyCity != null && PopulationEvent?.FiendCity != null)
         {
             return String.Format(GetMessage(), PopulationEvent.MyCity.Name, PopulationEvent.FiendCity.Name);
@@ -166,6 +171,10 @@ public class Incident : Weapon, IWeapon
     {
         this.PopulationEvent = statePopulationEvent;
 
+    }
+    public void SetRainFromCity(CityModel city)
+    {
+        this.RainFromCity = city;
     }
 
 

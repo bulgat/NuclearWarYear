@@ -14,15 +14,13 @@ namespace Assets.Scripts.Model.createCommand
     {
         public CreateFalloutRain(MainModel mainModel, List<CountryLider> CountryLiderList) 
         {
-            Debug.Log("08108  _Cre "+ mainModel._gameParam.RainList.Count);
             var CountryLiderLifeList = CountryLiderList.Where(a => a.GetDead() == false).ToList();
             var list = new List<string>();
             foreach (CityModel item in mainModel._gameParam.RainList) {
-                Debug.Log("08109  Cr L " );
+
                 int index = (int)UnityEngine.Random.Range(0.0f, CountryLiderLifeList.Count());
                 CountryLider victim = CountryLiderList[index];
-                Debug.Log("8110 iss = " + CountryLiderLifeList[index].Name);
-                Debug.Log("8111   Ye = " + item);
+
                 
                 CommandLider command = new CommandLider(
                         GlobalParam.TypeEvent.Rain,
@@ -30,6 +28,9 @@ namespace Assets.Scripts.Model.createCommand
                         mainModel._gameParam.CountYear,
                         victim.TargetCitySelectPlayer,
                         victim);
+
+                // Сохраняем город, из которого прилетело облако радиоактивного дождя.
+                command.IncidentCommand.SetRainFromCity(item);
 
                 mainModel.MainStackCommandLiderList.Add(command);
             }
