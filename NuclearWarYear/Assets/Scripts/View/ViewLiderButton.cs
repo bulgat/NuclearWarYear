@@ -35,9 +35,9 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
         var allImage_ar = GetComponentsInChildren<Image>();
 
 
-        var LiderImage_1 = allImage_ar[1].GetComponent<Image>();
-        var flagImage = allImage_ar[2].GetComponent<Image>();
-        var circleReady = allImage_ar[4].GetComponent<Image>();
+        var LiderImage_1 = allImage_ar[2].GetComponent<Image>();
+        var flagImage = allImage_ar[3].GetComponent<Image>();
+        var circleReady = allImage_ar[5].GetComponent<Image>();
 
 
         CountryLider countryLider = _mainModel.CountryLiderList.FirstOrDefault(a=>a.FlagId == lider.FlagId);
@@ -91,7 +91,7 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
 
         if (this.IconCardList != null)
         {
-            var imageEvent = gameObject.transform.GetChild(6).GetComponent<Image>();
+            var imageEvent = gameObject.transform.GetChild(7).GetComponent<Image>();
             imageEvent.sprite = this.IconCardList[countryLider.GetEventTotalTurn().IdEvent];
         }
     }
