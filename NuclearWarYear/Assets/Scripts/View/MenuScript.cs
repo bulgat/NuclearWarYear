@@ -29,7 +29,7 @@ public class MenuScript : MonoBehaviour
     //[Space(10)]
     public List<GameObject> UICardTownList;
 
-
+    public GameObject tempMessage;
     public GameObject panelMain;
     public GameObject CanvasTacticRealPrefabs;
     public GameObject CanTacticReal;
@@ -139,7 +139,7 @@ public class MenuScript : MonoBehaviour
         ResetCountryOutline();
 
         CreateTownInfoList();
-
+        tempMessage.SetActive(false);
     }
     void CreateTownInfoList()
     {
@@ -386,6 +386,7 @@ public class MenuScript : MonoBehaviour
 
     void TurnButtonMethod(Button turnButton)
     {
+        tempMessage.SetActive(false);
         turnButton.enabled = true;
         _controller.TurnAi();
         //Ходы игроков.
@@ -701,10 +702,16 @@ public class MenuScript : MonoBehaviour
         {
             return;
         }
+        tempMessage.SetActive(true);
+        TempMessage viewTempMessage = tempMessage.GetComponent<TempMessage>();
+        viewTempMessage.SetMessage(PrintMessage);
+        viewTempMessage.SetParam(this.IconCardList, IdEvent);
+        /*
         GameObject canvasReport = Instantiate(CanvasReportPrefabs, new Vector2(100, 100), Quaternion.identity);
         ViewCanvasReport viewCanvasReport = canvasReport.GetComponent<ViewCanvasReport>();
         viewCanvasReport.SetMessage(PrintMessage);
         viewCanvasReport.SetParam(this.IconCardList, IdEvent);
+        */
     }
 
     private void ManagerButton()

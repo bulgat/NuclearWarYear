@@ -128,6 +128,7 @@
     <Compile Include="Assets\Scripts\View\ViewManageWeapon.cs" />
     <Compile Include="Assets\Scripts\Model\BuildingCentralHelper.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
+    <Compile Include="Assets\Scripts\View\TempMessage.cs" />
     <Compile Include="Assets\Scripts\View\ViewCircleReady.cs" />
     <Compile Include="Assets\Scripts\Controller\EventSendLider.cs" />
     <Compile Include="Assets\Scripts\Model\Nation\CountryLider.cs" />
