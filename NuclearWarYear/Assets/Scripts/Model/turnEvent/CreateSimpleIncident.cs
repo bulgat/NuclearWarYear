@@ -45,6 +45,17 @@ namespace Assets.Scripts.Model.turnEvent
             
             CityModel myCity = new UtilModelCity().GetCityModel(TownList, lider);
 
+            // Если случайный город не найден (пустой список городов), берём первый доступный,
+            // чтобы в сообщениях всегда подставлялись названия городов, а не сырой шаблон {0}/{1}.
+            if (cityFiend == null)
+            {
+                cityFiend = TownList.FirstOrDefault(a => a.FlagId != lider.FlagId && a.GetPopulation() > 0);
+            }
+            if (myCity == null)
+            {
+                myCity = TownList.FirstOrDefault(a => a.FlagId == lider.FlagId && a.GetPopulation() > 0);
+            }
+
             string report = incident.GetMessage() + incident.GetDamage();
 
 

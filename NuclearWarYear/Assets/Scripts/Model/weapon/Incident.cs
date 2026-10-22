@@ -109,7 +109,9 @@ public class Incident : Weapon, IWeapon
         Debug.Log("0600  message incident = " + GetMessage()+ " PopulationEvent = "+ PopulationEvent+" name = "+Name);
         if (PopulationEvent?.MyCity == null && PopulationEvent?.FiendCity == null)
         {
-            return GetMessage();
+            // Города не определены — подставляем пустые строки вместо {0}/{1},
+            // чтобы в новостях не показывался сырой шаблон "население {0} сбежало в {1}".
+            return String.Format(GetMessage(), "", "");
         }
         if (this.Name == GlobalParam.TypeEvent.Rain && RainFromCity != null)
         {
@@ -127,7 +129,9 @@ public class Incident : Weapon, IWeapon
             Debug.Log("0601"+this.Name+" message incident = " + GetMessage());
             return String.Format(GetMessage(), PopulationEvent?.FiendCity.Name);
         }
-        return String.Format(GetMessage(), "");
+        // Города не определены — подставляем пустые строки вместо {0}/{1},
+        // чтобы в новостях не показывался сырой шаблон "население {0} сбежало в {1}".
+        return String.Format(GetMessage(), "", "");
     }
     public void SetMessage(string newMessage)
     {
