@@ -115,7 +115,10 @@ public class Incident : Weapon, IWeapon
         }
         if (this.Name == GlobalParam.TypeEvent.Rain && RainFromCity != null)
         {
-            return String.Format(GetMessage(), RainFromCity.Name);
+            // {0} — город, где взорвалась ракета (откуда прилетело облако);
+            // {1} — город, который накрыло радиоактивным дождём.
+            string fiendedCity = PopulationEvent?.FiendCity?.Name ?? PopulationEvent?.MyCity?.Name ?? "";
+            return String.Format(GetMessage(), RainFromCity.Name, fiendedCity);
         }
         if (PopulationEvent?.MyCity != null && PopulationEvent?.FiendCity != null)
         {
