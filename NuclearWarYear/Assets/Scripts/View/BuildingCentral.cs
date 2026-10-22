@@ -32,6 +32,10 @@ public class BuildingCentral : MonoBehaviour
 
     bool SetAnglePosition;
 
+    // Данные для баллистической траектории ракеты.
+    Vector3 _missleStartPos;
+    bool _missleStartPosInited;
+
     bool _animationProcess;
     float _animationTimeProcess;
     public TargetModel MyCity { get; private set; }
@@ -234,9 +238,19 @@ public class BuildingCentral : MonoBehaviour
             if (VisibleObjList[GlobalParam.TypeEvent.AttackMissle.ToString()]
                 )
             {
-                UfoObject.transform.position = new ViewMoveDeflectors().SendBomberAndWingState(
+                // Сохраняем стартовую позицию ракеты один раз при начале полёта.
+                if (!_missleStartPosInited)
+                {
+                    _missleStartPos = UfoObject.transform.position;
+                    _missleStartPosInited = true;
+                }
+
+                // Баллистическая траектория вверх: прямолинейное движение + параболическая добавка по Y.
+                UfoObject.transform.position = SendMissleBallistic(
                     UfoObject.transform.position,
-                        Speed, transform, _animationTimeProcess, TownList, false, targetBomber);
+                    _missleStartPos,
+                    targetBomber,
+                    Speed);
 
                 // Поворачиваем ракету носом к цели.
                 // missleRotationOffset компенсирует исходную ориентацию спрайта (обычно нос смотрит вверх, поэтому -90).
@@ -260,6 +274,34 @@ public class BuildingCentral : MonoBehaviour
             }
         }
     }
+    // Плавно двигает ракету к цели по небольшой параболической дуге вверх.
+    Vector3 SendMissleBallistic(Vector3 currentPos, Vector3 startPos, Vector3 targetPos, int speed)
+    {
+        float step = speed * Time.deltaTime;
+
+        Vector3 toTarget = targetPos - startPos;
+        float totalDistance = toTarget.magnitude;
+        if (totalDistance < 0.0001f)
+        {
+            return targetPos;
+        }
+
+        // Текущий прогресс полёта 0..1.
+        float progress = Vector3.Distance(startPos, currentPos) / totalDistance;
+        // Следующая позиция с той же скоростью (чтобы не замедлять сам полёт — считаем по горизонтали/расстоянию).
+        Vector3 nextPos = Vector3.MoveTowards(currentPos, targetPos, step);
+        float nextProgress = Vector3.Distance(startPos, nextPos) / totalDistance;
+
+        // Параболическая высота: 4*h*progress*(1-progress), максимум в середине пути.
+        // Очень малая дуга, чтобы баллистика была едва заметной на скорости ракеты.
+        float arcHeight = Mathf.Abs(Vector3.Distance(startPos, targetPos)) * 0.003f;
+        float curveProgress = 0.2f * (progress + nextProgress); // средняя точка для плавности
+        float heightOffset = 0.2f * arcHeight * curveProgress * (1f - curveProgress);
+
+        nextPos.y += heightOffset;
+        return nextPos;
+    }
+
     Vector3 GetTarget(TargetModel buildingCentral)
     {
         if (buildingCentral == null)
@@ -290,6 +332,7 @@ public class BuildingCentral : MonoBehaviour
         this._animationProcess = true;
         this._animationTimeProcess = Time.time;
         SetAnglePosition = false;
+        _missleStartPosInited = false;
 
 
         this.TownList = townList;
@@ -301,6 +344,7 @@ public class BuildingCentral : MonoBehaviour
     public void ViewEndState()
     {
         this._animationProcess = false;
+        _missleStartPosInited = false;
 
         // Скрываем все движущиеся объекты сразу после завершения хода,
         // чтобы они не оставались видимыми на сцене до отложенного Destroy(TimeDelete).
