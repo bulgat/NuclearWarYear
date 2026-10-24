@@ -48,7 +48,7 @@ namespace Assets.Scripts.Model
             new DictionaryEssence().GetIncident (GlobalParam.TypeEvent.Bomber),
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.HeavyBomber),
             new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Defence),
-            new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.Defence)
+            new DictionaryEssence().GetIncident(GlobalParam.TypeEvent.HeavyDefence)
                 },
                 countryLiderPropagandaBuildingList[4],
                 TownList, GlobalParam.ParamLiderList[4], 5));

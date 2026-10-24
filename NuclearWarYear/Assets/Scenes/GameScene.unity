@@ -3386,7 +3386,9 @@ MonoBehaviour:
   - {fileID: 8326680208961846624, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
   - {fileID: -2619361612633498010, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
   - {fileID: -412339033, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
-  - {fileID: -412339033, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: 2082472370, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: 1886267612, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
+  - {fileID: -1899919027, guid: 7167ebf17d08e2345adcad237247951e, type: 3}
   UICardTownList: []
   tempMessage: {fileID: 623789418}
   panelMain: {fileID: 1285494132}

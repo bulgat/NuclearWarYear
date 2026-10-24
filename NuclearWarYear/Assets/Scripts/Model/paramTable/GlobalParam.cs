@@ -17,7 +17,7 @@ namespace Assets.Scripts.Model.param
 
         public static List<TypeEvent> GroupDefenceList = new List<TypeEvent>()
         {
-            TypeEvent.Defence,TypeEvent.HeavyDefence
+            TypeEvent.Defence,TypeEvent.HeavyDefence,TypeEvent.Peace, TypeEvent.Grain, TypeEvent.Metal
         };
 
         public static List<TypeEvent> GroupMissleList = new List<TypeEvent>()
@@ -32,7 +32,9 @@ namespace Assets.Scripts.Model.param
 
         public enum TypeEvent
         {
-            Build, Bomber, HeavyBomber, Defence, HeavyDefence,Propaganda, Ufo, Baby, RocketRich,
+            Build, Bomber, HeavyBomber, 
+            Defence, HeavyDefence, Peace, Grain, Metal,
+            Propaganda, Ufo, Baby, RocketRich,
             CrazyCow, Defectors, Missle, HeavyMissle, SuperMissle,MegaMissle,
             AttackBomber, AttackMissle, Airport, AttackAirport, Incident, Rain, None
         }
@@ -63,6 +65,7 @@ namespace Assets.Scripts.Model.param
             {TypeEvent.Bomber, new TurnEventExecute( null, 0, false, true, false, false, true,false) } ,
             {TypeEvent.HeavyBomber, new TurnEventExecute( null, 0, false, true, false, false, true,false) },
             {TypeEvent.Rain, new TurnEventExecute( null, 0, false,true, false,false, false,false) },
+            {TypeEvent.Peace, new TurnEventExecute( null, 0, false, true, false,true, false,false) },
         };
 
         public static List<ScenarioLider> ParamLiderList = new List<ScenarioLider>()

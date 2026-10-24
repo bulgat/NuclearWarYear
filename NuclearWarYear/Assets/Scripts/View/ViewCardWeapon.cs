@@ -72,7 +72,7 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
     }
     public void SetParam( List<Sprite> iconCardList, Incident incident)
     {
-
+        
         if (incident != null)
         {
             Text.text = incident.GetName().ToString() +(incident.Damage>0 ? " Damage: " + incident.Damage:"");
@@ -81,7 +81,7 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
             ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
 
             viewIconCard.SetParam(iconCardList, incident.GetImageId());
-
+            Debug.Log("5901  Seco = " + incident.Name+ " = In  = " + incident.GetImageId());
             this._incident = incident;
         }
     }

@@ -175,12 +175,13 @@ public class MenuScript : MonoBehaviour
 
         float sizeWidth = (Screen.width/3) / missleList.Count;
 
-        Debug.Log("0901  SecondIncide  = " + _mainModel.VisibleCardLaunchWeapon());
+        
         if (_mainModel.VisibleCardLaunchWeapon())
         {
             int count = 0;
             foreach (Incident incident in missleList)
             {
+                Debug.Log("5057  CreateComman  = ");
                 GameObject CardWing = Instantiate(Card, new Vector2(10 + (count * sizeWidth), Screen.height / UIparam.CardCoefHeight), Quaternion.identity);
                 CardWing.transform.SetParent(panelMain.transform);
                 CardWing.transform.localScale = UIparam.CardScale;
@@ -548,7 +549,7 @@ public class MenuScript : MonoBehaviour
         }
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, cardAction))
         {
-
+            Debug.Log("5400 CountYe  Town My  GetTargetBo  = " );
             _controller.Defence(_mainModel.GetCurrenFlagPlayer());
 
         }
@@ -569,7 +570,7 @@ public class MenuScript : MonoBehaviour
 
 
             Debug.Log("0056  Creat  "+_mainModel.GetCurrentPlayer().TargetCitySelectPlayer.TargetCity.GetId());
-            Debug.Log("0057  CreateCommand C = "  );
+            
 
             _controller.Propaganda(_mainModel.GetCurrenFlagPlayer());
 
@@ -706,12 +707,7 @@ public class MenuScript : MonoBehaviour
         TempMessage viewTempMessage = tempMessage.GetComponent<TempMessage>();
         viewTempMessage.SetMessage(PrintMessage);
         viewTempMessage.SetParam(this.IconCardList, IdEvent);
-        /*
-        GameObject canvasReport = Instantiate(CanvasReportPrefabs, new Vector2(100, 100), Quaternion.identity);
-        ViewCanvasReport viewCanvasReport = canvasReport.GetComponent<ViewCanvasReport>();
-        viewCanvasReport.SetMessage(PrintMessage);
-        viewCanvasReport.SetParam(this.IconCardList, IdEvent);
-        */
+
     }
 
     private void ManagerButton()
@@ -724,7 +720,7 @@ public class MenuScript : MonoBehaviour
     {
 
         ViewCircleReady viewCircleReady = CircleReady.GetComponent<ViewCircleReady>();
-                                    Debug.Log("0400 CountYe  Town My  GetTargetBo  li  = " + viewCircleReady);
+                                    
         viewCircleReady.SetParam(Visible, IconCircleReadyList[IndexImage], incident);
 
     }

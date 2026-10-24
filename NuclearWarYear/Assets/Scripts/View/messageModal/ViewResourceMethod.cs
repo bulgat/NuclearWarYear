@@ -18,7 +18,7 @@ namespace Assets.Scripts.View
         {
 
             Debug.Log("0055  -   inc flagId = " + _mainModel.GetCurrenFlagPlayer().Name);
-            //int flagId = _mainModel.GetCurrenFlagPlayer().FlagId;
+
             CountryLider liderPlayer = _mainModel.GetCurrenFlagPlayer();
    
             var imageLider = gameObject.transform.GetChild(0).GetChild(1);
@@ -31,13 +31,11 @@ namespace Assets.Scripts.View
             }
             Debug.Log("0056   SecondIncide  = " + FlagImageList.Count);
 
-            //if (gameObject.transform.childCount > 4)
-            //{
+
             var childFlag = gameObject.transform.GetChild(0).GetChild(5);
                 Transform flagLider = childFlag;
                 flagLider.GetComponent<Image>().sprite = FlagImageList[
                      liderPlayer.FlagId-1];
-            //}
 
             var textLider = gameObject.transform.GetChild(0).GetChild(3);
             if (textLider != null)

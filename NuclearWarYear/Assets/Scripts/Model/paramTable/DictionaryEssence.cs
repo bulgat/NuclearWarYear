@@ -41,7 +41,7 @@ public class DictionaryEssence
             null,"Подготовка системы перехвата ракет",
             false),
         new Incident(GlobalParam.TypeEvent.HeavyDefence, GlobalParam.TypeEvent.Defence, 7, 
-            "Защитные системы приведены в готовность",new DamageParam(0, 6), false,
+            "Защитные системы приведены в готовность",new DamageParam(0, 7), false,
             null,"Подготовка системы перехвата ракет",
             false),
 
@@ -97,6 +97,18 @@ public class DictionaryEssence
         new Incident(GlobalParam.TypeEvent.Rain, GlobalParam.TypeEvent.Incident, 20,
             "Радиоктивный дождь, от взорванной ядерной ракеты в {0} накрыл {1}",new DamageParam(5, 20), false,
             new EventFortuneIncident(GlobalParam.TypeEvent.Baby,32),"",
+            false),
+        new Incident(GlobalParam.TypeEvent.Peace, GlobalParam.TypeEvent.Defence, 21,
+            "Переговоры о мире",new DamageParam(0,20), false,
+            null,"Подготовка к переговорам о мире",
+            false),
+        new Incident(GlobalParam.TypeEvent.Grain, GlobalParam.TypeEvent.Defence, 22,
+            "Зерновая сделка",new DamageParam(0,21), false,
+            null,"Зерновая сделка",
+            false),
+        new Incident(GlobalParam.TypeEvent.Metal, GlobalParam.TypeEvent.Defence, 23,
+            "Сделка по микроэлементам",new DamageParam(0,22), false,
+            null,"Сделка по микроэлементам",
             false),
     };
      

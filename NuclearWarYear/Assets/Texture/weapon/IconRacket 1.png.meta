@@ -552,7 +552,7 @@ TextureImporter:
         width: 138
         height: 139
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -560,6 +560,69 @@ TextureImporter:
       bones: []
       spriteID: 54165d0f24cea7842a6906546a0d9f70
       internalID: -412339033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconRacket 1_18
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 282
+        width: 142
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fcf80cbc29081644a956856e204dda8
+      internalID: 2082472370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconRacket 1_19
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 144
+        width: 141
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 075c45091935de3409160a545c609dc8
+      internalID: 1886267612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconRacket 1_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 143
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63c4ff1b502223d44934bdb62a310f1d
+      internalID: -1899919027
       vertices: []
       indices: 
       edges: []
@@ -585,7 +648,10 @@ TextureImporter:
       IconRacket 1_15: 4776699773809052520
       IconRacket 1_16: 8326680208961846624
       IconRacket 1_17: -412339033
+      IconRacket 1_18: 2082472370
+      IconRacket 1_19: 1886267612
       IconRacket 1_2: 6685342859469625371
+      IconRacket 1_20: -1899919027
       IconRacket 1_3: -3677860423627731794
       IconRacket 1_4: -2619361612633498010
       IconRacket 1_5: -5808162105275420530
