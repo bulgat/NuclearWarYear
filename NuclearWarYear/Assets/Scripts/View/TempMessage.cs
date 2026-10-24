@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using Assets.Scripts.Model.paramTable;
 public class TempMessage : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI messageText;
@@ -14,17 +14,19 @@ public class TempMessage : MonoBehaviour
     }
     public void SetMessage(string PrintMessage) {
         messageText.text = PrintMessage;
+        StartCoroutine(HideMessage());
     }
     public void SetParam(List<Sprite> IconCardList, int IdMissle)
     {
-
-        //var iconCard = gameObject.transform.GetChild(0).GetChild(1);
         ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
         viewIconCard.SetParam(IconCardList, IdMissle);
 
     }
 
-    // Update is called once per frame
+    private IEnumerator HideMessage() {
+        yield return new WaitForSeconds(UIparam.lifeMessage);
+        gameObject.SetActive(false);
+    }
     void Update()
     {
         
