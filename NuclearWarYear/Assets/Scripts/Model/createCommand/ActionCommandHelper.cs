@@ -58,7 +58,7 @@ public class ActionCommandHelper
                 {
 
                     commandLider.SetNameCommand(countryLider.GetMissleFirst().GetName());
-                    Debug.Log("8113  A Bomb  remove SECOND = " + commandLider.GetNameCommand());
+                    
                 }
                 else
                 {

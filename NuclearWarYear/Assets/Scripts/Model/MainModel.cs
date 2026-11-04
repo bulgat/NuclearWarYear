@@ -22,13 +22,15 @@ public class MainModel
 	private int CityIncrementId;
 	private CountryLider CurrenPlayer { set; get; }
 	public GameParam _gameParam = new GameParam(1);
-	
-	public List<CommandLider> MainStackCommandLiderList { private set; get; }
+	public PreparedTurnPlayer _preparedTurnPlayer;
+
+    public List<CommandLider> MainStackCommandLiderList { private set; get; }
 	public MainModel(List<GameObject> countryLiderPropagandaBuildingList) {
 		InitModel(countryLiderPropagandaBuildingList);
 		MainStackCommandLiderList = new List<CommandLider>();
+        _preparedTurnPlayer = new PreparedTurnPlayer(CurrenPlayer.EnergyCard);
 
-	}
+    }
 
 	private void InitModel(List<GameObject> countryLiderPropagandaBuildingList) {
 
@@ -137,17 +139,23 @@ public class MainModel
 	{
 		return this.CountryLiderList.Where(a => a.FlagId != this.GetCurrentPlayer().FlagId).ToList();
 	}
-	public void SetPropagandPlayer(CountryLider FlagId) {
-		int futureYear = _gameParam.CountYear + 1;
-		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId.FlagId);
 
-		CityModel enemyTownCity = this.GetAllTownList().Where(a => a.FlagId != FlagId.FlagId).FirstOrDefault();
-		CityModel myCity = this.GetAllTownList().Where(a => a.FlagId == FlagId.FlagId).FirstOrDefault();
+	private int GetFutureYear()
+	{
+		return _gameParam.CountYear + 1;
+
+    }
+	public void SetPropagandPlayer(CountryLider country) {
+        Debug.Log("0657  Create  = "  );
+		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, country.FlagId);
+
+		CityModel enemyTownCity = this.GetAllTownList().Where(a => a.FlagId != country.FlagId).FirstOrDefault();
+		CityModel myCity = this.GetAllTownList().Where(a => a.FlagId == country.FlagId).FirstOrDefault();
 
 		CommandLider commandLider = new CommandLider(
 			GlobalParam.TypeEvent.Propaganda,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			futureYear,
+            GetFutureYear(),
 			new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider),
             countryLider);
 		ResetActionCheckVictory();
@@ -161,20 +169,16 @@ public class MainModel
 			this.GetCurrenPlayer().FlagId,
 			commandLider,
 			this.GetCurrenPlayer(),
-			futureYear,
+            GetFutureYear(),
 			countryLider.FiendLider,
 			commandLiderFortune);
 
 
 		MainStackCommandLiderList.AddRange(сommandLiderList);
-
-
-	}
+        Debug.Log("0681 DEAD  untYear "+ _preparedTurnPlayer .EnergyCard+ " GetTargetBom   = " + commandLider.IncidentCommand.Cost);
+        _preparedTurnPlayer.ChangeEnergyCard(commandLider.IncidentCommand.Cost);
+    }
 	public void SetBuildingPlayer(CountryLider countryLider) {
-		int futureYear = _gameParam.CountYear + 1;
-
-
-		//CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId.FlagId);
 
 		CityModel enemyTownCity = this.GetAllTownList().Where(a => a.FlagId != countryLider.FlagId).FirstOrDefault();
 		CityModel myCity = this.GetAllTownList().Where(a => a.FlagId == countryLider.FlagId).FirstOrDefault();
@@ -182,7 +186,7 @@ public class MainModel
 		CommandLider commandLider = new CommandLider(
 			GlobalParam.TypeEvent.Build,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			futureYear,
+            GetFutureYear(),
 			new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider),
             countryLider);
 
@@ -198,23 +202,23 @@ public class MainModel
             countryLider.FlagId,
 			commandLider,
 			this.GetCurrenPlayer(),
-			futureYear,
+            GetFutureYear(),
 			countryLider.FiendLider,
 			commandLiderFortune));
 
+		_preparedTurnPlayer.ChangeEnergyCard(commandLider.IncidentCommand.Cost);
 
-	}
-	public void SetDefencePlayer(CountryLider FlagId) {
-		int futureYear = _gameParam.CountYear + 1;
-		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId.FlagId);
+    }
+	public void SetDefencePlayer(CountryLider country) {
+		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, country.FlagId);
 
-		CityModel enemyTownCity = this.GetAllTownList().Where(a => a.FlagId != FlagId.FlagId).FirstOrDefault();
-		CityModel myCity = this.GetAllTownList().Where(a => a.FlagId == FlagId.FlagId).FirstOrDefault();
+		CityModel enemyTownCity = this.GetAllTownList().Where(a => a.FlagId != country.FlagId).FirstOrDefault();
+		CityModel myCity = this.GetAllTownList().Where(a => a.FlagId == country.FlagId).FirstOrDefault();
 
 		CommandLider commandLider = new CommandLider(
 			GlobalParam.TypeEvent.Defence,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			futureYear,
+            GetFutureYear(),
 			new TargetCityModel(enemyTownCity, myCity, countryLider.FiendLider),
             countryLider);
 		ResetActionCheckVictory();
@@ -226,19 +230,20 @@ public class MainModel
 			this.GetCurrenPlayer().FlagId,
 			commandLider,
 			this.GetCurrenPlayer(),
-			futureYear,
+            GetFutureYear(),
 			countryLider.FiendLider,
 			commandLiderFortune));
 
-	}
-	public void SetCommandIncident(CountryLider FlagId, TypeEvent nameEvent)
+        _preparedTurnPlayer.ChangeEnergyCard(commandLider.IncidentCommand.Cost);
+
+    }
+	public CommandLider SetCommandIncident(CountryLider country, TypeEvent nameEvent)
 	{
 
-		int futureYear = _gameParam.CountYear + 1;
-		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, FlagId.FlagId);
+		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, country.FlagId);
 
-		CityModel enemyTownCity = this.GetAllTownList().Where(a => a.FlagId != FlagId.FlagId).FirstOrDefault();
-		CityModel myCity = this.GetAllTownList().Where(a => a.FlagId == FlagId.FlagId).FirstOrDefault();
+		CityModel enemyTownCity = this.GetAllTownList().Where(a => a.FlagId != country.FlagId).FirstOrDefault();
+		CityModel myCity = this.GetAllTownList().Where(a => a.FlagId == country.FlagId).FirstOrDefault();
 
 		CountryLider enemyliderPlayer = new LiderHelperOne().GetLiderOne(
 			this.CountryLiderList,
@@ -248,7 +253,7 @@ public class MainModel
 		CommandLider commandLider = new CommandLider(
 			nameEvent,
 			countryLider._RelationFeind.GetHighlyHatredLiderRandom(),
-			futureYear,
+            GetFutureYear(),
 			new TargetCityModel(enemyTownCity, myCity, enemyliderPlayer),
             countryLider);
 
@@ -259,37 +264,41 @@ public class MainModel
 
 		ResetActionCheckVictory();
 
-
         new CreateCommandLider().GetCommandOneLiderList(
 			countryLider,
 			CountryLiderList,
 			TownList,
 			this.GetCurrenPlayer(),
-			futureYear,
+            GetFutureYear(),
 			this);
-	}
 
-	public void SetMisslePlayer(CountryLider FlagId, TypeEvent nameEvent) {
-		SetCommandIncident(FlagId, nameEvent);
-	}
+		return commandLider;
+
+    }
+
+	public void SetMisslePlayer(CountryLider country, TypeEvent nameEvent) {
+        CommandLider commandLider = SetCommandIncident(country, nameEvent);
+        _preparedTurnPlayer.ChangeEnergyCard(commandLider.IncidentCommand.Cost);
+    }
 	
-	public void SetBomberPlayer(CountryLider FlagId, TypeEvent nameEvent) {
+	public void SetBomberPlayer(CountryLider country, TypeEvent nameEvent) {
 
-		SetCommandIncident(FlagId, nameEvent);
-	}
+        CommandLider commandLider = SetCommandIncident(country, nameEvent);
+        _preparedTurnPlayer.ChangeEnergyCard(commandLider.IncidentCommand.Cost);
+    }
 
 	public void SetLiderTargetPlayer(int FlagId) {
 		CountryLider liderPlayer = new LiderHelperOne().GetLiderOne(this.CountryLiderList, this.GetCurrenPlayer().FlagId);
 		liderPlayer.FlagIdAttack = FlagId;
 	}
-
+	/*
 	public void SetWarheadMethodPlayer(int FlagId) {
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, this.GetCurrenPlayer().FlagId);
 		countryLider.GetBomberFirst().SetDamage(countryLider.GetBomberFirst().GetDamage());
 		countryLider.GetMissleFirst().SetDamage(countryLider.GetMissleFirst().GetDamage());
 
 	}
-
+	*/
 	public Incident SatisfyOneLiderTurn(CountryLider country, Incident CommandIncident)
 	{
         return new MainSetTurnLider().SatisfyEventOneLiderTurn(country, CountryLiderList,
@@ -400,9 +409,8 @@ public class MainModel
 	}
 	public void TurnAi()
 	{
-
-		_gameParam.IncrementYear();
-		//CountYear++;
+		RefreshPreparedTurnPlayer();
+        _gameParam.IncrementYear();
 		ResetActionCheckVictory();
 
 
@@ -424,16 +432,18 @@ public class MainModel
             {
 					lider.RemoveWeapon(commandLider.IncidentCommand.Name);
             }
-
+			lider.TurnRefresh();
         }
-		
 
-
-        CountryLider countryLider = this.CurrenPlayer;
-		countryLider.DoneMoveMade(true);
+        this.CurrenPlayer.DoneMoveMade(true);
 
 	}
+	public void RefreshPreparedTurnPlayer()
+	{
+        Debug.Log("0610   CommandIncident   Count  = "+ this.CurrenPlayer.EnergyCard);
+        _preparedTurnPlayer = new PreparedTurnPlayer(this.CurrenPlayer.EnergyCard);
 
+	}
 	public bool VisibleCardLaunchWeapon()
 	{
         CommandLider commandLider = GetCommandLider(_gameParam.CountYear, GetCurrenFlagPlayer());
@@ -526,7 +536,7 @@ public class MainModel
 			}
 			textList.Add(text);
 		}
-        Debug.Log("0980 DEAD BOMB "+ textList.Count);
+        
 
         return textList;
     }

@@ -140,7 +140,7 @@ public class Incident : Weapon, IWeapon
     }
     public void SetMessage(string newMessage)
     {
-        Debug.Log("0602  id = "+Id+" NEW message incident = " + newMessage);
+        
         this.Message = newMessage;
     }
     string GetNameFiendLider() {

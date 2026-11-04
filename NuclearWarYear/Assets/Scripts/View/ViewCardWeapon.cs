@@ -77,14 +77,14 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
         if (incident != null)
         {
             Text.text = incident.GetName().ToString() +(incident.Damage>0 ? " Damage: " + incident.Damage:"");
-            Debug.Log("0802  tack = "+ incident);
+            
             TextCost.text = incident.Cost.ToString();
 
             var iconCard = gameObject.transform.GetChild(1);
             ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();
 
             viewIconCard.SetParam(iconCardList, incident.GetImageId());
-            Debug.Log("5901  Seco = " + incident.Name+ " = In  = " + incident.GetImageId());
+            
             this._incident = incident;
         }
     }

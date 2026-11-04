@@ -76,4 +76,12 @@ public class Controller
     {
         _mainModel.ReleasePopulationEvent(CommandIncident);
     }
+    public void RefreshPreparedTurnPlayer()
+    {
+        _mainModel.RefreshPreparedTurnPlayer();
+    }
+    public void ChangeEnergyCard(int cost)
+    {
+        _mainModel._preparedTurnPlayer.ChangeEnergyCard(cost);
+    }
 }

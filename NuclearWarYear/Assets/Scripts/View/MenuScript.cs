@@ -14,10 +14,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-
+using TMPro;
 public class MenuScript : MonoBehaviour
 {
     public Text TurnYear;
+    public TextMeshProUGUI EnergyCard;
     [SerializeField, FormerlySerializedAs("CardWeapon")]
     public GameObject Card;
     [SerializeField, Tooltip("список портретов лидеров")]
@@ -140,6 +141,8 @@ public class MenuScript : MonoBehaviour
 
         CreateTownInfoList();
         tempMessage.SetActive(false);
+        _controller.RefreshPreparedTurnPlayer();
+        RefreshInfoPlayer();
     }
     void CreateTownInfoList()
     {
@@ -181,7 +184,7 @@ public class MenuScript : MonoBehaviour
             int count = 0;
             foreach (Incident incident in missleList)
             {
-                Debug.Log("5057  CreateComman  = ");
+                
                 GameObject CardWing = Instantiate(Card, new Vector2(10 + (count * sizeWidth), Screen.height / UIparam.CardCoefHeight), Quaternion.identity);
                 CardWing.transform.SetParent(panelMain.transform);
                 CardWing.transform.localScale = UIparam.CardScale;
@@ -245,7 +248,6 @@ public class MenuScript : MonoBehaviour
 
         ViewLiderButton viewLiderButton = LiderButton_1.GetComponent<ViewLiderButton>();
         viewLiderButton.ButtonLiderFrame(viewLiderButton.Lider);
-        //LiderButton_1.enabled = false;
 
         ViewLiderButton viewLiderButton_2 = LiderButton_2.GetComponent<ViewLiderButton>();
         viewLiderButton_2.ButtonLiderFrame(viewLiderButton_2.Lider);
@@ -436,8 +438,13 @@ public class MenuScript : MonoBehaviour
         
         blockBackground =  Instantiate(BlockBackgroundPrefabs, new Vector2(Canvas.transform.position.x, Canvas.transform.position.y), Quaternion.identity);
         blockBackground.transform.parent = Canvas.transform;
+        RefreshInfoPlayer();
     }
-
+    private void RefreshInfoPlayer()
+    {
+        //EnergyCard.text = _mainModel.GetCurrentPlayer().EnergyCard.ToString();
+        EnergyCard.text = _mainModel._preparedTurnPlayer.GetEnergyCard().ToString();
+    }
     private IEnumerator TurnOneLider(CountryLider lider, int indexLider, Incident incident)
     {
         yield return new WaitForSeconds(this.waitTime + (this.waitTurnTime * indexLider));
@@ -522,7 +529,8 @@ public class MenuScript : MonoBehaviour
 
     void ClickCardPlayer(Incident cardAction)
     {
-
+        Debug.Log("0655 omb   SECOND = "  );
+        _controller.RefreshPreparedTurnPlayer();
 
         int idImageEvent = cardAction.GetImageId();
         foreach (var item in this.CardButtonList)
@@ -538,7 +546,6 @@ public class MenuScript : MonoBehaviour
         {
 
             _controller.SetMissle(_mainModel.GetCurrenFlagPlayer(), missleBomberIncident.Name);
-
         }
 
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, cardAction))
@@ -549,27 +556,28 @@ public class MenuScript : MonoBehaviour
         }
         if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupDefenceList, cardAction))
         {
-            Debug.Log("5400 CountYe  Town My  GetTargetBo  = " );
+            
             _controller.Defence(_mainModel.GetCurrenFlagPlayer());
 
         }
         if (cardAction.GetName() == GlobalParam.TypeEvent.Propaganda)
         {
-            
+
 
             if (_mainModel.GetCurrentPlayer().TargetCitySelectPlayer.TargetCity.GetId() == 0)
             {
                 
                 if (UIparam.HelpSelectTargetPropaganda == false)
                 {
+                    //_controller.Propaganda(_mainModel.GetCurrenFlagPlayer());
                     CanvasReportWindow("Выберете страну для действия пропаганды", idImageEvent);
                     UIparam.HelpSelectTargetPropaganda = true;
-                    return;
+                    //return;
                 }
             }
 
 
-            Debug.Log("0056  Creat  "+_mainModel.GetCurrentPlayer().TargetCitySelectPlayer.TargetCity.GetId());
+            Debug.Log("0606  Cre  ");
             
 
             _controller.Propaganda(_mainModel.GetCurrenFlagPlayer());
@@ -588,6 +596,8 @@ public class MenuScript : MonoBehaviour
         {
             CanvasReportWindow(String.Format(cardAction.PrepareMessage), idImageEvent);
         }
+        Debug.Log("0601 CountYe  Town  GetTarget  ");
+        RefreshInfoPlayer();
     }
 
     void SelectCountryOne()

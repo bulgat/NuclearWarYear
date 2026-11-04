@@ -33,7 +33,7 @@ namespace Assets.Scripts.View
             }
             Message(_messageArchvList[_page]);
             Debug.Log("0714 Add AttackBomb  Finally.OldIncide  LiderLi = "  + _page);
-            Debug.Log("0715  country   Lid   = " + _messageArchvList[_page]);
+            
         }
         private void ButtonNextMethod()
         {
@@ -42,7 +42,7 @@ namespace Assets.Scripts.View
 
             }
             Message(_messageArchvList[_page]);
-            Debug.Log("0755    CommandIncident   CountYe  = "  );
+            
         }
         public override void SetMessage(string messageList)
         {
@@ -52,7 +52,7 @@ namespace Assets.Scripts.View
         {
             _messageArchvList = messageList;
             _page = messageList.Count - 1;
-            Debug.Log("0781 DEAD  untYear na  To GetTargetBom   = " + _messageArchvList.Count);
+            
             Message(_messageArchvList[_page]);
         }
         public void Message(string message)

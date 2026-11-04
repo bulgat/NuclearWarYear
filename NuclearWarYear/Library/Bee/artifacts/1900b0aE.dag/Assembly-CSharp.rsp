@@ -417,6 +417,7 @@
 "Assets/Scripts/Model/paramTable/GameParam.cs"
 "Assets/Scripts/Model/paramTable/GlobalParam.cs"
 "Assets/Scripts/Model/paramTable/UIparam.cs"
+"Assets/Scripts/Model/PreparedTurnPlayer.cs"
 "Assets/Scripts/Model/scenario/ParamLider.cs"
 "Assets/Scripts/Model/scenario/ScenarioLider.cs"
 "Assets/Scripts/Model/SendAnim.cs"

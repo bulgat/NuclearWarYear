@@ -33,6 +33,7 @@ public class CountryLider
     public RelationShip _RelationFeind;
     public int GraphicId { get; }
     public bool MoveMade { private set; get; }
+    public int EnergyCard { private set; get; }
     public CountryLider(
         bool player,
         List<Incident> missleList,
@@ -62,11 +63,11 @@ public class CountryLider
         _maxPopulation = GetAllOwnPopulation();
         _RelationFeind = new RelationShip(FlagId);
         this.EventTotalTurn = new IncidentEvent(GlobalParam.TypeEvent.Propaganda);
+        this.EnergyCard = 1;
     }
     public void DoneMoveMade(bool Value)
     {
         MoveMade = Value;
-
     }
     public string SetEventTotalMessageTurn(string eventTotalTurn, GlobalParam.TypeEvent eventName)
     {
@@ -153,11 +154,14 @@ public class CountryLider
     }
     public void RemoveWeapon(GlobalParam.TypeEvent name)
     {
-        var deleteMissle = WeaponList.FirstOrDefault(a => a.GetName() == name);
-
-        if (deleteMissle != null)
+        
+        var deleteCard = WeaponList.FirstOrDefault(a => a.GetName() == name);
+        
+        if (deleteCard != null)
         {
-            WeaponList.Remove(deleteMissle);
+            WeaponList.Remove(deleteCard);
+            EnergyCard -= deleteCard.Cost;
+            
         }
 
     }
@@ -197,5 +201,8 @@ public class CountryLider
     {
         return FlagId - 1;
     }
-
+    public void TurnRefresh()
+    {
+        EnergyCard += 1;
+    }
 }
