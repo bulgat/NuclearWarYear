@@ -16,4 +16,5 @@ public class Weapon
 	public int Uid;
 	public EventFortuneIncident Fortune;
 	public bool Mortal;
+	public int Cost;
 }

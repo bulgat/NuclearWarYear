@@ -6,11 +6,12 @@ using UnityEngine.EventSystems;
 using Assets.Scripts.Model.param;
 using Assets.Scripts.Model;
 using Assets.Scripts.Model.paramTable;
-
+using TMPro;
 public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
 {
     private Incident _incident;
     public Text Text;
+    public TextMeshProUGUI TextCost;
     System.Action<Incident> callback;
     System.Action<Incident> refreshViewCallback;
     private List<Sprite> IconCardList;
@@ -22,7 +23,7 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("0802  tackBo= "  );
+        
         this.callback(this._incident);
         // Пересобираем раскладку карт. RefreshViewCard сбросит предыдущую карту в ряд
         // и анимирует выбранную (this._incident) в центр.
@@ -76,6 +77,8 @@ public class ViewCardWeapon : MonoBehaviour,IPointerClickHandler
         if (incident != null)
         {
             Text.text = incident.GetName().ToString() +(incident.Damage>0 ? " Damage: " + incident.Damage:"");
+            Debug.Log("0802  tack = "+ incident);
+            TextCost.text = incident.Cost.ToString();
 
             var iconCard = gameObject.transform.GetChild(1);
             ViewIconCard viewIconCard = iconCard.GetComponent<ViewIconCard>();

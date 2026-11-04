@@ -27,7 +27,8 @@ public class Incident : Weapon, IWeapon
         bool explodeNuclear,
         EventFortuneIncident fortune,
         string prepareMessage,
-        bool mortal
+        bool mortal,
+        int cost
         ) 
     {
 		this.Name=name;
@@ -41,6 +42,7 @@ public class Incident : Weapon, IWeapon
         this.PrepareMessage = prepareMessage;
         this.UnicalId = DictionaryEssence.GetUnicalId();
         this.Mortal = mortal;
+        this.Cost = cost;
      }
     public int MutationDamage()
     {

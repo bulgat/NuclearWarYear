@@ -453,6 +453,7 @@
 "Assets/Scripts/View/StateCentral/ViewAttackBomber.cs"
 "Assets/Scripts/View/StateCentral/ViewMoveDeflectors.cs"
 "Assets/Scripts/View/StateCentral/WithToInMove.cs"
+"Assets/Scripts/View/TempMessage.cs"
 "Assets/Scripts/View/TownCardInfo.cs"
 "Assets/Scripts/View/UFOmodel.cs"
 "Assets/Scripts/View/ViewCanvasReport.cs"
