@@ -8,6 +8,11 @@ using UnityEngine;
 
 public class BuildingCentral : MonoBehaviour
 {
+    public GameObject BomberObjectPrefabs;
+    public GameObject BomberObject;
+    public GameObject WingMisslePrefabs;
+    public GameObject UfoPrefabs;
+    public GameObject WingMissle;
     private GameObject Propaganda;
     private GameObject BuildingIndustry;
     private GameObject DefenceObject;
@@ -16,15 +21,10 @@ public class BuildingCentral : MonoBehaviour
     private GameObject Airport;
     private GameObject AirportAttack;
 
-    public GameObject BomberObjectPrefabs;
-    public GameObject BomberObject;
-    public GameObject UfoObject;
-    public GameObject WingMisslePrefabs;
-    public GameObject DefectorsPrefabs;
-    public GameObject UfoPrefabs;
-    public GameObject RocketRichPrefabs;
-    public GameObject CrazyCowPrefabs;
-    public GameObject WingMissle;
+    private GameObject UfoObject;
+    private GameObject DefectorsPrefabs;
+    private GameObject RocketRichPrefabs;
+    private GameObject CrazyCowPrefabs;
 
     private Dictionary<string, bool> VisibleObjList;
 
@@ -94,81 +94,87 @@ public class BuildingCentral : MonoBehaviour
 
     public void UpdateVisibleBuilding(Incident incident)
     {
-        var NameCommand = incident.GetName();
+        GlobalParam.TypeEvent nameCommand = incident.GetName();
+        Debug.Log("0600  coun   = " + nameCommand+" = "+ incident.GetTypeWeapon());
 
-        Propaganda.SetActive(NameCommand == GlobalParam.TypeEvent.Propaganda);
-        BuildingIndustry.SetActive(NameCommand == GlobalParam.TypeEvent.Build);
-        DefenceObject.SetActive(NameCommand == GlobalParam.TypeEvent.Defence);
+        Propaganda.SetActive(nameCommand == GlobalParam.TypeEvent.Propaganda);
+        BuildingIndustry.SetActive(nameCommand == GlobalParam.TypeEvent.Build);
+        DefenceObject.SetActive(nameCommand == GlobalParam.TypeEvent.Defence);
         MissleObject.SetActive(new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupMissleList, incident));
-        Airport.SetActive(NameCommand == GlobalParam.TypeEvent.Airport);
-        AirportAttack.SetActive(NameCommand == GlobalParam.TypeEvent.AttackAirport);
+        Airport.SetActive(nameCommand == GlobalParam.TypeEvent.Airport);
+        AirportAttack.SetActive(nameCommand == GlobalParam.TypeEvent.AttackAirport);
 
-        VisibleObjList[GlobalParam.TypeEvent.AttackBomber.ToString()] = NameCommand == GlobalParam.TypeEvent.AttackBomber;
-        VisibleObjList[GlobalParam.TypeEvent.AttackMissle.ToString()] = NameCommand == GlobalParam.TypeEvent.AttackMissle;
-        VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()] = NameCommand == GlobalParam.TypeEvent.Defectors;
-        VisibleObjList[GlobalParam.TypeEvent.Ufo.ToString()] = NameCommand == GlobalParam.TypeEvent.Ufo;
-        VisibleObjList[GlobalParam.TypeEvent.Baby.ToString()] = NameCommand == GlobalParam.TypeEvent.Baby;
-        VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()] = NameCommand == GlobalParam.TypeEvent.RocketRich;
-        VisibleObjList[GlobalParam.TypeEvent.CrazyCow.ToString()] = NameCommand == GlobalParam.TypeEvent.CrazyCow;
-        VisibleObjList[GlobalParam.TypeEvent.Rain.ToString()] = NameCommand == GlobalParam.TypeEvent.Rain;
+        VisibleObjList[GlobalParam.TypeEvent.AttackBomber.ToString()] = nameCommand == GlobalParam.TypeEvent.AttackBomber;
+        VisibleObjList[GlobalParam.TypeEvent.AttackMissle.ToString()] = nameCommand == GlobalParam.TypeEvent.AttackMissle;
+        VisibleObjList[GlobalParam.TypeEvent.Defectors.ToString()] = nameCommand == GlobalParam.TypeEvent.Defectors;
+        VisibleObjList[GlobalParam.TypeEvent.Ufo.ToString()] = nameCommand == GlobalParam.TypeEvent.Ufo;
+        VisibleObjList[GlobalParam.TypeEvent.Baby.ToString()] = nameCommand == GlobalParam.TypeEvent.Baby;
+        VisibleObjList[GlobalParam.TypeEvent.RocketRich.ToString()] = nameCommand == GlobalParam.TypeEvent.RocketRich;
+        VisibleObjList[GlobalParam.TypeEvent.CrazyCow.ToString()] = nameCommand == GlobalParam.TypeEvent.CrazyCow;
+        VisibleObjList[GlobalParam.TypeEvent.Rain.ToString()] = nameCommand == GlobalParam.TypeEvent.Rain;
 
         if (WingMissle != null)
         {
-            WingMissle.SetActive(NameCommand == GlobalParam.TypeEvent.AttackMissle);
-            MissleOpenObject.SetActive(NameCommand == GlobalParam.TypeEvent.AttackMissle);
+            WingMissle.SetActive(nameCommand == GlobalParam.TypeEvent.AttackMissle);
+            MissleOpenObject.SetActive(nameCommand == GlobalParam.TypeEvent.AttackMissle);
 
         }
 
         //bomber
         if (BomberObject != null)
         {
-
-            if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, incident) || NameCommand == GlobalParam.TypeEvent.AttackBomber)
+            if (new GroupWeapon().GroupWeaponPresence(GlobalParam.GroupBomberList, incident) || nameCommand == GlobalParam.TypeEvent.AttackBomber)
             {
                 bool vis = true;
                 BomberObject.SetActive(vis);
                 VisibleObjList[GlobalParam.TypeEvent.Bomber.ToString()] = vis;
             }
+            var bomber = BomberObject.GetComponent<ViewNucklearBomber>();
 
+            if (bomber != null) {
+                Debug.Log("0601   messag  = "+ bomber);
+
+                bomber.SetParam(nameCommand);
+            }
         }
 
-        if (NameCommand == GlobalParam.TypeEvent.Ufo
-                || NameCommand == GlobalParam.TypeEvent.Baby
-                || NameCommand == GlobalParam.TypeEvent.CrazyCow
-                || NameCommand == GlobalParam.TypeEvent.RocketRich
-                || NameCommand == GlobalParam.TypeEvent.Defectors
-                || NameCommand == GlobalParam.TypeEvent.AttackMissle
-                || NameCommand == GlobalParam.TypeEvent.Rain
+        if (nameCommand == GlobalParam.TypeEvent.Ufo
+                || nameCommand == GlobalParam.TypeEvent.Baby
+                || nameCommand == GlobalParam.TypeEvent.CrazyCow
+                || nameCommand == GlobalParam.TypeEvent.RocketRich
+                || nameCommand == GlobalParam.TypeEvent.Defectors
+                || nameCommand == GlobalParam.TypeEvent.AttackMissle
+                || nameCommand == GlobalParam.TypeEvent.Rain
                 )
         {
 
             UfoObject.SetActive(true);
             UFOmodel uFOmodel = UfoObject.GetComponent<UFOmodel>();
-            if (NameCommand == GlobalParam.TypeEvent.Ufo)
+            if (nameCommand == GlobalParam.TypeEvent.Ufo)
             {
                 uFOmodel.SetVisible(GlobalParam.TypeEvent.Ufo);
             }
-            if (NameCommand == GlobalParam.TypeEvent.Baby)
+            if (nameCommand == GlobalParam.TypeEvent.Baby)
             {
                 uFOmodel.SetVisible(GlobalParam.TypeEvent.Baby);
             }
-            if (NameCommand == GlobalParam.TypeEvent.CrazyCow)
+            if (nameCommand == GlobalParam.TypeEvent.CrazyCow)
             {
                 uFOmodel.SetVisible(GlobalParam.TypeEvent.CrazyCow);
             }
-            if (NameCommand == GlobalParam.TypeEvent.RocketRich)
+            if (nameCommand == GlobalParam.TypeEvent.RocketRich)
             {
                 uFOmodel.SetVisible(GlobalParam.TypeEvent.RocketRich);
             }
-            if (NameCommand == GlobalParam.TypeEvent.Defectors)
+            if (nameCommand == GlobalParam.TypeEvent.Defectors)
             {
                 uFOmodel.SetVisible(GlobalParam.TypeEvent.Defectors);
             }
-            if (NameCommand == GlobalParam.TypeEvent.AttackMissle)
+            if (nameCommand == GlobalParam.TypeEvent.AttackMissle)
             {
                 uFOmodel.SetVisible(GlobalParam.TypeEvent.AttackMissle);
             }
-            if (NameCommand == GlobalParam.TypeEvent.Rain)
+            if (nameCommand == GlobalParam.TypeEvent.Rain)
             {
                 uFOmodel.SetVisible(GlobalParam.TypeEvent.Rain);
             }

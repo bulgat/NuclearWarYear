@@ -466,6 +466,7 @@
 "Assets/Scripts/View/ViewLiderHelper.cs"
 "Assets/Scripts/View/ViewManageWeapon.cs"
 "Assets/Scripts/View/ViewNewPaperMethod.cs"
+"Assets/Scripts/View/ViewNucklearBomber.cs"
 "Assets/Scripts/View/ViewResourcуBase.cs"
 "Assets/Scripts/View/ViewTacticReal.cs"
 "Assets/Scripts/View/ViewTown.cs"

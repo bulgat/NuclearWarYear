@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\Controller\EventBomber.cs" />
     <Compile Include="Assets\Scripts\Model\paramTable\GlobalParam.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\WithToInMove.cs" />
+    <Compile Include="Assets\Scripts\View\ViewNucklearBomber.cs" />
     <Compile Include="Assets\Scripts\View\ViewTown.cs" />
     <Compile Include="Assets\Scripts\View\ViewLiderButton.cs" />
     <Compile Include="Assets\Scripts\Model\createCommand\CreateFortune.cs" />
