@@ -17,10 +17,10 @@ public class ViewNucklearBomber : MonoBehaviour
 
     public void SetParam(GlobalParam.TypeEvent nameCommand)
     {
-        Debug.Log("0410    Lider "+ Bomber + "opag " + nameCommand);
+        
         if (Bomber != null && StelsBomber != null)
         {
-            Debug.Log("0411    Lider  Pr  " + (nameCommand == GlobalParam.TypeEvent.HeavyBomber));
+
             Bomber.SetActive(false);
             StelsBomber.SetActive(false);
             if (nameCommand == GlobalParam.TypeEvent.Bomber)

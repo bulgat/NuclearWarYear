@@ -95,7 +95,7 @@ public class BuildingCentral : MonoBehaviour
     public void UpdateVisibleBuilding(Incident incident)
     {
         GlobalParam.TypeEvent nameCommand = incident.GetName();
-        Debug.Log("0600  coun   = " + nameCommand+" = "+ incident.GetTypeWeapon());
+        
 
         Propaganda.SetActive(nameCommand == GlobalParam.TypeEvent.Propaganda);
         BuildingIndustry.SetActive(nameCommand == GlobalParam.TypeEvent.Build);
@@ -132,7 +132,7 @@ public class BuildingCentral : MonoBehaviour
             var bomber = BomberObject.GetComponent<ViewNucklearBomber>();
 
             if (bomber != null) {
-                Debug.Log("0601   messag  = "+ bomber);
+                
 
                 bomber.SetParam(nameCommand);
             }
@@ -149,34 +149,38 @@ public class BuildingCentral : MonoBehaviour
         {
 
             UfoObject.SetActive(true);
-            UFOmodel uFOmodel = UfoObject.GetComponent<UFOmodel>();
+            UFOmodel movePrefabsModel = UfoObject.GetComponent<UFOmodel>();
             if (nameCommand == GlobalParam.TypeEvent.Ufo)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.Ufo);
+                movePrefabsModel.SetVisible(GlobalParam.TypeEvent.Ufo);
             }
             if (nameCommand == GlobalParam.TypeEvent.Baby)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.Baby);
+                movePrefabsModel.SetVisible(GlobalParam.TypeEvent.Baby);
             }
             if (nameCommand == GlobalParam.TypeEvent.CrazyCow)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.CrazyCow);
+                movePrefabsModel.SetVisible(GlobalParam.TypeEvent.CrazyCow);
             }
             if (nameCommand == GlobalParam.TypeEvent.RocketRich)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.RocketRich);
+                movePrefabsModel.SetVisible(GlobalParam.TypeEvent.RocketRich);
             }
             if (nameCommand == GlobalParam.TypeEvent.Defectors)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.Defectors);
-            }
-            if (nameCommand == GlobalParam.TypeEvent.AttackMissle)
-            {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.AttackMissle);
+                movePrefabsModel.SetVisible(GlobalParam.TypeEvent.Defectors);
             }
             if (nameCommand == GlobalParam.TypeEvent.Rain)
             {
-                uFOmodel.SetVisible(GlobalParam.TypeEvent.Rain);
+                movePrefabsModel.SetVisible(GlobalParam.TypeEvent.Rain);
+            }
+            if (nameCommand == GlobalParam.TypeEvent.AttackMissle)
+            {
+
+                Debug.Log("0601    Lider    " + incident.Name);
+                Debug.Log("0602    Lider    " + incident.SecondIncident.GetTypeWeapon());
+                Debug.Log("0603   mess   = " + incident.SecondIncident.GetName());
+                movePrefabsModel.SetVisible(incident.SecondIncident.GetName());
             }
         }
         else

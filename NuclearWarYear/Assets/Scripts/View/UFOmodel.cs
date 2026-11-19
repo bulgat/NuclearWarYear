@@ -8,8 +8,12 @@ public class UFOmodel : MonoBehaviour
     public GameObject Cow;
     public GameObject RocketRich;
     public GameObject Defectors;
-    public GameObject Missle;
     public GameObject Rain;
+    public GameObject Missle;
+    public GameObject HeavyMissle;
+    public GameObject SuperMissle;
+    public GameObject MegaMissle;
+
     private void Awake()
     {
     }
@@ -24,8 +28,12 @@ public class UFOmodel : MonoBehaviour
         this.Cow.SetActive(false);
         this.RocketRich.SetActive(false);
         this.Defectors.SetActive(false);
-        this.Missle.SetActive(false);
         this.Rain.SetActive(false);
+        this.Missle.SetActive(false);
+        this.HeavyMissle.SetActive(false);
+        this.SuperMissle.SetActive(false);
+        this.MegaMissle.SetActive(false);
+
         switch (nameId)
         {
             case GlobalParam.TypeEvent.Ufo:
@@ -43,11 +51,20 @@ public class UFOmodel : MonoBehaviour
             case GlobalParam.TypeEvent.Defectors:
                 this.Defectors.SetActive(true);
                 break;
-            case GlobalParam.TypeEvent.AttackMissle:
-                this.Missle.SetActive(true);
-                break;
             case GlobalParam.TypeEvent.Rain:
                 this.Rain.SetActive(true);
+                break;
+            case GlobalParam.TypeEvent.Missle:
+                this.Missle.SetActive(true);
+                break;
+            case GlobalParam.TypeEvent.HeavyMissle:
+                this.HeavyMissle.SetActive(true);
+                break;
+            case GlobalParam.TypeEvent.SuperMissle:
+                this.SuperMissle.SetActive(true);
+                break;
+            case GlobalParam.TypeEvent.MegaMissle:
+                this.MegaMissle.SetActive(true);
                 break;
         }
     }
