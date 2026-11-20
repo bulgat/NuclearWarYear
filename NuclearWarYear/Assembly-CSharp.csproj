@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Model\PreparedTurnPlayer.cs" />
+    <Compile Include="Assets\Scripts\View\selectLiderScene\SelectLiderScene.cs" />
     <Compile Include="Assets\Scripts\View\StateCentral\ViewAttackBomber.cs" />
     <Compile Include="Assets\Scripts\Model\weapon\PopulationEvent.cs" />
     <Compile Include="Assets\Scripts\SettingPlayer.cs" />
@@ -149,7 +150,7 @@
     <Compile Include="Assets\Scripts\Model\SendAnim.cs" />
     <Compile Include="Assets\Scripts\Controller\Controller.cs" />
     <Compile Include="Assets\Scripts\Model\paramTable\UIparam.cs" />
-    <Compile Include="Assets\Scripts\MenuStart.cs" />
+    <Compile Include="Assets\Scripts\View\menuStart\MenuStart.cs" />
     <Compile Include="Assets\Scripts\Model\paramTable\EventFortuneIncident.cs" />
   </ItemGroup>
   <ItemGroup>

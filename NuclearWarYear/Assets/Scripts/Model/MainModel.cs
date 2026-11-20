@@ -146,7 +146,7 @@ public class MainModel
 
     }
 	public void SetPropagandPlayer(CountryLider country) {
-        Debug.Log("0657  Create  = "  );
+ 
 		CountryLider countryLider = new LiderHelperOne().GetLiderOne(CountryLiderList, country.FlagId);
 
 		CityModel enemyTownCity = this.GetAllTownList().Where(a => a.FlagId != country.FlagId).FirstOrDefault();

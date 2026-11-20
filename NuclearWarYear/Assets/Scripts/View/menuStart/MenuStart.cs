@@ -13,15 +13,15 @@ public class MenuStart : MonoBehaviour
 
     void Start()
     {
-        StartButton.onClick.AddListener(() => StartMethod(StartButton));
-        Start2PlayerButton.onClick.AddListener(() => Start2PlayerMethod(Start2PlayerButton));
+        StartButton.onClick.AddListener(() => StartMethod());
+        Start2PlayerButton.onClick.AddListener(() => Start2PlayerMethod());
     }
-	void StartMethod(Button buttonPressed)
+	void StartMethod()
 	{
         SettingPlayer.TwoPlayerGame = false;
-        SceneManager.LoadScene(GlobalParam.Scene.GameScene.ToString(), LoadSceneMode.Single);
+        SceneManager.LoadScene(GlobalParam.Scene.SelectLiderScene.ToString(), LoadSceneMode.Single);
     }
-    void Start2PlayerMethod(Button buttonPressed)
+    void Start2PlayerMethod()
     {
         SettingPlayer.TwoPlayerGame = true;
         SceneManager.LoadScene(GlobalParam.Scene.GameScene.ToString(), LoadSceneMode.Single);

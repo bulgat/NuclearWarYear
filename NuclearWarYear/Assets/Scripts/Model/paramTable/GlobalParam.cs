@@ -41,7 +41,7 @@ namespace Assets.Scripts.Model.param
 
         public enum Scene
         {
-            MenuStart, Victory, GameScene
+            MenuStart, Victory, GameScene, SelectLiderScene
         }
 
         public static Dictionary<GlobalParam.TypeEvent, TurnEventExecute> MessageDictionary = 
