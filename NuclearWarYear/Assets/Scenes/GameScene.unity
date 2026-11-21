@@ -3575,6 +3575,14 @@ MonoBehaviour:
   - {fileID: -700961966, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
   - {fileID: -1866753574, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
   - {fileID: -2082834666, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
+  - {fileID: 2049037955, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
+  - {fileID: -1051757397, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
+  - {fileID: -330230417, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
+  - {fileID: 1141522126, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
+  - {fileID: 1513667334, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
+  - {fileID: 335172741, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
+  - {fileID: -188661134, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
+  - {fileID: 1200183059, guid: 27ec6db20f7c1d44ab48123acd5ea429, type: 3}
   weaponHelp: "\u0441\u043F\u0438\u0441\u043E\u043A \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A
     \u043E\u0440\u0443\u0436\u0438\u044F"
   IconCardList:

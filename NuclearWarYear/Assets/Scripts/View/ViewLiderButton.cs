@@ -14,8 +14,13 @@ public class ViewLiderButton : MonoBehaviour, IPointerEnterHandler
     List<Sprite> IconCardList;
     MainModel _mainModel;
     public CountryLider Lider;
-    public void Init(List<Sprite> liderImageList,List<Sprite> flagImageList, MainModel mainModel,
-        List<Sprite> iconCircleReadyList, List<Sprite> iconCardList,CountryLider Lider)
+    public void Init(
+        List<Sprite> liderImageList,
+        List<Sprite> flagImageList,
+        MainModel mainModel,
+        List<Sprite> iconCircleReadyList,
+        List<Sprite> iconCardList,
+        CountryLider Lider)
     {
         this.LiderImageList = liderImageList;
         this.FlagImageList = flagImageList;

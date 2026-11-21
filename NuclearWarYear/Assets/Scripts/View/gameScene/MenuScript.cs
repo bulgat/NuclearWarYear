@@ -61,7 +61,7 @@ public class MenuScript : MonoBehaviour
     public Button LiderButton_5;
     public Button NewPaperButton;
 
-    
+    [SerializeField, Tooltip("список флагов")]
     public List<Sprite> FlagImageList;
     public List<Sprite> IconCircleReadyList;
 
@@ -442,7 +442,6 @@ public class MenuScript : MonoBehaviour
     }
     private void RefreshInfoPlayer()
     {
-        //EnergyCard.text = _mainModel.GetCurrentPlayer().EnergyCard.ToString();
         EnergyCard.text = _mainModel._preparedTurnPlayer.GetEnergyCard().ToString();
     }
     private IEnumerator TurnOneLider(CountryLider lider, int indexLider, Incident incident)

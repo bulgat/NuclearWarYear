@@ -72,7 +72,7 @@
     <Compile Include="Assets\Scripts\Model\Nation\IncidentEvent.cs" />
     <Compile Include="Assets\Scripts\Model\turnEvent\RemoveBomber.cs" />
     <Compile Include="Assets\Scripts\Model\CreateAttackMissle.cs" />
-    <Compile Include="Assets\Scripts\View\MenuScript.cs" />
+    <Compile Include="Assets\Scripts\View\gameScene\MenuScript.cs" />
     <Compile Include="Assets\Scripts\Model\TargetModel.cs" />
     <Compile Include="Assets\Scripts\View\ViewCardGame.cs" />
     <Compile Include="Assets\Scripts\Model\lider\LiderHelper.cs" />

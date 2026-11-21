@@ -30,8 +30,6 @@ int canvasIndex = 1;
         
         ViewLiderButton viewLiderButton = gameObject.transform.GetChild(canvasIndex).GetChild(4).GetComponent<ViewLiderButton>();
 
-        //viewLiderButton.gameObject.SetActive(indexLider.GetIndexLider() != GlobalParam.StartTurnIdFlag);
-
         viewLiderButton.Init(LiderImageList, this._FlagImageList, mainModel,
             null, 
             null,

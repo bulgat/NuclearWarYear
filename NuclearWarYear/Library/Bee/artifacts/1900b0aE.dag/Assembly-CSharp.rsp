@@ -446,7 +446,7 @@
 "Assets/Scripts/SettingPlayer.cs"
 "Assets/Scripts/View/BuildingCentral.cs"
 "Assets/Scripts/View/CityView.cs"
-"Assets/Scripts/View/MenuScript.cs"
+"Assets/Scripts/View/gameScene/MenuScript.cs"
 "Assets/Scripts/View/menuStart/MenuStart.cs"
 "Assets/Scripts/View/MenuVictory.cs"
 "Assets/Scripts/View/messageModal/ViewResourceMethod.cs"

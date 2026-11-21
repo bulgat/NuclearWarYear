@@ -8,6 +8,10 @@ using UnityEngine.UI;
 public class SelectLiderScene : MonoBehaviour
 {
     public Button StartButton;
+    [SerializeField, Tooltip("список портретов лидеров")]
+    public List<Sprite> LiderPortraitList;
+    [SerializeField, Tooltip("список флагов")]
+    public List<Sprite> FlagImageList;
     void Start()
     {
         StartButton.onClick.AddListener(() => StartMethod());
